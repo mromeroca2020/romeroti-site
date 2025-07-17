@@ -1,0 +1,1 @@
+Aquí se incluirán archivos multimedia como videos o banners

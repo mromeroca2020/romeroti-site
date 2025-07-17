@@ -1,0 +1,1 @@
+// JavaScript principal para funcionalidades del sitio
