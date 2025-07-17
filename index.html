@@ -3,45 +3,124 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Romano TI Solutions | Professional IT Support</title>
-    <meta name="description" content="IT support, networking, and cybersecurity experts in Montréal. Custom solutions for businesses.">
+    <title>Romano TI Solutions | Seguridad IT para PYMES</title>
     <style>
+        :root {
+            --carmesi: #9A031E;  /* Carmesí oscuro */
+            --cafe: #6F4E37;     /* Café */
+            --crema: #F8F1E5;    /* Fondo crema */
+            --dark: #1A1A2E;     /* Para texto */
+        }
         body {
-            font-family: 'Arial', sans-serif;
-            line-height: 1.6;
+            font-family: 'Inter', sans-serif;
             margin: 0;
-            padding: 0;
-            color: #333;
+            line-height: 1.6;
+            color: var(--dark);
+            background: var(--crema);
+        }
+        .navbar {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
         .hero {
-            background: linear-gradient(rgba(0,0,0,0.7), url('assets/img/hero-bg.jpg'));
-            background-size: cover;
+            background: linear-gradient(135deg, var(--carmesi), var(--cafe));
+            color: white;
+            padding: 6rem 2rem;
+            text-align: center;
+        }
+        .cta-button {
+            background: var(--cafe);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 4px;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 1rem;
+            transition: all 0.3s;
+        }
+        .cta-button:hover {
+            background: #5a3d2b; /* Café más oscuro */
+            transform: translateY(-2px);
+        }
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .feature-card {
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(154, 3, 30, 0.1);
+        }
+        footer {
+            background: var(--cafe);
             color: white;
             text-align: center;
-            padding: 100px 20px;
+            padding: 2rem;
         }
     </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <h1>Romano TI Solutions</h1>
-        <nav>
-            <a href="index.html">Home</a>
-            <a href="services.html">Services</a>
-            <a href="contact.html">Contact</a>
-        </nav>
-    </header>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">
+            <h1 style="color: var(--carmesi); margin: 0;">Romano TI</h1>
+        </div>
+        <div class="nav-links">
+            <a href="#servicios" style="margin: 0 1rem; text-decoration: none; color: var(--dark); font-weight: 600;">Servicios</a>
+            <a href="#contacto" style="margin: 0 1rem; text-decoration: none; color: var(--dark); font-weight: 600;">Contacto</a>
+            <a href="#demo" class="cta-button" style="background: var(--carmesi);">Prueba Gratis</a>
+        </div>
+    </nav>
 
+    <!-- Hero Section -->
     <section class="hero">
-        <h2>IT Solutions for Your Business</h2>
-        <p>Experts in infrastructure, networking, and technical support.</p>
-        <a href="contact.html" class="btn">Get in Touch</a>
+        <h1 style="font-size: 2.8rem; margin-bottom: 1rem;">Protección IT con Estilo Único</h1>
+        <p style="font-size: 1.2rem; max-width: 700px; margin: 0 auto;">Soluciones personalizadas en ciberseguridad y redes para tu negocio.</p>
+        <a href="#demo" class="cta-button">Solicitar Demo</a>
     </section>
 
-    <footer>
-        <p>&copy; 2025 Romano TI Solutions</p>
-    </footer>
+    <!-- Features/Services -->
+    <section id="servicios" class="features">
+        <div class="feature-card">
+            <h3 style="color: var(--carmesi);">Defensa contra Amenazas</h3>
+            <p>Protección avanzada contra ransomware y malware.</p>
+        </div>
+        <div class="feature-card">
+            <h3 style="color: var(--carmesi);">Monitoreo Continuo</h3>
+            <p>Vigilancia 24/7 de tus sistemas críticos.</p>
+        </div>
+        <div class="feature-card">
+            <h3 style="color: var(--carmesi);">Soporte Prioritario</h3>
+            <p>Asistencia técnica rápida y especializada.</p>
+        </div>
+    </section>
 
-    <script src="assets/js/main.js"></script>
+    <!-- CTA Section -->
+    <section style="padding: 4rem 2rem; text-align: center; background: white;">
+        <h2 style="font-size: 2rem; color: var(--cafe);">¿Listo para modernizar tu seguridad IT?</h2>
+        <a href="#contacto" class="cta-button">Contactar Ahora</a>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2025 Romano TI Solutions. <br> Diseñado con pasión por la seguridad.</p>
+    </footer>
 </body>
 </html>
