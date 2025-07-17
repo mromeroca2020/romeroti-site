@@ -1,13 +1,64 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>About Me | Romano TI Solutions</title>
+    <!-- Metadatos y estilos previos -->
+    <style>
+        /* Estilos adicionales para About Us */
+        .about {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        .team-card {
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        .team-card img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--carmesi);
+        }
+    </style>
 </head>
 <body>
-    <section>
-        <h2>Mauricio Romero</h2>
-        <p>15+ years of IT experience, specializing in networks and datacenters.</p>
+    <!-- Navbar y Hero (código previo) -->
+
+    <!-- Sección About Us Mejorada -->
+    <section id="about" class="about">
+        <h2 style="color: var(--carmesi); font-size: 2.2rem;">Nuestra Experiencia</h2>
+        <p style="max-width: 800px; margin: 1rem auto;">
+            Con más de <strong>15 años en el sector IT</strong>, en Romano TI Solutions combinamos expertise técnico con un enfoque personalizado para proteger tu negocio.
+        </p>
+        
+        <div class="team-grid">
+            <div class="team-card">
+                <img src="assets/img/mauricio-profile.jpg" alt="Mauricio Romero">
+                <h3 style="color: var(--cafe);">Mauricio Romero</h3>
+                <p><em>Fundador & Ingeniero de Redes</em></p>
+                <p>Especializado en ciberseguridad y gestión de datacenters. Certificado en Microsoft Azure y Cisco.</p>
+            </div>
+            
+            <!-- Añade más miembros del equipo si es necesario -->
+            <div class="team-card">
+                <img src="assets/img/team-placeholder.jpg" alt="Equipo Romano TI">
+                <h3 style="color: var(--cafe);">Nuestro Equipo</h3>
+                <p><em>Expertos en TI</em></p>
+                <p>Profesionales certificados en seguridad, cloud y soporte técnico.</p>
+            </div>
+        </div>
     </section>
+
+    <!-- Resto del código (Features, CTA, Footer) -->
 </body>
 </html>
