@@ -2,3 +2,15 @@ body { font-family: Arial; background-color: #f3f1ee; color: #3e2f2f; }
 header { background-color: #a1866f; padding: 20px; text-align: center; }
 nav a { margin: 0 10px; color: #3e2f2f; text-decoration: none; }
 footer { text-align: center; padding: 10px; background-color: #d2b48c; }
+/* Efecto hover para tarjetas de equipo */
+.team-card:hover {
+    transform: translateY(-5px);
+    border: 1px solid var(--carmesi);
+}
+
+/* Responsive para móviles */
+@media (max-width: 768px) {
+    .team-grid {
+        grid-template-columns: 1fr;
+    }
+}
