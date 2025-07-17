@@ -1,4 +1,4 @@
-body { font-family: Arial, sans-serif; background-color: #f8f5f0; color: #3e2f1c; }
-header { background-color: #c6a27e; padding: 10px; text-align: center; }
-nav a { margin: 0 10px; color: #3e2f1c; text-decoration: none; }
-footer { background-color: #c6a27e; text-align: center; padding: 10px; }
+body { font-family: Arial; background-color: #f3f1ee; color: #3e2f2f; }
+header { background-color: #a1866f; padding: 20px; text-align: center; }
+nav a { margin: 0 10px; color: #3e2f2f; text-decoration: none; }
+footer { text-align: center; padding: 10px; background-color: #d2b48c; }
