@@ -3,124 +3,178 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Romano TI Solutions | Seguridad IT para PYMES</title>
+    <title>Romanoti Solutions | Infraestructura IT en Ottawa</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --carmesi: #9A031E;  /* Carmesí oscuro */
-            --cafe: #6F4E37;     /* Café */
-            --crema: #F8F1E5;    /* Fondo crema */
-            --dark: #1A1A2E;     /* Para texto */
-        }
         body {
-            font-family: 'Inter', sans-serif;
-            margin: 0;
-            line-height: 1.6;
-            color: var(--dark);
-            background: var(--crema);
+            font-family: 'Montserrat', sans-serif;
         }
-        .navbar {
-            background: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .hero {
-            background: linear-gradient(135deg, var(--carmesi), var(--cafe));
-            color: white;
-            padding: 6rem 2rem;
-            text-align: center;
-        }
-        .cta-button {
-            background: var(--cafe);
-            color: white;
-            padding: 12px 30px;
-            border-radius: 4px;
-            font-weight: bold;
-            text-decoration: none;
-            display: inline-block;
-            margin-top: 1rem;
+        .btn-primary {
+            background-color: #2563EB;
             transition: all 0.3s;
         }
-        .cta-button:hover {
-            background: #5a3d2b; /* Café más oscuro */
-            transform: translateY(-2px);
+        .btn-primary:hover {
+            background-color: #1D4ED8;
         }
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            padding: 4rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        .feature-card {
-            background: white;
-            border-radius: 8px;
-            padding: 2rem;
-            text-align: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        .service-card {
+            border: 1px solid #E5E7EB;
             transition: all 0.3s;
         }
-        .feature-card:hover {
+        .service-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(154, 3, 30, 0.1);
-        }
-        footer {
-            background: var(--cafe);
-            color: white;
-            text-align: center;
-            padding: 2rem;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
         }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
-<body>
-    <!-- Navbar -->
-    <nav class="navbar">
-        <div class="logo">
-            <h1 style="color: var(--carmesi); margin: 0;">Romano TI</h1>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-sm">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="text-2xl font-bold text-gray-800">Romanoti Solutions</div>
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#inicio" class="text-gray-600 hover:text-blue-600">Inicio</a>
+                    <a href="#servicios" class="text-gray-600 hover:text-blue-600">Servicios</a>
+                    <a href="#nosotros" class="text-gray-600 hover:text-blue-600">Nosotros</a>
+                    <a href="#contacto" class="text-gray-600 hover:text-blue-600">Contacto</a>
+                </nav>
+                <button class="md:hidden">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
         </div>
-        <div class="nav-links">
-            <a href="#servicios" style="margin: 0 1rem; text-decoration: none; color: var(--dark); font-weight: 600;">Servicios</a>
-            <a href="#contacto" style="margin: 0 1rem; text-decoration: none; color: var(--dark); font-weight: 600;">Contacto</a>
-            <a href="#demo" class="cta-button" style="background: var(--carmesi);">Prueba Gratis</a>
-        </div>
-    </nav>
+    </header>
 
     <!-- Hero Section -->
-    <section class="hero">
-        <h1 style="font-size: 2.8rem; margin-bottom: 1rem;">Protección IT con Estilo Único</h1>
-        <p style="font-size: 1.2rem; max-width: 700px; margin: 0 auto;">Soluciones personalizadas en ciberseguridad y redes para tu negocio.</p>
-        <a href="#demo" class="cta-button">Solicitar Demo</a>
-    </section>
-
-    <!-- Features/Services -->
-    <section id="servicios" class="features">
-        <div class="feature-card">
-            <h3 style="color: var(--carmesi);">Defensa contra Amenazas</h3>
-            <p>Protección avanzada contra ransomware y malware.</p>
-        </div>
-        <div class="feature-card">
-            <h3 style="color: var(--carmesi);">Monitoreo Continuo</h3>
-            <p>Vigilancia 24/7 de tus sistemas críticos.</p>
-        </div>
-        <div class="feature-card">
-            <h3 style="color: var(--carmesi);">Soporte Prioritario</h3>
-            <p>Asistencia técnica rápida y especializada.</p>
+    <section id="inicio" class="bg-blue-700 text-white py-20">
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-6">Infraestructura IT en Ottawa: <span class="underline">Segura, Escalable y Sin Riesgos</span></h1>
+            <p class="text-xl mb-8">Expertos en Azure, VMware y Ciberseguridad – Certificados por Microsoft y Cisco.</p>
+            <div class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-6">
+                <a href="tel:4386309157" class="btn-primary text-white px-8 py-3 rounded-lg font-semibold">✆ Soporte Urgente</a>
+                <a href="https://calendly.com/tu-usuario" class="bg-white text-blue-700 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100">📅 Consulta Gratis</a>
+            </div>
         </div>
     </section>
 
-    <!-- CTA Section -->
-    <section style="padding: 4rem 2rem; text-align: center; background: white;">
-        <h2 style="font-size: 2rem; color: var(--cafe);">¿Listo para modernizar tu seguridad IT?</h2>
-        <a href="#contacto" class="cta-button">Contactar Ahora</a>
+    <!-- Servicios -->
+    <section id="servicios" class="py-16 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center mb-12">Nuestros Servicios</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Servicio 1 -->
+                <div class="service-card p-6 rounded-lg bg-gray-50">
+                    <div class="text-4xl mb-4">🔒</div>
+                    <h3 class="text-xl font-bold mb-3">Protección contra Ransomware</h3>
+                    <p class="mb-4 text-gray-600">Backups automatizados + monitoreo 24/7 con Veeam y Azure.</p>
+                    <a href="#contacto" class="text-blue-600 font-semibold">Saber Más →</a>
+                </div>
+                <!-- Servicio 2 -->
+                <div class="service-card p-6 rounded-lg bg-gray-50">
+                    <div class="text-4xl mb-4">☁️</div>
+                    <h3 class="text-xl font-bold mb-3">Migración a Azure</h3>
+                    <p class="mb-4 text-gray-600">Reduzca costos y mejore la escalabilidad con la nube de Microsoft.</p>
+                    <a href="#contacto" class="text-blue-600 font-semibold">Saber Más →</a>
+                </div>
+                <!-- Servicio 3 -->
+                <div class="service-card p-6 rounded-lg bg-gray-50">
+                    <div class="text-4xl mb-4">🛠️</div>
+                    <h3 class="text-xl font-bold mb-3">Soporte IT Prioritario</h3>
+                    <p class="mb-4 text-gray-600">Resolución remota/onsite de problemas críticos en menos de 2 horas.</p>
+                    <a href="#contacto" class="text-blue-600 font-semibold">Saber Más →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certificaciones -->
+    <section class="py-16 bg-gray-100">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl font-bold mb-8">Certificaciones</h2>
+            <div class="flex justify-center space-x-12">
+                <img src="https://learn.microsoft.com/en-us/media/learn/certification/badges/microsoft-certified-fundamentals-badge.svg" alt="Microsoft Azure Certified" class="h-20">
+                <img src="https://images.credly.com/images/5c8b0ab5-ea1a-4d51-a95a-2d4a5b7f2933/Intro_to_Cybersecurity_Badge.png" alt="Cisco Certified" class="h-20">
+            </div>
+            <p class="mt-8 text-xl">Infraestructuras diseñadas por <strong>expertos certificados</strong>.</p>
+        </div>
+    </section>
+
+    <!-- Nosotros -->
+    <section id="nosotros" class="py-16 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="md:flex items-center">
+                <div class="md:w-1/2 mb-8 md:mb-0">
+                    <h2 class="text-3xl font-bold mb-6">Mauricio Romero</h2>
+                    <p class="mb-4 text-lg">Fundador de Romanoti Solutions, con <strong>15+ años</strong> diseñando infraestructuras IT para empresas como IBM, Kyndryl y Omni Technology Solutions.</p>
+                    <p class="mb-6 text-lg">Certificado en <strong>Microsoft Azure y Cisco</strong>, especializado en migración a la nube, seguridad y automatización.</p>
+                    <a href="#contacto" class="btn-primary text-white px-6 py-3 rounded-lg font-semibold inline-block">Contáctame</a>
+                </div>
+                <div class="md:w-1/2 md:pl-12">
+                    <img src="https://images.unsplash.com/photo-1571171637578-41bc2dd41cd2?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="IT Professional" class="rounded-lg shadow-md">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contacto -->
+    <section id="contacto" class="py-16 bg-blue-700 text-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center mb-12">¿Listo para Optimizar tu IT?</h2>
+            <div class="max-w-2xl mx-auto">
+                <form class="space-y-6">
+                    <div>
+                        <label for="name" class="block mb-2">Nombre</label>
+                        <input type="text" id="name" class="w-full px-4 py-3 rounded-lg bg-blue-800 border border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                    </div>
+                    <div>
+                        <label for="email" class="block mb-2">Email</label>
+                        <input type="email" id="email" class="w-full px-4 py-3 rounded-lg bg-blue-800 border border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                    </div>
+                    <div>
+                        <label for="message" class="block mb-2">Mensaje</label>
+                        <textarea id="message" rows="4" class="w-full px-4 py-3 rounded-lg bg-blue-800 border border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400"></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary text-white px-8 py-3 rounded-lg font-semibold w-full">Enviar Mensaje</button>
+                </form>
+                <div class="mt-12 text-center">
+                    <p class="mb-4">O contáctanos directamente:</p>
+                    <div class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-8">
+                        <a href="tel:4386309157" class="flex items-center justify-center">
+                            <span class="mr-2">✆</span> 438-630-9157
+                        </a>
+                        <a href="mailto:mauricioromeroca@gmail.com" class="flex items-center justify-center">
+                            <span class="mr-2">✉</span> mauricioromeroca@gmail.com
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
     <!-- Footer -->
-    <footer>
-        <p>© 2025 Romano TI Solutions. <br> Diseñado con pasión por la seguridad.</p>
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <div class="text-xl font-bold">Romanoti Solutions</div>
+                    <p class="text-gray-400">Infraestructura IT profesional en Ottawa.</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="https://www.linkedin.com/in/mauricio-romero-calderon" target="_blank" class="text-gray-400 hover:text-white">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                    </a>
+                </div>
+            </div>
+            <div class="mt-8 text-center text-gray-400 text-sm">
+                <p>© 2023 Romanoti Solutions. Todos los derechos reservados.</p>
+            </div>
+        </div>
     </footer>
+
+    <!-- Calendly Embed -->
+    <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
 </body>
 </html>
