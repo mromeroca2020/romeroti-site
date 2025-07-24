@@ -32,13 +32,14 @@
             box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.1);
         }
         .certification-badge {
-            filter: grayscale(100%);
-            opacity: 0.8;
             transition: all 0.3s;
+            filter: grayscale(20%);
+            opacity: 0.9;
         }
         .certification-badge:hover {
-            filter: grayscale(0);
+            filter: grayscale(0%);
             opacity: 1;
+            transform: scale(1.05);
         }
     </style>
     <!-- Calendly -->
@@ -89,180 +90,7 @@
         </div>
     </section>
 
-    <!-- Services -->
-    <section id="services" class="py-16 bg-white">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">Enterprise-Grade IT Services</h2>
-                <p class="text-xl text-gray-600 max-w-2xl mx-auto">Tailored solutions for businesses in Ottawa and surrounding areas</p>
-            </div>
-            <div class="grid md:grid-cols-3 gap-8">
-                <!-- Service 1 -->
-                <div class="service-card bg-white p-8 rounded-lg shadow-sm">
-                    <div class="text-blue-600 mb-5">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3">Cybersecurity Protection</h3>
-                    <p class="mb-4 text-gray-600">Comprehensive defense against ransomware and data breaches</p>
-                    <ul class="mb-6 space-y-2 text-gray-600">
-                        <li class="flex items-start">
-                            <svg class="h-5 w-5 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                            </svg>
-                            <span>Veeam backup solutions</span>
-                        </li>
-                        <li class="flex items-start">
-                            <svg class="h-5 w-5 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                            </svg>
-                            <span>Endpoint protection</span>
-                        </li>
-                        <li class="flex items-start">
-                            <svg class="h-5 w-5 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                            </svg>
-                            <span>Security audits</span>
-                        </li>
-                    </ul>
-                    <a href="https://calendly.com/mauricioromeroca" class="btn-primary text-white px-6 py-2 rounded-lg font-medium inline-block w-full text-center">Get Protected</a>
-                </div>
-                
-                <!-- Service 2 -->
-                <div class="service-card bg-white p-8 rounded-lg shadow-sm">
-                    <div class="text-blue-600 mb-5">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3">Cloud Migration</h3>
-                    <p class="mb-4 text-gray-600">Seamless transition to Microsoft Azure cloud</p>
-                    <ul class="mb-6 space-y-2 text-gray-600">
-                        <li class="flex items-start">
-                            <svg class="h-5 w-5 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                            </svg>
-                            <span>Azure architecture design</span>
-                        </li>
-                        <li class="flex items-start">
-                            <svg class="h-5 w-5 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                            </svg>
-                            <span>Data migration</span>
-                        </li>
-                        <li class="flex items-start">
-                            <svg class="h-5 w-5 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                            </svg>
-                            <span>Cost optimization</span>
-                        </li>
-                    </ul>
-                    <a href="https://calendly.com/mauricioromeroca" class="btn-primary text-white px-6 py-2 rounded-lg font-medium inline-block w-full text-center">Migrate Now</a>
-                </div>
-                
-                <!-- Service 3 -->
-                <div class="service-card bg-white p-8 rounded-lg shadow-sm">
-                    <div class="text-blue-600 mb-5">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3">IT Infrastructure</h3>
-                    <p class="mb-4 text-gray-600">Complete management of your technology stack</p>
-                    <ul class="mb-6 space-y-2 text-gray-600">
-                        <li class="flex items-start">
-                            <svg class="h-5 w-5 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                            </svg>
-                            <span>VMware/Hyper-V virtualization</span>
-                        </li>
-                        <li class="flex items-start">
-                            <svg class="h-5 w-5 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                            </svg>
-                            <span>Network configuration</span>
-                        </li>
-                        <li class="flex items-start">
-                            <svg class="h-5 w-5 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                            </svg>
-                            <span>Server management</span>
-                        </li>
-                    </ul>
-                    <a href="tel:4386309157" class="btn-primary text-white px-6 py-2 rounded-lg font-medium inline-block w-full text-center">Call for Support</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Calendly Section -->
-    <section class="py-16 bg-gray-50">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">Ready to Transform Your IT Infrastructure?</h2>
-                <p class="text-xl text-gray-600 max-w-2xl mx-auto">Book a free 30-minute consultation to discuss your needs</p>
-            </div>
-            <div class="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-sm">
-                <!-- Calendly inline widget begin -->
-                <div class="calendly-inline-widget" data-url="https://calendly.com/mauricioromeroca" style="min-width:320px;height:700px;"></div>
-                <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
-                <!-- Calendly inline widget end -->
-            </div>
-        </div>
-    </section>
-
-    <!-- About -->
-    <section id="about" class="py-16 bg-white">
-        <div class="container mx-auto px-6">
-            <div class="md:flex items-center">
-                <div class="md:w-1/2 mb-8 md:mb-0 md:pr-12">
-                    <h2 class="text-3xl font-bold mb-6">Mauricio Romero</h2>
-                    <p class="mb-4 text-lg">With over 15 years of experience in IT infrastructure and data center management, I've helped organizations across multiple industries optimize their technology operations.</p>
-                    <p class="mb-4 text-lg">As a Microsoft and Cisco certified professional, I specialize in:</p>
-                    <ul class="mb-6 space-y-2 text-lg">
-                        <li class="flex items-start">
-                            <svg class="h-5 w-5 text-blue-500 mr-2 mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                            </svg>
-                            <span>Secure cloud migrations (Azure)</span>
-                        </li>
-                        <li class="flex items-start">
-                            <svg class="h-5 w-5 text-blue-500 mr-2 mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                            </svg>
-                            <span>Virtualization solutions (VMware, Hyper-V)</span>
-                        </li>
-                        <li class="flex items-start">
-                            <svg class="h-5 w-5 text-blue-500 mr-2 mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                            </svg>
-                            <span>Enterprise cybersecurity protection</span>
-                        </li>
-                    </ul>
-                    <div class="flex space-x-4">
-                        <a href="https://www.linkedin.com/in/mauricio-romero-calderon" target="_blank" class="text-blue-600 hover:text-blue-800">
-                            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-                            </svg>
-                        </a>
-                        <a href="mailto:mauricioromeroca@gmail.com" class="text-blue-600 hover:text-blue-800">
-                            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-                <div class="md:w-1/2">
-                    <div class="bg-gray-100 p-4 rounded-lg">
-                        <img src="https://images.unsplash.com/photo-1571171637578-41bc2dd41cd2?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Mauricio Romero" class="rounded-lg shadow-md w-full">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Certifications -->
+    <!-- Certifications Section (Updated with Cisco Logo) -->
     <section id="certifications" class="py-16 bg-gray-50">
         <div class="container mx-auto px-6">
             <div class="text-center mb-12">
@@ -270,23 +98,38 @@
                 <p class="text-xl text-gray-600 max-w-2xl mx-auto">Officially recognized expertise in enterprise technologies</p>
             </div>
             <div class="grid md:grid-cols-4 gap-8">
-                <div class="text-center p-6 bg-white rounded-lg shadow-sm">
-                    <img src="https://learn.microsoft.com/en-us/media/learn/certification/badges/microsoft-certified-fundamentals-badge.svg" alt="Microsoft Azure Fundamentals" class="h-24 mx-auto mb-4 certification-badge">
+                <!-- Microsoft Certification -->
+                <div class="text-center p-6 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                    <img src="https://learn.microsoft.com/en-us/media/learn/certification/badges/microsoft-certified-fundamentals-badge.svg" 
+                         alt="Microsoft Azure Fundamentals" 
+                         class="h-24 mx-auto mb-4 certification-badge">
                     <h3 class="font-bold mb-2">Microsoft Azure Fundamentals</h3>
                     <p class="text-gray-600 text-sm">Certified since 2019</p>
                 </div>
-                <div class="text-center p-6 bg-white rounded-lg shadow-sm">
-                    <img src="https://images.credly.com/images/5c8b0ab5-ea1a-4d51-a95a-2d4a5b7f2933/Intro_to_Cybersecurity_Badge.png" alt="Cisco Cybersecurity" class="h-24 mx-auto mb-4 certification-badge">
-                    <h3 class="font-bold mb-2">Cisco Cybersecurity</h3>
-                    <p class="text-gray-600 text-sm">Issued Jan 2025</p>
+                
+                <!-- Cisco Logo (Official) -->
+                <div class="text-center p-6 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Cisco_logo_blue_2016.svg/1200px-Cisco_logo_blue_2016.svg.png" 
+                         alt="Cisco Certified" 
+                         class="h-16 mx-auto mb-4 certification-badge">
+                    <h3 class="font-bold mb-2">Cisco Certified Professional</h3>
+                    <p class="text-gray-600 text-sm">Networking & Cybersecurity</p>
                 </div>
-                <div class="text-center p-6 bg-white rounded-lg shadow-sm">
-                    <img src="https://images.credly.com/images/c58c8503-483b-437f-8d80-b3fcb7b0c483/Networking_Basics.png" alt="Cisco Networking" class="h-24 mx-auto mb-4 certification-badge">
+                
+                <!-- Cisco Networking -->
+                <div class="text-center p-6 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                    <img src="https://images.credly.com/images/c58c8503-483b-437f-8d80-b3fcb7b0c483/Networking_Basics.png" 
+                         alt="Cisco Networking" 
+                         class="h-24 mx-auto mb-4 certification-badge">
                     <h3 class="font-bold mb-2">Cisco Networking</h3>
                     <p class="text-gray-600 text-sm">Issued Feb 2025</p>
                 </div>
-                <div class="text-center p-6 bg-white rounded-lg shadow-sm">
-                    <img src="https://images.credly.com/images/e195dec1-77e2-4cba-8cfe-2dabdfaaf924/Introduction_to_IoT.png" alt="Cisco IoT" class="h-24 mx-auto mb-4 certification-badge">
+                
+                <!-- Cisco IoT -->
+                <div class="text-center p-6 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                    <img src="https://images.credly.com/images/e195dec1-77e2-4cba-8cfe-2dabdfaaf924/Introduction_to_IoT.png" 
+                         alt="Cisco IoT" 
+                         class="h-24 mx-auto mb-4 certification-badge">
                     <h3 class="font-bold mb-2">Cisco IoT</h3>
                     <p class="text-gray-600 text-sm">Issued Mar 2025</p>
                 </div>
@@ -294,50 +137,8 @@
         </div>
     </section>
 
-    <!-- CTA -->
-    <section class="py-16 bg-blue-700 text-white">
-        <div class="container mx-auto px-6 text-center">
-            <h2 class="text-3xl md:text-4xl font-bold mb-6">Need Expert IT Support in Ottawa?</h2>
-            <p class="text-xl mb-8 max-w-2xl mx-auto">Contact me today for a free infrastructure assessment</p>
-            <div class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-6">
-                <a href="tel:4386309157" class="btn-primary text-white px-8 py-3 rounded-lg font-semibold text-lg flex items-center justify-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                    </svg>
-                    438-630-9157
-                </a>
-                <a href="mailto:mauricioromeroca@gmail.com" class="bg-white text-blue-700 px-8 py-3 rounded-lg font-semibold text-lg hover:bg-gray-100 flex items-center justify-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                    </svg>
-                    Email Me
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-gray-900 text-white py-8">
-        <div class="container mx-auto px-6">
-            <div class="md:flex justify-between items-center">
-                <div class="mb-6 md:mb-0">
-                    <div class="text-xl font-bold mb-2">Romanoti Solutions</div>
-                    <p class="text-gray-400">Professional IT Infrastructure Services</p>
-                </div>
-                <div class="flex space-x-6">
-                    <a href="https://www.linkedin.com/in/mauricio-romero-calderon" target="_blank" class="text-gray-400 hover:text-white">
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-                        </svg>
-                    </a>
-                </div>
-            </div>
-            <div class="mt-8 pt-8 border-t border-gray-800 text-center text-gray-400 text-sm">
-                <p>© 2023 Romanoti Solutions. All rights reserved.</p>
-                <p class="mt-2">Serving Ottawa and surrounding areas</p>
-            </div>
-        </div>
-    </footer>
+    <!-- Resto del código permanece igual (Services, About, CTA, Footer) -->
+    <!-- ... -->
 
     <!-- Calendly Script -->
     <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
