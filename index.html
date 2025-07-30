@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,29 +7,128 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
+        /* Fondo con patrón de red tecnológica (SVG embebido) */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%231e3a8a' fill-opacity='0.03'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3Ccircle cx='15' cy='15' r='2'/%3E%3Ccircle cx='45' cy='15' r='2'/%3E%3Ccircle cx='15' cy='45' r='2'/%3E%3Ccircle cx='45' cy='45' r='2'/%3E%3Ccircle cx='30' cy='10' r='1'/%3E%3Ccircle cx='10' cy='30' r='1'/%3E%3Ccircle cx='50' cy='30' r='1'/%3E%3Ccircle cx='30' cy='50' r='1'/%3E%3C/g%3E%3Cg stroke='%231e3a8a' stroke-opacity='0.05' stroke-width='1'%3E%3Cpath d='M30 0v60M0 30h60'/%3E%3Cpath d='M15 15l30 30M15 45l30-30'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            background-repeat: repeat;
+            background-position: center;
+            z-index: -1;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+
+        /* Modo oscuro - fondo más visible */
+        .dark body::before {
+            background-image: url("image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2360a5fa' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3Ccircle cx='15' cy='15' r='2'/%3E%3Ccircle cx='45' cy='15' r='2'/%3E%3Ccircle cx='15' cy='45' r='2'/%3E%3Ccircle cx='45' cy='45' r='2'/%3E%3Ccircle cx='30' cy='10' r='1'/%3E%3Ccircle cx='10' cy='30' r='1'/%3E%3Ccircle cx='50' cy='30' r='1'/%3E%3Ccircle cx='30' cy='50' r='1'/%3E%3C/g%3E%3Cg stroke='%2360a5fa' stroke-opacity='0.1' stroke-width='1'%3E%3Cpath d='M30 0v60M0 30h60'/%3E%3Cpath d='M15 15l30 30M15 45l30-30'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
         body {
             font-family: 'Montserrat', sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+            position: relative;
         }
+
+        /* Estilos base */
+        .light {
+            --bg: #f8f9fa;
+            --text: #333;
+            --card-bg: white;
+            --header-bg: #ffffff;
+            --footer-bg: #111827;
+            --btn-primary: #2563EB;
+            --btn-primary-hover: #1D4ED8;
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
+        .dark {
+            --bg: #111827;
+            --text: #f9fafb;
+            --card-bg: #1f2937;
+            --header-bg: #1f2937;
+            --footer-bg: #000000;
+            --btn-primary: #3b82f6;
+            --btn-primary-hover: #2563eb;
+            --shadow: rgba(0, 0, 0, 0.3);
+        }
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+        }
+
         .hero-bg {
             background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+            position: relative;
+            overflow: hidden;
         }
+        .dark .hero-bg {
+            background: linear-gradient(135deg, #1e40af 0%, #1d4ed8 100%);
+        }
+
+        /* Iconos decorativos de tecnología */
+        .tech-icon {
+            position: absolute;
+            opacity: 0.05;
+            filter: var(--icon-filter, invert(0));
+            pointer-events: none;
+            z-index: 0;
+        }
+        .dark .tech-icon {
+            filter: var(--icon-filter, invert(1));
+        }
+        .tech-icon-server {
+            top: 15%;
+            right: 10%;
+            width: 100px;
+            height: 100px;
+        }
+        .tech-icon-cloud {
+            top: 60%;
+            left: 10%;
+            width: 80px;
+            height: 80px;
+        }
+        .tech-icon-laptop {
+            bottom: 20%;
+            right: 15%;
+            width: 70px;
+            height: 70px;
+        }
+        .tech-icon-router {
+            bottom: 40%;
+            left: 20%;
+            width: 60px;
+            height: 60px;
+        }
+
+        /* Estilos comunes */
         .btn-primary {
-            background: #2563EB;
+            background: var(--btn-primary);
             transition: all 0.3s;
         }
         .btn-primary:hover {
-            background: #1D4ED8;
+            background: var(--btn-primary-hover);
             transform: translateY(-2px);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 6px var(--shadow);
         }
         .service-card {
+            background: var(--card-bg);
             transition: all 0.3s;
             border-bottom: 4px solid transparent;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            box-shadow: 0 1px 3px var(--shadow);
+            position: relative;
+            z-index: 1;
         }
         .service-card:hover {
             transform: translateY(-5px);
-            border-color: #2563EB;
-            box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.1);
+            border-color: var(--btn-primary);
+            box-shadow: 0 10px 25px -5px var(--shadow);
         }
         .certification-badge {
             transition: all 0.3s;
@@ -52,20 +151,85 @@
             transform: scale(1.05);
         }
         .professional-card {
+            background: var(--card-bg);
             border-left: 4px solid transparent;
             transition: all 0.3s;
+            padding: 1rem;
+            border-radius: 0.5rem;
         }
         .professional-card:hover {
-            border-left-color: #2563EB;
+            border-left-color: var(--btn-primary);
             transform: translateX(5px);
+        }
+        header, footer {
+            background: var(--header-bg);
+            color: var(--text);
+        }
+        .dark .partner-logo, .dark .certification-badge {
+            filter: grayscale(30%) brightness(1.2);
+        }
+        .dark .partner-logo:hover, .dark .certification-badge:hover {
+            filter: grayscale(0%);
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+        .logo-icon {
+            background: var(--btn-primary);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        .toggle-btn {
+            background: var(--btn-primary);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+        .toggle-btn:hover {
+            background: var(--btn-primary-hover);
         }
     </style>
     <!-- Calendly -->
     <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
 </head>
-<body class="bg-gray-50">
+<body class="bg-gray-50 transition-colors duration-300">
+    <!-- Iconos decorativos de tecnología (SVG embebidos) -->
+    <svg class="tech-icon tech-icon-server" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="--icon-filter: invert(0.2);">
+        <rect x="2" y="6" width="20" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="2"/>
+        <line x1="2" y1="10" x2="22" y2="10" stroke="currentColor" stroke-width="2"/>
+        <circle cx="6" cy="14" r="1" fill="currentColor"/>
+        <circle cx="10" cy="14" r="1" fill="currentColor"/>
+        <circle cx="14" cy="14" r="1" fill="currentColor"/>
+    </svg>
+    <svg class="tech-icon tech-icon-cloud" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="--icon-filter: invert(0.2);">
+        <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <svg class="tech-icon tech-icon-laptop" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="--icon-filter: invert(0.2);">
+        <rect x="2" y="3" width="20" height="14" rx="2" ry="2" fill="none" stroke="currentColor" stroke-width="2"/>
+        <line x1="2" y1="17" x2="22" y2="17" stroke="currentColor" stroke-width="2"/>
+    </svg>
+    <svg class="tech-icon tech-icon-router" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="--icon-filter: invert(0.2);">
+        <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2"/>
+        <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+
     <!-- Header -->
-    <header class="bg-white shadow-md sticky top-0 z-50">
+    <header class="bg-white shadow-md sticky top-0 z-50 transition-colors duration-300">
         <div class="container mx-auto px-6 py-3">
             <div class="flex items-center justify-between">
                 <div class="flex items-center">
@@ -88,8 +252,8 @@
     </header>
 
     <!-- Hero Section -->
-    <section class="hero-bg text-white py-20 md:py-28">
-        <div class="container mx-auto px-6 text-center">
+    <section class="hero-bg text-white py-20 md:py-28 relative">
+        <div class="container mx-auto px-6 text-center relative z-10">
             <h1 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">Professional IT Infrastructure Solutions</h1>
             <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">Microsoft & Cisco Certified Expert with 15+ years experience in cloud, virtualization, and cybersecurity</p>
             <div class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-6">
@@ -110,7 +274,7 @@
     </section>
 
     <!-- Services Section -->
-    <section id="services" class="py-16 bg-white">
+    <section id="services" class="py-16 bg-white dark:bg-gray-800 transition-colors duration-300 relative">
         <div class="container mx-auto px-6">
             <div class="text-center mb-12">
                 <h2 class="text-3xl md:text-4xl font-bold mb-4">Our Core Services</h2>
@@ -215,7 +379,7 @@
     </section>
 
     <!-- Professional Services Section -->
-    <section id="professionals" class="py-16 bg-gray-50">
+    <section id="professionals" class="py-16 bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
         <div class="container mx-auto px-6">
             <div class="text-center mb-12">
                 <h2 class="text-3xl md:text-4xl font-bold mb-4">On-Demand Professional Services</h2>
@@ -282,7 +446,7 @@
     </section>
 
     <!-- Partners Section -->
-    <section id="partners" class="py-16 bg-white">
+    <section id="partners" class="py-16 bg-white dark:bg-gray-800 transition-colors duration-300">
         <div class="container mx-auto px-6">
             <div class="text-center mb-12">
                 <h2 class="text-3xl md:text-4xl font-bold mb-4">Technology Partners</h2>
@@ -314,20 +478,20 @@
                     <img src="https://upload.wikimedia.org/wikipedia/commons/a/ad/HP_Enterprise_Logo_2017.svg" alt="HPE" class="partner-logo h-10">
                 </div>
             </div>
-            <div class="bg-blue-50 p-8 rounded-lg">
+            <div class="bg-blue-50 dark:bg-blue-900/30 p-8 rounded-lg">
                 <h3 class="text-2xl font-bold mb-4 text-center">Our Partnership Approach</h3>
                 <div class="grid md:grid-cols-3 gap-6">
-                    <div class="bg-white p-6 rounded-lg shadow-sm">
-                        <h4 class="font-bold mb-2 text-blue-700">Certified Expertise</h4>
-                        <p class="text-gray-600">Our team maintains current certifications with all major technology partners.</p>
+                    <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm">
+                        <h4 class="font-bold mb-2 text-blue-700 dark:text-blue-400">Certified Expertise</h4>
+                        <p class="text-gray-600 dark:text-gray-300">Our team maintains current certifications with all major technology partners.</p>
                     </div>
-                    <div class="bg-white p-6 rounded-lg shadow-sm">
-                        <h4 class="font-bold mb-2 text-blue-700">Multi-Vendor Solutions</h4>
-                        <p class="text-gray-600">We integrate best-of-breed technologies from different providers.</p>
+                    <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm">
+                        <h4 class="font-bold mb-2 text-blue-700 dark:text-blue-400">Multi-Vendor Solutions</h4>
+                        <p class="text-gray-600 dark:text-gray-300">We integrate best-of-breed technologies from different providers.</p>
                     </div>
-                    <div class="bg-white p-6 rounded-lg shadow-sm">
-                        <h4 class="font-bold mb-2 text-blue-700">Joint Support</h4>
-                        <p class="text-gray-600">Direct access to vendor support teams when needed.</p>
+                    <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm">
+                        <h4 class="font-bold mb-2 text-blue-700 dark:text-blue-400">Joint Support</h4>
+                        <p class="text-gray-600 dark:text-gray-300">Direct access to vendor support teams when needed.</p>
                     </div>
                 </div>
             </div>
@@ -335,29 +499,29 @@
     </section>
 
     <!-- Certifications Section -->
-    <section id="certifications" class="py-16 bg-gray-50">
+    <section id="certifications" class="py-16 bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
         <div class="container mx-auto px-6">
             <div class="text-center mb-12">
                 <h2 class="text-3xl md:text-4xl font-bold mb-4">Certifications & Qualifications</h2>
                 <p class="text-xl text-gray-600 max-w-2xl mx-auto">Officially recognized expertise in enterprise technologies</p>
             </div>
             <div class="grid md:grid-cols-4 gap-8">
-                <div class="text-center p-6 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                <div class="text-center p-6 bg-white dark:bg-gray-800 rounded-lg shadow-sm hover:shadow-md transition-shadow">
                     <img src="https://learn.microsoft.com/en-us/media/learn/certification/badges/microsoft-certified-fundamentals-badge.svg" alt="Microsoft Azure Fundamentals" class="h-24 mx-auto mb-4 certification-badge">
                     <h3 class="font-bold mb-2">Microsoft Azure Fundamentals</h3>
                     <p class="text-gray-600 text-sm">Certified since 2019</p>
                 </div>
-                <div class="text-center p-6 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                <div class="text-center p-6 bg-white dark:bg-gray-800 rounded-lg shadow-sm hover:shadow-md transition-shadow">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Cisco_logo_blue_2016.svg/1200px-Cisco_logo_blue_2016.svg.png" alt="Cisco Certified" class="h-16 mx-auto mb-4 certification-badge">
                     <h3 class="font-bold mb-2">Cisco Certified Professional</h3>
                     <p class="text-gray-600 text-sm">Networking & Cybersecurity</p>
                 </div>
-                <div class="text-center p-6 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                <div class="text-center p-6 bg-white dark:bg-gray-800 rounded-lg shadow-sm hover:shadow-md transition-shadow">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Cisco_logo_blue_2016.svg/1200px-Cisco_logo_blue_2016.svg.png" alt="Cisco Networking" class="h-16 mx-auto mb-4 certification-badge">
                     <h3 class="font-bold mb-2">Cisco Networking</h3>
                     <p class="text-gray-600 text-sm">Issued Feb 2025</p>
                 </div>
-                <div class="text-center p-6 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                <div class="text-center p-6 bg-white dark:bg-gray-800 rounded-lg shadow-sm hover:shadow-md transition-shadow">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Cisco_logo_blue_2016.svg/1200px-Cisco_logo_blue_2016.svg.png" alt="Cisco IoT" class="h-16 mx-auto mb-4 certification-badge">
                     <h3 class="font-bold mb-2">Cisco IoT</h3>
                     <p class="text-gray-600 text-sm">Issued Mar 2025</p>
@@ -367,7 +531,7 @@
     </section>
 
     <!-- CTA Section -->
-    <section class="py-16 bg-blue-700 text-white">
+    <section class="py-16 bg-blue-700 dark:bg-blue-900 text-white transition-colors duration-300">
         <div class="container mx-auto px-6 text-center">
             <h2 class="text-3xl md:text-4xl font-bold mb-6">Ready to Transform Your IT Infrastructure?</h2>
             <p class="text-xl mb-8 max-w-2xl mx-auto">Contact us today for a free infrastructure assessment</p>
@@ -378,7 +542,7 @@
                     </svg>
                     438-630-9157
                 </a>
-                <a href="mailto:mauricioromeroca@gmail.com" class="bg-white text-blue-700 px-8 py-3 rounded-lg font-semibold text-lg hover:bg-gray-100 flex items-center justify-center">
+                <a href="mailto:mauricioromeroca@gmail.com" class="bg-white text-blue-700 dark:bg-gray-800 dark:text-white px-8 py-3 rounded-lg font-semibold text-lg hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center justify-center">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                     </svg>
@@ -389,12 +553,12 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 text-white py-8">
+    <footer class="bg-gray-900 dark:bg-black text-white py-8 transition-colors duration-300">
         <div class="container mx-auto px-6">
             <div class="md:flex justify-between items-center">
                 <div class="mb-6 md:mb-0">
                     <div class="text-xl font-bold mb-2">RomanoTI Solutions</div>
-                    <p class="text-gray-400">Professional IT Infrastructure Services</p>
+                    <p class="text-gray-400 mt-2">Professional IT Infrastructure Services</p>
                 </div>
                 <div class="flex space-x-6">
                     <a href="https://www.linkedin.com/in/mauricio-romero-calderon" target="_blank" class="text-gray-400 hover:text-white">
