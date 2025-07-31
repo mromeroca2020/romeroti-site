@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RomanoTI Solutions | IT Infrastructure & Cybersecurity</title>
 
-    <!-- Favicon: Reliable PNG fallback -->
+    <!-- ✅ Favicon: PNG confiable que funciona en todos los navegadores -->
     <link rel="icon" href="https://ui-avatars.com/api/?name=R&background=1e40af&color=fff&size=64" type="image/png">
 
-    <!-- CSS Frameworks -->
+    <!-- CSS -->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
 
-    <!-- Custom Styles -->
+    <!-- Estilos personalizados -->
     <style>
         body {
             font-family: 'Montserrat', sans-serif;
@@ -23,7 +23,7 @@
             background-attachment: fixed;
         }
 
-        /* Theme variables */
+        /* Variables de tema */
         .light {
             --bg: #f8f9fa;
             --text: #333;
@@ -145,17 +145,27 @@
 </head>
 <body class="bg-gray-50 transition-colors duration-300">
 
-    <!-- Header -->
+    <!-- ✅ Header con Logo y Menú de Navegación -->
     <header class="bg-white shadow-md sticky top-0 z-50 transition-colors duration-300">
         <div class="container mx-auto px-6 py-3">
             <div class="flex items-center justify-between">
+                <!-- Logo -->
                 <div class="logo">
                     <div class="logo-icon">R</div>
                     <span>RomanoTI Solutions</span>
                 </div>
-                <div class="flex items-center space-x-6">
-                    <button id="theme-toggle" class="toggle-btn">🌓 Modo Oscuro</button>
-                </div>
+
+                <!-- Menú de Navegación -->
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="#services" class="text-gray-700 hover:text-blue-600 font-medium">Services</a>
+                    <a href="#professionals" class="text-gray-700 hover:text-blue-600 font-medium">Professionals</a>
+                    <a href="#partners" class="text-gray-700 hover:text-blue-600 font-medium">Partners</a>
+                    <a href="#certifications" class="text-gray-700 hover:text-blue-600 font-medium">Certifications</a>
+                    <a href="https://calendly.com/mauricioromeroca" class="btn-primary text-white px-5 py-2 rounded-lg font-medium">Book Now</a>
+                </nav>
+
+                <!-- Botón de Modo Oscuro -->
+                <button id="theme-toggle" class="toggle-btn">🌓 Modo Oscuro</button>
             </div>
         </div>
     </header>
