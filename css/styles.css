@@ -177,18 +177,6 @@ nav a:hover {
     padding: 4rem 0;
 }
 
-.bg-light {
-    background-color: #f9f9f9;
-    padding: 4rem 0;
-}
-
-/* Títulos */
-h2 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-    color: #3e2f2f;
-}
-
 /* Grid */
 .grid {
     display: grid;
@@ -209,45 +197,6 @@ h2 {
 .service-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-}
-
-/* Tarjetas de equipo */
-.team-card {
-    background: white;
-    padding: 1.5rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-
-.team-card:hover {
-    transform: translateY(-5px);
-    border: 1px solid #a1866f;
-}
-
-/* Partners en sección fija */
-.partner-box {
-    background: white;
-    padding: 1rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    font-weight: bold;
-    color: #3e2f2f;
-}
-
-/* Certificaciones */
-.cert-card {
-    background: white;
-    padding: 1.5rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    text-align: center;
-}
-
-.cert-icon {
-    width: 80px;
-    height: 80px;
-    border-radius: 8px;
-    margin: 0 auto 10px;
 }
 
 /* Footer */
