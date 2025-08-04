@@ -1,119 +1,48 @@
 <!DOCTYPE html>
-<html lang="en" class="light">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RomanoTI Solutions | IT Infrastructure & Cybersecurity</title>
 
-    <!-- Favicon: SVG con apariencia de "R" azul -->
-    <link rel="icon" href="image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%231e3a8a'/%3E%3Ctext x='50%25' y='50%25' font-family='sans-serif' font-size='60' fill='white' text-anchor='middle' dominant-baseline='central'%3ER%3C/text%3E%3C/svg%3E" type="image/svg+xml">
+    <!-- Favicon -->
+    <link rel="icon" href="https://ui-avatars.com/api/?name=R&background=1e40af&color=fff&size=64" type="image/png">
 
     <!-- CSS -->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
 
-    <!-- Estilos personalizados -->
+    <!-- Estilos -->
     <style>
-        /* Fondo tecnológico sutil */
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url("image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%231e3a8a' fill-opacity='0.03'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3Ccircle cx='15' cy='15' r='2'/%3E%3Ccircle cx='45' cy='15' r='2'/%3E%3Ccircle cx='15' cy='45' r='2'/%3E%3Ccircle cx='45' cy='45' r='2'/%3E%3Ccircle cx='30' cy='10' r='1'/%3E%3Ccircle cx='10' cy='30' r='1'/%3E%3Ccircle cx='50' cy='30' r='1'/%3E%3Ccircle cx='30' cy='50' r='1'/%3E%3C/g%3E%3Cg stroke='%231e3a8a' stroke-opacity='0.05' stroke-width='1'%3E%3Cpath d='M30 0v60M0 30h60'/%3E%3Cpath d='M15 15l30 30M15 45l30-30'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-            background-repeat: repeat;
-            background-position: center;
-            z-index: -1;
-            pointer-events: none;
-            opacity: 0.1;
-        }
-
-        .dark body::before {
-            background-image: url("image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2360a5fa' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3Ccircle cx='15' cy='15' r='2'/%3E%3Ccircle cx='45' cy='15' r='2'/%3E%3Ccircle cx='15' cy='45' r='2'/%3E%3Ccircle cx='45' cy='45' r='2'/%3E%3Ccircle cx='30' cy='10' r='1'/%3E%3Ccircle cx='10' cy='30' r='1'/%3E%3Ccircle cx='50' cy='30' r='1'/%3E%3Ccircle cx='30' cy='50' r='1'/%3E%3C/g%3E%3Cg stroke='%2360a5fa' stroke-opacity='0.1' stroke-width='1'%3E%3Cpath d='M30 0v60M0 30h60'/%3E%3Cpath d='M15 15l30 30M15 45l30-30'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-            opacity: 0.15;
-        }
-
         body {
             font-family: 'Montserrat', sans-serif;
-            transition: background-color 0.3s, color 0.3s;
-            scroll-behavior: smooth;
-        }
-
-        /* Variables de tema */
-        .light {
-            --bg: #f8f9fa;
-            --text: #333;
-            --card-bg: white;
-            --header-bg: #ffffff;
-            --footer-bg: #111827;
-            --btn-primary: #2563EB;
-            --btn-primary-hover: #1D4ED8;
-            --shadow: rgba(0, 0, 0, 0.1);
-        }
-        .dark {
-            --bg: #111827;
-            --text: #f9fafb;
-            --card-bg: #1f2937;
-            --header-bg: #1f2937;
-            --footer-bg: #000000;
-            --btn-primary: #3b82f6;
-            --btn-primary-hover: #2563eb;
-            --shadow: rgba(0, 0, 0, 0.3);
-        }
-        body {
-            background-color: var(--bg);
-            color: var(--text);
-        }
-
-        section {
-            scroll-margin-top: 100px;
+            background-color: #f8f9fa;
+            color: #333;
         }
 
         .hero-bg {
             background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
         }
-        .dark .hero-bg {
-            background: linear-gradient(135deg, #1e40af 0%, #1d4ed8 100%);
-        }
 
         .btn-primary {
-            background: var(--btn-primary);
+            background: #2563EB;
             transition: all 0.3s ease;
         }
         .btn-primary:hover {
-            background: var(--btn-primary-hover);
+            background: #1D4ED8;
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px var(--shadow);
-        }
-
-        .service-card, .professional-card {
-            background: var(--card-bg);
-            transition: all 0.3s ease;
-            border-radius: 0.5rem;
-            box-shadow: 0 1px 3px var(--shadow);
-            overflow: hidden;
-        }
-        .service-card:hover, .professional-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 12px 30px -8px var(--shadow);
         }
 
         .partner-logo {
+            max-height: 40px;
             filter: grayscale(100%);
             opacity: 0.7;
             transition: all 0.3s;
         }
         .partner-logo:hover {
-            filter: grayscale(0%);
+            filter: grayscale(0);
             opacity: 1;
             transform: scale(1.05);
-        }
-
-        header, footer {
-            background: var(--header-bg);
-            color: var(--text);
         }
 
         .logo {
@@ -123,7 +52,7 @@
             font-size: 1.5rem;
         }
         .logo-icon {
-            background: var(--btn-primary);
+            background: #2563EB;
             color: white;
             width: 40px;
             height: 40px;
@@ -133,409 +62,130 @@
             justify-content: center;
             margin-right: 12px;
             font-size: 1.2rem;
-            font-weight: bold;
-        }
-
-        .toggle-btn {
-            background: var(--btn-primary);
-            color: white;
-            border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 0.5rem;
-            cursor: pointer;
-            font-size: 0.9rem;
-            transition: all 0.3s;
-        }
-        .toggle-btn:hover {
-            background: var(--btn-primary-hover);
-        }
-
-        /* Checkmark iconos pequeños */
-        .check-icon {
-            width: 16px;
-            height: 16px;
-            background: #10b981;
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.75rem;
-            margin-right: 8px;
-        }
-
-        /* Botones de navegación */
-        .btn-back {
-            background: #6b7280;
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 0.5rem;
-            font-size: 0.9rem;
-            transition: all 0.3s;
-            display: inline-block;
-            margin-top: 1rem;
-        }
-        .btn-back:hover {
-            background: #4b5563;
-            transform: translateY(-2px);
-        }
-
-        /* Botón "Regresar arriba" fijo */
-        .btn-top {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: var(--btn-primary);
-            color: white;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-            z-index: 50;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        .btn-top:hover {
-            transform: translateY(-3px);
-            background: var(--btn-primary-hover);
-        }
-
-        /* Animación de banner infinito */
-        @keyframes loop {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
-        }
-        .partner-banner {
-            animation: loop 30s linear infinite;
-        }
-        .partner-banner-container:hover .partner-banner {
-            animation-play-state: paused;
         }
     </style>
-
-    <!-- Calendly Widget -->
-    <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
 </head>
-<body class="bg-gray-50 transition-colors duration-300">
+<body class="bg-gray-50">
 
     <!-- Header -->
-    <header class="bg-white shadow-md sticky top-0 z-50 transition-colors duration-300">
+    <header class="bg-white shadow-md sticky top-0 z-50">
         <div class="container mx-auto px-6 py-3">
             <div class="flex items-center justify-between">
-                <!-- Logo -->
                 <div class="logo">
                     <div class="logo-icon">R</div>
                     <span>RomanoTI Solutions</span>
                 </div>
-
-                <!-- Navegación -->
-                <nav class="hidden md:flex items-center space-x-8">
-                    <a href="#services" class="text-gray-700 hover:text-blue-600 font-medium">Services</a>
-                    <a href="#professionals" class="text-gray-700 hover:text-blue-600 font-medium">Professionals</a>
-                    <a href="#data-center" class="text-gray-700 hover:text-blue-600 font-medium">Data Center & NOC/SOC</a>
-                    <a href="#partners" class="text-gray-700 hover:text-blue-600 font-medium">Partners</a>
-                    <a href="#certifications" class="text-gray-700 hover:text-blue-600 font-medium">Certifications</a>
-                    <a href="https://calendly.com/mauricioromeroca" class="btn-primary text-white px-5 py-2 rounded-lg font-medium">Book Now</a>
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#services" class="text-gray-700 hover:text-blue-600">Services</a>
+                    <a href="#partners" class="text-gray-700 hover:text-blue-600">Partners</a>
+                    <a href="https://calendly.com/mauricioromeroca" class="btn-primary text-white px-4 py-2 rounded">Book Now</a>
                 </nav>
-
-                <!-- Botón Modo Oscuro -->
-                <button id="theme-toggle" class="toggle-btn">🌓 Modo Oscuro</button>
             </div>
         </div>
     </header>
 
     <!-- Hero -->
-    <section class="hero-bg text-white py-28">
-        <div class="container mx-auto px-6 text-center">
-            <h1 class="text-4xl md:text-5xl font-bold mb-6">Professional IT Infrastructure Solutions</h1>
-            <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
-                Microsoft & Cisco Certified Expert with 15+ years in cloud, virtualization, and cybersecurity
-            </p>
-            <div class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-6">
-                <a href="tel:4386309157" class="btn-primary text-white px-8 py-3 rounded-lg font-semibold flex items-center justify-center">
-                    Emergency Support
-                </a>
-                <a href="https://calendly.com/mauricioromeroca" class="bg-white text-blue-700 px-8 py-3 rounded-lg font-semibold flex items-center justify-center">
-                    Free Consultation
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Services -->
-    <section id="services" class="py-16 bg-white dark:bg-gray-800 transition-colors duration-300">
+    <section class="hero-bg text-white py-28 text-center">
         <div class="container mx-auto px-6">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold dark:text-white">Our Core Services</h2>
-                <p class="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">Comprehensive IT solutions tailored to your business needs</p>
-            </div>
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="service-card p-8 rounded-lg shadow-sm">
-                    <h3 class="text-xl font-bold mb-4 dark:text-white">Cybersecurity Protection</h3>
-                    <ul class="space-y-3">
-                        <li class="flex items-start">
-                            <div class="check-icon">✔</div>
-                            <span class="text-gray-600 dark:text-gray-300">Veeam backup solutions</span>
-                        </li>
-                        <li class="flex items-start">
-                            <div class="check-icon">✔</div>
-                            <span class="text-gray-600 dark:text-gray-300">Endpoint protection</span>
-                        </li>
-                        <li class="flex items-start">
-                            <div class="check-icon">✔</div>
-                            <span class="text-gray-600 dark:text-gray-300">Security audits</span>
-                        </li>
-                    </ul>
-                    <a href="https://calendly.com/mauricioromeroca" class="btn-primary text-white px-6 py-2 rounded-lg block text-center mt-6">Get Protected</a>
-                </div>
-                <div class="service-card p-8 rounded-lg shadow-sm">
-                    <h3 class="text-xl font-bold mb-4 dark:text-white">Cloud Migration</h3>
-                    <ul class="space-y-3">
-                        <li class="flex items-start">
-                            <div class="check-icon">✔</div>
-                            <span class="text-gray-600 dark:text-gray-300">Azure architecture design</span>
-                        </li>
-                        <li class="flex items-start">
-                            <div class="check-icon">✔</div>
-                            <span class="text-gray-600 dark:text-gray-300">Data migration</span>
-                        </li>
-                        <li class="flex items-start">
-                            <div class="check-icon">✔</div>
-                            <span class="text-gray-600 dark:text-gray-300">Cost optimization</span>
-                        </li>
-                    </ul>
-                    <a href="https://calendly.com/mauricioromeroca" class="btn-primary text-white px-6 py-2 rounded-lg block text-center mt-6">Migrate Now</a>
-                </div>
-                <div class="service-card p-8 rounded-lg shadow-sm">
-                    <h3 class="text-xl font-bold mb-4 dark:text-white">IT Infrastructure</h3>
-                    <ul class="space-y-3">
-                        <li class="flex items-start">
-                            <div class="check-icon">✔</div>
-                            <span class="text-gray-600 dark:text-gray-300">VMware/Hyper-V virtualization</span>
-                        </li>
-                        <li class="flex items-start">
-                            <div class="check-icon">✔</div>
-                            <span class="text-gray-600 dark:text-gray-300">Network configuration</span>
-                        </li>
-                        <li class="flex items-start">
-                            <div class="check-icon">✔</div>
-                            <span class="text-gray-600 dark:text-gray-300">Server management</span>
-                        </li>
-                    </ul>
-                    <a href="tel:4386309157" class="btn-primary text-white px-6 py-2 rounded-lg block text-center mt-6">Call for Support</a>
-                </div>
-            </div>
-            <div class="text-center mt-10">
-                <a href="#" class="btn-back">← Regresar al menú principal</a>
-            </div>
+            <h1 class="text-4xl font-bold">Professional IT Infrastructure Solutions</h1>
+            <p class="text-xl mt-4">Microsoft & Cisco Certified Expert with 15+ years of experience</p>
         </div>
     </section>
 
-    <!-- Data Center & NOC/SOC -->
-    <section id="data-center" class="py-16 bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+    <!-- Partners Section -->
+    <section id="partners" class="py-16 bg-white">
         <div class="container mx-auto px-6">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold dark:text-white">Data Center & NOC/SOC Support</h2>
-                <p class="text-xl text-gray-600 dark:text-gray-300 max-w-4xl mx-auto">Professional on-site and remote monitoring services for clients with or without on-premises data centers.</p>
-            </div>
+            <h2 class="text-3xl font-bold text-center mb-4">Technology Partners</h2>
+            <p class="text-xl text-gray-600 text-center mb-12">We work with leading technology providers</p>
 
-            <div class="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-sm mb-10">
-                <h3 class="text-2xl font-bold mb-6 text-blue-700 dark:text-blue-400">On-Site Data Center Services</h3>
-                <div class="grid md:grid-cols-2 gap-8">
-                    <div>
-                        <h4 class="font-bold mb-4">Installation & Deployment</h4>
-                        <ul class="space-y-2 text-gray-700 dark:text-gray-300">
-                            <li class="flex items-start"><div class="check-icon">✔</div> <span><strong>Rack Installation:</strong> Secure mounting and leveling</span></li>
-                            <li class="flex items-start"><div class="check-icon">✔</div> <span><strong>Server Installation:</strong> Physical setup and integration</span></li>
-                            <li class="flex items-start"><div class="check-icon">✔</div> <span><strong>Network Hardware:</strong> Switches, routers, firewalls</span></li>
-                            <li class="flex items-start"><div class="check-icon">✔</div> <span><strong>Colocation & Smart Hands:</strong> Remote support services</span></li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h4 class="font-bold mb-4">Cabling & Certification</h4>
-                        <ul class="space-y-2 text-gray-700 dark:text-gray-300">
-                            <li class="flex items-start"><div class="check-icon">✔</div> <span><strong>Structured Cabling:</strong> Cat 5e to Cat 7</span></li>
-                            <li class="flex items-start"><div class="check-icon">✔</div> <span><strong>Fiber Optic:</strong> Single-mode & multi-mode</span></li>
-                            <li class="flex items-start"><div class="check-icon">✔</div> <span><strong>Cable Coil & Management:</strong> Labeling and organization</span></li>
-                            <li class="flex items-start"><div class="check-icon">✔</div> <span><strong>Certification:</strong> Fluke testing and reporting</span></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <div class="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-sm">
-                <h3 class="text-2xl font-bold mb-6 text-green-700 dark:text-green-400">NOC & SOC Services</h3>
-                <p class="text-gray-700 dark:text-gray-300 mb-6">24/7 monitoring and management of your IT infrastructure, regardless of whether you have an on-premises data center.</p>
-                <div class="grid md:grid-cols-2 gap-8">
-                    <div>
-                        <h4 class="font-bold mb-4 text-blue-600 dark:text-blue-400">Network Operations Center (NOC)</h4>
-                        <ul class="space-y-2 text-gray-700 dark:text-gray-300">
-                            <li class="flex items-start"><div class="check-icon">✔</div> <span>24/7 network monitoring & alerting</span></li>
-                            <li class="flex items-start"><div class="check-icon">✔</div> <span>Performance optimization</span></li>
-                            <li class="flex items-start"><div class="check-icon">✔</div> <span>Incident response & escalation</span></li>
-                            <li class="flex items-start"><div class="check-icon">✔</div> <span>Proactive maintenance & patching</span></li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h4 class="font-bold mb-4 text-red-600 dark:text-red-400">Security Operations Center (SOC)</h4>
-                        <ul class="space-y-2 text-gray-700 dark:text-gray-300">
-                            <li class="flex items-start"><div class="check-icon">✔</div> <span>Threat detection & response</span></li>
-                            <li class="flex items-start"><div class="check-icon">✔</div> <span>SIEM & log analysis</span></li>
-                            <li class="flex items-start"><div class="check-icon">✔</div> <span>Vulnerability scanning</span></li>
-                            <li class="flex items-start"><div class="check-icon">✔</div> <span>Compliance & reporting (ISO, SOC2, etc.)</span></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="text-center mt-8">
-                    <p class="text-gray-600 dark:text-gray-300 italic">Available for on-premises, hybrid, and fully cloud environments.</p>
-                </div>
-            </div>
-
-            <div class="text-center mt-10">
-                <a href="https://calendly.com/mauricioromeroca" class="btn-primary text-white px-8 py-3 rounded-lg font-semibold">
-                    Request Data Center, NOC or SOC Support
-                </a>
-                <br>
-                <a href="#" class="btn-back mt-4">← Regresar al menú principal</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Partners -->
-    <section id="partners" class="py-16 bg-white dark:bg-gray-800 transition-colors duration-300">
-        <!-- Banner Animado -->
-        <div class="py-6 bg-white dark:bg-gray-800 overflow-hidden">
-            <h3 class="text-center text-xl font-semibold mb-4 dark:text-white">Our Technology Partners</h3>
-            <div class="partner-banner-container relative w-full overflow-hidden">
-                <div class="partner-banner flex">
-                    <!-- Primera repetición -->
-                    <div class="flex items-center justify-center w-auto whitespace-nowrap mx-12">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/9/96/Microsoft_logo_%282012%29.svg" alt="Microsoft" class="h-10 grayscale hover:grayscale-0 transition">
-                        <span class="text-sm text-gray-600 dark:text-gray-300 ml-2">Microsoft</span>
-                    </div>
-                    <div class="flex items-center justify-center w-auto whitespace-nowrap mx-12">
-                        <img src="https://www.cisco.com/c/dam/assets/cisco_com/global/trade-mark/images/logo-cisco.svg" alt="Cisco" class="h-10 grayscale hover:grayscale-0 transition">
-                        <span class="text-sm text-gray-600 dark:text-gray-300 ml-2">Cisco</span>
-                    </div>
-                    <div class="flex items-center justify-center w-auto whitespace-nowrap mx-12">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/VMware_logo.png" alt="VMware" class="h-10 grayscale hover:grayscale-0 transition">
-                        <span class="text-sm text-gray-600 dark:text-gray-300 ml-2">VMware</span>
-                    </div>
-                    <div class="flex items-center justify-center w-auto whitespace-nowrap mx-12">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/9/95/Fortinet_logo.svg" alt="Fortinet" class="h-10 grayscale hover:grayscale-0 transition">
-                        <span class="text-sm text-gray-600 dark:text-gray-300 ml-2">Fortinet</span>
-                    </div>
-                    <div class="flex items-center justify-center w-auto whitespace-nowrap mx-12">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e9/Red_Hat_logo.svg" alt="Red Hat" class="h-10 grayscale hover:grayscale-0 transition">
-                        <span class="text-sm text-gray-600 dark:text-gray-300 ml-2">Red Hat</span>
-                    </div>
-                    <div class="flex items-center justify-center w-auto whitespace-nowrap mx-12">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/9/9e/Veeam_Software_logo.svg" alt="Veeam" class="h-10 grayscale hover:grayscale-0 transition">
-                        <span class="text-sm text-gray-600 dark:text-gray-300 ml-2">Veeam</span>
-                    </div>
-                    <div class="flex items-center justify-center w-auto whitespace-nowrap mx-12">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/9/9e/UbuntuCoF.svg" alt="Ubuntu" class="h-10 grayscale hover:grayscale-0 transition">
-                        <span class="text-sm text-gray-600 dark:text-gray-300 ml-2">Ubuntu</span>
-                    </div>
-                    <div class="flex items-center justify-center w-auto whitespace-nowrap mx-12">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/a/ad/HP_Enterprise_Logo_2017.svg" alt="HPE" class="h-10 grayscale hover:grayscale-0 transition">
-                        <span class="text-sm text-gray-600 dark:text-gray-300 ml-2">HPE</span>
-                    </div>
-                    <!-- Segunda repetición (para animación infinita) -->
-                    <div class="flex items-center justify-center w-auto whitespace-nowrap mx-12">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/9/96/Microsoft_logo_%282012%29.svg" alt="Microsoft" class="h-10 grayscale hover:grayscale-0 transition">
-                        <span class="text-sm text-gray-600 dark:text-gray-300 ml-2">Microsoft</span>
-                    </div>
-                    <div class="flex items-center justify-center w-auto whitespace-nowrap mx-12">
-                        <img src="https://www.cisco.com/c/dam/assets/cisco_com/global/trade-mark/images/logo-cisco.svg" alt="Cisco" class="h-10 grayscale hover:grayscale-0 transition">
-                        <span class="text-sm text-gray-600 dark:text-gray-300 ml-2">Cisco</span>
-                    </div>
-                    <div class="flex items-center justify-center w-auto whitespace-nowrap mx-12">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/VMware_logo.png" alt="VMware" class="h-10 grayscale hover:grayscale-0 transition">
-                        <span class="text-sm text-gray-600 dark:text-gray-300 ml-2">VMware</span>
-                    </div>
-                    <div class="flex items-center justify-center w-auto whitespace-nowrap mx-12">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/9/95/Fortinet_logo.svg" alt="Fortinet" class="h-10 grayscale hover:grayscale-0 transition">
-                        <span class="text-sm text-gray-600 dark:text-gray-300 ml-2">Fortinet</span>
-                    </div>
-                    <div class="flex items-center justify-center w-auto whitespace-nowrap mx-12">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e9/Red_Hat_logo.svg" alt="Red Hat" class="h-10 grayscale hover:grayscale-0 transition">
-                        <span class="text-sm text-gray-600 dark:text-gray-300 ml-2">Red Hat</span>
-                    </div>
-                    <div class="flex items-center justify-center w-auto whitespace-nowrap mx-12">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/9/9e/Veeam_Software_logo.svg" alt="Veeam" class="h-10 grayscale hover:grayscale-0 transition">
-                        <span class="text-sm text-gray-600 dark:text-gray-300 ml-2">Veeam</span>
-                    </div>
-                    <div class="flex items-center justify-center w-auto whitespace-nowrap mx-12">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/9/9e/UbuntuCoF.svg" alt="Ubuntu" class="h-10 grayscale hover:grayscale-0 transition">
-                        <span class="text-sm text-gray-600 dark:text-gray-300 ml-2">Ubuntu</span>
-                    </div>
-                    <div class="flex items-center justify-center w-auto whitespace-nowrap mx-12">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/a/ad/HP_Enterprise_Logo_2017.svg" alt="HPE" class="h-10 grayscale hover:grayscale-0 transition">
-                        <span class="text-sm text-gray-600 dark:text-gray-300 ml-2">HPE</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Contenido original de partners -->
-        <div class="container mx-auto px-6 mt-12">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold dark:text-white">Technology Partners</h2>
-                <p class="text-xl text-gray-600 dark:text-gray-300">We work with leading technology providers</p>
-            </div>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
-                <div class="flex items-center justify-center p-6"><img src="https://upload.wikimedia.org/wikipedia/commons/9/96/Microsoft_logo_%282012%29.svg" alt="Microsoft" class="partner-logo h-10" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'40\'><text x=\'50%25\' y=\'50%25\' fill=\'%230078D4\' font-size=\'12\' font-family=\'sans-serif\'>Microsoft</text></svg>';"></div>
-                <div class="flex items-center justify-center p-6"><img src="https://www.cisco.com/c/dam/assets/cisco_com/global/trade-mark/images/logo-cisco.svg" alt="Cisco" class="partner-logo h-10" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'40\'><text x=\'50%25\' y=\'50%25\' fill=\'%230033A0\' font-size=\'12\' font-family=\'sans-serif\'>Cisco</text></svg>';"></div>
-                <div class="flex items-center justify-center p-6"><img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/VMware_logo.png" alt="VMware" class="partner-logo h-10" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'40\'><text x=\'50%25\' y=\'50%25\' fill=\'%23488038\' font-size=\'12\' font-family=\'sans-serif\'>VMware</text></svg>';"></div>
-                <div class="flex items-center justify-center p-6"><img src="https://upload.wikimedia.org/wikipedia/commons/9/95/Fortinet_logo.svg" alt="Fortinet" class="partner-logo h-10" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'40\'><text x=\'50%25\' y=\'50%25\' fill=\'%23009DD9\' font-size=\'12\' font-family=\'sans-serif\'>Fortinet</text></svg>';"></div>
-                <div class="flex items-center justify-center p-6"><img src="https://upload.wikimedia.org/wikipedia/commons/e/e9/Red_Hat_logo.svg" alt="Red Hat" class="partner-logo h-10" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'40\'><text x=\'50%25\' y=\'50%25\' fill=\'%23CC0000\' font-size=\'12\' font-family=\'sans-serif\'>Red Hat</text></svg>';"></div>
-                <div class="flex items-center justify-center p-6"><img src="https://upload.wikimedia.org/wikipedia/commons/9/9e/Veeam_Software_logo.svg" alt="Veeam" class="partner-logo h-10" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'40\'><text x=\'50%25\' y=\'50%25\' fill=\'%2300A9E0\' font-size=\'12\' font-family=\'sans-serif\'>Veeam</text></svg>';"></div>
-                <div class="flex items-center justify-center p-6"><img src="https://upload.wikimedia.org/wikipedia/commons/9/9e/UbuntuCoF.svg" alt="Ubuntu" class="partner-logo h-10" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'40\'><text x=\'50%25\' y=\'50%25\' fill=\'%23DD4814\' font-size=\'12\' font-family=\'sans-serif\'>Ubuntu</text></svg>';"></div>
-                <div class="flex items-center justify-center p-6"><img src="https://upload.wikimedia.org/wikipedia/commons/a/ad/HP_Enterprise_Logo_2017.svg" alt="HPE" class="partner-logo h-10" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'40\'><text x=\'50%25\' y=\'50%25\' fill=\'%230096D6\' font-size=\'12\' font-family=\'sans-serif\'>HPE</text></svg>';"></div>
+                <!-- Microsoft -->
+                <div class="flex items-center justify-center p-6">
+                    <img
+                        src="https://upload.wikimedia.org/wikipedia/commons/9/96/Microsoft_logo_%282012%29.svg"
+                        alt="Microsoft"
+                        class="partner-logo"
+                        onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'40\'><text x=\'50%25\' y=\'50%25\' fill=\'%230078D4\' font-size=\'12\' font-family=\'sans-serif\'>Microsoft</text></svg>';"
+                    >
+                </div>
+
+                <!-- Cisco -->
+                <div class="flex items-center justify-center p-6">
+                    <img
+                        src="https://www.cisco.com/c/dam/assets/cisco_com/global/trade-mark/images/logo-cisco.svg"
+                        alt="Cisco"
+                        class="partner-logo"
+                        onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'40\'><text x=\'50%25\' y=\'50%25\' fill=\'%230033A0\' font-size=\'12\' font-family=\'sans-serif\'>Cisco</text></svg>';"
+                    >
+                </div>
+
+                <!-- VMware -->
+                <div class="flex items-center justify-center p-6">
+                    <img
+                        src="https://upload.wikimedia.org/wikipedia/commons/9/9a/VMware_logo.png"
+                        alt="VMware"
+                        class="partner-logo"
+                        onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'40\'><text x=\'50%25\' y=\'50%25\' fill=\'%23488038\' font-size=\'12\' font-family=\'sans-serif\'>VMware</text></svg>';"
+                    >
+                </div>
+
+                <!-- Fortinet -->
+                <div class="flex items-center justify-center p-6">
+                    <img
+                        src="https://upload.wikimedia.org/wikipedia/commons/9/95/Fortinet_logo.svg"
+                        alt="Fortinet"
+                        class="partner-logo"
+                        onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'40\'><text x=\'50%25\' y=\'50%25\' fill=\'%23009DD9\' font-size=\'12\' font-family=\'sans-serif\'>Fortinet</text></svg>';"
+                    >
+                </div>
+
+                <!-- Red Hat -->
+                <div class="flex items-center justify-center p-6">
+                    <img
+                        src="https://upload.wikimedia.org/wikipedia/commons/e/e9/Red_Hat_logo.svg"
+                        alt="Red Hat"
+                        class="partner-logo"
+                        onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'40\'><text x=\'50%25\' y=\'50%25\' fill=\'%23CC0000\' font-size=\'12\' font-family=\'sans-serif\'>Red Hat</text></svg>';"
+                    >
+                </div>
+
+                <!-- Veeam -->
+                <div class="flex items-center justify-center p-6">
+                    <img
+                        src="https://upload.wikimedia.org/wikipedia/commons/9/9e/Veeam_Software_logo.svg"
+                        alt="Veeam"
+                        class="partner-logo"
+                        onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'40\'><text x=\'50%25\' y=\'50%25\' fill=\'%2300A9E0\' font-size=\'12\' font-family=\'sans-serif\'>Veeam</text></svg>';"
+                    >
+                </div>
+
+                <!-- Ubuntu -->
+                <div class="flex items-center justify-center p-6">
+                    <img
+                        src="https://upload.wikimedia.org/wikipedia/commons/9/9e/UbuntuCoF.svg"
+                        alt="Ubuntu"
+                        class="partner-logo"
+                        onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'40\'><text x=\'50%25\' y=\'50%25\' fill=\'%23DD4814\' font-size=\'12\' font-family=\'sans-serif\'>Ubuntu</text></svg>';"
+                    >
+                </div>
+
+                <!-- HPE -->
+                <div class="flex items-center justify-center p-6">
+                    <img
+                        src="https://upload.wikimedia.org/wikipedia/commons/a/ad/HP_Enterprise_Logo_2017.svg"
+                        alt="HPE"
+                        class="partner-logo"
+                        onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'40\'><text x=\'50%25\' y=\'50%25\' fill=\'%230096D6\' font-size=\'12\' font-family=\'sans-serif\'>HPE</text></svg>';"
+                    >
+                </div>
             </div>
-        </div>
-        <div class="text-center mt-10">
-            <a href="#" class="btn-back">← Regresar al menú principal</a>
         </div>
     </section>
 
-    <!-- Otros servicios, certificaciones, CTA, footer... (omitiendo por brevedad, pero están en el archivo completo) -->
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8 text-center">
+        <p>&copy; 2025 RomanoTI Solutions. All rights reserved.</p>
+    </footer>
 
-    <!-- Botón "Regresar arriba" -->
-    <div class="btn-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">↑</div>
-
-    <!-- Scripts (Calendly, modo oscuro) -->
-    <script>
-        // Modo oscuro
-        const html = document.documentElement;
-        const toggleBtn = document.getElementById('theme-toggle');
-        const savedTheme = localStorage.getItem('theme');
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-        if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
-            html.classList.add('dark');
-            toggleBtn.textContent = '☀️ Modo Claro';
-        } else {
-            html.classList.remove('dark');
-            toggleBtn.textContent = '🌓 Modo Oscuro';
-        }
-
-        toggleBtn.addEventListener('click', () => {
-            if (html.classList.contains('dark')) {
-                html.classList.remove('dark');
-                localStorage.setItem('theme', 'light');
-                toggleBtn.textContent = '🌓 Modo Oscuro';
-            } else {
-                html.classList.add('dark');
-                localStorage.setItem('theme', 'dark');
-                toggleBtn.textContent = '☀️ Modo Claro';
-            }
-        });
-    </script>
 </body>
 </html>
