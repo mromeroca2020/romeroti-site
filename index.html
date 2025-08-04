@@ -12,14 +12,74 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
 
-    <!-- Estilos -->
+    <!-- Estilos personalizados -->
     <style>
         body {
             font-family: 'Montserrat', sans-serif;
             background-color: #f8f9fa;
             color: #333;
+            scroll-behavior: smooth;
         }
 
+        /* Banner de partners animado: izquierda a derecha */
+        .partners-banner-container {
+            overflow: hidden;
+            white-space: nowrap;
+            padding: 20px 0;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: relative;
+            margin: 0;
+        }
+
+        .partners-banner {
+            display: inline-block;
+            animation: slideLeftToRight 40s linear infinite;
+            /* Duplicamos para efecto infinito */
+            white-space: nowrap;
+        }
+
+        .partners-banner:hover {
+            animation-play-state: paused;
+        }
+
+        .partner-item {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0 40px;
+            text-align: center;
+        }
+
+        .partner-item img {
+            height: 40px;
+            filter: grayscale(100%);
+            opacity: 0.7;
+            transition: all 0.3s;
+        }
+
+        .partner-item img:hover {
+            filter: grayscale(0);
+            opacity: 1;
+            transform: scale(1.05);
+        }
+
+        .partner-item span {
+            margin-top: 6px;
+            font-size: 0.8rem;
+            color: #555;
+        }
+
+        @keyframes slideLeftToRight {
+            0% {
+                transform: translateX(-100%);
+            }
+            100% {
+                transform: translateX(100%);
+            }
+        }
+
+        /* Estilos generales */
         .hero-bg {
             background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
         }
@@ -31,10 +91,23 @@
         .btn-primary:hover {
             background: #1D4ED8;
             transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .service-card {
+            background: white;
+            border-bottom: 4px solid transparent;
+            transition: all 0.3s;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .service-card:hover {
+            transform: translateY(-5px);
+            border-color: #2563EB;
+            box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.1);
         }
 
         .partner-logo {
-            max-height: 40px;
             filter: grayscale(100%);
             opacity: 0.7;
             transition: all 0.3s;
@@ -43,6 +116,10 @@
             filter: grayscale(0);
             opacity: 1;
             transform: scale(1.05);
+        }
+
+        header, footer {
+            background: white;
         }
 
         .logo {
@@ -62,6 +139,41 @@
             justify-content: center;
             margin-right: 12px;
             font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .btn-back {
+            background: #6b7280;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-top: 1rem;
+        }
+        .btn-back:hover {
+            background: #4b5563;
+        }
+
+        .btn-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #2563EB;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            z-index: 50;
+            cursor: pointer;
+        }
+        .btn-top:hover {
+            transform: translateY(-3px);
         }
     </style>
 </head>
@@ -76,13 +188,87 @@
                     <span>RomanoTI Solutions</span>
                 </div>
                 <nav class="hidden md:flex space-x-8">
-                    <a href="#services" class="text-gray-700 hover:text-blue-600">Services</a>
-                    <a href="#partners" class="text-gray-700 hover:text-blue-600">Partners</a>
-                    <a href="https://calendly.com/mauricioromeroca" class="btn-primary text-white px-4 py-2 rounded">Book Now</a>
+                    <a href="#services" class="text-gray-700 hover:text-blue-600 font-medium">Services</a>
+                    <a href="#data-center" class="text-gray-700 hover:text-blue-600 font-medium">Data Center</a>
+                    <a href="#certifications" class="text-gray-700 hover:text-blue-600 font-medium">Certifications</a>
+                    <a href="https://calendly.com/mauricioromeroca" class="btn-primary text-white px-5 py-2 rounded-lg font-medium">Book Now</a>
                 </nav>
             </div>
         </div>
     </header>
+
+    <!-- ✅ Banner Animado: Izquierda a Derecha -->
+    <section class="partners-banner-container">
+        <div class="partners-banner">
+            <!-- Primera repetición -->
+            <div class="partner-item">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/9/96/Microsoft_logo_%282012%29.svg" alt="Microsoft" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'40\'><text x=\'50%25\' y=\'50%25\' fill=\'%230078D4\' font-size=\'12\' font-family=\'sans-serif\'>Microsoft</text></svg>';">
+                <span>Microsoft</span>
+            </div>
+            <div class="partner-item">
+                <img src="https://www.cisco.com/c/dam/assets/cisco_com/global/trade-mark/images/logo-cisco.svg" alt="Cisco" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'40\'><text x=\'50%25\' y=\'50%25\' fill=\'%230033A0\' font-size=\'12\' font-family=\'sans-serif\'>Cisco</text></svg>';">
+                <span>Cisco</span>
+            </div>
+            <div class="partner-item">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/VMware_logo.png" alt="VMware" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'40\'><text x=\'50%25\' y=\'50%25\' fill=\'%23488038\' font-size=\'12\' font-family=\'sans-serif\'>VMware</text></svg>';">
+                <span>VMware</span>
+            </div>
+            <div class="partner-item">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/9/95/Fortinet_logo.svg" alt="Fortinet" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'40\'><text x=\'50%25\' y=\'50%25\' fill=\'%23009DD9\' font-size=\'12\' font-family=\'sans-serif\'>Fortinet</text></svg>';">
+                <span>Fortinet</span>
+            </div>
+            <div class="partner-item">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/e/e9/Red_Hat_logo.svg" alt="Red Hat" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'40\'><text x=\'50%25\' y=\'50%25\' fill=\'%23CC0000\' font-size=\'12\' font-family=\'sans-serif\'>Red Hat</text></svg>';">
+                <span>Red Hat</span>
+            </div>
+            <div class="partner-item">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/9/9e/Veeam_Software_logo.svg" alt="Veeam" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'40\'><text x=\'50%25\' y=\'50%25\' fill=\'%2300A9E0\' font-size=\'12\' font-family=\'sans-serif\'>Veeam</text></svg>';">
+                <span>Veeam</span>
+            </div>
+            <div class="partner-item">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/9/9e/UbuntuCoF.svg" alt="Ubuntu" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'40\'><text x=\'50%25\' y=\'50%25\' fill=\'%23DD4814\' font-size=\'12\' font-family=\'sans-serif\'>Ubuntu</text></svg>';">
+                <span>Ubuntu</span>
+            </div>
+            <div class="partner-item">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/a/ad/HP_Enterprise_Logo_2017.svg" alt="HPE" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'40\'><text x=\'50%25\' y=\'50%25\' fill=\'%230096D6\' font-size=\'12\' font-family=\'sans-serif\'>HPE</text></svg>';">
+                <span>HPE</span>
+            </div>
+
+            <!-- Duplicado para animación infinita -->
+            <div class="partner-item">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/9/96/Microsoft_logo_%282012%29.svg" alt="Microsoft" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'40\'><text x=\'50%25\' y=\'50%25\' fill=\'%230078D4\' font-size=\'12\' font-family=\'sans-serif\'>Microsoft</text></svg>';">
+                <span>Microsoft</span>
+            </div>
+            <div class="partner-item">
+                <img src="https://www.cisco.com/c/dam/assets/cisco_com/global/trade-mark/images/logo-cisco.svg" alt="Cisco" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'40\'><text x=\'50%25\' y=\'50%25\' fill=\'%230033A0\' font-size=\'12\' font-family=\'sans-serif\'>Cisco</text></svg>';">
+                <span>Cisco</span>
+            </div>
+            <div class="partner-item">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/VMware_logo.png" alt="VMware" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'40\'><text x=\'50%25\' y=\'50%25\' fill=\'%23488038\' font-size=\'12\' font-family=\'sans-serif\'>VMware</text></svg>';">
+                <span>VMware</span>
+            </div>
+            <div class="partner-item">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/9/95/Fortinet_logo.svg" alt="Fortinet" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'40\'><text x=\'50%25\' y=\'50%25\' fill=\'%23009DD9\' font-size=\'12\' font-family=\'sans-serif\'>Fortinet</text></svg>';">
+                <span>Fortinet</span>
+            </div>
+            <div class="partner-item">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/e/e9/Red_Hat_logo.svg" alt="Red Hat" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'40\'><text x=\'50%25\' y=\'50%25\' fill=\'%23CC0000\' font-size=\'12\' font-family=\'sans-serif\'>Red Hat</text></svg>';">
+                <span>Red Hat</span>
+            </div>
+            <div class="partner-item">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/9/9e/Veeam_Software_logo.svg" alt="Veeam" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'40\'><text x=\'50%25\' y=\'50%25\' fill=\'%2300A9E0\' font-size=\'12\' font-family=\'sans-serif\'>Veeam</text></svg>';">
+                <span>Veeam</span>
+            </div>
+            <div class="partner-item">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/9/9e/UbuntuCoF.svg" alt="Ubuntu" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'40\'><text x=\'50%25\' y=\'50%25\' fill=\'%23DD4814\' font-size=\'12\' font-family=\'sans-serif\'>Ubuntu</text></svg>';">
+                <span>Ubuntu</span>
+            </div>
+            <div class="partner-item">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/a/ad/HP_Enterprise_Logo_2017.svg" alt="HPE" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'40\'><text x=\'50%25\' y=\'50%25\' fill=\'%230096D6\' font-size=\'12\' font-family=\'sans-serif\'>HPE</text></svg>';">
+                <span>HPE</span>
+            </div>
+        </div>
+    </section>
 
     <!-- Hero -->
     <section class="hero-bg text-white py-28 text-center">
@@ -92,93 +278,28 @@
         </div>
     </section>
 
-    <!-- Partners Section -->
-    <section id="partners" class="py-16 bg-white">
-        <div class="container mx-auto px-6">
-            <h2 class="text-3xl font-bold text-center mb-4">Technology Partners</h2>
-            <p class="text-xl text-gray-600 text-center mb-12">We work with leading technology providers</p>
-
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
-                <!-- Microsoft -->
-                <div class="flex items-center justify-center p-6">
-                    <img
-                        src="https://upload.wikimedia.org/wikipedia/commons/9/96/Microsoft_logo_%282012%29.svg"
-                        alt="Microsoft"
-                        class="partner-logo"
-                        onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'40\'><text x=\'50%25\' y=\'50%25\' fill=\'%230078D4\' font-size=\'12\' font-family=\'sans-serif\'>Microsoft</text></svg>';"
-                    >
-                </div>
-
-                <!-- Cisco -->
-                <div class="flex items-center justify-center p-6">
-                    <img
-                        src="https://www.cisco.com/c/dam/assets/cisco_com/global/trade-mark/images/logo-cisco.svg"
-                        alt="Cisco"
-                        class="partner-logo"
-                        onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'40\'><text x=\'50%25\' y=\'50%25\' fill=\'%230033A0\' font-size=\'12\' font-family=\'sans-serif\'>Cisco</text></svg>';"
-                    >
-                </div>
-
-                <!-- VMware -->
-                <div class="flex items-center justify-center p-6">
-                    <img
-                        src="https://upload.wikimedia.org/wikipedia/commons/9/9a/VMware_logo.png"
-                        alt="VMware"
-                        class="partner-logo"
-                        onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'40\'><text x=\'50%25\' y=\'50%25\' fill=\'%23488038\' font-size=\'12\' font-family=\'sans-serif\'>VMware</text></svg>';"
-                    >
-                </div>
-
-                <!-- Fortinet -->
-                <div class="flex items-center justify-center p-6">
-                    <img
-                        src="https://upload.wikimedia.org/wikipedia/commons/9/95/Fortinet_logo.svg"
-                        alt="Fortinet"
-                        class="partner-logo"
-                        onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'40\'><text x=\'50%25\' y=\'50%25\' fill=\'%23009DD9\' font-size=\'12\' font-family=\'sans-serif\'>Fortinet</text></svg>';"
-                    >
-                </div>
-
-                <!-- Red Hat -->
-                <div class="flex items-center justify-center p-6">
-                    <img
-                        src="https://upload.wikimedia.org/wikipedia/commons/e/e9/Red_Hat_logo.svg"
-                        alt="Red Hat"
-                        class="partner-logo"
-                        onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'40\'><text x=\'50%25\' y=\'50%25\' fill=\'%23CC0000\' font-size=\'12\' font-family=\'sans-serif\'>Red Hat</text></svg>';"
-                    >
-                </div>
-
-                <!-- Veeam -->
-                <div class="flex items-center justify-center p-6">
-                    <img
-                        src="https://upload.wikimedia.org/wikipedia/commons/9/9e/Veeam_Software_logo.svg"
-                        alt="Veeam"
-                        class="partner-logo"
-                        onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'40\'><text x=\'50%25\' y=\'50%25\' fill=\'%2300A9E0\' font-size=\'12\' font-family=\'sans-serif\'>Veeam</text></svg>';"
-                    >
-                </div>
-
-                <!-- Ubuntu -->
-                <div class="flex items-center justify-center p-6">
-                    <img
-                        src="https://upload.wikimedia.org/wikipedia/commons/9/9e/UbuntuCoF.svg"
-                        alt="Ubuntu"
-                        class="partner-logo"
-                        onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'40\'><text x=\'50%25\' y=\'50%25\' fill=\'%23DD4814\' font-size=\'12\' font-family=\'sans-serif\'>Ubuntu</text></svg>';"
-                    >
-                </div>
-
-                <!-- HPE -->
-                <div class="flex items-center justify-center p-6">
-                    <img
-                        src="https://upload.wikimedia.org/wikipedia/commons/a/ad/HP_Enterprise_Logo_2017.svg"
-                        alt="HPE"
-                        class="partner-logo"
-                        onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'40\'><text x=\'50%25\' y=\'50%25\' fill=\'%230096D6\' font-size=\'12\' font-family=\'sans-serif\'>HPE</text></svg>';"
-                    >
-                </div>
+    <!-- Services -->
+    <section id="services" class="py-16 bg-white">
+        <div class="container mx-auto px-6 text-center mb-12">
+            <h2 class="text-3xl font-bold">Our Core Services</h2>
+            <p class="text-xl text-gray-600 max-w-2xl mx-auto">Comprehensive IT solutions tailored to your business needs</p>
+        </div>
+        <div class="grid md:grid-cols-3 gap-8 px-6">
+            <div class="service-card p-8 rounded-lg">
+                <h3 class="text-xl font-bold mb-4">Cybersecurity Protection</h3>
+                <p>Defense against ransomware and data breaches.</p>
             </div>
+            <div class="service-card p-8 rounded-lg">
+                <h3 class="text-xl font-bold mb-4">Cloud Migration</h3>
+                <p>Seamless transition to Microsoft Azure.</p>
+            </div>
+            <div class="service-card p-8 rounded-lg">
+                <h3 class="text-xl font-bold mb-4">IT Infrastructure</h3>
+                <p>Complete management of your technology stack.</p>
+            </div>
+        </div>
+        <div class="text-center mt-10">
+            <a href="#top" class="btn-back">← Back to Menu</a>
         </div>
     </section>
 
@@ -186,6 +307,9 @@
     <footer class="bg-gray-900 text-white py-8 text-center">
         <p>&copy; 2025 RomanoTI Solutions. All rights reserved.</p>
     </footer>
+
+    <!-- Botón Regresar arriba -->
+    <div class="btn-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">↑</div>
 
 </body>
 </html>
