@@ -1,1 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RomanoTI Solutions | IT Infrastructure & Cybersecurity</title>
 
+    <!-- Favicon -->
+    <link rel="icon" href="https://ui-avatars.com/api/?name=R&background=1e40af&color=fff&size=64" type="image/png">
+
+    <!-- Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Estilos personalizados -->
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            scroll-behavior: smooth;
+        }
+
+        .hero-bg {
+            background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+        }
+
+        .btn-primary {
+            background: #2563EB;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            background: #1D4ED8;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .service-card {
+            transition: all 0.3s ease;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .service-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 30px -8px rgba(37, 99, 235, 0.15);
+        }
+
+        .partner-logo {
+            filter: grayscale(100%);
+            opacity: 0.7;
+            transition: all 0.3s;
+        }
+        .partner-logo:hover {
+            filter: grayscale(0%);
+            opacity: 1;
+            transform: scale(1.05);
+        }
+
+        header, footer {
+            background: white;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+        .logo-icon {
+            background: #2563EB;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+    </style>
+
+    <!-- Calendly Widget -->
+    <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50">
+
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-3">
+            <div class="flex items-center justify-between">
+                <div class="logo">
+                    <div class="logo-icon">R</div>
+                    <span>RomanoTI Solutions</span>
+                </div>
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="#services" class="text-gray-700 hover:text-blue-600 font-medium">Services</a>
+                    <a href="#professionals" class="text-gray-700 hover:text-blue-600 font-medium">Professionals</a>
+                    <a href="#partners" class="text-gray-700 hover:text-blue-600 font-medium">Partners</a>
+                    <a href="#certifications" class="text-gray-700 hover:text-blue-600 font-medium">Certifications</a>
+                    <a href="https://calendly.com/mauricioromeroca" class="btn-primary text-white px-5 py-2 rounded-lg font-medium">Book Now</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero-bg text-white py-28">
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-6">Professional IT Infrastructure Solutions</h1>
+            <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
+                Microsoft & Cisco Certified Expert with 15+ years in cloud, virtualization, and cybersecurity
+            </p>
+            <div class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-6">
+                <a href="tel:4386309157" class="btn-primary text-white px-8 py-3 rounded-lg font-semibold flex items-center justify-center">
+                    Emergency Support
+                </a>
+                <a href="https://calendly.com/mauricioromeroca" class="bg-white text-blue-700 px-8 py-3 rounded-lg font-semibold flex items-center justify-center">
+                    Free Consultation
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section id="services" class="py-16 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold">Our Core Services</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">Comprehensive IT solutions tailored to your business needs</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="service-card p-8 rounded-lg shadow-sm bg-white">
+                    <h3 class="text-xl font-bold mb-3">Cybersecurity Protection</h3>
+                    <p>Defense against ransomware and data breaches.</p>
+                </div>
+                <div class="service-card p-8 rounded-lg shadow-sm bg-white">
+                    <h3 class="text-xl font-bold mb-3">Cloud Migration</h3>
+                    <p>Seamless transition to Microsoft Azure cloud.</p>
+                </div>
+                <div class="service-card p-8 rounded-lg shadow-sm bg-white">
+                    <h3 class="text-xl font-bold mb-3">IT Infrastructure</h3>
+                    <p>Complete management of your technology stack.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="container mx-auto px-6 text-center">
+            <div class="logo">
+                <div class="logo-icon">R</div>
+                <span>RomanoTI Solutions</span>
+            </div>
+            <p class="text-gray-400 mt-2">Professional IT Infrastructure Services</p>
+        </div>
+    </footer>
+
+    <!-- Calendly Script -->
+    <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+</body>
+</html>
