@@ -47,6 +47,17 @@
             box-shadow: 0 12px 30px -8px rgba(37, 99, 235, 0.15);
         }
 
+        .partner-logo {
+            filter: grayscale(100%);
+            opacity: 0.7;
+            transition: all 0.3s;
+        }
+        .partner-logo:hover {
+            filter: grayscale(0%);
+            opacity: 1;
+            transform: scale(1.05);
+        }
+
         header, footer {
             background: white;
         }
@@ -69,6 +80,19 @@
             margin-right: 12px;
             font-size: 1.2rem;
             font-weight: bold;
+        }
+
+        .check-icon {
+            width: 16px;
+            height: 16px;
+            background: #10b981;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            margin-right: 8px;
         }
     </style>
 
@@ -122,45 +146,54 @@
                 <h2 class="text-3xl font-bold">Our Core Services</h2>
                 <p class="text-xl text-gray-600 max-w-2xl mx-auto">Comprehensive IT solutions tailored to your business needs</p>
             </div>
+            <div class="grid md:grid-cols-3 gap-8">
 
-            <!-- Cloud Migration -->
-            <div class="service-card p-8 rounded-lg shadow-sm bg-white mb-8">
-                <h3 class="text-2xl font-bold mb-4">Cloud Migration</h3>
-                <p class="mb-6 text-gray-600">Seamless transition to Microsoft Azure cloud</p>
-                <div class="grid md:grid-cols-2 gap-6">
-                    <!-- Subservice 1 -->
-                    <div class="bg-blue-50 p-6 rounded-lg">
-                        <h4 class="font-bold text-lg mb-2">Failover Cluster & Redundancy</h4>
-                        <p class="text-gray-600 mb-4">Design and implementation of high-availability solutions using failover clustering for critical workloads.</p>
-                        <a href="cloud-redundancy.html" class="btn-primary text-white px-4 py-2 rounded text-sm">Learn More</a>
+                <!-- Cloud Migration -->
+                <div class="service-card p-8 rounded-lg shadow-sm bg-white">
+                    <div class="text-blue-600 mb-5">
+                        <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"/>
+                        </svg>
                     </div>
-                    <!-- Subservice 2 -->
-                    <div class="bg-blue-50 p-6 rounded-lg">
-                        <h4 class="font-bold text-lg mb-2">Hybrid Cloud Architecture</h4>
-                        <p class="text-gray-600 mb-4">Strategic design of hybrid environments integrating on-premise infrastructure with Azure cloud services.</p>
-                        <a href="cloud-hybrid.html" class="btn-primary text-white px-4 py-2 rounded text-sm">Learn More</a>
+                    <h3 class="text-xl font-bold mb-3">Cloud Migration</h3>
+                    <p class="mb-4 text-gray-600">Seamless transition to Microsoft Azure cloud</p>
+
+                    <!-- Subservicios -->
+                    <div class="mt-4 space-y-3">
+                        <a href="cloud-redundancy.html" target="_blank" class="block text-sm text-blue-600 hover:underline">→ Failover Cluster & Redundancy</a>
+                        <a href="cloud-hybrid.html" target="_blank" class="block text-sm text-blue-600 hover:underline">→ Hybrid Cloud Architecture</a>
                     </div>
                 </div>
-            </div>
 
-            <!-- IT Infrastructure -->
-            <div class="service-card p-8 rounded-lg shadow-sm bg-white">
-                <h3 class="text-2xl font-bold mb-4">IT Infrastructure</h3>
-                <p class="mb-6 text-gray-600">Complete management of your technology stack</p>
-                <div class="grid md:grid-cols-2 gap-6">
-                    <!-- Subservice 1 -->
-                    <div class="bg-blue-50 p-6 rounded-lg">
-                        <h4 class="font-bold text-lg mb-2">NOC Services</h4>
-                        <p class="text-gray-600 mb-4">24/7 monitoring, alerting, and response for your network and systems.</p>
-                        <a href="it-noc.html" class="btn-primary text-white px-4 py-2 rounded text-sm">Learn More</a>
+                <!-- IT Infrastructure -->
+                <div class="service-card p-8 rounded-lg shadow-sm bg-white">
+                    <div class="text-blue-600 mb-5">
+                        <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"/>
+                        </svg>
                     </div>
-                    <!-- Subservice 2 -->
-                    <div class="bg-blue-50 p-6 rounded-lg">
-                        <h4 class="font-bold text-lg mb-2">SOC Services</h4>
-                        <p class="text-gray-600 mb-4">Security monitoring, threat detection, and incident response for your environment.</p>
-                        <a href="it-soc.html" class="btn-primary text-white px-4 py-2 rounded text-sm">Learn More</a>
+                    <h3 class="text-xl font-bold mb-3">IT Infrastructure</h3>
+                    <p class="mb-4 text-gray-600">Complete management of your technology stack</p>
+
+                    <!-- Subservicios -->
+                    <div class="mt-4 space-y-3">
+                        <a href="it-noc.html" target="_blank" class="block text-sm text-blue-600 hover:underline">→ NOC Services</a>
+                        <a href="it-soc.html" target="_blank" class="block text-sm text-blue-600 hover:underline">→ SOC Services</a>
                     </div>
                 </div>
+
+                <!-- Cybersecurity -->
+                <div class="service-card p-8 rounded-lg shadow-sm bg-white">
+                    <div class="text-blue-600 mb-5">
+                        <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Cybersecurity Protection</h3>
+                    <p class="mb-4 text-gray-600">Defense against ransomware and data breaches</p>
+                    <a href="https://calendly.com/mauricioromeroca" class="btn-primary text-white px-6 py-2 rounded-lg block text-center">Get Protected</a>
+                </div>
+
             </div>
         </div>
     </section>
