@@ -1,6 +1,6 @@
 /* Estilos generales */
 body {
-    font-family: 'Montserrat', Arial, sans-serif;
+    font-family: Arial, sans-serif;
     background-color: #f3f1ee;
     color: #3e2f2f;
     margin: 0;
@@ -59,7 +59,7 @@ nav a:hover {
     font-size: 0.9rem;
 }
 
-/* Banner Animado de Partners */
+/* Banner Animado: Partners */
 .partners-banner-container {
     background: white;
     overflow: hidden;
