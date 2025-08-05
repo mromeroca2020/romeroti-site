@@ -1,6 +1,6 @@
 /* Estilos generales */
 body {
-    font-family: 'Montserrat', Arial, sans-serif;
+    font-family: Arial, sans-serif;
     background-color: #f3f1ee;
     color: #3e2f2f;
     margin: 0;
@@ -176,10 +176,6 @@ nav a:hover {
 /* Secciones */
 .py-16 {
     padding: 4rem 0;
-}
-
-.bg-light {
-    background-color: #f9f9f9;
 }
 
 /* Grid */
