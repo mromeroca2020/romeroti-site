@@ -37,12 +37,12 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
 
-        .service-card {
+        .service-card, .professional-card {
             transition: all 0.3s ease;
             border-radius: 0.5rem;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
         }
-        .service-card:hover {
+        .service-card:hover, .professional-card:hover {
             transform: translateY(-6px);
             box-shadow: 0 12px 30px -8px rgba(37, 99, 235, 0.15);
         }
@@ -105,7 +105,7 @@
     <header class="bg-white shadow-md sticky top-0 z-50">
         <div class="container mx-auto px-6 py-3">
             <div class="flex items-center justify-between">
-                <!-- Logo -->
+                <!-- Logo como enlace al inicio -->
                 <a href="/" class="logo flex items-center">
                     <div class="logo-icon">R</div>
                     <span>RomanoTI Solutions</span>
@@ -114,6 +114,7 @@
                 <!-- Navegación -->
                 <nav class="hidden md:flex items-center space-x-8">
                     <a href="#services" class="text-gray-700 hover:text-blue-600 font-medium">Services</a>
+                    <a href="#about-us" class="text-gray-700 hover:text-blue-600 font-medium">About Us</a>
                     <a href="#professionals" class="text-gray-700 hover:text-blue-600 font-medium">Professionals</a>
                     <a href="#partners" class="text-gray-700 hover:text-blue-600 font-medium">Partners</a>
                     <a href="#certifications" class="text-gray-700 hover:text-blue-600 font-medium">Certifications</a>
@@ -124,7 +125,7 @@
     </header>
 
     <!-- Hero -->
-    <section class="hero-bg text-white py-28">
+    <section id="home" class="hero-bg text-white py-28">
         <div class="container mx-auto px-6 text-center">
             <h1 class="text-4xl md:text-5xl font-bold mb-6">Professional IT Infrastructure Solutions</h1>
             <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">Microsoft & Cisco Certified Expert with 15+ years in cloud, virtualization, and cybersecurity</p>
@@ -135,6 +136,27 @@
                 <a href="https://calendly.com/mauricioromeroca" class="bg-white text-blue-700 px-8 py-3 rounded-lg font-semibold flex items-center justify-center">
                     Free Consultation
                 </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us -->
+    <section id="about-us" class="py-16 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold">About RomanoTI Solutions</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">15+ years of excellence in IT infrastructure and cybersecurity</p>
+            </div>
+            <div class="max-w-4xl mx-auto text-lg text-gray-700 space-y-6">
+                <p>
+                    Founded by Mauricio Romero, RomanoTI Solutions brings over 15 years of hands-on experience in enterprise IT infrastructure, cloud migration, and cybersecurity. We specialize in helping small to medium businesses secure their data, optimize their networks, and transition to modern cloud platforms.
+                </p>
+                <p>
+                    Our mission is simple: deliver reliable, professional IT services with personalized attention. We don’t believe in one-size-fits-all solutions — every business has unique needs, and we tailor our services accordingly.
+                </p>
+                <p>
+                    With certifications from Microsoft, Cisco, and VMware, and partnerships with leading technology providers, we’re equipped to handle your most critical IT challenges.
+                </p>
             </div>
         </div>
     </section>
@@ -194,6 +216,64 @@
                     <a href="https://calendly.com/mauricioromeroca" class="btn-primary text-white px-6 py-2 rounded-lg block text-center">Get Protected</a>
                 </div>
 
+            </div>
+        </div>
+    </section>
+
+    <!-- Professionals -->
+    <section id="professionals" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold">On-Demand Professional Services</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">Access to highly qualified IT professionals for your specific project needs</p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="professional-card p-8 bg-white rounded-lg shadow-sm">
+                    <h3 class="text-xl font-bold mb-3">Certified IT Professionals</h3>
+                    <p>Our network includes Microsoft, Cisco, and VMware certified experts ready to assist with your projects.</p>
+                </div>
+                <div class="professional-card p-8 bg-white rounded-lg shadow-sm">
+                    <h3 class="text-xl font-bold mb-3">Flexible Engagement Models</h3>
+                    <p>Hourly, project-based, or long-term contracts to match your requirements and budget.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partners -->
+    <section id="partners" class="py-16 bg-white">
+        <div class="container mx-auto px-6 text-center mb-12">
+            <h2 class="text-3xl font-bold">Technology Partners</h2>
+            <p class="text-xl text-gray-600 max-w-2xl mx-auto">We work with leading technology providers</p>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div class="flex items-center justify-center p-6"><img src="https://upload.wikimedia.org/wikipedia/commons/9/96/Microsoft_logo_%282012%29.svg" alt="Microsoft" class="partner-logo h-10"></div>
+            <div class="flex items-center justify-center p-6"><img src="https://www.cisco.com/c/dam/assets/cisco_com/global/trade-mark/images/logo-cisco.svg" alt="Cisco" class="partner-logo h-10"></div>
+            <div class="flex items-center justify-center p-6"><img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/VMware_logo.png" alt="VMware" class="partner-logo h-10"></div>
+            <div class="flex items-center justify-center p-6"><img src="https://upload.wikimedia.org/wikipedia/commons/9/95/Fortinet_logo.svg" alt="Fortinet" class="partner-logo h-10"></div>
+            <div class="flex items-center justify-center p-6"><img src="https://upload.wikimedia.org/wikipedia/commons/e/e9/Red_Hat_logo.svg" alt="Red Hat" class="partner-logo h-10"></div>
+            <div class="flex items-center justify-center p-6"><img src="https://upload.wikimedia.org/wikipedia/commons/9/9e/Veeam_Software_logo.svg" alt="Veeam" class="partner-logo h-10"></div>
+            <div class="flex items-center justify-center p-6"><img src="https://upload.wikimedia.org/wikipedia/commons/9/9e/UbuntuCoF.svg" alt="Ubuntu" class="partner-logo h-10"></div>
+            <div class="flex items-center justify-center p-6"><img src="https://upload.wikimedia.org/wikipedia/commons/a/ad/HP_Enterprise_Logo_2017.svg" alt="HPE" class="partner-logo h-10"></div>
+        </div>
+    </section>
+
+    <!-- Certifications -->
+    <section id="certifications" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-6 text-center mb-12">
+            <h2 class="text-3xl font-bold">Certifications & Qualifications</h2>
+            <p class="text-xl text-gray-600">Officially recognized expertise in enterprise technologies</p>
+        </div>
+        <div class="grid md:grid-cols-4 gap-8">
+            <div class="text-center p-6 bg-white rounded-lg shadow-sm">
+                <div style="width: 80px; height: 80px; background: #0078D4; margin: 0 auto 10px; border-radius: 8px;"></div>
+                <h3 class="font-bold">Microsoft Azure Fundamentals</h3>
+                <p class="text-gray-600 text-sm">Certified since 2019</p>
+            </div>
+            <div class="text-center p-6 bg-white rounded-lg shadow-sm">
+                <div style="width: 80px; height: 80px; background: #0033A0; margin: 0 auto 10px; border-radius: 8px;"></div>
+                <h3 class="font-bold">Cisco Certified Professional</h3>
+                <p class="text-gray-600 text-sm">Networking & Cybersecurity</p>
             </div>
         </div>
     </section>
