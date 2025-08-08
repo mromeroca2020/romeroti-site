@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flexible Engagement Models | RomanoTI Solutions</title>
+
+    <!-- Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="icon" href="https://ui-avatars.com/api/?name=R&background=1e40af&color=fff&size=64" type="image/png">
+
+    <!-- Estilos personalizados -->
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            scroll-behavior: smooth;
+        }
+
+        .hero-bg {
+            background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+        }
+
+        .btn-primary {
+            background: #2563EB;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            background: #1D4ED8;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .service-card, .feature-card {
+            transition: all 0.3s ease;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .service-card:hover, .feature-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 30px -8px rgba(37, 99, 235, 0.15);
+        }
+
+        header, footer {
+            background: white;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+        .logo-icon {
+            background: #2563EB;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .check-icon {
+            width: 16px;
+            height: 16px;
+            background: #10b981;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            margin-right: 8px;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-3">
+            <div class="flex items-center justify-between">
+                <!-- Logo -->
+                <a href="/" class="logo flex items-center">
+                    <div class="logo-icon">R</div>
+                    <span>RomanoTI Solutions</span>
+                </a>
+
+                <!-- Navegación -->
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="/" class="text-gray-700 hover:text-blue-600 font-medium">Home</a>
+                    <a href="https://calendly.com/mauricioromeroca" class="btn-primary text-white px-5 py-2 rounded-lg font-medium">Book Now</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero-bg text-white py-28">
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-6">Flexible Engagement Models</h1>
+            <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">Hourly, project-based, or long-term contracts to match your requirements and budget</p>
+        </div>
+    </section>
+
+    <!-- What We Offer -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold">Choose the Right Model for Your Project</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">We adapt to your needs — no rigid contracts, no surprises.</p>
+            </div>
+
+            <!-- Hourly -->
+            <div class="feature-card p-8 rounded-lg shadow-sm bg-white mb-8">
+                <div class="flex items-start">
+                    <div class="bg-blue-100 p-3 rounded-full mr-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold mb-3">Hourly Engagement</h3>
+                        <p class="mb-4">Ideal for short tasks, troubleshooting, or on-demand support. Pay only for the time used.</p>
+                        <ul class="space-y-2 text-gray-600">
+                            <li class="flex items-start"><div class="check-icon">✔</div> <span>Minimum 1-hour block</span></li>
+                            <li class="flex items-start"><div class="check-icon">✔</div> <span>Ideal for emergency fixes or consultations</span></li>
+                            <li class="flex items-start"><div class="check-icon">✔</div> <span>Available within 4 business hours</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project-Based -->
+            <div class="feature-card p-8 rounded-lg shadow-sm bg-white mb-8">
+                <div class="flex items-start">
+                    <div class="bg-green-100 p-3 rounded-full mr-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold mb-3">Project-Based Contracts</h3>
+                        <p class="mb-4">Fixed scope and price for defined projects like migrations, audits, or deployments.</p>
+                        <ul class="space-y-2 text-gray-600">
+                            <li class="flex items-start"><div class="check-icon">✔</div> <span>Clear deliverables and timelines</span></li>
+                            <li class="flex items-start"><div class="check-icon">✔</div> <span>No cost overruns — fixed price</span></li>
+                            <li class="flex items-start"><div class="check-icon">✔</div> <span>Weekly progress updates</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Long-Term -->
+            <div class="feature-card p-8 rounded-lg shadow-sm bg-white">
+                <div class="flex items-start">
+                    <div class="bg-purple-100 p-3 rounded-full mr-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.84-1.29M15 14a3 3 0 00-3 3v2a2 2 0 01-2 2H8a2 2 0 01-2-2v-2a3 3 0 00-3-3M10 4a4 4 0 018 0v2H2v-2a4 4 0 018 0z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold mb-3">Long-Term Contracts</h3>
+                        <p class="mb-4">Dedicated resource for ongoing IT management, NOC/SOC, or infrastructure support.</p>
+                        <ul class="space-y-2 text-gray-600">
+                            <li class="flex items-start"><div class="check-icon">✔</div> <span>Full-time or part-time availability</span></li>
+                            <li class="flex items-start"><div class="check-icon">✔</div> <span>Seamless integration with your team</span></li>
+                            <li class="flex items-start"><div class="check-icon">✔</div> <span>Discounts for 3+ month commitments</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA with Calendly Integration -->
+    <section class="py-16 bg-blue-700 text-white">
+        <div class="container mx-auto text-center">
+            <h2 class="text-3xl font-bold mb-6">Ready to Choose Your Engagement Model?</h2>
+            <p class="text-xl mb-8">Schedule a free consultation to discuss your project and get a tailored proposal.</p>
+            <div class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-6">
+                <a href="https://calendly.com/mauricioromeroca" class="bg-white text-blue-700 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100">
+                    Schedule Free Consultation
+                </a>
+                <a href="tel:4386309157" class="btn-primary text-white px-8 py-3 rounded-lg font-semibold">
+                    Call Emergency Support
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="container mx-auto px-6 text-center">
+            <p>© 2025 RomanoTI Solutions. All rights reserved.</p>
+            <p class="mt-2">Serving Canada</p>
+        </div>
+    </footer>
+
+</body>
+</html>
