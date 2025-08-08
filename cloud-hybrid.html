@@ -4,35 +4,229 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hybrid Cloud Architecture | RomanoTI Solutions</title>
+
+    <!-- Tailwind CSS -->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="icon" href="https://ui-avatars.com/api/?name=R&background=1e40af&color=fff&size=64" type="image/png">
+
+    <!-- Estilos personalizados -->
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            scroll-behavior: smooth;
+        }
+
+        .hero-bg {
+            background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+        }
+
+        .btn-primary {
+            background: #2563EB;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            background: #1D4ED8;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .service-card, .feature-card {
+            transition: all 0.3s ease;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .service-card:hover, .feature-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 30px -8px rgba(37, 99, 235, 0.15);
+        }
+
+        header, footer {
+            background: white;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+        .logo-icon {
+            background: #2563EB;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .check-icon {
+            width: 16px;
+            height: 16px;
+            background: #10b981;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            margin-right: 8px;
+        }
+    </style>
 </head>
 <body class="bg-gray-50">
-    <div class="container mx-auto px-6 py-16 max-w-4xl">
-        <h1 class="text-3xl font-bold mb-6">Hybrid Cloud Architecture</h1>
-        <p class="text-lg mb-6">Strategic design of hybrid environments integrating on-premise infrastructure with Azure cloud services.</p>
 
-        <h2 class="text-2xl font-bold mt-8 mb-4">What We Deliver</h2>
-        <ul class="list-disc list-inside space-y-2 mb-6">
-            <li>Assessment of current infrastructure and workloads</li>
-            <li>Design of hybrid network topology (VPN, ExpressRoute)</li>
-            <li>Identity synchronization (Azure AD Connect)</li>
-            <li>Data replication and backup strategies</li>
-            <li>Cost optimization and licensing guidance</li>
-        </ul>
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-3">
+            <div class="flex items-center justify-between">
+                <!-- Logo -->
+                <a href="/" class="logo flex items-center">
+                    <div class="logo-icon">R</div>
+                    <span>RomanoTI Solutions</span>
+                </a>
 
-        <h2 class="text-2xl font-bold mt-8 mb-4">Prerequisites</h2>
-        <ul class="list-disc list-inside space-y-2">
-            <li>Existing on-premise servers and network</li>
-            <li>Azure subscription (or assistance to create one)</li>
-            <li>Network connectivity between sites</li>
-            <li>Administrative access to systems</li>
-            <li>Business requirements and workload priorities</li>
-        </ul>
-
-        <div class="mt-12">
-            <a href="https://calendly.com/mauricioromeroca" class="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold">Schedule Consultation</a>
+                <!-- Navegación -->
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="/" class="text-gray-700 hover:text-blue-600 font-medium">Home</a>
+                    <a href="https://calendly.com/mauricioromeroca" class="btn-primary text-white px-5 py-2 rounded-lg font-medium">Book Now</a>
+                </nav>
+            </div>
         </div>
-    </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero-bg text-white py-28">
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-6">Hybrid Cloud Architecture</h1>
+            <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">Strategic integration of on-premise infrastructure with Microsoft Azure cloud services</p>
+        </div>
+    </section>
+
+    <!-- What We Deliver -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold">What We Deliver</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">End-to-end design and implementation of secure, scalable hybrid environments.</p>
+            </div>
+
+            <!-- Hybrid Network Topology -->
+            <div class="feature-card p-8 rounded-lg shadow-sm bg-white mb-8">
+                <h3 class="text-xl font-bold mb-4">Hybrid Network Topology</h3>
+                <p class="mb-6">Design of secure network connectivity between on-premise and Azure using VPN or ExpressRoute.</p>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="bg-blue-50 p-6 rounded-lg">
+                        <h4 class="font-bold text-lg mb-3">Software</h4>
+                        <p>Azure Virtual Network, VPN Gateway, ExpressRoute, Route Tables.</p>
+                    </div>
+                    <div class="bg-blue-50 p-6 rounded-lg">
+                        <h4 class="font-bold text-lg mb-3">Hardware</h4>
+                        <p>On-premise firewalls (Cisco, Fortinet), routers, internet connection.</p>
+                    </div>
+                    <div class="bg-blue-50 p-6 rounded-lg">
+                        <h4 class="font-bold text-lg mb-3">Human Intervention</h4>
+                        <p>Network architects design topology, IP addressing, and routing policies.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Identity Synchronization -->
+            <div class="feature-card p-8 rounded-lg shadow-sm bg-white mb-8">
+                <h3 class="text-xl font-bold mb-4">Identity Synchronization (Azure AD Connect)</h3>
+                <p class="mb-6">Seamless integration of on-premise Active Directory with Azure AD for single sign-on.</p>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="bg-blue-50 p-6 rounded-lg">
+                        <h4 class="font-bold text-lg mb-3">Software</h4>
+                        <p>Azure AD Connect, Password Hash Sync, SSO, Conditional Access.</p>
+                    </div>
+                    <div class="bg-blue-50 p-6 rounded-lg">
+                        <h4 class="font-bold text-lg mb-3">Hardware</h4>
+                        <p>Server (Windows Server 2016+) for Azure AD Connect sync.</p>
+                    </div>
+                    <div class="bg-blue-50 p-6 rounded-lg">
+                        <h4 class="font-bold text-lg mb-3">Human Intervention</h4>
+                        <p>Identity specialists configure sync rules, test authentication, and enable MFA.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Data Replication -->
+            <div class="feature-card p-8 rounded-lg shadow-sm bg-white mb-8">
+                <h3 class="text-xl font-bold mb-4">Data Replication and Backup</h3>
+                <p class="mb-6">Secure replication of critical data to Azure with backup and disaster recovery.</p>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="bg-blue-50 p-6 rounded-lg">
+                        <h4 class="font-bold text-lg mb-3">Software</h4>
+                        <p>Azure Site Recovery, Azure Backup, Azure File Sync.</p>
+                    </div>
+                    <div class="bg-blue-50 p-6 rounded-lg">
+                        <h4 class="font-bold text-lg mb-3">Hardware</h4>
+                        <p>On-premise servers, Azure VMs, storage accounts.</p>
+                    </div>
+                    <div class="bg-blue-50 p-6 rounded-lg">
+                        <h4 class="font-bold text-lg mb-3">Human Intervention</h4>
+                        <p>Engineers configure replication policies, test failover, and document recovery steps.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cost Optimization -->
+            <div class="feature-card p-8 rounded-lg shadow-sm bg-white">
+                <h3 class="text-xl font-bold mb-4">Cost Optimization and Licensing</h3>
+                <p class="mb-6">Right-sizing resources, reserved instances, and licensing guidance to reduce cloud spend.</p>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="bg-blue-50 p-6 rounded-lg">
+                        <h4 class="font-bold text-lg mb-3">Software</h4>
+                        <p>Azure Cost Management, Advisor, Reserved Instances, Hybrid Benefit.</p>
+                    </div>
+                    <div class="bg-blue-50 p-6 rounded-lg">
+                        <h4 class="font-bold text-lg mb-3">Hardware</h4>
+                        <p>No additional hardware – optimization of cloud resources.</p>
+                    </div>
+                    <div class="bg-blue-50 p-6 rounded-lg">
+                        <h4 class="font-bold text-lg mb-3">Human Intervention</h4>
+                        <p>Cloud architects analyze usage and recommend cost-saving measures.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-16 bg-blue-700 text-white">
+        <div class="container mx-auto text-center">
+            <h2 class="text-3xl font-bold mb-6">Ready to Build Your Hybrid Cloud?</h2>
+            <p class="text-xl mb-8">Schedule a free consultation to plan your migration.</p>
+            <div class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-6">
+                <a href="https://calendly.com/mauricioromeroca" class="bg-white text-blue-700 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100">
+                    Schedule Consultation
+                </a>
+                <a href="tel:4386309157" class="btn-primary text-white px-8 py-3 rounded-lg font-semibold">
+                    Call Emergency Support
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="container mx-auto px-6 text-center">
+            <p>© 2025 RomanoTI Solutions. All rights reserved.</p>
+            <p class="mt-2">Serving Canada</p>
+        </div>
+    </footer>
+
 </body>
 </html>
