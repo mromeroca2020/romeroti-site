@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hire a Certified IT Professional | RomanoTI Solutions</title>
+
+    <!-- Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="icon" href="https://ui-avatars.com/api/?name=R&background=1e40af&color=fff&size=64" type="image/png">
+
+    <!-- Estilos personalizados -->
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            scroll-behavior: smooth;
+        }
+
+        .hero-bg {
+            background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+        }
+
+        .btn-primary {
+            background: #2563EB;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            background: #1D4ED8;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .form-card {
+            transition: all 0.3s ease;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .form-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px -8px rgba(37, 99, 235, 0.15);
+        }
+
+        header, footer {
+            background: white;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+        .logo-icon {
+            background: #2563EB;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-3">
+            <div class="flex items-center justify-between">
+                <!-- Logo -->
+                <a href="/" class="logo flex items-center">
+                    <div class="logo-icon">R</div>
+                    <span>RomanoTI Solutions</span>
+                </a>
+
+                <!-- Navegación -->
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="/" class="text-gray-700 hover:text-blue-600 font-medium">Home</a>
+                    <a href="https://calendly.com/mauricioromeroca" class="btn-primary text-white px-5 py-2 rounded-lg font-medium">Book Now</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero-bg text-white py-28">
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-6">Hire a Certified IT Professional</h1>
+            <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">Access Microsoft, Cisco, and VMware certified experts for your project needs</p>
+        </div>
+    </section>
+
+    <!-- Formulario -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-6 max-w-4xl">
+            <div class="form-card p-8 rounded-lg shadow-sm bg-white">
+                <h2 class="text-3xl font-bold mb-6 text-center">Tell Us What You Need</h2>
+                <p class="text-gray-600 text-center mb-8">Fill out this form and we’ll match you with the right certified professional within 24 hours.</p>
+
+                <!-- Formulario -->
+                <form action="https://api.web3forms.com/submit" method="POST" class="space-y-6">
+
+                    <!-- Campo oculto para Web3Forms -->
+                    <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
+
+                    <!-- Nombre -->
+                    <div>
+                        <label for="name" class="block font-medium mb-2">Full Name *</label>
+                        <input type="text" id="name" name="name" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    </div>
+
+                    <!-- Email -->
+                    <div>
+                        <label for="email" class="block font-medium mb-2">Email Address *</label>
+                        <input type="email" id="email" name="email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    </div>
+
+                    <!-- Teléfono -->
+                    <div>
+                        <label for="phone" class="block font-medium mb-2">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    </div>
+
+                    <!-- Tipo de profesional -->
+                    <div>
+                        <label for="service" class="block font-medium mb-2">Type of Professional Needed *</label>
+                        <select id="service" name="service" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" onchange="fillDescription()">
+                            <option value="">Select a service</option>
+                            <option value="Azure Cloud Engineer">Azure Cloud Engineer</option>
+                            <option value="Cisco Network Specialist">Cisco Network Specialist</option>
+                            <option value="VMware Virtualization Expert">VMware Virtualization Expert</option>
+                            <option value="Cybersecurity Analyst (SOC)">Cybersecurity Analyst (SOC)</option>
+                            <option value="NOC Monitoring Engineer">NOC Monitoring Engineer</option>
+                            <option value="Backup & Recovery Specialist">Backup & Recovery Specialist (Veeam)</option>
+                            <option value="Hybrid Cloud Architect">Hybrid Cloud Architect</option>
+                            <option value="Failover & High Availability">Failover & High Availability</option>
+                            <option value="IT Infrastructure Consultant">IT Infrastructure Consultant</option>
+                            <option value="Other">Other (specify below)</option>
+                        </select>
+                    </div>
+
+                    <!-- Duración del recurso -->
+                    <div>
+                        <label for="duration" class="block font-medium mb-2">Resource Duration *</label>
+                        <select id="duration" name="duration" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            <option value="">Select duration</option>
+                            <option value="Short-term (1-2 weeks)">Short-term (1-2 weeks)</option>
+                            <option value="Medium-term (3-8 weeks)">Medium-term (3-8 weeks)</option>
+                            <option value="Long-term (3+ months)">Long-term (3+ months)</option>
+                            <option value="Ongoing support">Ongoing support</option>
+                        </select>
+                    </div>
+
+                    <!-- Descripción del proyecto -->
+                    <div>
+                        <label for="message" class="block font-medium mb-2">Brief Project Description (Max 150 words) *</label>
+                        <textarea id="message" name="message" rows="5" maxlength="1000" required placeholder="Select a service above to auto-fill a description, then edit as needed..." class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"></textarea>
+                    </div>
+
+                    <!-- Botón de envío -->
+                    <div>
+                        <button type="submit" class="btn-primary text-white px-8 py-3 rounded-lg w-full font-semibold">
+                            Submit Request
+                        </button>
+                    </div>
+                </form>
+
+                <p class="text-sm text-gray-500 mt-4 text-center">
+                    We'll contact you within 24 hours to confirm availability and next steps.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="container mx-auto px-6 text-center">
+            <p>© 2025 RomanoTI Solutions. All rights reserved.</p>
+            <p class="mt-2">Serving Canada</p>
+        </div>
+    </footer>
+
+    <!-- Script para autocompletar descripción -->
+    <script>
+        function fillDescription() {
+            const serviceSelect = document.getElementById('service');
+            const messageTextarea = document.getElementById('message');
+            const service = serviceSelect.value;
+
+            const descriptions = {
+                'Azure Cloud Engineer': 'Looking for an Azure Cloud Engineer to assist with cloud migration, virtual machine deployment, storage configuration, and identity management using Azure AD. Project includes setting up secure networking (VNet, NSG) and monitoring with Azure Monitor.',
+                'Cisco Network Specialist': 'Require a Cisco-certified network engineer to design, configure, and troubleshoot enterprise networks. Scope includes routers, switches, firewalls (ASA/Firepower), VLANs, and site-to-site VPNs. Support for troubleshooting and documentation needed.',
+                'VMware Virtualization Expert': 'Need a VMware expert to manage vSphere environments, including ESXi hosts, vCenter, vMotion, and resource optimization. Tasks include VM deployment, storage (SAN/NAS), backup integration, and performance tuning.',
+                'Cybersecurity Analyst (SOC)': 'Seeking a SOC analyst for threat monitoring, incident response, and security log analysis. Requires experience with SIEM (Wazuh, Splunk), EDR tools, vulnerability scanning, and compliance reporting (GDPR, PIPEDA).',
+                'NOC Monitoring Engineer': 'Require a NOC engineer for 24/7 monitoring of servers, network devices, and applications. Tasks include alerting, performance reporting, log management, and incident tracking using tools like Zabbix, PRTG, or Nagios.',
+                'Backup & Recovery Specialist': 'Looking for a Veeam backup specialist to implement, manage, and test backup jobs for physical and virtual environments. Includes configuration of backup repositories, replication, and disaster recovery planning.',
+                'Hybrid Cloud Architect': 'Need a hybrid cloud architect to integrate on-premise infrastructure with Microsoft Azure. Scope includes Azure AD Connect, ExpressRoute/VPN, Azure Site Recovery, and cost optimization strategies.',
+                'Failover & High Availability': 'Require expertise in setting up failover clusters for SQL Server, file servers, or Hyper-V using Windows Server Failover Clustering (WSFC). Includes shared storage (iSCSI/SAN), quorum configuration, and failover testing.',
+                'IT Infrastructure Consultant': 'Seeking an IT consultant for infrastructure assessment, optimization, and strategic planning. Scope includes network review, server health check, security audit, and roadmap for cloud or on-premise improvements.',
+                'Other': 'Please describe your project requirements in detail, including technologies involved, scope of work, and expected outcomes.'
+            };
+
+            messageTextarea.value = descriptions[service] || '';
+        }
+    </script>
+</body>
+</html>
