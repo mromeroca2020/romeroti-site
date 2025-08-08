@@ -4,35 +4,249 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SOC Services | RomanoTI Solutions</title>
+
+    <!-- Tailwind CSS -->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="icon" href="https://ui-avatars.com/api/?name=R&background=1e40af&color=fff&size=64" type="image/png">
+
+    <!-- Estilos personalizados -->
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            scroll-behavior: smooth;
+        }
+
+        .hero-bg {
+            background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+        }
+
+        .btn-primary {
+            background: #2563EB;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            background: #1D4ED8;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .service-card, .feature-card {
+            transition: all 0.3s ease;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .service-card:hover, .feature-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 30px -8px rgba(37, 99, 235, 0.15);
+        }
+
+        header, footer {
+            background: white;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+        .logo-icon {
+            background: #2563EB;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .check-icon {
+            width: 16px;
+            height: 16px;
+            background: #10b981;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            margin-right: 8px;
+        }
+    </style>
 </head>
 <body class="bg-gray-50">
-    <div class="container mx-auto px-6 py-16 max-w-4xl">
-        <h1 class="text-3xl font-bold mb-6">SOC Services</h1>
-        <p class="text-lg mb-6">Security monitoring, threat detection, and incident response for your environment.</p>
 
-        <h2 class="text-2xl font-bold mt-8 mb-4">What We Deliver</h2>
-        <ul class="list-disc list-inside space-y-2 mb-6">
-            <li>24/7 security event monitoring (SIEM)</li>
-            <li>Threat intelligence and detection</li>
-            <li>Incident investigation and response</li>
-            <li>Vulnerability assessment and reporting</li>
-            <li>Compliance reporting (GDPR, HIPAA, etc.)</li>
-        </ul>
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-3">
+            <div class="flex items-center justify-between">
+                <!-- Logo -->
+                <a href="/" class="logo flex items-center">
+                    <div class="logo-icon">R</div>
+                    <span>RomanoTI Solutions</span>
+                </a>
 
-        <h2 class="text-2xl font-bold mt-8 mb-4">Prerequisites</h2>
-        <ul class="list-disc list-inside space-y-2">
-            <li>Firewalls, servers, and endpoints with logging enabled</li>
-            <li>Network access for security tools</li>
-            <li>Designated incident response contacts</li>
-            <li>Access to security logs (Windows Event, Syslog, etc.)</li>
-            <li>Compliance or security policy requirements</li>
-        </ul>
-
-        <div class="mt-12">
-            <a href="https://calendly.com/mauricioromeroca" class="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold">Schedule Consultation</a>
+                <!-- Navegación -->
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="/" class="text-gray-700 hover:text-blue-600 font-medium">Home</a>
+                    <a href="https://calendly.com/mauricioromeroca" class="btn-primary text-white px-5 py-2 rounded-lg font-medium">Book Now</a>
+                </nav>
+            </div>
         </div>
-    </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero-bg text-white py-28">
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-6">SOC Services</h1>
+            <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">24/7 security monitoring, threat detection, and incident response</p>
+        </div>
+    </section>
+
+    <!-- What We Deliver -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold">What We Deliver</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">Advanced security operations to protect your business from cyber threats.</p>
+            </div>
+
+            <!-- 24/7 Security Monitoring -->
+            <div class="feature-card p-8 rounded-lg shadow-sm bg-white mb-8">
+                <h3 class="text-xl font-bold mb-4">24/7 Security Monitoring (SIEM)</h3>
+                <p class="mb-6">Continuous monitoring of endpoints, firewalls, servers, and cloud environments for suspicious activity.</p>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="bg-blue-50 p-6 rounded-lg">
+                        <h4 class="font-bold text-lg mb-3">Software</h4>
+                        <p>Wazuh, ELK Stack, Graylog. Real-time correlation of security events across your environment.</p>
+                    </div>
+                    <div class="bg-blue-50 p-6 rounded-lg">
+                        <h4 class="font-bold text-lg mb-3">Hardware</h4>
+                        <p>SIEM server (4vCPU, 16GB RAM, 500GB SSD) or cloud-based deployment (Azure Canada).</p>
+                    </div>
+                    <div class="bg-blue-50 p-6 rounded-lg">
+                        <h4 class="font-bold text-lg mb-3">Human Intervention</h4>
+                        <p>Certified analysts (CompTIA Security+, CEH) review alerts and validate threats 24/7.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Threat Detection -->
+            <div class="feature-card p-8 rounded-lg shadow-sm bg-white mb-8">
+                <h3 class="text-xl font-bold mb-4">Threat Detection and Intelligence</h3>
+                <p class="mb-6">Proactive identification of malware, ransomware, phishing, and advanced persistent threats (APT).</p>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="bg-blue-50 p-6 rounded-lg">
+                        <h4 class="font-bold text-lg mb-3">Software</h4>
+                        <p>EDR (CrowdStrike Falcon, SentinelOne), threat intelligence feeds (AlienVault OTX).</p>
+                    </div>
+                    <div class="bg-blue-50 p-6 rounded-lg">
+                        <h4 class="font-bold text-lg mb-3">Hardware</h4>
+                        <p>Endpoints with EDR agents, firewalls with threat prevention modules.</p>
+                    </div>
+                    <div class="bg-blue-50 p-6 rounded-lg">
+                        <h4 class="font-bold text-lg mb-3">Human Intervention</h4>
+                        <p>Analysts investigate IoCs (Indicators of Compromise) and contain threats before escalation.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Incident Response -->
+            <div class="feature-card p-8 rounded-lg shadow-sm bg-white mb-8">
+                <h3 class="text-xl font-bold mb-4">Incident Investigation and Response</h3>
+                <p class="mb-6">Full lifecycle management of security incidents, from detection to eradication and recovery.</p>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="bg-blue-50 p-6 rounded-lg">
+                        <h4 class="font-bold text-lg mb-3">Software</h4>
+                        <p>Incident response platforms (TheHive, Cortex), forensic tools (FTK, Autopsy).</p>
+                    </div>
+                    <div class="bg-blue-50 p-6 rounded-lg">
+                        <h4 class="font-bold text-lg mb-3">Hardware</h4>
+                        <p>Secure forensic workstation, write blockers, isolated network for analysis.</p>
+                    </div>
+                    <div class="bg-blue-50 p-6 rounded-lg">
+                        <h4 class="font-bold text-lg mb-3">Human Intervention</h4>
+                        <p>Incident responders follow NIST 800-61 framework: Detection → Analysis → Containment → Eradication → Recovery.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vulnerability Management -->
+            <div class="feature-card p-8 rounded-lg shadow-sm bg-white mb-8">
+                <h3 class="text-xl font-bold mb-4">Vulnerability Assessment and Reporting</h3>
+                <p class="mb-6">Regular scanning and reporting of vulnerabilities to ensure compliance and reduce attack surface.</p>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="bg-blue-50 p-6 rounded-lg">
+                        <h4 class="font-bold text-lg mb-3">Software</h4>
+                        <p>Nessus, OpenVAS, Microsoft Defender for Cloud. Automated scans and prioritization (CVSS).</p>
+                    </div>
+                    <div class="bg-blue-50 p-6 rounded-lg">
+                        <h4 class="font-bold text-lg mb-3">Hardware</h4>
+                        <p>Scanning appliance or cloud-based scanner with access to internal/external networks.</p>
+                    </div>
+                    <div class="bg-blue-50 p-6 rounded-lg">
+                        <h4 class="font-bold text-lg mb-3">Human Intervention</h4>
+                        <p>Security engineers validate findings, recommend patches, and assist with remediation.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Compliance Reporting -->
+            <div class="feature-card p-8 rounded-lg shadow-sm bg-white">
+                <h3 class="text-xl font-bold mb-4">Compliance Reporting (GDPR, HIPAA, PIPEDA)</h3>
+                <p class="mb-6">Audit-ready reports for regulatory compliance and executive review.</p>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="bg-blue-50 p-6 rounded-lg">
+                        <h4 class="font-bold text-lg mb-3">Software</h4>
+                        <p>Custom dashboards in Power BI, automated compliance templates.</p>
+                    </div>
+                    <div class="bg-blue-50 p-6 rounded-lg">
+                        <h4 class="font-bold text-lg mb-3">Hardware</h4>
+                        <p>Secure storage for audit logs and reports (encrypted).</p>
+                    </div>
+                    <div class="bg-blue-50 p-6 rounded-lg">
+                        <h4 class="font-bold text-lg mb-3">Human Intervention</h4>
+                        <p>Security officer prepares reports and presents findings to management.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-16 bg-blue-700 text-white">
+        <div class="container mx-auto text-center">
+            <h2 class="text-3xl font-bold mb-6">Ready to Secure Your Business?</h2>
+            <p class="text-xl mb-8">Schedule a free consultation to discuss your SOC needs.</p>
+            <div class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-6">
+                <a href="https://calendly.com/mauricioromeroca" class="bg-white text-blue-700 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100">
+                    Schedule Consultation
+                </a>
+                <a href="tel:4386309157" class="btn-primary text-white px-8 py-3 rounded-lg font-semibold">
+                    Call Emergency Support
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="container mx-auto px-6 text-center">
+            <p>© 2025 RomanoTI Solutions. All rights reserved.</p>
+            <p class="mt-2">Serving Canada</p>
+        </div>
+    </footer>
+
 </body>
 </html>
