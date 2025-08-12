@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Partner with VMware | RomanoTI Solutions</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="https://ui-avatars.com/api/?name=R&background=1e40af&color=fff&size=64" type="image/png">
+    <style>
+        body { font-family: 'Montserrat', sans-serif; background-color: #f8f9fa; color: #333; }
+        .hero-bg { background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%); }
+        .btn-primary { background: #2563EB; transition: all 0.3s ease; }
+        .btn-primary:hover { background: #1D4ED8; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+        .form-card { transition: all 0.3s ease; border-radius: 0.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        .form-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px -8px rgba(37, 99, 235, 0.15); }
+        header, footer { background: white; }
+        .logo { display: flex; align-items: center; font-weight: bold; font-size: 1.5rem; }
+        .logo-icon { background: #2563EB; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 12px; font-size: 1.2rem; font-weight: bold; }
+        .alert { background-color: #fee2e2; color: #dc2626; padding: 12px; border-radius: 0.5rem; font-size: 0.875rem; display: none; }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-3">
+            <div class="flex items-center justify-between">
+                <a href="/" class="logo flex items-center">
+                    <div class="logo-icon">R</div>
+                    <span>RomanoTI Solutions</span>
+                </a>
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="/" class="text-gray-700 hover:text-blue-600 font-medium">Home</a>
+                    <a href="https://calendly.com/mauricioromeroca" class="btn-primary text-white px-5 py-2 rounded-lg font-medium">Book Now</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero-bg text-white py-28">
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-6">Partner with VMware</h1>
+            <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">Virtualization and cloud infrastructure with VMware-certified experts</p>
+        </div>
+    </section>
+
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-6 max-w-4xl">
+            <div class="form-card p-8 rounded-lg shadow-sm bg-white">
+                <h2 class="text-3xl font-bold mb-6 text-center">Request VMware Integration</h2>
+                <p class="text-gray-600 text-center mb-8">Tell us how you want to use VMware solutions, and we’ll help you implement them securely and efficiently.</p>
+
+                <form action="https://api.web3forms.com/submit" method="POST" class="space-y-6" id="partnerForm">
+                    <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
+                    <input type="hidden" name="subject" value="New VMware Partner Request">
+
+                    <div>
+                        <label for="company" class="block font-medium mb-2">Company Name *</label>
+                        <input type="text" id="company" name="company" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    </div>
+
+                    <div>
+                        <label for="name" class="block font-medium mb-2">Contact Name *</label>
+                        <input type="text" id="name" name="name" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    </div>
+
+                    <div>
+                        <label for="email" class="block font-medium mb-2">Corporate Email *</label>
+                        <input type="email" id="email" name="email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        <p class="text-sm text-gray-500 mt-1">Only corporate domains accepted (no Gmail, Hotmail, Yahoo)</p>
+                        <div class="alert" id="emailAlert">Please use a corporate email address.</div>
+                    </div>
+
+                    <div>
+                        <label for="phone" class="block font-medium mb-2">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    </div>
+
+                    <div>
+                        <label for="message" class="block font-medium mb-2">Project Details *</label>
+                        <textarea id="message" name="message" rows="6" maxlength="1000" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"></textarea>
+                    </div>
+
+                    <div>
+                        <button type="submit" class="btn-primary text-white px-8 py-3 rounded-lg w-full font-semibold">
+                            Submit Request
+                        </button>
+                    </div>
+                </form>
+
+                <p class="text-sm text-gray-500 mt-4 text-center">
+                    We'll contact you within 24 hours to discuss your VMware integration project.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="container mx-auto px-6 text-center">
+            <p>© 2025 RomanoTI Solutions. All rights reserved.</p>
+            <p class="mt-2">Serving Canada</p>
+        </div>
+    </footer>
+
+    <script>
+        const defaultText = `We are interested in VMware solutions for:
+- vSphere and ESXi virtualization environment management
+- vCenter configuration and resource optimization
+- High availability (HA) and vMotion setup
+- Integration with Veeam backup and disaster recovery
+- 24/7 monitoring and support for VMware infrastructure
+
+We require VMware-certified engineers to manage and optimize our virtual environment.`;
+
+        document.getElementById('message').value = defaultText;
+
+        document.getElementById('partnerForm').addEventListener('submit', function(e) {
+            const email = document.getElementById('email').value.toLowerCase();
+            const invalidDomains = ['gmail.com', 'yahoo.com', 'hotmail.com', 'outlook.com', 'live.com'];
+            const domain = email.split('@')[1];
+
+            if (invalidDomains.includes(domain)) {
+                e.preventDefault();
+                document.getElementById('emailAlert').style.display = 'block';
+                document.getElementById('email').focus();
+            }
+        });
+    </script>
+</body>
+</html>
