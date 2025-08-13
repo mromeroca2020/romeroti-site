@@ -95,6 +95,9 @@
             margin-right: 8px;
         }
     </style>
+
+    <!-- Calendly Widget -->
+    <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
 </head>
 <body class="bg-gray-50">
 
@@ -102,7 +105,7 @@
     <header class="bg-white shadow-md sticky top-0 z-50">
         <div class="container mx-auto px-6 py-3">
             <div class="flex items-center justify-between">
-                <!-- Logo -->
+                <!-- Logo como enlace al inicio -->
                 <a href="/" class="logo flex items-center">
                     <div class="logo-icon">R</div>
                     <span>RomanoTI Solutions</span>
@@ -111,6 +114,7 @@
                 <!-- Navegación -->
                 <nav class="hidden md:flex items-center space-x-8">
                     <a href="#services" class="text-gray-700 hover:text-blue-600 font-medium">Services</a>
+                    <a href="#about-us" class="text-gray-700 hover:text-blue-600 font-medium">About Us</a>
                     <a href="#professionals" class="text-gray-700 hover:text-blue-600 font-medium">Professionals</a>
                     <a href="#partners" class="text-gray-700 hover:text-blue-600 font-medium">Partners</a>
                     <a href="#certifications" class="text-gray-700 hover:text-blue-600 font-medium">Certifications</a>
@@ -121,7 +125,7 @@
     </header>
 
     <!-- Hero -->
-    <section class="hero-bg text-white py-28">
+    <section id="home" class="hero-bg text-white py-28">
         <div class="container mx-auto px-6 text-center">
             <h1 class="text-4xl md:text-5xl font-bold mb-6">Professional IT Infrastructure Solutions</h1>
             <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">Microsoft & Cisco Certified Expert with 15+ years in cloud, virtualization, and cybersecurity</p>
@@ -136,6 +140,27 @@
         </div>
     </section>
 
+    <!-- About Us -->
+    <section id="about-us" class="py-16 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold">About RomanoTI Solutions</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">15+ years of excellence in IT infrastructure and cybersecurity</p>
+            </div>
+            <div class="max-w-4xl mx-auto text-lg text-gray-700 space-y-6">
+                <p>
+                    RomanoTI Solutions brings over 15 years of hands-on experience in enterprise IT infrastructure, cloud migration, and cybersecurity. We specialize in helping small to medium businesses secure their data, optimize their networks, and transition to modern cloud platforms.
+                </p>
+                <p>
+                    Our mission is simple: deliver reliable, professional IT services with personalized attention. We don’t believe in one-size-fits-all solutions — every business has unique needs, and we tailor our services accordingly.
+                </p>
+                <p>
+                    With certifications from Microsoft, Cisco, and VMware, and partnerships with leading technology providers, we’re equipped to handle your most critical IT challenges.
+                </p>
+            </div>
+        </div>
+    </section>
+
     <!-- Services -->
     <section id="services" class="py-16 bg-white">
         <div class="container mx-auto px-6">
@@ -144,40 +169,6 @@
                 <p class="text-xl text-gray-600 max-w-2xl mx-auto">Comprehensive IT solutions tailored to your business needs</p>
             </div>
             <div class="grid md:grid-cols-3 gap-8">
-
-                <!-- IT NOC -->
-                <div class="service-card p-8 rounded-lg shadow-sm bg-white">
-                    <div class="text-blue-600 mb-5">
-                        <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"/>
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3">IT NOC Services</h3>
-                    <p class="mb-4 text-gray-600">24/7 monitoring and management of your IT infrastructure</p>
-                    <ul class="mb-6 space-y-2 text-gray-600">
-                        <li class="flex items-start"><div class="check-icon">✔</div><span>Server & network monitoring</span></li>
-                        <li class="flex items-start"><div class="check-icon">✔</div><span>Performance optimization</span></li>
-                        <li class="flex items-start"><div class="check-icon">✔</div><span>Proactive issue resolution</span></li>
-                    </ul>
-                    <a href="it-noc.html" class="btn-primary text-white px-6 py-2 rounded-lg block text-center">Learn More</a>
-                </div>
-
-                <!-- IT SOC -->
-                <div class="service-card p-8 rounded-lg shadow-sm bg-white">
-                    <div class="text-blue-600 mb-5">
-                        <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3">IT SOC Services</h3>
-                    <p class="mb-4 text-gray-600">Advanced threat detection and cybersecurity monitoring</p>
-                    <ul class="mb-6 space-y-2 text-gray-600">
-                        <li class="flex items-start"><div class="check-icon">✔</div><span>SIEM & log analysis</span></li>
-                        <li class="flex items-start"><div class="check-icon">✔</div><span>Incident response</span></li>
-                        <li class="flex items-start"><div class="check-icon">✔</div><span>Compliance & reporting</span></li>
-                    </ul>
-                    <a href="it-soc.html" class="btn-primary text-white px-6 py-2 rounded-lg block text-center">Learn More</a>
-                </div>
 
                 <!-- Cloud Migration -->
                 <div class="service-card p-8 rounded-lg shadow-sm bg-white">
@@ -188,12 +179,42 @@
                     </div>
                     <h3 class="text-xl font-bold mb-3">Cloud Migration</h3>
                     <p class="mb-4 text-gray-600">Seamless transition to Microsoft Azure cloud</p>
-                    <ul class="mb-6 space-y-2 text-gray-600">
-                        <li class="flex items-start"><div class="check-icon">✔</div><span>Azure architecture design</span></li>
-                        <li class="flex items-start"><div class="check-icon">✔</div><span>Data migration</span></li>
-                        <li class="flex items-start"><div class="check-icon">✔</div><span>Cost optimization</span></li>
-                    </ul>
-                    <a href="cloud-migration.html" class="btn-primary text-white px-6 py-2 rounded-lg block text-center">Learn More</a>
+
+                    <!-- Subservicios -->
+                    <div class="mt-4 space-y-3">
+                        <a href="cloud-redundancy.html" target="_blank" class="block text-sm text-blue-600 hover:underline">→ Failover Cluster & Redundancy</a>
+                        <a href="cloud-hybrid.html" target="_blank" class="block text-sm text-blue-600 hover:underline">→ Hybrid Cloud Architecture</a>
+                        <a href="cybersecurity.html" target="_blank" class="block text-sm text-blue-600 hover:underline">→ Cybersecurity Protection</a>
+                    </div>
+                </div>
+
+                <!-- IT Infrastructure -->
+                <div class="service-card p-8 rounded-lg shadow-sm bg-white">
+                    <div class="text-blue-600 mb-5">
+                        <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">IT Infrastructure</h3>
+                    <p class="mb-4 text-gray-600">Complete management of your technology stack</p>
+
+                    <!-- Subservicios -->
+                    <div class="mt-4 space-y-3">
+                        <a href="it-noc.html" target="_blank" class="block text-sm text-blue-600 hover:underline">→ NOC Services</a>
+                        <a href="it-soc.html" target="_blank" class="block text-sm text-blue-600 hover:underline">→ SOC Services</a>
+                    </div>
+                </div>
+
+                <!-- Cybersecurity -->
+                <div class="service-card p-8 rounded-lg shadow-sm bg-white">
+                    <div class="text-blue-600 mb-5">
+                        <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Cybersecurity Protection</h3>
+                    <p class="mb-4 text-gray-600">Defense against ransomware and data breaches</p>
+                    <a href="https://calendly.com/mauricioromeroca" class="btn-primary text-white px-6 py-2 rounded-lg block text-center">Get Protected</a>
                 </div>
 
             </div>
@@ -209,56 +230,15 @@
             </div>
             <div class="grid md:grid-cols-2 gap-8">
                 <div class="professional-card p-8 bg-white rounded-lg shadow-sm">
-                    <div class="flex items-start mb-4">
-                        <div class="bg-blue-100 p-3 rounded-full mr-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
-                            </svg>
-                        </div>
-                        <div>
-                            <h3 class="text-xl font-bold mb-2">Certified IT Professionals</h3>
-                            <p class="text-gray-600">Our network includes Microsoft, Cisco, and VMware certified experts ready to assist with your projects.</p>
-                        </div>
-                    </div>
+                    <h3 class="text-xl font-bold mb-3">Certified IT Professionals</h3>
+                    <p>Our network includes Microsoft, Cisco, and VMware certified experts ready to assist with your projects.</p>
+                    <a href="hire-professional.html" class="block text-sm text-blue-600 hover:underline">→ Certified IT Professionals</a>
                 </div>
                 <div class="professional-card p-8 bg-white rounded-lg shadow-sm">
-                    <div class="flex items-start mb-4">
-                        <div class="bg-blue-100 p-3 rounded-full mr-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
-                            </svg>
-                        </div>
-                        <div>
-                            <h3 class="text-xl font-bold mb-2">Flexible Engagement Models</h3>
-                            <p class="text-gray-600">Hourly, project-based, or long-term contracts to match your requirements and budget.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="professional-card p-8 bg-white rounded-lg shadow-sm">
-                    <div class="flex items-start mb-4">
-                        <div class="bg-blue-100 p-3 rounded-full mr-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
-                            </svg>
-                        </div>
-                        <div>
-                            <h3 class="text-xl font-bold mb-2">Specialized Expertise</h3>
-                            <p class="text-gray-600">Access to niche skills like Azure architecture, Cisco networking, and cybersecurity specialists.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="professional-card p-8 bg-white rounded-lg shadow-sm">
-                    <div class="flex items-start mb-4">
-                        <div class="bg-blue-100 p-3 rounded-full mr-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                            </svg>
-                        </div>
-                        <div>
-                            <h3 class="text-xl font-bold mb-2">Rapid Deployment</h3>
-                            <p class="text-gray-600">Get qualified professionals working on your project within 48 hours of request.</p>
-                        </div>
-                    </div>
+                    <h3 class="text-xl font-bold mb-3">Flexible Engagement Models</h3>
+                    <!-- En la sección de Professionals -->
+                    <p>Hourly, project-based, or long-term contracts to match your requirements and budget.</p>
+                    <a href="flexible-engagement.html" class="block text-sm text-blue-600 hover:underline">→ Flexible Engagement Models</a>
                 </div>
             </div>
         </div>
@@ -268,65 +248,48 @@
     <section id="partners" class="py-16 bg-white">
         <div class="container mx-auto px-6 text-center mb-12">
             <h2 class="text-3xl font-bold">Technology Partners</h2>
-            <p class="text-xl text-gray-600 max-w-2xl mx-auto">We work with leading technology providers to deliver best-in-class solutions</p>
+            <p class="text-xl text-gray-600 max-w-2xl mx-auto">We work with leading technology providers</p>
         </div>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
             <!-- Microsoft -->
-            <div class="flex items-center justify-center p-6">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/9/96/Microsoft_logo_%282012%29.svg" 
-                     alt="Microsoft" 
-                     class="partner-logo h-10"
-                     onerror="this.onerror=null;this.src='image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'40\'><text x=\'50%25\' y=\'50%25\' dominant-baseline=\'middle\' text-anchor=\'middle\' font-family=\'sans-serif\' font-size=\'12\' fill=\'%230078D4\'>Microsoft</text></svg>';">
-            </div>
-            <!-- Cisco -->
-            <div class="flex items-center justify-center p-6">
-                <img src="https://www.cisco.com/c/dam/assets/cisco_com/global/trade-mark/images/logo-cisco.svg" 
-                     alt="Cisco" 
-                     class="partner-logo h-10"
-                     onerror="this.onerror=null;this.src='image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'40\'><text x=\'50%25\' y=\'50%25\' dominant-baseline=\'middle\' text-anchor=\'middle\' font-family=\'sans-serif\' font-size=\'12\' fill=\'%230033A0\'>Cisco</text></svg>';">
-            </div>
-            <!-- VMware -->
-            <div class="flex items-center justify-center p-6">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/VMware_logo.png" 
-                     alt="VMware" 
-                     class="partner-logo h-10"
-                     onerror="this.onerror=null;this.src='image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'40\'><text x=\'50%25\' y=\'50%25\' dominant-baseline=\'middle\' text-anchor=\'middle\' font-family=\'sans-serif\' font-size=\'12\' fill=\'%23488038\'>VMware</text></svg>';">
-            </div>
-            <!-- Fortinet -->
-            <div class="flex items-center justify-center p-6">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/9/95/Fortinet_logo.svg" 
-                     alt="Fortinet" 
-                     class="partner-logo h-10"
-                     onerror="this.onerror=null;this.src='image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'40\'><text x=\'50%25\' y=\'50%25\' dominant-baseline=\'middle\' text-anchor=\'middle\' font-family=\'sans-serif\' font-size=\'12\' fill=\'%23009DD9\'>Fortinet</text></svg>';">
-            </div>
-            <!-- Red Hat -->
-            <div class="flex items-center justify-center p-6">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/e/e9/Red_Hat_logo.svg" 
-                     alt="Red Hat" 
-                     class="partner-logo h-10"
-                     onerror="this.onerror=null;this.src='image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'40\'><text x=\'50%25\' y=\'50%25\' dominant-baseline=\'middle\' text-anchor=\'middle\' font-family=\'sans-serif\' font-size=\'12\' fill=\'%23CC0000\'>Red Hat</text></svg>';">
-            </div>
-            <!-- Veeam -->
-            <div class="flex items-center justify-center p-6">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/9/9e/Veeam_Software_logo.svg" 
-                     alt="Veeam" 
-                     class="partner-logo h-10"
-                     onerror="this.onerror=null;this.src='image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'40\'><text x=\'50%25\' y=\'50%25\' dominant-baseline=\'middle\' text-anchor=\'middle\' font-family=\'sans-serif\' font-size=\'12\' fill=\'%2300A9E0\'>Veeam</text></svg>';">
-            </div>
-            <!-- Ubuntu -->
-            <div class="flex items-center justify-center p-6">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/9/9e/UbuntuCoF.svg" 
-                     alt="Ubuntu" 
-                     class="partner-logo h-10"
-                     onerror="this.onerror=null;this.src='image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'40\'><text x=\'50%25\' y=\'50%25\' dominant-baseline=\'middle\' text-anchor=\'middle\' font-family=\'sans-serif\' font-size=\'12\' fill=\'%23DD4814\'>Ubuntu</text></svg>';">
-            </div>
-            <!-- HPE -->
-            <div class="flex items-center justify-center p-6">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/a/ad/HP_Enterprise_Logo_2017.svg" 
-                     alt="HPE" 
-                     class="partner-logo h-10"
-                     onerror="this.onerror=null;this.src='image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'40\'><text x=\'50%25\' y=\'50%25\' dominant-baseline=\'middle\' text-anchor=\'middle\' font-family=\'sans-serif\' font-size=\'12\' fill=\'%230096D6\'>HPE</text></svg>';">
-            </div>
+<a href="partner-microsoft.html" class="flex items-center justify-center p-6 hover:opacity-80 transition">
+    <img src="/img/microsoft.png" alt="Microsoft" class="partner-logo h-10">
+</a>
+
+<!-- Cisco -->
+<a href="partner-cisco.html" class="flex items-center justify-center p-6 hover:opacity-80 transition">
+    <img src="/img/cisco.png" alt="Cisco" class="partner-logo h-10">
+</a>
+
+<!-- VMware -->
+<a href="partner-vmware.html" class="flex items-center justify-center p-6 hover:opacity-80 transition">
+    <img src="/img/vmware.png" alt="VMware" class="partner-logo h-10">
+</a>
+
+<!-- Fortinet -->
+<a href="partner-fortinet.html" class="flex items-center justify-center p-6 hover:opacity-80 transition">
+    <img src="/img/fortinet.png" alt="Fortinet" class="partner-logo h-10">
+</a>
+
+<!-- Red Hat -->
+<a href="partner-redhat.html" class="flex items-center justify-center p-6 hover:opacity-80 transition">
+    <img src="/img/redhat.png" alt="Red Hat" class="partner-logo h-10">
+</a>
+
+<!-- Veeam -->
+<a href="partner-veeam.html" class="flex items-center justify-center p-6 hover:opacity-80 transition">
+    <img src="/img/veeam.png" alt="Veeam" class="partner-logo h-10">
+</a>
+
+<!-- Ubuntu -->
+<a href="partner-ubuntu.html" class="flex items-center justify-center p-6 hover:opacity-80 transition">
+    <img src="/img/ubuntu.png" alt="Ubuntu" class="partner-logo h-10">
+</a>
+
+<!-- HPE -->
+<a href="partner-hpe.html" class="flex items-center justify-center p-6 hover:opacity-80 transition">
+    <img src="/img/hpe.png" alt="HPE" class="partner-logo h-10">
+</a>
         </div>
     </section>
 
@@ -334,7 +297,7 @@
     <section id="certifications" class="py-16 bg-gray-50">
         <div class="container mx-auto px-6 text-center mb-12">
             <h2 class="text-3xl font-bold">Certifications & Qualifications</h2>
-            <p class="text-xl text-gray-600 max-w-2xl mx-auto">Officially recognized expertise in enterprise technologies</p>
+            <p class="text-xl text-gray-600">Officially recognized expertise in enterprise technologies</p>
         </div>
         <div class="grid md:grid-cols-4 gap-8">
             <div class="text-center p-6 bg-white rounded-lg shadow-sm">
@@ -347,28 +310,6 @@
                 <h3 class="font-bold">Cisco Certified Professional</h3>
                 <p class="text-gray-600 text-sm">Networking & Cybersecurity</p>
             </div>
-            <div class="text-center p-6 bg-white rounded-lg shadow-sm">
-                <div style="width: 80px; height: 80px; background: #0033A0; margin: 0 auto 10px; border-radius: 8px;"></div>
-                <h3 class="font-bold">Cisco Networking</h3>
-                <p class="text-gray-600 text-sm">Issued Feb 2025</p>
-            </div>
-            <div class="text-center p-6 bg-white rounded-lg shadow-sm">
-                <div style="width: 80px; height: 80px; background: #0033A0; margin: 0 auto 10px; border-radius: 8px;"></div>
-                <h3 class="font-bold">Cisco IoT</h3>
-                <p class="text-gray-600 text-sm">Issued Mar 2025</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA -->
-    <section class="py-16 bg-blue-700 text-white">
-        <div class="container mx-auto text-center">
-            <h2 class="text-3xl font-bold mb-6">Ready to Transform Your IT Infrastructure?</h2>
-            <p class="text-xl mb-8">Contact us today for a free infrastructure assessment</p>
-            <div class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-6">
-                <a href="tel:4386309157" class="bg-white text-blue-700 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100">Call Now</a>
-                <a href="mailto:mauricioromeroca@gmail.com" class="btn-primary text-white px-8 py-3 rounded-lg font-semibold">Email Us</a>
-            </div>
         </div>
     </section>
 
@@ -380,5 +321,7 @@
         </div>
     </footer>
 
+    <!-- Calendly Script -->
+    <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
 </body>
 </html>
