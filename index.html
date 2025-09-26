@@ -243,7 +243,30 @@
             </div>
         </div>
     </section>
-
+<!-- RomanoTI Tools Platform -->
+<section id="tools" class="py-16 bg-blue-50">
+    <div class="container mx-auto px-6 text-center">
+        <h2 class="text-3xl font-bold mb-4">🛠️ RomanoTI Tools Platform</h2>
+        <p class="text-xl text-gray-600 mb-8">Exclusive tools for our certified engineers</p>
+        
+        <div class="max-w-2xl mx-auto">
+            <button onclick="runRomanoTITool()" 
+                    class="btn-primary text-white px-8 py-3 rounded-lg font-semibold text-lg inline-flex items-center mb-4">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                </svg>
+                Run Diagnostic Tool
+            </button>
+            
+            <div id="tool-output" class="mt-6 p-6 bg-white rounded-lg shadow-sm hidden">
+                <h4 class="font-bold mb-3">Tool Execution Results</h4>
+                <pre class="text-sm text-gray-700 text-left whitespace-pre-wrap" id="output-content"></pre>
+            </div>
+            
+            <p class="text-sm text-gray-500 mt-4">Available exclusively for RomanoTI certified engineers</p>
+        </div>
+    </div>
+</section>
     <!-- Partners -->
     <section id="partners" class="py-16 bg-white">
         <div class="container mx-auto px-6 text-center mb-12">
@@ -325,3 +348,28 @@
     <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
 </body>
 </html>
+<!-- RomanoTI Tools Script -->
+<script>
+async function runRomanoTITool() {
+    const outputDiv = document.getElementById('tool-output');
+    const outputContent = document.getElementById('output-content');
+    
+    // Mostrar loading
+    outputDiv.classList.remove('hidden');
+    outputContent.textContent = '🚀 Running RomanoTI Diagnostic Tool... Please wait...';
+    
+    try {
+        // Llamar a la función Netlify
+        const response = await fetch('/.netlify/functions/run-tool');
+        const data = await response.json();
+        
+        if (response.ok) {
+            outputContent.textContent = `✅ Tool executed successfully!\n\n${data.output}`;
+        } else {
+            outputContent.textContent = `❌ Error: ${data.error}`;
+        }
+    } catch (error) {
+        outputContent.textContent = `❌ Network error: ${error.message}\n\nPlease ensure you are logged in as a certified engineer.`;
+    }
+}
+</script>
