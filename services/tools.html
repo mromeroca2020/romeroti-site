@@ -12,6 +12,7 @@
     button{cursor:pointer}
     pre{background:#0e1116;color:#eaeef3;padding:12px;border-radius:8px;overflow:auto}
     .hidden{display:none}
+    small.muted{color:#6b7280}
   </style>
 </head>
 <body>
@@ -24,6 +25,12 @@
       <input id="pass" placeholder="password" type="password" />
       <button onclick="login()">Iniciar sesión</button>
     </div>
+    <small class="muted">
+      API: <code id="apiBaseShown"></code>. Puedes sobreescribirla con
+      <code>localStorage.setItem('romanoti_api','http://127.0.0.1:8000')</code>
+      y recargar.
+    </small>
+    <br />
     <small>El token se guarda en <code>sessionStorage</code> (se borra al cerrar la pestaña).</small>
     <div id="loginMsg"></div>
   </div>
@@ -50,6 +57,7 @@
         <input id="pingCount" type="number" min="1" max="10" value="4" />
         <button onclick="ping()">Enviar</button>
       </div>
+      <small class="muted">Nota: si el backend aún no implementa <code>/network/ping</code>, verás “endpoint no disponible”.</small>
     </div>
 
     <div class="card">
@@ -58,6 +66,7 @@
         <input id="traceHost" placeholder="host (ej: 8.8.8.8)" value="8.8.8.8" />
         <button onclick="trace()">Enviar</button>
       </div>
+      <small class="muted">Nota: si el backend aún no implementa <code>/network/traceroute</code>, verás “endpoint no disponible”.</small>
     </div>
 
     <div class="card">
@@ -66,8 +75,12 @@
         <input id="scanHost" placeholder="host (IP/hostname)" />
         <input id="scanStart" type="number" min="1" max="65535" value="1" />
         <input id="scanEnd" type="number" min="1" max="65535" value="1024" />
+      </div>
+      <div class="row">
+        <input id="scanPorts" placeholder="puertos (opcional: 80,443,22)" style="min-width:280px" />
         <button onclick="portscan()">Escanear</button>
       </div>
+      <small class="muted">Si indicas “puertos”, se ignoran start/end. Compatible con tu endpoint actual.</small>
     </div>
 
     <h4>Salida</h4>
@@ -75,16 +88,25 @@
   </div>
 
 <script>
-  // Para pruebas locales con tu API local:
-  const API_BASE = localStorage.getItem('romanoti_api') || 'http://127.0.0.1:8000';
+  // 👉 Por defecto usamos la API publicada en Render; puedes sobreescribir por localStorage para pruebas locales.
+  const API_BASE = localStorage.getItem('romanoti_api') || 'https://romanoti-tools-api.onrender.com';
+  document.getElementById('apiBaseShown').textContent = API_BASE;
 
   const $ = (id) => document.getElementById(id);
   const token = () => sessionStorage.getItem('romanoti_token');
 
   function show(id, on=true){ $(id).classList[on?'remove':'add']('hidden'); }
-  function log(obj){ $("out").textContent = (typeof obj==='string') ? obj : JSON.stringify(obj,null,2); }
+  function log(obj){
+    const out = $("out");
+    try {
+      out.textContent = (typeof obj==='string') ? obj : JSON.stringify(obj,null,2);
+    } catch {
+      out.textContent = String(obj);
+    }
+  }
 
   async function login(){
+    $("loginMsg").textContent = "Autenticando...";
     try{
       const body = new URLSearchParams();
       body.append('username', $('user').value);
@@ -94,13 +116,19 @@
         headers:{ 'Content-Type':'application/x-www-form-urlencoded' },
         body
       });
-      if(!res.ok){ $("loginMsg").innerHTML = `<span style="color:#c33">Login falló: ${res.status}</span>`; return; }
-      const data = await res.json();
+      if(!res.ok){
+        $("loginMsg").innerHTML = `<span style="color:#c33">Login falló: ${res.status}</span>`;
+        return;
+      }
+      const data = await res.json(); // {access_token, token_type}
       sessionStorage.setItem('romanoti_token', data.access_token);
       $("whoami").textContent = $('user').value;
       show('loginCard', false); show('toolsCard', true);
       log({login:'ok', ...data});
-    }catch(e){ $("loginMsg").innerHTML = `<span style="color:#c33">${e}</span>`; }
+      $("loginMsg").textContent = "OK";
+    }catch(e){
+      $("loginMsg").innerHTML = `<span style="color:#c33">${e}</span>`;
+    }
   }
 
   function logout(){
@@ -110,16 +138,28 @@
   }
 
   async function call(method, path, body=null){
-    const res = await fetch(`${API_BASE}${path}`, {
-      method,
-      headers:{
-        'Authorization': `Bearer ${token()}`,
-        'Content-Type': 'application/json'
-      },
-      body: body ? JSON.stringify(body) : null
-    });
-    const text = await res.text();
-    try{ log(JSON.parse(text)); }catch{ log(text); }
+    try{
+      const res = await fetch(`${API_BASE}${path}`, {
+        method,
+        headers:{
+          'Authorization': `Bearer ${token()}`,
+          'Content-Type': 'application/json'
+        },
+        body: body ? JSON.stringify(body) : null
+      });
+      const text = await res.text();
+      if (!res.ok) {
+        if (res.status === 404) {
+          log({ error: 'endpoint no disponible', path, status: res.status, body: text });
+        } else {
+          log({ error: 'HTTP error', path, status: res.status, body: text });
+        }
+        return;
+      }
+      try{ log(JSON.parse(text)); }catch{ log(text); }
+    }catch(e){
+      log(String(e));
+    }
   }
 
   async function ping(){
@@ -128,19 +168,26 @@
       count: Number($('pingCount').value||4)
     });
   }
+
   async function trace(){
     await call('POST','/network/traceroute', { host: $('traceHost').value });
   }
+
   async function portscan(){
-    await call('POST','/network/portscan', {
+    const payload = {
       host: $('scanHost').value,
       start: Number($('scanStart').value||1),
       end: Number($('scanEnd').value||1024)
-    });
+    };
+    const portsStr = $('scanPorts').value.trim();
+    if (portsStr) {
+      payload.ports = portsStr.split(',').map(p => parseInt(p.trim(),10)).filter(Boolean);
+    }
+    await call('POST','/network/portscan', payload);
   }
 
+  // Si ya hay token en la sesión, mostramos herramientas directamente.
   if(token()){ show('loginCard', false); show('toolsCard', true); $("whoami").textContent = 'session'; }
 </script>
 </body>
 </html>
-
