@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -347,63 +348,6 @@
     <!-- Calendly Script -->
     <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
 </body>
-    <script>
-  /**
-   * Pinta bonito cualquier objeto/JSON
-   */
-  function pretty(value, spaces = 2) {
-    try { return JSON.stringify(value, null, spaces); }
-    catch { return String(value); }
-  }
-
-  /**
-   * Llama a la Netlify Function que ya creaste: /.netlify/functions/run-tool
-   * y muestra solo el campo "output" (bonito) en la tarjeta de resultados.
-   */
-  async function runDiagnosticTool() {
-    const btn = document.getElementById('run-tool-btn');
-    const msg = document.getElementById('tool-msg');
-    const pre = document.getElementById('tool-json');
-
-    btn.disabled = true;
-    btn.style.opacity = '0.7';
-    msg.textContent = 'Running…';
-    pre.textContent = '';
-
-    try {
-      // pretty=1&indent=2 -> salida legible desde el backend por si ves la función directo en el navegador
-      const res  = await fetch('/.netlify/functions/run-tool?pretty=1&indent=2', {
-        headers: { 'Accept': 'application/json' }
-      });
-
-      const text = await res.text();
-      let data;
-      try { data = JSON.parse(text); } catch { data = text; }
-
-      if (res.ok) {
-        msg.textContent = '✅ Tool executed successfully!';
-      } else {
-        msg.textContent = `❌ Error ${res.status}`;
-      }
-
-      // Si la función devuelve { message, output: {...} } tomamos solo "output"
-      if (data && typeof data === 'object' && 'output' in data) {
-        pre.textContent = pretty(data.output, 2);
-      } else {
-        // fallback: lo que llegue
-        pre.textContent = (typeof data === 'string') ? data : pretty(data, 2);
-      }
-
-    } catch (err) {
-      msg.textContent = '❌ ' + String(err);
-      pre.textContent = '';
-    } finally {
-      btn.disabled = false;
-      btn.style.opacity = '1';
-    }
-  }
-</script>
-
 </html>
 <!-- RomanoTI Tools Script -->
 <script>
