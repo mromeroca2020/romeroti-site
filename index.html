@@ -347,6 +347,72 @@
 
     <!-- Calendly Script -->
     <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+<!-- ===== RomanoTI Tools: pretty JSON fix ===== -->
+<script>
+(function () {
+  // Utilidad para convertir cualquier valor a string bonito
+  function show(v, spaces = 2) {
+    return (typeof v === 'string') ? v : JSON.stringify(v, null, spaces);
+  }
+
+  // Hacemos robusta la búsqueda de elementos ya existentes
+  const btn = document.getElementById('run-tool-btn')
+            || document.querySelector('[onclick*="runDiagnosticTool"]');
+  const msg = document.getElementById('tool-msg') || (function () {
+    // si no existe, lo creamos dentro del contenedor
+    const box = document.getElementById('tool-result') || document.body;
+    const el = document.createElement('div'); el.id = 'tool-msg';
+    el.style.marginBottom = '8px'; box.appendChild(el); return el;
+  })();
+  const pre = document.getElementById('tool-json') || (function () {
+    const box = document.getElementById('tool-result') || document.body;
+    const el = document.createElement('pre'); el.id = 'tool-json';
+    el.style.background = '#0e1116'; el.style.color = '#eaeef3';
+    el.style.padding = '12px'; el.style.borderRadius = '8px';
+    el.style.overflow = 'auto'; el.style.maxHeight = '60vh';
+    el.style.whiteSpace = 'pre-wrap'; box.appendChild(el); return el;
+  })();
+
+  async function runDiagnosticTool() {
+    try {
+      if (btn) { btn.disabled = true; btn.style.opacity = '0.7'; }
+      msg.textContent = 'Running…';
+      pre.textContent = '';
+
+      // Llama a tu Netlify Function (ya devuelve pretty si pasas los params)
+      const res  = await fetch('/.netlify/functions/run-tool?pretty=1&indent=2', {
+        headers: { 'Accept': 'application/json' }
+      });
+
+      const text = await res.text();
+      let data; try { data = JSON.parse(text); } catch { data = text; }
+
+      msg.textContent = res.ok
+        ? '✅ Tool executed successfully!'
+        : `❌ Error ${res.status}`;
+
+      // Si la función devuelve { message, output: {...} } mostramos SOLO output
+      if (data && typeof data === 'object' && 'output' in data) {
+        pre.textContent = show(data.output, 2);
+      } else {
+        // Fallback: lo que llegue
+        pre.textContent = show(data, 2);
+      }
+
+    } catch (err) {
+      msg.textContent = '❌ ' + String(err);
+      pre.textContent = '';
+    } finally {
+      if (btn) { btn.disabled = false; btn.style.opacity = '1'; }
+    }
+  }
+
+  // Exponer la función para el onclick del botón
+  window.runDiagnosticTool = runDiagnosticTool;
+})();
+</script>
+<!-- ===== end pretty JSON fix ===== -->
+
 </body>
 </html>
 <!-- RomanoTI Tools Script -->
