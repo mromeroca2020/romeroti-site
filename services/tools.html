@@ -18,7 +18,7 @@
 <body>
   <h1>RomanoTI Tools</h1>
 
-  <!-- NUEVA TARJETA: ejecuta la Netlify Function (no requiere login) -->
+  <!-- 1) TARJETA: ejecuta la Netlify Function (no requiere login) -->
   <div class="card">
     <h3>Server Diagnostic (Netlify Function)</h3>
     <div class="row">
@@ -27,6 +27,50 @@
     </div>
   </div>
 
+  <!-- 2) TARJETA NUEVA: On-Prem Agent (Inventario de LAN) -->
+  <div class="card" id="lan-agent" style="margin-top:16px">
+    <h3>On-Prem Agent (LAN Inventory)</h3>
+    <p class="muted">
+      Instala este agente en una PC/VM dentro de tu red. Hará un inventario básico (hosts activos, IP local, etc.)
+      y enviará el reporte al Control Plane de RomanoTI.
+    </p>
+
+    <div class="row" style="align-items:flex-end">
+      <div>
+        <label for="orgKey"><b>Org API Key</b></label><br/>
+        <input id="orgKey" type="password" placeholder="pega aquí tu API key" style="min-width:320px"/>
+        <small class="muted">Se usa solo para generar comandos y consultar reportes. No se guarda.</small>
+      </div>
+      <div>
+        <label for="agentName"><b>Agent name (opcional)</b></label><br/>
+        <input id="agentName" placeholder="ej: rome-office-01"/>
+      </div>
+    </div>
+
+    <div class="row" style="margin-top:12px">
+      <button onclick="showLinuxCommand()">Linux / macOS</button>
+      <button onclick="showWindowsCommand()">Windows</button>
+      <button onclick="copyCmd()">Copiar comando</button>
+    </div>
+
+    <pre id="agentCmd" style="margin-top:12px;white-space:pre"></pre>
+
+    <div style="margin-top:8px">
+      <small class="muted">
+        El comando descarga el agente, configura <code>ROMANOTI_API</code> y <code>ROMANOTI_KEY</code>, y ejecuta un
+        escaneo rápido. Luego hace POST a <code>/client/report</code>.
+      </small>
+    </div>
+
+    <hr style="margin:16px 0"/>
+
+    <div class="row">
+      <button onclick="fetchLatestReport()">Ver último reporte</button>
+    </div>
+    <pre id="agentOut" style="margin-top:12px;white-space:pre"></pre>
+  </div>
+
+  <!-- 3) TARJETA: Login para herramientas autenticadas -->
   <div class="card" id="loginCard">
     <h3>Login</h3>
     <div class="row">
@@ -97,8 +141,11 @@
   <pre id="out"></pre>
 
 <script>
-  // 👉 Por defecto usamos la API publicada en Render; puedes sobreescribir por localStorage para pruebas locales.
-  const API_BASE = localStorage.getItem('romanoti_api') || 'https://romanoti-tools-api.onrender.com';
+  // === Configuración ===
+  // Control Plane (Render) — úsalo también para el agente LAN
+  const CP_API = 'https://romanoti-tools-api.onrender.com';
+  // API base para endpoints protegidos (puede ser el mismo CP_API)
+  const API_BASE = localStorage.getItem('romanoti_api') || CP_API;
   document.getElementById('apiBaseShown').textContent = API_BASE;
 
   const $ = (id) => document.getElementById(id);
@@ -114,7 +161,7 @@
     }
   }
 
-  // === NUEVO: Llama a la Netlify Function y pinta el JSON bonito ===
+  // 1) Netlify function: pretty JSON (muestra solo "output" si existe)
   async function runTool() {
     $("out").textContent = 'Running…';
     try {
@@ -124,7 +171,8 @@
       const text = await res.text();
       try {
         const data = JSON.parse(text);
-        $("out").textContent = JSON.stringify(data, null, 2);
+        const toShow = (data && typeof data === 'object' && 'output' in data) ? data.output : data;
+        $("out").textContent = JSON.stringify(toShow, null, 2);
       } catch {
         $("out").textContent = text; // por si no vino JSON
       }
@@ -133,6 +181,7 @@
     }
   }
 
+  // 2) Login normal (para endpoints protegidos)
   async function login(){
     $("loginMsg").textContent = "Autenticando...";
     try{
@@ -165,6 +214,7 @@
     $("out").textContent = '';
   }
 
+  // 3) Llamador genérico autenticado
   async function call(method, path, body=null){
     try{
       const res = await fetch(`${API_BASE}${path}`, {
@@ -196,11 +246,9 @@
       count: Number($('pingCount').value||4)
     });
   }
-
   async function trace(){
     await call('POST','/network/traceroute', { host: $('traceHost').value });
   }
-
   async function portscan(){
     const payload = {
       host: $('scanHost').value,
@@ -208,10 +256,46 @@
       end: Number($('scanEnd').value||1024)
     };
     const portsStr = $('scanPorts').value.trim();
-    if (portsStr) {
-      payload.ports = portsStr.split(',').map(p => parseInt(p.trim(),10)).filter(Boolean);
-    }
+    if (portsStr) payload.ports = portsStr.split(',').map(p => parseInt(p.trim(),10)).filter(Boolean);
     await call('POST','/network/portscan', payload);
+  }
+
+  // 4) ---- Agente On-Prem (LAN) ----
+  let lastCmd = '';
+  function buildLinuxCmd() {
+    const key = $('orgKey').value.trim();
+    const name = $('agentName').value.trim();
+    const tag  = name ? ` ROMANOTI_AGENT="${name}"` : '';
+    return [
+      `curl -L ${location.origin}/assets/agent/romanoti-agent -o romanoti-agent`,
+      `chmod +x romanoti-agent`,
+      `ROMANOTI_API="${CP_API}" ROMANOTI_KEY="${key}"${tag} ./romanoti-agent`
+    ].join(' && ');
+  }
+  function buildWindowsCmd() {
+    const key = $('orgKey').value.trim();
+    const name = $('agentName').value.trim();
+    const tag  = name ? `; setx ROMANOTI_AGENT "${name}"` : '';
+    return `powershell -Command "Invoke-WebRequest -Uri '${location.origin}/assets/agent/romanoti-agent.exe' -OutFile 'romanoti-agent.exe'; setx ROMANOTI_API '${CP_API}'; setx ROMANOTI_KEY '${key}'${tag}; .\\romanoti-agent.exe"`;
+  }
+  function showLinuxCommand(){ lastCmd = buildLinuxCmd(); $('agentCmd').textContent = lastCmd; }
+  function showWindowsCommand(){ lastCmd = buildWindowsCmd(); $('agentCmd').textContent = lastCmd; }
+  function copyCmd(){ if (lastCmd) navigator.clipboard.writeText(lastCmd); }
+
+  async function fetchLatestReport(){
+    const key = $('orgKey').value.trim();
+    if (!key) { $('agentOut').textContent = 'Ingresa tu Org API Key.'; return; }
+    $('agentOut').textContent = 'Consultando…';
+    try{
+      const res = await fetch(`${CP_API}/client/reports/latest`, {
+        headers: { 'x-api-key': key, 'accept': 'application/json' }
+      });
+      const text = await res.text();
+      try{ $('agentOut').textContent = JSON.stringify(JSON.parse(text), null, 2); }
+      catch{ $('agentOut').textContent = text; }
+    }catch(e){
+      $('agentOut').textContent = String(e);
+    }
   }
 
   // Si ya hay token en la sesión, mostramos herramientas directamente.
