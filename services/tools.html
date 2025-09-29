@@ -10,13 +10,22 @@
     .row{display:flex; gap:12px; flex-wrap:wrap}
     input,button,select{padding:10px;border:1px solid #ccc;border-radius:8px}
     button{cursor:pointer}
-    pre{background:#0e1116;color:#eaeef3;padding:12px;border-radius:8px;overflow:auto}
+    pre{background:#0e1116;color:#eaeef3;padding:12px;border-radius:8px;overflow:auto;max-height:60vh}
     .hidden{display:none}
     small.muted{color:#6b7280}
   </style>
 </head>
 <body>
   <h1>RomanoTI Tools</h1>
+
+  <!-- NUEVA TARJETA: ejecuta la Netlify Function (no requiere login) -->
+  <div class="card">
+    <h3>Server Diagnostic (Netlify Function)</h3>
+    <div class="row">
+      <button onclick="runTool()">⚡ Run Diagnostic Tool (Netlify)</button>
+      <small class="muted">Este botón llama a <code>/.netlify/functions/run-tool</code> y muestra el JSON “bonito” en la salida de abajo. No requiere login aquí.</small>
+    </div>
+  </div>
 
   <div class="card" id="loginCard">
     <h3>Login</h3>
@@ -82,10 +91,10 @@
       </div>
       <small class="muted">Si indicas “puertos”, se ignoran start/end. Compatible con tu endpoint actual.</small>
     </div>
-
-    <h4>Salida</h4>
-    <pre id="out"></pre>
   </div>
+
+  <h4>Salida</h4>
+  <pre id="out"></pre>
 
 <script>
   // 👉 Por defecto usamos la API publicada en Render; puedes sobreescribir por localStorage para pruebas locales.
@@ -102,6 +111,25 @@
       out.textContent = (typeof obj==='string') ? obj : JSON.stringify(obj,null,2);
     } catch {
       out.textContent = String(obj);
+    }
+  }
+
+  // === NUEVO: Llama a la Netlify Function y pinta el JSON bonito ===
+  async function runTool() {
+    $("out").textContent = 'Running…';
+    try {
+      const res = await fetch('/.netlify/functions/run-tool?pretty=1&indent=2', {
+        headers: { 'Accept': 'application/json' }
+      });
+      const text = await res.text();
+      try {
+        const data = JSON.parse(text);
+        $("out").textContent = JSON.stringify(data, null, 2);
+      } catch {
+        $("out").textContent = text; // por si no vino JSON
+      }
+    } catch (err) {
+      $("out").textContent = '❌ Error: ' + String(err);
     }
   }
 
