@@ -1,440 +1,278 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RomanoTI Solutions | IT Infrastructure & Cybersecurity</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RomanoTI Solutions | IT Infrastructure & Cybersecurity</title>
 
-    <!-- Favicon -->
-    <link rel="icon" href="https://ui-avatars.com/api/?name=R&background=1e40af&color=fff&size=64" type="image/png">
+  <!-- Favicon -->
+  <link rel="icon" href="https://ui-avatars.com/api/?name=R&background=1e40af&color=fff&size=64" type="image/png">
 
-    <!-- Tailwind CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <!-- Tailwind CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
 
-    <!-- Estilos personalizados -->
-    <style>
-        body {
-            font-family: 'Montserrat', sans-serif;
-            background-color: #f8f9fa;
-            color: #333;
-            scroll-behavior: smooth;
-        }
+  <!-- Estilos personalizados -->
+  <style>
+    body{font-family:'Montserrat',sans-serif;background-color:#f8f9fa;color:#333;scroll-behavior:smooth}
+    .hero-bg{background:linear-gradient(135deg,#1e3a8a 0%,#2563eb 100%)}
+    .btn-primary{background:#2563EB;transition:all .3s ease}
+    .btn-primary:hover{background:#1D4ED8;transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.15)}
+    .service-card,.professional-card{transition:all .3s ease;border-radius:.5rem;box-shadow:0 1px 3px rgba(0,0,0,.1)}
+    .service-card:hover,.professional-card:hover{transform:translateY(-6px);box-shadow:0 12px 30px -8px rgba(37,99,235,.15)}
+    .partner-logo{filter:grayscale(100%);opacity:.7;transition:all .3s}
+    .partner-logo:hover{filter:grayscale(0%);opacity:1;transform:scale(1.05)}
+    header,footer{background:#fff}
+    .logo{display:flex;align-items:center;font-weight:bold;font-size:1.5rem}
+    .logo-icon{background:#2563EB;color:#fff;width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-right:12px;font-size:1.2rem;font-weight:bold}
+    .check-icon{width:16px;height:16px;background:#10b981;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.75rem;margin-right:8px}
+  </style>
 
-        .hero-bg {
-            background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
-        }
-
-        .btn-primary {
-            background: #2563EB;
-            transition: all 0.3s ease;
-        }
-        .btn-primary:hover {
-            background: #1D4ED8;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        }
-
-        .service-card, .professional-card {
-            transition: all 0.3s ease;
-            border-radius: 0.5rem;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        }
-        .service-card:hover, .professional-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 12px 30px -8px rgba(37, 99, 235, 0.15);
-        }
-
-        .partner-logo {
-            filter: grayscale(100%);
-            opacity: 0.7;
-            transition: all 0.3s;
-        }
-        .partner-logo:hover {
-            filter: grayscale(0%);
-            opacity: 1;
-            transform: scale(1.05);
-        }
-
-        header, footer {
-            background: white;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            font-weight: bold;
-            font-size: 1.5rem;
-        }
-        .logo-icon {
-            background: #2563EB;
-            color: white;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 12px;
-            font-size: 1.2rem;
-            font-weight: bold;
-        }
-
-        .check-icon {
-            width: 16px;
-            height: 16px;
-            background: #10b981;
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.75rem;
-            margin-right: 8px;
-        }
-    </style>
-
-    <!-- Calendly Widget -->
-    <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+  <!-- Calendly Widget -->
+  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
 </head>
 <body class="bg-gray-50">
 
-    <!-- Header -->
-    <header class="bg-white shadow-md sticky top-0 z-50">
-        <div class="container mx-auto px-6 py-3">
-            <div class="flex items-center justify-between">
-                <!-- Logo como enlace al inicio -->
-                <a href="/" class="logo flex items-center">
-                    <div class="logo-icon">R</div>
-                    <span>RomanoTI Solutions</span>
-                </a>
+  <!-- Header -->
+  <header class="bg-white shadow-md sticky top-0 z-50">
+    <div class="container mx-auto px-6 py-3">
+      <div class="flex items-center justify-between">
+        <a href="/" class="logo flex items-center">
+          <div class="logo-icon">R</div>
+          <span>RomanoTI Solutions</span>
+        </a>
 
-                <!-- Navegación -->
-                <nav class="hidden md:flex items-center space-x-8">
-                    <a href="#services" class="text-gray-700 hover:text-blue-600 font-medium">Services</a>
-                    <a href="#about-us" class="text-gray-700 hover:text-blue-600 font-medium">About Us</a>
-                    <a href="#professionals" class="text-gray-700 hover:text-blue-600 font-medium">Professionals</a>
-                    <a href="#partners" class="text-gray-700 hover:text-blue-600 font-medium">Partners</a>
-                    <a href="#certifications" class="text-gray-700 hover:text-blue-600 font-medium">Certifications</a>
-                    <a href="https://calendly.com/mauricioromeroca" class="btn-primary text-white px-5 py-2 rounded-lg font-medium">Book Now</a>
-                </nav>
-            </div>
-        </div>
-    </header>
-
-    <!-- Hero -->
-    <section id="home" class="hero-bg text-white py-28">
-        <div class="container mx-auto px-6 text-center">
-            <h1 class="text-4xl md:text-5xl font-bold mb-6">Professional IT Infrastructure Solutions</h1>
-            <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">Microsoft & Cisco Certified Expert with 15+ years in cloud, virtualization, and cybersecurity</p>
-            <div class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-6">
-                <a href="tel:4386309157" class="btn-primary text-white px-8 py-3 rounded-lg font-semibold flex items-center justify-center">
-                    Emergency Support
-                </a>
-                <a href="https://calendly.com/mauricioromeroca" class="bg-white text-blue-700 px-8 py-3 rounded-lg font-semibold flex items-center justify-center">
-                    Free Consultation
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Us -->
-    <section id="about-us" class="py-16 bg-white">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold">About RomanoTI Solutions</h2>
-                <p class="text-xl text-gray-600 max-w-2xl mx-auto">15+ years of excellence in IT infrastructure and cybersecurity</p>
-            </div>
-            <div class="max-w-4xl mx-auto text-lg text-gray-700 space-y-6">
-                <p>
-                    RomanoTI Solutions brings over 15 years of hands-on experience in enterprise IT infrastructure, cloud migration, and cybersecurity. We specialize in helping small to medium businesses secure their data, optimize their networks, and transition to modern cloud platforms.
-                </p>
-                <p>
-                    Our mission is simple: deliver reliable, professional IT services with personalized attention. We don’t believe in one-size-fits-all solutions — every business has unique needs, and we tailor our services accordingly.
-                </p>
-                <p>
-                    With certifications from Microsoft, Cisco, and VMware, and partnerships with leading technology providers, we’re equipped to handle your most critical IT challenges.
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Services -->
-    <section id="services" class="py-16 bg-white">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold">Our Core Services</h2>
-                <p class="text-xl text-gray-600 max-w-2xl mx-auto">Comprehensive IT solutions tailored to your business needs</p>
-            </div>
-            <div class="grid md:grid-cols-3 gap-8">
-
-                <!-- Cloud Migration -->
-                <div class="service-card p-8 rounded-lg shadow-sm bg-white">
-                    <div class="text-blue-600 mb-5">
-                        <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"/>
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3">Cloud Migration</h3>
-                    <p class="mb-4 text-gray-600">Seamless transition to Microsoft Azure cloud</p>
-
-                    <!-- Subservicios -->
-                    <div class="mt-4 space-y-3">
-                        <a href="cloud-redundancy.html" target="_blank" class="block text-sm text-blue-600 hover:underline">→ Failover Cluster & Redundancy</a>
-                        <a href="cloud-hybrid.html" target="_blank" class="block text-sm text-blue-600 hover:underline">→ Hybrid Cloud Architecture</a>
-                        <a href="cybersecurity.html" target="_blank" class="block text-sm text-blue-600 hover:underline">→ Cybersecurity Protection</a>
-                    </div>
-                </div>
-
-                <!-- IT Infrastructure -->
-                <div class="service-card p-8 rounded-lg shadow-sm bg-white">
-                    <div class="text-blue-600 mb-5">
-                        <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"/>
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3">IT Infrastructure</h3>
-                    <p class="mb-4 text-gray-600">Complete management of your technology stack</p>
-
-                    <!-- Subservicios -->
-                    <div class="mt-4 space-y-3">
-                        <a href="it-noc.html" target="_blank" class="block text-sm text-blue-600 hover:underline">→ NOC Services</a>
-                        <a href="it-soc.html" target="_blank" class="block text-sm text-blue-600 hover:underline">→ SOC Services</a>
-                    </div>
-                </div>
-
-                <!-- Cybersecurity -->
-                <div class="service-card p-8 rounded-lg shadow-sm bg-white">
-                    <div class="text-blue-600 mb-5">
-                        <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3">Cybersecurity Protection</h3>
-                    <p class="mb-4 text-gray-600">Defense against ransomware and data breaches</p>
-                    <a href="https://calendly.com/mauricioromeroca" class="btn-primary text-white px-6 py-2 rounded-lg block text-center">Get Protected</a>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- Professionals -->
-    <section id="professionals" class="py-16 bg-gray-50">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold">On-Demand Professional Services</h2>
-                <p class="text-xl text-gray-600 max-w-2xl mx-auto">Access to highly qualified IT professionals for your specific project needs</p>
-            </div>
-            <div class="grid md:grid-cols-2 gap-8">
-                <div class="professional-card p-8 bg-white rounded-lg shadow-sm">
-                    <h3 class="text-xl font-bold mb-3">Certified IT Professionals</h3>
-                    <p>Our network includes Microsoft, Cisco, and VMware certified experts ready to assist with your projects.</p>
-                    <a href="hire-professional.html" class="block text-sm text-blue-600 hover:underline">→ Certified IT Professionals</a>
-                </div>
-                <div class="professional-card p-8 bg-white rounded-lg shadow-sm">
-                    <h3 class="text-xl font-bold mb-3">Flexible Engagement Models</h3>
-                    <!-- En la sección de Professionals -->
-                    <p>Hourly, project-based, or long-term contracts to match your requirements and budget.</p>
-                    <a href="flexible-engagement.html" class="block text-sm text-blue-600 hover:underline">→ Flexible Engagement Models</a>
-                </div>
-            </div>
-        </div>
-    </section>
-<!-- RomanoTI Tools Platform -->
-<section id="tools" class="py-16 bg-blue-50">
-    <div class="container mx-auto px-6 text-center">
-        <h2 class="text-3xl font-bold mb-4">🛠️ RomanoTI Tools Platform</h2>
-        <p class="text-xl text-gray-600 mb-8">Exclusive tools for our certified engineers</p>
-        
-        <div class="max-w-2xl mx-auto">
-            <button onclick="runRomanoTITool()" 
-                    class="btn-primary text-white px-8 py-3 rounded-lg font-semibold text-lg inline-flex items-center mb-4">
-                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
-                </svg>
-                Run Diagnostic Tool
-            </button>
-            
-            <div id="tool-output" class="mt-6 p-6 bg-white rounded-lg shadow-sm hidden">
-                <h4 class="font-bold mb-3">Tool Execution Results</h4>
-                <pre class="text-sm text-gray-700 text-left whitespace-pre-wrap" id="output-content"></pre>
-            </div>
-            
-            <p class="text-sm text-gray-500 mt-4">Available exclusively for RomanoTI certified engineers</p>
-        </div>
+        <nav class="hidden md:flex items-center space-x-8">
+          <a href="#services" class="text-gray-700 hover:text-blue-600 font-medium">Services</a>
+          <a href="#about-us" class="text-gray-700 hover:text-blue-600 font-medium">About Us</a>
+          <a href="#professionals" class="text-gray-700 hover:text-blue-600 font-medium">Professionals</a>
+          <a href="#partners" class="text-gray-700 hover:text-blue-600 font-medium">Partners</a>
+          <a href="#certifications" class="text-gray-700 hover:text-blue-600 font-medium">Certifications</a>
+          <a href="https://calendly.com/mauricioromeroca" class="btn-primary text-white px-5 py-2 rounded-lg font-medium">Book Now</a>
+        </nav>
+      </div>
     </div>
-</section>
-    <!-- Partners -->
-    <section id="partners" class="py-16 bg-white">
-        <div class="container mx-auto px-6 text-center mb-12">
-            <h2 class="text-3xl font-bold">Technology Partners</h2>
-            <p class="text-xl text-gray-600 max-w-2xl mx-auto">We work with leading technology providers</p>
+  </header>
+
+  <!-- Hero -->
+  <section id="home" class="hero-bg text-white py-28">
+    <div class="container mx-auto px-6 text-center">
+      <h1 class="text-4xl md:text-5xl font-bold mb-6">Professional IT Infrastructure Solutions</h1>
+      <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">Microsoft & Cisco Certified Expert with 15+ years in cloud, virtualization, and cybersecurity</p>
+      <div class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-6">
+        <a href="tel:4386309157" class="btn-primary text-white px-8 py-3 rounded-lg font-semibold flex items-center justify-center">Emergency Support</a>
+        <a href="https://calendly.com/mauricioromeroca" class="bg-white text-blue-700 px-8 py-3 rounded-lg font-semibold flex items-center justify-center">Free Consultation</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Us -->
+  <section id="about-us" class="py-16 bg-white">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold">About RomanoTI Solutions</h2>
+        <p class="text-xl text-gray-600 max-w-2xl mx-auto">15+ years of excellence in IT infrastructure and cybersecurity</p>
+      </div>
+      <div class="max-w-4xl mx-auto text-lg text-gray-700 space-y-6">
+        <p>RomanoTI Solutions brings over 15 years of hands-on experience in enterprise IT infrastructure, cloud migration, and cybersecurity. We specialize in helping small to medium businesses secure their data, optimize their networks, and transition to modern cloud platforms.</p>
+        <p>Our mission is simple: deliver reliable, professional IT services with personalized attention. We don’t believe in one-size-fits-all solutions — every business has unique needs, and we tailor our services accordingly.</p>
+        <p>With certifications from Microsoft, Cisco, and VMware, and partnerships with leading technology providers, we’re equipped to handle your most critical IT challenges.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section id="services" class="py-16 bg-white">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold">Our Core Services</h2>
+        <p class="text-xl text-gray-600 max-w-2xl mx-auto">Comprehensive IT solutions tailored to your business needs</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        <!-- Cloud Migration -->
+        <div class="service-card p-8 rounded-lg shadow-sm bg-white">
+          <div class="text-blue-600 mb-5">
+            <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"/>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold mb-3">Cloud Migration</h3>
+          <p class="mb-4 text-gray-600">Seamless transition to Microsoft Azure cloud</p>
+          <div class="mt-4 space-y-3">
+            <a href="cloud-redundancy.html" target="_blank" class="block text-sm text-blue-600 hover:underline">→ Failover Cluster & Redundancy</a>
+            <a href="cloud-hybrid.html" target="_blank" class="block text-sm text-blue-600 hover:underline">→ Hybrid Cloud Architecture</a>
+            <a href="cybersecurity.html" target="_blank" class="block text-sm text-blue-600 hover:underline">→ Cybersecurity Protection</a>
+          </div>
         </div>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
-            <!-- Microsoft -->
-<a href="partner-microsoft.html" class="flex items-center justify-center p-6 hover:opacity-80 transition">
-    <img src="/img/microsoft.jpeg" alt="Microsoft" class="partner-logo h-10">
-</a>
 
-<!-- Cisco -->
-<a href="partner-cisco.html" class="flex items-center justify-center p-6 hover:opacity-80 transition">
-    <img src="/img/cisco.png" alt="Cisco" class="partner-logo h-10">
-</a>
-
-<!-- VMware -->
-<a href="partner-vmware.html" class="flex items-center justify-center p-6 hover:opacity-80 transition">
-    <img src="/img/vmware.jpeg" alt="VMware" class="partner-logo h-10">
-</a>
-
-<!-- Fortinet -->
-<a href="partner-fortinet.html" class="flex items-center justify-center p-6 hover:opacity-80 transition">
-    <img src="/img/Fortinet.png" alt="Fortinet" class="partner-logo h-10">
-</a>
-
-<!-- Red Hat -->
-<a href="partner-redhat.html" class="flex items-center justify-center p-6 hover:opacity-80 transition">
-    <img src="/img/RedHat.png" alt="Red Hat" class="partner-logo h-10">
-</a>
-
-<!-- Veeam -->
-<a href="partner-veeam.html" class="flex items-center justify-center p-6 hover:opacity-80 transition">
-    <img src="/img/veeam.png" alt="Veeam" class="partner-logo h-10">
-</a>
-
-<!-- Ubuntu -->
-<a href="partner-ubuntu.html" class="flex items-center justify-center p-6 hover:opacity-80 transition">
-    <img src="/img/ubuntu.png" alt="Ubuntu" class="partner-logo h-10">
-</a>
-
-<!-- HPE -->
-<a href="partner-hpe.html" class="flex items-center justify-center p-6 hover:opacity-80 transition">
-    <img src="/img/HP.png" alt="HPE" class="partner-logo h-10">
-</a>
+        <!-- IT Infrastructure -->
+        <div class="service-card p-8 rounded-lg shadow-sm bg-white">
+          <div class="text-blue-600 mb-5">
+            <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"/>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold mb-3">IT Infrastructure</h3>
+          <p class="mb-4 text-gray-600">Complete management of your technology stack</p>
+          <div class="mt-4 space-y-3">
+            <a href="it-noc.html" target="_blank" class="block text-sm text-blue-600 hover:underline">→ NOC Services</a>
+            <a href="it-soc.html" target="_blank" class="block text-sm text-blue-600 hover:underline">→ SOC Services</a>
+          </div>
         </div>
-    </section>
 
-    <!-- Certifications -->
-    <section id="certifications" class="py-16 bg-gray-50">
-        <div class="container mx-auto px-6 text-center mb-12">
-            <h2 class="text-3xl font-bold">Certifications & Qualifications</h2>
-            <p class="text-xl text-gray-600">Officially recognized expertise in enterprise technologies</p>
+        <!-- Cybersecurity -->
+        <div class="service-card p-8 rounded-lg shadow-sm bg-white">
+          <div class="text-blue-600 mb-5">
+            <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold mb-3">Cybersecurity Protection</h3>
+          <p class="mb-4 text-gray-600">Defense against ransomware and data breaches</p>
+          <a href="https://calendly.com/mauricioromeroca" class="btn-primary text-white px-6 py-2 rounded-lg block text-center">Get Protected</a>
         </div>
-        <div class="grid md:grid-cols-4 gap-8">
-            <div class="text-center p-6 bg-white rounded-lg shadow-sm">
-                <div style="width: 80px; height: 80px; background: #0078D4; margin: 0 auto 10px; border-radius: 8px;"></div>
-                <h3 class="font-bold">Microsoft Azure Fundamentals</h3>
-                <p class="text-gray-600 text-sm">Certified since 2019</p>
-            </div>
-            <div class="text-center p-6 bg-white rounded-lg shadow-sm">
-                <div style="width: 80px; height: 80px; background: #0033A0; margin: 0 auto 10px; border-radius: 8px;"></div>
-                <h3 class="font-bold">Cisco Certified Professional</h3>
-                <p class="text-gray-600 text-sm">Networking & Cybersecurity</p>
-            </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Professionals -->
+  <section id="professionals" class="py-16 bg-gray-50">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold">On-Demand Professional Services</h2>
+        <p class="text-xl text-gray-600 max-w-2xl mx-auto">Access to highly qualified IT professionals for your specific project needs</p>
+      </div>
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="professional-card p-8 bg-white rounded-lg shadow-sm">
+          <h3 class="text-xl font-bold mb-3">Certified IT Professionals</h3>
+          <p>Our network includes Microsoft, Cisco, and VMware certified experts ready to assist with your projects.</p>
+          <a href="hire-professional.html" class="block text-sm text-blue-600 hover:underline">→ Certified IT Professionals</a>
         </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-gray-900 text-white py-8">
-        <div class="container mx-auto px-6 text-center">
-            <p>© 2025 RomanoTI Solutions. All rights reserved.</p>
-            <p class="mt-2">Serving Canada</p>
+        <div class="professional-card p-8 bg-white rounded-lg shadow-sm">
+          <h3 class="text-xl font-bold mb-3">Flexible Engagement Models</h3>
+          <p>Hourly, project-based, or long-term contracts to match your requirements and budget.</p>
+          <a href="flexible-engagement.html" class="block text-sm text-blue-600 hover:underline">→ Flexible Engagement Models</a>
         </div>
-    </footer>
+      </div>
+    </div>
+  </section>
 
-    <!-- Calendly Script -->
-    <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
-    <!-- ===== RomanoTI Tools: pretty JSON fix ===== -->
-<script>
-(function () {
-  // Utilidad para convertir cualquier valor a string bonito
-  function show(v, spaces = 2) {
-    return (typeof v === 'string') ? v : JSON.stringify(v, null, spaces);
-  }
+  <!-- RomanoTI Tools Platform -->
+  <section id="tools-platform" class="section">
+    <div class="container mx-auto px-6">
+      <h2 class="text-2xl font-bold">🛠️ RomanoTI Tools Platform</h2>
+      <p class="mb-4 text-gray-600">Exclusive tools for our certified engineers</p>
 
-  // Hacemos robusta la búsqueda de elementos ya existentes
-  const btn = document.getElementById('run-tool-btn')
-            || document.querySelector('[onclick*="runDiagnosticTool"]');
-  const msg = document.getElementById('tool-msg') || (function () {
-    // si no existe, lo creamos dentro del contenedor
-    const box = document.getElementById('tool-result') || document.body;
-    const el = document.createElement('div'); el.id = 'tool-msg';
-    el.style.marginBottom = '8px'; box.appendChild(el); return el;
-  })();
-  const pre = document.getElementById('tool-json') || (function () {
-    const box = document.getElementById('tool-result') || document.body;
-    const el = document.createElement('pre'); el.id = 'tool-json';
-    el.style.background = '#0e1116'; el.style.color = '#eaeef3';
-    el.style.padding = '12px'; el.style.borderRadius = '8px';
-    el.style.overflow = 'auto'; el.style.maxHeight = '60vh';
-    el.style.whiteSpace = 'pre-wrap'; box.appendChild(el); return el;
-  })();
+      <!-- botón corregido sin la clase "btn" -->
+      <button id="run-tool-btn" class="btn-primary text-white px-5 py-2 rounded-lg font-medium">
+        ⚡ Run Diagnostic Tool
+      </button>
 
-  async function runDiagnosticTool() {
-    try {
-      if (btn) { btn.disabled = true; btn.style.opacity = '0.7'; }
-      msg.textContent = 'Running…';
-      pre.textContent = '';
+      <div class="card mt-4">
+        <h3 class="text-xl font-semibold mb-2">Tool Execution Results</h3>
+        <pre id="tool-output" style="background:#0e1116;color:#eaeef3;padding:12px;border-radius:8px;overflow:auto;max-height:60vh;white-space:pre;"></pre>
+      </div>
+    </div>
+  </section>
 
-      // Llama a tu Netlify Function (ya devuelve pretty si pasas los params)
-      const res  = await fetch('/.netlify/functions/run-tool?pretty=1&indent=2', {
-        headers: { 'Accept': 'application/json' }
+  <!-- Partners -->
+  <section id="partners" class="py-16 bg-white">
+    <div class="container mx-auto px-6 text-center mb-12">
+      <h2 class="text-3xl font-bold">Technology Partners</h2>
+      <p class="text-xl text-gray-600 max-w-2xl mx-auto">We work with leading technology providers</p>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+      <a href="partner-microsoft.html" class="flex items-center justify-center p-6 hover:opacity-80 transition">
+        <img src="/img/microsoft.jpeg" alt="Microsoft" class="partner-logo h-10">
+      </a>
+      <a href="partner-cisco.html" class="flex items-center justify-center p-6 hover:opacity-80 transition">
+        <img src="/img/cisco.png" alt="Cisco" class="partner-logo h-10">
+      </a>
+      <a href="partner-vmware.html" class="flex items-center justify-center p-6 hover:opacity-80 transition">
+        <img src="/img/vmware.jpeg" alt="VMware" class="partner-logo h-10">
+      </a>
+      <a href="partner-fortinet.html" class="flex items-center justify-center p-6 hover:opacity-80 transition">
+        <img src="/img/Fortinet.png" alt="Fortinet" class="partner-logo h-10">
+      </a>
+      <a href="partner-redhat.html" class="flex items-center justify-center p-6 hover:opacity-80 transition">
+        <img src="/img/RedHat.png" alt="Red Hat" class="partner-logo h-10">
+      </a>
+      <a href="partner-veeam.html" class="flex items-center justify-center p-6 hover:opacity-80 transition">
+        <img src="/img/veeam.png" alt="Veeam" class="partner-logo h-10">
+      </a>
+      <a href="partner-ubuntu.html" class="flex items-center justify-center p-6 hover:opacity-80 transition">
+        <img src="/img/ubuntu.png" alt="Ubuntu" class="partner-logo h-10">
+      </a>
+      <a href="partner-hpe.html" class="flex items-center justify-center p-6 hover:opacity-80 transition">
+        <img src="/img/HP.png" alt="HPE" class="partner-logo h-10">
+      </a>
+    </div>
+  </section>
+
+  <!-- Certifications -->
+  <section id="certifications" class="py-16 bg-gray-50">
+    <div class="container mx-auto px-6 text-center mb-12">
+      <h2 class="text-3xl font-bold">Certifications & Qualifications</h2>
+      <p class="text-xl text-gray-600">Officially recognized expertise in enterprise technologies</p>
+    </div>
+    <div class="grid md:grid-cols-4 gap-8">
+      <div class="text-center p-6 bg-white rounded-lg shadow-sm">
+        <div style="width:80px;height:80px;background:#0078D4;margin:0 auto 10px;border-radius:8px;"></div>
+        <h3 class="font-bold">Microsoft Azure Fundamentals</h3>
+        <p class="text-gray-600 text-sm">Certified since 2019</p>
+      </div>
+      <div class="text-center p-6 bg-white rounded-lg shadow-sm">
+        <div style="width:80px;height:80px;background:#0033A0;margin:0 auto 10px;border-radius:8px;"></div>
+        <h3 class="font-bold">Cisco Certified Professional</h3>
+        <p class="text-gray-600 text-sm">Networking & Cybersecurity</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-white py-8">
+    <div class="container mx-auto px-6 text-center">
+      <p>© 2025 RomanoTI Solutions. All rights reserved.</p>
+      <p class="mt-2">Serving Canada</p>
+    </div>
+  </footer>
+
+  <!-- Calendly Script -->
+  <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+
+  <!-- ===== RomanoTI Tools: pretty JSON fix ===== -->
+  <script>
+    (function () {
+      const btn = document.getElementById('run-tool-btn');
+      const out = document.getElementById('tool-output');
+      if (!btn || !out) return;
+
+      btn.addEventListener('click', async () => {
+        out.textContent = 'Running…';
+        try {
+          const res = await fetch('/.netlify/functions/run-tool?pretty=1&indent=2', {
+            headers: { 'Accept': 'application/json' }
+          });
+          const text = await res.text();
+
+          try {
+            const data = JSON.parse(text);
+            const toShow = (data && typeof data === 'object' && 'output' in data)
+              ? data.output
+              : data;
+            out.textContent = JSON.stringify(toShow, null, 2);
+          } catch {
+            out.textContent = text;
+          }
+        } catch (err) {
+          out.textContent = '❌ Error: ' + String(err);
+        }
       });
-
-      const text = await res.text();
-      let data; try { data = JSON.parse(text); } catch { data = text; }
-
-      msg.textContent = res.ok
-        ? '✅ Tool executed successfully!'
-        : `❌ Error ${res.status}`;
-
-      // Si la función devuelve { message, output: {...} } mostramos SOLO output
-      if (data && typeof data === 'object' && 'output' in data) {
-        pre.textContent = show(data.output, 2);
-      } else {
-        // Fallback: lo que llegue
-        pre.textContent = show(data, 2);
-      }
-
-    } catch (err) {
-      msg.textContent = '❌ ' + String(err);
-      pre.textContent = '';
-    } finally {
-      if (btn) { btn.disabled = false; btn.style.opacity = '1'; }
-    }
-  }
-
-  // Exponer la función para el onclick del botón
-  window.runDiagnosticTool = runDiagnosticTool;
-})();
-</script>
-<!-- ===== end pretty JSON fix ===== -->
+    })();
+  </script>
 </body>
 </html>
-<!-- RomanoTI Tools Script -->
-<script>
-async function runRomanoTITool() {
-    const outputDiv = document.getElementById('tool-output');
-    const outputContent = document.getElementById('output-content');
-    
-    // Mostrar loading
-    outputDiv.classList.remove('hidden');
-    outputContent.textContent = '🚀 Running RomanoTI Diagnostic Tool... Please wait...';
-    
-    try {
-        // Llamar a la función Netlify
-        const response = await fetch('/.netlify/functions/run-tool');
-        const data = await response.json();
-        
-        if (response.ok) {
-            outputContent.textContent = `✅ Tool executed successfully!\n\n${data.output}`;
-        } else {
-            outputContent.textContent = `❌ Error: ${data.error}`;
-        }
-    } catch (error) {
-        outputContent.textContent = `❌ Network error: ${error.message}\n\nPlease ensure you are logged in as a certified engineer.`;
-    }
-}
-</script>
