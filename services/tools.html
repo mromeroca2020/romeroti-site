@@ -324,50 +324,49 @@
     });
 
     // ========= 4) On-Prem Agent UI =========
-     let lastCmd = '';
-     function buildLinuxCmd() {
-    const key = $('orgKey').value.trim();
+   <script>
+  // ...
+  const ASSET_BASE = `${location.origin}/assets/agent`;
+  const GH_RAW_BASE = "https://raw.githubusercontent.com/mromeroca2020/romeroti-site/main/assets/agent";
+
+  function buildLinuxCmd() {
+    const key  = $('orgKey').value.trim();
     const name = $('agentName').value.trim();
     const tag  = name ? ` ROMANOTI_AGENT="${name}"` : '';
-    return [
-      // Descarga el script desde tu sitio (Netlify)
-      `curl -L ${location.origin}/assets/agent/romanoti-agent.sh -o romanoti-agent.sh`,
-      `chmod +x romanoti-agent.sh`,
-      // Exporta variables para esta ejecución y corre el script
-      `ROMANOTI_API="${CP_API}" ROMANOTI_KEY="${key}"${tag} ./romanoti-agent.sh`
-    ].join(' && ');
+
+    const primary  = `curl -sSL ${ASSET_BASE}/romanoti-agent.sh | bash`;
+    const fallback = `curl -sSL ${GH_RAW_BASE}/romanoti-agent.sh | bash`;
+
+    $('agentCmd').textContent =
+`# Comando principal (Netlify)
+export ROMANOTI_API="${CP_API}" ROMANOTI_KEY="${key}"${tag} && ${primary}
+
+# Si falla, usa este fallback (GitHub RAW)
+export ROMANOTI_API="${CP_API}" ROMANOTI_KEY="${key}"${tag} && ${fallback}`;
+
+    return `export ROMANOTI_API="${CP_API}" ROMANOTI_KEY="${key}"${tag} && ${primary}`;
   }
 
-  // ⬇️ Reemplaza esta función por esta versión
   function buildWindowsCmd() {
-    const key = $('orgKey').value.trim();
+    const key  = $('orgKey').value.trim();
     const name = $('agentName').value.trim();
-    const agentVar = name ? `; $Env:ROMANOTI_AGENT='${name}'` : '';
-    return `powershell -NoProfile -ExecutionPolicy Bypass -Command "`
-      + `Invoke-WebRequest -Uri '${location.origin}/assets/agent/romanoti-agent.ps1' -OutFile 'romanoti-agent.ps1'; `
-      + `$Env:ROMANOTI_API='${CP_API}'; $Env:ROMANOTI_KEY='${key}'${agentVar}; `
-      + `.\\romanoti-agent.ps1"`;
-  }
+    const tag  = name ? `; setx ROMANOTI_AGENT "${name}"` : '';
 
-  function showLinuxCommand(){ lastCmd = buildLinuxCmd(); $('agentCmd').textContent = lastCmd; }
-  function showWindowsCommand(){ lastCmd = buildWindowsCmd(); $('agentCmd').textContent = lastCmd; }
-  function copyCmd(){ if (lastCmd) navigator.clipboard.writeText(lastCmd); }
+    const primary  = `iwr ${ASSET_BASE}/romanoti-agent.ps1 -UseBasicParsing | iex`;
+    const fallback = `iwr ${GH_RAW_BASE}/romanoti-agent.ps1 -UseBasicParsing | iex`;
 
-  async function fetchLatestReport(){
-    const key = $('orgKey').value.trim();
-    if (!key) { $('agentOut').textContent = 'Ingresa tu Org API Key.'; return; }
-    $('agentOut').textContent = 'Consultando…';
-    try{
-      const res = await fetch(`${CP_API}/client/reports/latest`, {
-        headers: { 'x-api-key': key, 'accept': 'application/json' }
-      });
-      const text = await res.text();
-      try{ $('agentOut').textContent = JSON.stringify(JSON.parse(text), null, 2); }
-      catch{ $('agentOut').textContent = text; }
-    }catch(e){
-      $('agentOut').textContent = String(e);
-    }
+    $('agentCmd').textContent =
+`# Comando principal (Netlify)
+setx ROMANOTI_API '${CP_API}'; setx ROMANOTI_KEY '${key}'${tag}; ${primary}
+
+# Si falla, usa este fallback (GitHub RAW)
+setx ROMANOTI_API '${CP_API}'; setx ROMANOTI_KEY '${key}'${tag}; ${fallback}`;
+
+    return `powershell -Command "setx ROMANOTI_API '${CP_API}'; setx ROMANOTI_KEY '${key}'${tag}; ${primary}"`;
   }
+  // ...
+</script>
+
   </script>
 </body>
 </html>
