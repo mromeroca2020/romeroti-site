@@ -3,40 +3,102 @@
 <head>
   <meta charset="utf-8" />
   <title>RomanoTI Tools</title>
+
+  <!-- Hace la página responsive -->
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Favicon de la web -->
   <link rel="icon" href="/img/favicon.png" type="image/png">
+
   <style>
-    :root{--brand:#2563eb;--brand-dark:#1d4ed8;--ink:#0f172a}
-    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Helvetica,Arial,sans-serif;margin:0;background:#f6f7fb;color:#111827}
-    .topbar{background:linear-gradient(120deg,#1e40af,#2563eb);color:#fff;padding:28px 16px}
+    /* ===== Estilos base y variables (colores corporativos) ===== */
+    :root{
+      --brand:#2563eb;       /* Azul principal */
+      --brand-dark:#1d4ed8;  /* Azul más oscuro para hover */
+      --ink:#0f172a;         /* Color de texto base (no se usa mucho aquí, pero útil) */
+    }
+    body{
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Helvetica,Arial,sans-serif;
+      margin:0;
+      background:#f6f7fb; /* gris muy claro para el fondo general */
+      color:#111827;      /* texto gris oscuro */
+    }
+
+    /* Cinta superior con degradado azul (hero) */
+    .topbar{
+      background:linear-gradient(120deg,#1e40af,#2563eb);
+      color:#fff;
+      padding:28px 16px;
+    }
+
+    /* Contenedor centrado (layout) */
     .wrap{max-width:1040px;margin:0 auto;padding:0 16px}
+
+    /* Espaciado estándar en títulos */
     h1,h2,h3,h4{margin:0 0 12px}
+
+    /* Texto atenuado */
     .muted{color:#6b7280}
-    .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:10px;border:1px solid #e5e7eb;background:#fff;cursor:pointer}
+
+    /* Botón base */
+    .btn{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:10px 14px;border-radius:10px;border:1px solid #e5e7eb;
+      background:#fff;cursor:pointer
+    }
+    /* Botón azul (principal) */
     .btn-primary{background:var(--brand);border-color:var(--brand);color:#fff}
     .btn-primary:hover{background:var(--brand-dark);border-color:var(--brand-dark)}
+
+    /* Botón tipo enlace (para la navegación) */
     .btn-link{background:transparent;border:0;color:#fff;text-decoration:underline;cursor:pointer}
+
+    /* Grids utilitarias */
     .grid{display:grid;gap:18px}
     @media(min-width:900px){.grid-cols-2{grid-template-columns:1fr 1fr}}
-    .card{background:#fff;border:1px solid #e5e7eb;border-radius:14px;box-shadow:0 6px 18px -8px rgba(0,0,0,.12);padding:18px}
+
+    /* Tarjeta con borde y sombra suave */
+    .card{
+      background:#fff;border:1px solid #e5e7eb;border-radius:14px;
+      box-shadow:0 6px 18px -8px rgba(0,0,0,.12);padding:18px
+    }
+
+    /* Filas con gap (inputs/botones) */
     .row{display:flex;gap:10px;flex-wrap:wrap}
+
+    /* Inputs y selects coherentes con los botones */
     input,button,select{padding:10px;border:1px solid #cbd5e1;border-radius:10px}
     input:focus{outline:3px solid rgba(37,99,235,.15);border-color:var(--brand)}
+
+    /* Subtítulo del hero */
     .kicker{font-size:13px;color:#c7d2fe}
-    pre{background:#0e1116;color:#eaeef3;padding:14px;border-radius:12px;overflow:auto;max-height:50vh;white-space:pre}
+
+    /* Área de salida de texto (JSON o logs) */
+    pre{
+      background:#0e1116;color:#eaeef3;padding:14px;border-radius:12px;
+      overflow:auto;max-height:50vh;white-space:pre
+    }
+
+    /* Utilidad para ocultar elementos */
     .hidden{display:none}
+
+    /* Título de sección dentro de tarjetas */
     .section-title{font-weight:700;font-size:22px;margin:0 0 8px}
+
+    /* Navegación de regreso (arriba del hero) */
     .backlinks{display:flex;gap:8px;align-items:center;margin-top:10px}
     .btn-sm{padding:8px 10px;border-radius:8px;font-size:14px}
   </style>
 </head>
 <body>
 
-  <!-- HERO -->
+  <!-- ===== HERO / CABECERA ===== -->
   <div class="topbar">
     <div class="wrap">
       <div class="kicker">RomanoTI Tools Platform</div>
       <h1 style="font-size:28px;margin:6px 0 0">Exclusive tools for our certified engineers</h1>
+
+      <!-- Enlaces rápidos: volver a Services o ir al Home -->
       <div class="backlinks">
         <a class="btn btn-sm" href="/#services">← Back to Services</a>
         <a class="btn btn-sm" href="/">Home</a>
@@ -44,9 +106,12 @@
     </div>
   </div>
 
+  <!-- ===== CONTENIDO PRINCIPAL ===== -->
   <div class="wrap" style="margin-top:20px; margin-bottom:56px">
 
-    <!-- Server Diagnostic -->
+    <!-- ===== Tarjeta: Server Diagnostic (Netlify Function) =====
+         Llama a la función serverless /.netlify/functions/run-tool para mostrar
+         un JSON de diagnóstico del sitio (útil para pruebas de conectividad/entorno). -->
     <div class="card">
       <div class="row" style="justify-content:space-between;align-items:center">
         <div>
@@ -58,7 +123,9 @@
       <pre id="diagOut"></pre>
     </div>
 
-    <!-- On-Prem Agent -->
+    <!-- ===== Tarjeta: On-Prem Agent (LAN Inventory) =====
+         Genera los comandos (Linux/Windows) que el cliente ejecuta en su red LAN
+         para recolectar un inventario rápido y enviarlo al Control Plane (Render). -->
     <div class="card">
       <div class="section-title">On-Prem Agent (LAN Inventory)</div>
       <div class="muted" style="margin-bottom:10px">
@@ -66,6 +133,7 @@
         y enviará el reporte al Control Plane de RomanoTI.
       </div>
 
+      <!-- Campos: API Key de la organización y nombre opcional del agente -->
       <div class="row" style="align-items:flex-end">
         <div>
           <div><b>Org API Key</b></div>
@@ -78,13 +146,16 @@
         </div>
       </div>
 
+      <!-- Botones que construyen el comando según el SO del cliente -->
       <div class="row" style="margin-top:10px">
         <button id="btnLinux" class="btn">Linux / macOS</button>
         <button id="btnWindows" class="btn">Windows</button>
         <button id="btnCopyCmd" class="btn">Copiar comando</button>
       </div>
 
+      <!-- Aquí pintamos el comando generado -->
       <pre id="agentCmd"></pre>
+
       <div class="muted" style="font-size:12px">
         El comando descarga el agente, configura <code>ROMANOTI_API</code> y <code>ROMANOTI_KEY</code>, y ejecuta un
         escaneo rápido. Luego hace POST a <code>/client/report</code>.
@@ -92,13 +163,37 @@
 
       <hr style="border:none;border-top:1px solid #e5e7eb;margin:14px 0">
 
+      <!-- Consulta el último reporte que haya enviado el/los agentes -->
       <button id="btnLatestReport" class="btn btn-primary btn-sm">Ver último reporte</button>
       <pre id="agentOut"></pre>
     </div>
 
-    <!-- Tools (auth) + Login -->
+    <!-- ===== Tarjeta: External Checks (TLS y Email DNS) =====
+         Checks públicos que NO requieren autenticación:
+         - TLS: obtiene el certificado de un host/puerto y calcula días restantes.
+         - Email DNS: consulta MX/SPF/DMARC de un dominio. -->
+    <div class="card">
+      <div class="section-title">External Checks</div>
+
+      <!-- TLS -->
+      <div class="row" style="align-items:center">
+        <input id="tlsHost" placeholder="domain (ej: example.com)" />
+        <input id="tlsPort" type="number" min="1" max="65535" value="443" />
+        <button class="btn btn-sm" id="btnTLS">TLS Cert</button>
+      </div>
+
+      <!-- Email DNS -->
+      <div class="row" style="align-items:center; margin-top:8px">
+        <input id="dnsDomain" placeholder="domain (ej: example.com)" />
+        <button class="btn btn-sm" id="btnEmailDNS">Email (MX/SPF/DMARC)</button>
+      </div>
+    </div>
+
+    <!-- ===== Grid de 2 columnas: Login + Herramientas autenticadas ===== -->
     <div class="grid grid-cols-2">
-      <!-- Login -->
+      <!-- ===== Tarjeta: Login (JWT) =====
+           El backend devuelve un token; lo guardamos en sessionStorage y,
+           al estar autenticados, habilitamos la tarjeta de herramientas. -->
       <div class="card" id="loginCard">
         <div class="section-title">Login</div>
         <div class="muted" style="margin-bottom:8px">Necesario para usar Ping/Traceroute/Port Scan contra el backend.</div>
@@ -117,16 +212,18 @@
         <div id="loginMsg" class="muted" style="margin-top:6px"></div>
       </div>
 
-      <!-- Herramientas autenticadas -->
+      <!-- ===== Tarjeta: Herramientas que requieren JWT =====
+           Botones para llamar a endpoints /system/info, /network/info, ping, traceroute y portscan. -->
       <div class="card hidden" id="toolsCard">
         <div class="row" style="align-items:center;justify-content:space-between">
           <div>
             <div class="section-title" style="margin:0">Herramientas</div>
             <div class="muted">Autenticado como: <b id="whoami"></b></div>
           </div>
-          <button class="btn" id="btnLogoutTop">Cerrar sesión</button>
+        <button class="btn" id="btnLogoutTop">Cerrar sesión</button>
         </div>
 
+        <!-- Sistema -->
         <div class="card" style="margin-top:12px">
           <div class="section-title" style="font-size:18px">Sistema</div>
           <div class="row">
@@ -135,6 +232,7 @@
           </div>
         </div>
 
+        <!-- Ping -->
         <div class="card" style="margin-top:12px">
           <div class="section-title" style="font-size:18px">Ping</div>
           <div class="row">
@@ -145,6 +243,7 @@
           <div class="muted" style="font-size:12px">Si el backend aún no implementa <code>/network/ping</code>, verás “endpoint no disponible”.</div>
         </div>
 
+        <!-- Traceroute -->
         <div class="card" style="margin-top:12px">
           <div class="section-title" style="font-size:18px">Traceroute</div>
           <div class="row">
@@ -154,6 +253,7 @@
           <div class="muted" style="font-size:12px">Si el backend aún no implementa <code>/network/traceroute</code>, verás “endpoint no disponible”.</div>
         </div>
 
+        <!-- Port Scan -->
         <div class="card" style="margin-top:12px">
           <div class="section-title" style="font-size:18px">Port Scan</div>
           <div class="row">
@@ -170,113 +270,200 @@
       </div>
     </div>
 
+    <!-- Consola de salida general (muestra JSONs y errores) -->
     <h3 style="margin:22px 0 8px">Salida</h3>
     <pre id="out"></pre>
   </div>
 
 <script>
-  // ===== Config =====
-  const CP_API  = 'https://romanoti-tools-api.onrender.com'; // Control Plane
+  /* ============================================================
+   *  CONFIGURACIÓN DE CLIENTE (FRONTEND)
+   * ============================================================
+   * CP_API: URL del Control Plane (tu backend en Render).
+   * API_BASE: por defecto usamos CP_API, pero se puede sobrescribir
+   *           vía localStorage para pruebas locales.
+   */
+  const CP_API  = 'https://romanoti-tools-api.onrender.com';
   const API_BASE = localStorage.getItem('romanoti_api') || CP_API;
   document.getElementById('apiBaseShown').textContent = API_BASE;
 
-  // ===== Utils =====
-  const $  = (id) => document.getElementById(id);
-  const on = (id, type, fn) => { const el = $(id); if (el) el.addEventListener(type, fn); };
-  const token = () => sessionStorage.getItem('romanoti_token');
+  /* ============================================================
+   *  UTILIDADES GENERALES
+   * ============================================================ */
+  const $  = (id) => document.getElementById(id);                 // acceso rápido a elementos
+  const on = (id, type, fn) => { const el = $(id); if (el) el.addEventListener(type, fn); }; // binding seguro
+  const token = () => sessionStorage.getItem('romanoti_token');  // JWT en sesión
 
+  // Muestra/oculta tarjetas
   function show(id, on=true){ $(id).classList[on?'remove':'add']('hidden'); }
+
+  // Pinta un objeto (o texto) en un <pre> por id
   function logTo(preId, obj){
     const el = $(preId);
     try { el.textContent = (typeof obj==='string') ? obj : JSON.stringify(obj,null,2); }
     catch { el.textContent = String(obj); }
   }
+  // Pinta en la consola principal "Salida"
   function log(obj){ logTo('out', obj); }
 
-  // ===== Netlify function: pretty JSON =====
+  /* ============================================================
+   *  FUNCIÓN SERVERLESS DE NETLIFY (Diagnóstico)
+   * ============================================================ */
   async function runTool() {
     $('diagOut').textContent = 'Running…';
     try {
-      const res  = await fetch('/.netlify/functions/run-tool?pretty=1&indent=2',{headers:{'Accept':'application/json'}});
+      // Llamada GET a la función deployada en Netlify
+      const res  = await fetch('/.netlify/functions/run-tool?pretty=1&indent=2',
+                               {headers:{'Accept':'application/json'}});
       const text = await res.text();
+      // Intentamos parsear JSON; si no, mostramos texto crudo
       try {
         const data = JSON.parse(text);
-        const toShow = (data && typeof data === 'object' && 'output' in data) ? data.output : data;
+        const toShow = (data && typeof data==='object' && 'output' in data) ? data.output : data;
         $('diagOut').textContent = JSON.stringify(toShow, null, 2);
-      } catch {
-        $('diagOut').textContent = text;
-      }
+      } catch { $('diagOut').textContent = text; }
     } catch (err) {
       $('diagOut').textContent = '❌ Error: ' + String(err);
     }
   }
 
-  // ===== Auth =====
+  /* ============================================================
+   *  LOGIN / LOGOUT (JWT)
+   * ============================================================ */
+  // Activa la tarjeta de herramientas si hay token válido
   function setAuthedUI(){
-    if(token()){ show('loginCard', false); show('toolsCard', true); $('whoami').textContent = $('user').value || 'session'; }
-    else       { show('toolsCard', false); show('loginCard', true); $('whoami').textContent = ''; }
+    if(token()){
+      show('loginCard', false);
+      show('toolsCard', true);
+      $('whoami').textContent = $('user').value || 'session';
+    } else {
+      show('toolsCard', false);
+      show('loginCard', true);
+      $('whoami').textContent = '';
+    }
   }
 
+  // Hace POST a /auth/token (form-urlencoded) y guarda el token
   async function login(){
     $('loginMsg').textContent = 'Autenticando…';
     try{
       const body = new URLSearchParams();
       body.append('username', $('user').value);
       body.append('password', $('pass').value);
-      const res = await fetch(`${API_BASE}/auth/token`, {
-        method:'POST', headers:{'Content-Type':'application/x-www-form-urlencoded'}, body
+
+      const res  = await fetch(`${API_BASE}/auth/token`, {
+        method:'POST',
+        headers:{'Content-Type':'application/x-www-form-urlencoded'},
+        body
       });
+
       const text = await res.text();
       if(!res.ok){ $('loginMsg').innerHTML = `<span style="color:#c33">Login falló: ${res.status}</span>`; return; }
-      const data = JSON.parse(text); // {access_token, token_type}
+      const data = JSON.parse(text); // { access_token, token_type }
       sessionStorage.setItem('romanoti_token', data.access_token);
       setAuthedUI();
       log({login:'ok', ...data});
       $('loginMsg').textContent = 'OK';
-    }catch(e){ $('loginMsg').innerHTML = `<span style="color:#c33">${e}</span>`; }
+    }catch(e){
+      $('loginMsg').innerHTML = `<span style="color:#c33">${e}</span>`;
+    }
   }
-  function logout(){ sessionStorage.removeItem('romanoti_token'); setAuthedUI(); $('out').textContent=''; }
+  // Limpia el token y oculta herramientas
+  function logout(){
+    sessionStorage.removeItem('romanoti_token');
+    setAuthedUI();
+    $('out').textContent='';
+  }
 
-  // ===== Generic authed call =====
+  /* ============================================================
+   *  LLAMADAS GENERALES AL BACKEND (AUTENTICADAS)
+   * ============================================================
+   * Reutilizamos esta función para la mayoría de endpoints: construye
+   * la petición y pinta tanto la respuesta como los errores.
+   */
   async function call(method, path, body=null){
     try{
       const res  = await fetch(`${API_BASE}${path}`, {
         method,
-        headers:{ 'Authorization': `Bearer ${token()}`, 'Content-Type':'application/json' },
+        headers:{
+          'Authorization': `Bearer ${token()}`, // si no hay token, va "Bearer null" (el backend lo ignora si no lo necesita)
+          'Content-Type': 'application/json'
+        },
         body: body ? JSON.stringify(body) : null
       });
       const text = await res.text();
       if(!res.ok){
+        // Mensaje de error estándar
         if(res.status===404)  { log({error:'endpoint no disponible', path, status:res.status, body:text}); }
         else                  { log({error:'HTTP error', path, status:res.status, body:text}); }
         return;
       }
+      // Respuesta OK: intentamos parsear JSON
       try{ log(JSON.parse(text)); }catch{ log(text); }
-    }catch(e){ log(String(e)); }
+    }catch(e){
+      log(String(e));
+    }
   }
 
-  // ===== Tools actions =====
-  async function doPing(){ await call('POST','/network/ping',{ host:$('pingHost').value, count:Number($('pingCount').value||4) }); }
-  async function doTrace(){ await call('POST','/network/traceroute',{ host:$('traceHost').value }); }
+  /* ============================================================
+   *  ACCIONES DE HERRAMIENTAS (autenticadas)
+   * ============================================================ */
+  async function doPing(){
+    await call('POST','/network/ping', { host:$('pingHost').value, count:Number($('pingCount').value||4) });
+  }
+  async function doTrace(){
+    await call('POST','/network/traceroute', { host:$('traceHost').value });
+  }
   async function doScan(){
     const payload = {
-      host:$('scanHost').value,
-      start:Number($('scanStart').value||1),
-      end:Number($('scanEnd').value||1024)
+      host: $('scanHost').value,
+      start: Number($('scanStart').value||1),
+      end:   Number($('scanEnd').value||1024)
     };
     const portsStr = $('scanPorts').value.trim();
-    if(portsStr){ payload.ports = portsStr.split(',').map(p=>parseInt(p.trim(),10)).filter(Boolean); }
+    if(portsStr){
+      payload.ports = portsStr.split(',')
+                              .map(p=>parseInt(p.trim(),10))
+                              .filter(Boolean);
+    }
     await call('POST','/network/portscan', payload);
   }
 
-  // ===== On-Prem Agent (LAN) =====
+  /* ============================================================
+   *  EXTERNAL CHECKS (NO requieren JWT)
+   * ============================================================
+   * /ext/tls:   Obtiene info del certificado TLS de un host (y puerto).
+   * /ext/emaildns: Consulta MX/SPF/DMARC de un dominio.
+   * Reutilizamos 'call()' para centralizar la salida; el backend no
+   * requiere Authorization así que ignorará el header si llega.
+   */
+  async function extTLS(){
+    const host = $('tlsHost').value.trim();
+    const port = Number($('tlsPort').value || 443);
+    if(!host){ log({error:'Ingresa un host'}); return; }
+    await call('POST','/ext/tls', { host, port });
+  }
+  async function extEmailDNS(){
+    const domain = $('dnsDomain').value.trim();
+    if(!domain){ log({error:'Ingresa un dominio'}); return; }
+    await call('POST','/ext/emaildns', { domain });
+  }
+
+  /* ============================================================
+   *  ON-PREM AGENT (Construcción de comandos y consulta de reportes)
+   * ============================================================ */
+
+  // Último comando construido (para poder copiarlo con un botón)
   let lastCmd = '';
 
+  // Construye el comando para Linux/macOS:
+  // - Descarga el script .sh desde tu web (Netlify)
+  // - Le da permisos
+  // - Exporta ROMANOTI_API / ROMANOTI_KEY / ROMANOTI_AGENT y ejecuta
   function buildLinuxCmd(){
     const key  = $('orgKey').value.trim();
     const name = $('agentName').value.trim();
     const tag  = name ? ` ROMANOTI_AGENT="${name}"` : '';
-    // usa tus artefactos publicados en Netlify
     return [
       `curl -fsSL ${location.origin}/assets/agent/romanoti-agent.sh -o romanoti-agent.sh`,
       `chmod +x romanoti-agent.sh`,
@@ -284,6 +471,10 @@
     ].join(' && ');
   }
 
+  // Construye el comando para Windows (PowerShell):
+  // - Descarga el .ps1
+  // - Setea variables de entorno
+  // - Ejecuta el script con ExecutionPolicy Bypass
   function buildWindowsCmd(){
     const key  = $('orgKey').value.trim();
     const name = $('agentName').value.trim();
@@ -295,38 +486,55 @@
     return cmd;
   }
 
+  // Llama al endpoint del CP que devuelve el último reporte registrado
   async function fetchLatestReport(){
     const key = $('orgKey').value.trim();
     if(!key){ $('agentOut').textContent = 'Ingresa tu Org API Key.'; return; }
     $('agentOut').textContent = 'Consultando…';
     try{
-      const res  = await fetch(`${CP_API}/client/reports/latest`, { headers:{'x-api-key': key, 'accept':'application/json'} });
+      const res  = await fetch(`${CP_API}/client/reports/latest`, {
+        headers:{'x-api-key': key, 'accept':'application/json'}
+      });
       const text = await res.text();
       try{ $('agentOut').textContent = JSON.stringify(JSON.parse(text), null, 2); }
       catch{ $('agentOut').textContent = text; }
-    }catch(e){ $('agentOut').textContent = String(e); }
+    }catch(e){
+      $('agentOut').textContent = String(e);
+    }
   }
 
-  // ===== Wire events (seguros, no revientan si falta un ID) =====
+  /* ============================================================
+   *  ENLACE DE EVENTOS (no revienta si falta algún ID)
+   * ============================================================ */
+
+  // Netlify diagnostic
   on('btnRunDiag','click',runTool);
 
+  // Login / Logout
   on('btnLogin','click',login);
   on('btnLogout','click',logout);
   on('btnLogoutTop','click',logout);
 
+  // Sistema / Red (authed)
   on('btnSysInfo','click',()=>call('GET','/system/info'));
   on('btnNetInfo','click',()=>call('GET','/network/info'));
 
+  // Ping / Trace / Scan (authed)
   on('btnPing','click',doPing);
   on('btnTrace','click',doTrace);
   on('btnScan','click',doScan);
 
+  // External checks (no authed)
+  on('btnTLS','click',extTLS);
+  on('btnEmailDNS','click',extEmailDNS);
+
+  // On-Prem Agent
   on('btnLinux','click',()=>{ lastCmd = buildLinuxCmd(); $('agentCmd').textContent = lastCmd; });
   on('btnWindows','click',()=>{ lastCmd = buildWindowsCmd(); $('agentCmd').textContent = lastCmd; });
   on('btnCopyCmd','click',()=>{ if(lastCmd) navigator.clipboard.writeText(lastCmd); });
   on('btnLatestReport','click',fetchLatestReport);
 
-  // init
+  // Estado inicial de la UI
   setAuthedUI();
 </script>
 </body>
