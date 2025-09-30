@@ -28,16 +28,6 @@
     .section-title{font-weight:700;font-size:22px;margin:0 0 8px}
     .backlinks{display:flex;gap:8px;align-items:center;margin-top:10px}
     .btn-sm{padding:8px 10px;border-radius:8px;font-size:14px}
-
-    /* ---- Tablas bonitas para visualizar reportes ---- */
-    table.tidy{width:100%;border-collapse:separate;border-spacing:0;border:1px solid #e5e7eb;border-radius:12px;overflow:hidden}
-    .tidy th,.tidy td{padding:10px 12px;border-bottom:1px solid #eef2f7;font-size:14px}
-    .tidy thead th{background:#f3f6fb;text-align:left;font-weight:600;color:#0f172a}
-    .tidy tbody tr:hover{background:#f8fafc}
-    .tidy tbody tr:last-child td{border-bottom:none}
-    .badge{display:inline-block;padding:2px 8px;border-radius:999px;font-size:12px}
-    .badge-ok{background:#dcfce7;color:#065f46}
-    .badge-warn{background:#fee2e2;color:#7f1d1d}
   </style>
 </head>
 <body>
@@ -102,21 +92,47 @@
 
       <hr style="border:none;border-top:1px solid #e5e7eb;margin:14px 0">
 
-      <button id="btnLatestReport" class="btn btn-primary btn-sm">Ver último reporte</button>
+      <div class="row" style="gap:8px">
+        <button id="btnLatestReport" class="btn btn-primary btn-sm">Ver último reporte</button>
+        <button id="btnViewIfaces" class="btn btn-sm">Ver Interfaces (tabla)</button>
+        <button id="btnExportCSV" class="btn btn-sm">Exportar LAN a CSV</button>
+        <button id="btnDownloadJSON" class="btn btn-sm">Descargar JSON</button>
+      </div>
+      <div class="muted" style="font-size:12px">Sin datos para mostrar.</div>
       <pre id="agentOut"></pre>
+    </div>
 
-      <!-- Visor tabular del último reporte -->
-      <div class="card" style="margin-top:12px">
-        <div class="section-title" style="font-size:18px">Report Viewer</div>
-        <div class="row" style="margin-bottom:8px">
-          <button id="btnViewLan" class="btn btn-sm">Ver LAN sweep (tabla)</button>
-          <button id="btnViewIfaces" class="btn btn-sm">Ver Interfaces (tabla)</button>
-          <button id="btnExportCSV" class="btn btn-sm">Exportar LAN a CSV</button>
-          <button id="btnDownloadJSON" class="btn btn-sm">Descargar JSON</button>
+    <!-- === External checks (NEW) === -->
+    <div class="card">
+      <div class="section-title">External Checks</div>
+      <div class="muted" style="margin-bottom:8px">
+        Diagnósticos rápidos sobre dominios externos (no requieren login).
+      </div>
+
+      <!-- TLS cert -->
+      <div class="card" style="margin-top:8px">
+        <div class="section-title" style="font-size:18px">TLS Certificate Check</div>
+        <div class="row">
+          <input id="tlsHost" placeholder="host (ej: example.com)" style="min-width:240px">
+          <input id="tlsPort" type="number" value="443" min="1" max="65535" style="width:100px">
+          <button id="btnTLS" class="btn btn-sm">Check TLS</button>
         </div>
-        <div id="tableMount"></div>
+        <div class="muted" style="font-size:12px">Llama a <code>/ext/tls</code> y devuelve emisor, sujeto y expiración.</div>
+        <pre id="tlsOut"></pre>
+      </div>
+
+      <!-- Email DNS -->
+      <div class="card" style="margin-top:12px">
+        <div class="section-title" style="font-size:18px">Email DNS Check</div>
+        <div class="row">
+          <input id="dnsDomain" placeholder="dominio (ej: midominio.com)" style="min-width:260px">
+          <button id="btnEmailDNS" class="btn btn-sm">Check Email DNS</button>
+        </div>
+        <div class="muted" style="font-size:12px">Llama a <code>/ext/emaildns</code> y muestra MX / SPF / DMARC.</div>
+        <pre id="dnsOut"></pre>
       </div>
     </div>
+    <!-- === /External checks === -->
 
     <!-- Tools (auth) + Login -->
     <div class="grid grid-cols-2">
@@ -198,8 +214,8 @@
 
 <script>
   // ===== Config =====
-  const CP_API  = 'https://romanoti-tools-api.onrender.com'; // Control Plane (Render)
-  const API_BASE = localStorage.getItem('romanoti_api') || CP_API; // para endpoints protegidos
+  const CP_API  = 'https://romanoti-tools-api.onrender.com'; // Control Plane
+  const API_BASE = localStorage.getItem('romanoti_api') || CP_API;
   document.getElementById('apiBaseShown').textContent = API_BASE;
 
   // ===== Utils =====
@@ -277,11 +293,15 @@
     }catch(e){ log(String(e)); }
   }
 
-  // ===== Tools actions =====
+  // ===== Tools actions (authed) =====
   async function doPing(){ await call('POST','/network/ping',{ host:$('pingHost').value, count:Number($('pingCount').value||4) }); }
   async function doTrace(){ await call('POST','/network/traceroute',{ host:$('traceHost').value }); }
   async function doScan(){
-    const payload = { host:$('scanHost').value, start:Number($('scanStart').value||1), end:Number($('scanEnd').value||1024) };
+    const payload = {
+      host:$('scanHost').value,
+      start:Number($('scanStart').value||1),
+      end:Number($('scanEnd').value||1024)
+    };
     const portsStr = $('scanPorts').value.trim();
     if(portsStr){ payload.ports = portsStr.split(',').map(p=>parseInt(p.trim(),10)).filter(Boolean); }
     await call('POST','/network/portscan', payload);
@@ -289,13 +309,11 @@
 
   // ===== On-Prem Agent (LAN) =====
   let lastCmd = '';
-  let lastReportObj = null; // aquí guardaremos el último reporte para el visor
 
   function buildLinuxCmd(){
     const key  = $('orgKey').value.trim();
     const name = $('agentName').value.trim();
     const tag  = name ? ` ROMANOTI_AGENT="${name}"` : '';
-    // usa tus artefactos publicados en Netlify
     return [
       `curl -fsSL ${location.origin}/assets/agent/romanoti-agent.sh -o romanoti-agent.sh`,
       `chmod +x romanoti-agent.sh`,
@@ -321,116 +339,41 @@
     try{
       const res  = await fetch(`${CP_API}/client/reports/latest`, { headers:{'x-api-key': key, 'accept':'application/json'} });
       const text = await res.text();
-      try{
-        const data = JSON.parse(text);
-        $('agentOut').textContent = JSON.stringify(data, null, 2);
-        lastReportObj = data;  // 👈 guardamos para el visor
-      } catch{
-        $('agentOut').textContent = text;
-        lastReportObj = null;
-      }
-    }catch(e){
-      $('agentOut').textContent = String(e);
-      lastReportObj = null;
-    }
+      try{ $('agentOut').textContent = JSON.stringify(JSON.parse(text), null, 2); }
+      catch{ $('agentOut').textContent = text; }
+    }catch(e){ $('agentOut').textContent = String(e); }
   }
 
-  /* ---------- Helpers de render / export ---------- */
-  function renderTable(arr, columns, mountId='tableMount', headerMap={}){
-    const mount = $(mountId);
-    if(!Array.isArray(arr) || arr.length===0){ mount.innerHTML = '<div class="muted">Sin datos para mostrar.</div>'; return; }
-    const cols = (columns && columns.length) ? columns
-              : Array.from(new Set(arr.flatMap(o => Object.keys(o||{}))));
-    const ths = cols.map(c => `<th>${headerMap[c] || c}</th>`).join('');
-    const rows = arr.map(o => {
-      const tds = cols.map(c => {
-        let v = (o && (o[c]!==undefined && o[c]!==null)) ? o[c] : '';
-        if(typeof v === 'boolean') v = v ? '<span class="badge badge-ok">up</span>' : '<span class="badge badge-warn">down</span>';
-        if(Array.isArray(v)) v = v.join(', ');
-        return `<td>${v}</td>`;
-      }).join('');
-      return `<tr>${tds}</tr>`;
-    }).join('');
-    mount.innerHTML = `<div style="overflow:auto"><table class="tidy">
-      <thead><tr>${ths}</tr></thead>
-      <tbody>${rows}</tbody>
-    </table></div>`;
-  }
-
-  function pick(report, paths){
-    for(const p of paths){
-      try{
-        const val = p.split('.').reduce((acc,k)=>acc?.[k], report);
-        if(Array.isArray(val) && val.length) return val;
-      }catch(e){}
-    }
-    return [];
-  }
-
-  function toCSV(arr, columns){
-    const cols = (columns && columns.length) ? columns
-              : Array.from(new Set(arr.flatMap(o => Object.keys(o||{}))));
-    const esc = s => `"${String(s??'').replace(/"/g,'""')}"`;
-    const head = cols.map(esc).join(',');
-    const body = arr.map(o => cols.map(c => esc(o?.[c])).join(',')).join('\n');
-    return head + '\n' + body;
-  }
-
-  function downloadFile(filename, mime, content){
-    const blob = new Blob([content], {type:mime});
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url; a.download = filename; a.click();
-    URL.revokeObjectURL(url);
-  }
-
-  /* ---------- Renderizadores específicos ---------- */
-  function renderLanTable(){
-    if(!lastReportObj){ log({error:'Primero pulsa "Ver último reporte"'}); return; }
-    const lan = pick(lastReportObj, ['data.lan_sweep','data.lan','lan_sweep','lan']);
-    if(!lan.length){ renderTable([], [], 'tableMount'); return; }
-    const prefCols = ['ip','hostname','is_up','rtt_ms','mac','vendor','open_ports','ports_open'];
-    const present = prefCols.filter(k => lan.some(o => o && (k in o)));
-    const headers = { ip:'IP', hostname:'Hostname', is_up:'UP', rtt_ms:'RTT (ms)', mac:'MAC', vendor:'Vendor', open_ports:'Open', ports_open:'Open' };
-    renderTable(lan, present, 'tableMount', headers);
-  }
-
-  function renderInterfacesTable(){
-    if(!lastReportObj){ log({error:'Primero pulsa "Ver último reporte"'}); return; }
-    let ifs = [];
-    const objCandidates = [
-      lastReportObj?.data?.interfaces,
-      lastReportObj?.data?.network?.interfaces,
-      lastReportObj?.interfaces
-    ].filter(Boolean);
-    if(objCandidates.length){
-      const o = objCandidates[0];
-      ifs = Object.entries(o).map(([name,info])=>{
-        const addrs = (info?.addrs||[]).map(a=>a.ip||a.ip6||'').filter(Boolean).join(', ');
-        return { iface:name, is_up: info?.isup, speed: info?.speed, addrs };
+  // ===== External checks (no auth) =====
+  async function checkTLS(){
+    const host = $('tlsHost').value.trim();
+    const port = Number($('tlsPort').value||443);
+    $('tlsOut').textContent = 'Consultando…';
+    try{
+      const res = await fetch(`${CP_API}/ext/tls`, {
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({host, port})
       });
-    } else {
-      ifs = pick(lastReportObj, ['data.interfaces','interfaces']);
-    }
-    const prefCols = ['iface','is_up','speed','addrs'];
-    const present = prefCols.filter(k => ifs.some(o => o && (k in o)));
-    const headers = { iface:'Interface', is_up:'UP', speed:'Speed', addrs:'Addrs' };
-    renderTable(ifs, present, 'tableMount', headers);
+      const text = await res.text();
+      try{ $('tlsOut').textContent = JSON.stringify(JSON.parse(text), null, 2); }
+      catch{ $('tlsOut').textContent = text; }
+    }catch(e){ $('tlsOut').textContent = String(e); }
   }
 
-  function exportLanCSV(){
-    if(!lastReportObj){ log({error:'Primero pulsa "Ver último reporte"'}); return; }
-    const lan = pick(lastReportObj, ['data.lan_sweep','data.lan','lan_sweep','lan']);
-    if(!lan.length){ log({warn:'El reporte no contiene LAN sweep'}); return; }
-    const prefCols = ['ip','hostname','is_up','rtt_ms','mac','vendor','open_ports','ports_open'];
-    const present = prefCols.filter(k => lan.some(o => o && (k in o)));
-    const csv = toCSV(lan, present);
-    downloadFile('lan_sweep.csv', 'text/csv;charset=utf-8', csv);
-  }
-
-  function downloadJSON(){
-    if(!lastReportObj){ log({error:'Primero pulsa "Ver último reporte"'}); return; }
-    downloadFile('last_report.json', 'application/json', JSON.stringify(lastReportObj,null,2));
+  async function checkEmailDNS(){
+    const domain = $('dnsDomain').value.trim();
+    $('dnsOut').textContent = 'Consultando…';
+    try{
+      const res = await fetch(`${CP_API}/ext/emaildns`, {
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({domain})
+      });
+      const text = await res.text();
+      try{ $('dnsOut').textContent = JSON.stringify(JSON.parse(text), null, 2); }
+      catch{ $('dnsOut').textContent = text; }
+    }catch(e){ $('dnsOut').textContent = String(e); }
   }
 
   // ===== Wire events =====
@@ -452,11 +395,8 @@
   on('btnCopyCmd','click',()=>{ if(lastCmd) navigator.clipboard.writeText(lastCmd); });
   on('btnLatestReport','click',fetchLatestReport);
 
-  // Visor / export
-  on('btnViewLan','click',renderLanTable);
-  on('btnViewIfaces','click',renderInterfacesTable);
-  on('btnExportCSV','click',exportLanCSV);
-  on('btnDownloadJSON','click',downloadJSON);
+  on('btnTLS','click',checkTLS);
+  on('btnEmailDNS','click',checkEmailDNS);
 
   // init
   setAuthedUI();
