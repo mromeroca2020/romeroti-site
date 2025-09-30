@@ -2,371 +2,332 @@
 <html lang="es">
 <head>
   <meta charset="utf-8" />
+  <title>RomanoTI Tools</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>RomanoTI Tools Platform</title>
-<!-- Favicon -->
-<link rel="icon" href="https://ui-avatars.com/api/?name=R&background=1e40af&color=fff&size=64" type="image/png">
-<link rel="apple-touch-icon" href="https://ui-avatars.com/api/?name=R&background=1e40af&color=fff&size=180">
-<link rel="icon" sizes="32x32" href="https://ui-avatars.com/api/?name=R&background=1e40af&color=fff&size=32" type="image/png">
-<link rel="icon" sizes="16x16" href="https://ui-avatars.com/api/?name=R&background=1e40af&color=fff&size=16" type="image/png">
-
-  <!-- Tailwind para heredar el estilo azul/blanco del sitio -->
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
-
+  <link rel="icon" href="/img/favicon.png" type="image/png">
   <style>
-    /* Ajustes sutiles y el bloque JSON oscuro */
-    pre.json {
-      background:#0e1116; color:#eaeef3; padding:12px; border-radius:10px;
-      overflow:auto; max-height:60vh; white-space:pre;
-    }
-    .soft-card { border:1px solid #e5e7eb; border-radius:14px; box-shadow:0 1px 2px rgba(0,0,0,.06); }
+    :root{--brand:#2563eb;--brand-dark:#1d4ed8;--ink:#0f172a}
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Helvetica,Arial,sans-serif;margin:0;background:#f6f7fb;color:#111827}
+    .topbar{background:linear-gradient(120deg,#1e40af,#2563eb);color:#fff;padding:28px 16px}
+    .wrap{max-width:1040px;margin:0 auto;padding:0 16px}
+    h1,h2,h3,h4{margin:0 0 12px}
+    .muted{color:#6b7280}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:10px;border:1px solid #e5e7eb;background:#fff;cursor:pointer}
+    .btn-primary{background:var(--brand);border-color:var(--brand);color:#fff}
+    .btn-primary:hover{background:var(--brand-dark);border-color:var(--brand-dark)}
+    .btn-link{background:transparent;border:0;color:#fff;text-decoration:underline;cursor:pointer}
+    .grid{display:grid;gap:18px}
+    @media(min-width:900px){.grid-cols-2{grid-template-columns:1fr 1fr}}
+    .card{background:#fff;border:1px solid #e5e7eb;border-radius:14px;box-shadow:0 6px 18px -8px rgba(0,0,0,.12);padding:18px}
+    .row{display:flex;gap:10px;flex-wrap:wrap}
+    input,button,select{padding:10px;border:1px solid #cbd5e1;border-radius:10px}
+    input:focus{outline:3px solid rgba(37,99,235,.15);border-color:var(--brand)}
+    .kicker{font-size:13px;color:#c7d2fe}
+    pre{background:#0e1116;color:#eaeef3;padding:14px;border-radius:12px;overflow:auto;max-height:50vh;white-space:pre}
+    .hidden{display:none}
+    .section-title{font-weight:700;font-size:22px;margin:0 0 8px}
+    .backlinks{display:flex;gap:8px;align-items:center;margin-top:10px}
+    .btn-sm{padding:8px 10px;border-radius:8px;font-size:14px}
   </style>
 </head>
-<body class="bg-gray-50">
+<body>
 
-  <!-- Header simple, coherente con el sitio -->
-  <header class="bg-white shadow-sm">
-    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-      <a href="/" class="flex items-center font-bold text-lg">
-        <span class="bg-blue-600 text-white w-9 h-9 rounded-full flex items-center justify-center mr-2">R</span>
-        <span>RomanoTI Solutions</span>
-      </a>
-
-      <nav class="hidden md:flex items-center space-x-6">
-        <a href="/#services" class="text-gray-700 hover:text-blue-600 font-medium">Services</a>
-        <a href="/services/tools.html" class="text-blue-700 font-semibold">Tools</a>
-        <a href="https://calendly.com/mauricioromeroca" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium">Book Now</a>
-      </nav>
-    </div>
-  </header>
-
-  <!-- Hero -->
-  <section class="bg-gradient-to-r from-blue-800 to-blue-600 text-white">
-    <div class="max-w-6xl mx-auto px-4 py-10">
-      <div class="flex items-center justify-between flex-wrap gap-3">
-        <div>
-          <h1 class="text-2xl md:text-3xl font-bold">🛠️ RomanoTI Tools Platform</h1>
-          <p class="opacity-90">Exclusive tools for our certified engineers</p>
-        </div>
-        <div class="flex items-center gap-3">
-          <a href="/#services" class="bg-white text-blue-700 hover:bg-gray-100 px-4 py-2 rounded-lg font-medium">← Back to Services</a>
-          <a href="/" class="bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-lg font-medium">Home</a>
-        </div>
+  <!-- HERO -->
+  <div class="topbar">
+    <div class="wrap">
+      <div class="kicker">RomanoTI Tools Platform</div>
+      <h1 style="font-size:28px;margin:6px 0 0">Exclusive tools for our certified engineers</h1>
+      <div class="backlinks">
+        <a class="btn btn-sm" href="/#services">← Back to Services</a>
+        <a class="btn btn-sm" href="/">Home</a>
       </div>
     </div>
-  </section>
+  </div>
 
-  <main class="max-w-6xl mx-auto px-4 py-8 space-y-6">
+  <div class="wrap" style="margin-top:20px; margin-bottom:56px">
 
-    <!-- 1) Netlify Diagnostic -->
-    <section class="soft-card bg-white p-5">
-      <div class="flex items-center justify-between flex-wrap gap-3">
+    <!-- Server Diagnostic -->
+    <div class="card">
+      <div class="row" style="justify-content:space-between;align-items:center">
         <div>
-          <h2 class="text-lg font-semibold">Server Diagnostic (Netlify Function)</h2>
-          <p class="text-sm text-gray-500">Ejecuta <code>/.netlify/functions/run-tool</code> y muestra el JSON bonito.</p>
+          <div class="section-title">Server Diagnostic (Netlify Function)</div>
+          <div class="muted">Ejecuta <code>/.netlify/functions/run-tool</code> y muestra el JSON bonito.</div>
         </div>
-        <button id="btnRunTool" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium">
-          ⚡ Run Diagnostic
-        </button>
+        <button id="btnRunDiag" class="btn btn-primary">⚡ Run Diagnostic</button>
       </div>
-      <div class="mt-4">
-        <pre id="out" class="json"></pre>
+      <pre id="diagOut"></pre>
+    </div>
+
+    <!-- On-Prem Agent -->
+    <div class="card">
+      <div class="section-title">On-Prem Agent (LAN Inventory)</div>
+      <div class="muted" style="margin-bottom:10px">
+        Instala este agente en una PC/VM dentro de tu red. Hará un inventario básico (hosts activos, IP local, etc.)
+        y enviará el reporte al Control Plane de RomanoTI.
       </div>
-    </section>
 
-    <!-- 2) On-Prem Agent (LAN) -->
-    <section class="soft-card bg-white p-5">
-      <h3 class="text-lg font-semibold mb-1">On-Prem Agent (LAN Inventory)</h3>
-      <p class="text-sm text-gray-500 mb-4">Instala este agente en una PC/VM dentro de tu red. Hará un inventario básico (hosts activos, IP local, etc.) y enviará el reporte al Control Plane de RomanoTI.</p>
-
-      <div class="grid md:grid-cols-2 gap-4">
+      <div class="row" style="align-items:flex-end">
         <div>
-          <label class="text-sm font-medium">Org API Key</label>
-          <input id="orgKey" type="password" placeholder="pega aquí tu API key" class="mt-1 w-full border rounded-lg px-3 py-2" />
-          <p class="text-xs text-gray-500 mt-1">Se usa solo para generar comandos y consultar reportes. No se guarda.</p>
+          <div><b>Org API Key</b></div>
+          <input id="orgKey" type="password" placeholder="pega aquí tu API key" style="min-width:320px">
+          <div class="muted" style="font-size:12px">Se usa solo para generar comandos y consultar reportes. No se guarda.</div>
         </div>
         <div>
-          <label class="text-sm font-medium">Agent name (opcional)</label>
-          <input id="agentName" placeholder="ej: rome-office-01" class="mt-1 w-full border rounded-lg px-3 py-2" />
+          <div><b>Agent name (opcional)</b></div>
+          <input id="agentName" placeholder="ej: rome-office-01">
         </div>
       </div>
 
-      <div class="flex items-center gap-2 mt-4 flex-wrap">
-        <button id="btnLinux"   class="bg-gray-100 hover:bg-gray-200 px-3 py-2 rounded-lg">Linux / macOS</button>
-        <button id="btnWindows" class="bg-gray-100 hover:bg-gray-200 px-3 py-2 rounded-lg">Windows</button>
-        <button id="btnCopyCmd" class="bg-gray-100 hover:bg-gray-200 px-3 py-2 rounded-lg">Copiar comando</button>
+      <div class="row" style="margin-top:10px">
+        <button id="btnLinux" class="btn">Linux / macOS</button>
+        <button id="btnWindows" class="btn">Windows</button>
+        <button id="btnCopyCmd" class="btn">Copiar comando</button>
       </div>
 
-      <pre id="agentCmd" class="json mt-3"></pre>
-
-      <div class="flex items-center gap-2 mt-3">
-        <button id="btnLatestReport" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium">Ver último reporte</button>
-        <span class="text-sm text-gray-500">Consulta <code>/client/reports/latest</code> con tu API Key.</span>
+      <pre id="agentCmd"></pre>
+      <div class="muted" style="font-size:12px">
+        El comando descarga el agente, configura <code>ROMANOTI_API</code> y <code>ROMANOTI_KEY</code>, y ejecuta un
+        escaneo rápido. Luego hace POST a <code>/client/report</code>.
       </div>
-      <pre id="agentOut" class="json mt-3"></pre>
-    </section>
 
-    <!-- 3) Login y herramientas autenticadas -->
-    <section class="grid md:grid-cols-2 gap-6">
+      <hr style="border:none;border-top:1px solid #e5e7eb;margin:14px 0">
+
+      <button id="btnLatestReport" class="btn btn-primary btn-sm">Ver último reporte</button>
+      <pre id="agentOut"></pre>
+    </div>
+
+    <!-- Tools (auth) + Login -->
+    <div class="grid grid-cols-2">
       <!-- Login -->
-      <div class="soft-card bg-white p-5">
-        <h3 class="text-lg font-semibold mb-1">Login</h3>
-        <p class="text-sm text-gray-500">Necesario para usar Ping/Traceroute/Port Scan contra el backend.</p>
-        <div class="grid grid-cols-1 gap-3 mt-3">
-          <input id="user" placeholder="username (ej: eng1)" class="border rounded-lg px-3 py-2" />
-          <input id="pass" placeholder="password" type="password" class="border rounded-lg px-3 py-2" />
-          <div class="flex items-center gap-2">
-            <button id="btnLogin"  class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium">Iniciar sesión</button>
-            <button id="btnLogout" class="bg-gray-100 hover:bg-gray-200 px-4 py-2 rounded-lg">Cerrar sesión</button>
-          </div>
-          <p class="text-xs text-gray-500">
-            API: <code id="apiBaseShown"></code>. Puedes sobreescribirla con
-            <code>localStorage.setItem('romanoti_api','http://127.0.0.1:8000')</code> y recargar.
-          </p>
-          <div id="loginMsg" class="text-sm"></div>
-          <p class="text-sm">Autenticado como: <b id="whoami" class="font-semibold">—</b></p>
+      <div class="card" id="loginCard">
+        <div class="section-title">Login</div>
+        <div class="muted" style="margin-bottom:8px">Necesario para usar Ping/Traceroute/Port Scan contra el backend.</div>
+        <div class="row">
+          <input id="user" placeholder="usuario (ej: eng1)" style="min-width:180px">
+          <input id="pass" placeholder="password" type="password" style="min-width:180px">
         </div>
+        <div class="row" style="margin-top:10px">
+          <button id="btnLogin" class="btn btn-primary">Iniciar sesión</button>
+          <button id="btnLogout" class="btn">Cerrar sesión</button>
+        </div>
+        <div class="muted" style="margin-top:10px;font-size:12px">
+          API: <code id="apiBaseShown"></code>. Puedes sobreescribirla con
+          <code>localStorage.setItem('romanoti_api','http://127.0.0.1:8000')</code> y recargar.
+        </div>
+        <div id="loginMsg" class="muted" style="margin-top:6px"></div>
       </div>
 
-      <!-- Tools -->
-      <div class="soft-card bg-white p-5">
-        <h3 class="text-lg font-semibold mb-2">Herramientas</h3>
-        <p id="authHint" class="text-sm text-yellow-700 bg-yellow-50 border border-yellow-200 rounded-lg px-3 py-2 hidden">
-          Para usar estas herramientas debes iniciar sesión.
-        </p>
-
-        <div class="space-y-4 mt-3">
+      <!-- Herramientas autenticadas -->
+      <div class="card hidden" id="toolsCard">
+        <div class="row" style="align-items:center;justify-content:space-between">
           <div>
-            <h4 class="font-medium mb-2">Sistema</h4>
-            <div class="flex items-center gap-2 flex-wrap">
-              <button data-action="GET" data-path="/system/info"   class="tool-btn bg-gray-100 hover:bg-gray-200 px-3 py-2 rounded-lg">/system/info</button>
-              <button data-action="GET" data-path="/network/info"  class="tool-btn bg-gray-100 hover:bg-gray-200 px-3 py-2 rounded-lg">/network/info</button>
-            </div>
+            <div class="section-title" style="margin:0">Herramientas</div>
+            <div class="muted">Autenticado como: <b id="whoami"></b></div>
           </div>
+          <button class="btn" id="btnLogoutTop">Cerrar sesión</button>
+        </div>
 
-          <div>
-            <h4 class="font-medium mb-2">Ping</h4>
-            <div class="flex items-center gap-2 flex-wrap">
-              <input id="pingHost"  placeholder="host (ej: 8.8.8.8)" value="8.8.8.8" class="border rounded-lg px-3 py-2" />
-              <input id="pingCount" type="number" min="1" max="10" value="4" class="border rounded-lg px-3 py-2 w-20" />
-              <button id="btnPing" class="bg-gray-100 hover:bg-gray-200 px-3 py-2 rounded-lg">Enviar</button>
-            </div>
-            <p class="text-xs text-gray-500 mt-1">Si el backend aún no implementa <code>/network/ping</code>, verás “endpoint no disponible”.</p>
-          </div>
-
-          <div>
-            <h4 class="font-medium mb-2">Traceroute</h4>
-            <div class="flex items-center gap-2 flex-wrap">
-              <input id="traceHost" placeholder="host (ej: 8.8.8.8)" value="8.8.8.8" class="border rounded-lg px-3 py-2" />
-              <button id="btnTrace" class="bg-gray-100 hover:bg-gray-200 px-3 py-2 rounded-lg">Enviar</button>
-            </div>
-          </div>
-
-          <div>
-            <h4 class="font-medium mb-2">Port Scan</h4>
-            <div class="grid md:grid-cols-2 gap-2">
-              <input id="scanHost"  placeholder="host (IP/hostname)" class="border rounded-lg px-3 py-2" />
-              <input id="scanPorts" placeholder="puertos (opcional: 80,443,22)" class="border rounded-lg px-3 py-2" />
-              <div class="flex items-center gap-2">
-                <input id="scanStart" type="number" min="1" max="65535" value="1" class="border rounded-lg px-3 py-2 w-28" />
-                <input id="scanEnd"   type="number" min="1" max="65535" value="1024" class="border rounded-lg px-3 py-2 w-28" />
-                <button id="btnScan" class="bg-gray-100 hover:bg-gray-200 px-3 py-2 rounded-lg">Escanear</button>
-              </div>
-            </div>
-            <p class="text-xs text-gray-500 mt-1">Si indicas “puertos”, se ignoran start/end. Compatible con tu endpoint actual.</p>
+        <div class="card" style="margin-top:12px">
+          <div class="section-title" style="font-size:18px">Sistema</div>
+          <div class="row">
+            <button class="btn btn-sm" id="btnSysInfo">/system/info</button>
+            <button class="btn btn-sm" id="btnNetInfo">/network/info</button>
           </div>
         </div>
+
+        <div class="card" style="margin-top:12px">
+          <div class="section-title" style="font-size:18px">Ping</div>
+          <div class="row">
+            <input id="pingHost" placeholder="host (ej: 8.8.8.8)" value="8.8.8.8" style="min-width:170px">
+            <input id="pingCount" type="number" min="1" max="10" value="4" style="width:80px">
+            <button class="btn btn-sm" id="btnPing">Enviar</button>
+          </div>
+          <div class="muted" style="font-size:12px">Si el backend aún no implementa <code>/network/ping</code>, verás “endpoint no disponible”.</div>
+        </div>
+
+        <div class="card" style="margin-top:12px">
+          <div class="section-title" style="font-size:18px">Traceroute</div>
+          <div class="row">
+            <input id="traceHost" placeholder="host (ej: 8.8.8.8)" value="8.8.8.8" style="min-width:170px">
+            <button class="btn btn-sm" id="btnTrace">Enviar</button>
+          </div>
+          <div class="muted" style="font-size:12px">Si el backend aún no implementa <code>/network/traceroute</code>, verás “endpoint no disponible”.</div>
+        </div>
+
+        <div class="card" style="margin-top:12px">
+          <div class="section-title" style="font-size:18px">Port Scan</div>
+          <div class="row">
+            <input id="scanHost" placeholder="host (IP/hostname)" style="min-width:200px">
+            <input id="scanStart" type="number" min="1" max="65535" value="1" style="width:90px">
+            <input id="scanEnd" type="number" min="1" max="65535" value="1024" style="width:90px">
+          </div>
+          <div class="row" style="margin-top:6px">
+            <input id="scanPorts" placeholder="puertos (opcional: 80,443,22)" style="min-width:280px">
+            <button class="btn btn-sm" id="btnScan">Escanear</button>
+          </div>
+          <div class="muted" style="font-size:12px">Si indicas “puertos”, se ignoran start/end. Compatible con tu endpoint actual.</div>
+        </div>
       </div>
-    </section>
-
-  </main>
-
-  <footer class="bg-gray-900 text-white">
-    <div class="max-w-6xl mx-auto px-4 py-6 text-center text-sm">
-      © 2025 RomanoTI Solutions. All rights reserved.
     </div>
-  </footer>
 
-  <!-- ====== JS ====== -->
-  <script>
-    // ---- Config ----
-    const CP_API  = 'https://romanoti-tools-api.onrender.com';
-    const API_BASE = localStorage.getItem('romanoti_api') || CP_API;
-    const $ = (id) => document.getElementById(id);
-    const token = () => sessionStorage.getItem('romanoti_token');
-    $('apiBaseShown').textContent = API_BASE;
+    <h3 style="margin:22px 0 8px">Salida</h3>
+    <pre id="out"></pre>
+  </div>
 
-    const out = $('out');
-    const authHint = $('authHint');
+<script>
+  // ===== Config =====
+  const CP_API  = 'https://romanoti-tools-api.onrender.com'; // Control Plane
+  const API_BASE = localStorage.getItem('romanoti_api') || CP_API;
+  document.getElementById('apiBaseShown').textContent = API_BASE;
 
-    // Pretty print helper
-    function show(obj) {
-      try { out.textContent = (typeof obj === 'string') ? obj : JSON.stringify(obj, null, 2); }
-      catch { out.textContent = String(obj); }
-    }
+  // ===== Utils =====
+  const $  = (id) => document.getElementById(id);
+  const on = (id, type, fn) => { const el = $(id); if (el) el.addEventListener(type, fn); };
+  const token = () => sessionStorage.getItem('romanoti_token');
 
-    function setAuthedUI() {
-      const authed = !!token();
-      $('whoami').textContent = authed ? (sessionStorage.getItem('romanoti_user') || 'session') : '—';
-      // Si no hay login, mostramos aviso
-      authHint.classList.toggle('hidden', authed);
-      // Deshabilitamos botones de herramientas si no hay login
-      const needsAuth = ['btnPing','btnTrace','btnScan', ...Array.from(document.querySelectorAll('.tool-btn')).map(b => b.id).filter(Boolean)];
-      ['btnPing','btnTrace','btnScan'].forEach(id => $(id).disabled = !authed);
-      document.querySelectorAll('.tool-btn').forEach(b => b.disabled = !authed);
-    }
+  function show(id, on=true){ $(id).classList[on?'remove':'add']('hidden'); }
+  function logTo(preId, obj){
+    const el = $(preId);
+    try { el.textContent = (typeof obj==='string') ? obj : JSON.stringify(obj,null,2); }
+    catch { el.textContent = String(obj); }
+  }
+  function log(obj){ logTo('out', obj); }
 
-    // ========= 1) Diagnostic (Netlify function) =========
-    $('btnRunTool').addEventListener('click', async () => {
-      out.textContent = 'Running…';
+  // ===== Netlify function: pretty JSON =====
+  async function runTool() {
+    $('diagOut').textContent = 'Running…';
+    try {
+      const res  = await fetch('/.netlify/functions/run-tool?pretty=1&indent=2',{headers:{'Accept':'application/json'}});
+      const text = await res.text();
       try {
-        const res = await fetch('/.netlify/functions/run-tool?pretty=1&indent=2', { headers: { 'Accept':'application/json' }});
-        const text = await res.text();
-        try {
-          const data = JSON.parse(text);
-          const toShow = (data && typeof data === 'object' && 'output' in data) ? data.output : data;
-          out.textContent = JSON.stringify(toShow, null, 2);
-        } catch { out.textContent = text; }
-      } catch (e) {
-        out.textContent = '❌ Error: ' + String(e);
-      }
-    });
-
-    // ========= 2) Login =========
-    $('btnLogin').addEventListener('click', async () => {
-      $('loginMsg').textContent = 'Autenticando…';
-      try {
-        const body = new URLSearchParams();
-        body.append('username', $('user').value);
-        body.append('password', $('pass').value);
-        const res = await fetch(`${API_BASE}/auth/token`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body
-        });
-        const text = await res.text();
-        if (!res.ok) {
-          $('loginMsg').innerHTML = `❌ Login falló: ${res.status}<br><small>${text}</small>`;
-          return;
-        }
         const data = JSON.parse(text);
-        sessionStorage.setItem('romanoti_token', data.access_token);
-        sessionStorage.setItem('romanoti_user', $('user').value);
-        $('loginMsg').textContent = '✅ OK';
-        setAuthedUI();
-      } catch (e) {
-        $('loginMsg').textContent = '❌ ' + String(e);
+        const toShow = (data && typeof data === 'object' && 'output' in data) ? data.output : data;
+        $('diagOut').textContent = JSON.stringify(toShow, null, 2);
+      } catch {
+        $('diagOut').textContent = text;
       }
-    });
-
-    $('btnLogout').addEventListener('click', () => {
-      sessionStorage.removeItem('romanoti_token');
-      sessionStorage.removeItem('romanoti_user');
-      setAuthedUI();
-      show('');
-    });
-
-    // ========= 3) Authenticated generic caller =========
-    async function call(method, path, body=null) {
-      if (!token()) { show('⚠️ Debes iniciar sesión para usar esta herramienta.'); return; }
-      try {
-        const res = await fetch(`${API_BASE}${path}`, {
-          method,
-          headers: {
-            'Authorization': `Bearer ${token()}`,
-            'Content-Type': 'application/json'
-          },
-          body: body ? JSON.stringify(body) : null
-        });
-        const text = await res.text();
-        if (!res.ok) {
-          // mensajes más claros
-          if (res.status === 404) show({ error:'endpoint no disponible', path, status: res.status, body: text });
-          else show({ error:'HTTP error', path, status: res.status, body: text });
-          return;
-        }
-        try { show(JSON.parse(text)); } catch { show(text); }
-      } catch (e) {
-        show(String(e));
-      }
+    } catch (err) {
+      $('diagOut').textContent = '❌ Error: ' + String(err);
     }
+  }
 
-    // Botones /system/info y /network/info
-    document.querySelectorAll('.tool-btn').forEach(btn => {
-      btn.addEventListener('click', async () => {
-        await call(btn.dataset.action, btn.dataset.path);
+  // ===== Auth =====
+  function setAuthedUI(){
+    if(token()){ show('loginCard', false); show('toolsCard', true); $('whoami').textContent = $('user').value || 'session'; }
+    else       { show('toolsCard', false); show('loginCard', true); $('whoami').textContent = ''; }
+  }
+
+  async function login(){
+    $('loginMsg').textContent = 'Autenticando…';
+    try{
+      const body = new URLSearchParams();
+      body.append('username', $('user').value);
+      body.append('password', $('pass').value);
+      const res = await fetch(`${API_BASE}/auth/token`, {
+        method:'POST', headers:{'Content-Type':'application/x-www-form-urlencoded'}, body
       });
-    });
+      const text = await res.text();
+      if(!res.ok){ $('loginMsg').innerHTML = `<span style="color:#c33">Login falló: ${res.status}</span>`; return; }
+      const data = JSON.parse(text); // {access_token, token_type}
+      sessionStorage.setItem('romanoti_token', data.access_token);
+      setAuthedUI();
+      log({login:'ok', ...data});
+      $('loginMsg').textContent = 'OK';
+    }catch(e){ $('loginMsg').innerHTML = `<span style="color:#c33">${e}</span>`; }
+  }
+  function logout(){ sessionStorage.removeItem('romanoti_token'); setAuthedUI(); $('out').textContent=''; }
 
-    // Ping
-    $('btnPing').addEventListener('click', async () => {
-      await call('POST','/network/ping', {
-        host: $('pingHost').value,
-        count: Number($('pingCount').value || 4)
+  // ===== Generic authed call =====
+  async function call(method, path, body=null){
+    try{
+      const res  = await fetch(`${API_BASE}${path}`, {
+        method,
+        headers:{ 'Authorization': `Bearer ${token()}`, 'Content-Type':'application/json' },
+        body: body ? JSON.stringify(body) : null
       });
-    });
+      const text = await res.text();
+      if(!res.ok){
+        if(res.status===404)  { log({error:'endpoint no disponible', path, status:res.status, body:text}); }
+        else                  { log({error:'HTTP error', path, status:res.status, body:text}); }
+        return;
+      }
+      try{ log(JSON.parse(text)); }catch{ log(text); }
+    }catch(e){ log(String(e)); }
+  }
 
-    // Traceroute
-    $('btnTrace').addEventListener('click', async () => {
-      await call('POST','/network/traceroute', { host: $('traceHost').value });
-    });
+  // ===== Tools actions =====
+  async function doPing(){ await call('POST','/network/ping',{ host:$('pingHost').value, count:Number($('pingCount').value||4) }); }
+  async function doTrace(){ await call('POST','/network/traceroute',{ host:$('traceHost').value }); }
+  async function doScan(){
+    const payload = {
+      host:$('scanHost').value,
+      start:Number($('scanStart').value||1),
+      end:Number($('scanEnd').value||1024)
+    };
+    const portsStr = $('scanPorts').value.trim();
+    if(portsStr){ payload.ports = portsStr.split(',').map(p=>parseInt(p.trim(),10)).filter(Boolean); }
+    await call('POST','/network/portscan', payload);
+  }
 
-    // Portscan
-    $('btnScan').addEventListener('click', async () => {
-      const payload = {
-        host: $('scanHost').value,
-        start: Number($('scanStart').value || 1),
-        end: Number($('scanEnd').value || 1024),
-      };
-      const portsStr = $('scanPorts').value.trim();
-      if (portsStr) payload.ports = portsStr.split(',').map(p => parseInt(p.trim(),10)).filter(Boolean);
-      await call('POST','/network/portscan', payload);
-    });
+  // ===== On-Prem Agent (LAN) =====
+  let lastCmd = '';
 
-    // ========= 4) On-Prem Agent UI =========
-   <script>
-  // ...
-  const ASSET_BASE = `${location.origin}/assets/agent`;
-  const GH_RAW_BASE = "https://raw.githubusercontent.com/mromeroca2020/romeroti-site/main/assets/agent";
-
-  function buildLinuxCmd() {
+  function buildLinuxCmd(){
     const key  = $('orgKey').value.trim();
     const name = $('agentName').value.trim();
     const tag  = name ? ` ROMANOTI_AGENT="${name}"` : '';
-
-    const primary  = `curl -sSL ${ASSET_BASE}/romanoti-agent.sh | bash`;
-    const fallback = `curl -sSL ${GH_RAW_BASE}/romanoti-agent.sh | bash`;
-
-    $('agentCmd').textContent =
-`# Comando principal (Netlify)
-export ROMANOTI_API="${CP_API}" ROMANOTI_KEY="${key}"${tag} && ${primary}
-
-# Si falla, usa este fallback (GitHub RAW)
-export ROMANOTI_API="${CP_API}" ROMANOTI_KEY="${key}"${tag} && ${fallback}`;
-
-    return `export ROMANOTI_API="${CP_API}" ROMANOTI_KEY="${key}"${tag} && ${primary}`;
+    // usa tus artefactos publicados en Netlify
+    return [
+      `curl -fsSL ${location.origin}/assets/agent/romanoti-agent.sh -o romanoti-agent.sh`,
+      `chmod +x romanoti-agent.sh`,
+      `ROMANOTI_API="${CP_API}" ROMANOTI_KEY="${key}"${tag} ./romanoti-agent.sh`
+    ].join(' && ');
   }
 
-  function buildWindowsCmd() {
+  function buildWindowsCmd(){
     const key  = $('orgKey').value.trim();
     const name = $('agentName').value.trim();
-    const tag  = name ? `; setx ROMANOTI_AGENT "${name}"` : '';
-
-    const primary  = `iwr ${ASSET_BASE}/romanoti-agent.ps1 -UseBasicParsing | iex`;
-    const fallback = `iwr ${GH_RAW_BASE}/romanoti-agent.ps1 -UseBasicParsing | iex`;
-
-    $('agentCmd').textContent =
-`# Comando principal (Netlify)
-setx ROMANOTI_API '${CP_API}'; setx ROMANOTI_KEY '${key}'${tag}; ${primary}
-
-# Si falla, usa este fallback (GitHub RAW)
-setx ROMANOTI_API '${CP_API}'; setx ROMANOTI_KEY '${key}'${tag}; ${fallback}`;
-
-    return `powershell -Command "setx ROMANOTI_API '${CP_API}'; setx ROMANOTI_KEY '${key}'${tag}; ${primary}"`;
+    let cmd = `powershell -NoProfile -ExecutionPolicy Bypass -Command "`
+            + `Invoke-WebRequest -UseBasicParsing -Uri '${location.origin}/assets/agent/romanoti-agent.ps1' -OutFile 'romanoti-agent.ps1'; `
+            + `$env:ROMANOTI_API='${CP_API}'; $env:ROMANOTI_KEY='${key}'; `;
+    if(name) cmd += `$env:ROMANOTI_AGENT='${name}'; `;
+    cmd += `powershell -ExecutionPolicy Bypass -File .\\romanoti-agent.ps1"`;
+    return cmd;
   }
-  // ...
-</script>
 
-  </script>
+  async function fetchLatestReport(){
+    const key = $('orgKey').value.trim();
+    if(!key){ $('agentOut').textContent = 'Ingresa tu Org API Key.'; return; }
+    $('agentOut').textContent = 'Consultando…';
+    try{
+      const res  = await fetch(`${CP_API}/client/reports/latest`, { headers:{'x-api-key': key, 'accept':'application/json'} });
+      const text = await res.text();
+      try{ $('agentOut').textContent = JSON.stringify(JSON.parse(text), null, 2); }
+      catch{ $('agentOut').textContent = text; }
+    }catch(e){ $('agentOut').textContent = String(e); }
+  }
+
+  // ===== Wire events (seguros, no revientan si falta un ID) =====
+  on('btnRunDiag','click',runTool);
+
+  on('btnLogin','click',login);
+  on('btnLogout','click',logout);
+  on('btnLogoutTop','click',logout);
+
+  on('btnSysInfo','click',()=>call('GET','/system/info'));
+  on('btnNetInfo','click',()=>call('GET','/network/info'));
+
+  on('btnPing','click',doPing);
+  on('btnTrace','click',doTrace);
+  on('btnScan','click',doScan);
+
+  on('btnLinux','click',()=>{ lastCmd = buildLinuxCmd(); $('agentCmd').textContent = lastCmd; });
+  on('btnWindows','click',()=>{ lastCmd = buildWindowsCmd(); $('agentCmd').textContent = lastCmd; });
+  on('btnCopyCmd','click',()=>{ if(lastCmd) navigator.clipboard.writeText(lastCmd); });
+  on('btnLatestReport','click',fetchLatestReport);
+
+  // init
+  setAuthedUI();
+</script>
 </body>
 </html>
