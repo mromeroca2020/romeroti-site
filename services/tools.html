@@ -10,7 +10,7 @@
     .row{display:flex; gap:12px; flex-wrap:wrap}
     input,button,select{padding:10px;border:1px solid #ccc;border-radius:8px}
     button{cursor:pointer}
-    pre{background:#0e1116;color:#eaeef3;padding:12px;border-radius:8px;overflow:auto;max-height:60vh}
+    pre{background:#0e1116;color:#eaeef3;padding:12px;border-radius:8px;overflow:auto;max-height:60vh;white-space:pre}
     .hidden{display:none}
     small.muted{color:#6b7280}
   </style>
@@ -27,7 +27,7 @@
     </div>
   </div>
 
-  <!-- 2) TARJETA NUEVA: On-Prem Agent (Inventario de LAN) -->
+  <!-- 2) TARJETA NUEVA: Control Plane + Agente On-Prem (Inventario de LAN) -->
   <div class="card" id="lan-agent" style="margin-top:16px">
     <h3>On-Prem Agent (LAN Inventory)</h3>
     <p class="muted">
@@ -35,25 +35,37 @@
       y enviará el reporte al Control Plane de RomanoTI.
     </p>
 
+    <!-- Configuración del Control Plane -->
     <div class="row" style="align-items:flex-end">
       <div>
-        <label for="orgKey"><b>Org API Key</b></label><br/>
-        <input id="orgKey" type="password" placeholder="pega aquí tu API key" style="min-width:320px"/>
-        <small class="muted">Se usa solo para generar comandos y consultar reportes. No se guarda.</small>
+        <label for="cpApi"><b>Control Plane API URL</b></label><br/>
+        <input id="cpApi" placeholder="https://romanoti-tools-api.onrender.com" style="min-width:380px"/>
+        <small class="muted">Se guarda en <code>localStorage</code>.</small>
       </div>
+      <div>
+        <label for="cpKey"><b>Org API Key</b></label><br/>
+        <input id="cpKey" type="password" placeholder="pega aquí tu x-api-key" style="min-width:260px"/>
+        <small class="muted">Se guarda en <code>localStorage</code>.</small>
+      </div>
+      <div>
+        <button onclick="saveCP()">Guardar</button>
+      </div>
+    </div>
+
+    <!-- Parámetros del agente -->
+    <div class="row" style="align-items:flex-end; margin-top:12px">
       <div>
         <label for="agentName"><b>Agent name (opcional)</b></label><br/>
         <input id="agentName" placeholder="ej: rome-office-01"/>
       </div>
+      <div>
+        <button onclick="showLinuxCommand()">Linux / macOS</button>
+        <button onclick="showWindowsCommand()">Windows</button>
+        <button onclick="copyCmd()">Copiar comando</button>
+      </div>
     </div>
 
-    <div class="row" style="margin-top:12px">
-      <button onclick="showLinuxCommand()">Linux / macOS</button>
-      <button onclick="showWindowsCommand()">Windows</button>
-      <button onclick="copyCmd()">Copiar comando</button>
-    </div>
-
-    <pre id="agentCmd" style="margin-top:12px;white-space:pre"></pre>
+    <pre id="agentCmd" style="margin-top:12px"></pre>
 
     <div style="margin-top:8px">
       <small class="muted">
@@ -65,9 +77,9 @@
     <hr style="margin:16px 0"/>
 
     <div class="row">
-      <button onclick="fetchLatestReport()">Ver último reporte</button>
+      <button onclick="latestReport()">Ver último reporte</button>
     </div>
-    <pre id="agentOut" style="margin-top:12px;white-space:pre"></pre>
+    <pre id="agentOut" style="margin-top:12px"></pre>
   </div>
 
   <!-- 3) TARJETA: Login para herramientas autenticadas -->
@@ -141,27 +153,28 @@
   <pre id="out"></pre>
 
 <script>
-  // === Configuración ===
-  // Control Plane (Render) — úsalo también para el agente LAN
-  const CP_API = 'https://romanoti-tools-api.onrender.com';
-  // API base para endpoints protegidos (puede ser el mismo CP_API)
-  const API_BASE = localStorage.getItem('romanoti_api') || CP_API;
-  document.getElementById('apiBaseShown').textContent = API_BASE;
-
+  // =========================================================
+  // Helpers
+  // =========================================================
   const $ = (id) => document.getElementById(id);
   const token = () => sessionStorage.getItem('romanoti_token');
-
   function show(id, on=true){ $(id).classList[on?'remove':'add']('hidden'); }
   function log(obj){
     const out = $("out");
-    try {
-      out.textContent = (typeof obj==='string') ? obj : JSON.stringify(obj,null,2);
-    } catch {
-      out.textContent = String(obj);
-    }
+    try { out.textContent = (typeof obj==='string') ? obj : JSON.stringify(obj,null,2); }
+    catch { out.textContent = String(obj); }
   }
 
-  // 1) Netlify function: pretty JSON (muestra solo "output" si existe)
+  // =========================================================
+  // Configuración general (API protegida)
+  // =========================================================
+  // Si no hay override, usamos también el CP_API como API_BASE
+  let API_BASE = localStorage.getItem('romanoti_api') || 'https://romanoti-tools-api.onrender.com';
+  $('apiBaseShown').textContent = API_BASE;
+
+  // =========================================================
+  // 1) Netlify function: pretty JSON (muestra solo "output")
+  // =========================================================
   async function runTool() {
     $("out").textContent = 'Running…';
     try {
@@ -173,15 +186,15 @@
         const data = JSON.parse(text);
         const toShow = (data && typeof data === 'object' && 'output' in data) ? data.output : data;
         $("out").textContent = JSON.stringify(toShow, null, 2);
-      } catch {
-        $("out").textContent = text; // por si no vino JSON
-      }
+      } catch { $("out").textContent = text; }
     } catch (err) {
       $("out").textContent = '❌ Error: ' + String(err);
     }
   }
 
+  // =========================================================
   // 2) Login normal (para endpoints protegidos)
+  // =========================================================
   async function login(){
     $("loginMsg").textContent = "Autenticando...";
     try{
@@ -207,14 +220,13 @@
       $("loginMsg").innerHTML = `<span style="color:#c33">${e}</span>`;
     }
   }
-
   function logout(){
     sessionStorage.removeItem('romanoti_token');
     show('toolsCard', false); show('loginCard', true);
     $("out").textContent = '';
   }
 
-  // 3) Llamador genérico autenticado
+  // Llamador genérico autenticado
   async function call(method, path, body=null){
     try{
       const res = await fetch(`${API_BASE}${path}`, {
@@ -227,17 +239,12 @@
       });
       const text = await res.text();
       if (!res.ok) {
-        if (res.status === 404) {
-          log({ error: 'endpoint no disponible', path, status: res.status, body: text });
-        } else {
-          log({ error: 'HTTP error', path, status: res.status, body: text });
-        }
+        if (res.status === 404) log({ error: 'endpoint no disponible', path, status: res.status, body: text });
+        else log({ error: 'HTTP error', path, status: res.status, body: text });
         return;
       }
       try{ log(JSON.parse(text)); }catch{ log(text); }
-    }catch(e){
-      log(String(e));
-    }
+    }catch(e){ log(String(e)); }
   }
 
   async function ping(){
@@ -246,9 +253,7 @@
       count: Number($('pingCount').value||4)
     });
   }
-  async function trace(){
-    await call('POST','/network/traceroute', { host: $('traceHost').value });
-  }
+  async function trace(){ await call('POST','/network/traceroute', { host: $('traceHost').value }); }
   async function portscan(){
     const payload = {
       host: $('scanHost').value,
@@ -260,35 +265,62 @@
     await call('POST','/network/portscan', payload);
   }
 
-  // 4) ---- Agente On-Prem (LAN) ----
+  // =========================================================
+  // 3) Control Plane + Agente On-Prem
+  // =========================================================
+  const ASSETS_BASE = '/assets/agent'; // sube aquí los binarios (romanoti-agent, romanoti-agent.exe)
+
+  // Cargamos CP_API/KEY desde localStorage y pintamos en inputs
+  let CP_API = localStorage.getItem('romanoti_cp_api') || 'https://romanoti-tools-api.onrender.com';
+  let CP_KEY = localStorage.getItem('romanoti_cp_key') || '';
+  document.addEventListener('DOMContentLoaded', () => {
+    if ($('cpApi')) $('cpApi').value = CP_API;
+    if ($('cpKey')) $('cpKey').value = CP_KEY;
+  });
+
+  function saveCP(){
+    CP_API = ($('cpApi')?.value || '').trim();
+    CP_KEY = ($('cpKey')?.value || '').trim();
+    localStorage.setItem('romanoti_cp_api', CP_API);
+    localStorage.setItem('romanoti_cp_key', CP_KEY);
+    // si no hay override de romanoti_api, usa CP_API también
+    if (!localStorage.getItem('romanoti_api')) {
+      API_BASE = CP_API;
+      $('apiBaseShown').textContent = API_BASE;
+    }
+    log({ok:true, message:'Control Plane guardado', CP_API, key_set: !!CP_KEY});
+  }
+
+  // Construcción de comandos
   let lastCmd = '';
   function buildLinuxCmd() {
-    const key = $('orgKey').value.trim();
     const name = $('agentName').value.trim();
     const tag  = name ? ` ROMANOTI_AGENT="${name}"` : '';
     return [
-      `curl -L ${location.origin}/assets/agent/romanoti-agent -o romanoti-agent`,
+      `curl -L ${location.origin}${ASSETS_BASE}/romanoti-agent -o romanoti-agent`,
       `chmod +x romanoti-agent`,
-      `ROMANOTI_API="${CP_API}" ROMANOTI_KEY="${key}"${tag} ./romanoti-agent`
+      `ROMANOTI_API="${CP_API}" ROMANOTI_KEY="${CP_KEY}"${tag} ./romanoti-agent`
     ].join(' && ');
   }
   function buildWindowsCmd() {
-    const key = $('orgKey').value.trim();
     const name = $('agentName').value.trim();
-    const tag  = name ? `; setx ROMANOTI_AGENT "${name}"` : '';
-    return `powershell -Command "Invoke-WebRequest -Uri '${location.origin}/assets/agent/romanoti-agent.exe' -OutFile 'romanoti-agent.exe'; setx ROMANOTI_API '${CP_API}'; setx ROMANOTI_KEY '${key}'${tag}; .\\romanoti-agent.exe"`;
+    const nameSet = name ? `; setx ROMANOTI_AGENT '${name}'` : '';
+    return `powershell -NoProfile -ExecutionPolicy Bypass -Command "Invoke-WebRequest -Uri '${location.origin}${ASSETS_BASE}/romanoti-agent.exe' -OutFile 'romanoti-agent.exe'; setx ROMANOTI_API '${CP_API}'; setx ROMANOTI_KEY '${CP_KEY}'${nameSet}; .\\romanoti-agent.exe"`;
   }
   function showLinuxCommand(){ lastCmd = buildLinuxCmd(); $('agentCmd').textContent = lastCmd; }
   function showWindowsCommand(){ lastCmd = buildWindowsCmd(); $('agentCmd').textContent = lastCmd; }
   function copyCmd(){ if (lastCmd) navigator.clipboard.writeText(lastCmd); }
 
-  async function fetchLatestReport(){
-    const key = $('orgKey').value.trim();
-    if (!key) { $('agentOut').textContent = 'Ingresa tu Org API Key.'; return; }
+  // Consultar último reporte del Control Plane
+  async function latestReport(){
+    if (!CP_API || !CP_KEY){
+      $('agentOut').textContent = 'Configura primero Control Plane URL y Org API Key (botón Guardar).';
+      return;
+    }
     $('agentOut').textContent = 'Consultando…';
     try{
       const res = await fetch(`${CP_API}/client/reports/latest`, {
-        headers: { 'x-api-key': key, 'accept': 'application/json' }
+        headers: { 'x-api-key': CP_KEY, 'accept': 'application/json' }
       });
       const text = await res.text();
       try{ $('agentOut').textContent = JSON.stringify(JSON.parse(text), null, 2); }
