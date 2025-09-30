@@ -1,8 +1,10 @@
+/assets/agent/*
+  Content-Disposition: inline
+  Cache-Control: max-age=0
+  X-Content-Type-Options: nosniff
+
 /assets/agent/romanoti-agent.sh
   Content-Type: text/x-shellscript; charset=utf-8
-  Cache-Control: max-age=0
 
 /assets/agent/romanoti-agent.ps1
   Content-Type: text/plain; charset=utf-8
-  Cache-Control: max-age=0
-
