@@ -1,252 +1,379 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SOC Services | RomanoTI Solutions</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SOC Services | RomanoTI Solutions</title>
 
-    <!-- Tailwind CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <!-- Tailwind CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
 
-    <!-- Favicon -->
-    <link rel="icon" href="https://ui-avatars.com/api/?name=R&background=1e40af&color=fff&size=64" type="image/png">
+  <!-- Favicon -->
+  <link rel="icon" href="https://ui-avatars.com/api/?name=R&background=1e40af&color=fff&size=64" type="image/png">
 
-    <!-- Estilos personalizados -->
-    <style>
-        body {
-            font-family: 'Montserrat', sans-serif;
-            background-color: #f8f9fa;
-            color: #333;
-            scroll-behavior: smooth;
-        }
-
-        .hero-bg {
-            background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
-        }
-
-        .btn-primary {
-            background: #2563EB;
-            transition: all 0.3s ease;
-        }
-        .btn-primary:hover {
-            background: #1D4ED8;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        }
-
-        .service-card, .feature-card {
-            transition: all 0.3s ease;
-            border-radius: 0.5rem;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        }
-        .service-card:hover, .feature-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 12px 30px -8px rgba(37, 99, 235, 0.15);
-        }
-
-        header, footer {
-            background: white;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            font-weight: bold;
-            font-size: 1.5rem;
-        }
-        .logo-icon {
-            background: #2563EB;
-            color: white;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 12px;
-            font-size: 1.2rem;
-            font-weight: bold;
-        }
-
-        .check-icon {
-            width: 16px;
-            height: 16px;
-            background: #10b981;
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.75rem;
-            margin-right: 8px;
-        }
-    </style>
+  <!-- Estilos rápidos -->
+  <style>
+    body{font-family:'Montserrat',sans-serif;background:#f8f9fa;color:#333;scroll-behavior:smooth}
+    .hero-bg{background:linear-gradient(135deg,#0f3a2e 0%,#10b981 100%)}
+    .btn-primary{background:#2563EB;transition:all .3s}
+    .btn-primary:hover{background:#1D4ED8;transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.15)}
+    .feature-card{transition:all .3s;border-radius:.5rem;box-shadow:0 1px 3px rgba(0,0,0,.1)}
+    .feature-card:hover{transform:translateY(-6px);box-shadow:0 12px 30px -8px rgba(37,99,235,.15)}
+    header,footer{background:#fff}
+    .logo{display:flex;align-items:center;font-weight:700;font-size:1.5rem}
+    .logo-icon{background:#2563EB;color:#fff;width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-right:12px;font-size:1.2rem}
+    pre.tools-out{background:#0e1116;color:#eaeef3;padding:10px;border-radius:8px;max-height:40vh;overflow:auto}
+    .badge{display:inline-flex;align-items:center;padding:.2rem .5rem;border-radius:.5rem;font-size:.75rem;font-weight:600}
+    .badge-ok{background:#ecfdf5;color:#065f46;border:1px solid #a7f3d0}
+    .badge-warn{background:#fffbeb;color:#92400e;border:1px solid #fcd34d}
+    .badge-err{background:#fef2f2;color:#991b1b;border:1px solid #fecaca}
+  </style>
 </head>
 <body class="bg-gray-50">
 
-    <!-- Header -->
-    <header class="bg-white shadow-md sticky top-0 z-50">
-        <div class="container mx-auto px-6 py-3">
-            <div class="flex items-center justify-between">
-                <!-- Logo -->
-                <a href="/" class="logo flex items-center">
-                    <div class="logo-icon">R</div>
-                    <span>RomanoTI Solutions</span>
-                </a>
+  <!-- ===== Header ===== -->
+  <header class="bg-white shadow-md sticky top-0 z-50">
+    <div class="container mx-auto px-6 py-3">
+      <div class="flex items-center justify-between">
+        <a href="/" class="logo">
+          <div class="logo-icon">R</div>
+          <span>RomanoTI Solutions</span>
+        </a>
+        <nav class="hidden md:flex items-center space-x-8">
+          <a href="/" class="text-gray-700 hover:text-blue-600 font-medium">Home</a>
+          <a href="/services/tools.html" class="text-gray-700 hover:text-blue-600 font-medium">Tools</a>
+          <a href="https://calendly.com/mauricioromeroca" class="btn-primary text-white px-5 py-2 rounded-lg font-medium">Book Now</a>
+        </nav>
+      </div>
+    </div>
+  </header>
 
-                <!-- Navegación -->
-                <nav class="hidden md:flex items-center space-x-8">
-                    <a href="/" class="text-gray-700 hover:text-blue-600 font-medium">Home</a>
-                    <a href="https://calendly.com/mauricioromeroca" class="btn-primary text-white px-5 py-2 rounded-lg font-medium">Book Now</a>
-                </nav>
-            </div>
+  <!-- ===== Hero SOC ===== -->
+  <section class="hero-bg text-white py-28">
+    <div class="container mx-auto px-6 text-center">
+      <h1 class="text-4xl md:text-5xl font-bold mb-6">SOC Services</h1>
+      <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
+        Threat detection, log analytics, and incident response — 24/7
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== Marketing SOC ===== -->
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold">What We Deliver</h2>
+        <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+          Centralized security monitoring, alert triage, and swift incident response.
+        </p>
+      </div>
+
+      <div class="feature-card p-8 rounded-lg shadow-sm bg-white mb-8">
+        <h3 class="text-xl font-bold mb-4">Security Monitoring & Threat Detection</h3>
+        <p class="mb-6">SIEM correlación de eventos (Wazuh/ELK), reglas Sigma, detección de IOC/IOA y alertas en tiempo real.</p>
+        <div class="grid md:grid-cols-3 gap-6">
+          <div class="bg-green-50 p-6 rounded-lg">
+            <h4 class="font-bold text-lg mb-3">Plataforma</h4>
+            <p>Wazuh, ELK/Opensearch, Zeek, Suricata (según alcance)</p>
+          </div>
+          <div class="bg-green-50 p-6 rounded-lg">
+            <h4 class="font-bold text-lg mb-3">Cobertura</h4>
+            <p>Endpoints, servers, firewalls, O365/Azure AD, SaaS</p>
+          </div>
+          <div class="bg-green-50 p-6 rounded-lg">
+            <h4 class="font-bold text-lg mb-3">Triage</h4>
+            <p>Clasificación L1/L2 con playbooks repetibles</p>
+          </div>
         </div>
-    </header>
+      </div>
 
-    <!-- Hero -->
-    <section class="hero-bg text-white py-28">
-        <div class="container mx-auto px-6 text-center">
-            <h1 class="text-4xl md:text-5xl font-bold mb-6">SOC Services</h1>
-            <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">24/7 security monitoring, threat detection, and incident response</p>
+      <div class="feature-card p-8 rounded-lg shadow-sm bg-white mb-8">
+        <h3 class="text-xl font-bold mb-4">Email Security Posture</h3>
+        <p class="mb-6">Validación de MX, SPF, DKIM y DMARC para reducir suplantación y spoofing.</p>
+        <div class="grid md:grid-cols-3 gap-6">
+          <div class="bg-green-50 p-6 rounded-lg">
+            <h4 class="font-bold text-lg mb-3">MX</h4>
+            <p>Ruteo adecuado, null-MX si el dominio no recibe correo</p>
+          </div>
+          <div class="bg-green-50 p-6 rounded-lg">
+            <h4 class="font-bold text-lg mb-3">SPF</h4>
+            <p>Reglas y mecanismos permitidos, longitud y sintaxis</p>
+          </div>
+          <div class="bg-green-50 p-6 rounded-lg">
+            <h4 class="font-bold text-lg mb-3">DMARC</h4>
+            <p>Política p/quarantine/reject y reporting</p>
+          </div>
         </div>
-    </section>
+      </div>
 
-    <!-- What We Deliver -->
-    <section class="py-16 bg-white">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold">What We Deliver</h2>
-                <p class="text-xl text-gray-600 max-w-2xl mx-auto">Advanced security operations to protect your business from cyber threats.</p>
-            </div>
-
-            <!-- 24/7 Security Monitoring -->
-            <div class="feature-card p-8 rounded-lg shadow-sm bg-white mb-8">
-                <h3 class="text-xl font-bold mb-4">24/7 Security Monitoring (SIEM)</h3>
-                <p class="mb-6">Continuous monitoring of endpoints, firewalls, servers, and cloud environments for suspicious activity.</p>
-                <div class="grid md:grid-cols-3 gap-6">
-                    <div class="bg-blue-50 p-6 rounded-lg">
-                        <h4 class="font-bold text-lg mb-3">Software</h4>
-                        <p>Wazuh, ELK Stack, Graylog. Real-time correlation of security events across your environment.</p>
-                    </div>
-                    <div class="bg-blue-50 p-6 rounded-lg">
-                        <h4 class="font-bold text-lg mb-3">Hardware</h4>
-                        <p>SIEM server (4vCPU, 16GB RAM, 500GB SSD) or cloud-based deployment (Azure Canada).</p>
-                    </div>
-                    <div class="bg-blue-50 p-6 rounded-lg">
-                        <h4 class="font-bold text-lg mb-3">Human Intervention</h4>
-                        <p>Certified analysts (CompTIA Security+, CEH) review alerts and validate threats 24/7.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Threat Detection -->
-            <div class="feature-card p-8 rounded-lg shadow-sm bg-white mb-8">
-                <h3 class="text-xl font-bold mb-4">Threat Detection and Intelligence</h3>
-                <p class="mb-6">Proactive identification of malware, ransomware, phishing, and advanced persistent threats (APT).</p>
-                <div class="grid md:grid-cols-3 gap-6">
-                    <div class="bg-blue-50 p-6 rounded-lg">
-                        <h4 class="font-bold text-lg mb-3">Software</h4>
-                        <p>EDR (CrowdStrike Falcon, SentinelOne), threat intelligence feeds (AlienVault OTX).</p>
-                    </div>
-                    <div class="bg-blue-50 p-6 rounded-lg">
-                        <h4 class="font-bold text-lg mb-3">Hardware</h4>
-                        <p>Endpoints with EDR agents, firewalls with threat prevention modules.</p>
-                    </div>
-                    <div class="bg-blue-50 p-6 rounded-lg">
-                        <h4 class="font-bold text-lg mb-3">Human Intervention</h4>
-                        <p>Analysts investigate IoCs (Indicators of Compromise) and contain threats before escalation.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Incident Response -->
-            <div class="feature-card p-8 rounded-lg shadow-sm bg-white mb-8">
-                <h3 class="text-xl font-bold mb-4">Incident Investigation and Response</h3>
-                <p class="mb-6">Full lifecycle management of security incidents, from detection to eradication and recovery.</p>
-                <div class="grid md:grid-cols-3 gap-6">
-                    <div class="bg-blue-50 p-6 rounded-lg">
-                        <h4 class="font-bold text-lg mb-3">Software</h4>
-                        <p>Incident response platforms (TheHive, Cortex), forensic tools (FTK, Autopsy).</p>
-                    </div>
-                    <div class="bg-blue-50 p-6 rounded-lg">
-                        <h4 class="font-bold text-lg mb-3">Hardware</h4>
-                        <p>Secure forensic workstation, write blockers, isolated network for analysis.</p>
-                    </div>
-                    <div class="bg-blue-50 p-6 rounded-lg">
-                        <h4 class="font-bold text-lg mb-3">Human Intervention</h4>
-                        <p>Incident responders follow NIST 800-61 framework: Detection → Analysis → Containment → Eradication → Recovery.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Vulnerability Management -->
-            <div class="feature-card p-8 rounded-lg shadow-sm bg-white mb-8">
-                <h3 class="text-xl font-bold mb-4">Vulnerability Assessment and Reporting</h3>
-                <p class="mb-6">Regular scanning and reporting of vulnerabilities to ensure compliance and reduce attack surface.</p>
-                <div class="grid md:grid-cols-3 gap-6">
-                    <div class="bg-blue-50 p-6 rounded-lg">
-                        <h4 class="font-bold text-lg mb-3">Software</h4>
-                        <p>Nessus, OpenVAS, Microsoft Defender for Cloud. Automated scans and prioritization (CVSS).</p>
-                    </div>
-                    <div class="bg-blue-50 p-6 rounded-lg">
-                        <h4 class="font-bold text-lg mb-3">Hardware</h4>
-                        <p>Scanning appliance or cloud-based scanner with access to internal/external networks.</p>
-                    </div>
-                    <div class="bg-blue-50 p-6 rounded-lg">
-                        <h4 class="font-bold text-lg mb-3">Human Intervention</h4>
-                        <p>Security engineers validate findings, recommend patches, and assist with remediation.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Compliance Reporting -->
-            <div class="feature-card p-8 rounded-lg shadow-sm bg-white">
-                <h3 class="text-xl font-bold mb-4">Compliance Reporting (GDPR, HIPAA, PIPEDA)</h3>
-                <p class="mb-6">Audit-ready reports for regulatory compliance and executive review.</p>
-                <div class="grid md:grid-cols-3 gap-6">
-                    <div class="bg-blue-50 p-6 rounded-lg">
-                        <h4 class="font-bold text-lg mb-3">Software</h4>
-                        <p>Custom dashboards in Power BI, automated compliance templates.</p>
-                    </div>
-                    <div class="bg-blue-50 p-6 rounded-lg">
-                        <h4 class="font-bold text-lg mb-3">Hardware</h4>
-                        <p>Secure storage for audit logs and reports (encrypted).</p>
-                    </div>
-                    <div class="bg-blue-50 p-6 rounded-lg">
-                        <h4 class="font-bold text-lg mb-3">Human Intervention</h4>
-                        <p>Security officer prepares reports and presents findings to management.</p>
-                    </div>
-                </div>
-            </div>
+      <div class="feature-card p-8 rounded-lg shadow-sm bg-white">
+        <h3 class="text-xl font-bold mb-4">Incident Response</h3>
+        <p class="mb-6">Playbooks para phishing, ransomware, C2 y exfiltración. Evidencias y post-mortem.</p>
+        <div class="grid md:grid-cols-3 gap-6">
+          <div class="bg-green-50 p-6 rounded-lg">
+            <h4 class="font-bold text-lg mb-3">Contención</h4>
+            <p>Aislar host, bloquear IOC, revocar tokens</p>
+          </div>
+          <div class="bg-green-50 p-6 rounded-lg">
+            <h4 class="font-bold text-lg mb-3">Erradicación</h4>
+            <p>Limpiar persistencia, restaurar integridad</p>
+          </div>
+          <div class="bg-green-50 p-6 rounded-lg">
+            <h4 class="font-bold text-lg mb-3">Lecciones</h4>
+            <p>Reporte ejecutivo y mejoras de control</p>
+          </div>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <!-- CTA -->
-    <section class="py-16 bg-blue-700 text-white">
-        <div class="container mx-auto text-center">
-            <h2 class="text-3xl font-bold mb-6">Ready to Secure Your Business?</h2>
-            <p class="text-xl mb-8">Schedule a free consultation to discuss your SOC needs.</p>
-            <div class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-6">
-                <a href="https://calendly.com/mauricioromeroca" class="bg-white text-blue-700 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100">
-                    Schedule Consultation
-                </a>
-                <a href="tel:4386309157" class="btn-primary text-white px-8 py-3 rounded-lg font-semibold">
-                    Call Emergency Support
-                </a>
-            </div>
+  <!-- ===== SOC Quick Tools =====
+       Usa tu API en Render. La Org API Key viaja en 'x-api-key' y se guarda en localStorage. -->
+  <section id="soc-tools" class="py-16 bg-white">
+    <div class="container mx-auto px-6 max-w-6xl">
+      <div class="text-center mb-10">
+        <h2 class="text-3xl font-bold">SOC Quick Tools</h2>
+        <p class="text-xl text-gray-600">Chequear postura de correo y cifrado TLS en segundos</p>
+      </div>
+
+      <!-- Settings: API Key -->
+      <div class="bg-white rounded-lg shadow-sm border p-6 mb-10">
+        <h3 class="text-xl font-semibold mb-2">Settings</h3>
+        <p class="text-gray-600 mb-4">Tu <b>Org API Key</b> (se almacena en tu navegador, no en el servidor).</p>
+        <div class="flex flex-col md:flex-row gap-4 items-start md:items-end">
+          <div class="flex-1">
+            <label for="orgKey" class="block text-sm font-medium text-gray-700">Org API Key</label>
+            <input id="orgKey" type="password" class="mt-1 w-full border rounded-lg px-3 py-2"
+                   placeholder="pega tu API key (ej: MySecret123$)">
+          </div>
+          <button id="btnSaveKey" class="btn-primary text-white px-5 py-2 rounded-lg font-medium">
+            Guardar
+          </button>
         </div>
-    </section>
+        <p id="keyMsg" class="text-sm text-gray-500 mt-2"></p>
+      </div>
 
-    <!-- Footer -->
-    <footer class="bg-gray-900 text-white py-8">
-        <div class="container mx-auto px-6 text-center">
-            <p>© 2025 RomanoTI Solutions. All rights reserved.</p>
-            <p class="mt-2">Serving Canada</p>
+      <!-- Herramientas -->
+      <div class="grid md:grid-cols-3 gap-8">
+        <!-- Email Security Posture -->
+        <div class="feature-card p-6 bg-white rounded-lg shadow-sm border">
+          <h3 class="text-lg font-bold mb-3">Email Security Posture</h3>
+          <p class="text-gray-600 mb-4">Consulta MX / SPF / DMARC para un dominio.</p>
+          <label class="block text-sm font-medium text-gray-700">Domain</label>
+          <input id="espDomain" class="w-full border rounded-lg px-3 py-2 mb-3" placeholder="example.com" value="example.com">
+          <button id="btnEspCheck" class="btn-primary text-white px-4 py-2 rounded-lg font-medium">Run</button>
+          <div id="espBadges" class="mt-3 space-x-2"></div>
+          <pre id="espOut" class="tools-out mt-3"></pre>
+          <p class="text-xs text-gray-500 mt-2">Tip: Null MX (0 .) indica que el dominio <b>no</b> acepta correo (RFC 7505).</p>
         </div>
-    </footer>
 
+        <!-- DKIM Lookup -->
+        <div class="feature-card p-6 bg-white rounded-lg shadow-sm border">
+          <h3 class="text-lg font-bold mb-3">DKIM Lookup</h3>
+          <p class="text-gray-600 mb-4">Consulta el registro TXT de un selector DKIM.</p>
+          <label class="block text-sm font-medium text-gray-700">Domain</label>
+          <input id="dkimDomain" class="w-full border rounded-lg px-3 py-2 mb-3" placeholder="example.com" value="example.com">
+          <label class="block text-sm font-medium text-gray-700">Selector</label>
+          <input id="dkimSelector" class="w-full border rounded-lg px-3 py-2 mb-3" placeholder="selector1" value="selector1">
+          <button id="btnDkimCheck" class="btn-primary text-white px-4 py-2 rounded-lg font-medium">Run</button>
+          <pre id="dkimOut" class="tools-out mt-3"></pre>
+          <p class="text-xs text-gray-500 mt-2">Consulta TXT en <code>selector._domainkey.domain</code>.</p>
+        </div>
+
+        <!-- TLS Cert Expiry -->
+        <div class="feature-card p-6 bg-white rounded-lg shadow-sm border">
+          <h3 class="text-lg font-bold mb-3">TLS Cert Expiry</h3>
+          <p class="text-gray-600 mb-4">Verifica expiración y emisor del certificado.</p>
+          <label class="block text-sm font-medium text-gray-700">Host</label>
+          <input id="tlsHost" class="w-full border rounded-lg px-3 py-2 mb-3" placeholder="example.com" value="example.com">
+          <label class="block text-sm font-medium text-gray-700">Port</label>
+          <input id="tlsPort" type="number" min="1" max="65535" value="443" class="w-full border rounded-lg px-3 py-2 mb-3">
+          <button id="btnTlsCheck" class="btn-primary text-white px-4 py-2 rounded-lg font-medium">Run</button>
+          <pre id="tlsOut" class="tools-out mt-3"></pre>
+          <p class="text-xs text-gray-500 mt-2">
+            Nota: este chequeo espera TLS directo (HTTPS:443 o SMTPS:465). <b>STARTTLS</b> (SMTP:25/587) no aplica.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA ===== -->
+  <section class="py-16 bg-green-700 text-white">
+    <div class="container mx-auto text-center">
+      <h2 class="text-3xl font-bold mb-6">Ready to Level Up Your Security?</h2>
+      <p class="text-xl mb-8">Schedule a free consultation to discuss your SOC needs.</p>
+      <div class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-6">
+        <a href="https://calendly.com/mauricioromeroca" class="bg-white text-green-700 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100">
+          Schedule Consultation
+        </a>
+        <a href="tel:4386309157" class="btn-primary text-white px-8 py-3 rounded-lg font-semibold">
+          Call Emergency Support
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Footer ===== -->
+  <footer class="bg-gray-900 text-white py-8">
+    <div class="container mx-auto px-6 text-center">
+      <p>© 2025 RomanoTI Solutions. All rights reserved.</p>
+      <p class="mt-2">Serving Canada</p>
+    </div>
+  </footer>
+
+  <!-- ====== JS SOC Quick Tools (documentado) ====== -->
+  <script>
+  /**
+   * SOC Quick Tools (frontend)
+   * -------------------------------------------------------
+   * - API base: Render (API_BASE)
+   * - La Org API Key viaja en 'x-api-key' y se guarda en localStorage
+   * - Herramientas:
+   *   1) /ext/emaildns   -> Email Security Posture (MX, SPF, DMARC)
+   *   2) /noc/dns-lookup -> DKIM (selector._domainkey.domain, TXT)
+   *   3) /ext/tls        -> TLS Cert Expiry
+   */
+
+  // === 1) Config: URL base de tu API en Render ===
+  const API_BASE = 'https://romanoti-tools-api.onrender.com';
+
+  // === 2) Helpers de DOM/UX ===
+  const $ = (id) => document.getElementById(id);
+
+  function pretty(preId, data) {
+    const el = $(preId);
+    try { el.textContent = JSON.stringify(data, null, 2); }
+    catch { el.textContent = String(data); }
+  }
+  function msg(id, text){ $(id).textContent = text || ''; }
+
+  // Badges rápidos (estado visual)
+  function badge(text, type='ok') {
+    const span = document.createElement('span');
+    span.className = `badge ${type==='ok'?'badge-ok':type==='warn'?'badge-warn':'badge-err'}`;
+    span.textContent = text;
+    return span;
+  }
+
+  // === 3) Org API Key en localStorage ===
+  function loadKey(){
+    $('orgKey').value = localStorage.getItem('romanoti_org_key') || '';
+  }
+  function saveKey(){
+    const k = $('orgKey').value.trim();
+    localStorage.setItem('romanoti_org_key', k);
+    msg('keyMsg', k ? '✅ API Key guardada localmente.' : 'API Key vacía.');
+  }
+  function getKeyOrWarn(){
+    const k = $('orgKey').value.trim() || localStorage.getItem('romanoti_org_key') || '';
+    if(!k) alert('Ingresa tu Org API Key primero.');
+    return k;
+  }
+
+  // === 4) Email Security Posture (/ext/emaildns) ===
+  async function runEmailPosture(){
+    const key = getKeyOrWarn(); if(!key) return;
+
+    const domain = $('espDomain').value.trim();
+    $('espOut').textContent = 'Running…';
+    $('espBadges').innerHTML = ''; // limpia badges
+
+    try{
+      const res = await fetch(`${API_BASE}/ext/emaildns`, {
+        method:'POST',
+        headers:{ 'x-api-key': key, 'content-type':'application/json', 'accept':'application/json' },
+        body: JSON.stringify({ domain })
+      });
+      const data = await res.json();
+
+      // Badges rápidos (interpretación simple)
+      // MX
+      const mx = data.mx || [];
+      if (mx.length === 1 && (typeof mx[0] === 'string') && mx[0].trim() === '0 .') {
+        $('espBadges').appendChild(badge('Null MX (no recibe correo)', 'warn'));
+      } else if (mx.length > 0) {
+        $('espBadges').appendChild(badge('MX OK', 'ok'));
+      } else {
+        $('espBadges').appendChild(badge('MX faltante', 'err'));
+      }
+
+      // SPF
+      const spf = (data.spf || []).find(s => s.toLowerCase().startsWith('v=spf1'));
+      if (spf) $('espBadges').appendChild(badge('SPF OK', 'ok'));
+      else     $('espBadges').appendChild(badge('SPF faltante', 'err'));
+
+      // DMARC
+      const dmarc = (data.dmarc || []).find(s => s.toLowerCase().startsWith('v=dmarc1'));
+      if (dmarc) {
+        const pol = (dmarc.toLowerCase().match(/p=(none|quarantine|reject)/) || [,'none'])[1];
+        $('espBadges').appendChild(badge(`DMARC p=${pol}`, pol==='reject'?'ok':pol==='quarantine'?'warn':'err'));
+      } else {
+        $('espBadges').appendChild(badge('DMARC faltante', 'err'));
+      }
+
+      pretty('espOut', data);
+    }catch(e){
+      pretty('espOut', { error: String(e) });
+    }
+  }
+
+  // === 5) DKIM Lookup (/noc/dns-lookup -> TXT) ===
+  async function runDkimLookup(){
+    const key = getKeyOrWarn(); if(!key) return;
+
+    const domain   = $('dkimDomain').value.trim();
+    const selector = $('dkimSelector').value.trim();
+    if (!domain || !selector) { pretty('dkimOut', { error: 'Ingresa dominio y selector' }); return; }
+
+    const qname = `${selector}._domainkey.${domain}`;
+    $('dkimOut').textContent = `Consultando TXT en ${qname} …`;
+
+    try{
+      const res = await fetch(`${API_BASE}/noc/dns-lookup`, {
+        method:'POST',
+        headers:{ 'x-api-key': key, 'content-type':'application/json', 'accept':'application/json' },
+        body: JSON.stringify({ domain: qname, type: 'TXT' })
+      });
+      const data = await res.json();
+      pretty('dkimOut', data);
+    }catch(e){
+      pretty('dkimOut', { error: String(e) });
+    }
+  }
+
+  // === 6) TLS Cert Expiry (/ext/tls) ===
+  async function runTlsCheck(){
+    const key = getKeyOrWarn(); if(!key) return;
+
+    const host = $('tlsHost').value.trim();
+    const port = parseInt($('tlsPort').value||'443', 10);
+
+    $('tlsOut').textContent = 'Running…';
+    try{
+      const res = await fetch(`${API_BASE}/ext/tls`, {
+        method:'POST',
+        headers:{ 'x-api-key': key, 'content-type':'application/json', 'accept':'application/json' },
+        body: JSON.stringify({ host, port })
+      });
+      const data = await res.json();
+      pretty('tlsOut', data);
+    }catch(e){
+      pretty('tlsOut', { error: String(e) });
+    }
+  }
+
+  // === 7) Wire-up ===
+  document.addEventListener('DOMContentLoaded', () => {
+    loadKey();
+    $('btnSaveKey').addEventListener('click', saveKey);
+    $('btnEspCheck').addEventListener('click', runEmailPosture);
+    $('btnDkimCheck').addEventListener('click', runDkimLookup);
+    $('btnTlsCheck').addEventListener('click', runTlsCheck);
+  });
+  </script>
 </body>
 </html>
