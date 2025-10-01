@@ -44,40 +44,35 @@
           <span>RomanoTI Solutions</span>
         </a>
 
-<nav class="hidden md:flex items-center space-x-8">
-  <!-- Services con submenú -->
-  <div class="relative">
-    <button id="servicesMenuBtn"
-            class="text-gray-700 hover:text-blue-600 font-medium inline-flex items-center focus:outline-none focus:ring-2 focus:ring-blue-500 rounded">
-      Services
-      <svg xmlns="http://www.w3.org/2000/svg" class="ml-1 h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-        <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.584l3.71-3.354a.75.75 0 111.02 1.1l-4.2 3.794a.75.75 0 01-1.02 0l-4.2-3.794a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
-      </svg>
-    </button>
+        <nav class="hidden md:flex items-center space-x-8">
+          <!-- Services con submenú -->
+          <div class="relative">
+            <button id="servicesMenuBtn"
+                    class="text-gray-700 hover:text-blue-600 font-medium inline-flex items-center focus:outline-none focus:ring-2 focus:ring-blue-500 rounded">
+              Services
+              <svg xmlns="http://www.w3.org/2000/svg" class="ml-1 h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.584l3.71-3.354a.75.75 0 111.02 1.1l-4.2 3.794a.75.75 0 01-1.02 0l-4.2-3.794a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+              </svg>
+            </button>
 
-    <!-- Dropdown -->
-    <div id="servicesMenu"
-         class="hidden absolute left-0 mt-2 w-56 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5 z-50">
-      <a href="#services" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">All Services</a>
-      <a href="/services/tools.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">Tools (Diagnostics)</a>
-      <!-- Si quieres, agrega más opciones aquí -->
-      <!-- <a href="/services/cloud-hybrid.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">Hybrid Cloud</a> -->
-    </div>
-  </div>
+            <!-- Dropdown -->
+            <div id="servicesMenu"
+                 class="hidden absolute left-0 mt-2 w-56 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5 z-50">
+              <a href="#services" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">All Services</a>
+              <a href="/services/tools.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">Tools (Diagnostics)</a>
+            </div>
+          </div>
 
-  <!-- El resto del menú igual que antes -->
-  <a href="#about-us" class="text-gray-700 hover:text-blue-600 font-medium">About Us</a>
-  <a href="#professionals" class="text-gray-700 hover:text-blue-600 font-medium">Professionals</a>
-  <a href="#partners" class="text-gray-700 hover:text-blue-600 font-medium">Partners</a>
-  <a href="#certifications" class="text-gray-700 hover:text-blue-600 font-medium">Certifications</a>
+          <a href="#about-us" class="text-gray-700 hover:text-blue-600 font-medium">About Us</a>
+          <a href="#professionals" class="text-gray-700 hover:text-blue-600 font-medium">Professionals</a>
+          <a href="#partners" class="text-gray-700 hover:text-blue-600 font-medium">Partners</a>
+          <a href="#certifications" class="text-gray-700 hover:text-blue-600 font-medium">Certifications</a>
 
-  <a href="https://calendly.com/mauricioromeroca"
-     class="btn-primary text-white px-5 py-2 rounded-lg font-medium">
-    Book Now
-  </a>
-</nav>
-
-
+          <a href="https://calendly.com/mauricioromeroca"
+             class="btn-primary text-white px-5 py-2 rounded-lg font-medium">
+            Book Now
+          </a>
+        </nav>
       </div>
     </div>
   </header>
@@ -186,21 +181,17 @@
     </div>
   </section>
 
-  <!-- RomanoTI Tools Platform -->
-  <section id="tools-platform" class="section">
-    <div class="container mx-auto px-6">
-      <h2 class="text-2xl font-bold">🛠️ RomanoTI Tools Platform</h2>
-      <p class="mb-4 text-gray-600">Exclusive tools for our certified engineers</p>
-
-      <!-- botón corregido sin la clase "btn" -->
-      <button id="run-tool-btn" class="btn-primary text-white px-5 py-2 rounded-lg font-medium">
-        ⚡ Run Diagnostic Tool
-      </button>
-
-      <div class="card mt-4">
-        <h3 class="text-xl font-semibold mb-2">Tool Execution Results</h3>
-        <pre id="tool-output" style="background:#0e1116;color:#eaeef3;padding:12px;border-radius:8px;overflow:auto;max-height:60vh;white-space:pre;"></pre>
-      </div>
+  <!-- CTA limpio hacia Tools -->
+  <section id="tools-cta" style="max-width:980px;margin:48px auto;padding:0 16px">
+    <div style="border:1px solid #e5e7eb;border-radius:12px;padding:20px;background:#fff;box-shadow:0 6px 18px -8px rgba(0,0,0,.12)">
+      <h2 style="margin:0 0 6px;font-size:22px">🛠️ RomanoTI Tools Platform</h2>
+      <p style="margin:0 0 14px;color:#6b7280">
+        Access network diagnostics and advanced utilities.
+      </p>
+      <a href="/services/tools.html"
+         style="display:inline-block;padding:10px 14px;border-radius:10px;background:#2563eb;color:#fff;text-decoration:none">
+        Ir a Tools
+      </a>
     </div>
   </section>
 
@@ -243,7 +234,6 @@
   <section id="certifications" class="py-16 bg-gray-50">
     <div class="container mx-auto px-6 text-center mb-12">
       <h2 class="text-3xl font-bold">Certifications & Qualifications</h2>
-      <p class="text-xl text-gray-600">Officially recognized expertise in enterprise technologies</p>
     </div>
     <div class="grid md:grid-cols-4 gap-8">
       <div class="text-center p-6 bg-white rounded-lg shadow-sm">
@@ -270,60 +260,30 @@
   <!-- Calendly Script -->
   <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
 
-  <!-- ===== RomanoTI Tools: pretty JSON fix ===== -->
+  <!-- Script: submenu Services -->
   <script>
-    (function () {
-      const btn = document.getElementById('run-tool-btn');
-      const out = document.getElementById('tool-output');
-      if (!btn || !out) return;
+  (function() {
+    const btn  = document.getElementById('servicesMenuBtn');
+    const menu = document.getElementById('servicesMenu');
+    if (!btn || !menu) return;
 
-      btn.addEventListener('click', async () => {
-        out.textContent = 'Running…';
-        try {
-          const res = await fetch('/.netlify/functions/run-tool?pretty=1&indent=2', {
-            headers: { 'Accept': 'application/json' }
-          });
-          const text = await res.text();
+    const toggle = () => menu.classList.toggle('hidden');
+    const close  = () => menu.classList.add('hidden');
 
-          try {
-            const data = JSON.parse(text);
-            const toShow = (data && typeof data === 'object' && 'output' in data)
-              ? data.output
-              : data;
-            out.textContent = JSON.stringify(toShow, null, 2);
-          } catch {
-            out.textContent = text;
-          }
-        } catch (err) {
-          out.textContent = '❌ Error: ' + String(err);
-        }
-      });
-    })();
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      toggle();
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!menu.contains(e.target) && e.target !== btn) close();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') close();
+    });
+  })();
   </script>
-  <script>
-(function() {
-  const btn  = document.getElementById('servicesMenuBtn');
-  const menu = document.getElementById('servicesMenu');
-  if (!btn || !menu) return;
-
-  const toggle = () => menu.classList.toggle('hidden');
-  const close  = () => menu.classList.add('hidden');
-
-  btn.addEventListener('click', (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    toggle();
-  });
-
-  document.addEventListener('click', (e) => {
-    // cerrar si clic fuera del menú y del botón
-    if (!menu.contains(e.target) && e.target !== btn) close();
-  });
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') close();
-  });
-})();
-</script>
 </body>
 </html>
