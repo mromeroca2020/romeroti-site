@@ -1,1 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>CyberShield | RomanoTI Managed Security</title>
+  <link rel="icon" href="/img/favicon.png" type="image/png"/>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body{font-family:'Montserrat',sans-serif}
+    .hero-bg{background:linear-gradient(135deg,#1e3a8a 0%,#2563eb 100%)}
+    .btn-primary{background:#2563EB;transition:all .3s}
+    .btn-primary:hover{background:#1D4ED8;transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.15)}
+    .card{border:1px solid #e5e7eb;border-radius:16px;box-shadow:0 10px 30px -12px rgba(0,0,0,.12)}
+    .badge{display:inline-block;border:1px solid #cbd5e1;border-radius:999px;padding:4px 10px;font-size:12px;background:#f8fafc}
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-900">
+
+  <!-- Header -->
+  <header class="bg-white shadow-md sticky top-0 z-50">
+    <div class="container mx-auto px-6 py-3">
+      <div class="flex items-center justify-between">
+        <a href="/" class="flex items-center font-bold text-xl">
+          <span class="bg-blue-600 text-white rounded-full w-10 h-10 grid place-items-center mr-3">R</span>
+          RomanoTI Solutions
+        </a>
+        <nav class="hidden md:flex items-center space-x-8">
+          <a href="/#services" class="text-gray-700 hover:text-blue-600 font-medium">Services</a>
+          <a href="/services/tools.html" class="text-gray-700 hover:text-blue-600 font-medium">Tools</a>
+          <a href="/it-noc" class="text-gray-700 hover:text-blue-600 font-medium">NOC</a>
+          <a href="/it-soc" class="text-gray-700 hover:text-blue-600 font-medium">SOC</a>
+          <a href="https://calendly.com/mauricioromeroca" class="btn-primary text-white px-5 py-2 rounded-lg font-medium">Book Demo</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero-bg text-white">
+    <div class="container mx-auto px-6 py-20 text-center">
+      <span class="badge border-white text-white">Managed Detection & Response</span>
+      <h1 class="text-4xl md:text-5xl font-bold mt-4">CyberShield</h1>
+      <p class="text-xl md:text-2xl mt-4 max-w-3xl mx-auto">
+        Detección y respuesta 24×7 contra ransomware, intrusiones y caídas — para redes on-prem y cloud.
+      </p>
+      <div class="mt-8 flex flex-col md:flex-row items-center justify-center gap-4">
+        <a href="https://calendly.com/mauricioromeroca" class="btn-primary px-8 py-3 rounded-lg font-semibold">Agendar demo</a>
+        <a href="/it-soc" class="bg-white text-blue-700 px-8 py-3 rounded-lg font-semibold">Ver detalles SOC</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Qué incluye -->
+  <section class="py-14 bg-white">
+    <div class="container mx-auto px-6">
+      <h2 class="text-3xl font-bold text-center">Qué incluye</h2>
+      <p class="text-gray-600 text-center max-w-2xl mx-auto mt-2">
+        Combinamos NOC (disponibilidad) + SOC (seguridad) + protección de correo para cubrir riesgos reales.
+      </p>
+
+      <div class="grid md:grid-cols-3 gap-6 mt-10">
+        <div class="card p-6 bg-white">
+          <h3 class="text-xl font-bold mb-2">NOC 24×7</h3>
+          <ul class="text-gray-700 list-disc ml-5 space-y-1">
+            <li>Uptime / HTTP / TLS / DNS / Puertos</li>
+            <li>Alertas email/Teams/Slack</li>
+            <li>Reporte mensual de performance</li>
+          </ul>
+        </div>
+        <div class="card p-6 bg-white">
+          <h3 class="text-xl font-bold mb-2">SOC (MDR)</h3>
+          <ul class="text-gray-700 list-disc ml-5 space-y-1">
+            <li>EDR + correlación de eventos</li>
+            <li>Use cases: ransomware / C2 / lateral movement</li>
+            <li>Playbooks y respuesta guiada</li>
+          </ul>
+        </div>
+        <div class="card p-6 bg-white">
+          <h3 class="text-xl font-bold mb-2">Email Security</h3>
+          <ul class="text-gray-700 list-disc ml-5 space-y-1">
+            <li>SPF/DMARC/DKIM posture checks</li>
+            <li>Autenticación avanzada</li>
+            <li>Awareness (opcional)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Planes -->
+  <section class="py-14">
+    <div class="container mx-auto px-6">
+      <h2 class="text-3xl font-bold text-center">Planes</h2>
+      <div class="grid md:grid-cols-3 gap-6 mt-10">
+        <div class="card bg-white p-6">
+          <div class="badge">Starter</div>
+          <h3 class="text-xl font-bold mt-2 mb-2">Pequeños equipos</h3>
+          <ul class="text-gray-700 list-disc ml-5 space-y-1">
+            <li>NOC Essentials</li>
+            <li>Correo seguro (1 dominio)</li>
+            <li>Soporte horario laboral</li>
+          </ul>
+        </div>
+        <div class="card bg-white p-6 border-blue-600">
+          <div class="badge bg-blue-50 border-blue-200">Recommended</div>
+          <h3 class="text-xl font-bold mt-2 mb-2">Growth</h3>
+          <ul class="text-gray-700 list-disc ml-5 space-y-1">
+            <li>NOC + SOC (MDR)</li>
+            <li>Correo seguro (2 dominios)</li>
+            <li>Soporte extendido</li>
+          </ul>
+        </div>
+        <div class="card bg-white p-6">
+          <div class="badge">Enterprise</div>
+          <h3 class="text-xl font-bold mt-2 mb-2">Operación 24×7</h3>
+          <ul class="text-gray-700 list-disc ml-5 space-y-1">
+            <li>NOC + SOC avanzados</li>
+            <li>Integraciones SIEM/ITSM</li>
+            <li>SLA críticos</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="text-center mt-10">
+        <a href="https://calendly.com/mauricioromeroca" class="btn-primary text-white px-8 py-3 rounded-lg font-semibold">Cotizar / Demo</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-white py-8">
+    <div class="container mx-auto px-6 text-center">
+      <p>© 2025 RomanoTI Solutions. All rights reserved.</p>
+      <p class="mt-2">Serving Canada</p>
+    </div>
+  </footer>
+</body>
+</html>
 
