@@ -130,8 +130,7 @@
     </div>
   </section>
 
-  <!-- ===== SOC Quick Tools =====
-       Usa tu API en Render. La Org API Key viaja en 'x-api-key' y se guarda en localStorage. -->
+  <!-- ===== SOC Quick Tools ===== -->
   <section id="soc-tools" class="py-16 bg-white">
     <div class="container mx-auto px-6 max-w-6xl">
       <div class="text-center mb-10">
@@ -201,6 +200,83 @@
     </div>
   </section>
 
+  <!-- ===== SOC Live Toolbox (NUEVO) ===== -->
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-6 max-w-6xl">
+      <div class="text-center mb-10">
+        <h2 class="text-3xl font-bold">SOC Live Toolbox</h2>
+        <p class="text-xl text-gray-600">
+          Demos de alertas y respuesta: <code>/soc/alerts</code>, <code>/soc/alerts/recent</code>, <code>/soc/playbooks/run</code>
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8">
+        <!-- Enviar alerta -->
+        <div class="feature-card p-6 bg-white rounded-lg shadow-sm border">
+          <h3 class="text-lg font-bold mb-3">Enviar alerta (demo)</h3>
+          <div class="grid grid-cols-2 gap-3 mb-3">
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Source</label>
+              <select id="alSource" class="w-full border rounded-lg px-3 py-2">
+                <option>edr</option>
+                <option>wazuh</option>
+                <option>firewall</option>
+                <option>ids</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Severity</label>
+              <select id="alSeverity" class="w-full border rounded-lg px-3 py-2">
+                <option>low</option>
+                <option>medium</option>
+                <option>high</option>
+                <option>critical</option>
+              </select>
+            </div>
+          </div>
+          <input id="alTitle" class="w-full border rounded-lg px-3 py-2 mb-3" placeholder="Título (ej: Suspicious PowerShell)">
+          <textarea id="alDetails" rows="5" class="w-full border rounded-lg px-3 py-2 mb-3" placeholder='Detalles JSON (ej: {"host":"pc-01","user":"alice"})'></textarea>
+          <button id="btnSendAlert" class="btn-primary text-white px-4 py-2 rounded-lg">Enviar alerta</button>
+          <pre id="outAlert" class="tools-out mt-3"></pre>
+        </div>
+
+        <!-- Alertas recientes -->
+        <div class="feature-card p-6 bg-white rounded-lg shadow-sm border">
+          <h3 class="text-lg font-bold mb-3">Alertas recientes</h3>
+          <div class="flex items-center gap-3 mb-3">
+            <label class="text-sm text-gray-700">Límite</label>
+            <input id="alLimit" type="number" value="10" min="1" max="200" class="w-24 border rounded-lg px-3 py-2">
+            <button id="btnFetchAlerts" class="btn-primary text-white px-4 py-2 rounded-lg">Actualizar</button>
+          </div>
+          <pre id="outAlerts" class="tools-out"></pre>
+        </div>
+
+        <!-- Playbooks -->
+        <div class="feature-card p-6 bg-white rounded-lg shadow-sm border md:col-span-2">
+          <h3 class="text-lg font-bold mb-3">Ejecutar playbook (simulado)</h3>
+          <div class="grid md:grid-cols-3 gap-3">
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Playbook</label>
+              <select id="pbId" class="w-full border rounded-lg px-3 py-2">
+                <option value="isolate-host">isolate-host</option>
+                <option value="reset-user">reset-user</option>
+                <option value="block-ip">block-ip</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Target</label>
+              <input id="pbTarget" class="w-full border rounded-lg px-3 py-2" placeholder="host/usuario/IP">
+            </div>
+            <div class="flex items-end">
+              <button id="btnRunPB" class="btn-primary text-white px-4 py-2 rounded-lg w-full">Ejecutar</button>
+            </div>
+          </div>
+          <pre id="outPB" class="tools-out mt-3"></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ===== CTA ===== -->
   <section class="py-16 bg-green-700 text-white">
     <div class="container mx-auto text-center">
@@ -225,17 +301,17 @@
     </div>
   </footer>
 
-  <!-- ====== JS SOC Quick Tools (documentado) ====== -->
+  <!-- ====== JS SOC (Quick Tools + Live Toolbox) ====== -->
   <script>
   /**
-   * SOC Quick Tools (frontend)
-   * -------------------------------------------------------
+   * SOC Quick Tools + Live Toolbox (frontend)
    * - API base: Render (API_BASE)
-   * - La Org API Key viaja en 'x-api-key' y se guarda en localStorage
+   * - La Org API Key viaja en 'x-api-key' y se guarda en localStorage ('romanoti_org_key')
    * - Herramientas:
    *   1) /ext/emaildns   -> Email Security Posture (MX, SPF, DMARC)
    *   2) /noc/dns-lookup -> DKIM (selector._domainkey.domain, TXT)
    *   3) /ext/tls        -> TLS Cert Expiry
+   *   4) /soc/alerts, /soc/alerts/recent, /soc/playbooks/run (demo SOC)
    */
 
   // === 1) Config: URL base de tu API en Render ===
@@ -246,7 +322,7 @@
 
   function pretty(preId, data) {
     const el = $(preId);
-    try { el.textContent = JSON.stringify(data, null, 2); }
+    try { el.textContent = (typeof data==='string') ? data : JSON.stringify(data, null, 2); }
     catch { el.textContent = String(data); }
   }
   function msg(id, text){ $(id).textContent = text || ''; }
@@ -366,13 +442,77 @@
     }
   }
 
-  // === 7) Wire-up ===
+  // === 7) SOC Live Toolbox (nuevo) ===
+  async function socPost(path, body){
+    const key = getKeyOrWarn(); if(!key) return { ok:false, status:0, error:'API key missing' };
+    try{
+      const res  = await fetch(API_BASE + path, {
+        method:'POST',
+        headers:{ 'x-api-key': key, 'content-type':'application/json', 'accept':'application/json' },
+        body: JSON.stringify(body||{})
+      });
+      const text = await res.text();
+      try{ return { ok:res.ok, status:res.status, data: JSON.parse(text) }; }
+      catch{ return { ok:res.ok, status:res.status, data: text }; }
+    }catch(e){ return { ok:false, status:0, error:String(e) }; }
+  }
+  async function socGet(path){
+    const key = getKeyOrWarn(); if(!key) return { ok:false, status:0, error:'API key missing' };
+    try{
+      const res  = await fetch(API_BASE + path, {
+        headers:{ 'x-api-key': key, 'accept':'application/json' }
+      });
+      const text = await res.text();
+      try{ return { ok:res.ok, status:res.status, data: JSON.parse(text) }; }
+      catch{ return { ok:res.ok, status:res.status, data: text }; }
+    }catch(e){ return { ok:false, status:0, error:String(e) }; }
+  }
+
+  async function sendAlert(){
+    const source   = $('alSource').value.trim().toLowerCase();
+    const severity = $('alSeverity').value.trim().toLowerCase();
+    const title    = $('alTitle').value.trim();
+    let   details  = {};
+    const raw      = $('alDetails').value.trim();
+    if (raw){
+      try{ details = JSON.parse(raw); }
+      catch(e){ pretty('outAlert',{error:'JSON inválido en detalles',e:String(e)}); return; }
+    }
+    if(!title){ pretty('outAlert',{error:'Falta título'}); return; }
+    pretty('outAlert','Enviando…');
+    const resp = await socPost('/soc/alerts', { source, severity, title, details });
+    pretty('outAlert', resp);
+  }
+
+  async function fetchAlerts(){
+    const limit = Math.max(1, Math.min(200, parseInt(($('alLimit').value||'10'),10)));
+    pretty('outAlerts','Cargando…');
+    const resp = await socGet('/soc/alerts/recent?limit=' + encodeURIComponent(limit));
+    pretty('outAlerts', resp);
+  }
+
+  async function runPlaybook(){
+    const playbook_id = $('pbId').value;
+    const target      = $('pbTarget').value.trim();
+    pretty('outPB','Ejecutando…');
+    const resp = await socPost('/soc/playbooks/run', { playbook_id, target });
+    pretty('outPB', resp);
+  }
+
+  // === 8) Wire-up ===
   document.addEventListener('DOMContentLoaded', () => {
     loadKey();
     $('btnSaveKey').addEventListener('click', saveKey);
+
+    // Quick Tools
     $('btnEspCheck').addEventListener('click', runEmailPosture);
     $('btnDkimCheck').addEventListener('click', runDkimLookup);
     $('btnTlsCheck').addEventListener('click', runTlsCheck);
+
+    // Live Toolbox (nuevo)
+    $('btnSendAlert').addEventListener('click', sendAlert);
+    $('btnFetchAlerts').addEventListener('click', fetchAlerts);
+    $('btnRunPB').addEventListener('click', runPlaybook);
   });
   </script>
 </body>
