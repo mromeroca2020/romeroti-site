@@ -1,1 +1,412 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>SOC Console | RomanoTI Solutions</title>
+
+  <!-- Tailwind (igual que el resto del sitio) -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Favicon sencillo -->
+  <link rel="icon" href="https://ui-avatars.com/api/?name=R&background=1e40af&color=fff&size=64" type="image/png">
+
+  <!-- Chart.js para la mini-gráfica de tendencia -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+  <style>
+    body{font-family:'Montserrat',sans-serif;background:#f8f9fa;color:#111827}
+    .hero-bg{background:linear-gradient(135deg,#0f3a2e 0%,#10b981 100%)}
+    .btn-primary{background:#2563EB;transition:all .2s}
+    .btn-primary:hover{background:#1D4ED8;transform:translateY(-1px)}
+    .badge{display:inline-flex;align-items:center;padding:.15rem .5rem;border-radius:.5rem;font-size:.75rem;font-weight:700}
+    .sev-critical{background:#fee2e2;color:#991b1b;border:1px solid #fecaca}
+    .sev-high{background:#ffedd5;color:#9a3412;border:1px solid #fed7aa}
+    .sev-medium{background:#fef9c3;color:#92400e;border:1px solid #fde68a}
+    .sev-low{background:#ecfdf5;color:#065f46;border:1px solid #a7f3d0}
+    .status-new{background:#dbeafe;color:#1e3a8a;border:1px solid #bfdbfe}
+    .status-ack{background:#e0e7ff;color:#3730a3;border:1px solid #c7d2fe}
+    .status-closed{background:#e5e7eb;color:#374151;border:1px solid #d1d5db}
+    pre.json{background:#0e1116;color:#eaeef3;padding:10px;border-radius:8px;max-height:40vh;overflow:auto}
+  </style>
+</head>
+<body>
+
+  <!-- ===== Header simple ===== -->
+  <header class="bg-white shadow-md sticky top-0 z-50">
+    <div class="container mx-auto px-6 py-3">
+      <div class="flex items-center justify-between">
+        <a href="/" class="flex items-center font-bold text-xl">
+          <span class="inline-flex items-center justify-center w-9 h-9 rounded-full bg-blue-600 text-white mr-3">R</span>
+          RomanoTI Solutions
+        </a>
+        <nav class="hidden md:flex items-center space-x-6">
+          <a href="/" class="text-gray-700 hover:text-blue-600">Home</a>
+          <a href="/services/tools.html" class="text-gray-700 hover:text-blue-600">Tools</a>
+          <a href="/it-noc.html" class="text-gray-700 hover:text-blue-600">NOC</a>
+          <a href="/it-soc.html" class="text-gray-700 hover:text-blue-600">SOC</a>
+          <a href="https://calendly.com/mauricioromeroca" class="btn-primary text-white px-4 py-2 rounded-lg font-medium">Book Now</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== Título ===== -->
+  <section class="hero-bg text-white py-12">
+    <div class="container mx-auto px-6">
+      <h1 class="text-3xl md:text-4xl font-bold">SOC Console</h1>
+      <p class="text-lg opacity-90 mt-2">Visor de alertas, Ack/Cierre y tendencia (demo/mocks listos para crecer).</p>
+    </div>
+  </section>
+
+  <main class="container mx-auto px-6 py-8 space-y-8">
+
+    <!-- ===== Panel de conexión / API Key ===== -->
+    <section class="bg-white border rounded-xl shadow-sm p-5">
+      <h2 class="text-xl font-semibold mb-2">Conexión</h2>
+      <p class="text-gray-600 mb-4">Tu <b>Org API Key</b> sólo se usa como header <code>x-api-key</code> y se guarda en tu navegador.</p>
+      <div class="grid md:grid-cols-3 gap-4 items-end">
+        <div class="md:col-span-2">
+          <label class="block text-sm font-medium text-gray-700 mb-1">Org API Key</label>
+          <input id="orgKey" type="password" class="w-full border rounded-lg px-3 py-2" placeholder="MySecret123$">
+          <p id="keyMsg" class="text-sm text-gray-500 mt-1"></p>
+        </div>
+        <div class="flex gap-3">
+          <button id="btnSaveKey" class="btn-primary text-white px-4 py-2 rounded-lg">Guardar</button>
+          <button id="btnRefresh" class="px-4 py-2 rounded-lg border">Refrescar</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Filtros / Auto-refresh ===== -->
+    <section class="bg-white border rounded-xl shadow-sm p-5">
+      <div class="grid md:grid-cols-4 gap-4 items-end">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Severidad</label>
+          <select id="fltSeverity" class="w-full border rounded-lg px-3 py-2">
+            <option value="">Todas</option>
+            <option value="critical">Critical</option>
+            <option value="high">High</option>
+            <option value="medium">Medium</option>
+            <option value="low">Low</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Source (texto)</label>
+          <input id="fltSource" class="w-full border rounded-lg px-3 py-2" placeholder="edr / firewall / email">
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Límite</label>
+          <input id="fltLimit" type="number" min="1" max="200" value="50" class="w-full border rounded-lg px-3 py-2">
+        </div>
+        <div class="flex items-center gap-4">
+          <label class="inline-flex items-center gap-2">
+            <input id="autoRefresh" type="checkbox" class="rounded border-gray-300">
+            <span>Auto-refresh (15s)</span>
+          </label>
+          <span id="lastRefresh" class="text-sm text-gray-500"></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Gráfica de tendencia ===== -->
+    <section class="bg-white border rounded-xl shadow-sm p-5">
+      <h2 class="text-lg font-semibold mb-3">Tendencia (últimos 7 días)</h2>
+      <canvas id="chartTrend" height="90"></canvas>
+    </section>
+
+    <!-- ===== Tabla de alertas ===== -->
+    <section class="bg-white border rounded-xl shadow-sm p-5">
+      <div class="flex items-center justify-between mb-3">
+        <h2 class="text-lg font-semibold">Alertas recientes</h2>
+        <div class="text-sm text-gray-500">Click en <b>Ack</b> o <b>Close</b> para actualizar estado.</div>
+      </div>
+
+      <div class="overflow-auto">
+        <table class="min-w-full divide-y divide-gray-200">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="px-3 py-2 text-left text-xs font-semibold text-gray-600">Time (UTC)</th>
+              <th class="px-3 py-2 text-left text-xs font-semibold text-gray-600">Sev</th>
+              <th class="px-3 py-2 text-left text-xs font-semibold text-gray-600">Source</th>
+              <th class="px-3 py-2 text-left text-xs font-semibold text-gray-600">Title</th>
+              <th class="px-3 py-2 text-left text-xs font-semibold text-gray-600">Status</th>
+              <th class="px-3 py-2 text-left text-xs font-semibold text-gray-600">SLA Ack</th>
+              <th class="px-3 py-2 text-left text-xs font-semibold text-gray-600">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="tbAlerts" class="divide-y divide-gray-100 bg-white"></tbody>
+        </table>
+      </div>
+
+      <details class="mt-4">
+        <summary class="cursor-pointer text-sm text-gray-600">Payload seleccionado</summary>
+        <pre id="alertJson" class="json mt-2"></pre>
+      </details>
+    </section>
+
+  </main>
+
+  <!-- ===== Lógica de la consola ===== -->
+  <script>
+  // -------------------------------------------------------------------
+  // Config y utilidades
+  // -------------------------------------------------------------------
+  const API_BASE = 'https://romanoti-tools-api.onrender.com'; // tu FastAPI en Render
+  const KEY_STORAGE = 'romanoti_org_key';                      // donde guardamos la x-api-key
+
+  const $ = (id) => document.getElementById(id);
+  const nowIso = () => new Date().toISOString().replace('Z','') + 'Z';
+
+  function saveKey(){
+    const k = $('orgKey').value.trim();
+    localStorage.setItem(KEY_STORAGE, k);
+    $('keyMsg').textContent = k ? '✅ API Key guardada localmente.' : 'API Key vacía.';
+  }
+  function loadKey(){
+    $('orgKey').value = localStorage.getItem(KEY_STORAGE) || '';
+  }
+  function keyOrAlert(){
+    const k = $('orgKey').value.trim() || localStorage.getItem(KEY_STORAGE) || '';
+    if(!k) alert('Ingresa tu Org API Key.');
+    return k;
+  }
+
+  // Fetch genérico con x-api-key
+  async function fetchJSON(path, options={}){
+    const key = keyOrAlert(); if(!key) throw new Error('Missing key');
+
+    const headers = Object.assign({
+      'x-api-key': key,
+      'accept': 'application/json'
+    }, options.headers || {});
+
+    const res = await fetch(`${API_BASE}${path}`, Object.assign({}, options, { headers }));
+    const text = await res.text();
+    let data;
+    try { data = JSON.parse(text); } catch { data = text; }
+
+    if (!res.ok) {
+      throw new Error(typeof data === 'string' ? data : (data.detail || JSON.stringify(data)));
+    }
+    return data;
+  }
+
+  // Helpers visuales
+  function sevBadge(sev){
+    const s = (sev||'').toLowerCase();
+    const map = {critical:'sev-critical',high:'sev-high',medium:'sev-medium',low:'sev-low'};
+    const cls = map[s] || 'sev-low';
+    return `<span class="badge ${cls}">${s||'-'}</span>`;
+  }
+  function statusBadge(a){
+    if (a.closed_ts) return `<span class="badge status-closed">closed</span>`;
+    if (a.ack_ts)    return `<span class="badge status-ack">ack</span>`;
+    return `<span class="badge status-new">new</span>`;
+  }
+  function msToHuman(ms){
+    const m = Math.floor(ms/60000);
+    const s = Math.floor((ms%60000)/1000);
+    if (m>0) return `${m}m ${s}s`;
+    return `${s}s`;
+  }
+
+  // SLA: tiempo desde creación a ACK (o ahora si sin ACK)
+  function slaAckString(a){
+    try{
+      const t0 = new Date((a.ts||'').replace('Z','Z'));
+      const t1 = a.ack_ts ? new Date(a.ack_ts) : new Date();
+      const ms = Math.max(0, t1 - t0);
+      return msToHuman(ms);
+    }catch(e){ return '-'; }
+  }
+
+  // -------------------------------------------------------------------
+  // Capa de datos (llamadas a API)
+  // -------------------------------------------------------------------
+  async function loadRecentAlerts(){
+    const limit = Math.max(1, Math.min(200, parseInt($('fltLimit').value||'50',10)));
+    const data = await fetchJSON(`/soc/alerts/recent?limit=${limit}`);
+    // Filtrado simple en cliente (por ahora)
+    const sev = ($('fltSeverity').value||'').toLowerCase();
+    const src = ($('fltSource').value||'').toLowerCase();
+    return (Array.isArray(data) ? data : []).filter(a=>{
+      const okSev = !sev || (a.severity||'').toLowerCase()===sev;
+      const okSrc = !src || (a.source||'').toLowerCase().includes(src);
+      return okSev && okSrc;
+    });
+  }
+
+  async function ackAlert(id){
+    return await fetchJSON('/soc/alerts/ack', {
+      method:'PATCH',
+      headers:{ 'content-type':'application/json' },
+      body: JSON.stringify({ id, who:'console' })
+    });
+  }
+  async function closeAlert(id, reason='closed from console'){
+    return await fetchJSON('/soc/alerts/close', {
+      method:'PATCH',
+      headers:{ 'content-type':'application/json' },
+      body: JSON.stringify({ id, reason })
+    });
+  }
+
+  async function loadTrend(){
+    return await fetchJSON('/soc/alerts/trend?days=7');
+  }
+
+  // -------------------------------------------------------------------
+  // Render de tabla y acciones
+  // -------------------------------------------------------------------
+  function renderAlertsTable(alerts){
+    const tb = $('tbAlerts');
+    tb.innerHTML = '';
+
+    if (!alerts.length){
+      tb.innerHTML = `<tr><td colspan="7" class="px-3 py-6 text-center text-gray-500">Sin alertas para los filtros actuales.</td></tr>`;
+      return;
+    }
+
+    for (const a of alerts){
+      const tr = document.createElement('tr');
+      tr.className = 'hover:bg-gray-50';
+
+      const time = (a.ts||'').replace('T',' ').replace('Z','Z');
+      tr.innerHTML = `
+        <td class="px-3 py-2 text-sm text-gray-700">${time}</td>
+        <td class="px-3 py-2 text-sm">${sevBadge(a.severity)}</td>
+        <td class="px-3 py-2 text-sm text-gray-700">${a.source||'-'}</td>
+        <td class="px-3 py-2 text-sm text-gray-900">
+          <button class="font-medium hover:underline" data-action="show" data-id="${a.id}">${a.title||'(sin título)'}</button>
+        </td>
+        <td class="px-3 py-2 text-sm">${statusBadge(a)}</td>
+        <td class="px-3 py-2 text-sm text-gray-700">${slaAckString(a)}</td>
+        <td class="px-3 py-2 text-sm">
+          <div class="flex gap-2">
+            <button class="px-2 py-1 border rounded" data-action="ack" data-id="${a.id}">Ack</button>
+            <button class="px-2 py-1 border rounded" data-action="close" data-id="${a.id}">Close</button>
+          </div>
+        </td>
+      `;
+
+      // Delegamos eventos de fila
+      tr.addEventListener('click', async (ev)=>{
+        const btn = ev.target.closest('button');
+        if (!btn) return;
+        const id = btn.getAttribute('data-id');
+        const action = btn.getAttribute('data-action');
+
+        if (action==='show'){
+          try{
+            const d = await fetchJSON(`/soc/alerts/${id}`);
+            $('alertJson').textContent = JSON.stringify(d, null, 2);
+          }catch(e){
+            $('alertJson').textContent = String(e);
+          }
+        } else if (action==='ack'){
+          try{
+            await ackAlert(id);
+            refreshAll(); // recarga tabla + tendencia
+          }catch(e){ alert(e); }
+        } else if (action==='close'){
+          const reason = prompt('Motivo de cierre:', 'handled in console') || 'handled in console';
+          try{
+            await closeAlert(id, reason);
+            refreshAll();
+          }catch(e){ alert(e); }
+        }
+      });
+
+      tb.appendChild(tr);
+    }
+  }
+
+  // -------------------------------------------------------------------
+  // Tendencia (Chart.js)
+  // -------------------------------------------------------------------
+  let chart;
+  function renderTrend(trend){
+    try{
+      const labels = Object.keys(trend.series || {});
+      const totals = labels.map(d => trend.series[d].total);
+      const crit   = labels.map(d => trend.series[d].critical);
+      const high   = labels.map(d => trend.series[d].high);
+      const med    = labels.map(d => trend.series[d].medium);
+      const low    = labels.map(d => trend.series[d].low);
+
+      const ctx = $('chartTrend').getContext('2d');
+      if (chart) chart.destroy();
+      chart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels,
+          datasets: [
+            { label:'Total',   data: totals, borderWidth:2 },
+            { label:'Critical',data: crit,   borderWidth:2 },
+            { label:'High',    data: high,   borderWidth:2 },
+            { label:'Medium',  data: med,    borderWidth:2 },
+            { label:'Low',     data: low,    borderWidth:2 },
+          ]
+        },
+        options: {
+          responsive: true,
+          plugins: { legend: { position:'bottom' } },
+          scales: { y: { beginAtZero: true, precision:0 } }
+        }
+      });
+    }catch(e){
+      console.warn('Trend chart error:', e);
+    }
+  }
+
+  // -------------------------------------------------------------------
+  // Ciclo de refresco
+  // -------------------------------------------------------------------
+  let timer = null;
+
+  async function refreshAll(){
+    try{
+      const alerts = await loadRecentAlerts();
+      renderAlertsTable(alerts);
+
+      const trend = await loadTrend();
+      if (trend && trend.ok) renderTrend(trend);
+
+      $('lastRefresh').textContent = `Última actualización: ${new Date().toLocaleTimeString()}`;
+    }catch(e){
+      $('lastRefresh').textContent = `Error: ${e.message||e}`;
+    }
+  }
+
+  function maybeStartAuto(){
+    if (timer) { clearInterval(timer); timer = null; }
+    if ($('autoRefresh').checked){
+      timer = setInterval(refreshAll, 15000); // 15s
+    }
+  }
+
+  // -------------------------------------------------------------------
+  // Wire-up inicial
+  // -------------------------------------------------------------------
+  document.addEventListener('DOMContentLoaded', ()=>{
+    loadKey();
+    $('btnSaveKey').addEventListener('click', saveKey);
+    $('btnRefresh').addEventListener('click', refreshAll);
+    $('fltSeverity').addEventListener('change', refreshAll);
+    $('fltSource').addEventListener('input', ()=>{ /* debounced simple */ clearTimeout(window._t); window._t=setTimeout(refreshAll,400); });
+    $('fltLimit').addEventListener('change', refreshAll);
+    $('autoRefresh').addEventListener('change', maybeStartAuto);
+
+    // Primer render
+    refreshAll();
+    maybeStartAuto();
+  });
+  </script>
+
+</body>
+</html>
 
