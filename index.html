@@ -282,28 +282,23 @@
 
   <!-- Script: submenu Services -->
   <script>
-  (function() {
-    const btn  = document.getElementById('servicesMenuBtn');
-    const menu = document.getElementById('servicesMenu');
+(function() {
+  function wireDropdown(btnId, menuId) {
+    const btn  = document.getElementById(btnId);
+    const menu = document.getElementById(menuId);
     if (!btn || !menu) return;
-
     const toggle = () => menu.classList.toggle('hidden');
     const close  = () => menu.classList.add('hidden');
 
     btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      toggle();
+      e.preventDefault(); e.stopPropagation(); toggle();
     });
-
     document.addEventListener('click', (e) => {
       if (!menu.contains(e.target) && e.target !== btn) close();
     });
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') close();
-    });
-  })();
-  </script>
-</body>
-</html>
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
+  }
+  wireDropdown('servicesMenuBtn','servicesMenu');
+  wireDropdown('solutionsMenuBtn','solutionsMenu');
+})();
+</script>
