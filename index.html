@@ -1,26 +1,33 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"/>
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Solutions | RomanoTI Solutions</title>
+  <title>RomanoTI Solutions | IT Infrastructure & Cybersecurity</title>
 
-  <!-- Favicon + estilos -->
-  <link rel="icon" href="/img/favicon.png" type="image/png">
+  <!-- Favicon -->
+  <link rel="icon" href="/img/favicon.png" type="image/png"/>
+
+  <!-- Tailwind CSS -->
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+
   <style>
-    body{font-family:'Montserrat',sans-serif;background:#f8f9fa}
+    body{font-family:'Montserrat',sans-serif;background:#f8f9fa;color:#333;scroll-behavior:smooth}
     .hero-bg{background:linear-gradient(135deg,#1e3a8a 0%,#2563eb 100%)}
-    .btn-primary{background:#2563EB;color:#fff;transition:all .25s}
-    .btn-primary:hover{background:#1D4ED8;transform:translateY(-1px)}
-    .card{background:#fff;border:1px solid #e5e7eb;border-radius:14px;box-shadow:0 10px 30px -12px rgba(0,0,0,.12);transition:all .25s}
-    .card:hover{transform:translateY(-4px);box-shadow:0 18px 44px -16px rgba(37,99,235,.25)}
+    .btn-primary{background:#2563EB;transition:all .3s ease}
+    .btn-primary:hover{background:#1D4ED8;transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.15)}
+    .service-card,.professional-card{transition:all .3s ease;border-radius:.5rem;box-shadow:0 1px 3px rgba(0,0,0,.1)}
+    .service-card:hover,.professional-card:hover{transform:translateY(-6px);box-shadow:0 12px 30px -8px rgba(37,99,235,.15)}
+    .partner-logo{filter:grayscale(100%);opacity:.7;transition:all .3s}
+    .partner-logo:hover{filter:grayscale(0%);opacity:1;transform:scale(1.05)}
   </style>
 </head>
-<body class="bg-gray-50 text-gray-900">
+<body class="bg-gray-50">
 
-  <!-- Header consistente -->
+  <!-- Header (con dropdown Solutions) -->
   <header class="bg-white shadow-md sticky top-0 z-50">
     <div class="container mx-auto px-6 py-3">
       <div class="flex items-center justify-between">
@@ -28,68 +35,118 @@
           <span class="bg-blue-600 text-white rounded-full w-10 h-10 grid place-items-center mr-3">R</span>
           RomanoTI Solutions
         </a>
+
         <nav class="hidden md:flex items-center space-x-8">
-          <a href="/" class="text-gray-700 hover:text-blue-600 font-medium">Home</a>
+          <!-- Solutions dropdown -->
+          <div class="relative">
+            <button id="solutionsMenuBtn"
+                    class="text-gray-700 hover:text-blue-600 font-medium inline-flex items-center focus:outline-none">
+              Solutions
+              <svg class="ml-1 h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.584l3.71-3.354a.75.75 0 111.02 1.1l-4.2 3.794a.75.75 0 01-1.02 0l-4.2-3.794a.75.75 0 01.02-1.06z" clip-rule="evenodd"/>
+              </svg>
+            </button>
+            <div id="solutionsMenu"
+                 class="hidden absolute right-0 mt-2 w-56 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5 z-50">
+              <a href="/solutions/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">All Solutions</a>
+              <a href="/solutions/cybershield/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">CyberShield</a>
+              <a href="/solutions/cybershield/soc-console.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">SOC Console</a>
+            </div>
+          </div>
+
           <a href="/services/tools.html" class="text-gray-700 hover:text-blue-600 font-medium">Tools</a>
           <a href="/it-noc.html" class="text-gray-700 hover:text-blue-600 font-medium">NOC</a>
           <a href="/it-soc.html" class="text-gray-700 hover:text-blue-600 font-medium">SOC</a>
-          <a href="https://calendly.com/mauricioromeroca" class="btn-primary px-5 py-2 rounded-lg font-medium">Book Now</a>
+          <a href="https://calendly.com/mauricioromeroca"
+             class="btn-primary text-white px-5 py-2 rounded-lg font-medium">Book Now</a>
         </nav>
       </div>
     </div>
   </header>
 
   <!-- Hero -->
-  <section class="hero-bg text-white">
-    <div class="container mx-auto px-6 py-16 text-center">
-      <h1 class="text-4xl md:text-5xl font-bold">Solutions Portfolio</h1>
-      <p class="text-lg md:text-xl opacity-95 max-w-2xl mx-auto mt-3">
-        Paquetes listos basados en nuestras plataformas NOC/SOC y herramientas de diagnóstico.
+  <section class="hero-bg text-white py-28">
+    <div class="container mx-auto px-6 text-center">
+      <h1 class="text-4xl md:text-5xl font-bold mb-6">Professional IT Infrastructure Solutions</h1>
+      <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
+        Microsoft & Cisco Certified Expert with 15+ years in cloud, virtualization, and cybersecurity
       </p>
-      <div class="mt-6">
-        <a href="/solutions/cybershield/" class="btn-primary px-6 py-3 rounded-lg inline-block font-semibold">Ver CyberShield</a>
+      <div class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-6">
+        <a href="/solutions/" class="bg-white text-blue-700 px-8 py-3 rounded-lg font-semibold">See Solutions</a>
+        <a href="https://calendly.com/mauricioromeroca" class="btn-primary text-white px-8 py-3 rounded-lg font-semibold">Book a Call</a>
       </div>
     </div>
   </section>
 
-  <!-- Grid de soluciones -->
-  <main class="container mx-auto px-6 py-12">
-    <div class="grid md:grid-cols-3 gap-8">
-      <!-- CyberShield -->
-      <a href="/solutions/cybershield/" class="block card p-6">
-        <div class="text-sm text-blue-700 font-semibold tracking-wide">Managed Security</div>
-        <h3 class="text-2xl font-bold mt-1 mb-2">CyberShield</h3>
-        <p class="text-gray-600">
-          NOC + SOC + Email Posture en un bundle diseñado para PYMEs y empresas distribuidas.
-        </p>
-        <ul class="text-sm text-gray-700 space-y-1 mt-4 list-disc list-inside">
-          <li>Monitoreo 24/7 (NOC)</li>
-          <li>Detección y respuesta (SOC/MDR)</li>
-          <li>MX/SPF/DMARC posture</li>
-        </ul>
-        <span class="inline-block mt-4 btn-primary px-4 py-2 rounded-md">Ver detalles</span>
-      </a>
+  <!-- About -->
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-6 max-w-5xl">
+      <h2 class="text-3xl font-bold text-center mb-4">About RomanoTI Solutions</h2>
+      <p class="text-lg text-gray-700 text-center max-w-3xl mx-auto">
+        15+ years delivering enterprise-grade infrastructure, cloud and security for SMBs and distributed teams.
+        We tailor solutions to your context — no one-size-fits-all.
+      </p>
+    </div>
+  </section>
 
-      <!-- Próximas soluciones -->
-      <div class="card p-6 opacity-90">
-        <div class="text-sm text-blue-700 font-semibold tracking-wide">Cloud</div>
-        <h3 class="text-2xl font-bold mt-1 mb-2">Cloud Hardening <span class="text-xs text-gray-500">(coming soon)</span></h3>
-        <p class="text-gray-600">Baseline CIS para Azure/M365 con reporting continuo y recomendaciones accionables.</p>
-      </div>
-
-      <div class="card p-6 opacity-90">
-        <div class="text-sm text-blue-700 font-semibold tracking-wide">Resilience</div>
-        <h3 class="text-2xl font-bold mt-1 mb-2">Ransomware Readiness <span class="text-xs text-gray-500">(coming soon)</span></h3>
-        <p class="text-gray-600">Backups verificados, segmentación de red y ejercicios tabletop orientados a respuesta.</p>
+  <!-- Services summary -->
+  <section id="services" class="py-16 bg-gray-50">
+    <div class="container mx-auto px-6">
+      <h2 class="text-3xl font-bold text-center mb-10">Core Services</h2>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="service-card p-8 bg-white rounded-lg">
+          <h3 class="text-xl font-bold mb-3">Cloud Migration</h3>
+          <p class="text-gray-600 mb-4">Seamless transition to Azure & hybrid architectures.</p>
+          <a href="/solutions/" class="text-blue-600 hover:underline">Explore solutions →</a>
+        </div>
+        <div class="service-card p-8 bg-white rounded-lg">
+          <h3 class="text-xl font-bold mb-3">IT Infrastructure</h3>
+          <p class="text-gray-600 mb-4">Reliable networks, virtualization, monitoring & backups.</p>
+          <a href="/it-noc.html" class="text-blue-600 hover:underline">NOC details →</a>
+        </div>
+        <div class="service-card p-8 bg-white rounded-lg">
+          <h3 class="text-xl font-bold mb-3">Cybersecurity</h3>
+          <p class="text-gray-600 mb-4">MDR/SOC, email posture, and incident response.</p>
+          <a href="/solutions/cybershield/" class="text-blue-600 hover:underline">CyberShield →</a>
+        </div>
       </div>
     </div>
-  </main>
+  </section>
+
+  <!-- Partners -->
+  <section id="partners" class="py-16 bg-white">
+    <div class="container mx-auto px-6 text-center mb-12">
+      <h2 class="text-3xl font-bold">Technology Partners</h2>
+      <p class="text-xl text-gray-600 max-w-2xl mx-auto">We work with leading providers</p>
+    </div>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 px-6 max-w-5xl mx-auto">
+      <img src="/img/microsoft.jpeg" alt="Microsoft" class="partner-logo h-10 mx-auto">
+      <img src="/img/cisco.png" alt="Cisco" class="partner-logo h-10 mx-auto">
+      <img src="/img/vmware.jpeg" alt="VMware" class="partner-logo h-10 mx-auto">
+      <img src="/img/Fortinet.png" alt="Fortinet" class="partner-logo h-10 mx-auto">
+    </div>
+  </section>
 
   <!-- Footer -->
   <footer class="bg-gray-900 text-white py-8">
     <div class="container mx-auto px-6 text-center">
       <p>© 2025 RomanoTI Solutions. All rights reserved.</p>
+      <p class="mt-2">Serving Canada</p>
     </div>
   </footer>
+
+  <!-- Dropdown script (Solutions) -->
+  <script>
+  (function() {
+    const btn  = document.getElementById('solutionsMenuBtn');
+    const menu = document.getElementById('solutionsMenu');
+    if (!btn || !menu) return;
+    const toggle = () => menu.classList.toggle('hidden');
+    const close  = () => menu.classList.add('hidden');
+    btn.addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); toggle(); });
+    document.addEventListener('click', (e) => { if (!menu.contains(e.target) && e.target !== btn) close(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
+  })();
+  </script>
 </body>
 </html>
