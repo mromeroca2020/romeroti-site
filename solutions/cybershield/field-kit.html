@@ -1,1 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>CyberShield Field Kit | RomanoTI</title>
+  <link rel="icon" href="/img/favicon.png" type="image/png"/>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    body{font-family:ui-sans-serif,system-ui,Segoe UI,Roboto; background:#f8fafc}
+    .btn{background:#2563EB;color:#fff;border-radius:.5rem;padding:.5rem 1rem;font-weight:600}
+    .btn:hover{background:#1D4ED8}
+    pre{background:#0f172a;color:#e2e8f0;border-radius:.5rem;padding:12px;overflow:auto;max-height:50vh}
+    .card{background:#fff;border:1px solid #e5e7eb;border-radius:1rem;padding:1rem}
+  </style>
+</head>
+<body>
+  <!-- Header simple -->
+  <header class="bg-white shadow">
+    <div class="container mx-auto px-6 py-3 flex justify-between items-center">
+      <a href="/" class="font-bold text-xl">RomanoTI Solutions</a>
+      <nav class="hidden md:flex gap-6 items-center">
+        <a class="hover:text-blue-600" href="/">Home</a>
+        <a class="hover:text-blue-600" href="/solutions/">Solutions</a>
+        <a class="hover:text-blue-600" href="/it-noc.html">NOC</a>
+        <a class="hover:text-blue-600" href="/it-soc.html">SOC</a>
+        <a class="hover:text-blue-600" href="/solutions/cybershield/soc-console.html">SOC Console</a>
+        <a class="btn" href="https://calendly.com/mauricioromeroca">Book Demo</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container mx-auto px-6 py-8">
+    <h1 class="text-3xl font-bold mb-2">CyberShield Field Kit</h1>
+    <p class="text-gray-600 mb-6">Chequeos rápidos para demos y assessment inicial. Usa tu <code>x-api-key</code>.</p>
+
+    <!-- API key -->
+    <div class="card mb-6">
+      <label class="block text-sm font-medium text-gray-700">Org API Key (x-api-key)</label>
+      <input id="apiKey" type="password" class="mt-1 w-full border rounded px-3 py-2" placeholder="MySecret123$">
+      <button id="saveKey" class="btn mt-3">Guardar</button>
+      <p id="saveMsg" class="text-sm text-gray-500 mt-2"></p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-6">
+      <!-- External posture -->
+      <section class="card">
+        <h2 class="text-xl font-semibold mb-3">External Posture</h2>
+        <div class="space-y-3">
+          <div>
+            <label class="block text-sm font-medium">Domain</label>
+            <input id="dom" class="w-full border rounded px-3 py-2" value="example.com">
+          </div>
+          <div class="flex gap-3">
+            <button id="btnEmail" class="btn">Email Posture (MX/SPF/DMARC)</button>
+            <button id="btnDKIM" class="btn">DKIM TXT lookup</button>
+          </div>
+          <div class="grid md:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-sm font-medium">TLS host</label>
+              <input id="tlsHost" class="w-full border rounded px-3 py-2" value="example.com">
+            </div>
+            <div>
+              <label class="block text-sm font-medium">Port</label>
+              <input id="tlsPort" type="number" class="w-full border rounded px-3 py-2" value="443">
+            </div>
+          </div>
+          <button id="btnTLS" class="btn">TLS Cert Check</button>
+          <pre id="outEmail" class="mt-3"></pre>
+          <pre id="outTLS" class="mt-3"></pre>
+        </div>
+      </section>
+
+      <!-- Service check -->
+      <section class="card">
+        <h2 class="text-xl font-semibold mb-3">Service Check (host/url)</h2>
+        <div class="space-y-3">
+          <div class="grid md:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-sm font-medium">Host</label>
+              <input id="svcHost" class="w-full border rounded px-3 py-2" placeholder="8.8.8.8">
+            </div>
+            <div>
+              <label class="block text-sm font-medium">URL (opcional)</label>
+              <input id="svcUrl" class="w-full border rounded px-3 py-2" placeholder="https://tu-sitio.com">
+            </div>
+          </div>
+          <label class="block text-sm font-medium">Puertos rápidos (coma)</label>
+          <input id="svcPorts" class="w-full border rounded px-3 py-2" value="22,80,443,3389,445,25,587">
+          <button id="btnSvc" class="btn">Ejecutar</button>
+          <pre id="outSvc" class="mt-3"></pre>
+        </div>
+      </section>
+
+      <!-- SOC demo -->
+      <section class="card md:col-span-2">
+        <h2 class="text-xl font-semibold mb-3">SOC demo (alertas & playbooks)</h2>
+        <div class="space-y-3">
+          <div class="flex gap-3 flex-wrap">
+            <button class="btn" id="aCritical">Alerta CRITICAL (EDR)</button>
+            <button class="btn" id="aMedium">Alerta MEDIUM (FW)</button>
+            <button class="btn" id="aLow">Alerta LOW (Email)</button>
+          </div>
+          <div class="grid md:grid-cols-3 gap-3">
+            <div>
+              <label class="block text-sm font-medium">Playbook</label>
+              <select id="pbId" class="w-full border rounded px-3 py-2">
+                <option value="isolate-host">isolate-host</option>
+                <option value="block-ip">block-ip</option>
+                <option value="reset-user">reset-user</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-sm font-medium">Target</label>
+              <input id="pbTarget" class="w-full border rounded px-3 py-2" placeholder="host/usuario/IP">
+            </div>
+            <div class="flex items-end">
+              <button id="btnPBPreview" class="btn mr-2">Preview</button>
+              <button id="btnPBRun" class="btn">Run</button>
+            </div>
+          </div>
+          <pre id="outSoc" class="mt-3"></pre>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    const API = 'https://romanoti-tools-api.onrender.com';
+    const $ = (id)=>document.getElementById(id);
+    const pretty = (el, data)=>{ el.textContent = (typeof data === 'string') ? data : JSON.stringify(data,null,2); };
+    const keyHdr = ()=>({'x-api-key': (localStorage.getItem('romanoti_org_key')||'')});
+
+    $('saveKey').onclick = ()=>{
+      localStorage.setItem('romanoti_org_key', $('apiKey').value.trim());
+      $('saveMsg').textContent = 'API key guardada localmente.';
+    };
+    (function init(){ $('apiKey').value = localStorage.getItem('romanoti_org_key')||''; })();
+
+    // Email posture / DKIM / TLS
+    $('btnEmail').onclick = async ()=>{
+      $('outEmail').textContent = 'Running...';
+      const body = {domain: $('dom').value.trim()};
+      const r = await fetch(`${API}/ext/emaildns`, {method:'POST', headers:{...keyHdr(),'content-type':'application/json'}, body: JSON.stringify(body)});
+      pretty($('outEmail'), await r.json());
+    };
+    $('btnDKIM').onclick = async ()=>{
+      $('outEmail').textContent = 'Running...';
+      const dom = $('dom').value.trim();
+      const qname = `selector1._domainkey.${dom}`;
+      const r = await fetch(`${API}/noc/dns-lookup`, {method:'POST', headers:{...keyHdr(),'content-type':'application/json'}, body: JSON.stringify({domain:qname, type:'TXT'})});
+      pretty($('outEmail'), await r.json());
+    };
+    $('btnTLS').onclick = async ()=>{
+      $('outTLS').textContent = 'Running...';
+      const body = {host: $('tlsHost').value.trim(), port: parseInt($('tlsPort').value||'443',10)};
+      const r = await fetch(`${API}/ext/tls`, {method:'POST', headers:{...keyHdr(),'content-type':'application/json'}, body: JSON.stringify(body)});
+      pretty($('outTLS'), await r.json());
+    };
+
+    // Service check
+    $('btnSvc').onclick = async ()=>{
+      $('outSvc').textContent = 'Running...';
+      const ports = $('svcPorts').value.split(',').map(x=>parseInt(x.trim(),10)).filter(n=>!isNaN(n));
+      const body = {host:$('svcHost').value.trim()||null, url:$('svcUrl').value.trim()||null, ports};
+      const r = await fetch(`${API}/noc/service-check`, {method:'POST', headers:{...keyHdr(),'content-type':'application/json'}, body: JSON.stringify(body)});
+      pretty($('outSvc'), await r.json());
+    };
+
+    // SOC demo
+    async function sendAlert(src, sev, title, details){
+      const r = await fetch(`${API}/soc/alerts`, {method:'POST', headers:{...keyHdr(),'content-type':'application/json'}, body: JSON.stringify({source:src, severity:sev, title, details})});
+      return r.json();
+    }
+    $('aCritical').onclick = async ()=>{ pretty($('outSoc'), await sendAlert('edr','critical','Ransomware behavior',{host:'pc-01',user:'alice'})); };
+    $('aMedium').onclick   = async ()=>{ pretty($('outSoc'), await sendAlert('firewall','medium','Port scan',{src:'10.0.0.8'})); };
+    $('aLow').onclick      = async ()=>{ pretty($('outSoc'), await sendAlert('email','low','Suspicious link clicked',{user:'bob'})); };
+
+    $('btnPBPreview').onclick = async ()=>{
+      const r = await fetch(`${API}/soc/playbooks/preview`, {method:'POST', headers:{...keyHdr(),'content-type':'application/json'}, body: JSON.stringify({playbook_id:$('pbId').value})});
+      pretty($('outSoc'), await r.json());
+    };
+    $('btnPBRun').onclick = async ()=>{
+      const r = await fetch(`${API}/soc/playbooks/run`, {method:'POST', headers:{...keyHdr(),'content-type':'application/json'}, body: JSON.stringify({playbook_id:$('pbId').value, target:$('pbTarget').value})});
+      pretty($('outSoc'), await r.json());
+    };
+  </script>
+</body>
+</html>
 
