@@ -124,17 +124,29 @@
 
   <!-- Dropdown script -->
   <script>
-  (function() {
-    const btn=document.getElementById('solutionsMenuBtn');
-    const menu=document.getElementById('solutionsMenu');
-    if(!btn||!menu) return;
-    const toggle=()=>menu.classList.toggle('hidden');
-    const close =()=>menu.classList.add('hidden');
-    btn.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();toggle();});
-    document.addEventListener('click',e=>{if(!menu.contains(e.target)&&e.target!==btn)close();});
-    document.addEventListener('keydown',e=>{if(e.key==='Escape')close();});
-  })();
-  </script>
-</body>
+(function() {
+  const btn  = document.getElementById('solutionsMenuBtn');
+  const menu = document.getElementById('solutionsMenu');
+  if (!btn || !menu) return;
+
+  const toggle = () => menu.classList.toggle('hidden');
+  const close  = () => menu.classList.add('hidden');
+
+  btn.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    toggle();
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!menu.contains(e.target) && e.target !== btn) close();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') close();
+  });
+})();
+</script>
+
 </html>
 
