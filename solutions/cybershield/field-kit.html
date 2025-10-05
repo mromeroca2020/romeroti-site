@@ -3,188 +3,327 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>CyberShield Field Kit | RomanoTI</title>
+  <title>CyberShield Field Kit | RomanoTI Solutions</title>
+
   <link rel="icon" href="/img/favicon.png" type="image/png"/>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+
   <style>
-    body{font-family:ui-sans-serif,system-ui,Segoe UI,Roboto; background:#f8fafc}
-    .btn{background:#2563EB;color:#fff;border-radius:.5rem;padding:.5rem 1rem;font-weight:600}
-    .btn:hover{background:#1D4ED8}
-    pre{background:#0f172a;color:#e2e8f0;border-radius:.5rem;padding:12px;overflow:auto;max-height:50vh}
-    .card{background:#fff;border:1px solid #e5e7eb;border-radius:1rem;padding:1rem}
+    :root{
+      --rt-primary:#2563eb;
+      --rt-primary-hover:#1d4ed8;
+      --rt-brand-deep:#1e3a8a;
+      --rt-accent:#10b981;
+      --rt-code:#0e1116;
+    }
+    body{font-family:'Montserrat',sans-serif}
+    .btn-primary{background:var(--rt-primary);transition:all .2s}
+    .btn-primary:hover{background:var(--rt-primary-hover);transform:translateY(-1px)}
+    .badge{display:inline-block;border:1px solid #cbd5e1;border-radius:999px;padding:4px 10px;font-size:12px;background:#f8fafc}
+    .card{border:1px solid #e5e7eb;border-radius:16px;box-shadow:0 10px 30px -12px rgba(0,0,0,.12)}
+    pre.fieldkit-out{background:var(--rt-code);color:#eaeef3;padding:12px;border-radius:10px;max-height:46vh;overflow:auto}
+    .hidden{display:none}
+    .muted{color:#94a3b8;font-style:italic}
   </style>
 </head>
-<body>
-  <!-- Header simple -->
-  <header class="bg-white shadow">
-    <div class="container mx-auto px-6 py-3 flex justify-between items-center">
-      <a href="/" class="font-bold text-xl">RomanoTI Solutions</a>
-      <nav class="hidden md:flex gap-6 items-center">
-        <a class="hover:text-blue-600" href="/">Home</a>
-        <a class="hover:text-blue-600" href="/solutions/">Solutions</a>
-        <a class="hover:text-blue-600" href="/it-noc.html">NOC</a>
-        <a class="hover:text-blue-600" href="/it-soc.html">SOC</a>
-        <a class="hover:text-blue-600" href="/solutions/cybershield/soc-console.html">SOC Console</a>
-        <a class="btn" href="https://calendly.com/mauricioromeroca">Book Demo</a>
-      </nav>
+<body class="bg-gray-50 text-gray-900">
+
+  <!-- Header / navbar -->
+  <header class="bg-white shadow-md sticky top-0 z-50">
+    <div class="container mx-auto px-6 py-3">
+      <div class="flex items-center justify-between">
+        <a href="/" class="flex items-center font-bold text-xl">
+          <span class="bg-blue-600 text-white rounded-full w-10 h-10 grid place-items-center mr-3">R</span>
+          RomanoTI Solutions
+        </a>
+
+        <nav class="hidden md:flex items-center space-x-8">
+          <a href="/" class="text-gray-700 hover:text-blue-600 font-medium">Home</a>
+
+          <!-- Solutions dropdown -->
+          <div class="relative">
+            <button id="solutionsBtn" class="text-gray-900 font-semibold inline-flex items-center focus:outline-none">
+              Solutions
+              <svg class="ml-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.58l3.71-3.35a.75.75 0 111.02 1.1l-4.2 3.79a.75.75 0 01-1.02 0l-4.2-3.79a.75.75 0 01.02-1.06z" clip-rule="evenodd"/>
+              </svg>
+            </button>
+            <div id="solutionsMenu" class="hidden absolute right-0 mt-2 w-72 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5">
+              <a href="/solutions/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">Overview</a>
+              <a href="/solutions/cybershield/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">CyberShield (MDR)</a>
+              <a href="/solutions/cybershield/soc-console.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">SOC Console</a>
+              <a href="/solutions/cybershield/field-kit.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">Field Kit</a>
+            </div>
+          </div>
+
+          <a href="/services/tools.html" class="text-gray-700 hover:text-blue-600 font-medium">Tools</a>
+          <a href="/it-noc.html" class="text-gray-700 hover:text-blue-600 font-medium">NOC</a>
+          <a href="/it-soc.html" class="text-gray-700 hover:text-blue-600 font-medium">SOC</a>
+          <a href="https://calendly.com/mauricioromeroca" class="btn-primary text-white px-5 py-2 rounded-lg font-medium">Book Demo</a>
+        </nav>
+      </div>
     </div>
   </header>
 
-  <main class="container mx-auto px-6 py-8">
-    <h1 class="text-3xl font-bold mb-2">CyberShield Field Kit</h1>
-    <p class="text-gray-600 mb-6">Chequeos rápidos para demos y assessment inicial. Usa tu <code>x-api-key</code>.</p>
-
-    <!-- API key -->
-    <div class="card mb-6">
-      <label class="block text-sm font-medium text-gray-700">Org API Key (x-api-key)</label>
-      <input id="apiKey" type="password" class="mt-1 w-full border rounded px-3 py-2" placeholder="MySecret123$">
-      <button id="saveKey" class="btn mt-3">Guardar</button>
-      <p id="saveMsg" class="text-sm text-gray-500 mt-2"></p>
+  <!-- Title / intro -->
+  <section class="bg-white border-b">
+    <div class="container mx-auto px-6 py-8">
+      <h1 class="text-3xl font-bold">CyberShield Field Kit</h1>
+      <p class="text-gray-600 mt-2">Chequeos rápidos para demos y assessment inicial. Usa tu <code>x-api-key</code>.</p>
     </div>
+  </section>
 
+  <!-- API Key -->
+  <section class="container mx-auto px-6">
+    <div class="card bg-white p-6 mt-6">
+      <label class="block text-sm font-medium text-gray-700 mb-1">Org API Key (<code>x-api-key</code>)</label>
+      <div class="flex flex-col md:flex-row gap-3 items-start md:items-center">
+        <div class="flex items-center gap-2 w-full md:w-auto">
+          <input id="fkKey" type="password" class="w-[380px] max-w-full border rounded-lg px-3 py-2" placeholder="pega tu API key">
+          <label class="text-sm text-gray-600 inline-flex items-center gap-1">
+            <input id="fkKeyShow" type="checkbox" class="rounded border-gray-300">
+            <span>mostrar</span>
+          </label>
+        </div>
+        <div class="flex gap-3">
+          <button id="btnSaveKey" class="btn-primary text-white px-5 py-2 rounded-lg font-medium">Guardar</button>
+          <button id="btnClearKey" class="px-5 py-2 rounded-lg font-medium border">Clear</button>
+        </div>
+      </div>
+      <p id="fkKeyMsg" class="text-sm text-gray-500 mt-2"></p>
+    </div>
+  </section>
+
+  <section class="container mx-auto px-6 mt-6">
     <div class="grid md:grid-cols-2 gap-6">
-      <!-- External posture -->
-      <section class="card">
-        <h2 class="text-xl font-semibold mb-3">External Posture</h2>
-        <div class="space-y-3">
+
+      <!-- Left: External posture -->
+      <div class="card bg-white p-6">
+        <h2 class="text-xl font-bold mb-4">External Posture</h2>
+
+        <!-- Domain -->
+        <label class="block text-sm font-medium text-gray-700">Domain</label>
+        <input id="fkDomain" class="w-full border rounded-lg px-3 py-2 mb-3" placeholder="example.com" value="example.com">
+
+        <div class="flex flex-wrap gap-3">
+          <button id="btnEmailPosture" class="btn-primary text-white px-4 py-2 rounded-lg font-medium">
+            Email Posture (MX/SPF/DMARC)
+          </button>
+        </div>
+
+        <!-- DKIM -->
+        <div class="grid md:grid-cols-2 gap-3 mt-5">
           <div>
-            <label class="block text-sm font-medium">Domain</label>
-            <input id="dom" class="w-full border rounded px-3 py-2" value="example.com">
+            <label class="block text-sm font-medium text-gray-700">DKIM selector</label>
+            <input id="fkDkimSelector" class="w-full border rounded-lg px-3 py-2" placeholder="selector1">
           </div>
-          <div class="flex gap-3">
-            <button id="btnEmail" class="btn">Email Posture (MX/SPF/DMARC)</button>
-            <button id="btnDKIM" class="btn">DKIM TXT lookup</button>
+          <div class="flex items-end">
+            <button id="btnDkim" class="btn-primary text-white px-4 py-2 rounded-lg font-medium w-full">DKIM TXT lookup</button>
           </div>
-          <div class="grid md:grid-cols-2 gap-3">
-            <div>
-              <label class="block text-sm font-medium">TLS host</label>
-              <input id="tlsHost" class="w-full border rounded px-3 py-2" value="example.com">
-            </div>
-            <div>
-              <label class="block text-sm font-medium">Port</label>
-              <input id="tlsPort" type="number" class="w-full border rounded px-3 py-2" value="443">
-            </div>
-          </div>
-          <button id="btnTLS" class="btn">TLS Cert Check</button>
-          <pre id="outEmail" class="mt-3"></pre>
-          <pre id="outTLS" class="mt-3"></pre>
         </div>
-      </section>
 
-      <!-- Service check -->
-      <section class="card">
-        <h2 class="text-xl font-semibold mb-3">Service Check (host/url)</h2>
-        <div class="space-y-3">
-          <div class="grid md:grid-cols-2 gap-3">
-            <div>
-              <label class="block text-sm font-medium">Host</label>
-              <input id="svcHost" class="w-full border rounded px-3 py-2" placeholder="8.8.8.8">
-            </div>
-            <div>
-              <label class="block text-sm font-medium">URL (opcional)</label>
-              <input id="svcUrl" class="w-full border rounded px-3 py-2" placeholder="https://tu-sitio.com">
-            </div>
+        <!-- TLS -->
+        <div class="grid md:grid-cols-6 gap-3 mt-6">
+          <div class="md:col-span-4">
+            <label class="block text-sm font-medium text-gray-700">TLS host</label>
+            <input id="fkTlsHost" class="w-full border rounded-lg px-3 py-2" placeholder="example.com" value="example.com">
           </div>
-          <label class="block text-sm font-medium">Puertos rápidos (coma)</label>
-          <input id="svcPorts" class="w-full border rounded px-3 py-2" value="22,80,443,3389,445,25,587">
-          <button id="btnSvc" class="btn">Ejecutar</button>
-          <pre id="outSvc" class="mt-3"></pre>
+          <div class="md:col-span-1">
+            <label class="block text-sm font-medium text-gray-700">Port</label>
+            <input id="fkTlsPort" type="number" min="1" max="65535" value="443" class="w-full border rounded-lg px-3 py-2">
+          </div>
+          <div class="md:col-span-1 flex items-end">
+            <button id="btnTls" class="btn-primary text-white px-4 py-2 rounded-lg font-medium w-full">TLS Cert Check</button>
+          </div>
         </div>
-      </section>
 
-      <!-- SOC demo -->
-      <section class="card md:col-span-2">
-        <h2 class="text-xl font-semibold mb-3">SOC demo (alertas & playbooks)</h2>
-        <div class="space-y-3">
-          <div class="flex gap-3 flex-wrap">
-            <button class="btn" id="aCritical">Alerta CRITICAL (EDR)</button>
-            <button class="btn" id="aMedium">Alerta MEDIUM (FW)</button>
-            <button class="btn" id="aLow">Alerta LOW (Email)</button>
+        <pre id="fkOutLeft" class="fieldkit-out hidden mt-4"></pre>
+      </div>
+
+      <!-- Right: Service check -->
+      <div class="card bg-white p-6">
+        <h2 class="text-xl font-bold mb-4">Service Check (host/url)</h2>
+
+        <div class="grid md:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Host</label>
+            <input id="fkHost" class="w-full border rounded-lg px-3 py-2" placeholder="8.8.8.8">
           </div>
-          <div class="grid md:grid-cols-3 gap-3">
-            <div>
-              <label class="block text-sm font-medium">Playbook</label>
-              <select id="pbId" class="w-full border rounded px-3 py-2">
-                <option value="isolate-host">isolate-host</option>
-                <option value="block-ip">block-ip</option>
-                <option value="reset-user">reset-user</option>
-              </select>
-            </div>
-            <div>
-              <label class="block text-sm font-medium">Target</label>
-              <input id="pbTarget" class="w-full border rounded px-3 py-2" placeholder="host/usuario/IP">
-            </div>
-            <div class="flex items-end">
-              <button id="btnPBPreview" class="btn mr-2">Preview</button>
-              <button id="btnPBRun" class="btn">Run</button>
-            </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">URL (opcional)</label>
+            <input id="fkUrl" class="w-full border rounded-lg px-3 py-2" placeholder="https://tu-sitio.com">
           </div>
-          <pre id="outSoc" class="mt-3"></pre>
         </div>
-      </section>
+
+        <label class="block text-sm font-medium text-gray-700 mt-3">Puertos rápidos (coma)</label>
+        <input id="fkPorts" class="w-full border rounded-lg px-3 py-2" value="22,80,443,3389,445,25,587">
+
+        <div class="mt-3">
+          <button id="btnSvc" class="btn-primary text-white px-4 py-2 rounded-lg font-medium">Ejecutar</button>
+        </div>
+
+        <pre id="fkOutRight" class="fieldkit-out hidden mt-4"></pre>
+      </div>
     </div>
-  </main>
+  </section>
 
+  <footer class="bg-gray-900 text-white py-8 mt-10">
+    <div class="container mx-auto px-6 text-center">
+      <p>© 2025 RomanoTI Solutions. All rights reserved.</p>
+      <p class="mt-2">Serving Canada</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
   <script>
-    const API = 'https://romanoti-tools-api.onrender.com';
+  // Navbar dropdown
+  (function(){
+    const btn=document.getElementById('solutionsBtn');
+    const menu=document.getElementById('solutionsMenu');
+    if(!btn||!menu) return;
+    const toggle=()=>menu.classList.toggle('hidden');
+    const close =()=>menu.classList.add('hidden');
+    btn.addEventListener('click',(e)=>{e.preventDefault();e.stopPropagation();toggle();});
+    document.addEventListener('click',(e)=>{ if(!menu.contains(e.target) && e.target!==btn) close();});
+    document.addEventListener('keydown',(e)=>{ if(e.key==='Escape') close(); });
+  })();
+
+  // Field Kit logic
+  (function(){
+    const API_BASE = 'https://romanoti-tools-api.onrender.com';
     const $ = (id)=>document.getElementById(id);
-    const pretty = (el, data)=>{ el.textContent = (typeof data === 'string') ? data : JSON.stringify(data,null,2); };
-    const keyHdr = ()=>({'x-api-key': (localStorage.getItem('romanoti_org_key')||'')});
 
-    $('saveKey').onclick = ()=>{
-      localStorage.setItem('romanoti_org_key', $('apiKey').value.trim());
-      $('saveMsg').textContent = 'API key guardada localmente.';
-    };
-    (function init(){ $('apiKey').value = localStorage.getItem('romanoti_org_key')||''; })();
-
-    // Email posture / DKIM / TLS
-    $('btnEmail').onclick = async ()=>{
-      $('outEmail').textContent = 'Running...';
-      const body = {domain: $('dom').value.trim()};
-      const r = await fetch(`${API}/ext/emaildns`, {method:'POST', headers:{...keyHdr(),'content-type':'application/json'}, body: JSON.stringify(body)});
-      pretty($('outEmail'), await r.json());
-    };
-    $('btnDKIM').onclick = async ()=>{
-      $('outEmail').textContent = 'Running...';
-      const dom = $('dom').value.trim();
-      const qname = `selector1._domainkey.${dom}`;
-      const r = await fetch(`${API}/noc/dns-lookup`, {method:'POST', headers:{...keyHdr(),'content-type':'application/json'}, body: JSON.stringify({domain:qname, type:'TXT'})});
-      pretty($('outEmail'), await r.json());
-    };
-    $('btnTLS').onclick = async ()=>{
-      $('outTLS').textContent = 'Running...';
-      const body = {host: $('tlsHost').value.trim(), port: parseInt($('tlsPort').value||'443',10)};
-      const r = await fetch(`${API}/ext/tls`, {method:'POST', headers:{...keyHdr(),'content-type':'application/json'}, body: JSON.stringify(body)});
-      pretty($('outTLS'), await r.json());
-    };
-
-    // Service check
-    $('btnSvc').onclick = async ()=>{
-      $('outSvc').textContent = 'Running...';
-      const ports = $('svcPorts').value.split(',').map(x=>parseInt(x.trim(),10)).filter(n=>!isNaN(n));
-      const body = {host:$('svcHost').value.trim()||null, url:$('svcUrl').value.trim()||null, ports};
-      const r = await fetch(`${API}/noc/service-check`, {method:'POST', headers:{...keyHdr(),'content-type':'application/json'}, body: JSON.stringify(body)});
-      pretty($('outSvc'), await r.json());
-    };
-
-    // SOC demo
-    async function sendAlert(src, sev, title, details){
-      const r = await fetch(`${API}/soc/alerts`, {method:'POST', headers:{...keyHdr(),'content-type':'application/json'}, body: JSON.stringify({source:src, severity:sev, title, details})});
-      return r.json();
+    function showPlaceholder(preId, text='No output yet'){
+      const el=$(preId); el.textContent=text; el.classList.remove('hidden'); el.classList.add('muted');
     }
-    $('aCritical').onclick = async ()=>{ pretty($('outSoc'), await sendAlert('edr','critical','Ransomware behavior',{host:'pc-01',user:'alice'})); };
-    $('aMedium').onclick   = async ()=>{ pretty($('outSoc'), await sendAlert('firewall','medium','Port scan',{src:'10.0.0.8'})); };
-    $('aLow').onclick      = async ()=>{ pretty($('outSoc'), await sendAlert('email','low','Suspicious link clicked',{user:'bob'})); };
+    function showJSON(preId, data){
+      const el=$(preId); el.classList.remove('muted','hidden');
+      try{ el.textContent = JSON.stringify(data, null, 2); }catch{ el.textContent = String(data); }
+    }
+    function setBtnLoading(btn, isLoading, label){
+      if(!btn) return;
+      btn.disabled = !!isLoading;
+      if(isLoading){ btn.dataset._label = btn.textContent; btn.textContent = label || 'Running…'; }
+      else { btn.textContent = btn.dataset._label || btn.textContent; }
+    }
+    function parsePorts(s){
+      return (s||'').split(',').map(x=>x.trim()).filter(Boolean)
+        .map(x=>parseInt(x,10)).filter(x=>Number.isInteger(x)&&x>0&&x<=65535).slice(0,50);
+    }
+    function getKey(){
+      return $('fkKey').value.trim() || localStorage.getItem('romanoti_org_key') || '';
+    }
 
-    $('btnPBPreview').onclick = async ()=>{
-      const r = await fetch(`${API}/soc/playbooks/preview`, {method:'POST', headers:{...keyHdr(),'content-type':'application/json'}, body: JSON.stringify({playbook_id:$('pbId').value})});
-      pretty($('outSoc'), await r.json());
-    };
-    $('btnPBRun').onclick = async ()=>{
-      const r = await fetch(`${API}/soc/playbooks/run`, {method:'POST', headers:{...keyHdr(),'content-type':'application/json'}, body: JSON.stringify({playbook_id:$('pbId').value, target:$('pbTarget').value})});
-      pretty($('outSoc'), await r.json());
-    };
+    // Load/save/clear key
+    (function initKey(){
+      const saved = localStorage.getItem('romanoti_org_key') || '';
+      if(saved) {$('fkKey').value = saved; $('fkKeyMsg').textContent='✅ API key cargada desde tu navegador.';}
+      $('fkKeyShow').addEventListener('change', (e)=>{ $('fkKey').type = e.target.checked ? 'text' : 'password'; });
+      $('btnSaveKey').addEventListener('click', ()=>{
+        const v=$('fkKey').value.trim(); localStorage.setItem('romanoti_org_key', v);
+        $('fkKeyMsg').textContent = v ? '✅ Guardada localmente.' : 'API Key vacía.';
+      });
+      $('btnClearKey').addEventListener('click', ()=>{
+        localStorage.removeItem('romanoti_org_key'); $('fkKey').value=''; $('fkKeyMsg').textContent='🔒 Key eliminada del navegador.';
+      });
+    })();
+
+    // Email posture
+    $('btnEmailPosture').addEventListener('click', async ()=>{
+      const key=getKey(); if(!key){alert('Ingresa tu Org API Key');return;}
+      const domain=$('fkDomain').value.trim(); if(!domain){showJSON('fkOutLeft',{error:'Ingresa domain'});return;}
+      setBtnLoading($('btnEmailPosture'), true);
+      showPlaceholder('fkOutLeft','Running…');
+      try{
+        const res = await fetch(`${API_BASE}/ext/emaildns`, {
+          method:'POST',
+          headers:{'x-api-key':key,'content-type':'application/json','accept':'application/json'},
+          body: JSON.stringify({ domain })
+        });
+        const data = await res.json();
+        showJSON('fkOutLeft', data);
+      }catch(e){ showJSON('fkOutLeft', {error:String(e)}); }
+      finally{ setBtnLoading($('btnEmailPosture'), false); }
+    });
+
+    // DKIM
+    $('btnDkim').addEventListener('click', async ()=>{
+      const key=getKey(); if(!key){alert('Ingresa tu Org API Key');return;}
+      const dom=$('fkDomain').value.trim();
+      const sel=$('fkDkimSelector').value.trim();
+      if(!dom || !sel){ showJSON('fkOutLeft', {error:'Ingresa domain y selector'}); return; }
+      const qname=`${sel}._domainkey.${dom}`;
+      setBtnLoading($('btnDkim'), true);
+      showPlaceholder('fkOutLeft',`Consultando TXT en ${qname}…`);
+      try{
+        const res = await fetch(`${API_BASE}/noc/dns-lookup`, {
+          method:'POST',
+          headers:{'x-api-key':key,'content-type':'application/json','accept':'application/json'},
+          body: JSON.stringify({ domain:qname, type:'TXT' })
+        });
+        const data = await res.json();
+        showJSON('fkOutLeft', data);
+      }catch(e){ showJSON('fkOutLeft', {error:String(e)}); }
+      finally{ setBtnLoading($('btnDkim'), false); }
+    });
+
+    // TLS
+    $('btnTls').addEventListener('click', async ()=>{
+      const key=getKey(); if(!key){alert('Ingresa tu Org API Key');return;}
+      const host=$('fkTlsHost').value.trim(); const port=parseInt(($('fkTlsPort').value||'443'),10);
+      if(!host || !port){ showJSON('fkOutLeft',{error:'Ingresa host y puerto'}); return; }
+      setBtnLoading($('btnTls'), true);
+      showPlaceholder('fkOutLeft','Running…');
+      try{
+        const res = await fetch(`${API_BASE}/ext/tls`, {
+          method:'POST',
+          headers:{'x-api-key':key,'content-type':'application/json','accept':'application/json'},
+          body: JSON.stringify({ host, port })
+        });
+        const data = await res.json();
+        showJSON('fkOutLeft', data);
+      }catch(e){ showJSON('fkOutLeft', {error:String(e)}); }
+      finally{ setBtnLoading($('btnTls'), false); }
+    });
+
+    // Service check (portscan + optional http-check)
+    $('btnSvc').addEventListener('click', async ()=>{
+      const key=getKey(); if(!key){alert('Ingresa tu Org API Key');return;}
+      const host=$('fkHost').value.trim(); const url=$('fkUrl').value.trim();
+      const ports=parsePorts($('fkPorts').value);
+      if(!host && !url){ showJSON('fkOutRight',{error:'Ingresa host y/o URL'}); return; }
+
+      setBtnLoading($('btnSvc'), true);
+      showPlaceholder('fkOutRight','Running…');
+
+      const headers={'x-api-key':key,'content-type':'application/json','accept':'application/json'};
+      const results={};
+
+      try{
+        if(ports.length && host){
+          const res = await fetch(`${API_BASE}/network/portscan`, {
+            method:'POST', headers, body: JSON.stringify({ host, ports, timeout_ms:500 })
+          });
+          results.portscan = await res.json();
+        }
+        if(url){
+          const res = await fetch(`${API_BASE}/noc/http-check`, {
+            method:'POST', headers, body: JSON.stringify({ url, timeout_s:8, verify_tls:true })
+          });
+          results.http_check = await res.json();
+        }
+        showJSON('fkOutRight', results);
+      }catch(e){
+        showJSON('fkOutRight', {error:String(e), partial:results});
+      }finally{
+        setBtnLoading($('btnSvc'), false);
+      }
+    });
+
+    // Placeholders iniciales
+    showPlaceholder('fkOutLeft'); showPlaceholder('fkOutRight');
+  })();
   </script>
 </body>
 </html>
-
