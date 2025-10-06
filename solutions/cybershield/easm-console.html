@@ -1,1 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>CyberShield – EASM Console | RomanoTI</title>
+
+  <!-- Favicon -->
+  <link rel="icon" href="/img/favicon.png" type="image/png"/>
+
+  <!-- Tailwind + Fuente -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    body{font-family:'Montserrat',sans-serif;background:#f8f9fa;color:#0f172a}
+    .hero-bg{background:linear-gradient(135deg,#1e3a8a 0%,#2563eb 100%)}
+    .btn-primary{background:#2563EB;transition:all .2s ease}
+    .btn-primary:hover{background:#1D4ED8;transform:translateY(-1px)}
+    .card{border:1px solid #e5e7eb;border-radius:16px;box-shadow:0 10px 30px -12px rgba(0,0,0,.12)}
+    .badge{display:inline-block;border:1px solid #cbd5e1;border-radius:999px;padding:4px 10px;font-size:12px;background:#f8fafc}
+    pre.output{background:#0e1116;color:#eaeef3;padding:12px;border-radius:10px;max-height:60vh;overflow:auto;white-space:pre}
+    .pill{display:inline-flex;align-items:center;padding:.25rem .6rem;border-radius:999px;font-size:.75rem;font-weight:600}
+    .ok{background:#ecfdf5;color:#065f46;border:1px solid #a7f3d0}
+    .warn{background:#fffbeb;color:#92400e;border:1px solid #fcd34d}
+    .err{background:#fef2f2;color:#991b1b;border:1px solid #fecaca}
+  </style>
+</head>
+<body class="bg-gray-50">
+
+  <!-- ===== NAVBAR (consistente con Solutions/CyberShield) ===== -->
+  <header class="bg-white shadow-sm sticky top-0 z-50">
+    <div class="container mx-auto px-6 py-3">
+      <div class="flex items-center justify-between">
+        <a href="/" class="flex items-center font-bold text-xl">
+          <span class="bg-blue-600 text-white rounded-full w-10 h-10 grid place-items-center mr-3">R</span>
+          RomanoTI Solutions
+        </a>
+
+        <nav class="hidden md:flex items-center space-x-8">
+          <a href="/" class="text-gray-700 hover:text-blue-600 font-medium">Home</a>
+          <a href="/services/tools.html" class="text-gray-700 hover:text-blue-600 font-medium">Tools</a>
+          <a href="/it-noc.html" class="text-gray-700 hover:text-blue-600 font-medium">NOC</a>
+          <a href="/it-soc.html" class="text-gray-700 hover:text-blue-600 font-medium">SOC</a>
+
+          <!-- Dropdown Solutions -->
+          <div class="relative group">
+            <button class="text-gray-700 hover:text-blue-600 font-medium inline-flex items-center">
+              Solutions
+              <svg xmlns="http://www.w3.org/2000/svg" class="ml-1 h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.584l3.71-3.354a.75.75 0 111.02 1.1l-4.2 3.794a.75.75 0 01-1.02 0l-4.2-3.794a.75.75 0 01.02-1.06z" clip-rule="evenodd"/>
+              </svg>
+            </button>
+            <div class="hidden absolute group-hover:block left-0 mt-2 w-64 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5 z-50">
+              <a href="/solutions/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">All Solutions</a>
+              <a href="/solutions/cybershield/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">CyberShield Overview</a>
+              <a href="/solutions/cybershield/field-kit/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">Field Kit</a>
+              <a href="/solutions/cybershield/soc-console.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">SOC Console</a>
+              <a href="/solutions/cybershield/easm-console.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 font-semibold">EASM Console</a>
+            </div>
+          </div>
+
+          <a href="https://calendly.com/mauricioromeroca" class="btn-primary text-white px-5 py-2 rounded-lg font-medium">Book Now</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero-bg text-white">
+    <div class="container mx-auto px-6 py-14">
+      <span class="badge border-white text-white">External Attack Surface Management</span>
+      <h1 class="text-4xl md:text-5xl font-bold mt-3">EASM Console</h1>
+      <p class="text-xl md:text-2xl mt-3 max-w-3xl">
+        Descubre exposición externa (DNS/Email/TLS/Subdominios/Puertos) y genera reportes listos para cliente.
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== SETTINGS / RUN ===== -->
+  <section class="py-10">
+    <div class="container mx-auto px-6 max-w-6xl grid md:grid-cols-3 gap-6">
+      <!-- Settings -->
+      <div class="card p-6 bg-white">
+        <h3 class="text-xl font-semibold mb-2">Settings</h3>
+        <p class="text-gray-600 mb-4">Tu <b>Org API Key</b> se guarda solo en tu navegador.</p>
+
+        <label class="block text-sm font-medium text-gray-700">Org API Key</label>
+        <input id="orgKey" type="password" class="w-full border rounded-lg px-3 py-2 mt-1" placeholder="MySecret123$">
+        <button id="btnSaveKey" class="btn-primary text-white px-4 py-2 rounded-lg font-medium mt-3">Guardar</button>
+        <p id="keyMsg" class="text-xs text-gray-500 mt-2"></p>
+
+        <hr class="my-6"/>
+
+        <h4 class="font-semibold mb-2">PowerShell (Integración)</h4>
+        <p class="text-gray-600 text-sm">Genera un comando y/o descarga un <code>.ps1</code> con tu API Key y parámetros actuales.</p>
+        <div class="space-y-2 mt-2">
+          <button id="btnGenPS" class="w-full btn-primary text-white px-4 py-2 rounded-lg font-medium">Generar PowerShell</button>
+          <button id="btnDlPS" class="w-full bg-gray-800 text-white px-4 py-2 rounded-lg font-medium hover:bg-black">Descargar .ps1</button>
+        </div>
+        <pre id="psOut" class="output mt-3" style="max-height:32vh"></pre>
+      </div>
+
+      <!-- Runner -->
+      <div class="card p-6 bg-white md:col-span-2">
+        <h3 class="text-xl font-semibold mb-2">Run EASM Scan</h3>
+        <div class="grid md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Domain</label>
+            <input id="inDomain" class="w-full border rounded-lg px-3 py-2 mt-1" placeholder="example.com" value="example.com">
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Timeout (ms)</label>
+            <input id="inTimeout" type="number" min="100" max="10000" value="400" class="w-full border rounded-lg px-3 py-2 mt-1">
+          </div>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-4 mt-4">
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Subdomains (optional)</label>
+            <textarea id="inSubs" class="w-full border rounded-lg px-3 py-2 mt-1" rows="3" placeholder="www
+vpn
+mail
+api"></textarea>
+            <p class="text-xs text-gray-500 mt-1">Uno por línea o separados por comas.</p>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Ports to check (optional)</label>
+            <input id="inPorts" class="w-full border rounded-lg px-3 py-2 mt-1" placeholder="22,80,443,3389,445,25,587" value="22,80,443,3389,445,25,587">
+            <p class="text-xs text-gray-500 mt-1">Lista separada por comas (máx. ~30 recomendable).</p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3 mt-4">
+          <label class="inline-flex items-center gap-2">
+            <input id="inVerifyTls" type="checkbox" class="rounded border-gray-300" checked>
+            <span class="text-sm text-gray-700">Verify TLS chain</span>
+          </label>
+        </div>
+
+        <div class="mt-5 flex gap-3">
+          <button id="btnRun" class="btn-primary text-white px-5 py-2 rounded-lg font-medium">Run Scan</button>
+          <button id="btnDlJson" class="bg-white border px-5 py-2 rounded-lg font-medium hover:bg-gray-50">Download JSON</button>
+          <button id="btnCopyMd" class="bg-white border px-5 py-2 rounded-lg font-medium hover:bg-gray-50">Copy Markdown</button>
+        </div>
+
+        <!-- Quick summary pills -->
+        <div id="summaryPills" class="mt-5 space-x-2"></div>
+
+        <!-- Raw output -->
+        <h4 class="mt-6 font-semibold">Raw Output</h4>
+        <pre id="outRaw" class="output"></pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="bg-gray-900 text-white py-8">
+    <div class="container mx-auto px-6 text-center">
+      <p>© 2025 RomanoTI Solutions. All rights reserved.</p>
+      <p class="mt-2">Serving Canada</p>
+    </div>
+  </footer>
+
+  <!-- ===== JS ===== -->
+  <script>
+  (function(){
+    const API_BASE = 'https://romanoti-tools-api.onrender.com';
+
+    // DOM helpers
+    const $ = (id) => document.getElementById(id);
+    const toList = (txt) => (txt||'')
+      .split(/[\n,]+/).map(s=>s.trim()).filter(Boolean);
+
+    // Persist API key
+    const KEY_K = 'romanoti_org_key';
+    const loadKey = () => ($('orgKey').value = localStorage.getItem(KEY_K) || '');
+    const saveKey = () => {
+      const k = $('orgKey').value.trim();
+      localStorage.setItem(KEY_K, k);
+      $('keyMsg').textContent = k ? '✅ API key guardada localmente.' : '';
+    };
+
+    function pill(text, type='ok'){
+      const span = document.createElement('span');
+      span.className = `pill ${type==='ok'?'ok':type==='warn'?'warn':'err'}`;
+      span.textContent = text;
+      return span;
+    }
+    function pretty(preId, data){
+      const el = $(preId);
+      try { el.textContent = JSON.stringify(data, null, 2); }
+      catch { el.textContent = String(data); }
+    }
+
+    async function postJson(path, body){
+      const key = $('orgKey').value.trim() || localStorage.getItem(KEY_K) || '';
+      if(!key){ alert('Ingresa tu Org API Key'); throw new Error('missing key'); }
+      const res = await fetch(`${API_BASE}${path}`, {
+        method: 'POST',
+        headers: { 'x-api-key': key, 'content-type':'application/json', 'accept':'application/json' },
+        body: JSON.stringify(body)
+      });
+      const text = await res.text();
+      try { return JSON.parse(text); } catch { return text; }
+    }
+
+    // ===== RUN SCAN =====
+    $('btnRun').addEventListener('click', async () => {
+      const domain = $('inDomain').value.trim();
+      if(!domain){ alert('Ingresa un dominio'); return; }
+
+      const subs  = toList($('inSubs').value);
+      const ports = toList($('inPorts').value).map(x=>parseInt(x,10)).filter(n=>!isNaN(n));
+      const timeout_ms = Math.max(100, Math.min(10000, parseInt($('inTimeout').value||'400',10)));
+      const verify_tls = $('inVerifyTls').checked;
+
+      $('outRaw').textContent = 'Running…';
+      $('summaryPills').innerHTML = '';
+
+      try{
+        const payload = { domain, timeout_ms, verify_tls };
+        if(subs.length)  payload.subdomains   = subs;
+        if(ports.length) payload.check_ports  = ports;
+
+        const data = await postJson('/easm/scan', payload);
+        pretty('outRaw', data);
+
+        // Build quick summary
+        const box = $('summaryPills');
+        if(data && typeof data === 'object'){
+          // Risk score
+          if(typeof data.risk_score === 'number'){
+            const rs = data.risk_score;
+            const type = rs >= 85 ? 'ok' : (rs >= 70 ? 'warn' : 'err');
+            box.appendChild(pill(`Risk Score: ${rs}`, type));
+          }
+          // TLS
+          const tls = data.tls || {};
+          if(typeof tls.days_left === 'number'){
+            const t = tls.days_left >= 30 ? 'ok' : 'warn';
+            box.appendChild(pill(`TLS: ${tls.days_left} days left`, t));
+          }
+          if(tls.verified_chain === false) box.appendChild(pill('TLS chain: NOT VERIFIED', 'err'));
+          // Email posture
+          const ep = (data.email_posture && data.email_posture.summary) || {};
+          if(ep.dmarc_policy){
+            const pol = String(ep.dmarc_policy).toLowerCase();
+            const t = pol === 'reject' ? 'ok' : (pol === 'quarantine' ? 'warn' : 'err');
+            box.appendChild(pill(`DMARC: ${pol}`, t));
+          }
+          // Subdomains
+          const subs = Array.isArray(data.subdomains) ? data.subdomains.length : 0;
+          box.appendChild(pill(`Subdomains checked: ${subs}`, 'ok'));
+          // Findings
+          const f = Array.isArray(data.findings) ? data.findings : [];
+          if(f.length){
+            const sevRank = {critical:3, high:2, medium:1, low:0};
+            const worst = f.reduce((a,b)=> (sevRank[(b.sev||'low')] > sevRank[(a.sev||'low')] ? b : a), {sev:'low'});
+            const type = worst.sev === 'critical' ? 'err' : (worst.sev==='high'?'err':worst.sev==='medium'?'warn':'ok');
+            box.appendChild(pill(`Findings: ${f.length} (max ${worst.sev})`, type));
+          }else{
+            box.appendChild(pill('No findings', 'ok'));
+          }
+        }
+      }catch(e){
+        pretty('outRaw', { error: String(e) });
+      }
+    });
+
+    // ===== DOWNLOAD JSON =====
+    $('btnDlJson').addEventListener('click', () => {
+      const text = $('outRaw').textContent || '';
+      try {
+        // valida que parezca JSON
+        JSON.parse(text);
+        const blob = new Blob([text], {type:'application/json'});
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = `easm-${Date.now()}.json`;
+        a.click();
+      } catch {
+        alert('El resultado no es JSON válido aún (ejecuta el scan primero).');
+      }
+    });
+
+    // ===== COPY MARKDOWN (resumen ejecutivo) =====
+    $('btnCopyMd').addEventListener('click', () => {
+      const text = $('outRaw').textContent || '';
+      let md = '# EASM Summary\\n';
+      try{
+        const d = JSON.parse(text);
+        md += `**Domain:** ${d.domain || '-'}\\n\\n`;
+        md += `**Risk Score:** ${d.risk_score ?? '-'}\\n`;
+        if (d.tls){
+          md += `**TLS:** chain=${d.tls.verified_chain ? 'verified':'not verified'}, days_left=${d.tls.days_left ?? '-'}\\n`;
+        }
+        if (d.email_posture && d.email_posture.summary){
+          md += `**Email Posture:** DMARC=${d.email_posture.summary.dmarc_policy || 'missing'}\\n`;
+        }
+        if (Array.isArray(d.subdomains)) md += `**Subdomains checked:** ${d.subdomains.length}\\n`;
+        if (Array.isArray(d.findings) && d.findings.length){
+          md += '\\n## Findings\\n';
+          d.findings.forEach(x => { md += `- [${x.sev}] ${x.id}: ${x.msg}\\n`; });
+        }
+      }catch{
+        md += '_Run the scan first to populate results._\\n';
+      }
+      navigator.clipboard.writeText(md);
+      alert('Resumen copiado en Markdown ✅');
+    });
+
+    // ===== POWERHELL GENERATOR =====
+    $('btnGenPS').addEventListener('click', () => {
+      const key = $('orgKey').value.trim() || localStorage.getItem(KEY_K) || '';
+      if(!key){ alert('Ingresa tu Org API Key'); return; }
+
+      const domain = $('inDomain').value.trim() || 'example.com';
+      const subs   = toList($('inSubs').value);
+      const ports  = toList($('inPorts').value).map(x=>parseInt(x,10)).filter(n=>!isNaN(n));
+      const timeout_ms = Math.max(100, Math.min(10000, parseInt($('inTimeout').value||'400',10)));
+
+      const subsPS  = subs.length ? '@("'+subs.join('","')+'")' : '$null';
+      const portsPS = ports.length ? '@('+ports.join(',')+')' : '$null';
+
+      const ps = [
+`$Headers = @{ "x-api-key" = "${key}" }`,
+`Invoke-RestMethod -Method Post \\`,
+`  -Uri "${API_BASE}/easm/scan" \\`,
+`  -Headers $Headers -ContentType "application/json" \\`,
+`  -Body (@{`,
+`    domain="${domain}";`,
+`    subdomains=${subsPS};`,
+`    check_ports=${portsPS};`,
+`    timeout_ms=${timeout_ms}`,
+`  } | ConvertTo-Json) | ConvertTo-Json -Depth 6`
+      ].join('\n');
+
+      $('psOut').textContent = ps;
+    });
+
+    // ===== DOWNLOAD .PS1 =====
+    $('btnDlPS').addEventListener('click', () => {
+      const key = $('orgKey').value.trim() || localStorage.getItem(KEY_K) || '';
+      if(!key){ alert('Ingresa tu Org API Key'); return; }
+
+      const domain = $('inDomain').value.trim() || 'example.com';
+      const subs   = toList($('inSubs').value);
+      const ports  = toList($('inPorts').value).map(x=>parseInt(x,10)).filter(n=>!isNaN(n));
+      const timeout_ms = Math.max(100, Math.min(10000, parseInt($('inTimeout').value||'400',10)));
+
+      const subsPS  = subs.length ? '@("'+subs.join('","')+'")' : '$null';
+      const portsPS = ports.length ? '@('+ports.join(',')+')' : '$null';
+
+      const script = `# RomanoTI – EASM Scan
+param(
+  [Parameter(Mandatory=$true)][string]$Domain = "${domain}",
+  [string[]]$Subdomains = ${subsPS},
+  [int[]]$CheckPorts   = ${portsPS},
+  [int]$TimeoutMs      = ${timeout_ms},
+  [string]$ApiKey      = "${key}"
+)
+
+$Headers = @{ "x-api-key" = $ApiKey }
+
+$body = @{ domain=$Domain; timeout_ms=$TimeoutMs }
+if($Subdomains){ $body.subdomains = $Subdomains }
+if($CheckPorts){ $body.check_ports = $CheckPorts }
+
+$res = Invoke-RestMethod -Method Post -Uri "${API_BASE}/easm/scan" -Headers $Headers -ContentType "application/json" -Body ($body | ConvertTo-Json)
+$res | ConvertTo-Json -Depth 6
+
+Write-Host ""
+Write-Host "Summary:" -ForegroundColor Cyan
+if($res.risk_score){ Write-Host (" - Risk Score: {0}" -f $res.risk_score) }
+if($res.tls){
+  $chain = if($res.tls.verified_chain){"verified"}else{"NOT verified"}
+  $days  = if($res.tls.days_left){$res.tls.days_left}else{"-"}
+  Write-Host (" - TLS: {0}, days_left={1}" -f $chain, $days)
+}
+if($res.email_posture -and $res.email_posture.summary){
+  Write-Host (" - DMARC: {0}" -f $res.email_posture.summary.dmarc_policy)
+}
+if($res.findings){
+  Write-Host " - Findings:"; $res.findings | ForEach-Object { Write-Host ("   * [{0}] {1}: {2}" -f $_.sev, $_.id, $_.msg) }
+}
+`;
+
+      const blob = new Blob([script], {type:'text/plain'});
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = `romanoti-easm-scan.ps1`;
+      a.click();
+    });
+
+    // wire-up
+    $('btnSaveKey').addEventListener('click', saveKey);
+    loadKey();
+  })();
+  </script>
+</body>
+</html>
 
