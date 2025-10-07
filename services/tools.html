@@ -4,10 +4,28 @@
   <meta charset="utf-8" />
   <title>RomanoTI Tools</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- ============================ [NEW] ============================ -->
+  <!-- FAVICONS (RomanoTI unificados) -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16.png">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#2563eb">
+  <meta name="theme-color" content="#2563eb">
+
+  <!-- Tipografía y Tailwind para estilizar el header/footer centralizados -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <!-- ========================== [/NEW] ============================ -->
+
+  <!-- ============================ [REMOVED] ============================
   <link rel="icon" href="/img/favicon.png" type="image/png">
+  ============================ [/REMOVED] ============================= -->
+
   <style>
     :root{--brand:#2563eb;--brand-dark:#1d4ed8;--ink:#0f172a}
-    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Helvetica,Arial,sans-serif;margin:0;background:#f6f7fb;color:#111827}
+    body{font-family:'Montserrat',system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Helvetica,Arial,sans-serif;margin:0;background:#f6f7fb;color:#111827}
     .topbar{background:linear-gradient(120deg,#1e40af,#2563eb);color:#fff;padding:28px 16px}
     .wrap{max-width:1040px;margin:0 auto;padding:0 16px}
     h1,h2,h3,h4{margin:0 0 12px}
@@ -31,6 +49,11 @@
   </style>
 </head>
 <body>
+
+  <!-- ============================ [NEW] ============================ -->
+  <!-- Mountpoint del HEADER centralizado -->
+  <div id="app-header"></div>
+  <!-- ========================== [/NEW] ============================ -->
 
   <!-- HERO -->
   <div class="topbar">
@@ -106,7 +129,7 @@
     <div class="card">
       <div class="section-title">External Checks</div>
       <div class="muted" style="margin-bottom:8px">
-        Diagnósticos rápidos sobre dominios externos (no requieren login).
+        Diagnósticos rápidos sobre dominios externos.
       </div>
 
       <!-- TLS cert -->
@@ -211,6 +234,11 @@
     <h3 style="margin:22px 0 8px">Salida</h3>
     <pre id="out"></pre>
   </div>
+
+  <!-- ============================ [NEW] ============================ -->
+  <!-- Mountpoint del FOOTER centralizado -->
+  <div id="app-footer" class="mt-10"></div>
+  <!-- ========================== [/NEW] ============================ -->
 
 <script>
   // ===== Config =====
@@ -344,15 +372,18 @@
     }catch(e){ $('agentOut').textContent = String(e); }
   }
 
-  // ===== External checks (no auth) =====
+  // ===== External checks (require x-api-key) =====
   async function checkTLS(){
     const host = $('tlsHost').value.trim();
     const port = Number($('tlsPort').value||443);
+    const key  = $('orgKey').value.trim();            // [NEW] tomar x-api-key del campo
+    if(!key){ $('tlsOut').textContent = 'Ingresa tu Org API Key.'; return; }  // [NEW]
+
     $('tlsOut').textContent = 'Consultando…';
     try{
       const res = await fetch(`${CP_API}/ext/tls`, {
         method:'POST',
-        headers:{'Content-Type':'application/json'},
+        headers:{'Content-Type':'application/json','x-api-key': key},         // [NEW]
         body: JSON.stringify({host, port})
       });
       const text = await res.text();
@@ -363,11 +394,14 @@
 
   async function checkEmailDNS(){
     const domain = $('dnsDomain').value.trim();
+    const key    = $('orgKey').value.trim();          // [NEW]
+    if(!key){ $('dnsOut').textContent = 'Ingresa tu Org API Key.'; return; }  // [NEW]
+
     $('dnsOut').textContent = 'Consultando…';
     try{
       const res = await fetch(`${CP_API}/ext/emaildns`, {
         method:'POST',
-        headers:{'Content-Type':'application/json'},
+        headers:{'Content-Type':'application/json','x-api-key': key},         // [NEW]
         body: JSON.stringify({domain})
       });
       const text = await res.text();
@@ -401,5 +435,11 @@
   // init
   setAuthedUI();
 </script>
+
+<!-- ============================ [NEW] ============================ -->
+<!-- Carga del header/footer centralizados -->
+<script defer src="/js/nav.js"></script>
+<script defer src="/js/footer.js"></script>
+<!-- ========================== [/NEW] ============================ -->
 </body>
 </html>
