@@ -5,14 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Solutions | RomanoTI Solutions</title>
 
- <!-- FAVICONS (RomanoTI) -->
-<link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16.png">
-<link rel="shortcut icon" href="/favicon.ico">
-<link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#2563eb">
-<meta name="theme-color" content="#2563eb">
-
+  <!-- FAVICONS (RomanoTI) -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16.png">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#2563eb">
+  <meta name="theme-color" content="#2563eb">
 
   <!-- Tailwind CSS (CDN) -->
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
@@ -34,51 +33,16 @@
 </head>
 <body class="bg-gray-50">
 
-  <!-- Header / Navbar -->
+  <!-- ============================ [REMOVED] ============================
   <header class="bg-white shadow-sm sticky top-0 z-50">
-    <div class="container mx-auto px-6 py-3">
-      <div class="flex items-center justify-between">
-        <a href="/" class="flex items-center font-bold text-xl text-gray-900">
-          <span class="logo-badge text-white rounded-full w-10 h-10 grid place-items-center mr-3">R</span>
-          RomanoTI Solutions
-        </a>
-
-        <nav class="hidden md:flex items-center space-x-8">
-          <a href="/" class="text-gray-700 hover:text-blue-600 font-medium">Home</a>
-
-          <!-- Solutions dropdown -->
-          <div class="relative">
-            <button id="solutionsBtn"
-                    class="text-gray-900 font-semibold inline-flex items-center focus:outline-none">
-              Solutions
-              <svg class="ml-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.58l3.71-3.35a.75.75 0 111.02 1.1l-4.2 3.79a.75.75 0 01-1.02 0l-4.2-3.79a.75.75 0 01.02-1.06z" clip-rule="evenodd"/>
-              </svg>
-            </button>
-            <div id="solutionsMenu"
-                 class="dropdown absolute right-0 mt-2 w-64 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5">
-              <a href="/solutions/" class="block px-4 py-2 text-sm text-blue-700 font-semibold bg-gray-50">Overview</a>
-              <a href="/solutions/cybershield/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">CyberShield (MDR)</a>
-              <a href="/solutions/cybershield/soc-console.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">SOC Console</a>
-              <a href="/solutions/cybershield/easm-console.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">EASM Console</a>
-              <a href="/solutions/cybershield/field-kit.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">Field Kit (engineers)</a>
-            </div>
-          </div>
-
-          <a href="/services/tools.html" class="text-gray-700 hover:text-blue-600 font-medium">Tools</a>
-          <a href="/it-noc.html" class="text-gray-700 hover:text-blue-600 font-medium">NOC</a>
-          <a href="/it-soc.html" class="text-gray-700 hover:text-blue-600 font-medium">SOC</a>
-          <a href="https://calendly.com/mauricioromeroca" class="btn-primary text-white px-5 py-2 rounded-lg font-medium">Book Now</a>
-        </nav>
-
-        <!-- Mobile (atajo simple) -->
-        <div class="md:hidden">
-          <a href="/" class="text-gray-700 mr-4">Home</a>
-          <a href="/solutions/" class="btn-primary text-white px-4 py-2 rounded-lg">Solutions</a>
-        </div>
-      </div>
-    </div>
+    ... (header completo con menú y dropdown)
   </header>
+  ============================ [/REMOVED] ============================= -->
+
+  <!-- ============================ [NEW] ============================ -->
+  <!-- Mountpoint del HEADER unificado -->
+  <div id="app-header"></div>
+  <!-- ========================== [/NEW] ============================ -->
 
   <!-- Hero -->
   <section class="hero-bg text-white">
@@ -149,26 +113,29 @@
     </div>
   </section>
 
-  <!-- Footer -->
+  <!-- ============================ [REMOVED] ============================
   <footer class="bg-gray-900 text-white py-8">
     <div class="container mx-auto px-6 text-center">
       <p>© 2025 RomanoTI Solutions. All rights reserved.</p>
       <p class="mt-2">Serving Canada</p>
     </div>
   </footer>
+  ============================ [/REMOVED] ============================= -->
 
-  <!-- Dropdown script -->
-  <script>
-    (function(){
-      const btn  = document.getElementById('solutionsBtn');
-      const menu = document.getElementById('solutionsMenu');
-      if(!btn || !menu) return;
-      const toggle = () => menu.classList.toggle('show');
-      const close  = () => menu.classList.remove('show');
-      btn.addEventListener('click', (e)=>{ e.preventDefault(); e.stopPropagation(); toggle(); });
-      document.addEventListener('click', (e)=>{ if(!menu.contains(e.target) && e.target!==btn) close(); });
-      document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') close(); });
-    })();
-  </script>
+  <!-- ============================ [NEW] ============================ -->
+  <!-- Mountpoint del FOOTER unificado -->
+  <div id="app-footer"></div>
+  <!-- ========================== [/NEW] ============================ -->
+
+  <!-- ============================ [REMOVED] ============================
+  Script inline del dropdown (lo maneja /js/nav.js)
+  <script> ... </script>
+  ============================ [/REMOVED] ============================= -->
+
+  <!-- ============================ [NEW] ============================ -->
+  <!-- Carga del header/footer centralizados -->
+  <script defer src="/js/nav.js"></script>
+  <script defer src="/js/footer.js"></script>
+  <!-- ========================== [/NEW] ============================ -->
 </body>
 </html>
