@@ -11,8 +11,20 @@
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
 
-  <!-- Favicon temporal (puedes cambiarlo por /img/favicon.png) -->
+  <!-- ============================ [NEW] ============================ -->
+  <!-- FAVICONS (RomanoTI unificados) -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16.png">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#2563eb">
+  <meta name="theme-color" content="#2563eb">
+  <!-- ========================== [/NEW] ============================ -->
+
+  <!-- ============================ [REMOVED] ============================
+  Favicon temporal (puedes cambiarlo por /img/favicon.png)
   <link rel="icon" href="https://ui-avatars.com/api/?name=R&background=1e40af&color=fff&size=64" type="image/png">
+  ============================ [/REMOVED] ============================= -->
 
   <!-- Estilos rápidos de la página -->
   <style>
@@ -29,43 +41,17 @@
 </head>
 <body class="bg-gray-50">
 
-  <!-- ===== Header fijo del sitio ===== -->
+  <!-- ============================ [NEW] ============================ -->
+  <!-- Header centralizado (inyectado por /js/nav.js) -->
+  <div id="app-header"></div>
+  <!-- ========================== [/NEW] ============================ -->
+
+  <!-- ============================ [REMOVED] ============================
+  ===== Header fijo del sitio =====
   <header class="bg-white shadow-md sticky top-0 z-50">
-    <div class="container mx-auto px-6 py-3">
-      <div class="flex items-center justify-between">
-        <a href="/" class="logo">
-          <div class="logo-icon">R</div>
-          <span>RomanoTI Solutions</span>
-        </a>
-<nav class="hidden md:flex items-center space-x-8">
-  <a href="/" class="text-gray-700 hover:text-blue-600 font-medium">Home</a>
-
-  <!-- Solutions dropdown -->
-  <div class="relative">
-    <button id="solutionsMenuBtn"
-            class="text-gray-700 hover:text-blue-600 font-medium inline-flex items-center focus:outline-none focus:ring-2 focus:ring-blue-500 rounded">
-      Solutions
-      <svg xmlns="http://www.w3.org/2000/svg" class="ml-1 h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-        <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.584l3.71-3.354a.75.75 0 111.02 1.1l-4.2 3.794a.75.75 0 01-1.02 0l-4.2-3.794a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
-      </svg>
-    </button>
-
-    <div id="solutionsMenu"
-         class="hidden absolute left-0 mt-2 w-64 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5 z-50">
-      <a href="/solutions/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">All Solutions</a>
-      <a href="/solutions/cybershield/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">CyberShield (NOC + SOC + Email)</a>
-    </div>
-  </div>
-
-  <a href="/services/tools.html" class="text-gray-700 hover:text-blue-600 font-medium">Tools</a>
-  <a href="https://calendly.com/mauricioromeroca" class="btn-primary text-white px-5 py-2 rounded-lg font-medium">Book Now</a>
-</nav>
-
-
-
-      </div>
-    </div>
+    ...
   </header>
+  ============================ [/REMOVED] ============================= -->
 
   <!-- ===== Hero NOC ===== -->
   <section class="hero-bg text-white py-28">
@@ -77,7 +63,7 @@
     </div>
   </section>
 
-  <!-- ===== Sección marketing (lo que ya tenías) ===== -->
+  <!-- ===== Sección marketing ===== -->
   <section class="py-16 bg-white">
     <div class="container mx-auto px-6">
       <div class="text-center mb-12">
@@ -189,15 +175,13 @@
     </div>
   </section>
 
-  <!-- ===== NOC Live Toolbox (nuevo) =====
-       Este bloque agrega mini-herramientas operativas que hablan con la API.
-       Org API Key se envía en x-api-key.   -->
+  <!-- ===== NOC Live Toolbox (nuevo) ===== -->
   <section class="py-12 bg-white">
     <div class="container mx-auto px-6 max-w-4xl">
       <h2 class="text-2xl font-bold mb-2">NOC Live Toolbox</h2>
       <p class="text-gray-600 mb-6">Ejecuta chequeos en tiempo real desde el backend de RomanoTI.</p>
 
-      <!-- Org API Key: se recuerda en localStorage para ahorrar tecleo -->
+      <!-- Org API Key -->
       <div class="mb-6">
         <label class="block text-sm font-medium text-gray-700 mb-1">Org API Key</label>
         <input id="nocKey" type="password" placeholder="Pega tu API key"
@@ -206,7 +190,7 @@
       </div>
 
       <div class="grid md:grid-cols-2 gap-6">
-        <!-- === HTTP Check: POST /noc/http-check (url, timeout_s, verify_tls) === -->
+        <!-- HTTP Check -->
         <div class="p-5 border rounded-xl shadow-sm">
           <h3 class="font-semibold mb-3">HTTP Check</h3>
           <div class="space-y-3">
@@ -229,7 +213,7 @@
           </div>
         </div>
 
-        <!-- === DNS Lookup: POST /noc/dns-lookup (domain, type) === -->
+        <!-- DNS Lookup -->
         <div class="p-5 border rounded-xl shadow-sm">
           <h3 class="font-semibold mb-3">DNS Lookup</h3>
           <div class="space-y-3">
@@ -247,7 +231,7 @@
           </div>
         </div>
 
-        <!-- === Ping simple: POST /network/ping (host, count) === -->
+        <!-- Ping -->
         <div class="p-5 border rounded-xl shadow-sm md:col-span-2">
           <h3 class="font-semibold mb-3">Ping</h3>
           <div class="grid md:grid-cols-3 gap-3">
@@ -282,13 +266,20 @@
     </div>
   </section>
 
-  <!-- ===== Footer ===== -->
+  <!-- ============================ [NEW] ============================ -->
+  <!-- Footer centralizado (inyectado por /js/footer.js) -->
+  <div id="app-footer"></div>
+  <!-- ========================== [/NEW] ============================ -->
+
+  <!-- ============================ [REMOVED] ============================
+  ===== Footer estático =====
   <footer class="bg-gray-900 text-white py-8">
     <div class="container mx-auto px-6 text-center">
       <p>© 2025 RomanoTI Solutions. All rights reserved.</p>
       <p class="mt-2">Serving Canada</p>
     </div>
   </footer>
+  ============================ [/REMOVED] ============================= -->
 
   <!-- ====== JS del toolbox NOC (documentado) ====== -->
   <script>
@@ -303,8 +294,7 @@
     // Encabezado con x-api-key (se arma en cada request)
     const keyHdr = () => ({ 'x-api-key': val('nocKey') });
 
-    // Persistencia simple de la Org Key en el navegador (no en servidor)
-    // para no teclearla siempre. Cambia la clave y se vuelve a guardar.
+    // Persistencia simple de la Org Key en el navegador
     const KEY_STORAGE = 'noc_org_key';
     const saved = localStorage.getItem(KEY_STORAGE);
     if (saved && $('nocKey')) $('nocKey').value = saved;
@@ -350,7 +340,7 @@
       if (!url) { showJSON('outHttp', { error: 'Ingresa una URL' }); return; }
       showJSON('outHttp', 'Consultando…');
 
-      // Espera: POST /noc/http-check (si aún no existe, verás 404)
+      // POST /noc/http-check
       const resp = await postJson('/noc/http-check', { url, timeout_s: timeoutS, verify_tls: verify });
       showJSON('outHttp', resp);
     });
@@ -363,40 +353,41 @@
       if (!domain) { showJSON('outDns', { error: 'Ingresa un dominio' }); return; }
       showJSON('outDns', 'Consultando…');
 
-      // Espera: POST /noc/dns-lookup (si aún no existe, verás 404)
+      // POST /noc/dns-lookup
       const resp = await postJson('/noc/dns-lookup', { domain, type });
       showJSON('outDns', resp);
     });
 
-    // ====== Ping (usa tu endpoint existente /network/ping) ======
+    // ====== Ping ======
     $('btnPing')?.addEventListener('click', async () => {
       const host  = val('pingHost');
       const count = Number(val('pingCount') || '4');
       if (!host) { showJSON('outPing', { error: 'Ingresa un host' }); return; }
       showJSON('outPing', 'Enviando…');
 
-      // Si en tu API /network/ping pide JWT, aquí podríamos añadir 'Authorization: Bearer ...'
-      // De momento hacemos llamada simple (tu endpoint actual suele aceptar POST sin auth).
+      // POST /network/ping
       const resp = await postJson('/network/ping', { host, count });
       showJSON('outPing', resp);
     });
   })();
   </script>
-  <script>
-(function() {
-  function wireDropdown(btnId, menuId) {
-    const btn  = document.getElementById(btnId);
-    const menu = document.getElementById(menuId);
-    if (!btn || !menu) return;
-    const toggle = () => menu.classList.toggle('hidden');
-    const close  = () => menu.classList.add('hidden');
 
-    btn.addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); toggle(); });
-    document.addEventListener('click', (e) => { if (!menu.contains(e.target) && e.target !== btn) close(); });
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
-  }
-  wireDropdown('solutionsMenuBtn','solutionsMenu');
-})();
-</script>
+  <!-- ============================ [REMOVED] ============================
+  Script del dropdown del header antiguo
+  <script>
+  (function() {
+    function wireDropdown(btnId, menuId) {
+      ...
+    }
+    wireDropdown('solutionsMenuBtn','solutionsMenu');
+  })();
+  </script>
+  ============================ [/REMOVED] ============================= -->
+
+  <!-- ============================ [NEW] ============================ -->
+  <!-- Carga del header/footer centralizados -->
+  <script defer src="/js/nav.js"></script>
+  <script defer src="/js/footer.js"></script>
+  <!-- ========================== [/NEW] ============================ -->
 </body>
 </html>
