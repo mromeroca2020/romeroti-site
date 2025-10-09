@@ -1,29 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- =========================
+  <!-- =========================================================
     Archivo: /solutions/cybershield/index.html
-    Propósito: Landing de CyberShield (MDR).
-    Notas:
-    - Mantiene tu navegación y cards.
-    - [NUEVO] Se incluye /js/fix-nav.js.
-  ========================== -->
+    Propósito: Landing de CyberShield (MDR)
+    Puntos clave:
+      - Favicons RomanoTI (con cache-buster)
+      - Navbar unificada + dropdown Solutions
+      - Estilo y secciones documentadas
+      - Hotfix universal del menú (/js/fix-nav.js)
+  ========================================================== -->
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>CyberShield | RomanoTI Managed Security</title>
 
-  <!-- Favicons -->
-  <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16.png">
-  <link rel="shortcut icon" href="/favicon.ico">
-  <link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#2563eb">
+  <!-- ===== Favicons RomanoTI (unificados) ===== -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png?v=4">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png?v=4">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16.png?v=4">
+  <link rel="shortcut icon" href="/favicon.ico?v=4" type="image/x-icon">
+  <link rel="mask-icon" href="/img/safari-pinned-tab.svg?v=4" color="#2563eb">
   <meta name="theme-color" content="#2563eb">
 
-  <!-- CSS + Fuentes -->
-  <link rel="icon" href="/img/favicon.png" type="image/png"/>
+  <!-- ===== CSS + Fuentes ===== -->
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- ===== Estilos locales ===== -->
   <style>
     body{font-family:'Montserrat',sans-serif}
     .hero-bg{background:linear-gradient(135deg,#1e3a8a 0%,#2563eb 100%)}
@@ -32,34 +35,45 @@
     .card{border:1px solid #e5e7eb;border-radius:16px;box-shadow:0 10px 30px -12px rgba(0,0,0,.12)}
     .badge{display:inline-block;border:1px solid #cbd5e1;border-radius:999px;padding:4px 10px;font-size:12px;background:#f8fafc}
     .logo-badge{background:#2563EB}
+    /* Compatibilidad para el dropdown (legacy / hotfix) */
     .dropdown{display:none}
     .dropdown.show{display:block}
   </style>
 </head>
 <body class="bg-gray-50 text-gray-900">
 
-  <!-- ===== Header ===== -->
+  <!-- =================== Header / Navbar =================== -->
   <header class="bg-white shadow-sm sticky top-0 z-50">
     <div class="container mx-auto px-6 py-3">
       <div class="flex items-center justify-between">
+        <!-- Logo -->
         <a href="/" class="flex items-center font-bold text-xl">
           <span class="logo-badge text-white rounded-full w-10 h-10 grid place-items-center mr-3">R</span>
           RomanoTI Solutions
         </a>
 
+        <!-- Navegación (desktop) -->
         <nav class="hidden md:flex items-center space-x-8">
           <a href="/" class="text-gray-700 hover:text-blue-600 font-medium">Home</a>
 
-          <!-- Solutions dropdown -->
+          <!-- Dropdown Solutions -->
           <div class="relative">
-            <button id="solutionsBtn" class="text-gray-700 hover:text-blue-600 font-medium inline-flex items-center focus:outline-none">
+            <button id="solutionsBtn"
+                    class="text-gray-700 hover:text-blue-600 font-medium inline-flex items-center focus:outline-none"
+                    aria-haspopup="true" aria-expanded="false">
               Solutions
-              <svg class="ml-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.58l3.71-3.35a.75.75 0 111.02 1.1l-4.2 3.79a.75.75 0 01-1.02 0l-4.2-3.79a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
+              <svg class="ml-1 w-4 h-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.58l3.71-3.35a.75.75 0 111.02 1.1l-4.2 3.79a.75.75 0 01-1.02 0l-4.2-3.79a.75.75 0 01.02-1.06z" clip-rule="evenodd"/>
+              </svg>
             </button>
-            <div id="solutionsMenu" class="dropdown absolute right-0 mt-2 w-64 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5">
+
+            <!-- Nota: 'hidden' + 'dropdown' para soportar ambos mecanismos (hotfix y legacy) -->
+            <div id="solutionsMenu"
+                 class="hidden dropdown absolute right-0 mt-2 w-64 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5 z-50">
               <a href="/solutions/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">Overview</a>
               <a href="/solutions/cybershield/" class="block px-4 py-2 text-sm text-blue-700 font-semibold bg-gray-50">CyberShield (MDR)</a>
               <a href="/solutions/cybershield/soc-console.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">SOC Console</a>
+              <a href="/solutions/cybershield/easm-console.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">EASM Console</a>
               <a href="/solutions/cybershield/field-kit.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">Field Kit (engineers)</a>
             </div>
           </div>
@@ -70,7 +84,7 @@
           <a href="https://calendly.com/mauricioromeroca" class="btn-primary text-white px-5 py-2 rounded-lg font-medium">Book Now</a>
         </nav>
 
-        <!-- Mobile -->
+        <!-- Navegación (mobile atajo) -->
         <div class="md:hidden">
           <a href="/solutions/" class="btn-primary text-white px-4 py-2 rounded-lg">Solutions</a>
         </div>
@@ -78,28 +92,36 @@
     </div>
   </header>
 
-  <!-- ===== Hero ===== -->
+  <!-- =================== Hero =================== -->
   <section class="hero-bg text-white">
     <div class="container mx-auto px-6 py-20 text-center">
       <span class="badge border-white text-white">Managed Detection & Response</span>
       <h1 class="text-4xl md:text-5xl font-bold mt-4">CyberShield</h1>
-      <p class="text-xl md:text-2xl mt-4 max-w-3xl mx-auto">Detección y respuesta 24×7 contra ransomware, intrusiones y caídas — para redes on-prem y cloud.</p>
+      <p class="text-xl md:text-2xl mt-4 max-w-3xl mx-auto">
+        Detección y respuesta 24×7 contra ransomware, intrusiones y caídas — para redes on-prem y cloud.
+      </p>
 
       <div class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-6 mt-6">
-        <a href="https://calendly.com/mauricioromeroca" class="btn-primary text-white px-6 py-3 rounded-lg font-semibold inline-flex items-center justify-center">Agendar demo</a>
-        <a href="/it-soc.html" class="bg-white text-blue-700 px-6 py-3 rounded-lg font-semibold inline-flex items-center justify-center hover:bg-gray-100">Ver detalles SOC</a>
-        <a href="/solutions/cybershield/soc-console.html" class="bg-white text-blue-700 px-6 py-3 rounded-lg font-semibold inline-flex items-center justify-center hover:bg-gray-100">Abrir consola SOC</a>
+        <a href="https://calendly.com/mauricioromeroca"
+           class="btn-primary text-white px-6 py-3 rounded-lg font-semibold inline-flex items-center justify-center">Agendar demo</a>
+        <a href="/it-soc.html"
+           class="bg-white text-blue-700 px-6 py-3 rounded-lg font-semibold inline-flex items-center justify-center hover:bg-gray-100">Ver detalles SOC</a>
+        <a href="/solutions/cybershield/soc-console.html"
+           class="bg-white text-blue-700 px-6 py-3 rounded-lg font-semibold inline-flex items-center justify-center hover:bg-gray-100">Abrir consola SOC</a>
       </div>
     </div>
   </section>
 
-  <!-- ===== Qué incluye ===== -->
+  <!-- =================== Qué incluye =================== -->
   <section class="py-14 bg-white">
     <div class="container mx-auto px-6">
       <h2 class="text-3xl font-bold text-center">Qué incluye</h2>
-      <p class="text-gray-600 text-center max-w-2xl mx-auto mt-2">Combinamos NOC (disponibilidad) + SOC (seguridad) + protección de correo para cubrir riesgos reales.</p>
+      <p class="text-gray-600 text-center max-w-2xl mx-auto mt-2">
+        Combinamos NOC (disponibilidad) + SOC (seguridad) + protección de correo para cubrir riesgos reales.
+      </p>
 
       <div class="grid md:grid-cols-3 gap-6 mt-10">
+        <!-- NOC -->
         <div class="card p-6 bg-white">
           <h3 class="text-xl font-bold mb-2">NOC 24×7</h3>
           <ul class="text-gray-700 list-disc ml-5 space-y-1">
@@ -108,6 +130,7 @@
             <li>Reporte mensual de performance</li>
           </ul>
         </div>
+        <!-- SOC -->
         <div class="card p-6 bg-white">
           <h3 class="text-xl font-bold mb-2">SOC (MDR)</h3>
           <ul class="text-gray-700 list-disc ml-5 space-y-1">
@@ -116,6 +139,7 @@
             <li>Playbooks y respuesta guiada</li>
           </ul>
         </div>
+        <!-- Email -->
         <div class="card p-6 bg-white">
           <h3 class="text-xl font-bold mb-2">Email Security</h3>
           <ul class="text-gray-700 list-disc ml-5 space-y-1">
@@ -128,11 +152,12 @@
     </div>
   </section>
 
-  <!-- ===== Planes ===== -->
+  <!-- =================== Planes =================== -->
   <section class="py-14">
     <div class="container mx-auto px-6">
       <h2 class="text-3xl font-bold text-center">Planes</h2>
       <div class="grid md:grid-cols-3 gap-6 mt-10">
+        <!-- Starter -->
         <div class="card bg-white p-6">
           <div class="badge">Starter</div>
           <h3 class="text-xl font-bold mt-2 mb-2">Pequeños equipos</h3>
@@ -142,6 +167,7 @@
             <li>Soporte horario laboral</li>
           </ul>
         </div>
+        <!-- Growth -->
         <div class="card bg-white p-6 border-blue-600">
           <div class="badge bg-blue-50 border-blue-200">Recommended</div>
           <h3 class="text-xl font-bold mt-2 mb-2">Growth</h3>
@@ -151,6 +177,7 @@
             <li>Soporte extendido</li>
           </ul>
         </div>
+        <!-- Enterprise -->
         <div class="card bg-white p-6">
           <div class="badge">Enterprise</div>
           <h3 class="text-xl font-bold mt-2 mb-2">Operación 24×7</h3>
@@ -168,7 +195,7 @@
     </div>
   </section>
 
-  <!-- ===== Footer ===== -->
+  <!-- =================== Footer =================== -->
   <footer class="bg-gray-900 text-white py-8">
     <div class="container mx-auto px-6 text-center">
       <p>© 2025 RomanoTI Solutions. All rights reserved.</p>
@@ -176,22 +203,31 @@
     </div>
   </footer>
 
-  <!-- ===== Dropdown legacy (compatibilidad con .dropdown/.show) ===== -->
+  <!-- =================== Scripts =================== -->
+
+  <!-- Fallback de dropdown (robusto; no interfiere con /js/fix-nav.js) -->
   <script>
     (function(){
       const btn  = document.getElementById('solutionsBtn');
       const menu = document.getElementById('solutionsMenu');
       if(!btn || !menu) return;
-      const toggle = () => menu.classList.toggle('show');
-      const close  = () => menu.classList.remove('show');
-      btn.addEventListener('click', (e)=>{ e.preventDefault(); e.stopPropagation(); toggle(); });
-      document.addEventListener('click', (e)=>{ if(!menu.contains(e.target) && e.target!==btn) close(); });
-      document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') close(); });
+
+      function open(){ menu.classList.add('show'); menu.classList.remove('hidden'); menu.style.display='block'; btn.setAttribute('aria-expanded','true'); }
+      function close(){ menu.classList.remove('show'); menu.classList.add('hidden'); menu.style.display=''; btn.setAttribute('aria-expanded','false'); }
+      function isOpen(){ return menu.classList.contains('show') || !menu.classList.contains('hidden') || menu.style.display==='block'; }
+      function toggle(){ isOpen()? close() : open(); }
+
+      btn.addEventListener('click',(e)=>{ e.preventDefault(); e.stopPropagation(); toggle(); });
+      document.addEventListener('click',(e)=>{ if(!menu.contains(e.target) && e.target!==btn) close(); });
+      document.addEventListener('keydown',(e)=>{ if(e.key==='Escape') close(); });
+
+      // Hover como refuerzo UX
+      btn.addEventListener('mouseenter', open);
+      btn.parentNode.addEventListener('mouseleave', ()=>setTimeout(close,120));
     })();
   </script>
 
-  <!-- ==== [NUEVO] Hotfix universal para el menú “Solutions” ==== -->
-  <script src="/js/fix-nav.js" defer></script>
-  <!-- ==== [FIN NUEVO] ==== -->
+  <!-- Hotfix universal para el menú “Solutions” -->
+  <script src="/js/fix-nav.js?v=4" defer></script>
 </body>
 </html>
