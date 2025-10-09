@@ -1,32 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- =========================================================
+    Archivo: /it-noc.html
+    Propósito: Página de servicios NOC + Live Toolbox.
+    Cambios clave:
+      - Favicons RomanoTI con cache-buster (?v=4) para evitar iconos antiguos.
+      - Header y Footer centralizados vía /js/nav.js y /js/footer.js.
+      - Fallback robusto del dropdown “Solutions” (IDs nuevos/legados).
+      - Se conserva toda la lógica del NOC Live Toolbox.
+  ========================================================== -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>NOC Services | RomanoTI Solutions</title>
 
-  <!-- Tailwind CSS (mismo que usas en el sitio) -->
+  <!-- Tailwind CSS (coherente con el resto del sitio) -->
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
 
-  <!-- ============================ [NEW] ============================ -->
-  <!-- FAVICONS (RomanoTI unificados) -->
-  <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16.png">
-  <link rel="shortcut icon" href="/favicon.ico">
-  <link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#2563eb">
+  <!-- =============== Favicons RomanoTI (cache-buster v=4) =============== -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png?v=4">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png?v=4">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16.png?v=4">
+  <link rel="shortcut icon" href="/favicon.ico?v=4">
+  <link rel="mask-icon" href="/img/safari-pinned-tab.svg?v=4" color="#2563eb">
   <meta name="theme-color" content="#2563eb">
-  <!-- ========================== [/NEW] ============================ -->
 
-  <!-- ============================ [REMOVED] ============================
-  Favicon temporal (puedes cambiarlo por /img/favicon.png)
-  <link rel="icon" href="https://ui-avatars.com/api/?name=R&background=1e40af&color=fff&size=64" type="image/png">
-  ============================ [/REMOVED] ============================= -->
-
-  <!-- Estilos rápidos de la página -->
+  <!-- ================= Estilos locales ================= -->
   <style>
     body{font-family:'Montserrat',sans-serif;background:#f8f9fa;color:#333;scroll-behavior:smooth}
     .hero-bg{background:linear-gradient(135deg,#1e3a8a 0%,#2563eb 100%)}
@@ -34,26 +36,17 @@
     .btn-primary:hover{background:#1D4ED8;transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.15)}
     .feature-card{transition:all .3s;border-radius:.5rem;box-shadow:0 1px 3px rgba(0,0,0,.1)}
     .feature-card:hover{transform:translateY(-6px);box-shadow:0 12px 30px -8px rgba(37,99,235,.15)}
-    header,footer{background:#fff}
-    .logo{display:flex;align-items:center;font-weight:700;font-size:1.5rem}
-    .logo-icon{background:#2563EB;color:#fff;width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-right:12px;font-size:1.2rem}
   </style>
 </head>
 <body class="bg-gray-50">
 
-  <!-- ============================ [NEW] ============================ -->
-  <!-- Header centralizado (inyectado por /js/nav.js) -->
+  <!-- =========================================================
+       Header centralizado (inyectado por /js/nav.js)
+       Monta un navbar consistente en todas las páginas.
+  ========================================================== -->
   <div id="app-header"></div>
-  <!-- ========================== [/NEW] ============================ -->
 
-  <!-- ============================ [REMOVED] ============================
-  ===== Header fijo del sitio =====
-  <header class="bg-white shadow-md sticky top-0 z-50">
-    ...
-  </header>
-  ============================ [/REMOVED] ============================= -->
-
-  <!-- ===== Hero NOC ===== -->
+  <!-- ============================ HERO ============================ -->
   <section class="hero-bg text-white py-28">
     <div class="container mx-auto px-6 text-center">
       <h1 class="text-4xl md:text-5xl font-bold mb-6">NOC Services</h1>
@@ -63,7 +56,7 @@
     </div>
   </section>
 
-  <!-- ===== Sección marketing ===== -->
+  <!-- ====================== Sección marketing ====================== -->
   <section class="py-16 bg-white">
     <div class="container mx-auto px-6">
       <div class="text-center mb-12">
@@ -175,7 +168,7 @@
     </div>
   </section>
 
-  <!-- ===== NOC Live Toolbox (nuevo) ===== -->
+  <!-- ===================== NOC Live Toolbox ===================== -->
   <section class="py-12 bg-white">
     <div class="container mx-auto px-6 max-w-4xl">
       <h2 class="text-2xl font-bold mb-2">NOC Live Toolbox</h2>
@@ -250,7 +243,7 @@
     </div>
   </section>
 
-  <!-- ===== CTA ===== -->
+  <!-- ============================= CTA ============================= -->
   <section class="py-16 bg-blue-700 text-white">
     <div class="container mx-auto text-center">
       <h2 class="text-3xl font-bold mb-6">Ready to Secure Your Network?</h2>
@@ -266,22 +259,12 @@
     </div>
   </section>
 
-  <!-- ============================ [NEW] ============================ -->
-  <!-- Footer centralizado (inyectado por /js/footer.js) -->
+  <!-- =========================================================
+       Footer centralizado (inyectado por /js/footer.js)
+  ========================================================== -->
   <div id="app-footer"></div>
-  <!-- ========================== [/NEW] ============================ -->
 
-  <!-- ============================ [REMOVED] ============================
-  ===== Footer estático =====
-  <footer class="bg-gray-900 text-white py-8">
-    <div class="container mx-auto px-6 text-center">
-      <p>© 2025 RomanoTI Solutions. All rights reserved.</p>
-      <p class="mt-2">Serving Canada</p>
-    </div>
-  </footer>
-  ============================ [/REMOVED] ============================= -->
-
-  <!-- ====== JS del toolbox NOC (documentado) ====== -->
+  <!-- ============ JS: NOC Live Toolbox (lógica completa) ============ -->
   <script>
   (function(){
     // ==== Config base del Control Plane (tu API en Render) ====
@@ -372,24 +355,36 @@
   })();
   </script>
 
-  <!-- ============================ [REMOVED] ============================
-  Script del dropdown del header antiguo
+  <!-- =================== Fallback robusto dropdown =================== -->
   <script>
-  (function() {
-    function wireDropdown(btnId, menuId) {
-      ...
-    }
-    wireDropdown('solutionsMenuBtn','solutionsMenu');
-  })();
+    /* Este fallback cablea el menú "Solutions" tanto si el header usa
+       IDs nuevos (navSolutionsBtn/navSolutionsMenu) como legados
+       (solutionsBtn/solutionsMenu). Se reintenta tras el montaje. */
+    (function(){
+      function wire(btn, menu){
+        if(!btn || !menu || btn.dataset.wired) return;
+        const open  = ()=>{ menu.classList.remove('hidden'); menu.classList.add('show'); btn.setAttribute('aria-expanded','true'); };
+        const close = ()=>{ menu.classList.add('hidden'); menu.classList.remove('show'); btn.setAttribute('aria-expanded','false'); };
+        const toggle= ()=> (menu.classList.contains('hidden') ? open() : close());
+        btn.addEventListener('click', (e)=>{ e.preventDefault(); e.stopPropagation(); toggle(); });
+        btn.addEventListener('mouseenter', open);
+        menu.parentNode.addEventListener('mouseleave', ()=> setTimeout(close, 120));
+        document.addEventListener('click', (e)=>{ if(!menu.contains(e.target) && e.target!==btn) close(); });
+        document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') close(); });
+        btn.dataset.wired = '1';
+      }
+      function tryWire(){
+        const btn  = document.getElementById('navSolutionsBtn') || document.getElementById('solutionsBtn');
+        const menu = document.getElementById('navSolutionsMenu')|| document.getElementById('solutionsMenu');
+        wire(btn, menu);
+      }
+      document.addEventListener('DOMContentLoaded', ()=>{ tryWire(); setTimeout(tryWire, 250); setTimeout(tryWire, 800); });
+    })();
   </script>
-  ============================ [/REMOVED] ============================= -->
 
-  <!-- ============================ [NEW] ============================ -->
-  <!-- Carga del header/footer centralizados -->
+  <!-- ========= Carga del header/footer + hotfix universal ========= -->
   <script defer src="/js/nav.js"></script>
   <script defer src="/js/footer.js"></script>
-  <!-- ========================== [/NEW] ============================ -->
-  <script src="/js/fix-nav.js" defer></script>
-
+  <script defer src="/js/fix-nav.js"></script>
 </body>
 </html>
