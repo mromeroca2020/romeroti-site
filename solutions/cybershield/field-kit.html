@@ -5,22 +5,22 @@
     Archivo: /solutions/cybershield/field-kit.html  (o .../index.html)
     Propósito: "Field Kit" para demos/assessment rápido.
     Claves:
-    - Favicons RomanoTI unificados
+    - Favicons RomanoTI unificados (con cache-buster ?v=4)
     - Navbar estándar con dropdown "Solutions"
     - Estilo de marca (gradiente azul, botones)
-    - Hotfix universal del menú (/js/fix-nav.js) + fallback local
-    - Lógica del Field Kit (tu JS) respetada
+    - Hotfix universal del menú (/js/fix-nav.js) + fallback local robusto
+    - Lógica del Field Kit (JS) respetada
   ========================================================== -->
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>CyberShield Field Kit | RomanoTI Solutions</title>
 
   <!-- Favicons (RomanoTI) -->
-  <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png?v=3">
-  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png?v=3">
-  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16.png?v=3">
-  <link rel="icon" href="/favicon.ico?v=3" sizes="any">
-  <link rel="mask-icon" href="/img/safari-pinned-tab.svg?v=3" color="#2563eb">
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png?v=4">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png?v=4">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16.png?v=4">
+  <link rel="shortcut icon" href="/favicon.ico?v=4" type="image/x-icon">
+  <link rel="mask-icon" href="/img/safari-pinned-tab.svg?v=4" color="#2563eb">
   <meta name="theme-color" content="#2563eb">
 
   <!-- Tailwind + Fuente -->
@@ -42,8 +42,11 @@
     .badge{display:inline-block;border:1px solid #cbd5e1;border-radius:999px;padding:4px 10px;font-size:12px;background:#f8fafc}
     .card{border:1px solid #e5e7eb;border-radius:16px;box-shadow:0 10px 30px -12px rgba(0,0,0,.12)}
     pre.fieldkit-out{background:var(--rt-code);color:#eaeef3;padding:12px;border-radius:10px;max-height:46vh;overflow:auto}
+    /* dropdown legacy + tailwind */
     .dropdown{display:none}
     .dropdown.show{display:block}
+    /* faltaba esta clase que usa tu JS para los placeholders */
+    .muted{color:#94a3b8;font-style:italic}
   </style>
 </head>
 <body class="bg-gray-50">
@@ -62,15 +65,16 @@
         <nav class="hidden md:flex items-center space-x-8">
           <a href="/" class="text-gray-700 hover:text-blue-600 font-medium">Home</a>
 
-          <!-- Dropdown Solutions (compatible con fix-nav.js) -->
+          <!-- Dropdown Solutions (compatible con fix-nav.js y con fallback local) -->
           <div class="relative">
-            <button id="solutionsBtn" class="text-gray-900 font-semibold inline-flex items-center focus:outline-none">
+            <button id="solutionsBtn" class="text-gray-900 font-semibold inline-flex items-center focus:outline-none" aria-haspopup="true" aria-expanded="false">
               Solutions
               <svg class="ml-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                 <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.58l3.71-3.35a.75.75 0 111.02 1.1l-4.2 3.79a.75.75 0 01-1.02 0l-4.2-3.79a.75.75 0 01.02-1.06z" clip-rule="evenodd"/>
               </svg>
             </button>
-            <div id="solutionsMenu" class="dropdown absolute right-0 mt-2 w-64 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5">
+            <!-- Nota: añadimos 'hidden' además de 'dropdown' para soportar ambos modos -->
+            <div id="solutionsMenu" class="dropdown hidden absolute right-0 mt-2 w-64 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5 z-50">
               <a href="/solutions/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">Overview</a>
               <a href="/solutions/cybershield/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">CyberShield (MDR)</a>
               <a href="/solutions/cybershield/soc-console.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">SOC Console</a>
@@ -201,19 +205,38 @@
 
   <!-- =================== SCRIPTS =================== -->
 
-  <!-- Fallback de dropdown (por compatibilidad con .dropdown/.show).
-       fix-nav.js hará el manejo unificado, pero dejamos esto por si
-       fallara el defer/orden de carga. -->
+  <!-- Fallback de dropdown (robusto: soporta .show/.hidden y estilos inline).
+       Permite click y hover, y no interfiere con fix-nav.js si éste carga. -->
   <script>
     (function(){
-      const btn=document.getElementById('solutionsBtn');
-      const menu=document.getElementById('solutionsMenu');
-      if(!btn||!menu) return;
-      const toggle=()=>menu.classList.toggle('show');
-      const close =()=>menu.classList.remove('show');
-      btn.addEventListener('click',(e)=>{e.preventDefault();e.stopPropagation();toggle();});
+      const btn  = document.getElementById('solutionsBtn');
+      const menu = document.getElementById('solutionsMenu');
+      if(!btn || !menu) return;
+
+      function open(){
+        menu.classList.add('show');
+        menu.classList.remove('hidden');
+        menu.style.display = 'block';
+        btn.setAttribute('aria-expanded','true');
+      }
+      function close(){
+        menu.classList.remove('show');
+        menu.classList.add('hidden');
+        menu.style.display = '';
+        btn.setAttribute('aria-expanded','false');
+      }
+      function isOpen(){
+        return menu.classList.contains('show') || !menu.classList.contains('hidden') || menu.style.display==='block';
+      }
+      function toggle(){ isOpen() ? close() : open(); }
+
+      btn.addEventListener('click',(e)=>{ e.preventDefault(); e.stopPropagation(); toggle();});
       document.addEventListener('click',(e)=>{ if(!menu.contains(e.target) && e.target!==btn) close();});
       document.addEventListener('keydown',(e)=>{ if(e.key==='Escape') close(); });
+
+      // Hover opcional como refuerzo
+      btn.addEventListener('mouseenter', open);
+      btn.parentNode.addEventListener('mouseleave', ()=>setTimeout(close,120));
     })();
   </script>
 
@@ -356,6 +379,6 @@
   </script>
 
   <!-- Hotfix universal de navegación -->
-  <script src="/js/fix-nav.js" defer></script>
+  <script src="/js/fix-nav.js?v=4" defer></script>
 </body>
 </html>
