@@ -1,73 +1,120 @@
-/* /js/fix-nav.js — Hotfix universal para el dropdown “Solutions”
-   - Soporta menús que usan .hidden o .dropdown/.show
-   - Soporta variantes de IDs: solutionsBtn/solutionsMenu y solutionsMenuBtn/solutionsMenu
-   - Fallback: detecta por el texto del botón (“Solutions”) dentro del <header>
+/* /js/fix-nav.js
+   Hotfix robusto y *idempotente* para el menú “Solutions”.
+   Soporta variaciones que ya existen en tu sitio:
+   - Botones con id: solutionsBtn o solutionsMenuBtn
+   - Botones cuyo texto sea “Solutions” (fallback)
+   - Menús con: .hidden (Tailwind) o .dropdown/.show (legacy)
+   - Múltiples headers y/o menús en la misma página
+
+   Comportamiento:
+   - Inicialmente oculta el menú si está visible por CSS/HTML.
+   - Toggle con click en el botón.
+   - Cierra con click afuera o tecla Escape.
+   - Actualiza aria-expanded y aria-controls cuando es posible.
 */
-(function(){
-  function isHidden(menu){
-    return menu.classList.contains('hidden') ||
-           (menu.classList.contains('dropdown') && !menu.classList.contains('show')) ||
-           (menu.style.display === 'none');
+
+(function () {
+  function normText(el) { return (el.textContent || '').trim().toLowerCase(); }
+
+  function isHidden(menu) {
+    if (menu.classList.contains('hidden')) return true;
+    if (menu.classList.contains('dropdown') && !menu.classList.contains('show')) return true;
+    const cs = getComputedStyle(menu);
+    return cs.display === 'none' || cs.visibility === 'hidden';
   }
-  function hide(menu){
-    if(menu.classList.contains('dropdown')){
-      menu.classList.remove('show');
-    } else if(menu.classList.contains('hidden')) {
-      /* ya oculto */
-    } else if(menu.style.display){
-      menu.style.display = '';
-    } else {
-      menu.classList.add('hidden');
-    }
+
+  function hideMenu(menu, btn) {
+    if (!menu) return;
+    if (menu.classList.contains('dropdown')) menu.classList.remove('show');
+    else if (!menu.classList.contains('hidden')) menu.classList.add('hidden');
+    else menu.style.display = 'none';
+
+    if (btn) btn.setAttribute('aria-expanded', 'false');
   }
-  function toggle(menu){
-    if(menu.classList.contains('dropdown')){
-      menu.classList.toggle('show');
-      return;
-    }
-    if(menu.classList.contains('hidden')){
+
+  function showMenu(menu, btn) {
+    if (!menu) return;
+    if (menu.classList.contains('dropdown')) menu.classList.add('show');
+    else {
       menu.classList.remove('hidden');
-      return;
+      menu.style.display = 'block';
     }
-    // fallback inline
-    menu.style.display = (menu.style.display === 'block') ? '' : 'block';
+    if (btn) btn.setAttribute('aria-expanded', 'true');
   }
-  function ensureStartHidden(menu){
-    if(menu.classList.contains('dropdown')){
-      menu.classList.remove('show');
-      return;
-    }
-    if(!menu.classList.contains('hidden') && !menu.style.display){
-      menu.classList.add('hidden');
-    }
+
+  function toggleMenu(menu, btn) {
+    if (!menu) return;
+    if (isHidden(menu)) showMenu(menu, btn);
+    else hideMenu(menu, btn);
   }
-  function wire(btn, menu){
-    if(!btn || !menu) return;
+
+  function ensureStartHidden(menu) {
+    // Si está visible al cargar, lo ocultamos para tener un estado controlado
+    if (!isHidden(menu)) hideMenu(menu);
+  }
+
+  function findMenuForButton(btn) {
+    // 1) si hay id clásico
+    const direct = document.getElementById('solutionsMenu');
+    if (direct && btn.closest('header')?.contains(direct)) return direct;
+
+    // 2) dentro de un contenedor típico (.relative padre del botón)
+    const box = btn.closest('.relative') || btn.parentElement || btn.closest('header');
+    if (box) {
+      // Preferimos elementos con apariencia de dropdown/absolute
+      const candidates = box.querySelectorAll(
+        '#solutionsMenu, .dropdown, div[class*="absolute"], div[role="menu"], div.menu'
+      );
+      if (candidates.length) return candidates[0];
+    }
+
+    // 3) busca el primer menú plausible dentro del header
+    const header = btn.closest('header') || document;
+    const fallback = header.querySelector('#solutionsMenu, .dropdown, div[class*="absolute"], div[role="menu"]');
+    return fallback || null;
+  }
+
+  function wire(btn) {
+    const menu = findMenuForButton(btn);
+    if (!menu) return;
+
+    // Asegura estado inicial oculto
     ensureStartHidden(menu);
-    btn.addEventListener('click', (e)=>{ e.preventDefault(); e.stopPropagation(); toggle(menu); });
-    document.addEventListener('click', (e)=>{ if(!menu.contains(e.target) && e.target!==btn) hide(menu); });
-    document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') hide(menu); });
-  }
 
-  function byIds(){
-    wire(document.getElementById('solutionsBtn'),     document.getElementById('solutionsMenu'));
-    wire(document.getElementById('solutionsMenuBtn'), document.getElementById('solutionsMenu'));
-  }
-  function byText(){
-    const headers = document.querySelectorAll('header');
-    headers.forEach(h=>{
-      const candidates = h.querySelectorAll('button,a');
-      candidates.forEach(b=>{
-        if(/^\s*solutions\s*$/i.test(b.textContent||'')){
-          const box  = b.closest('.relative') || b.parentElement;
-          const menu = box ? (box.querySelector('.dropdown') ||
-                              box.querySelector('div[class*="absolute"]') ||
-                              box.querySelector('div.menu')) : null;
-          if(menu) wire(b, menu);
-        }
-      });
+    // Accesibilidad mínima
+    if (!btn.id) btn.id = 'solutionsToggle-' + Math.random().toString(36).slice(2, 7);
+    if (!menu.id) menu.id = 'solutionsMenu-' + Math.random().toString(36).slice(2, 7);
+    btn.setAttribute('aria-controls', menu.id);
+    btn.setAttribute('aria-expanded', 'false');
+
+    // Toggle y cierres
+    const onClick = (e) => { e.preventDefault(); e.stopPropagation(); toggleMenu(menu, btn); };
+    btn.addEventListener('click', onClick);
+
+    document.addEventListener('click', (e) => {
+      if (!menu.contains(e.target) && e.target !== btn) hideMenu(menu, btn);
     });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') hideMenu(menu, btn); });
   }
 
-  document.addEventListener('DOMContentLoaded', ()=>{ byIds(); byText(); });
+  function wireAll() {
+    // 1) por IDs conocidos
+    const byId = ['solutionsBtn', 'solutionsMenuBtn']
+      .map(id => document.getElementById(id))
+      .filter(Boolean);
+
+    // 2) por texto del botón “Solutions” dentro de headers
+    const btnsByText = Array.from(document.querySelectorAll('header button, header a'))
+      .filter(el => normText(el) === 'solutions');
+
+    // Unificamos y cableamos sin duplicar
+    const set = new Set();
+    [...byId, ...btnsByText].forEach(b => { if (!set.has(b)) { set.add(b); wire(b); } });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', wireAll);
+  } else {
+    wireAll();
+  }
 })();
