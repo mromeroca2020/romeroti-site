@@ -5,21 +5,21 @@
     Archivo: /solutions/cybershield/easm-console.html
     Propósito: Consola EASM (External Attack Surface Management)
     Cambios clave:
-      - Navbar unificado (IDs: navSolutionsBtn / navSolutionsMenu)
-      - Favicons RomanoTI corregidos
+      - Navbar unificado (IDs: solutionsBtn / solutionsMenu)
+      - Favicons RomanoTI corregidos (con cache-buster)
       - Enlaces “Solutions” consistentes
-      - Se conserva y documenta toda la lógica de la herramienta
+      - Fallback de dropdown robusto (+ /js/fix-nav.js)
   ========================================================== -->
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>CyberShield – EASM Console | RomanoTI</title>
 
   <!-- Favicons (RomanoTI) -->
-  <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16.png">
-  <link rel="shortcut icon" href="/favicon.ico">
-  <link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#2563eb">
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png?v=4">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png?v=4">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16.png?v=4">
+  <link rel="shortcut icon" href="/favicon.ico?v=4" type="image/x-icon">
+  <link rel="mask-icon" href="/img/safari-pinned-tab.svg?v=4" color="#2563eb">
   <meta name="theme-color" content="#2563eb">
 
   <!-- Tailwind + Fuente -->
@@ -39,11 +39,14 @@
     .ok{background:#ecfdf5;color:#065f46;border:1px solid #a7f3d0}
     .warn{background:#fffbeb;color:#92400e;border:1px solid #fcd34d}
     .err{background:#fef2f2;color:#991b1b;border:1px solid #fecaca}
+    /* compatibilidad dropdown legacy + tailwind */
+    .dropdown{display:none}
+    .dropdown.show{display:block}
   </style>
 </head>
 <body class="bg-gray-50">
 
-  <!-- ===== NAVBAR unificada (IDs estándar para /js/fix-nav.js) ===== -->
+  <!-- ===== NAVBAR (IDs estándar para fix-nav.js) ===== -->
   <header class="bg-white shadow-sm sticky top-0 z-50">
     <div class="container mx-auto px-6 py-3">
       <div class="flex items-center justify-between">
@@ -59,7 +62,7 @@
 
           <!-- Dropdown Solutions -->
           <div class="relative">
-            <button id="navSolutionsBtn"
+            <button id="solutionsBtn"
                     class="text-gray-700 hover:text-blue-600 font-medium inline-flex items-center focus:outline-none"
                     aria-haspopup="true" aria-expanded="false">
               Solutions
@@ -68,13 +71,14 @@
               </svg>
             </button>
 
-            <div id="navSolutionsMenu"
-                 class="hidden absolute left-0 mt-2 w-72 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5 z-50">
+            <!-- Nota: 'hidden' + 'dropdown' para soportar ambos mecanismos -->
+            <div id="solutionsMenu"
+                 class="hidden dropdown absolute left-0 mt-2 w-72 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5 z-50">
               <a href="/solutions/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">Overview</a>
               <a href="/solutions/cybershield/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">CyberShield (MDR)</a>
               <a href="/solutions/cybershield/soc-console.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">SOC Console</a>
               <a href="/solutions/cybershield/easm-console.html" class="block px-4 py-2 text-sm text-blue-700 bg-gray-50 font-semibold">EASM Console</a>
-              <a href="/solutions/cybershield/field-kit/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">Field Kit (engineers)</a>
+              <a href="/solutions/cybershield/field-kit.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">Field Kit (engineers)</a>
             </div>
           </div>
 
@@ -330,7 +334,7 @@ api"></textarea>
       alert('Resumen copiado en Markdown ✅');
     });
 
-    // ===== POWERHELL GENERATOR =====
+    // ===== POWERSHELL GENERATOR =====
     $('btnGenPS').addEventListener('click', () => {
       const key = $('orgKey').value.trim() || localStorage.getItem(KEY_K) || '';
       if(!key){ alert('Ingresa tu Org API Key'); return; }
@@ -419,7 +423,29 @@ if($res.findings){
   })();
   </script>
 
+  <!-- ===== Fallback de dropdown (robusto; no interfiere con fix-nav.js) ===== -->
+  <script>
+    (function(){
+      const btn  = document.getElementById('solutionsBtn');
+      const menu = document.getElementById('solutionsMenu');
+      if(!btn || !menu) return;
+
+      function open(){ menu.classList.add('show'); menu.classList.remove('hidden'); menu.style.display='block'; btn.setAttribute('aria-expanded','true'); }
+      function close(){ menu.classList.remove('show'); menu.classList.add('hidden'); menu.style.display=''; btn.setAttribute('aria-expanded','false'); }
+      function isOpen(){ return menu.classList.contains('show') || !menu.classList.contains('hidden') || menu.style.display==='block'; }
+      function toggle(){ isOpen()? close() : open(); }
+
+      btn.addEventListener('click',(e)=>{ e.preventDefault(); e.stopPropagation(); toggle(); });
+      document.addEventListener('click',(e)=>{ if(!menu.contains(e.target) && e.target!==btn) close(); });
+      document.addEventListener('keydown',(e)=>{ if(e.key==='Escape') close(); });
+
+      // Hover como refuerzo
+      btn.addEventListener('mouseenter', open);
+      btn.parentNode.addEventListener('mouseleave', ()=>setTimeout(close,120));
+    })();
+  </script>
+
   <!-- ===== HOTFIX universal del menú Solutions ===== -->
-  <script src="/js/fix-nav.js" defer></script>
+  <script src="/js/fix-nav.js?v=4" defer></script>
 </body>
 </html>
