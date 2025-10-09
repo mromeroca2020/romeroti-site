@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- =========================================================
+    Archivo: /it-soc.html
+    Propósito: Página de servicios SOC + Quick Tools + Live Toolbox.
+    Cambios clave:
+      - Favicons RomanoTI con cache-buster (?v=4).
+      - Header y Footer centralizados (nav.js / footer.js).
+      - Fallback robusto del dropdown “Solutions”.
+      - Lógica SOC intacta (Quick Tools + Live Toolbox).
+  ========================================================== -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>SOC Services | RomanoTI Solutions</title>
@@ -11,20 +20,13 @@
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
 
-  <!-- ============================ [NEW] ============================ -->
-  <!-- FAVICONS (RomanoTI unificados) -->
-  <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16.png">
-  <link rel="shortcut icon" href="/favicon.ico">
-  <link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#2563eb">
+  <!-- =============== Favicons RomanoTI (cache-buster v=4) =============== -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png?v=4">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png?v=4">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16.png?v=4">
+  <link rel="shortcut icon" href="/favicon.ico?v=4">
+  <link rel="mask-icon" href="/img/safari-pinned-tab.svg?v=4" color="#2563eb">
   <meta name="theme-color" content="#2563eb">
-  <!-- ========================== [/NEW] ============================ -->
-
-  <!-- ============================ [REMOVED] ============================
-  Favicon temporal
-  <link rel="icon" href="https://ui-avatars.com/api/?name=R&background=1e40af&color=fff&size=64" type="image/png">
-  ============================ [/REMOVED] ============================= -->
 
   <!-- Estilos rápidos -->
   <style>
@@ -46,17 +48,8 @@
 </head>
 <body class="bg-gray-50">
 
-  <!-- ============================ [NEW] ============================ -->
   <!-- Header centralizado (inyectado por /js/nav.js) -->
   <div id="app-header"></div>
-  <!-- ========================== [/NEW] ============================ -->
-
-  <!-- ============================ [REMOVED] ============================
-  ===== Header estático con menú =====
-  <header class="bg-white shadow-md sticky top-0 z-50">
-    ...
-  </header>
-  ============================ [/REMOVED] ============================= -->
 
   <!-- ===== Hero SOC ===== -->
   <section class="hero-bg text-white py-28">
@@ -211,7 +204,7 @@
   <section class="py-16 bg-white">
     <div class="container mx-auto px-6 max-w-6xl">
       <div class="text-center mb-10">
-        <h2 class="text-3xl font-bold">SOC Live Toolbox</h2>
+        <h2 class="text-3cxl md:text-3xl font-bold">SOC Live Toolbox</h2>
         <p class="text-xl text-gray-600">
           Demos de alertas y respuesta: <code>/soc/alerts</code>, <code>/soc/alerts/recent</code>, <code>/soc/playbooks/run</code>
         </p>
@@ -284,20 +277,8 @@
     </div>
   </section>
 
-  <!-- ============================ [NEW] ============================ -->
   <!-- Footer centralizado (inyectado por /js/footer.js) -->
   <div id="app-footer"></div>
-  <!-- ========================== [/NEW] ============================ -->
-
-  <!-- ============================ [REMOVED] ============================
-  ===== Footer estático =====
-  <footer class="bg-gray-900 text-white py-8">
-    <div class="container mx-auto px-6 text-center">
-      <p>© 2025 RomanoTI Solutions. All rights reserved.</p>
-      <p class="mt-2">Serving Canada</p>
-    </div>
-  </footer>
-  ============================ [/REMOVED] ============================= -->
 
   <!-- ====== JS SOC (Quick Tools + Live Toolbox) ====== -->
   <script>
@@ -311,190 +292,98 @@
    *   3) /ext/tls        -> TLS Cert Expiry
    *   4) /soc/alerts, /soc/alerts/recent, /soc/playbooks/run (demo SOC)
    */
-
-  // === 1) Config: URL base de tu API en Render ===
   const API_BASE = 'https://romanoti-tools-api.onrender.com';
 
-  // === 2) Helpers de DOM/UX ===
+  // Helpers de DOM/UX
   const $ = (id) => document.getElementById(id);
-
-  function pretty(preId, data) {
-    const el = $(preId);
-    try { el.textContent = (typeof data==='string') ? data : JSON.stringify(data, null, 2); }
-    catch { el.textContent = String(data); }
-  }
+  function pretty(preId, data){ const el=$(preId); try{ el.textContent=(typeof data==='string')?data:JSON.stringify(data,null,2);}catch{ el.textContent=String(data);} }
   function msg(id, text){ $(id).textContent = text || ''; }
+  function badge(text, type='ok'){ const s=document.createElement('span'); s.className=`badge ${type==='ok'?'badge-ok':type==='warn'?'badge-warn':'badge-err'}`; s.textContent=text; return s; }
 
-  // Badges rápidos (estado visual)
-  function badge(text, type='ok') {
-    const span = document.createElement('span');
-    span.className = `badge ${type==='ok'?'badge-ok':type==='warn'?'badge-warn':'badge-err'}`;
-    span.textContent = text;
-    return span;
-  }
+  // API Key
+  function loadKey(){ $('orgKey').value = localStorage.getItem('romanoti_org_key') || ''; }
+  function saveKey(){ const k=$('orgKey').value.trim(); localStorage.setItem('romanoti_org_key', k); msg('keyMsg', k?'✅ API Key guardada localmente.':'API Key vacía.'); }
+  function getKeyOrWarn(){ const k=$('orgKey').value.trim() || localStorage.getItem('romanoti_org_key') || ''; if(!k) alert('Ingresa tu Org API Key primero.'); return k; }
 
-  // === 3) Org API Key en localStorage ===
-  function loadKey(){
-    $('orgKey').value = localStorage.getItem('romanoti_org_key') || '';
-  }
-  function saveKey(){
-    const k = $('orgKey').value.trim();
-    localStorage.setItem('romanoti_org_key', k);
-    msg('keyMsg', k ? '✅ API Key guardada localmente.' : 'API Key vacía.');
-  }
-  function getKeyOrWarn(){
-    const k = $('orgKey').value.trim() || localStorage.getItem('romanoti_org_key') || '';
-    if(!k) alert('Ingresa tu Org API Key primero.');
-    return k;
-  }
-
-  // === 4) Email Security Posture (/ext/emaildns) ===
+  // Email Posture
   async function runEmailPosture(){
-    const key = getKeyOrWarn(); if(!key) return;
-
-    const domain = $('espDomain').value.trim();
-    $('espOut').textContent = 'Running…';
-    $('espBadges').innerHTML = '';
-
+    const key=getKeyOrWarn(); if(!key) return;
+    const domain=$('espDomain').value.trim();
+    $('espOut').textContent='Running…'; $('espBadges').innerHTML='';
     try{
-      const res = await fetch(`${API_BASE}/ext/emaildns`, {
-        method:'POST',
-        headers:{ 'x-api-key': key, 'content-type':'application/json', 'accept':'application/json' },
-        body: JSON.stringify({ domain })
-      });
-      const data = await res.json();
+      const res=await fetch(`${API_BASE}/ext/emaildns`,{method:'POST',headers:{'x-api-key':key,'content-type':'application/json','accept':'application/json'},body:JSON.stringify({domain})});
+      const data=await res.json();
 
-      // Badges rápidos (interpretación simple)
-      const mx = data.mx || [];
-      if (mx.length === 1 && (typeof mx[0] === 'string') && mx[0].trim() === '0 .') {
-        $('espBadges').appendChild(badge('Null MX (no recibe correo)', 'warn'));
-      } else if (mx.length > 0) {
-        $('espBadges').appendChild(badge('MX OK', 'ok'));
-      } else {
-        $('espBadges').appendChild(badge('MX faltante', 'err'));
-      }
+      const mx=data.mx||[];
+      if(mx.length===1 && (typeof mx[0]==='string') && mx[0].trim()==='0 .'){ $('espBadges').appendChild(badge('Null MX (no recibe correo)','warn')); }
+      else if(mx.length>0){ $('espBadges').appendChild(badge('MX OK','ok')); } else { $('espBadges').appendChild(badge('MX faltante','err')); }
 
-      const spf = (data.spf || []).find(s => s.toLowerCase().startsWith('v=spf1'));
-      if (spf) $('espBadges').appendChild(badge('SPF OK', 'ok'));
-      else     $('espBadges').appendChild(badge('SPF faltante', 'err'));
+      const spf=(data.spf||[]).find(s=>s.toLowerCase().startsWith('v=spf1'));
+      if(spf) $('espBadges').appendChild(badge('SPF OK','ok')); else $('espBadges').appendChild(badge('SPF faltante','err'));
 
-      const dmarc = (data.dmarc || []).find(s => s.toLowerCase().startsWith('v=dmarc1'));
-      if (dmarc) {
-        const pol = (dmarc.toLowerCase().match(/p=(none|quarantine|reject)/) || [,'none'])[1];
-        $('espBadges').appendChild(badge(`DMARC p=${pol}`, pol==='reject'?'ok':pol==='quarantine'?'warn':'err'));
-      } else {
-        $('espBadges').appendChild(badge('DMARC faltante', 'err'));
-      }
+      const dmarc=(data.dmarc||[]).find(s=>s.toLowerCase().startsWith('v=dmarc1'));
+      if(dmarc){ const pol=(dmarc.toLowerCase().match(/p=(none|quarantine|reject)/)||[,'none'])[1]; $('espBadges').appendChild(badge(`DMARC p=${pol}`, pol==='reject'?'ok':pol==='quarantine'?'warn':'err')); }
+      else { $('espBadges').appendChild(badge('DMARC faltante','err')); }
 
       pretty('espOut', data);
-    }catch(e){
-      pretty('espOut', { error: String(e) });
-    }
+    }catch(e){ pretty('espOut',{error:String(e)}); }
   }
 
-  // === 5) DKIM Lookup (/noc/dns-lookup -> TXT) ===
+  // DKIM
   async function runDkimLookup(){
-    const key = getKeyOrWarn(); if(!key) return;
-
-    const domain   = $('dkimDomain').value.trim();
-    const selector = $('dkimSelector').value.trim();
-    if (!domain || !selector) { pretty('dkimOut', { error: 'Ingresa dominio y selector' }); return; }
-
-    const qname = `${selector}._domainkey.${domain}`;
-    $('dkimOut').textContent = `Consultando TXT en ${qname} …`;
-
+    const key=getKeyOrWarn(); if(!key) return;
+    const domain=$('dkimDomain').value.trim(); const selector=$('dkimSelector').value.trim();
+    if(!domain || !selector){ pretty('dkimOut',{error:'Ingresa dominio y selector'}); return; }
+    const qname=`${selector}._domainkey.${domain}`; $('dkimOut').textContent=`Consultando TXT en ${qname} …`;
     try{
-      const res = await fetch(`${API_BASE}/noc/dns-lookup`, {
-        method:'POST',
-        headers:{ 'x-api-key': key, 'content-type':'application/json', 'accept':'application/json' },
-        body: JSON.stringify({ domain: qname, type: 'TXT' })
-      });
-      const data = await res.json();
-      pretty('dkimOut', data);
-    }catch(e){
-      pretty('dkimOut', { error: String(e) });
-    }
+      const res=await fetch(`${API_BASE}/noc/dns-lookup`,{method:'POST',headers:{'x-api-key':key,'content-type':'application/json','accept':'application/json'},body:JSON.stringify({domain:qname,type:'TXT'})});
+      const data=await res.json(); pretty('dkimOut', data);
+    }catch(e){ pretty('dkimOut',{error:String(e)}); }
   }
 
-  // === 6) TLS Cert Expiry (/ext/tls) ===
+  // TLS
   async function runTlsCheck(){
-    const key = getKeyOrWarn(); if(!key) return;
-
-    const host = $('tlsHost').value.trim();
-    const port = parseInt($('tlsPort').value||'443', 10);
-
-    $('tlsOut').textContent = 'Running…';
+    const key=getKeyOrWarn(); if(!key) return;
+    const host=$('tlsHost').value.trim(); const port=parseInt($('tlsPort').value||'443',10);
+    $('tlsOut').textContent='Running…';
     try{
-      const res = await fetch(`${API_BASE}/ext/tls`, {
-        method:'POST',
-        headers:{ 'x-api-key': key, 'content-type':'application/json', 'accept':'application/json' },
-        body: JSON.stringify({ host, port })
-      });
-      const data = await res.json();
-      pretty('tlsOut', data);
-    }catch(e){
-      pretty('tlsOut', { error: String(e) });
-    }
+      const res=await fetch(`${API_BASE}/ext/tls`,{method:'POST',headers:{'x-api-key':key,'content-type':'application/json','accept':'application/json'},body:JSON.stringify({host,port})});
+      const data=await res.json(); pretty('tlsOut', data);
+    }catch(e){ pretty('tlsOut',{error:String(e)}); }
   }
 
-  // === 7) SOC Live Toolbox (nuevo) ===
-  async function socPost(path, body){
-    const key = getKeyOrWarn(); if(!key) return { ok:false, status:0, error:'API key missing' };
-    try{
-      const res  = await fetch(API_BASE + path, {
-        method:'POST',
-        headers:{ 'x-api-key': key, 'content-type':'application/json', 'accept':'application/json' },
-        body: JSON.stringify(body||{})
-      });
-      const text = await res.text();
-      try{ return { ok:res.ok, status:res.status, data: JSON.parse(text) }; }
-      catch{ return { ok:res.ok, status:res.status, data: text }; }
-    }catch(e){ return { ok:false, status:0, error:String(e) }; }
-  }
-  async function socGet(path){
-    const key = getKeyOrWarn(); if(!key) return { ok:false, status:0, error:'API key missing' };
-    try{
-      const res  = await fetch(API_BASE + path, {
-        headers:{ 'x-api-key': key, 'accept':'application/json' }
-      });
-      const text = await res.text();
-      try{ return { ok:res.ok, status:res.status, data: JSON.parse(text) }; }
-      catch{ return { ok:res.ok, status:res.status, data: text }; }
-    }catch(e){ return { ok:false, status:0, error:String(e) }; }
-  }
+  // SOC Live Toolbox
+  async function socPost(path, body){ const key=getKeyOrWarn(); if(!key) return {ok:false,status:0,error:'API key missing'}; try{ const res=await fetch(API_BASE+path,{method:'POST',headers:{'x-api-key':key,'content-type':'application/json','accept':'application/json'},body:JSON.stringify(body||{})}); const text=await res.text(); try{return{ok:res.ok,status:res.status,data:JSON.parse(text)}}catch{return{ok:res.ok,status:res.status,data:text}} }catch(e){return{ok:false,status:0,error:String(e)}}}
+  async function socGet(path){ const key=getKeyOrWarn(); if(!key) return {ok:false,status:0,error:'API key missing'}; try{ const res=await fetch(API_BASE+path,{headers:{'x-api-key':key,'accept':'application/json'}}); const text=await res.text(); try{return{ok:res.ok,status:res.status,data:JSON.parse(text)}}catch{return{ok:res.ok,status:res.status,data:text}} }catch(e){return{ok:false,status:0,error:String(e)}}}
 
   async function sendAlert(){
-    const source   = $('alSource').value.trim().toLowerCase();
-    const severity = $('alSeverity').value.trim().toLowerCase();
-    const title    = $('alTitle').value.trim();
-    let   details  = {};
-    const raw      = $('alDetails').value.trim();
-    if (raw){
-      try{ details = JSON.parse(raw); }
-      catch(e){ pretty('outAlert',{error:'JSON inválido en detalles',e:String(e)}); return; }
-    }
+    const source=$('alSource').value.trim().toLowerCase();
+    const severity=$('alSeverity').value.trim().toLowerCase();
+    const title=$('alTitle').value.trim();
+    let details={}; const raw=$('alDetails').value.trim();
+    if(raw){ try{details=JSON.parse(raw);}catch(e){ pretty('outAlert',{error:'JSON inválido en detalles',e:String(e)}); return; } }
     if(!title){ pretty('outAlert',{error:'Falta título'}); return; }
     pretty('outAlert','Enviando…');
-    const resp = await socPost('/soc/alerts', { source, severity, title, details });
+    const resp=await socPost('/soc/alerts',{source,severity,title,details});
     pretty('outAlert', resp);
   }
 
   async function fetchAlerts(){
-    const limit = Math.max(1, Math.min(200, parseInt(($('alLimit').value||'10'),10)));
+    const limit=Math.max(1, Math.min(200, parseInt(($('alLimit').value||'10'),10)));
     pretty('outAlerts','Cargando…');
-    const resp = await socGet('/soc/alerts/recent?limit=' + encodeURIComponent(limit));
+    const resp=await socGet('/soc/alerts/recent?limit='+encodeURIComponent(limit));
     pretty('outAlerts', resp);
   }
 
   async function runPlaybook(){
-    const playbook_id = $('pbId').value;
-    const target      = $('pbTarget').value.trim();
+    const playbook_id=$('pbId').value;
+    const target=$('pbTarget').value.trim();
     pretty('outPB','Ejecutando…');
-    const resp = await socPost('/soc/playbooks/run', { playbook_id, target });
+    const resp=await socPost('/soc/playbooks/run',{playbook_id,target});
     pretty('outPB', resp);
   }
 
-  // === 8) Wire-up ===
+  // Wire-up
   document.addEventListener('DOMContentLoaded', () => {
     loadKey();
     $('btnSaveKey').addEventListener('click', saveKey);
@@ -504,31 +393,40 @@
     $('btnDkimCheck').addEventListener('click', runDkimLookup);
     $('btnTlsCheck').addEventListener('click', runTlsCheck);
 
-    // Live Toolbox (nuevo)
+    // Live Toolbox
     $('btnSendAlert').addEventListener('click', sendAlert);
     $('btnFetchAlerts').addEventListener('click', fetchAlerts);
     $('btnRunPB').addEventListener('click', runPlaybook);
   });
   </script>
 
-  <!-- ============================ [REMOVED] ============================
-  Script de dropdown del header antiguo
+  <!-- ===== Fallback robusto del dropdown “Solutions” ===== -->
   <script>
-  (function() {
-    function wireDropdown(btnId, menuId) {
-      ...
-    }
-    wireDropdown('solutionsMenuBtn','solutionsMenu');
-  })();
+    (function(){
+      function wire(btn, menu){
+        if(!btn || !menu || btn.dataset.wired) return;
+        const open  = ()=>{ menu.classList.remove('hidden'); menu.classList.add('show'); btn.setAttribute('aria-expanded','true'); };
+        const close = ()=>{ menu.classList.add('hidden'); menu.classList.remove('show'); btn.setAttribute('aria-expanded','false'); };
+        const toggle= ()=> (menu.classList.contains('hidden') ? open() : close());
+        btn.addEventListener('click', (e)=>{ e.preventDefault(); e.stopPropagation(); toggle(); });
+        btn.addEventListener('mouseenter', open);
+        menu.parentNode.addEventListener('mouseleave', ()=> setTimeout(close, 120));
+        document.addEventListener('click', (e)=>{ if(!menu.contains(e.target) && e.target!==btn) close(); });
+        document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') close(); });
+        btn.dataset.wired='1';
+      }
+      function tryWire(){
+        const btn  = document.getElementById('navSolutionsBtn') || document.getElementById('solutionsBtn');
+        const menu = document.getElementById('navSolutionsMenu')|| document.getElementById('solutionsMenu');
+        wire(btn, menu);
+      }
+      document.addEventListener('DOMContentLoaded', ()=>{ tryWire(); setTimeout(tryWire, 250); setTimeout(tryWire, 800); });
+    })();
   </script>
-  ============================ [/REMOVED] ============================= -->
 
-  <!-- ============================ [NEW] ============================ -->
-  <!-- Carga del header/footer centralizados -->
+  <!-- Carga del header/footer + hotfix universal -->
   <script defer src="/js/nav.js"></script>
   <script defer src="/js/footer.js"></script>
-  <!-- ========================== [/NEW] ============================ -->
-  <script src="/js/fix-nav.js" defer></script>
-
+  <script defer src="/js/fix-nav.js"></script>
 </body>
 </html>
