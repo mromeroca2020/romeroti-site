@@ -1,68 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- =========================================================
+    Archivo: /solutions/cybershield/field-kit.html  (o .../index.html)
+    Propósito: "Field Kit" para demos/assessment rápido.
+    Claves:
+    - Favicons RomanoTI unificados
+    - Navbar estándar con dropdown "Solutions"
+    - Estilo de marca (gradiente azul, botones)
+    - Hotfix universal del menú (/js/fix-nav.js) + fallback local
+    - Lógica del Field Kit (tu JS) respetada
+  ========================================================== -->
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>CyberShield Field Kit | RomanoTI Solutions</title>
 
-  <!-- ============================ [NEW] ============================ -->
-  <!-- FAVICONS (RomanoTI unificados) -->
-  <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16.png">
-  <link rel="shortcut icon" href="/favicon.ico">
-  <link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#2563eb">
+  <!-- Favicons (RomanoTI) -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png?v=3">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png?v=3">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16.png?v=3">
+  <link rel="icon" href="/favicon.ico?v=3" sizes="any">
+  <link rel="mask-icon" href="/img/safari-pinned-tab.svg?v=3" color="#2563eb">
   <meta name="theme-color" content="#2563eb">
-  <!-- ========================== [/NEW] ============================ -->
 
-  <!-- ============================ [REMOVED] ============================
-  Favicon suelto anterior:
-  <link rel="icon" href="/img/favicon.png" type="image/png"/>
-  ============================ [/REMOVED] ============================= -->
-
+  <!-- Tailwind + Fuente -->
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
 
+  <!-- Estilos RomanoTI (colores y componentes) -->
   <style>
     :root{
       --rt-primary:#2563eb;
       --rt-primary-hover:#1d4ed8;
-      --rt-brand-deep:#1e3a8a;
-      --rt-accent:#10b981;
+      --rt-ink:#0f172a;
       --rt-code:#0e1116;
     }
-    body{font-family:'Montserrat',sans-serif}
+    body{font-family:'Montserrat',sans-serif;background:#f8f9fa;color:var(--rt-ink)}
+    .hero-bg{background:linear-gradient(135deg,#1e3a8a 0%,#2563eb 100%)}
     .btn-primary{background:var(--rt-primary);transition:all .2s}
     .btn-primary:hover{background:var(--rt-primary-hover);transform:translateY(-1px)}
     .badge{display:inline-block;border:1px solid #cbd5e1;border-radius:999px;padding:4px 10px;font-size:12px;background:#f8fafc}
     .card{border:1px solid #e5e7eb;border-radius:16px;box-shadow:0 10px 30px -12px rgba(0,0,0,.12)}
     pre.fieldkit-out{background:var(--rt-code);color:#eaeef3;padding:12px;border-radius:10px;max-height:46vh;overflow:auto}
-    .hidden{display:none}
-    .muted{color:#94a3b8;font-style:italic}
+    .dropdown{display:none}
+    .dropdown.show{display:block}
   </style>
 </head>
-<body class="bg-gray-50 text-gray-900">
+<body class="bg-gray-50">
 
-  <!-- ============================ [REMOVED] ============================
-  Header/nav estático previo con dropdown duplicado
-  <header class="bg-white shadow-md sticky top-0 z-50"> ... </header>
-  ============================ [/REMOVED] ============================= -->
+  <!-- =================== NAVBAR =================== -->
+  <header class="bg-white shadow-sm sticky top-0 z-50">
+    <div class="container mx-auto px-6 py-3">
+      <div class="flex items-center justify-between">
+        <!-- Logo -->
+        <a href="/" class="flex items-center font-bold text-xl">
+          <span class="bg-blue-600 text-white rounded-full w-10 h-10 grid place-items-center mr-3">R</span>
+          RomanoTI Solutions
+        </a>
 
-  <!-- ============================ [NEW] ============================ -->
-  <!-- Mountpoint del HEADER unificado (inyectado por /js/nav.js) -->
-  <div id="app-header"></div>
-  <!-- ========================== [/NEW] ============================ -->
+        <!-- Menú desktop -->
+        <nav class="hidden md:flex items-center space-x-8">
+          <a href="/" class="text-gray-700 hover:text-blue-600 font-medium">Home</a>
 
-  <!-- Title / intro -->
-  <section class="bg-white border-b">
-    <div class="container mx-auto px-6 py-8">
-      <h1 class="text-3xl font-bold">CyberShield Field Kit</h1>
-      <p class="text-gray-600 mt-2">Chequeos rápidos para demos y assessment inicial. Usa tu <code>x-api-key</code>.</p>
+          <!-- Dropdown Solutions (compatible con fix-nav.js) -->
+          <div class="relative">
+            <button id="solutionsBtn" class="text-gray-900 font-semibold inline-flex items-center focus:outline-none">
+              Solutions
+              <svg class="ml-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.58l3.71-3.35a.75.75 0 111.02 1.1l-4.2 3.79a.75.75 0 01-1.02 0l-4.2-3.79a.75.75 0 01.02-1.06z" clip-rule="evenodd"/>
+              </svg>
+            </button>
+            <div id="solutionsMenu" class="dropdown absolute right-0 mt-2 w-64 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5">
+              <a href="/solutions/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">Overview</a>
+              <a href="/solutions/cybershield/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">CyberShield (MDR)</a>
+              <a href="/solutions/cybershield/soc-console.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">SOC Console</a>
+              <a href="/solutions/cybershield/easm-console.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">EASM Console</a>
+              <a href="/solutions/cybershield/field-kit.html" class="block px-4 py-2 text-sm text-blue-700 bg-gray-50 font-semibold">Field Kit</a>
+            </div>
+          </div>
+
+          <a href="/services/tools.html" class="text-gray-700 hover:text-blue-600 font-medium">Tools</a>
+          <a href="/it-noc.html" class="text-gray-700 hover:text-blue-600 font-medium">NOC</a>
+          <a href="/it-soc.html" class="text-gray-700 hover:text-blue-600 font-medium">SOC</a>
+          <a href="https://calendly.com/mauricioromeroca" class="btn-primary text-white px-5 py-2 rounded-lg font-medium">Book Now</a>
+        </nav>
+
+        <!-- Mobile atajo -->
+        <div class="md:hidden">
+          <a href="/" class="text-gray-700 mr-4">Home</a>
+          <a href="/solutions/" class="btn-primary text-white px-4 py-2 rounded-lg">Solutions</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- =================== HERO =================== -->
+  <section class="hero-bg text-white">
+    <div class="container mx-auto px-6 py-10">
+      <h1 class="text-3xl md:text-4xl font-bold">CyberShield Field Kit</h1>
+      <p class="text-lg md:text-xl mt-2">Chequeos rápidos para demos y assessment inicial. Usa tu <code>x-api-key</code>.</p>
     </div>
   </section>
 
-  <!-- API Key -->
+  <!-- =================== CONTENIDO =================== -->
   <section class="container mx-auto px-6">
+    <!-- API Key -->
     <div class="card bg-white p-6 mt-6">
       <label class="block text-sm font-medium text-gray-700 mb-1">Org API Key (<code>x-api-key</code>)</label>
       <div class="flex flex-col md:flex-row gap-3 items-start md:items-center">
@@ -80,16 +122,12 @@
       </div>
       <p id="fkKeyMsg" class="text-sm text-gray-500 mt-2"></p>
     </div>
-  </section>
 
-  <section class="container mx-auto px-6 mt-6">
-    <div class="grid md:grid-cols-2 gap-6">
-
+    <div class="grid md:grid-cols-2 gap-6 mt-6">
       <!-- Left: External posture -->
       <div class="card bg-white p-6">
         <h2 class="text-xl font-bold mb-4">External Posture</h2>
 
-        <!-- Domain -->
         <label class="block text-sm font-medium text-gray-700">Domain</label>
         <input id="fkDomain" class="w-full border rounded-lg px-3 py-2 mb-3" placeholder="example.com" value="example.com">
 
@@ -99,7 +137,6 @@
           </button>
         </div>
 
-        <!-- DKIM -->
         <div class="grid md:grid-cols-2 gap-3 mt-5">
           <div>
             <label class="block text-sm font-medium text-gray-700">DKIM selector</label>
@@ -110,7 +147,6 @@
           </div>
         </div>
 
-        <!-- TLS -->
         <div class="grid md:grid-cols-6 gap-3 mt-6">
           <div class="md:col-span-4">
             <label class="block text-sm font-medium text-gray-700">TLS host</label>
@@ -155,22 +191,33 @@
     </div>
   </section>
 
-  <!-- ============================ [REMOVED] ============================
-  Footer estático previo:
-  <footer class="bg-gray-900 text-white py-8 mt-10"> ... </footer>
-  ============================ [/REMOVED] ============================= -->
+  <!-- =================== FOOTER =================== -->
+  <footer class="bg-gray-900 text-white py-8 mt-10">
+    <div class="container mx-auto px-6 text-center">
+      <p>© 2025 RomanoTI Solutions. All rights reserved.</p>
+      <p class="mt-2">Serving Canada</p>
+    </div>
+  </footer>
 
-  <!-- ============================ [NEW] ============================ -->
-  <!-- Mountpoint del FOOTER unificado (inyectado por /js/footer.js) -->
-  <div id="app-footer" class="mt-10"></div>
-  <!-- ========================== [/NEW] ============================ -->
+  <!-- =================== SCRIPTS =================== -->
 
-  <!-- ============================ [REMOVED] ============================
-  Script del dropdown del navbar (ya no se usa porque el header es centralizado):
-  <script> (function(){ ... })(); </script>
-  ============================ [/REMOVED] ============================= -->
+  <!-- Fallback de dropdown (por compatibilidad con .dropdown/.show).
+       fix-nav.js hará el manejo unificado, pero dejamos esto por si
+       fallara el defer/orden de carga. -->
+  <script>
+    (function(){
+      const btn=document.getElementById('solutionsBtn');
+      const menu=document.getElementById('solutionsMenu');
+      if(!btn||!menu) return;
+      const toggle=()=>menu.classList.toggle('show');
+      const close =()=>menu.classList.remove('show');
+      btn.addEventListener('click',(e)=>{e.preventDefault();e.stopPropagation();toggle();});
+      document.addEventListener('click',(e)=>{ if(!menu.contains(e.target) && e.target!==btn) close();});
+      document.addEventListener('keydown',(e)=>{ if(e.key==='Escape') close(); });
+    })();
+  </script>
 
-  <!-- Field Kit logic (sin cambios funcionales) -->
+  <!-- Lógica del Field Kit (tu JS tal cual, sólo con comentarios de sección) -->
   <script>
   (function(){
     const API_BASE = 'https://romanoti-tools-api.onrender.com';
@@ -197,7 +244,7 @@
       return $('fkKey').value.trim() || localStorage.getItem('romanoti_org_key') || '';
     }
 
-    // Load/save/clear key
+    // Cargar/guardar/eliminar key
     (function initKey(){
       const saved = localStorage.getItem('romanoti_org_key') || '';
       if(saved) {$('fkKey').value = saved; $('fkKeyMsg').textContent='✅ API key cargada desde tu navegador.';}
@@ -308,12 +355,7 @@
   })();
   </script>
 
-  <!-- ============================ [NEW] ============================ -->
-  <!-- Carga del header/footer centralizados -->
-  <script defer src="/js/nav.js"></script>
-  <script defer src="/js/footer.js"></script>
-  <!-- ========================== [/NEW] ============================ -->
+  <!-- Hotfix universal de navegación -->
   <script src="/js/fix-nav.js" defer></script>
-
 </body>
 </html>
