@@ -1,28 +1,32 @@
 <!doctype html>
 <html lang="es">
 <head>
+  <!-- =========================================================
+    Archivo: /services/tools.html
+    Propósito: Consola de herramientas (diagnóstico, agent, checks externos, ping/trace/scan).
+    Claves:
+      - Favicons RomanoTI unificados (con cache-buster ?v=4)
+      - Header/Footer centralizados (nav.js/footer.js)
+      - Hotfix menú “Solutions” (fix-nav.js) + fallback local por si el header ya está montado
+      - Lógica de herramientas intacta (se documentan bloques)
+  ========================================================== -->
   <meta charset="utf-8" />
   <title>RomanoTI Tools</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- ============================ [NEW] ============================ -->
-  <!-- FAVICONS (RomanoTI unificados) -->
-  <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16.png">
-  <link rel="shortcut icon" href="/favicon.ico">
-  <link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#2563eb">
+  <!-- ===== FAVICONS (unificados) ===== -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png?v=4">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png?v=4">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16.png?v=4">
+  <link rel="shortcut icon" href="/favicon.ico?v=4">
+  <link rel="mask-icon" href="/img/safari-pinned-tab.svg?v=4" color="#2563eb">
   <meta name="theme-color" content="#2563eb">
 
-  <!-- Tipografía y Tailwind para estilizar el header/footer centralizados -->
+  <!-- ===== Tipografía + Tailwind (estética consistente del sitio) ===== -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <!-- ========================== [/NEW] ============================ -->
 
-  <!-- ============================ [REMOVED] ============================
-  <link rel="icon" href="/img/favicon.png" type="image/png">
-  ============================ [/REMOVED] ============================= -->
-
+  <!-- ===== Estilos locales (UI de tarjetas y controles) ===== -->
   <style>
     :root{--brand:#2563eb;--brand-dark:#1d4ed8;--ink:#0f172a}
     body{font-family:'Montserrat',system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Helvetica,Arial,sans-serif;margin:0;background:#f6f7fb;color:#111827}
@@ -50,12 +54,10 @@
 </head>
 <body>
 
-  <!-- ============================ [NEW] ============================ -->
-  <!-- Mountpoint del HEADER centralizado -->
+  <!-- ===== Header centralizado montado por /js/nav.js ===== -->
   <div id="app-header"></div>
-  <!-- ========================== [/NEW] ============================ -->
 
-  <!-- HERO -->
+  <!-- ===== HERO ===== -->
   <div class="topbar">
     <div class="wrap">
       <div class="kicker">RomanoTI Tools Platform</div>
@@ -67,9 +69,10 @@
     </div>
   </div>
 
+  <!-- ===== Contenido principal ===== -->
   <div class="wrap" style="margin-top:20px; margin-bottom:56px">
 
-    <!-- Server Diagnostic -->
+    <!-- 1) Server Diagnostic (Netlify Function) -->
     <div class="card">
       <div class="row" style="justify-content:space-between;align-items:center">
         <div>
@@ -81,7 +84,7 @@
       <pre id="diagOut"></pre>
     </div>
 
-    <!-- On-Prem Agent -->
+    <!-- 2) On-Prem Agent (LAN Inventory) -->
     <div class="card">
       <div class="section-title">On-Prem Agent (LAN Inventory)</div>
       <div class="muted" style="margin-bottom:10px">
@@ -125,14 +128,14 @@
       <pre id="agentOut"></pre>
     </div>
 
-    <!-- === External checks (NEW) === -->
+    <!-- 3) External checks (TLS / Email DNS) -->
     <div class="card">
       <div class="section-title">External Checks</div>
       <div class="muted" style="margin-bottom:8px">
         Diagnósticos rápidos sobre dominios externos.
       </div>
 
-      <!-- TLS cert -->
+      <!-- 3.a) TLS cert -->
       <div class="card" style="margin-top:8px">
         <div class="section-title" style="font-size:18px">TLS Certificate Check</div>
         <div class="row">
@@ -144,7 +147,7 @@
         <pre id="tlsOut"></pre>
       </div>
 
-      <!-- Email DNS -->
+      <!-- 3.b) Email DNS -->
       <div class="card" style="margin-top:12px">
         <div class="section-title" style="font-size:18px">Email DNS Check</div>
         <div class="row">
@@ -155,11 +158,10 @@
         <pre id="dnsOut"></pre>
       </div>
     </div>
-    <!-- === /External checks === -->
 
-    <!-- Tools (auth) + Login -->
+    <!-- 4) Tools autenticadas + Login -->
     <div class="grid grid-cols-2">
-      <!-- Login -->
+      <!-- 4.a) Login -->
       <div class="card" id="loginCard">
         <div class="section-title">Login</div>
         <div class="muted" style="margin-bottom:8px">Necesario para usar Ping/Traceroute/Port Scan contra el backend.</div>
@@ -178,7 +180,7 @@
         <div id="loginMsg" class="muted" style="margin-top:6px"></div>
       </div>
 
-      <!-- Herramientas autenticadas -->
+      <!-- 4.b) Herramientas autenticadas -->
       <div class="card hidden" id="toolsCard">
         <div class="row" style="align-items:center;justify-content:space-between">
           <div>
@@ -235,18 +237,17 @@
     <pre id="out"></pre>
   </div>
 
-  <!-- ============================ [NEW] ============================ -->
-  <!-- Mountpoint del FOOTER centralizado -->
+  <!-- ===== Footer centralizado montado por /js/footer.js ===== -->
   <div id="app-footer" class="mt-10"></div>
-  <!-- ========================== [/NEW] ============================ -->
 
-<script>
-  // ===== Config =====
-  const CP_API  = 'https://romanoti-tools-api.onrender.com'; // Control Plane
+  <!-- =================== Lógica de página (idéntica, con comentarios) =================== -->
+  <script>
+  // === Config base (Control Plane + API seleccionable por localStorage) ===
+  const CP_API  = 'https://romanoti-tools-api.onrender.com';
   const API_BASE = localStorage.getItem('romanoti_api') || CP_API;
-  document.getElementById('apiBaseShown').textContent = API_BASE;
+  const elApiShown = document.getElementById('apiBaseShown'); if(elApiShown) elApiShown.textContent = API_BASE;
 
-  // ===== Utils =====
+  // === Helpers básicos de DOM/UX ===
   const $  = (id) => document.getElementById(id);
   const on = (id, type, fn) => { const el = $(id); if (el) el.addEventListener(type, fn); };
   const token = () => sessionStorage.getItem('romanoti_token');
@@ -259,7 +260,7 @@
   }
   function log(obj){ logTo('out', obj); }
 
-  // ===== Netlify function: pretty JSON =====
+  // === Netlify function: pretty JSON ===
   async function runTool() {
     $('diagOut').textContent = 'Running…';
     try {
@@ -277,12 +278,11 @@
     }
   }
 
-  // ===== Auth =====
+  // === Auth (login/logout y UI asociada) ===
   function setAuthedUI(){
     if(token()){ show('loginCard', false); show('toolsCard', true); $('whoami').textContent = $('user').value || 'session'; }
     else       { show('toolsCard', false); show('loginCard', true); $('whoami').textContent = ''; }
   }
-
   async function login(){
     $('loginMsg').textContent = 'Autenticando…';
     try{
@@ -303,7 +303,7 @@
   }
   function logout(){ sessionStorage.removeItem('romanoti_token'); setAuthedUI(); $('out').textContent=''; }
 
-  // ===== Generic authed call =====
+  // === Llamada genérica autenticada ===
   async function call(method, path, body=null){
     try{
       const res  = await fetch(`${API_BASE}${path}`, {
@@ -321,7 +321,7 @@
     }catch(e){ log(String(e)); }
   }
 
-  // ===== Tools actions (authed) =====
+  // === Acciones autenticadas ===
   async function doPing(){ await call('POST','/network/ping',{ host:$('pingHost').value, count:Number($('pingCount').value||4) }); }
   async function doTrace(){ await call('POST','/network/traceroute',{ host:$('traceHost').value }); }
   async function doScan(){
@@ -335,9 +335,8 @@
     await call('POST','/network/portscan', payload);
   }
 
-  // ===== On-Prem Agent (LAN) =====
+  // === On-Prem Agent (comandos generados) ===
   let lastCmd = '';
-
   function buildLinuxCmd(){
     const key  = $('orgKey').value.trim();
     const name = $('agentName').value.trim();
@@ -348,7 +347,6 @@
       `ROMANOTI_API="${CP_API}" ROMANOTI_KEY="${key}"${tag} ./romanoti-agent.sh`
     ].join(' && ');
   }
-
   function buildWindowsCmd(){
     const key  = $('orgKey').value.trim();
     const name = $('agentName').value.trim();
@@ -359,7 +357,6 @@
     cmd += `powershell -ExecutionPolicy Bypass -File .\\romanoti-agent.ps1"`;
     return cmd;
   }
-
   async function fetchLatestReport(){
     const key = $('orgKey').value.trim();
     if(!key){ $('agentOut').textContent = 'Ingresa tu Org API Key.'; return; }
@@ -372,18 +369,17 @@
     }catch(e){ $('agentOut').textContent = String(e); }
   }
 
-  // ===== External checks (require x-api-key) =====
+  // === External checks (requieren x-api-key) ===
   async function checkTLS(){
     const host = $('tlsHost').value.trim();
     const port = Number($('tlsPort').value||443);
-    const key  = $('orgKey').value.trim();            // [NEW] tomar x-api-key del campo
-    if(!key){ $('tlsOut').textContent = 'Ingresa tu Org API Key.'; return; }  // [NEW]
-
+    const key  = $('orgKey').value.trim();
+    if(!key){ $('tlsOut').textContent = 'Ingresa tu Org API Key.'; return; }
     $('tlsOut').textContent = 'Consultando…';
     try{
       const res = await fetch(`${CP_API}/ext/tls`, {
         method:'POST',
-        headers:{'Content-Type':'application/json','x-api-key': key},         // [NEW]
+        headers:{'Content-Type':'application/json','x-api-key': key},
         body: JSON.stringify({host, port})
       });
       const text = await res.text();
@@ -391,17 +387,15 @@
       catch{ $('tlsOut').textContent = text; }
     }catch(e){ $('tlsOut').textContent = String(e); }
   }
-
   async function checkEmailDNS(){
     const domain = $('dnsDomain').value.trim();
-    const key    = $('orgKey').value.trim();          // [NEW]
-    if(!key){ $('dnsOut').textContent = 'Ingresa tu Org API Key.'; return; }  // [NEW]
-
+    const key    = $('orgKey').value.trim();
+    if(!key){ $('dnsOut').textContent = 'Ingresa tu Org API Key.'; return; }
     $('dnsOut').textContent = 'Consultando…';
     try{
       const res = await fetch(`${CP_API}/ext/emaildns`, {
         method:'POST',
-        headers:{'Content-Type':'application/json','x-api-key': key},         // [NEW]
+        headers:{'Content-Type':'application/json','x-api-key': key},
         body: JSON.stringify({domain})
       });
       const text = await res.text();
@@ -410,7 +404,7 @@
     }catch(e){ $('dnsOut').textContent = String(e); }
   }
 
-  // ===== Wire events =====
+  // === Wire events ===
   on('btnRunDiag','click',runTool);
 
   on('btnLogin','click',login);
@@ -434,14 +428,38 @@
 
   // init
   setAuthedUI();
-</script>
+  </script>
 
-<!-- ============================ [NEW] ============================ -->
-<!-- Carga del header/footer centralizados -->
-<script defer src="/js/nav.js"></script>
-<script defer src="/js/footer.js"></script>
-<!-- ========================== [/NEW] ============================ -->
-  <script src="/js/fix-nav.js" defer></script>
+  <!-- ===== Header/Footer centralizados ===== -->
+  <script defer src="/js/nav.js"></script>
+  <script defer src="/js/footer.js"></script>
 
+  <!-- ===== Fallback local del menú Solutions (por si nav.js ya montó el header) ===== -->
+  <script>
+    (function(){
+      function wire(btn, menu){
+        if(!btn || !menu || btn.dataset.wired) return;
+        const open = ()=>{ menu.classList.remove('hidden'); menu.classList.add('show'); btn.setAttribute('aria-expanded','true'); };
+        const close= ()=>{ menu.classList.add('hidden'); menu.classList.remove('show'); btn.setAttribute('aria-expanded','false'); };
+        const toggle=()=> (menu.classList.contains('hidden') ? open() : close());
+        btn.addEventListener('click', (e)=>{ e.preventDefault(); e.stopPropagation(); toggle(); });
+        btn.addEventListener('mouseenter', open);
+        menu.parentNode.addEventListener('mouseleave', ()=> setTimeout(close,120));
+        document.addEventListener('click', (e)=>{ if(!menu.contains(e.target) && e.target!==btn) close(); });
+        document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') close(); });
+        btn.dataset.wired = '1';
+      }
+      function tryWire(){
+        const btn  = document.getElementById('solutionsBtn') || document.getElementById('navSolutionsBtn');
+        const menu = document.getElementById('solutionsMenu') || document.getElementById('navSolutionsMenu');
+        wire(btn, menu);
+      }
+      // intenta al cargar y unos ms después (por si nav.js monta tarde)
+      document.addEventListener('DOMContentLoaded', ()=>{ tryWire(); setTimeout(tryWire, 300); setTimeout(tryWire, 800); });
+    })();
+  </script>
+
+  <!-- ===== Hotfix universal del menú (idempotente) ===== -->
+  <script src="/js/fix-nav.js?v=4" defer></script>
 </body>
 </html>
