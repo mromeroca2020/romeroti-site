@@ -1,82 +1,114 @@
 <!doctype html>
 <html lang="es">
 <head>
-  <!-- =========================================================
-    Archivo: /services/tools.html
-    Propósito: Consola de herramientas (diagnóstico, agent, checks externos, ping/trace/scan).
-    Claves:
-      - Favicons RomanoTI unificados (con cache-buster ?v=4)
-      - Header/Footer centralizados (nav.js/footer.js)
-      - Hotfix menú “Solutions” (fix-nav.js) + fallback local por si el header ya está montado
-      - Lógica de herramientas intacta (se documentan bloques)
-  ========================================================== -->
   <meta charset="utf-8" />
   <title>RomanoTI Tools</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- ===== FAVICONS (unificados) ===== -->
-  <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png?v=4">
-  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png?v=4">
-  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16.png?v=4">
-  <link rel="shortcut icon" href="/favicon.ico?v=4">
-  <link rel="mask-icon" href="/img/safari-pinned-tab.svg?v=4" color="#2563eb">
+  <!-- Favicons RomanoTI -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16.png">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#2563eb">
   <meta name="theme-color" content="#2563eb">
 
-  <!-- ===== Tipografía + Tailwind (estética consistente del sitio) ===== -->
+  <!-- Tipografía y Tailwind -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 
-  <!-- ===== Estilos locales (UI de tarjetas y controles) ===== -->
   <style>
     :root{--brand:#2563eb;--brand-dark:#1d4ed8;--ink:#0f172a}
     body{font-family:'Montserrat',system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Helvetica,Arial,sans-serif;margin:0;background:#f6f7fb;color:#111827}
     .topbar{background:linear-gradient(120deg,#1e40af,#2563eb);color:#fff;padding:28px 16px}
     .wrap{max-width:1040px;margin:0 auto;padding:0 16px}
-    h1,h2,h3,h4{margin:0 0 12px}
     .muted{color:#6b7280}
     .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:10px;border:1px solid #e5e7eb;background:#fff;cursor:pointer}
     .btn-primary{background:var(--brand);border-color:var(--brand);color:#fff}
     .btn-primary:hover{background:var(--brand-dark);border-color:var(--brand-dark)}
-    .btn-link{background:transparent;border:0;color:#fff;text-decoration:underline;cursor:pointer}
+    .btn-sm{padding:8px 10px;border-radius:8px;font-size:14px}
     .grid{display:grid;gap:18px}
     @media(min-width:900px){.grid-cols-2{grid-template-columns:1fr 1fr}}
     .card{background:#fff;border:1px solid #e5e7eb;border-radius:14px;box-shadow:0 6px 18px -8px rgba(0,0,0,.12);padding:18px}
-    .row{display:flex;gap:10px;flex-wrap:wrap}
     input,button,select{padding:10px;border:1px solid #cbd5e1;border-radius:10px}
     input:focus{outline:3px solid rgba(37,99,235,.15);border-color:var(--brand)}
-    .kicker{font-size:13px;color:#c7d2fe}
     pre{background:#0e1116;color:#eaeef3;padding:14px;border-radius:12px;overflow:auto;max-height:50vh;white-space:pre}
     .hidden{display:none}
-    .section-title{font-weight:700;font-size:22px;margin:0 0 8px}
-    .backlinks{display:flex;gap:8px;align-items:center;margin-top:10px}
-    .btn-sm{padding:8px 10px;border-radius:8px;font-size:14px}
+    .dropdown{display:none}
+    .dropdown.show{display:block}
   </style>
 </head>
 <body>
 
-  <!-- ===== Header centralizado montado por /js/nav.js ===== -->
+  <!-- Mountpoint del header centralizado -->
   <div id="app-header"></div>
 
-  <!-- ===== HERO ===== -->
+  <!-- ====== HEADER FALLBACK (se oculta si nav.js inyecta uno) ====== -->
+  <header id="fallback-header" class="bg-white shadow-sm sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-6 py-3">
+      <div class="flex items-center justify-between">
+        <a href="/" class="flex items-center font-bold text-xl text-gray-900">
+          <span class="bg-blue-600 text-white rounded-full w-10 h-10 grid place-items-center mr-3">R</span>
+          RomanoTI Solutions
+        </a>
+
+        <nav class="hidden md:flex items-center space-x-8">
+          <a href="/" class="text-gray-700 hover:text-blue-600 font-medium">Home</a>
+
+          <!-- Dropdown Solutions -->
+          <div class="relative">
+            <button id="navSolutionsBtn"
+                    class="text-gray-700 hover:text-blue-600 font-medium inline-flex items-center focus:outline-none"
+                    aria-haspopup="true" aria-expanded="false">
+              Solutions
+              <svg class="ml-1 w-4 h-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.58l3.71-3.35a.75.75 0 111.02 1.1l-4.2 3.79a.75.75 0 01-1.02 0l-4.2-3.79a.75.75 0 01.02-1.06z" clip-rule="evenodd"/>
+              </svg>
+            </button>
+            <div id="navSolutionsMenu"
+                 class="dropdown absolute right-0 mt-2 w-72 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5 z-50">
+              <a href="/solutions/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">Overview</a>
+              <a href="/solutions/cybershield/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">CyberShield (MDR)</a>
+              <a href="/solutions/cybershield/soc-console.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">SOC Console</a>
+              <a href="/solutions/cybershield/easm-console.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">EASM Console</a>
+              <a href="/solutions/cybershield/field-kit.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">Field Kit</a>
+            </div>
+          </div>
+
+          <a href="/services/tools.html" class="text-blue-700 font-semibold">Tools</a>
+          <a href="/it-noc.html" class="text-gray-700 hover:text-blue-600 font-medium">NOC</a>
+          <a href="/it-soc.html" class="text-gray-700 hover:text-blue-600 font-medium">SOC</a>
+          <a href="https://calendly.com/mauricioromeroca" class="bg-blue-600 text-white px-5 py-2 rounded-lg font-medium hover:bg-blue-700">Book Now</a>
+        </nav>
+
+        <!-- Mobile quick -->
+        <div class="md:hidden">
+          <a href="/solutions/" class="bg-blue-600 text-white px-4 py-2 rounded-lg">Solutions</a>
+        </div>
+      </div>
+    </div>
+  </header>
+  <!-- ====== /HEADER FALLBACK ====== -->
+
+  <!-- HERO -->
   <div class="topbar">
     <div class="wrap">
-      <div class="kicker">RomanoTI Tools Platform</div>
+      <div class="text-sm" style="color:#c7d2fe">RomanoTI Tools Platform</div>
       <h1 style="font-size:28px;margin:6px 0 0">Exclusive tools for our certified engineers</h1>
-      <div class="backlinks">
+      <div class="mt-3 flex gap-2">
         <a class="btn btn-sm" href="/#services">← Back to Services</a>
         <a class="btn btn-sm" href="/">Home</a>
       </div>
     </div>
   </div>
 
-  <!-- ===== Contenido principal ===== -->
   <div class="wrap" style="margin-top:20px; margin-bottom:56px">
 
-    <!-- 1) Server Diagnostic (Netlify Function) -->
+    <!-- Server Diagnostic -->
     <div class="card">
-      <div class="row" style="justify-content:space-between;align-items:center">
+      <div class="flex items-center justify-between flex-wrap gap-3">
         <div>
-          <div class="section-title">Server Diagnostic (Netlify Function)</div>
+          <div class="font-bold text-lg">Server Diagnostic (Netlify Function)</div>
           <div class="muted">Ejecuta <code>/.netlify/functions/run-tool</code> y muestra el JSON bonito.</div>
         </div>
         <button id="btnRunDiag" class="btn btn-primary">⚡ Run Diagnostic</button>
@@ -84,15 +116,15 @@
       <pre id="diagOut"></pre>
     </div>
 
-    <!-- 2) On-Prem Agent (LAN Inventory) -->
+    <!-- On-Prem Agent -->
     <div class="card">
-      <div class="section-title">On-Prem Agent (LAN Inventory)</div>
-      <div class="muted" style="margin-bottom:10px">
+      <div class="font-bold text-lg">On-Prem Agent (LAN Inventory)</div>
+      <div class="muted mb-2">
         Instala este agente en una PC/VM dentro de tu red. Hará un inventario básico (hosts activos, IP local, etc.)
         y enviará el reporte al Control Plane de RomanoTI.
       </div>
 
-      <div class="row" style="align-items:flex-end">
+      <div class="flex flex-wrap gap-4 items-end">
         <div>
           <div><b>Org API Key</b></div>
           <input id="orgKey" type="password" placeholder="pega aquí tu API key" style="min-width:320px">
@@ -104,7 +136,7 @@
         </div>
       </div>
 
-      <div class="row" style="margin-top:10px">
+      <div class="flex gap-2 mt-3 flex-wrap">
         <button id="btnLinux" class="btn">Linux / macOS</button>
         <button id="btnWindows" class="btn">Windows</button>
         <button id="btnCopyCmd" class="btn">Copiar comando</button>
@@ -118,7 +150,7 @@
 
       <hr style="border:none;border-top:1px solid #e5e7eb;margin:14px 0">
 
-      <div class="row" style="gap:8px">
+      <div class="flex gap-2 flex-wrap">
         <button id="btnLatestReport" class="btn btn-primary btn-sm">Ver último reporte</button>
         <button id="btnViewIfaces" class="btn btn-sm">Ver Interfaces (tabla)</button>
         <button id="btnExportCSV" class="btn btn-sm">Exportar LAN a CSV</button>
@@ -128,17 +160,15 @@
       <pre id="agentOut"></pre>
     </div>
 
-    <!-- 3) External checks (TLS / Email DNS) -->
+    <!-- External checks -->
     <div class="card">
-      <div class="section-title">External Checks</div>
-      <div class="muted" style="margin-bottom:8px">
-        Diagnósticos rápidos sobre dominios externos.
-      </div>
+      <div class="font-bold text-lg">External Checks</div>
+      <div class="muted mb-2">Diagnósticos rápidos sobre dominios externos.</div>
 
-      <!-- 3.a) TLS cert -->
+      <!-- TLS cert -->
       <div class="card" style="margin-top:8px">
-        <div class="section-title" style="font-size:18px">TLS Certificate Check</div>
-        <div class="row">
+        <div class="font-semibold" style="font-size:18px">TLS Certificate Check</div>
+        <div class="flex gap-2 flex-wrap mt-2">
           <input id="tlsHost" placeholder="host (ej: example.com)" style="min-width:240px">
           <input id="tlsPort" type="number" value="443" min="1" max="65535" style="width:100px">
           <button id="btnTLS" class="btn btn-sm">Check TLS</button>
@@ -147,10 +177,10 @@
         <pre id="tlsOut"></pre>
       </div>
 
-      <!-- 3.b) Email DNS -->
+      <!-- Email DNS -->
       <div class="card" style="margin-top:12px">
-        <div class="section-title" style="font-size:18px">Email DNS Check</div>
-        <div class="row">
+        <div class="font-semibold" style="font-size:18px">Email DNS Check</div>
+        <div class="flex gap-2 flex-wrap">
           <input id="dnsDomain" placeholder="dominio (ej: midominio.com)" style="min-width:260px">
           <button id="btnEmailDNS" class="btn btn-sm">Check Email DNS</button>
         </div>
@@ -159,48 +189,48 @@
       </div>
     </div>
 
-    <!-- 4) Tools autenticadas + Login -->
+    <!-- Tools (auth) + Login -->
     <div class="grid grid-cols-2">
-      <!-- 4.a) Login -->
+      <!-- Login -->
       <div class="card" id="loginCard">
-        <div class="section-title">Login</div>
-        <div class="muted" style="margin-bottom:8px">Necesario para usar Ping/Traceroute/Port Scan contra el backend.</div>
-        <div class="row">
+        <div class="font-bold text-lg">Login</div>
+        <div class="muted mb-2">Necesario para usar Ping/Traceroute/Port Scan contra el backend.</div>
+        <div class="flex gap-2 flex-wrap">
           <input id="user" placeholder="usuario (ej: eng1)" style="min-width:180px">
           <input id="pass" placeholder="password" type="password" style="min-width:180px">
         </div>
-        <div class="row" style="margin-top:10px">
+        <div class="flex gap-2 mt-2">
           <button id="btnLogin" class="btn btn-primary">Iniciar sesión</button>
           <button id="btnLogout" class="btn">Cerrar sesión</button>
         </div>
-        <div class="muted" style="margin-top:10px;font-size:12px">
+        <div class="muted mt-2" style="font-size:12px">
           API: <code id="apiBaseShown"></code>. Puedes sobreescribirla con
           <code>localStorage.setItem('romanoti_api','http://127.0.0.1:8000')</code> y recargar.
         </div>
-        <div id="loginMsg" class="muted" style="margin-top:6px"></div>
+        <div id="loginMsg" class="muted mt-1"></div>
       </div>
 
-      <!-- 4.b) Herramientas autenticadas -->
+      <!-- Herramientas autenticadas -->
       <div class="card hidden" id="toolsCard">
-        <div class="row" style="align-items:center;justify-content:space-between">
+        <div class="flex items-center justify-between">
           <div>
-            <div class="section-title" style="margin:0">Herramientas</div>
+            <div class="font-bold text-lg">Herramientas</div>
             <div class="muted">Autenticado como: <b id="whoami"></b></div>
           </div>
           <button class="btn" id="btnLogoutTop">Cerrar sesión</button>
         </div>
 
         <div class="card" style="margin-top:12px">
-          <div class="section-title" style="font-size:18px">Sistema</div>
-          <div class="row">
+          <div class="font-semibold" style="font-size:18px">Sistema</div>
+          <div class="flex gap-2 mt-2">
             <button class="btn btn-sm" id="btnSysInfo">/system/info</button>
             <button class="btn btn-sm" id="btnNetInfo">/network/info</button>
           </div>
         </div>
 
         <div class="card" style="margin-top:12px">
-          <div class="section-title" style="font-size:18px">Ping</div>
-          <div class="row">
+          <div class="font-semibold" style="font-size:18px">Ping</div>
+          <div class="flex gap-2 mt-2 flex-wrap">
             <input id="pingHost" placeholder="host (ej: 8.8.8.8)" value="8.8.8.8" style="min-width:170px">
             <input id="pingCount" type="number" min="1" max="10" value="4" style="width:80px">
             <button class="btn btn-sm" id="btnPing">Enviar</button>
@@ -209,8 +239,8 @@
         </div>
 
         <div class="card" style="margin-top:12px">
-          <div class="section-title" style="font-size:18px">Traceroute</div>
-          <div class="row">
+          <div class="font-semibold" style="font-size:18px">Traceroute</div>
+          <div class="flex gap-2 mt-2 flex-wrap">
             <input id="traceHost" placeholder="host (ej: 8.8.8.8)" value="8.8.8.8" style="min-width:170px">
             <button class="btn btn-sm" id="btnTrace">Enviar</button>
           </div>
@@ -218,13 +248,13 @@
         </div>
 
         <div class="card" style="margin-top:12px">
-          <div class="section-title" style="font-size:18px">Port Scan</div>
-          <div class="row">
+          <div class="font-semibold" style="font-size:18px">Port Scan</div>
+          <div class="flex gap-2 mt-2 flex-wrap">
             <input id="scanHost" placeholder="host (IP/hostname)" style="min-width:200px">
             <input id="scanStart" type="number" min="1" max="65535" value="1" style="width:90px">
             <input id="scanEnd" type="number" min="1" max="65535" value="1024" style="width:90px">
           </div>
-          <div class="row" style="margin-top:6px">
+          <div class="flex gap-2 mt-2">
             <input id="scanPorts" placeholder="puertos (opcional: 80,443,22)" style="min-width:280px">
             <button class="btn btn-sm" id="btnScan">Escanear</button>
           </div>
@@ -237,17 +267,26 @@
     <pre id="out"></pre>
   </div>
 
-  <!-- ===== Footer centralizado montado por /js/footer.js ===== -->
+  <!-- Mountpoint del footer centralizado -->
   <div id="app-footer" class="mt-10"></div>
 
-  <!-- =================== Lógica de página (idéntica, con comentarios) =================== -->
-  <script>
-  // === Config base (Control Plane + API seleccionable por localStorage) ===
+<script>
+  // ===== Ocultar header fallback si nav.js inyecta uno =====
+  document.addEventListener('DOMContentLoaded', () => {
+    const mount = document.getElementById('app-header');
+    const fb    = document.getElementById('fallback-header');
+    if(!mount || !fb) return;
+    const check = () => { if (mount.childElementCount > 0) fb.style.display = 'none'; };
+    check();
+    new MutationObserver(check).observe(mount, { childList: true });
+  });
+
+  // ===== Config =====
   const CP_API  = 'https://romanoti-tools-api.onrender.com';
   const API_BASE = localStorage.getItem('romanoti_api') || CP_API;
-  const elApiShown = document.getElementById('apiBaseShown'); if(elApiShown) elApiShown.textContent = API_BASE;
+  document.getElementById('apiBaseShown').textContent = API_BASE;
 
-  // === Helpers básicos de DOM/UX ===
+  // ===== Utils =====
   const $  = (id) => document.getElementById(id);
   const on = (id, type, fn) => { const el = $(id); if (el) el.addEventListener(type, fn); };
   const token = () => sessionStorage.getItem('romanoti_token');
@@ -260,7 +299,7 @@
   }
   function log(obj){ logTo('out', obj); }
 
-  // === Netlify function: pretty JSON ===
+  // ===== Netlify function: pretty JSON =====
   async function runTool() {
     $('diagOut').textContent = 'Running…';
     try {
@@ -278,11 +317,12 @@
     }
   }
 
-  // === Auth (login/logout y UI asociada) ===
+  // ===== Auth =====
   function setAuthedUI(){
     if(token()){ show('loginCard', false); show('toolsCard', true); $('whoami').textContent = $('user').value || 'session'; }
     else       { show('toolsCard', false); show('loginCard', true); $('whoami').textContent = ''; }
   }
+
   async function login(){
     $('loginMsg').textContent = 'Autenticando…';
     try{
@@ -303,7 +343,7 @@
   }
   function logout(){ sessionStorage.removeItem('romanoti_token'); setAuthedUI(); $('out').textContent=''; }
 
-  // === Llamada genérica autenticada ===
+  // ===== Generic authed call =====
   async function call(method, path, body=null){
     try{
       const res  = await fetch(`${API_BASE}${path}`, {
@@ -321,7 +361,7 @@
     }catch(e){ log(String(e)); }
   }
 
-  // === Acciones autenticadas ===
+  // ===== Tools actions (authed) =====
   async function doPing(){ await call('POST','/network/ping',{ host:$('pingHost').value, count:Number($('pingCount').value||4) }); }
   async function doTrace(){ await call('POST','/network/traceroute',{ host:$('traceHost').value }); }
   async function doScan(){
@@ -335,8 +375,9 @@
     await call('POST','/network/portscan', payload);
   }
 
-  // === On-Prem Agent (comandos generados) ===
+  // ===== On-Prem Agent (LAN) =====
   let lastCmd = '';
+
   function buildLinuxCmd(){
     const key  = $('orgKey').value.trim();
     const name = $('agentName').value.trim();
@@ -347,6 +388,7 @@
       `ROMANOTI_API="${CP_API}" ROMANOTI_KEY="${key}"${tag} ./romanoti-agent.sh`
     ].join(' && ');
   }
+
   function buildWindowsCmd(){
     const key  = $('orgKey').value.trim();
     const name = $('agentName').value.trim();
@@ -357,6 +399,7 @@
     cmd += `powershell -ExecutionPolicy Bypass -File .\\romanoti-agent.ps1"`;
     return cmd;
   }
+
   async function fetchLatestReport(){
     const key = $('orgKey').value.trim();
     if(!key){ $('agentOut').textContent = 'Ingresa tu Org API Key.'; return; }
@@ -369,12 +412,13 @@
     }catch(e){ $('agentOut').textContent = String(e); }
   }
 
-  // === External checks (requieren x-api-key) ===
+  // ===== External checks (require x-api-key) =====
   async function checkTLS(){
     const host = $('tlsHost').value.trim();
     const port = Number($('tlsPort').value||443);
     const key  = $('orgKey').value.trim();
     if(!key){ $('tlsOut').textContent = 'Ingresa tu Org API Key.'; return; }
+
     $('tlsOut').textContent = 'Consultando…';
     try{
       const res = await fetch(`${CP_API}/ext/tls`, {
@@ -387,10 +431,12 @@
       catch{ $('tlsOut').textContent = text; }
     }catch(e){ $('tlsOut').textContent = String(e); }
   }
+
   async function checkEmailDNS(){
     const domain = $('dnsDomain').value.trim();
     const key    = $('orgKey').value.trim();
     if(!key){ $('dnsOut').textContent = 'Ingresa tu Org API Key.'; return; }
+
     $('dnsOut').textContent = 'Consultando…';
     try{
       const res = await fetch(`${CP_API}/ext/emaildns`, {
@@ -404,7 +450,7 @@
     }catch(e){ $('dnsOut').textContent = String(e); }
   }
 
-  // === Wire events ===
+  // ===== Wire events =====
   on('btnRunDiag','click',runTool);
 
   on('btnLogin','click',login);
@@ -428,37 +474,27 @@
 
   // init
   setAuthedUI();
-  </script>
+</script>
 
-  <!-- ===== Header/Footer centralizados ===== -->
-  <script defer src="/js/nav.js"></script>
-  <script defer src="/js/footer.js"></script>
+<!-- Carga del header/footer centralizados (si existen) -->
+<script defer src="/js/nav.js"></script>
+<script defer src="/js/footer.js"></script>
+<!-- Hotfix universal del menú -->
+<script src="/js/fix-nav.js" defer></script>
 
-  <!-- ===== Fallback local del menú Solutions (por si nav.js ya montó el header) ===== -->
-  <script>
-    (function(){
-      function wire(btn, menu){
-        if(!btn || !menu || btn.dataset.wired) return;
-        const open = ()=>{ menu.classList.remove('hidden'); menu.classList.add('show'); btn.setAttribute('aria-expanded','true'); };
-        const close= ()=>{ menu.classList.add('hidden'); menu.classList.remove('show'); btn.setAttribute('aria-expanded','false'); };
-        const toggle=()=> (menu.classList.contains('hidden') ? open() : close());
-        btn.addEventListener('click', (e)=>{ e.preventDefault(); e.stopPropagation(); toggle(); });
-        btn.addEventListener('mouseenter', open);
-        menu.parentNode.addEventListener('mouseleave', ()=> setTimeout(close,120));
-        document.addEventListener('click', (e)=>{ if(!menu.contains(e.target) && e.target!==btn) close(); });
-        document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') close(); });
-        btn.dataset.wired = '1';
-      }
-      function tryWire(){
-        const btn  = document.getElementById('solutionsBtn') || document.getElementById('navSolutionsBtn');
-        const menu = document.getElementById('solutionsMenu') || document.getElementById('navSolutionsMenu');
-        wire(btn, menu);
-      }
-      // intenta al cargar y unos ms después (por si nav.js monta tarde)
-      document.addEventListener('DOMContentLoaded', ()=>{ tryWire(); setTimeout(tryWire, 300); setTimeout(tryWire, 800); });
-    })();
-  </script>
-  <!-- ===== Hotfix universal del menú (idempotente) ===== -->
-  <script src="/js/fix-nav.js?v=4" defer></script>
+<!-- Fallback mínimo para el dropdown si no carga fix-nav.js -->
+<script>
+  (function(){
+    const btn  = document.getElementById('navSolutionsBtn');
+    const menu = document.getElementById('navSolutionsMenu');
+    if(!btn || !menu) return;
+    const toggle = () => menu.classList.toggle('show');
+    const close  = () => menu.classList.remove('show');
+    btn.addEventListener('click', (e)=>{ e.preventDefault(); e.stopPropagation(); toggle(); });
+    document.addEventListener('click', (e)=>{ if(!menu.contains(e.target) && e.target!==btn) close(); });
+    document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') close(); });
+  })();
+</script>
+
 </body>
 </html>
