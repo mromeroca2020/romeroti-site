@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>CyberShield POV 14 días | RomanoTI Solutions</title>
+
+  <!-- Favicons (RomanoTI unificados) -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16.png">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#2563eb">
+  <meta name="theme-color" content="#2563eb">
+
+  <!-- Tailwind + Montserrat -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    body{font-family:'Montserrat',sans-serif;background:#f8f9fa;color:#0f172a}
+    .hero-bg{background:linear-gradient(135deg,#1e3a8a 0%,#2563eb 100%)}
+    .btn-primary{background:#2563EB;transition:all .2s}
+    .btn-primary:hover{background:#1D4ED8;transform:translateY(-1px)}
+    .card{border:1px solid #e5e7eb;border-radius:16px;box-shadow:0 10px 30px -12px rgba(0,0,0,.12)}
+    .badge{display:inline-flex;align-items:center;padding:.2rem .6rem;border-radius:999px;font-size:.75rem;font-weight:700;background:#eff6ff;color:#1e3a8a;border:1px solid #bfdbfe}
+    .check{display:inline-flex;align-items:center;gap:.5rem}
+  </style>
+</head>
+<body class="bg-gray-50">
+  <!-- Header centralizado -->
+  <div id="app-header"></div>
+
+  <!-- Hero -->
+  <section class="hero-bg text-white">
+    <div class="container mx-auto px-6 py-16 text-center">
+      <span class="badge">Prueba guiada (sin SIEM enterprise)</span>
+      <h1 class="text-4xl md:text-5xl font-bold mt-3">CyberShield POV — 14 días</h1>
+      <p class="text-xl md:text-2xl mt-3 max-w-3xl mx-auto">
+        En 2 semanas: postura de correo a prueba de spoofing, exposición externa priorizada y reglas anti-ransomware activas.
+      </p>
+      <div class="mt-6">
+        <a href="#form" class="btn-primary text-white px-6 py-3 rounded-lg font-semibold">Solicitar POV</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Qué incluye -->
+  <section class="py-12">
+    <div class="container mx-auto px-6 max-w-5xl grid md:grid-cols-3 gap-6">
+      <div class="card bg-white p-6">
+        <h3 class="text-xl font-bold mb-2">EASM rápido</h3>
+        <p class="text-gray-700">Escaneo de dominio con subdominios y puertos clave; priorización por riesgo y recomendaciones.</p>
+        <ul class="mt-3 space-y-2 text-sm text-gray-700">
+          <li class="check">✅ 20 subdominios / 15 puertos</li>
+          <li class="check">✅ TLS y expiración de certificados</li>
+          <li class="check">✅ Reporte con plan de cierre</li>
+        </ul>
+      </div>
+      <div class="card bg-white p-6">
+        <h3 class="text-xl font-bold mb-2">Email Security</h3>
+        <p class="text-gray-700">Validamos MX, SPF, DKIM, DMARC y dejamos la ruta para llegar a <b>p=reject</b> sin romper correo.</p>
+        <ul class="mt-3 space-y-2 text-sm text-gray-700">
+          <li class="check">✅ Postura actual + brechas</li>
+          <li class="check">✅ Ajustes sugeridos</li>
+          <li class="check">✅ BIMI (opcional)</li>
+        </ul>
+      </div>
+      <div class="card bg-white p-6">
+        <h3 class="text-xl font-bold mb-2">Detecciones clave</h3>
+        <p class="text-gray-700">Activamos detecciones para ransomware, C2 y movimientos laterales en endpoints piloto.</p>
+        <ul class="mt-3 space-y-2 text-sm text-gray-700">
+          <li class="check">✅ Reglas anti-ransomware</li>
+          <li class="check">✅ Alertas con SLA</li>
+          <li class="check">✅ Mini-runbook (1 página)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cómo se ejecuta -->
+  <section class="py-6">
+    <div class="container mx-auto px-6 max-w-5xl card bg-white p-6">
+      <h2 class="text-2xl font-bold mb-3">Cómo funciona el POV</h2>
+      <ol class="list-decimal ml-5 space-y-2 text-gray-700">
+        <li><b>Kickoff (30 min):</b> dominio, alcance y conectores.</li>
+        <li><b>Día 1–3:</b> EASM + postura de correo + reglas base en endpoints piloto.</li>
+        <li><b>Día 7:</b> revisión de hallazgos, ajustes y quick wins.</li>
+        <li><b>Día 14:</b> reporte ejecutivo (PDF) y roadmap de cierre de brechas.</li>
+      </ol>
+      <p class="text-sm text-gray-500 mt-3">Requisitos: contacto técnico, acceso DNS (lectura/cambios), 3–5 endpoints piloto.</p>
+    </div>
+  </section>
+
+  <!-- Formulario (Netlify Forms) -->
+  <section id="form" class="py-12">
+    <div class="container mx-auto px-6 max-w-3xl">
+      <div class="card bg-white p-6">
+        <h2 class="text-2xl font-bold mb-4">Solicita tu POV guiado</h2>
+
+        <form name="pov-lead" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thanks.html" class="grid gap-4">
+          <input type="hidden" name="form-name" value="pov-lead">
+          <p class="hidden">
+            <label>Don’t fill this out: <input name="bot-field"></label>
+          </p>
+
+          <div class="grid md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Nombre</label>
+              <input name="name" required class="w-full border rounded-lg px-3 py-2" placeholder="Tu nombre">
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Email corporativo</label>
+              <input type="email" name="email" required class="w-full border rounded-lg px-3 py-2" placeholder="tu@empresa.com">
+            </div>
+          </div>
+
+          <div class="grid md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Dominio</label>
+              <input name="domain" required class="w-full border rounded-lg px-3 py-2" placeholder="example.com">
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Tamaño de la empresa</label>
+              <select name="size" class="w-full border rounded-lg px-3 py-2">
+                <option>10–50</option>
+                <option>51–200</option>
+                <option>201–500</option>
+                <option>500+</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Objetivo principal</label>
+            <textarea name="goal" rows="4" class="w-full border rounded-lg px-3 py-2" placeholder="Ej.: cerrar DMARC a reject, evaluar exposición externa, habilitar detecciones..."></textarea>
+          </div>
+
+          <label class="inline-flex items-center gap-2 text-sm text-gray-700">
+            <input type="checkbox" name="consent" required class="rounded border-gray-300">
+            Acepto ser contactado para coordinar el POV.
+          </label>
+
+          <div class="flex gap-3">
+            <button class="btn-primary text-white px-6 py-2 rounded-lg font-semibold">Enviar solicitud</button>
+            <a href="/solutions/cybershield/easm-console.html" class="px-6 py-2 rounded-lg font-semibold border bg-white hover:bg-gray-50">Ver demo EASM</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ corta -->
+  <section class="py-6">
+    <div class="container mx-auto px-6 max-w-5xl">
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="card bg-white p-6">
+          <h3 class="font-bold mb-2">¿Tiene costo?</h3>
+          <p class="text-gray-700">El POV de 14 días es sin costo para pymes calificadas. Incluye reporte ejecutivo.</p>
+        </div>
+        <div class="card bg-white p-6">
+          <h3 class="font-bold mb-2">¿Qué acceso requiere?</h3>
+          <p class="text-gray-700">Acceso DNS (cambios), 3–5 endpoints piloto y un contacto técnico.</p>
+        </div>
+        <div class="card bg-white p-6">
+          <h3 class="font-bold mb-2">¿Qué entregables recibo?</h3>
+          <p class="text-gray-700">Reporte EASM + Email Posture, hallazgos priorizados y mini-runbook de incidentes.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <div id="app-footer" class="mt-10"></div>
+
+  <!-- Scripts de sitio -->
+  <script defer src="/js/nav.js"></script>
+  <script defer src="/js/footer.js"></script>
+  <script src="/js/fix-nav.js" defer></script>
+</body>
+</html>
