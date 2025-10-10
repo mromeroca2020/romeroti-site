@@ -41,7 +41,7 @@
     .section-title{font-weight:700;font-size:22px;margin:0 0 8px}
     .backlinks{display:flex;gap:8px;align-items:center;margin-top:10px}
     .btn-sm{padding:8px 10px;border-radius:8px;font-size:14px}
-    /* Navbar simple */
+    /* Navbar */
     .logo-badge{background:#2563EB}
     .dropdown{display:none}
     .dropdown.show{display:block}
@@ -49,7 +49,7 @@
 </head>
 <body>
 
-  <!-- ===== Header embebido (estándar) ===== -->
+  <!-- ===== Header embebido (estándar, SIEMPRE visible) ===== -->
   <header class="bg-white shadow-sm sticky top-0 z-50">
     <div class="container mx-auto px-6 py-3">
       <div class="flex items-center justify-between">
@@ -58,7 +58,8 @@
           RomanoTI Solutions
         </a>
 
-        <nav class="hidden md:flex items-center space-x-8">
+        <!-- NAV SIEMPRE VISIBLE (antes: hidden md:flex) -->
+        <nav class="flex flex-wrap items-center gap-4">
           <a href="/" class="text-gray-700 hover:text-blue-600 font-medium">Home</a>
 
           <!-- Dropdown Solutions -->
@@ -83,11 +84,6 @@
           <a href="/it-soc.html" class="text-gray-700 hover:text-blue-600 font-medium">SOC</a>
           <a href="https://calendly.com/mauricioromeroca" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg font-medium">Book Now</a>
         </nav>
-
-        <!-- Mobile -->
-        <div class="md:hidden">
-          <a href="/solutions/" class="bg-blue-600 text-white px-4 py-2 rounded-lg">Solutions</a>
-        </div>
       </div>
     </div>
   </header>
