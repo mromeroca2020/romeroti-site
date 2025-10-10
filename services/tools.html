@@ -13,42 +13,48 @@
   <link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#2563eb">
   <meta name="theme-color" content="#2563eb">
 
-  <!-- Tipografía y Tailwind -->
+  <!-- Fuente + Tailwind -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 
   <style>
     :root{--brand:#2563eb;--brand-dark:#1d4ed8;--ink:#0f172a}
     body{font-family:'Montserrat',system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Helvetica,Arial,sans-serif;margin:0;background:#f6f7fb;color:#111827}
+    /* HERO */
     .topbar{background:linear-gradient(120deg,#1e40af,#2563eb);color:#fff;padding:28px 16px}
     .wrap{max-width:1040px;margin:0 auto;padding:0 16px}
+    h1,h2,h3,h4{margin:0 0 12px}
     .muted{color:#6b7280}
     .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:10px;border:1px solid #e5e7eb;background:#fff;cursor:pointer}
     .btn-primary{background:var(--brand);border-color:var(--brand);color:#fff}
     .btn-primary:hover{background:var(--brand-dark);border-color:var(--brand-dark)}
-    .btn-sm{padding:8px 10px;border-radius:8px;font-size:14px}
+    .btn-link{background:transparent;border:0;color:#fff;text-decoration:underline;cursor:pointer}
     .grid{display:grid;gap:18px}
     @media(min-width:900px){.grid-cols-2{grid-template-columns:1fr 1fr}}
     .card{background:#fff;border:1px solid #e5e7eb;border-radius:14px;box-shadow:0 6px 18px -8px rgba(0,0,0,.12);padding:18px}
+    .row{display:flex;gap:10px;flex-wrap:wrap}
     input,button,select{padding:10px;border:1px solid #cbd5e1;border-radius:10px}
     input:focus{outline:3px solid rgba(37,99,235,.15);border-color:var(--brand)}
+    .kicker{font-size:13px;color:#c7d2fe}
     pre{background:#0e1116;color:#eaeef3;padding:14px;border-radius:12px;overflow:auto;max-height:50vh;white-space:pre}
     .hidden{display:none}
+    .section-title{font-weight:700;font-size:22px;margin:0 0 8px}
+    .backlinks{display:flex;gap:8px;align-items:center;margin-top:10px}
+    .btn-sm{padding:8px 10px;border-radius:8px;font-size:14px}
+    /* Navbar simple */
+    .logo-badge{background:#2563EB}
     .dropdown{display:none}
     .dropdown.show{display:block}
   </style>
 </head>
 <body>
 
-  <!-- Mountpoint del header centralizado -->
-  <div id="app-header"></div>
-
-  <!-- ====== HEADER FALLBACK (se oculta si nav.js inyecta uno) ====== -->
-  <header id="fallback-header" class="bg-white shadow-sm sticky top-0 z-50">
-    <div class="max-w-7xl mx-auto px-6 py-3">
+  <!-- ===== Header embebido (estándar) ===== -->
+  <header class="bg-white shadow-sm sticky top-0 z-50">
+    <div class="container mx-auto px-6 py-3">
       <div class="flex items-center justify-between">
         <a href="/" class="flex items-center font-bold text-xl text-gray-900">
-          <span class="bg-blue-600 text-white rounded-full w-10 h-10 grid place-items-center mr-3">R</span>
+          <span class="logo-badge text-white rounded-full w-10 h-10 grid place-items-center mr-3">R</span>
           RomanoTI Solutions
         </a>
 
@@ -57,45 +63,41 @@
 
           <!-- Dropdown Solutions -->
           <div class="relative">
-            <button id="navSolutionsBtn"
-                    class="text-gray-700 hover:text-blue-600 font-medium inline-flex items-center focus:outline-none"
-                    aria-haspopup="true" aria-expanded="false">
+            <button id="navSolutionsBtn" class="text-gray-700 hover:text-blue-600 font-medium inline-flex items-center focus:outline-none">
               Solutions
-              <svg class="ml-1 w-4 h-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.58l3.71-3.35a.75.75 0 111.02 1.1l-4.2 3.79a.75.75 0 01-1.02 0l-4.2-3.79a.75.75 0 01.02-1.06z" clip-rule="evenodd"/>
+              <svg class="ml-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.584l3.71-3.354a.75.75 0 111.02 1.1l-4.2 3.794a.75.75 0 01-1.02 0l-4.2-3.794a.75.75 0 01.02-1.06z" clip-rule="evenodd"/>
               </svg>
             </button>
-            <div id="navSolutionsMenu"
-                 class="dropdown absolute right-0 mt-2 w-72 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5 z-50">
+            <div id="navSolutionsMenu" class="dropdown absolute right-0 mt-2 w-72 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5 z-50">
               <a href="/solutions/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">Overview</a>
               <a href="/solutions/cybershield/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">CyberShield (MDR)</a>
               <a href="/solutions/cybershield/soc-console.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">SOC Console</a>
               <a href="/solutions/cybershield/easm-console.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">EASM Console</a>
-              <a href="/solutions/cybershield/field-kit.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">Field Kit</a>
+              <a href="/solutions/cybershield/field-kit.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">Field Kit (engineers)</a>
             </div>
           </div>
 
           <a href="/services/tools.html" class="text-blue-700 font-semibold">Tools</a>
           <a href="/it-noc.html" class="text-gray-700 hover:text-blue-600 font-medium">NOC</a>
           <a href="/it-soc.html" class="text-gray-700 hover:text-blue-600 font-medium">SOC</a>
-          <a href="https://calendly.com/mauricioromeroca" class="bg-blue-600 text-white px-5 py-2 rounded-lg font-medium hover:bg-blue-700">Book Now</a>
+          <a href="https://calendly.com/mauricioromeroca" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg font-medium">Book Now</a>
         </nav>
 
-        <!-- Mobile quick -->
+        <!-- Mobile -->
         <div class="md:hidden">
           <a href="/solutions/" class="bg-blue-600 text-white px-4 py-2 rounded-lg">Solutions</a>
         </div>
       </div>
     </div>
   </header>
-  <!-- ====== /HEADER FALLBACK ====== -->
 
   <!-- HERO -->
   <div class="topbar">
     <div class="wrap">
-      <div class="text-sm" style="color:#c7d2fe">RomanoTI Tools Platform</div>
+      <div class="kicker">RomanoTI Tools Platform</div>
       <h1 style="font-size:28px;margin:6px 0 0">Exclusive tools for our certified engineers</h1>
-      <div class="mt-3 flex gap-2">
+      <div class="backlinks">
         <a class="btn btn-sm" href="/#services">← Back to Services</a>
         <a class="btn btn-sm" href="/">Home</a>
       </div>
@@ -106,9 +108,9 @@
 
     <!-- Server Diagnostic -->
     <div class="card">
-      <div class="flex items-center justify-between flex-wrap gap-3">
+      <div class="row" style="justify-content:space-between;align-items:center">
         <div>
-          <div class="font-bold text-lg">Server Diagnostic (Netlify Function)</div>
+          <div class="section-title">Server Diagnostic (Netlify Function)</div>
           <div class="muted">Ejecuta <code>/.netlify/functions/run-tool</code> y muestra el JSON bonito.</div>
         </div>
         <button id="btnRunDiag" class="btn btn-primary">⚡ Run Diagnostic</button>
@@ -118,13 +120,13 @@
 
     <!-- On-Prem Agent -->
     <div class="card">
-      <div class="font-bold text-lg">On-Prem Agent (LAN Inventory)</div>
-      <div class="muted mb-2">
+      <div class="section-title">On-Prem Agent (LAN Inventory)</div>
+      <div class="muted" style="margin-bottom:10px">
         Instala este agente en una PC/VM dentro de tu red. Hará un inventario básico (hosts activos, IP local, etc.)
         y enviará el reporte al Control Plane de RomanoTI.
       </div>
 
-      <div class="flex flex-wrap gap-4 items-end">
+      <div class="row" style="align-items:flex-end">
         <div>
           <div><b>Org API Key</b></div>
           <input id="orgKey" type="password" placeholder="pega aquí tu API key" style="min-width:320px">
@@ -136,7 +138,7 @@
         </div>
       </div>
 
-      <div class="flex gap-2 mt-3 flex-wrap">
+      <div class="row" style="margin-top:10px">
         <button id="btnLinux" class="btn">Linux / macOS</button>
         <button id="btnWindows" class="btn">Windows</button>
         <button id="btnCopyCmd" class="btn">Copiar comando</button>
@@ -150,7 +152,7 @@
 
       <hr style="border:none;border-top:1px solid #e5e7eb;margin:14px 0">
 
-      <div class="flex gap-2 flex-wrap">
+      <div class="row" style="gap:8px">
         <button id="btnLatestReport" class="btn btn-primary btn-sm">Ver último reporte</button>
         <button id="btnViewIfaces" class="btn btn-sm">Ver Interfaces (tabla)</button>
         <button id="btnExportCSV" class="btn btn-sm">Exportar LAN a CSV</button>
@@ -162,13 +164,15 @@
 
     <!-- External checks -->
     <div class="card">
-      <div class="font-bold text-lg">External Checks</div>
-      <div class="muted mb-2">Diagnósticos rápidos sobre dominios externos.</div>
+      <div class="section-title">External Checks</div>
+      <div class="muted" style="margin-bottom:8px">
+        Diagnósticos rápidos sobre dominios externos.
+      </div>
 
       <!-- TLS cert -->
       <div class="card" style="margin-top:8px">
-        <div class="font-semibold" style="font-size:18px">TLS Certificate Check</div>
-        <div class="flex gap-2 flex-wrap mt-2">
+        <div class="section-title" style="font-size:18px">TLS Certificate Check</div>
+        <div class="row">
           <input id="tlsHost" placeholder="host (ej: example.com)" style="min-width:240px">
           <input id="tlsPort" type="number" value="443" min="1" max="65535" style="width:100px">
           <button id="btnTLS" class="btn btn-sm">Check TLS</button>
@@ -179,8 +183,8 @@
 
       <!-- Email DNS -->
       <div class="card" style="margin-top:12px">
-        <div class="font-semibold" style="font-size:18px">Email DNS Check</div>
-        <div class="flex gap-2 flex-wrap">
+        <div class="section-title" style="font-size:18px">Email DNS Check</div>
+        <div class="row">
           <input id="dnsDomain" placeholder="dominio (ej: midominio.com)" style="min-width:260px">
           <button id="btnEmailDNS" class="btn btn-sm">Check Email DNS</button>
         </div>
@@ -193,44 +197,44 @@
     <div class="grid grid-cols-2">
       <!-- Login -->
       <div class="card" id="loginCard">
-        <div class="font-bold text-lg">Login</div>
-        <div class="muted mb-2">Necesario para usar Ping/Traceroute/Port Scan contra el backend.</div>
-        <div class="flex gap-2 flex-wrap">
+        <div class="section-title">Login</div>
+        <div class="muted" style="margin-bottom:8px">Necesario para usar Ping/Traceroute/Port Scan contra el backend.</div>
+        <div class="row">
           <input id="user" placeholder="usuario (ej: eng1)" style="min-width:180px">
           <input id="pass" placeholder="password" type="password" style="min-width:180px">
         </div>
-        <div class="flex gap-2 mt-2">
+        <div class="row" style="margin-top:10px">
           <button id="btnLogin" class="btn btn-primary">Iniciar sesión</button>
           <button id="btnLogout" class="btn">Cerrar sesión</button>
         </div>
-        <div class="muted mt-2" style="font-size:12px">
+        <div class="muted" style="margin-top:10px;font-size:12px">
           API: <code id="apiBaseShown"></code>. Puedes sobreescribirla con
           <code>localStorage.setItem('romanoti_api','http://127.0.0.1:8000')</code> y recargar.
         </div>
-        <div id="loginMsg" class="muted mt-1"></div>
+        <div id="loginMsg" class="muted" style="margin-top:6px"></div>
       </div>
 
       <!-- Herramientas autenticadas -->
       <div class="card hidden" id="toolsCard">
-        <div class="flex items-center justify-between">
+        <div class="row" style="align-items:center;justify-content:space-between">
           <div>
-            <div class="font-bold text-lg">Herramientas</div>
+            <div class="section-title" style="margin:0">Herramientas</div>
             <div class="muted">Autenticado como: <b id="whoami"></b></div>
           </div>
           <button class="btn" id="btnLogoutTop">Cerrar sesión</button>
         </div>
 
         <div class="card" style="margin-top:12px">
-          <div class="font-semibold" style="font-size:18px">Sistema</div>
-          <div class="flex gap-2 mt-2">
+          <div class="section-title" style="font-size:18px">Sistema</div>
+          <div class="row">
             <button class="btn btn-sm" id="btnSysInfo">/system/info</button>
             <button class="btn btn-sm" id="btnNetInfo">/network/info</button>
           </div>
         </div>
 
         <div class="card" style="margin-top:12px">
-          <div class="font-semibold" style="font-size:18px">Ping</div>
-          <div class="flex gap-2 mt-2 flex-wrap">
+          <div class="section-title" style="font-size:18px">Ping</div>
+          <div class="row">
             <input id="pingHost" placeholder="host (ej: 8.8.8.8)" value="8.8.8.8" style="min-width:170px">
             <input id="pingCount" type="number" min="1" max="10" value="4" style="width:80px">
             <button class="btn btn-sm" id="btnPing">Enviar</button>
@@ -239,8 +243,8 @@
         </div>
 
         <div class="card" style="margin-top:12px">
-          <div class="font-semibold" style="font-size:18px">Traceroute</div>
-          <div class="flex gap-2 mt-2 flex-wrap">
+          <div class="section-title" style="font-size:18px">Traceroute</div>
+          <div class="row">
             <input id="traceHost" placeholder="host (ej: 8.8.8.8)" value="8.8.8.8" style="min-width:170px">
             <button class="btn btn-sm" id="btnTrace">Enviar</button>
           </div>
@@ -248,13 +252,13 @@
         </div>
 
         <div class="card" style="margin-top:12px">
-          <div class="font-semibold" style="font-size:18px">Port Scan</div>
-          <div class="flex gap-2 mt-2 flex-wrap">
+          <div class="section-title" style="font-size:18px">Port Scan</div>
+          <div class="row">
             <input id="scanHost" placeholder="host (IP/hostname)" style="min-width:200px">
             <input id="scanStart" type="number" min="1" max="65535" value="1" style="width:90px">
             <input id="scanEnd" type="number" min="1" max="65535" value="1024" style="width:90px">
           </div>
-          <div class="flex gap-2 mt-2">
+          <div class="row" style="margin-top:6px">
             <input id="scanPorts" placeholder="puertos (opcional: 80,443,22)" style="min-width:280px">
             <button class="btn btn-sm" id="btnScan">Escanear</button>
           </div>
@@ -267,22 +271,17 @@
     <pre id="out"></pre>
   </div>
 
-  <!-- Mountpoint del footer centralizado -->
-  <div id="app-footer" class="mt-10"></div>
+  <!-- ===== Footer embebido ===== -->
+  <footer class="bg-gray-900 text-white py-8">
+    <div class="container mx-auto px-6 text-center">
+      <p>© 2025 RomanoTI Solutions. All rights reserved.</p>
+      <p class="mt-2">Serving Canada</p>
+    </div>
+  </footer>
 
 <script>
-  // ===== Ocultar header fallback si nav.js inyecta uno =====
-  document.addEventListener('DOMContentLoaded', () => {
-    const mount = document.getElementById('app-header');
-    const fb    = document.getElementById('fallback-header');
-    if(!mount || !fb) return;
-    const check = () => { if (mount.childElementCount > 0) fb.style.display = 'none'; };
-    check();
-    new MutationObserver(check).observe(mount, { childList: true });
-  });
-
   // ===== Config =====
-  const CP_API  = 'https://romanoti-tools-api.onrender.com';
+  const CP_API  = 'https://romanoti-tools-api.onrender.com'; // Control Plane
   const API_BASE = localStorage.getItem('romanoti_api') || CP_API;
   document.getElementById('apiBaseShown').textContent = API_BASE;
 
@@ -476,25 +475,21 @@
   setAuthedUI();
 </script>
 
-<!-- Carga del header/footer centralizados (si existen) -->
-<script defer src="/js/nav.js"></script>
-<script defer src="/js/footer.js"></script>
-<!-- Hotfix universal del menú -->
-<script src="/js/fix-nav.js" defer></script>
-
-<!-- Fallback mínimo para el dropdown si no carga fix-nav.js -->
+<!-- Fallback local del dropdown (por si /js/fix-nav.js no alcanza a correr) -->
 <script>
   (function(){
-    const btn  = document.getElementById('navSolutionsBtn');
+    const btn = document.getElementById('navSolutionsBtn');
     const menu = document.getElementById('navSolutionsMenu');
     if(!btn || !menu) return;
-    const toggle = () => menu.classList.toggle('show');
-    const close  = () => menu.classList.remove('show');
+    const toggle = ()=> menu.classList.toggle('show');
+    const close  = ()=> menu.classList.remove('show');
     btn.addEventListener('click', (e)=>{ e.preventDefault(); e.stopPropagation(); toggle(); });
     document.addEventListener('click', (e)=>{ if(!menu.contains(e.target) && e.target!==btn) close(); });
     document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') close(); });
   })();
 </script>
 
+<!-- Hotfix universal de navegación -->
+<script src="/js/fix-nav.js" defer></script>
 </body>
 </html>
