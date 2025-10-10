@@ -1,34 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- =========================================================
-    Archivo: /it-noc.html
-    Propósito: Página de servicios NOC + Live Toolbox.
-    Cambios clave:
-      - Favicons RomanoTI con cache-buster (?v=4) para evitar iconos antiguos.
-      - Header y Footer centralizados vía /js/nav.js y /js/footer.js.
-      - Fallback robusto del dropdown “Solutions” (IDs nuevos/legados).
-      - Se conserva toda la lógica del NOC Live Toolbox.
-  ========================================================== -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>NOC Services | RomanoTI Solutions</title>
 
-  <!-- Tailwind CSS (coherente con el resto del sitio) -->
+  <!-- Tailwind CSS -->
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
 
-  <!-- =============== Favicons RomanoTI (cache-buster v=4) =============== -->
-  <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png?v=4">
-  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png?v=4">
-  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16.png?v=4">
-  <link rel="shortcut icon" href="/favicon.ico?v=4">
-  <link rel="mask-icon" href="/img/safari-pinned-tab.svg?v=4" color="#2563eb">
+  <!-- FAVICONS unificados -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16.png">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#2563eb">
   <meta name="theme-color" content="#2563eb">
 
-  <!-- ================= Estilos locales ================= -->
   <style>
     body{font-family:'Montserrat',sans-serif;background:#f8f9fa;color:#333;scroll-behavior:smooth}
     .hero-bg{background:linear-gradient(135deg,#1e3a8a 0%,#2563eb 100%)}
@@ -40,13 +30,57 @@
 </head>
 <body class="bg-gray-50">
 
-  <!-- =========================================================
-       Header centralizado (inyectado por /js/nav.js)
-       Monta un navbar consistente en todas las páginas.
-  ========================================================== -->
+  <!-- Mountpoint del header centralizado -->
   <div id="app-header"></div>
 
-  <!-- ============================ HERO ============================ -->
+  <!-- ===== Header FALLBACK (navegación garantizada) ===== -->
+  <header id="fallback-header" class="bg-white shadow-md sticky top-0 z-40">
+    <div class="container mx-auto px-6 py-3">
+      <div class="flex items-center justify-between">
+        <a href="/" class="flex items-center font-bold text-xl">
+          <span class="inline-flex items-center justify-center w-9 h-9 rounded-full bg-blue-600 text-white mr-3">R</span>
+          RomanoTI Solutions
+        </a>
+        <nav class="hidden md:flex items-center space-x-6">
+          <a href="/" class="text-gray-700 hover:text-blue-600">Home</a>
+
+          <!-- Dropdown Solutions (fallback) -->
+          <div class="relative">
+            <button id="fb-solutions-btn" class="text-gray-700 hover:text-blue-600 inline-flex items-center focus:outline-none">
+              Solutions
+              <svg class="ml-1 w-4 h-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.584l3.71-3.354a.75.75 0 111.02 1.1l-4.2 3.794a.75.75 0 01-1.02 0l-4.2-3.794a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
+            </button>
+            <div id="fb-solutions-menu" class="absolute right-0 mt-2 w-72 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5 hidden">
+              <a href="/solutions/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">Overview</a>
+              <a href="/solutions/cybershield/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">CyberShield (MDR)</a>
+              <a href="/solutions/cybershield/soc-console.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">SOC Console</a>
+              <a href="/solutions/cybershield/easm-console.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">EASM Console</a>
+              <a href="/solutions/cybershield/field-kit.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">Field Kit</a>
+            </div>
+          </div>
+
+          <a href="/services/tools.html" class="text-gray-700 hover:text-blue-600">Tools</a>
+          <a href="/it-noc.html" class="text-blue-600 font-semibold">NOC</a>
+          <a href="/it-soc.html" class="text-gray-700 hover:text-blue-600">SOC</a>
+          <a href="https://calendly.com/mauricioromeroca" class="btn-primary text-white px-4 py-2 rounded-lg font-medium">Book Now</a>
+        </nav>
+      </div>
+    </div>
+    <script>
+      // Dropdown simple del fallback
+      (function(){
+        const btn  = document.getElementById('fb-solutions-btn');
+        const menu = document.getElementById('fb-solutions-menu');
+        if(!btn||!menu) return;
+        btn.addEventListener('click', (e)=>{ e.preventDefault(); e.stopPropagation(); menu.classList.toggle('hidden'); });
+        document.addEventListener('click', (e)=>{ if(!menu.contains(e.target) && e.target!==btn) menu.classList.add('hidden'); });
+        document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') menu.classList.add('hidden'); });
+      })();
+    </script>
+  </header>
+  <!-- ====================================================== -->
+
+  <!-- ===== Hero NOC ===== -->
   <section class="hero-bg text-white py-28">
     <div class="container mx-auto px-6 text-center">
       <h1 class="text-4xl md:text-5xl font-bold mb-6">NOC Services</h1>
@@ -56,7 +90,7 @@
     </div>
   </section>
 
-  <!-- ====================== Sección marketing ====================== -->
+  <!-- ===== Sección marketing ===== -->
   <section class="py-16 bg-white">
     <div class="container mx-auto px-6">
       <div class="text-center mb-12">
@@ -168,7 +202,7 @@
     </div>
   </section>
 
-  <!-- ===================== NOC Live Toolbox ===================== -->
+  <!-- ===== NOC Live Toolbox ===== -->
   <section class="py-12 bg-white">
     <div class="container mx-auto px-6 max-w-4xl">
       <h2 class="text-2xl font-bold mb-2">NOC Live Toolbox</h2>
@@ -243,7 +277,7 @@
     </div>
   </section>
 
-  <!-- ============================= CTA ============================= -->
+  <!-- ===== CTA ===== -->
   <section class="py-16 bg-blue-700 text-white">
     <div class="container mx-auto text-center">
       <h2 class="text-3xl font-bold mb-6">Ready to Secure Your Network?</h2>
@@ -259,25 +293,17 @@
     </div>
   </section>
 
-  <!-- =========================================================
-       Footer centralizado (inyectado por /js/footer.js)
-  ========================================================== -->
+  <!-- Footer centralizado -->
   <div id="app-footer"></div>
 
-  <!-- ============ JS: NOC Live Toolbox (lógica completa) ============ -->
+  <!-- ====== JS del toolbox NOC ====== -->
   <script>
   (function(){
-    // ==== Config base del Control Plane (tu API en Render) ====
     const CP_API = 'https://romanoti-tools-api.onrender.com';
-
-    // ==== Helpers cortos para DOM y valores ====
     const $   = (id) => document.getElementById(id);
     const val = (id) => (($(id)?.value) || '').trim();
-
-    // Encabezado con x-api-key (se arma en cada request)
     const keyHdr = () => ({ 'x-api-key': val('nocKey') });
 
-    // Persistencia simple de la Org Key en el navegador
     const KEY_STORAGE = 'noc_org_key';
     const saved = localStorage.getItem(KEY_STORAGE);
     if (saved && $('nocKey')) $('nocKey').value = saved;
@@ -287,7 +313,6 @@
       else   localStorage.removeItem(KEY_STORAGE);
     });
 
-    // ==== Util: mostrar JSON o texto en <pre> ====
     function showJSON(preId, payload){
       const el = $(preId);
       if (!el) return;
@@ -295,7 +320,6 @@
       catch { el.textContent = String(payload); }
     }
 
-    // ==== POST JSON genérico con manejo básico de errores ====
     async function postJson(path, body, extraHeaders = {}){
       const headers = {
         'content-type': 'application/json',
@@ -314,77 +338,55 @@
       catch{ return { ok: res.ok, status: res.status, data: text }; }
     }
 
-    // ====== HTTP Check ======
     $('btnHttp')?.addEventListener('click', async () => {
       const url      = val('httpUrl');
       const timeoutS = Number(val('httpTimeout') || '8');
       const verify   = $('httpTls')?.checked ?? true;
-
       if (!url) { showJSON('outHttp', { error: 'Ingresa una URL' }); return; }
       showJSON('outHttp', 'Consultando…');
-
-      // POST /noc/http-check
       const resp = await postJson('/noc/http-check', { url, timeout_s: timeoutS, verify_tls: verify });
       showJSON('outHttp', resp);
     });
 
-    // ====== DNS Lookup ======
     $('btnDns')?.addEventListener('click', async () => {
       const domain = val('dnsDomain');
       const type   = (val('dnsType') || 'A').toUpperCase();
-
       if (!domain) { showJSON('outDns', { error: 'Ingresa un dominio' }); return; }
       showJSON('outDns', 'Consultando…');
-
-      // POST /noc/dns-lookup
       const resp = await postJson('/noc/dns-lookup', { domain, type });
       showJSON('outDns', resp);
     });
 
-    // ====== Ping ======
     $('btnPing')?.addEventListener('click', async () => {
       const host  = val('pingHost');
       const count = Number(val('pingCount') || '4');
       if (!host) { showJSON('outPing', { error: 'Ingresa un host' }); return; }
       showJSON('outPing', 'Enviando…');
-
-      // POST /network/ping
       const resp = await postJson('/network/ping', { host, count });
       showJSON('outPing', resp);
     });
   })();
   </script>
 
-  <!-- =================== Fallback robusto dropdown =================== -->
-  <script>
-    /* Este fallback cablea el menú "Solutions" tanto si el header usa
-       IDs nuevos (navSolutionsBtn/navSolutionsMenu) como legados
-       (solutionsBtn/solutionsMenu). Se reintenta tras el montaje. */
-    (function(){
-      function wire(btn, menu){
-        if(!btn || !menu || btn.dataset.wired) return;
-        const open  = ()=>{ menu.classList.remove('hidden'); menu.classList.add('show'); btn.setAttribute('aria-expanded','true'); };
-        const close = ()=>{ menu.classList.add('hidden'); menu.classList.remove('show'); btn.setAttribute('aria-expanded','false'); };
-        const toggle= ()=> (menu.classList.contains('hidden') ? open() : close());
-        btn.addEventListener('click', (e)=>{ e.preventDefault(); e.stopPropagation(); toggle(); });
-        btn.addEventListener('mouseenter', open);
-        menu.parentNode.addEventListener('mouseleave', ()=> setTimeout(close, 120));
-        document.addEventListener('click', (e)=>{ if(!menu.contains(e.target) && e.target!==btn) close(); });
-        document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') close(); });
-        btn.dataset.wired = '1';
-      }
-      function tryWire(){
-        const btn  = document.getElementById('navSolutionsBtn') || document.getElementById('solutionsBtn');
-        const menu = document.getElementById('navSolutionsMenu')|| document.getElementById('solutionsMenu');
-        wire(btn, menu);
-      }
-      document.addEventListener('DOMContentLoaded', ()=>{ tryWire(); setTimeout(tryWire, 250); setTimeout(tryWire, 800); });
-    })();
-  </script>
-
-  <!-- ========= Carga del header/footer + hotfix universal ========= -->
+  <!-- Carga del header/footer centralizados -->
   <script defer src="/js/nav.js"></script>
   <script defer src="/js/footer.js"></script>
-  <script defer src="/js/fix-nav.js"></script>
+  <script src="/js/fix-nav.js" defer></script>
+
+  <!-- Ocultar fallback cuando nav.js ya inyectó el header -->
+  <script>
+    (function(){
+      function swapIfReady(){
+        const mount = document.getElementById('app-header');
+        const fb = document.getElementById('fallback-header');
+        if(mount && mount.childElementCount > 0 && fb){
+          fb.parentNode.removeChild(fb);
+        }
+      }
+      document.addEventListener('DOMContentLoaded', swapIfReady);
+      window.addEventListener('load', ()=>setTimeout(swapIfReady, 60));
+      setTimeout(swapIfReady, 800);
+    })();
+  </script>
 </body>
 </html>
