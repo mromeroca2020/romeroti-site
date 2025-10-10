@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>RomanoTI Solutions | IT Infrastructure & Cybersecurity</title>
 
-  <!-- ===== Favicons (RomanoTI unificados) ===== -->
+  <!-- Favicons unificados -->
   <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16.png">
@@ -13,11 +13,10 @@
   <link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#2563eb">
   <meta name="theme-color" content="#2563eb">
 
-  <!-- ===== Tailwind + Montserrat ===== -->
+  <!-- Tailwind + Montserrat -->
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
 
-  <!-- ===== Estilos base ===== -->
   <style>
     body{font-family:'Montserrat',sans-serif;background:#f8f9fa;color:#111827;scroll-behavior:smooth}
     .hero-bg{background:linear-gradient(135deg,#1e3a8a 0%,#2563eb 100%)}
@@ -29,8 +28,55 @@
 </head>
 <body class="bg-gray-50">
 
-  <!-- ===== Header centralizado (inyectado por /js/nav.js) ===== -->
+  <!-- Mountpoint del header centralizado -->
   <div id="app-header"></div>
+
+  <!-- ===== Header FALLBACK (se oculta si nav.js inyecta el header) ===== -->
+  <header id="fallback-header" class="bg-white shadow-sm sticky top-0 z-40">
+    <div class="container mx-auto px-6 py-3">
+      <div class="flex items-center justify-between">
+        <a href="/" class="flex items-center font-bold text-xl text-gray-900">
+          <span class="bg-blue-600 text-white rounded-full w-10 h-10 grid place-items-center mr-3">R</span>
+          RomanoTI Solutions
+        </a>
+        <nav class="hidden md:flex items-center space-x-8">
+          <a href="/" class="text-blue-600 font-medium">Home</a>
+          <div class="relative">
+            <button id="fb-solutions-btn" class="text-gray-700 hover:text-blue-600 font-medium inline-flex items-center">
+              Solutions
+              <svg class="ml-1 w-4 h-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.58l3.71-3.35a.75.75 0 111.02 1.1l-4.2 3.79a.75.75 0 01-1.02 0l-4.2-3.79a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
+            </button>
+            <div id="fb-solutions-menu" class="absolute right-0 mt-2 w-64 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5 hidden">
+              <a href="/solutions/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">Overview</a>
+              <a href="/solutions/cybershield/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">CyberShield (MDR)</a>
+              <a href="/solutions/cybershield/soc-console.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">SOC Console</a>
+              <a href="/solutions/cybershield/easm-console.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">EASM Console</a>
+              <a href="/solutions/cybershield/field-kit.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">Field Kit</a>
+            </div>
+          </div>
+          <a href="/services/tools.html" class="text-gray-700 hover:text-blue-600 font-medium">Tools</a>
+          <a href="/it-noc.html" class="text-gray-700 hover:text-blue-600 font-medium">NOC</a>
+          <a href="/it-soc.html" class="text-gray-700 hover:text-blue-600 font-medium">SOC</a>
+          <a href="https://calendly.com/mauricioromeroca" class="bg-blue-600 text-white px-5 py-2 rounded-lg font-medium">Book Now</a>
+        </nav>
+        <div class="md:hidden">
+          <a href="/solutions/" class="bg-blue-600 text-white px-4 py-2 rounded-lg">Solutions</a>
+        </div>
+      </div>
+    </div>
+    <script>
+      // Dropdown simple para el fallback
+      (function(){
+        const b=document.getElementById('fb-solutions-btn');
+        const m=document.getElementById('fb-solutions-menu');
+        if(!b||!m) return;
+        b.addEventListener('click', (e)=>{e.preventDefault();e.stopPropagation();m.classList.toggle('hidden');});
+        document.addEventListener('click', ()=> m.classList.add('hidden'));
+        document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') m.classList.add('hidden'); });
+      })();
+    </script>
+  </header>
+  <!-- =============================================================== -->
 
   <!-- ===== Hero ===== -->
   <section class="hero-bg text-white">
@@ -48,7 +94,7 @@
     </div>
   </section>
 
-  <!-- ===== CTA Ciberseguridad (bajo hero) ===== -->
+  <!-- ===== Banda/CTA de Ciber ===== -->
   <section class="bg-blue-50 border-t border-b border-blue-100">
     <div class="container mx-auto px-6 py-4 flex flex-col md:flex-row items-center justify-between gap-3">
       <div class="text-blue-900 font-semibold">
@@ -79,12 +125,12 @@
     </div>
   </section>
 
-  <!-- ===== Por qué elegirnos (enfoque Cyber) ===== -->
+  <!-- ===== Why Cyber (enfoque) ===== -->
   <section class="py-14">
     <div class="container mx-auto px-6">
       <div class="text-center mb-10">
         <h2 class="text-3xl font-bold">Why Choose Us for Cybersecurity</h2>
-        <p class="text-xl text-gray-600 max-w-3xl mx-auto">Resultados concretos: menos superficie de ataque, detecciones más tempranas y respuestas guiadas.</p>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto">Menos superficie de ataque, detecciones más tempranas y respuestas guiadas.</p>
       </div>
 
       <div class="grid md:grid-cols-3 gap-6">
@@ -161,12 +207,28 @@
     </div>
   </section>
 
-  <!-- ===== Footer centralizado ===== -->
+  <!-- Footer centralizado -->
   <div id="app-footer"></div>
 
-  <!-- ===== Scripts de sitio (sin duplicados) ===== -->
+  <!-- Scripts del sitio -->
   <script defer src="/js/nav.js"></script>
   <script defer src="/js/footer.js"></script>
   <script src="/js/fix-nav.js" defer></script>
+
+  <!-- Oculta el fallback cuando nav.js inyecta el header en #app-header -->
+  <script>
+    (function(){
+      function swapIfReady(){
+        const mount = document.getElementById('app-header');
+        const fb = document.getElementById('fallback-header');
+        if(mount && mount.childElementCount > 0 && fb){
+          fb.parentNode.removeChild(fb);
+        }
+      }
+      document.addEventListener('DOMContentLoaded', swapIfReady);
+      window.addEventListener('load', ()=>setTimeout(swapIfReady, 60));
+      setTimeout(swapIfReady, 800); // último intento por si hay cache lento/CDN
+    })();
+  </script>
 </body>
 </html>
