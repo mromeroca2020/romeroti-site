@@ -6,8 +6,8 @@
     Propósito: Página de servicios SOC + Quick Tools + Live Toolbox.
     Cambios clave:
       - Favicons RomanoTI con cache-buster (?v=4).
-      - Header y Footer centralizados (nav.js / footer.js).
-      - Fallback robusto del dropdown “Solutions”.
+      - Header y Footer centralizados (nav.js / footer.js) + FALLBACK.
+      - Dropdown “Solutions” funcionando siempre.
       - Lógica SOC intacta (Quick Tools + Live Toolbox).
   ========================================================== -->
   <meta charset="UTF-8" />
@@ -31,14 +31,11 @@
   <!-- Estilos rápidos -->
   <style>
     body{font-family:'Montserrat',sans-serif;background:#f8f9fa;color:#333;scroll-behavior:smooth}
-    .hero-bg{background:linear-gradient(135deg,#0f3a2e 0%,#10b981 100%)}
+    .hero-bg{background:linear-gradient(135deg,#0f3a2e 0%,#10b981 100%)} /* SOC = verde */
     .btn-primary{background:#2563EB;transition:all .3s}
     .btn-primary:hover{background:#1D4ED8;transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.15)}
     .feature-card{transition:all .3s;border-radius:.5rem;box-shadow:0 1px 3px rgba(0,0,0,.1)}
     .feature-card:hover{transform:translateY(-6px);box-shadow:0 12px 30px -8px rgba(37,99,235,.15)}
-    header,footer{background:#fff}
-    .logo{display:flex;align-items:center;font-weight:700;font-size:1.5rem}
-    .logo-icon{background:#2563EB;color:#fff;width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-right:12px;font-size:1.2rem}
     pre.tools-out{background:#0e1116;color:#eaeef3;padding:10px;border-radius:8px;max-height:40vh;overflow:auto}
     .badge{display:inline-flex;align-items:center;padding:.2rem .5rem;border-radius:.5rem;font-size:.75rem;font-weight:600}
     .badge-ok{background:#ecfdf5;color:#065f46;border:1px solid #a7f3d0}
@@ -48,8 +45,57 @@
 </head>
 <body class="bg-gray-50">
 
-  <!-- Header centralizado (inyectado por /js/nav.js) -->
+  <!-- Mountpoint del header centralizado -->
   <div id="app-header"></div>
+
+  <!-- ===== Header FALLBACK (navegación garantizada) ===== -->
+  <header id="fallback-header" class="bg-white shadow-md sticky top-0 z-40">
+    <div class="container mx-auto px-6 py-3">
+      <div class="flex items-center justify-between">
+        <a href="/" class="flex items-center font-bold text-xl text-gray-900">
+          <span class="inline-flex items-center justify-center w-9 h-9 rounded-full bg-blue-600 text-white mr-3">R</span>
+          RomanoTI Solutions
+        </a>
+        <nav class="hidden md:flex items-center space-x-6">
+          <a href="/" class="text-gray-700 hover:text-blue-600">Home</a>
+
+          <!-- Dropdown Solutions (fallback) -->
+          <div class="relative">
+            <button id="fb-solutions-btn" class="text-gray-700 hover:text-blue-600 inline-flex items-center focus:outline-none" aria-expanded="false">
+              Solutions
+              <svg class="ml-1 w-4 h-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.584l3.71-3.354a.75.75 0 111.02 1.1l-4.2 3.794a.75.75 0 01-1.02 0l-4.2-3.794a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
+            </button>
+            <div id="fb-solutions-menu" class="absolute right-0 mt-2 w-72 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5 hidden">
+              <a href="/solutions/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">Overview</a>
+              <a href="/solutions/cybershield/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">CyberShield (MDR)</a>
+              <a href="/solutions/cybershield/soc-console.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">SOC Console</a>
+              <a href="/solutions/cybershield/easm-console.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">EASM Console</a>
+              <a href="/solutions/cybershield/field-kit.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">Field Kit</a>
+            </div>
+          </div>
+
+          <a href="/services/tools.html" class="text-gray-700 hover:text-blue-600">Tools</a>
+          <a href="/it-noc.html" class="text-gray-700 hover:text-blue-600">NOC</a>
+          <a href="/it-soc.html" class="text-blue-600 font-semibold">SOC</a>
+          <a href="https://calendly.com/mauricioromeroca" class="btn-primary text-white px-4 py-2 rounded-lg font-medium">Book Now</a>
+        </nav>
+      </div>
+    </div>
+    <script>
+      // Dropdown simple del fallback
+      (function(){
+        const btn  = document.getElementById('fb-solutions-btn');
+        const menu = document.getElementById('fb-solutions-menu');
+        if(!btn||!menu) return;
+        const open=()=>{menu.classList.remove('hidden');btn.setAttribute('aria-expanded','true');};
+        const close=()=>{menu.classList.add('hidden');btn.setAttribute('aria-expanded','false');};
+        btn.addEventListener('click', (e)=>{e.preventDefault();e.stopPropagation();menu.classList.toggle('hidden');btn.setAttribute('aria-expanded',menu.classList.contains('hidden')?'false':'true');});
+        document.addEventListener('click', (e)=>{ if(!menu.contains(e.target)&&e.target!==btn) close(); });
+        document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') close(); });
+      })();
+    </script>
+  </header>
+  <!-- ====================================================== -->
 
   <!-- ===== Hero SOC ===== -->
   <section class="hero-bg text-white py-28">
@@ -277,35 +323,24 @@
     </div>
   </section>
 
-  <!-- Footer centralizado (inyectado por /js/footer.js) -->
+  <!-- Footer centralizado -->
   <div id="app-footer"></div>
 
   <!-- ====== JS SOC (Quick Tools + Live Toolbox) ====== -->
   <script>
   /**
    * SOC Quick Tools + Live Toolbox (frontend)
-   * - API base: Render (API_BASE)
-   * - La Org API Key viaja en 'x-api-key' y se guarda en localStorage ('romanoti_org_key')
-   * - Herramientas:
-   *   1) /ext/emaildns   -> Email Security Posture (MX, SPF, DMARC)
-   *   2) /noc/dns-lookup -> DKIM (selector._domainkey.domain, TXT)
-   *   3) /ext/tls        -> TLS Cert Expiry
-   *   4) /soc/alerts, /soc/alerts/recent, /soc/playbooks/run (demo SOC)
    */
   const API_BASE = 'https://romanoti-tools-api.onrender.com';
-
-  // Helpers de DOM/UX
   const $ = (id) => document.getElementById(id);
   function pretty(preId, data){ const el=$(preId); try{ el.textContent=(typeof data==='string')?data:JSON.stringify(data,null,2);}catch{ el.textContent=String(data);} }
   function msg(id, text){ $(id).textContent = text || ''; }
   function badge(text, type='ok'){ const s=document.createElement('span'); s.className=`badge ${type==='ok'?'badge-ok':type==='warn'?'badge-warn':'badge-err'}`; s.textContent=text; return s; }
 
-  // API Key
   function loadKey(){ $('orgKey').value = localStorage.getItem('romanoti_org_key') || ''; }
   function saveKey(){ const k=$('orgKey').value.trim(); localStorage.setItem('romanoti_org_key', k); msg('keyMsg', k?'✅ API Key guardada localmente.':'API Key vacía.'); }
   function getKeyOrWarn(){ const k=$('orgKey').value.trim() || localStorage.getItem('romanoti_org_key') || ''; if(!k) alert('Ingresa tu Org API Key primero.'); return k; }
 
-  // Email Posture
   async function runEmailPosture(){
     const key=getKeyOrWarn(); if(!key) return;
     const domain=$('espDomain').value.trim();
@@ -329,7 +364,6 @@
     }catch(e){ pretty('espOut',{error:String(e)}); }
   }
 
-  // DKIM
   async function runDkimLookup(){
     const key=getKeyOrWarn(); if(!key) return;
     const domain=$('dkimDomain').value.trim(); const selector=$('dkimSelector').value.trim();
@@ -341,7 +375,6 @@
     }catch(e){ pretty('dkimOut',{error:String(e)}); }
   }
 
-  // TLS
   async function runTlsCheck(){
     const key=getKeyOrWarn(); if(!key) return;
     const host=$('tlsHost').value.trim(); const port=parseInt($('tlsPort').value||'443',10);
@@ -352,7 +385,6 @@
     }catch(e){ pretty('tlsOut',{error:String(e)}); }
   }
 
-  // SOC Live Toolbox
   async function socPost(path, body){ const key=getKeyOrWarn(); if(!key) return {ok:false,status:0,error:'API key missing'}; try{ const res=await fetch(API_BASE+path,{method:'POST',headers:{'x-api-key':key,'content-type':'application/json','accept':'application/json'},body:JSON.stringify(body||{})}); const text=await res.text(); try{return{ok:res.ok,status:res.status,data:JSON.parse(text)}}catch{return{ok:res.ok,status:res.status,data:text}} }catch(e){return{ok:false,status:0,error:String(e)}}}
   async function socGet(path){ const key=getKeyOrWarn(); if(!key) return {ok:false,status:0,error:'API key missing'}; try{ const res=await fetch(API_BASE+path,{headers:{'x-api-key':key,'accept':'application/json'}}); const text=await res.text(); try{return{ok:res.ok,status:res.status,data:JSON.parse(text)}}catch{return{ok:res.ok,status:res.status,data:text}} }catch(e){return{ok:false,status:0,error:String(e)}}}
 
@@ -383,7 +415,6 @@
     pretty('outPB', resp);
   }
 
-  // Wire-up
   document.addEventListener('DOMContentLoaded', () => {
     loadKey();
     $('btnSaveKey').addEventListener('click', saveKey);
@@ -400,33 +431,45 @@
   });
   </script>
 
-  <!-- ===== Fallback robusto del dropdown “Solutions” ===== -->
+  <!-- ===== Fallback robusto del dropdown “Solutions” (si nav.js no cablea) ===== -->
   <script>
     (function(){
       function wire(btn, menu){
         if(!btn || !menu || btn.dataset.wired) return;
-        const open  = ()=>{ menu.classList.remove('hidden'); menu.classList.add('show'); btn.setAttribute('aria-expanded','true'); };
-        const close = ()=>{ menu.classList.add('hidden'); menu.classList.remove('show'); btn.setAttribute('aria-expanded','false'); };
+        const open  = ()=>{ menu.classList.remove('hidden'); btn.setAttribute('aria-expanded','true'); };
+        const close = ()=>{ menu.classList.add('hidden');  btn.setAttribute('aria-expanded','false'); };
         const toggle= ()=> (menu.classList.contains('hidden') ? open() : close());
         btn.addEventListener('click', (e)=>{ e.preventDefault(); e.stopPropagation(); toggle(); });
-        btn.addEventListener('mouseenter', open);
-        menu.parentNode.addEventListener('mouseleave', ()=> setTimeout(close, 120));
         document.addEventListener('click', (e)=>{ if(!menu.contains(e.target) && e.target!==btn) close(); });
         document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') close(); });
         btn.dataset.wired='1';
       }
       function tryWire(){
-        const btn  = document.getElementById('navSolutionsBtn') || document.getElementById('solutionsBtn');
-        const menu = document.getElementById('navSolutionsMenu')|| document.getElementById('solutionsMenu');
+        const btn  = document.getElementById('navSolutionsBtn') || document.getElementById('solutionsBtn') || document.getElementById('fb-solutions-btn');
+        const menu = document.getElementById('navSolutionsMenu')|| document.getElementById('solutionsMenu')|| document.getElementById('fb-solutions-menu');
         wire(btn, menu);
       }
       document.addEventListener('DOMContentLoaded', ()=>{ tryWire(); setTimeout(tryWire, 250); setTimeout(tryWire, 800); });
     })();
   </script>
 
-  <!-- Carga del header/footer + hotfix universal -->
+  <!-- Carga del header/footer centralizados -->
   <script defer src="/js/nav.js"></script>
   <script defer src="/js/footer.js"></script>
   <script defer src="/js/fix-nav.js"></script>
+
+  <!-- Quita el fallback cuando nav.js ya inyectó el header -->
+  <script>
+    (function(){
+      function swapIfReady(){
+        const mount = document.getElementById('app-header');
+        const fb = document.getElementById('fallback-header');
+        if(mount && mount.childElementCount > 0 && fb){ fb.parentNode.removeChild(fb); }
+      }
+      document.addEventListener('DOMContentLoaded', swapIfReady);
+      window.addEventListener('load', ()=>setTimeout(swapIfReady, 60));
+      setTimeout(swapIfReady, 800);
+    })();
+  </script>
 </body>
 </html>
