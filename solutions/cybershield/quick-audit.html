@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Quick Cyber Audit | RomanoTI CyberShield</title>
+
+  <!-- Tailwind + Montserrat (alineado con el resto del sitio) -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    body{font-family:'Montserrat',sans-serif;background:#f8f9fa;color:#111827;scroll-behavior:smooth}
+    .hero-bg{background:linear-gradient(135deg,#1e3a8a 0%,#2563eb 100%)}
+    .btn-primary{background:#2563EB;transition:all .2s}
+    .btn-primary:hover{background:#1D4ED8;transform:translateY(-1px);box-shadow:0 6px 18px -10px rgba(37,99,235,.7)}
+    .card{border-radius:14px;box-shadow:0 12px 32px -16px rgba(2,6,23,.2)}
+    .badge{display:inline-flex;align-items:center;padding:.25rem .55rem;border-radius:.5rem;font-size:.75rem;font-weight:700}
+    .badge-ok{background:#ecfdf5;color:#065f46;border:1px solid #a7f3d0}
+    .badge-warn{background:#fffbeb;color:#92400e;border:1px solid #fcd34d}
+    .badge-err{background:#fef2f2;color:#991b1b;border:1px solid #fecaca}
+    pre.output{background:#0e1116;color:#eaeef3;padding:12px;border-radius:10px;max-height:45vh;overflow:auto}
+    .score-ring{width:110px;height:110px;border-radius:9999px;background:#fff;box-shadow:0 6px 20px -10px rgba(2,6,23,.25);display:grid;place-items:center}
+    .score-num{font-size:30px;font-weight:800}
+  </style>
+</head>
+<body class="bg-gray-50">
+
+  <!-- Header unificado -->
+  <div id="app-header"></div>
+
+  <!-- Hero -->
+  <section class="hero-bg text-white">
+    <div class="container mx-auto px-6 py-16 text-center">
+      <h1 class="text-4xl md:text-5xl font-bold mb-4">Quick Cyber Audit</h1>
+      <p class="text-lg md:text-xl opacity-95 max-w-3xl mx-auto">
+        Evalúa correo (SPF/DKIM/DMARC), TLS y salud HTTP en minutos. Obtén un puntaje y un reporte listo para enviar a tu cliente.
+      </p>
+      <div class="mt-6">
+        <a href="/solutions/cybershield/" class="inline-block text-white opacity-90 hover:opacity-100 underline">Volver a CyberShield</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contenido -->
+  <section class="py-10">
+    <div class="container mx-auto px-6 max-w-6xl grid md:grid-cols-3 gap-6">
+      <!-- Columna izquierda: Settings -->
+      <div class="md:col-span-1">
+        <div class="card bg-white p-6">
+          <h2 class="text-xl font-bold mb-2">Settings</h2>
+          <p class="text-sm text-gray-600 mb-4">
+            Tu <b>Org API Key</b> se guarda solo en tu navegador. Se envía como <code>x-api-key</code>.
+          </p>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Org API Key</label>
+          <input id="orgKey" type="password" class="w-full border rounded-lg px-3 py-2 mb-2" placeholder="pega tu API key">
+          <button id="btnSaveKey" class="btn-primary text-white px-4 py-2 rounded-lg">Guardar</button>
+          <p id="keyMsg" class="text-xs text-gray-500 mt-2"></p>
+
+          <hr class="my-6">
+
+          <h3 class="font-semibold mb-2">Opciones del audit</h3>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Dominio</label>
+          <input id="domain" class="w-full border rounded-lg px-3 py-2 mb-3" placeholder="example.com" value="example.com">
+
+          <div class="space-y-2 text-sm">
+            <label class="inline-flex items-center gap-2">
+              <input id="chkEmail" type="checkbox" class="rounded border-gray-300" checked>
+              <span>Revisar postura de Email (MX/SPF/DMARC + DKIM)</span>
+            </label>
+            <label class="inline-flex items-center gap-2">
+              <input id="chkTls" type="checkbox" class="rounded border-gray-300" checked>
+              <span>Revisar TLS (expiración y emisor)</span>
+            </label>
+            <label class="inline-flex items-center gap-2">
+              <input id="chkHttp" type="checkbox" class="rounded border-gray-300" checked>
+              <span>Revisar HTTP (status/tiempo/validación TLS)</span>
+            </label>
+          </div>
+
+          <div class="mt-4">
+            <label class="block text-sm font-medium text-gray-700 mb-1">Puertos a probar (TLS)</label>
+            <input id="tlsPorts" class="w-full border rounded-lg px-3 py-2" value="443" />
+            <p class="text-xs text-gray-500 mt-1">Lista separada por comas (ej: 443,465)</p>
+          </div>
+
+          <div class="mt-4">
+            <label class="block text-sm font-medium text-gray-700 mb-1">URL HTTP opcional</label>
+            <input id="httpUrl" class="w-full border rounded-lg px-3 py-2" placeholder="https://example.com" />
+            <div class="flex items-center gap-2 mt-2 text-sm">
+              <input id="httpVerify" type="checkbox" class="rounded border-gray-300" checked>
+              <span>Verificar TLS</span>
+              <span class="ml-auto">Timeout</span>
+              <input id="httpTimeout" type="number" min="3" max="30" value="8" class="w-20 border rounded-lg px-2 py-1">
+              <span>s</span>
+            </div>
+          </div>
+
+          <div class="mt-6 flex gap-3">
+            <button id="btnRunAudit" class="btn-primary text-white px-4 py-2 rounded-lg w-full">Run Audit</button>
+          </div>
+          <p id="auditMsg" class="text-sm text-gray-600 mt-2"></p>
+        </div>
+      </div>
+
+      <!-- Columna derecha: Resultados -->
+      <div class="md:col-span-2">
+        <div class="card bg-white p-6">
+          <div class="flex items-center gap-4 mb-4">
+            <div class="score-ring">
+              <div class="text-center">
+                <div id="scoreNum" class="score-num text-gray-900">—</div>
+                <div class="text-xs text-gray-500 -mt-1">/100</div>
+              </div>
+            </div>
+            <div>
+              <h2 class="text-xl font-bold">Resultados</h2>
+              <p class="text-sm text-gray-600">Badges rápidos y detalles por control.</p>
+              <div id="quickBadges" class="mt-2 flex flex-wrap gap-2"></div>
+            </div>
+          </div>
+
+          <div class="grid md:grid-cols-2 gap-6">
+            <!-- Email posture -->
+            <div class="border rounded-lg p-4">
+              <div class="flex items-center justify-between mb-2">
+                <h3 class="font-semibold">Email Posture</h3>
+                <div id="emailBadges" class="flex flex-wrap gap-2"></div>
+              </div>
+              <pre id="emailOut" class="output"></pre>
+            </div>
+
+            <!-- TLS -->
+            <div class="border rounded-lg p-4">
+              <div class="flex items-center justify-between mb-2">
+                <h3 class="font-semibold">TLS</h3>
+                <div id="tlsBadges" class="flex flex-wrap gap-2"></div>
+              </div>
+              <pre id="tlsOut" class="output"></pre>
+            </div>
+
+            <!-- HTTP -->
+            <div class="border rounded-lg p-4 md:col-span-2">
+              <div class="flex items-center justify-between mb-2">
+                <h3 class="font-semibold">HTTP</h3>
+                <div id="httpBadges" class="flex flex-wrap gap-2"></div>
+              </div>
+              <pre id="httpOut" class="output"></pre>
+            </div>
+          </div>
+
+          <hr class="my-6">
+
+          <div class="flex flex-wrap gap-3">
+            <button id="btnCopyMd" class="px-4 py-2 rounded-lg border font-medium">Copy Markdown</button>
+            <button id="btnDownloadJson" class="px-4 py-2 rounded-lg border font-medium">Download JSON</button>
+          </div>
+          <pre id="mdOut" class="output mt-3 hidden"></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer unificado -->
+  <div id="app-footer"></div>
+
+  <!-- JS -->
+  <script>
+    // ===== Config =====
+    const API_BASE = 'https://romanoti-tools-api.onrender.com';
+
+    // ===== Helpers =====
+    const $ = (id) => document.getElementById(id);
+    const txt = (el, v='') => { if(el) el.textContent = v; }
+    const pretty = (el, data) => {
+      try { el.textContent = (typeof data==='string') ? data : JSON.stringify(data, null, 2); }
+      catch { el.textContent = String(data); }
+    }
+    const badge = (text, type='ok') => {
+      const s = document.createElement('span');
+      s.className = 'badge ' + (type==='ok' ? 'badge-ok' : type==='warn' ? 'badge-warn' : 'badge-err');
+      s.textContent = text;
+      return s;
+    }
+    const ensureUrl = (domainOrUrl) => {
+      if(!domainOrUrl) return '';
+      if(/^https?:\/\//i.test(domainOrUrl)) return domainOrUrl;
+      return 'https://' + domainOrUrl;
+    }
+
+    // ===== API key persistence =====
+    function loadKey(){ $('orgKey').value = localStorage.getItem('romanoti_org_key') || '' }
+    function saveKey(){
+      const k = $('orgKey').value.trim();
+      localStorage.setItem('romanoti_org_key', k);
+      txt($('keyMsg'), k ? '✅ API Key guardada localmente.' : 'API Key vacía.');
+    }
+    function getKeyOrWarn(){
+      const k = $('orgKey').value.trim() || localStorage.getItem('romanoti_org_key') || '';
+      if(!k) alert('Ingresa tu Org API Key primero.');
+      return k;
+    }
+
+    // ===== HTTP POST JSON =====
+    async function postJson(path, body, extraHeaders={}){
+      const key = getKeyOrWarn(); if(!key) return {ok:false, status:0, error:'API key missing'};
+      const headers = { 'content-type':'application/json', 'accept':'application/json', 'x-api-key': key, ...extraHeaders };
+      try{
+        const res = await fetch(API_BASE + path, { method:'POST', headers, body: JSON.stringify(body||{}) });
+        const text = await res.text();
+        try{ return { ok:res.ok, status:res.status, data:JSON.parse(text) } }
+        catch{ return { ok:res.ok, status:res.status, data:text } }
+      }catch(e){
+        return { ok:false, status:0, error:String(e) };
+      }
+    }
+
+    // ===== Controls =====
+    async function doEmailPosture(domain){
+      const emailOut = $('emailOut'), emailBadges = $('emailBadges');
+      txt(emailOut, 'Running…'); emailBadges.innerHTML = '';
+      const r = await postJson('/ext/emaildns', { domain });
+      if(!r.ok){ pretty(emailOut, r); emailBadges.appendChild(badge('Error', 'err')); return {r, score:0} }
+      // DKIM via selector "selector1" as quick probe (opcional)
+      let dkim = null;
+      try{
+        const dk = await postJson('/noc/dns-lookup', { domain: `selector1._domainkey.${domain}`, type:'TXT' });
+        dkim = dk.data || dk;
+      }catch{}
+
+      // Badges + score quick
+      const data = r.data || {};
+      const mx = (data.mx||[]);
+      const spf = (data.spf||[]).find(s => s.toLowerCase().startsWith('v=spf1'));
+      const dmarc = (data.dmarc||[]).find(s => s.toLowerCase().startsWith('v=dmarc1'));
+      const dmarcPolicy = dmarc ? (dmarc.toLowerCase().match(/p=(none|quarantine|reject)/)||[,'none'])[1] : 'none';
+      const dkimOk = dkim && (Array.isArray(dkim.answers) ? dkim.answers.length>0 : false);
+
+      if(mx.length===1 && typeof mx[0]==='string' && mx[0].trim()==='0 .') emailBadges.appendChild(badge('Null MX (no email)', 'warn'));
+      else if(mx.length>0) emailBadges.appendChild(badge('MX OK', 'ok')); else emailBadges.appendChild(badge('MX faltante','err'));
+
+      if(spf) emailBadges.appendChild(badge('SPF OK','ok')); else emailBadges.appendChild(badge('SPF faltante','err'));
+      if(dmarc){
+        const type = dmarcPolicy==='reject' ? 'ok' : dmarcPolicy==='quarantine' ? 'warn' : 'err';
+        emailBadges.appendChild(badge(`DMARC p=${dmarcPolicy}`, type));
+      }else{
+        emailBadges.appendChild(badge('DMARC faltante','err'));
+      }
+      if(dkimOk) emailBadges.appendChild(badge('DKIM selector1 OK','ok'));
+
+      pretty(emailOut, { emaildns:data, dkim });
+      // Score: 40 pts si todo completo (MX+SPF+DMARC reject + DKIM opcional)
+      let score = 0;
+      if(mx.length>0) score += 8;
+      if(spf) score += 10;
+      if(dmarcPolicy==='reject') score += 18;
+      else if(dmarcPolicy==='quarantine') score += 10;
+      if(dkimOk) score += 4;
+      return { r:data, score: Math.min(score, 40) };
+    }
+
+    async function doTlsChecks(domain, ports){
+      const tlsOut = $('tlsOut'), tlsBadges = $('tlsBadges');
+      txt(tlsOut, 'Running…'); tlsBadges.innerHTML = '';
+      const host = domain;
+      let bestScore = 0;
+      const results = [];
+      for(const p of ports){
+        const rr = await postJson('/ext/tls', { host, port: p });
+        results.push(rr);
+      }
+      // Interpretación rápida
+      let passAny = false;
+      let minDays = null, issuer = '';
+      results.forEach(rr=>{
+        if(rr.ok && rr.data && typeof rr.data==='object'){
+          const d=rr.data;
+          if(typeof d.days_left==='number'){
+            minDays = (minDays===null) ? d.days_left : Math.min(minDays, d.days_left);
+          }
+          if(d.issuer) issuer = d.issuer;
+          passAny = true;
+        }
+      });
+      if(passAny){
+        tlsBadges.appendChild(badge('TLS detectado','ok'));
+        if(minDays!==null){
+          if(minDays >= 60){ tlsBadges.appendChild(badge(`${minDays}d restantes`,'ok')); bestScore += 20; }
+          else if(minDays >= 15){ tlsBadges.appendChild(badge(`${minDays}d restantes`,'warn')); bestScore += 12; }
+          else { tlsBadges.appendChild(badge(`${minDays}d restantes`,'err')); bestScore += 6; }
+        }
+        if(issuer) tlsBadges.appendChild(badge(issuer.length>28?(`Issuer: ${issuer.slice(0,28)}…`):(`Issuer: ${issuer}`),'ok'));
+      }else{
+        tlsBadges.appendChild(badge('Sin TLS','err'));
+      }
+      pretty(tlsOut, results.map(x=>x.data||x));
+      return { r:results, score: Math.min(bestScore, 20) };
+    }
+
+    async function doHttpCheck(url, verify, timeout_s){
+      const httpOut = $('httpOut'), httpBadges = $('httpBadges');
+      txt(httpOut, 'Running…'); httpBadges.innerHTML = '';
+
+      if(!url){ txt(httpOut, 'URL no especificada.'); return {r:null, score:0}; }
+      const rr = await postJson('/noc/http-check', { url, timeout_s, verify_tls: !!verify });
+      const data = rr.data || rr;
+
+      if(rr.ok && data && data.status){
+        httpBadges.appendChild(badge(`HTTP ${data.status}`, (data.status>=200&&data.status<400)?'ok':'warn'));
+        if(typeof data.elapsed_ms==='number'){
+          const ms = Math.round(data.elapsed_ms);
+          httpBadges.appendChild(badge(`${ms}ms`, ms<800?'ok':ms<1500?'warn':'err'));
+        }
+      }else{
+        httpBadges.appendChild(badge('Error HTTP','err'));
+      }
+      pretty(httpOut, data);
+      // Score: 20pts si 2xx y latencia rápida
+      let score = 0;
+      if(rr.ok && data && data.status>=200 && data.status<300){
+        score += 12;
+        const ms = Math.round(data.elapsed_ms||0);
+        if(ms<800) score += 8;
+        else if(ms<1500) score += 4;
+      }
+      return { r:data, score: Math.min(score, 20) };
+    }
+
+    function setScore(val){
+      const num = $('scoreNum');
+      num.textContent = (typeof val==='number' ? Math.round(val) : '—');
+      num.style.color = (val>=80)?'#065f46' : (val>=60)?'#92400e' : '#991b1b';
+    }
+
+    function addQuickBadge(txtStr, type){
+      $('quickBadges').appendChild(badge(txtStr, type));
+    }
+
+    function buildMarkdown(domain, parts, total){
+      const lines = [];
+      lines.push(`# RomanoTI Quick Cyber Audit`);
+      lines.push(`**Dominio:** ${domain}`);
+      lines.push(`**Score:** ${Math.round(total)}/100`);
+      lines.push('');
+      // Email
+      if(parts.email){
+        const e = parts.email;
+        lines.push(`## Email Posture`);
+        if(e.data){
+          const d = e.data;
+          const mx = (d.mx||[]).join(', ') || '(no MX)';
+          const spf = (d.spf||[]).join(' | ') || '(sin SPF)';
+          const dmarc = (d.dmarc||[]).join(' | ') || '(sin DMARC)';
+          lines.push(`- MX: ${mx}`);
+          lines.push(`- SPF: ${spf}`);
+          lines.push(`- DMARC: ${dmarc}`);
+        }
+        if(e.dkim){ lines.push(`- DKIM selector1: ${JSON.stringify(e.dkim)}`) }
+        lines.push('');
+      }
+      // TLS
+      if(parts.tls){
+        lines.push(`## TLS`);
+        lines.push('```json');
+        lines.push(JSON.stringify(parts.tls, null, 2));
+        lines.push('```');
+        lines.push('');
+      }
+      // HTTP
+      if(parts.http){
+        lines.push(`## HTTP`);
+        lines.push('```json');
+        lines.push(JSON.stringify(parts.http, null, 2));
+        lines.push('```');
+        lines.push('');
+      }
+      lines.push(`_Generado con RomanoTI CyberShield_`);
+      return lines.join('\n');
+    }
+
+    function downloadBlob(filename, dataStr, mime='application/json'){
+      const blob = new Blob([dataStr], {type:mime});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = filename; a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    // ===== Wire-up =====
+    document.addEventListener('DOMContentLoaded', () => {
+      loadKey();
+      $('btnSaveKey').addEventListener('click', saveKey);
+
+      $('btnRunAudit').addEventListener('click', async ()=>{
+        $('auditMsg').textContent = 'Ejecutando…';
+        $('quickBadges').innerHTML = '';
+        setScore(null);
+
+        const domain = $('domain').value.trim();
+        const wantEmail = $('chkEmail').checked;
+        const wantTls = $('chkTls').checked;
+        const wantHttp = $('chkHttp').checked;
+
+        const tlsPorts = String($('tlsPorts').value||'443').split(',').map(x=>parseInt(x.trim(),10)).filter(Boolean);
+        const httpUrl = ensureUrl(($('httpUrl').value||'').trim() || `https://${domain}`);
+        const httpVerify = $('httpVerify').checked;
+        const httpTimeout = Math.max(3, Math.min(30, parseInt($('httpTimeout').value||'8',10)));
+
+        let total = 0, parts = {};
+        try{
+          if(wantEmail){
+            const e = await doEmailPosture(domain);
+            total += e.score;
+            parts.email = { data:e.r, dkim:(e.r && e.r.dkim) ? e.r.dkim : undefined };
+            addQuickBadge(`Email +${e.score}`, e.score>=30?'ok':e.score>=18?'warn':'err');
+          }else{
+            $('emailBadges').innerHTML = ''; $('emailOut').textContent = '(omitido)';
+          }
+
+          if(wantTls){
+            const t = await doTlsChecks(domain, tlsPorts);
+            total += t.score;
+            parts.tls = t.r;
+            addQuickBadge(`TLS +${t.score}`, t.score>=18?'ok':t.score>=10?'warn':'err');
+          }else{
+            $('tlsBadges').innerHTML = ''; $('tlsOut').textContent = '(omitido)';
+          }
+
+          if(wantHttp){
+            const h = await doHttpCheck(httpUrl, httpVerify, httpTimeout);
+            total += h.score;
+            parts.http = h.r;
+            addQuickBadge(`HTTP +${h.score}`, h.score>=18?'ok':h.score>=10?'warn':'err');
+          }else{
+            $('httpBadges').innerHTML = ''; $('httpOut').textContent = '(omitido)';
+          }
+
+          // Normaliza a 100 (Email 40 + TLS 20 + HTTP 20 = 80). Damos 20 “baseline” por completar el audit.
+          total = Math.min(100, Math.round(total + 20));
+          setScore(total);
+
+          const md = buildMarkdown(domain, parts, total);
+          $('mdOut').classList.remove('hidden');
+          $('mdOut').textContent = md;
+
+          $('auditMsg').textContent = 'Listo ✅';
+        }catch(e){
+          $('auditMsg').textContent = 'Error: ' + String(e);
+        }
+      });
+
+      $('btnCopyMd').addEventListener('click', async ()=>{
+        const md = $('mdOut').textContent || '';
+        try{ await navigator.clipboard.writeText(md); alert('Markdown copiado.'); }
+        catch{ alert('No se pudo copiar.'); }
+      });
+
+      $('btnDownloadJson').addEventListener('click', ()=>{
+        const dump = {
+          domain: $('domain').value.trim(),
+          when: new Date().toISOString(),
+          email: $('emailOut').textContent,
+          tls: $('tlsOut').textContent,
+          http: $('httpOut').textContent,
+          score: $('scoreNum').textContent
+        };
+        downloadBlob('quick-audit.json', JSON.stringify(dump, null, 2));
+      });
+    });
+  </script>
+
+  <!-- Nav/Footer -->
+  <script defer src="/js/nav.js"></script>
+  <script defer src="/js/footer.js"></script>
+  <script defer src="/js/fix-nav.js"></script>
+</body>
+</html>
