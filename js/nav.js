@@ -1,5 +1,3 @@
-<!-- /js/nav.js -->
-<script>
 (function(){
   // 1) Construimos el header unificado
   const html = `
@@ -26,14 +24,14 @@
             <div id="navSolutionsMenu"
                  class="absolute right-0 mt-2 w-72 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5 hidden"
                  role="menu" aria-labelledby="navSolutionsBtn">
-              <a href="/solutions/"                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem">Overview</a>
-              <a href="/solutions/cybershield/"                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem">CyberShield (MDR)</a>
-              <a href="/solutions/cybershield/soc-console.html"    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem">SOC Console</a>
-              <a href="/solutions/cybershield/easm-console.html"   class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem">EASM Console</a>
-              <a href="/solutions/cybershield/field-kit.html"      class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem">Field Kit (engineers)</a>
+              <a href="/solutions/"                              class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem">Overview</a>
+              <a href="/solutions/cybershield/"                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem">CyberShield (MDR)</a>
+              <a href="/solutions/cybershield/soc-console.html"  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem">SOC Console</a>
+              <a href="/solutions/cybershield/easm-console.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem">EASM Console</a>
+              <a href="/solutions/cybershield/field-kit.html"    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem">Field Kit (engineers)</a>
               <div class="border-t my-1"></div>
-              <a href="/solutions/cybershield/quick-audit.html"    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem">Quick Audit</a>
-              <a href="/solutions/cybershield/pov-14d.html"        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem">POV 14 días</a>
+              <a href="/solutions/cybershield/quick-audit.html"  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem">Quick Audit</a>
+              <a href="/solutions/cybershield/pov-14d.html"      class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem">POV 14 días</a>
             </div>
           </div>
 
@@ -44,7 +42,7 @@
              class="bg-blue-600 text-white px-5 py-2 rounded-lg font-medium">Book Now</a>
         </nav>
 
-        <!-- Mobile nav (link directo a Solutions) -->
+        <!-- Mobile nav -->
         <div class="md:hidden">
           <a href="/solutions/" class="bg-blue-600 text-white px-4 py-2 rounded-lg">Solutions</a>
         </div>
@@ -59,7 +57,6 @@
     if (mount) {
       mount.innerHTML = html;
     } else {
-      // si no existe el mountpoint, insertamos al inicio del body
       const temp = document.createElement('div');
       temp.innerHTML = html;
       document.body.insertBefore(temp.firstElementChild, document.body.firstChild);
@@ -77,20 +74,11 @@
     const close = () => { menu.classList.add('hidden');  btn.setAttribute('aria-expanded','false'); };
     const toggle= () => (menu.classList.contains('hidden') ? open() : close());
 
-    // Click del botón
     btn.addEventListener('click', (e)=>{ e.preventDefault(); e.stopPropagation(); toggle(); });
-
-    // Hover (desktop)
     btn.addEventListener('mouseenter', open);
-    root.addEventListener('mouseleave', ()=> setTimeout(close, 120));
-
-    // Click fuera
+    if (root) root.addEventListener('mouseleave', ()=> setTimeout(close, 120));
     document.addEventListener('click', (e)=>{ if (!menu.contains(e.target) && e.target !== btn) close(); });
-
-    // ESC para cerrar
     document.addEventListener('keydown', (e)=>{ if (e.key === 'Escape') close(); });
-
-    // Evitar que se corte el menú por overflow
     if (root) root.style.overflow = 'visible';
 
     btn.dataset.wired = '1';
@@ -110,4 +98,3 @@
     setTimeout(wireSolutions, 800);
   }
 })();
-</script>
