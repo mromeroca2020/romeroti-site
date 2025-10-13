@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Quick Cyber Audit | RomanoTI CyberShield</title>
 
-  <!-- Tailwind + Montserrat (alineado con el resto del sitio) -->
+  <!-- Tailwind + Montserrat -->
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
 
@@ -42,11 +42,62 @@
     </div>
   </section>
 
+  <!-- Banner de éxito (opcional, se muestra si ?thanks=1) -->
+  <div id="thanksBar" class="hidden bg-green-600 text-white">
+    <div class="container mx-auto px-6 py-3 text-center">
+      ¡Gracias! Recibimos tu solicitud de Quick Audit. Te contactaremos en breve.
+    </div>
+  </div>
+
   <!-- Contenido -->
   <section class="py-10">
     <div class="container mx-auto px-6 max-w-6xl grid md:grid-cols-3 gap-6">
-      <!-- Columna izquierda: Settings -->
-      <div class="md:col-span-1">
+      <!-- Columna izquierda -->
+      <div class="md:col-span-1 space-y-6">
+
+        <!-- FORM LEAD (Netlify) -->
+        <div class="card bg-white p-6">
+          <h2 class="text-xl font-bold mb-2">Solicitar informe por email</h2>
+          <p class="text-sm text-gray-600 mb-4">
+            Déjanos tus datos y te enviamos el resultado del Quick Audit con recomendaciones priorizadas.
+          </p>
+
+          <!-- Netlify form -->
+          <form name="quick-audit" method="POST" data-netlify="true" class="grid gap-3"
+                netlify-honeypot="bot-field" action="/solutions/cybershield/quick-audit.html?thanks=1">
+            <input type="hidden" name="form-name" value="quick-audit"/>
+            <p class="hidden">
+              <label>Don’t fill this out: <input name="bot-field"/></label>
+            </p>
+
+            <label class="text-sm font-medium">Nombre</label>
+            <input name="name" required class="border rounded-lg px-3 py-2"/>
+
+            <label class="text-sm font-medium">Email</label>
+            <input name="email" type="email" required class="border rounded-lg px-3 py-2"/>
+
+            <label class="text-sm font-medium">Dominio</label>
+            <input id="leadDomain" name="domain" required placeholder="example.com" class="border rounded-lg px-3 py-2"/>
+
+            <label class="text-sm font-medium">Mensaje (opcional)</label>
+            <textarea name="message" rows="3" class="border rounded-lg px-3 py-2" placeholder="Contexto, urgencia, etc."></textarea>
+
+            <button class="btn-primary text-white px-4 py-2 rounded-lg">Solicitar Quick Audit</button>
+
+            <p class="text-xs text-gray-500 mt-1">
+              Al enviar, aceptas que te contactemos con el informe y próximos pasos.
+            </p>
+          </form>
+
+          <hr class="my-5">
+
+          <div class="text-sm">
+            ¿Listo para una prueba guiada?
+            <a class="text-blue-600 font-semibold hover:underline" href="/solutions/cybershield/pov-14d.html">POV 14 días →</a>
+          </div>
+        </div>
+
+        <!-- Settings (API key / opciones) -->
         <div class="card bg-white p-6">
           <h2 class="text-xl font-bold mb-2">Settings</h2>
           <p class="text-sm text-gray-600 mb-4">
@@ -188,8 +239,23 @@
       return 'https://' + domainOrUrl;
     }
 
+    // ===== Mostrar banner de gracias si ?thanks=1 =====
+    (function showThanks(){
+      const u = new URL(window.location.href);
+      if(u.searchParams.get('thanks') === '1'){
+        const bar = $('thanksBar');
+        if(bar) bar.classList.remove('hidden');
+      }
+    })();
+
     // ===== API key persistence =====
-    function loadKey(){ $('orgKey').value = localStorage.getItem('romanoti_org_key') || '' }
+    function loadKey(){
+      $('orgKey').value = localStorage.getItem('romanoti_org_key') || '';
+      // Sincroniza el dominio del form con el campo de opciones si existe
+      const d = $('domain')?.value || '';
+      const lead = $('leadDomain');
+      if(lead && d) lead.value = d;
+    }
     function saveKey(){
       const k = $('orgKey').value.trim();
       localStorage.setItem('romanoti_org_key', k);
@@ -221,14 +287,13 @@
       txt(emailOut, 'Running…'); emailBadges.innerHTML = '';
       const r = await postJson('/ext/emaildns', { domain });
       if(!r.ok){ pretty(emailOut, r); emailBadges.appendChild(badge('Error', 'err')); return {r, score:0} }
-      // DKIM via selector "selector1" as quick probe (opcional)
+      // DKIM via selector "selector1" (opcional)
       let dkim = null;
       try{
         const dk = await postJson('/noc/dns-lookup', { domain: `selector1._domainkey.${domain}`, type:'TXT' });
         dkim = dk.data || dk;
       }catch{}
 
-      // Badges + score quick
       const data = r.data || {};
       const mx = (data.mx||[]);
       const spf = (data.spf||[]).find(s => s.toLowerCase().startsWith('v=spf1'));
@@ -249,7 +314,7 @@
       if(dkimOk) emailBadges.appendChild(badge('DKIM selector1 OK','ok'));
 
       pretty(emailOut, { emaildns:data, dkim });
-      // Score: 40 pts si todo completo (MX+SPF+DMARC reject + DKIM opcional)
+      // Score: 40 pts como máximo
       let score = 0;
       if(mx.length>0) score += 8;
       if(spf) score += 10;
@@ -262,14 +327,12 @@
     async function doTlsChecks(domain, ports){
       const tlsOut = $('tlsOut'), tlsBadges = $('tlsBadges');
       txt(tlsOut, 'Running…'); tlsBadges.innerHTML = '';
-      const host = domain;
       let bestScore = 0;
       const results = [];
       for(const p of ports){
-        const rr = await postJson('/ext/tls', { host, port: p });
+        const rr = await postJson('/ext/tls', { host: domain, port: p });
         results.push(rr);
       }
-      // Interpretación rápida
       let passAny = false;
       let minDays = null, issuer = '';
       results.forEach(rr=>{
@@ -315,7 +378,6 @@
         httpBadges.appendChild(badge('Error HTTP','err'));
       }
       pretty(httpOut, data);
-      // Score: 20pts si 2xx y latencia rápida
       let score = 0;
       if(rr.ok && data && data.status>=200 && data.status<300){
         score += 12;
@@ -342,7 +404,6 @@
       lines.push(`**Dominio:** ${domain}`);
       lines.push(`**Score:** ${Math.round(total)}/100`);
       lines.push('');
-      // Email
       if(parts.email){
         const e = parts.email;
         lines.push(`## Email Posture`);
@@ -358,7 +419,6 @@
         if(e.dkim){ lines.push(`- DKIM selector1: ${JSON.stringify(e.dkim)}`) }
         lines.push('');
       }
-      // TLS
       if(parts.tls){
         lines.push(`## TLS`);
         lines.push('```json');
@@ -366,7 +426,6 @@
         lines.push('```');
         lines.push('');
       }
-      // HTTP
       if(parts.http){
         lines.push(`## HTTP`);
         lines.push('```json');
@@ -391,6 +450,13 @@
       loadKey();
       $('btnSaveKey').addEventListener('click', saveKey);
 
+      // Si el usuario cambia el dominio en opciones, lo copiamos al form lead
+      const domainInput = $('domain');
+      const leadDomain = $('leadDomain');
+      if(domainInput && leadDomain){
+        domainInput.addEventListener('input', ()=>{ leadDomain.value = domainInput.value.trim(); });
+      }
+
       $('btnRunAudit').addEventListener('click', async ()=>{
         $('auditMsg').textContent = 'Ejecutando…';
         $('quickBadges').innerHTML = '';
@@ -411,7 +477,7 @@
           if(wantEmail){
             const e = await doEmailPosture(domain);
             total += e.score;
-            parts.email = { data:e.r, dkim:(e.r && e.r.dkim) ? e.r.dkim : undefined };
+            parts.email = { data:e.r };
             addQuickBadge(`Email +${e.score}`, e.score>=30?'ok':e.score>=18?'warn':'err');
           }else{
             $('emailBadges').innerHTML = ''; $('emailOut').textContent = '(omitido)';
@@ -435,7 +501,7 @@
             $('httpBadges').innerHTML = ''; $('httpOut').textContent = '(omitido)';
           }
 
-          // Normaliza a 100 (Email 40 + TLS 20 + HTTP 20 = 80). Damos 20 “baseline” por completar el audit.
+          // Normaliza a 100 (Email 40 + TLS 20 + HTTP 20 = 80). +20 baseline por completar.
           total = Math.min(100, Math.round(total + 20));
           setScore(total);
 
