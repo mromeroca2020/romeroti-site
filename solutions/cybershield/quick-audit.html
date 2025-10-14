@@ -62,32 +62,39 @@
             Déjanos tus datos y te enviamos el resultado del Quick Audit con recomendaciones priorizadas.
           </p>
 
-          <!-- Netlify form -->
-          <form name="quick-audit" method="POST" data-netlify="true" class="grid gap-3"
-                netlify-honeypot="bot-field" action="/solutions/cybershield/quick-audit.html?thanks=1">
-            <input type="hidden" name="form-name" value="quick-audit"/>
-            <p class="hidden">
-              <label>Don’t fill this out: <input name="bot-field"/></label>
-            </p>
+          <!-- FORM LEAD (Netlify) -->
+<form
+  name="quick-audit"
+  method="POST"
+  data-netlify="true"
+  netlify-honeypot="bot-field"
+  action="/solutions/cybershield/quick-audit?thanks=1"
+  class="grid gap-3"
+>
+  <input type="hidden" name="form-name" value="quick-audit" />
+  <p class="hidden">
+    <label>Don’t fill this out: <input name="bot-field" /></label>
+  </p>
 
-            <label class="text-sm font-medium">Nombre</label>
-            <input name="name" required class="border rounded-lg px-3 py-2"/>
+  <label class="text-sm font-medium">Nombre</label>
+  <input name="name" required class="border rounded-lg px-3 py-2" />
 
-            <label class="text-sm font-medium">Email</label>
-            <input name="email" type="email" required class="border rounded-lg px-3 py-2"/>
+  <label class="text-sm font-medium">Email</label>
+  <input name="email" type="email" required class="border rounded-lg px-3 py-2" />
 
-            <label class="text-sm font-medium">Dominio</label>
-            <input id="leadDomain" name="domain" required placeholder="example.com" class="border rounded-lg px-3 py-2"/>
+  <label class="text-sm font-medium">Dominio</label>
+  <input id="leadDomain" name="domain" required placeholder="example.com" class="border rounded-lg px-3 py-2" />
 
-            <label class="text-sm font-medium">Mensaje (opcional)</label>
-            <textarea name="message" rows="3" class="border rounded-lg px-3 py-2" placeholder="Contexto, urgencia, etc."></textarea>
+  <label class="text-sm font-medium">Mensaje (opcional)</label>
+  <textarea name="message" rows="3" class="border rounded-lg px-3 py-2" placeholder="Contexto, urgencia, etc."></textarea>
 
-            <button class="btn-primary text-white px-4 py-2 rounded-lg">Solicitar Quick Audit</button>
+  <button class="btn-primary text-white px-4 py-2 rounded-lg">Solicitar Quick Audit</button>
 
-            <p class="text-xs text-gray-500 mt-1">
-              Al enviar, aceptas que te contactemos con el informe y próximos pasos.
-            </p>
-          </form>
+  <p class="text-xs text-gray-500 mt-1">
+    Al enviar, aceptas que te contactemos con el informe y próximos pasos.
+  </p>
+</form>
+
 
           <hr class="my-5">
 
