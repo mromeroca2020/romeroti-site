@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CyberShield (MDR) | RomanoTI Solutions</title>
+
+  <link rel="alternate" href="https://romanoti-solutions.netlify.app/en/solutions/cybershield/" hreflang="en-CA">
+  <link rel="alternate" href="https://romanoti-solutions.netlify.app/solutions/cybershield/" hreflang="es-CA">
+  <link rel="alternate" href="https://romanoti-solutions.netlify.app/fr/solutions/cybershield/" hreflang="fr-CA">
+  <link rel="alternate" href="https://romanoti-solutions.netlify.app/en/solutions/cybershield/" hreflang="x-default">
+
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body{font-family:'Montserrat',sans-serif;background:#f8f9fa;color:#111827}
+    .hero-bg{background:linear-gradient(135deg,#1e3a8a 0%,#2563eb 100%)}
+    .btn-primary{background:#2563EB;transition:all .2s}
+    .btn-primary:hover{background:#1D4ED8;transform:translateY(-1px);box-shadow:0 6px 18px -10px rgba(37,99,235,.7)}
+    .card{border-radius:14px;box-shadow:0 12px 32px -16px rgba(2,6,23,.2)}
+    .langbar a{opacity:.9} .langbar a:hover{opacity:1;text-decoration:underline}
+  </style>
+</head>
+<body>
+
+  <div class="langbar text-sm bg-gray-100 border-b">
+    <div class="container mx-auto px-6 py-2 flex gap-4">
+      <span>Language:</span>
+      <a href="/en/solutions/cybershield/" class="font-semibold">English</a>
+      <a href="/fr/solutions/cybershield/">Français</a>
+      <a href="/solutions/cybershield/">Español</a>
+    </div>
+  </div>
+
+  <div id="app-header"></div>
+
+  <section class="hero-bg text-white">
+    <div class="container mx-auto px-6 py-16 text-center">
+      <h1 class="text-4xl md:text-5xl font-bold mb-4">CyberShield (MDR)</h1>
+      <p class="text-lg md:text-xl opacity-95 max-w-3xl mx-auto">
+        24×7 detection & response against ransomware, intrusions and outages — for on-prem and cloud networks.
+      </p>
+      <div class="mt-8 flex flex-col md:flex-row gap-4 justify-center">
+        <a href="https://calendly.com/mauricioromeroca" class="btn-primary text-white px-5 py-3 rounded-lg">Schedule a Demo</a>
+        <a href="/en/solutions/cybershield/quick-audit" class="bg-white text-blue-700 px-5 py-3 rounded-lg font-semibold hover:bg-gray-100">
+          Run Quick Audit
+        </a>
+        <a href="/solutions/cybershield/soc-console.html" class="bg-white text-blue-700 px-5 py-3 rounded-lg font-semibold hover:bg-gray-100">
+          Open SOC Console
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-12">
+    <div class="container mx-auto px-6 grid md:grid-cols-3 gap-6">
+      <div class="card bg-white p-6">
+        <h3 class="text-xl font-bold mb-2">SIEM & Correlation</h3>
+        <p class="text-gray-600">Wazuh/ELK, Sigma rules, IOCs/IOAs, alert triage and playbooks.</p>
+      </div>
+      <div class="card bg-white p-6">
+        <h3 class="text-xl font-bold mb-2">EASM & Hardening</h3>
+        <p class="text-gray-600">External exposure discovery (DNS/email/subdomains/ports) with monthly fixes.</p>
+      </div>
+      <div class="card bg-white p-6">
+        <h3 class="text-xl font-bold mb-2">Guided Response</h3>
+        <p class="text-gray-600">Isolate host, block IPs, reset credentials, executive reporting.</p>
+      </div>
+    </div>
+  </section>
+
+  <div id="app-footer"></div>
+
+  <script defer src="/js/nav.js"></script>
+  <script defer src="/js/footer.js"></script>
+  <script defer src="/js/fix-nav.js"></script>
+</body>
+</html>
