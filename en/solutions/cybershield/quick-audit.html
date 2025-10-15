@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Quick Cyber Audit | RomanoTI CyberShield (EN)</title>
+
+  <link rel="alternate" href="https://romanoti-solutions.netlify.app/en/solutions/cybershield/quick-audit" hreflang="en-CA">
+  <link rel="alternate" href="https://romanoti-solutions.netlify.app/solutions/cybershield/quick-audit.html" hreflang="es-CA">
+  <link rel="alternate" href="https://romanoti-solutions.netlify.app/fr/solutions/cybershield/quick-audit" hreflang="fr-CA">
+
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body{font-family:'Montserrat',sans-serif;background:#f8f9fa;color:#111827}
+    .hero-bg{background:linear-gradient(135deg,#1e3a8a 0%,#2563eb 100%)}
+    .btn-primary{background:#2563EB;transition:all .2s}
+    .btn-primary:hover{background:#1D4ED8;transform:translateY(-1px);box-shadow:0 6px 18px -10px rgba(37,99,235,.7)}
+    .card{border-radius:14px;box-shadow:0 12px 32px -16px rgba(2,6,23,.2)}
+    .badge{display:inline-flex;align-items:center;padding:.25rem .55rem;border-radius:.5rem;font-size:.75rem;font-weight:700}
+    .badge-ok{background:#ecfdf5;color:#065f46;border:1px solid #a7f3d0}
+    .badge-warn{background:#fffbeb;color:#92400e;border:1px solid #fcd34d}
+    .badge-err{background:#fef2f2;color:#991b1b;border:1px solid #fecaca}
+    pre.output{background:#0e1116;color:#eaeef3;padding:12px;border-radius:10px;max-height:45vh;overflow:auto}
+    .score-ring{width:110px;height:110px;border-radius:9999px;background:#fff;box-shadow:0 6px 20px -10px rgba(2,6,23,.25);display:grid;place-items:center}
+    .score-num{font-size:30px;font-weight:800}
+    .langbar a{opacity:.9} .langbar a:hover{opacity:1;text-decoration:underline}
+  </style>
+</head>
+<body class="bg-gray-50">
+
+  <div class="langbar text-sm bg-gray-100 border-b">
+    <div class="container mx-auto px-6 py-2 flex gap-4">
+      <span>Language:</span>
+      <a href="/en/solutions/cybershield/quick-audit" class="font-semibold">English</a>
+      <a href="/fr/solutions/cybershield/quick-audit">Français</a>
+      <a href="/solutions/cybershield/quick-audit.html">Español</a>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <div id="app-header"></div>
+
+  <!-- Hero -->
+  <section class="hero-bg text-white">
+    <div class="container mx-auto px-6 py-16 text-center">
+      <h1 class="text-4xl md:text-5xl font-bold mb-4">Quick Cyber Audit</h1>
+      <p class="text-lg md:text-xl opacity-95 max-w-3xl mx-auto">
+        Check email posture (SPF/DKIM/DMARC), TLS and HTTP health in minutes. Get a score and a client-ready report.
+      </p>
+      <div class="mt-6">
+        <a href="/en/solutions/cybershield/" class="inline-block text-white opacity-90 hover:opacity-100 underline">Back to CyberShield</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Success bar (?thanks=1) -->
+  <div id="thanksBar" class="hidden bg-green-600 text-white">
+    <div class="container mx-auto px-6 py-3 text-center">
+      Thanks! We received your Quick Audit request. We’ll contact you shortly.
+    </div>
+  </div>
+
+  <!-- Content (lead form + tool) -->
+  <section class="py-10">
+    <div class="container mx-auto px-6 max-w-6xl grid md:grid-cols-3 gap-6">
+      <!-- Left column -->
+      <div class="md:col-span-1 space-y-6">
+
+        <!-- Netlify lead form -->
+        <div class="card bg-white p-6">
+          <h2 class="text-xl font-bold mb-2">Get the report by email</h2>
+          <p class="text-sm text-gray-600 mb-4">
+            Leave your details and we’ll send the Quick Audit results with prioritized recommendations.
+          </p>
+
+          <form name="quick-audit" method="POST" data-netlify="true"
+                netlify-honeypot="bot-field"
+                action="/en/solutions/cybershield/quick-audit?thanks=1"
+                class="grid gap-3">
+            <input type="hidden" name="form-name" value="quick-audit"/>
+            <p class="hidden"><label>Don’t fill this out: <input name="bot-field"/></label></p>
+
+            <label class="text-sm font-medium">Name</label>
+            <input name="name" required class="border rounded-lg px-3 py-2"/>
+
+            <label class="text-sm font-medium">Email</label>
+            <input name="email" type="email" required class="border rounded-lg px-3 py-2"/>
+
+            <label class="text-sm font-medium">Domain</label>
+            <input id="leadDomain" name="domain" required placeholder="example.com" class="border rounded-lg px-3 py-2"/>
+
+            <label class="text-sm font-medium">Message (optional)</label>
+            <textarea name="message" rows="3" class="border rounded-lg px-3 py-2" placeholder="Context, urgency, etc."></textarea>
+
+            <button class="btn-primary text-white px-4 py-2 rounded-lg">Request Quick Audit</button>
+            <p class="text-xs text-gray-500 mt-1">By submitting you agree to be contacted with the report and next steps.</p>
+          </form>
+
+          <hr class="my-5">
+          <div class="text-sm">
+            Ready for a guided trial?
+            <a class="text-blue-600 font-semibold hover:underline" href="/en/solutions/cybershield/">14-day POV →</a>
+          </div>
+        </div>
+
+        <!-- Settings -->
+        <div class="card bg-white p-6">
+          <h2 class="text-xl font-bold mb-2">Settings</h2>
+          <p class="text-sm text-gray-600 mb-4">
+            Your <b>Org API Key</b> is stored locally in your browser and sent as <code>x-api-key</code>.
+          </p>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Org API Key</label>
+          <input id="orgKey" type="password" class="w-full border rounded-lg px-3 py-2 mb-2" placeholder="paste your API key">
+          <button id="btnSaveKey" class="btn-primary text-white px-4 py-2 rounded-lg">Save</button>
+          <p id="keyMsg" class="text-xs text-gray-500 mt-2"></p>
+
+          <hr class="my-6">
+
+          <h3 class="font-semibold mb-2">Audit options</h3>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Domain</label>
+          <input id="domain" class="w-full border rounded-lg px-3 py-2 mb-3" placeholder="example.com" value="example.com">
+
+          <div class="space-y-2 text-sm">
+            <label class="inline-flex items-center gap-2">
+              <input id="chkEmail" type="checkbox" class="rounded border-gray-300" checked>
+              <span>Email posture (MX/SPF/DMARC + DKIM)</span>
+            </label>
+            <label class="inline-flex items-center gap-2">
+              <input id="chkTls" type="checkbox" class="rounded border-gray-300" checked>
+              <span>TLS (expiry & issuer)</span>
+            </label>
+            <label class="inline-flex items-center gap-2">
+              <input id="chkHttp" type="checkbox" class="rounded border-gray-300" checked>
+              <span>HTTP (status/time/TLS verify)</span>
+            </label>
+          </div>
+
+          <div class="mt-4">
+            <label class="block text-sm font-medium text-gray-700 mb-1">TLS ports</label>
+            <input id="tlsPorts" class="w-full border rounded-lg px-3 py-2" value="443" />
+            <p class="text-xs text-gray-500 mt-1">Comma-separated (e.g., 443,465)</p>
+          </div>
+
+          <div class="mt-4">
+            <label class="block text-sm font-medium text-gray-700 mb-1">Optional HTTP URL</label>
+            <input id="httpUrl" class="w-full border rounded-lg px-3 py-2" placeholder="https://example.com" />
+            <div class="flex items-center gap-2 mt-2 text-sm">
+              <input id="httpVerify" type="checkbox" class="rounded border-gray-300" checked>
+              <span>Verify TLS</span>
+              <span class="ml-auto">Timeout</span>
+              <input id="httpTimeout" type="number" min="3" max="30" value="8" class="w-20 border rounded-lg px-2 py-1">
+              <span>s</span>
+            </div>
+          </div>
+
+          <div class="mt-6 flex gap-3">
+            <button id="btnRunAudit" class="btn-primary text-white px-4 py-2 rounded-lg w-full">Run Audit</button>
+          </div>
+          <p id="auditMsg" class="text-sm text-gray-600 mt-2"></p>
+        </div>
+      </div>
+
+      <!-- Right column -->
+      <div class="md:col-span-2">
+        <div class="card bg-white p-6">
+          <div class="flex items-center gap-4 mb-4">
+            <div class="score-ring">
+              <div class="text-center">
+                <div id="scoreNum" class="score-num text-gray-900">—</div>
+                <div class="text-xs text-gray-500 -mt-1">/100</div>
+              </div>
+            </div>
+            <div>
+              <h2 class="text-xl font-bold">Results</h2>
+              <p class="text-sm text-gray-600">Quick badges and details per control.</p>
+              <div id="quickBadges" class="mt-2 flex flex-wrap gap-2"></div>
+            </div>
+          </div>
+
+          <div class="grid md:grid-cols-2 gap-6">
+            <div class="border rounded-lg p-4">
+              <div class="flex items-center justify-between mb-2">
+                <h3 class="font-semibold">Email Posture</h3>
+                <div id="emailBadges" class="flex flex-wrap gap-2"></div>
+              </div>
+              <pre id="emailOut" class="output"></pre>
+            </div>
+
+            <div class="border rounded-lg p-4">
+              <div class="flex items-center justify-between mb-2">
+                <h3 class="font-semibold">TLS</h3>
+                <div id="tlsBadges" class="flex flex-wrap gap-2"></div>
+              </div>
+              <pre id="tlsOut" class="output"></pre>
+            </div>
+
+            <div class="border rounded-lg p-4 md:col-span-2">
+              <div class="flex items-center justify-between mb-2">
+                <h3 class="font-semibold">HTTP</h3>
+                <div id="httpBadges" class="flex flex-wrap gap-2"></div>
+              </div>
+              <pre id="httpOut" class="output"></pre>
+            </div>
+          </div>
+
+          <hr class="my-6">
+
+          <div class="flex flex-wrap gap-3">
+            <button id="btnCopyMd" class="px-4 py-2 rounded-lg border font-medium">Copy Markdown</button>
+            <button id="btnDownloadJson" class="px-4 py-2 rounded-lg border font-medium">Download JSON</button>
+          </div>
+          <pre id="mdOut" class="output mt-3 hidden"></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="app-footer"></div>
+
+  <!-- Tool logic (same as ES, text strings in EN) -->
+  <script>
+    const API_BASE = 'https://romanoti-tools-api.onrender.com';
+    const $ = (id)=>document.getElementById(id);
+    const txt=(el,v='')=>{ if(el) el.textContent=v; }
+    const pretty=(el,data)=>{ try{ el.textContent=(typeof data==='string')?data:JSON.stringify(data,null,2);}catch{ el.textContent=String(data);} }
+    const badge=(text,type='ok')=>{
+      const s=document.createElement('span');
+      s.className='badge '+(type==='ok'?'badge-ok':type==='warn'?'badge-warn':'badge-err');
+      s.textContent=text; return s;
+    }
+    const ensureUrl=(u)=>{ if(!u) return ''; if(/^https?:\/\//i.test(u)) return u; return 'https://'+u; }
+
+    (function showThanks(){
+      const u=new URL(window.location.href);
+      if(u.searchParams.get('thanks')==='1'){ const bar=$('thanksBar'); if(bar) bar.classList.remove('hidden'); }
+    })();
+
+    function loadKey(){
+      $('orgKey').value=localStorage.getItem('romanoti_org_key')||'';
+      const d=$('domain')?.value||''; const lead=$('leadDomain'); if(lead&&d) lead.value=d;
+    }
+    function saveKey(){
+      const k=$('orgKey').value.trim();
+      localStorage.setItem('romanoti_org_key',k);
+      txt($('keyMsg'), k?'✅ API Key saved locally.':'API Key empty.');
+    }
+    function getKeyOrWarn(){
+      const k=$('orgKey').value.trim()||localStorage.getItem('romanoti_org_key')||'';
+      if(!k) alert('Please enter your Org API Key first.');
+      return k;
+    }
+    async function postJson(path, body, extraHeaders={}){
+      const key=getKeyOrWarn(); if(!key) return {ok:false,status:0,error:'API key missing'};
+      const headers={'content-type':'application/json','accept':'application/json','x-api-key':key,...extraHeaders};
+      try{
+        const res=await fetch(API_BASE+path,{method:'POST',headers,body:JSON.stringify(body||{})});
+        const text=await res.text();
+        try{ return {ok:res.ok,status:res.status,data:JSON.parse(text)} }catch{ return {ok:res.ok,status:res.status,data:text} }
+      }catch(e){ return {ok:false,status:0,error:String(e)} }
+    }
+
+    async function doEmailPosture(domain){
+      const emailOut=$('emailOut'), emailBadges=$('emailBadges');
+      txt(emailOut,'Running…'); emailBadges.innerHTML='';
+      const r=await postJson('/ext/emaildns',{domain});
+      if(!r.ok){ pretty(emailOut,r); emailBadges.appendChild(badge('Error','err')); return {r,score:0} }
+      let dkim=null; try{ const dk=await postJson('/noc/dns-lookup',{domain:`selector1._domainkey.${domain}`,type:'TXT'}); dkim=dk.data||dk; }catch{}
+      const data=r.data||{};
+      const mx=(data.mx||[]);
+      const spf=(data.spf||[]).find(s=>s.toLowerCase().startsWith('v=spf1'));
+      const dmarc=(data.dmarc||[]).find(s=>s.toLowerCase().startsWith('v=dmarc1'));
+      const dmarcPolicy=dmarc?(dmarc.toLowerCase().match(/p=(none|quarantine|reject)/)||[,'none'])[1]:'none';
+      const dkimOk=dkim&&(Array.isArray(dkim.answers)?dkim.answers.length>0:false);
+
+      if(mx.length===1 && typeof mx[0]==='string' && mx[0].trim()==='0 .') emailBadges.appendChild(badge('Null MX (no email)','warn'));
+      else if(mx.length>0) emailBadges.appendChild(badge('MX OK','ok')); else emailBadges.appendChild(badge('Missing MX','err'));
+
+      if(spf) emailBadges.appendChild(badge('SPF OK','ok')); else emailBadges.appendChild(badge('Missing SPF','err'));
+      if(dmarc){
+        const type=dmarcPolicy==='reject'?'ok':dmarcPolicy==='quarantine'?'warn':'err';
+        emailBadges.appendChild(badge(`DMARC p=${dmarcPolicy}`,type));
+      }else{ emailBadges.appendChild(badge('Missing DMARC','err')); }
+      if(dkimOk) emailBadges.appendChild(badge('DKIM selector1 OK','ok'));
+
+      pretty(emailOut,{emaildns:data,dkim});
+      let score=0; if(mx.length>0) score+=8; if(spf) score+=10;
+      if(dmarcPolicy==='reject') score+=18; else if(dmarcPolicy==='quarantine') score+=10;
+      if(dkimOk) score+=4;
+      return {r:data,score:Math.min(score,40)};
+    }
+
+    async function doTlsChecks(domain, ports){
+      const tlsOut=$('tlsOut'), tlsBadges=$('tlsBadges');
+      txt(tlsOut,'Running…'); tlsBadges.innerHTML='';
+      let bestScore=0; const results=[];
+      for(const p of ports){ const rr=await postJson('/ext/tls',{host:domain,port:p}); results.push(rr); }
+      let passAny=false; let minDays=null, issuer='';
+      results.forEach(rr=>{
+        if(rr.ok && rr.data && typeof rr.data==='object'){
+          const d=rr.data; if(typeof d.days_left==='number'){ minDays=(minDays===null)?d.days_left:Math.min(minDays,d.days_left); }
+          if(d.issuer) issuer=d.issuer; passAny=true;
+        }
+      });
+      if(passAny){
+        tlsBadges.appendChild(badge('TLS detected','ok'));
+        if(minDays!==null){
+          if(minDays>=60){ tlsBadges.appendChild(badge(`${minDays}d left`,'ok')); bestScore+=20; }
+          else if(minDays>=15){ tlsBadges.appendChild(badge(`${minDays}d left`,'warn')); bestScore+=12; }
+          else { tlsBadges.appendChild(badge(`${minDays}d left`,'err')); bestScore+=6; }
+        }
+        if(issuer) tlsBadges.appendChild(badge(issuer.length>28?(`Issuer: ${issuer.slice(0,28)}…`):(`Issuer: ${issuer}`),'ok'));
+      }else{ tlsBadges.appendChild(badge('No TLS','err')); }
+      pretty(tlsOut,results.map(x=>x.data||x));
+      return {r:results,score:Math.min(bestScore,20)};
+    }
+
+    async function doHttpCheck(url, verify, timeout_s){
+      const httpOut=$('httpOut'), httpBadges=$('httpBadges');
+      txt(httpOut,'Running…'); httpBadges.innerHTML='';
+      if(!url){ txt(httpOut,'URL not specified.'); return {r:null,score:0}; }
+      const rr=await postJson('/noc/http-check',{url,timeout_s,verify_tls:!!verify});
+      const data=rr.data||rr;
+      if(rr.ok && data && data.status){
+        httpBadges.appendChild(badge(`HTTP ${data.status}`, (data.status>=200&&data.status<400)?'ok':'warn'));
+        if(typeof data.elapsed_ms==='number'){
+          const ms=Math.round(data.elapsed_ms);
+          httpBadges.appendChild(badge(`${ms}ms`, ms<800?'ok':ms<1500?'warn':'err'));
+        }
+      }else{ httpBadges.appendChild(badge('HTTP error','err')); }
+      pretty(httpOut,data);
+      let score=0;
+      if(rr.ok && data && data.status>=200 && data.status<300){
+        score+=12; const ms=Math.round(data.elapsed_ms||0);
+        if(ms<800) score+=8; else if(ms<1500) score+=4;
+      }
+      return {r:data,score:Math.min(score,20)};
+    }
+
+    function setScore(val){ const num=$('scoreNum'); num.textContent=(typeof val==='number'?Math.round(val):'—'); num.style.color=(val>=80)?'#065f46':(val>=60)?'#92400e':'#991b1b'; }
+    function addQuickBadge(t,ty){ $('quickBadges').appendChild(badge(t,ty)); }
+    function buildMarkdown(domain, parts, total){
+      const L=[];
+      L.push('# RomanoTI Quick Cyber Audit');
+      L.push(`**Domain:** ${domain}`);
+      L.push(`**Score:** ${Math.round(total)}/100`,'');
+      if(parts.email){
+        const d=parts.email.data||{};
+        L.push('## Email Posture');
+        L.push(`- MX: ${(d.mx||[]).join(', ') || '(none)'}`);
+        L.push(`- SPF: ${(d.spf||[]).join(' | ') || '(none)'}`);
+        L.push(`- DMARC: ${(d.dmarc||[]).join(' | ') || '(none)'}`,'');
+      }
+      if(parts.tls){ L.push('## TLS','```json',JSON.stringify(parts.tls,null,2),'```',''); }
+      if(parts.http){ L.push('## HTTP','```json',JSON.stringify(parts.http,null,2),'```',''); }
+      L.push('_Generated with RomanoTI CyberShield_');
+      return L.join('\n');
+    }
+    function downloadBlob(filename, dataStr, mime='application/json'){
+      const blob=new Blob([dataStr],{type:mime});
+      const url=URL.createObjectURL(blob);
+      const a=document.createElement('a'); a.href=url; a.download=filename; a.click(); URL.revokeObjectURL(url);
+    }
+
+    document.addEventListener('DOMContentLoaded',()=>{
+      loadKey();
+      $('btnSaveKey').addEventListener('click',saveKey);
+      const domainInput=$('domain'), leadDomain=$('leadDomain');
+      if(domainInput && leadDomain){ domainInput.addEventListener('input',()=>{ leadDomain.value=domainInput.value.trim(); }); }
+
+      $('btnRunAudit').addEventListener('click', async ()=>{
+        $('auditMsg').textContent='Running…';
+        $('quickBadges').innerHTML=''; setScore(null);
+
+        const domain=$('domain').value.trim();
+        const wantEmail=$('chkEmail').checked, wantTls=$('chkTls').checked, wantHttp=$('chkHttp').checked;
+        const tlsPorts=String($('tlsPorts').value||'443').split(',').map(x=>parseInt(x.trim(),10)).filter(Boolean);
+        const httpUrl=ensureUrl(($('httpUrl').value||'').trim() || `https://${domain}`);
+        const httpVerify=$('httpVerify').checked;
+        const httpTimeout=Math.max(3,Math.min(30,parseInt($('httpTimeout').value||'8',10)));
+
+        let total=0, parts={};
+        try{
+          if(wantEmail){ const e=await doEmailPosture(domain); total+=e.score; parts.email={data:e.r}; addQuickBadge(`Email +${e.score}`, e.score>=30?'ok':e.score>=18?'warn':'err'); }
+          else{ $('emailBadges').innerHTML=''; $('emailOut').textContent='(skipped)'; }
+
+          if(wantTls){ const t=await doTlsChecks(domain,tlsPorts); total+=t.score; parts.tls=t.r; addQuickBadge(`TLS +${t.score}`, t.score>=18?'ok':t.score>=10?'warn':'err'); }
+          else{ $('tlsBadges').innerHTML=''; $('tlsOut').textContent='(skipped)'; }
+
+          if(wantHttp){ const h=await doHttpCheck(httpUrl,httpVerify,httpTimeout); total+=h.score; parts.http=h.r; addQuickBadge(`HTTP +${h.score}`, h.score>=18?'ok':h.score>=10?'warn':'err'); }
+          else{ $('httpBadges').innerHTML=''; $('httpOut').textContent='(skipped)'; }
+
+          total=Math.min(100, Math.round(total+20));
+          setScore(total);
+
+          const md=buildMarkdown(domain,parts,total);
+          $('mdOut').classList.remove('hidden'); $('mdOut').textContent=md;
+          $('auditMsg').textContent='Done ✅';
+        }catch(e){ $('auditMsg').textContent='Error: '+String(e); }
+      });
+
+      $('btnCopyMd').addEventListener('click', async ()=>{ const md=$('mdOut').textContent||''; try{ await navigator.clipboard.writeText(md); alert('Markdown copied.'); }catch{ alert('Could not copy.'); } });
+      $('btnDownloadJson').addEventListener('click', ()=>{
+        const dump={ domain:$('domain').value.trim(), when:new Date().toISOString(), email:$('emailOut').textContent, tls:$('tlsOut').textContent, http:$('httpOut').textContent, score:$('scoreNum').textContent };
+        downloadBlob('quick-audit.json', JSON.stringify(dump,null,2));
+      });
+    });
+  </script>
+
+  <script defer src="/js/nav.js"></script>
+  <script defer src="/js/footer.js"></script>
+  <script defer src="/js/fix-nav.js"></script>
+</body>
+</html>
