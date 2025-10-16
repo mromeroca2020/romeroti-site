@@ -1,4 +1,11 @@
 <!-- /js/nav.js -->
+  <!-- /js/nav.js -->
+<script>
+  console.log('nav.js build 2025-02');
+  (function(){
+    // … tu código
+  })();
+</script>
 <script>
 (function(){
   /**
