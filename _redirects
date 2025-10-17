@@ -7,3 +7,8 @@
 /solutions/cybershield/quick-audit   /solutions/cybershield/quick-audit.html  200
 /en/solutions/cybershield/quick-audit  /en/solutions/cybershield/quick-audit.html  200
 /fr/solutions/cybershield/quick-audit  /fr/solutions/cybershield/quick-audit.html  200
+http://romeroti-solutions.com/*                https://romeroti-solutions.com/:splat  301!
+http://www.romeroti-solutions.com/*            https://romeroti-solutions.com/:splat  301!
+https://www.romeroti-solutions.com/*           https://romeroti-solutions.com/:splat  301!
+https://*.netlify.app/*                        https://romeroti-solutions.com/:splat  301!
+
