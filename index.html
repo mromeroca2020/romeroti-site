@@ -1,257 +1,240 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>RomanoTI Solutions | IT Infrastructure & Cybersecurity</title>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>RomanoTI Solutions | Cybersecurity & Operational Resilience</title>
 
-  <!-- Favicons unificados -->
-  <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16.png">
-  <link rel="shortcut icon" href="/favicon.ico">
-  <link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#2563eb">
-  <meta name="theme-color" content="#2563eb">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16.png">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#2563eb">
+  <meta name="theme-color" content="#2563eb">
 
-  <!-- Tailwind + Montserrat -->
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
 
-  <style>
-    body{font-family:'Montserrat',sans-serif;background:#f8f9fa;color:#111827;scroll-behavior:smooth}
-    .hero-bg{background:linear-gradient(135deg,#1e3a8a 0%,#2563eb 100%)}
-    .btn-primary{background:#2563EB;transition:all .2s}
-    .btn-primary:hover{background:#1D4ED8;transform:translateY(-1px);box-shadow:0 6px 18px -10px rgba(37,99,235,.7)}
-    .card{border-radius:14px;box-shadow:0 12px 32px -16px rgba(2,6,23,.2)}
-    .badge{display:inline-block;border:1px solid #cbd5e1;border-radius:999px;padding:4px 10px;font-size:12px;background:#f8fafc}
-  </style>
+  <style>
+    body{font-family:'Montserrat',sans-serif;background:#f8f9fa;color:#111827;scroll-behavior:smooth}
+    .hero-bg{background:linear-gradient(135deg,#1e3a8a 0%,#2563eb 100%)}
+    .btn-primary{background:#2563EB;transition:all .2s}
+    .btn-primary:hover{background:#1D4ED8;transform:translateY(-1px);box-shadow:0 6px 18px -10px rgba(37,99,235,.7)}
+    .card{border-radius:14px;box-shadow:0 12px 32px -16px rgba(2,6,23,.2)}
+    .badge{display:inline-block;border:1px solid #cbd5e1;border-radius:999px;padding:4px 10px;font-size:12px;background:#f8fafc}
+  </style>
 </head>
 <body class="bg-gray-50">
 
-  <!-- Mountpoint del header centralizado -->
-  <div id="app-header"></div>
+    <div id="app-header"></div>
 
-  <!-- ===== Header FALLBACK (se oculta si nav.js inyecta el header) ===== -->
-  <header id="fallback-header" class="bg-white shadow-sm sticky top-0 z-40">
-    <div class="container mx-auto px-6 py-3">
-      <div class="flex items-center justify-between">
-        <a href="/" class="flex items-center font-bold text-xl text-gray-900">
-          <span class="bg-blue-600 text-white rounded-full w-10 h-10 grid place-items-center mr-3">R</span>
-          RomanoTI Solutions (Loading...)
-        </a>
-        <a href="/solutions/" class="bg-blue-600 text-white px-4 py-2 rounded-lg">Solutions</a>
-      </div>
-    </div>
-  </header>
-  <!-- =============================================================== -->
+    <header id="fallback-header" class="bg-white shadow-sm sticky top-0 z-40">
+    <div class="container mx-auto px-6 py-3">
+      <div class="flex items-center justify-between">
+        <a href="/" class="flex items-center font-bold text-xl text-gray-900">
+          <span class="bg-blue-600 text-white rounded-full w-10 h-10 grid place-items-center mr-3">R</span>
+          RomanoTI Solutions (Loading...)
+        </a>
+        <a href="/solutions/" class="bg-blue-600 text-white px-4 py-2 rounded-lg">Solutions</a>
+      </div>
+    </div>
+  </header>
+      <section class="hero-bg text-white">
+    <div class="container mx-auto px-6 py-20 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-6">Expert Leadership in IT & Cybersecurity</h1>
+      <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
+        Microsoft & Cisco Certified experts with 15+ years guaranteeing operational resilience in Canada.
+      </p>
+      <div class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-6">
+                <a href="tel:4386309157" class="btn-primary text-white px-8 py-3 rounded-lg font-semibold">Immediate Support</a>
+                <a href="https://calendly.com/mauricioromeroca" class="bg-white text-blue-700 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100">
+          Book Your Free Consultation
+        </a>
+      </div>
+    </div>
+  </section>
 
-  <!-- ===== Hero ===== -->
-  <section class="hero-bg text-white">
-    <div class="container mx-auto px-6 py-20 text-center">
-      <h1 class="text-4xl md:text-5xl font-bold mb-6">Professional IT Infrastructure Solutions</h1>
-      <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
-        Microsoft & Cisco Certified Expert with 15+ years in cloud, virtualization, and cybersecurity
-      </p>
-      <div class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-6">
-        <a href="tel:4386309157" class="btn-primary text-white px-8 py-3 rounded-lg font-semibold">Emergency Support</a>
-        <a href="https://calendly.com/mauricioromeroca" class="bg-white text-blue-700 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100">
-          Free Consultation
-        </a>
-      </div>
-    </div>
-  </section>
+    <section class="bg-blue-50 border-t border-b border-blue-100">
+    <div class="container mx-auto px-6 py-4 flex flex-col md:flex-row items-center justify-between gap-3">
+            <div class="text-blue-900 font-semibold">
+        Is your external attack surface exposed? Run a Quick EASM Audit now.
+      </div>
+      <div class="flex gap-3">
+        <a href="/solutions/cybershield/easm-console.html" class="bg-white border px-5 py-2 rounded-lg font-medium hover:bg-gray-50">
+          View EASM Demo
+        </a>
+        <a href="/solutions/cybershield/" class="btn-primary text-white px-5 py-2 rounded-lg font-medium">
+          Discover CyberShield (MDR)
+        </a>
+      </div>
+    </div>
+  </section>
 
-  <!-- ===== Banda/CTA de Ciber ===== -->
-  <section class="bg-blue-50 border-t border-b border-blue-100">
-    <div class="container mx-auto px-6 py-4 flex flex-col md:flex-row items-center justify-between gap-3">
-      <div class="text-blue-900 font-semibold">
-        ¿Tu dominio está expuesto? Ejecuta un EASM rápido ahora.
-      </div>
-      <div class="flex gap-3">
-        <a href="/solutions/cybershield/easm-console.html" class="bg-white border px-5 py-2 rounded-lg font-medium hover:bg-gray-50">
-          Ver demo EASM
-        </a>
-        <a href="/solutions/cybershield/" class="btn-primary text-white px-5 py-2 rounded-lg font-medium">
-          Conoce CyberShield (MDR)
-        </a>
-      </div>
-    </div>
-  </section>
+    <section id="about-us" class="py-14 bg-white">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-10">
+        <h2 class="text-3xl font-bold">About RomanoTI Solutions</h2>
+        <p class="text-xl text-gray-600 max-w-2xl mx-auto">15+ years of excellence in Managed IT & Cybersecurity for SMBs in Canada</p>
+      </div>
+            <div class="max-w-4xl mx-auto text-lg text-gray-700 space-y-6">
+        <p>RomanoTI Solutions leverages over 15 years of dedicated experience in enterprise IT infrastructure, secure cloud migration, and threat mitigation. We specialize in empowering Small and Medium Businesses (SMBs) across Montreal and Ottawa to secure critical data, optimize network performance, and comply with strict regulatory mandates.</p>
+        <p>Our commitment is to eliminate technological vulnerability. We deliver tailored, proactive solutions, ensuring your infrastructure is an asset that guarantees business continuity, not a liability that introduces risk.</p>
+      </div>
+    </div>
+  </section>
 
-  <!-- ===== About ===== -->
-  <section id="about-us" class="py-14 bg-white">
-    <div class="container mx-auto px-6">
-      <div class="text-center mb-10">
-        <h2 class="text-3xl font-bold">About RomanoTI Solutions</h2>
-        <p class="text-xl text-gray-600 max-w-2xl mx-auto">15+ years of excellence in IT infrastructure and cybersecurity</p>
-      </div>
-      <div class="max-w-4xl mx-auto text-lg text-gray-700 space-y-6">
-        <p>RomanoTI Solutions brings over 15 years of hands-on experience in enterprise IT infrastructure, cloud migration, and cybersecurity. We specialize in helping SMBs secure their data, optimize networks, and transition to modern cloud platforms.</p>
-        <p>We don’t believe in one-size-fits-all — every business has unique needs, and we tailor our services accordingly.</p>
-      </div>
-    </div>
-  </section>
+    <section class="py-14">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-10">
+        <h2 class="text-3xl font-bold">Our Advantage: Proactive Resilience</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Minimize the attack surface, achieve earlier threat detection, and ensure guided expert response.</p>
+      </div>
 
-  <!-- ===== Why Cyber (enfoque) ===== -->
-  <section class="py-14">
-    <div class="container mx-auto px-6">
-      <div class="text-center mb-10">
-        <h2 class="text-3xl font-bold">Why Choose Us for Cybersecurity</h2>
-        <p class="text-xl text-gray-600 max-w-3xl mx-auto">Menos superficie de ataque, detecciones más tempranas y respuestas guiadas.</p>
-      </div>
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="card bg-white p-6">
+          <div class="badge">EASM & Hardening</div>
+                    <h3 class="text-xl font-bold mt-2 mb-2">Reduce Your Risk Profile</h3>
+                    <p class="text-gray-600">Discover and neutralize exposed subdomains, open ports, and vulnerable email posture (SPF/DMARC/DKIM) before they lead to an attack.</p>
+          <a href="/solutions/cybershield/easm-console.html" class="text-blue-600 hover:underline mt-3 inline-block">Test Our EASM →</a>
+        </div>
+        <div class="card bg-white p-6">
+          <div class="badge">SOC / MDR 24×7</div>
+                    <h3 class="text-xl font-bold mt-2 mb-2">Expert Detection & Response</h3>
+                    <p class="text-gray-600">Continuous event correlation (Wazuh/ELK), IOC/IOA monitoring, and pre-approved playbooks for fast containment: isolating hosts and blocking lateral movement.</p>
+          <a href="/it-soc.html" class="text-blue-600 hover:underline mt-3 inline-block">Explore SOC →</a>
+        </div>
+        <div class="card bg-white p-6">
+          <div class="badge">NOC & Business Continuity</div>
+                    <h3 class="text-xl font-bold mt-2 mb-2">Guaranteed Availability</h3>
+                    <p class="text-gray-600">Proactive service monitoring (HTTP/TLS/DNS), capacity management, and executive reporting to ensure planned growth without operational surprises.</p>
+          <a href="/it-noc.html" class="text-blue-600 hover:underline mt-3 inline-block">Explore NOC →</a>
+        </div>
+      </div>
+      </div>
+  </section>
 
-      <div class="grid md:grid-cols-3 gap-6">
-        <div class="card bg-white p-6">
-          <div class="badge">EASM + Hardening</div>
-          <h3 class="text-xl font-bold mt-2 mb-2">Reducimos exposición</h3>
-          <p class="text-gray-600">Descubrir subdominios, puertos y posture de correo (SPF/DMARC/DKIM) para cerrar brechas antes del ataque.</p>
-          <a href="/solutions/cybershield/easm-console.html" class="text-blue-600 hover:underline mt-3 inline-block">Probar EASM →</a>
-        </div>
-        <div class="card bg-white p-6">
-          <div class="badge">SOC / MDR 24×7</div>
-          <h3 class="text-xl font-bold mt-2 mb-2">Detección & respuesta</h3>
-          <p class="text-gray-600">Correlación de eventos (Wazuh/ELK), IOCs/IOAs y playbooks de contención: aislar host, bloquear IP, resetear credenciales.</p>
-          <a href="/it-soc.html" class="text-blue-600 hover:underline mt-3 inline-block">Ver SOC →</a>
-        </div>
-        <div class="card bg-white p-6">
-          <div class="badge">NOC + Resiliencia</div>
-          <h3 class="text-xl font-bold mt-2 mb-2">Disponibilidad primero</h3>
-          <p class="text-gray-600">Monitoreo de servicios (HTTP/TLS/DNS) y capacidad; reportes ejecutivos para planear crecimiento sin sorpresas.</p>
-          <a href="/it-noc.html" class="text-blue-600 hover:underline mt-3 inline-block">Ver NOC →</a>
-        </div>
-      </div>
-    </div>
-  </section>
+    <section id="services" class="py-14">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-10">
+        <h2 class="text-3xl font-bold">Core Services Portfolio</h2>
+        <p class="text-xl text-gray-600 max-w-2xl mx-auto">Comprehensive, professional IT solutions tailored to your business needs</p>
+      </div>
 
-  <!-- ===== Core services ===== -->
-  <section id="services" class="py-14">
-    <div class="container mx-auto px-6">
-      <div class="text-center mb-10">
-        <h2 class="text-3xl font-bold">Core Services</h2>
-        <p class="text-xl text-gray-600 max-w-2xl mx-auto">Comprehensive IT solutions tailored to your business needs</p>
-      </div>
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="card bg-white p-6">
+          <h3 class="text-xl font-bold mb-2">Secure Cloud Migration</h3>
+                    <p class="text-gray-600">Seamless, secure transition to Microsoft Azure and M365 platforms, focusing on cost optimization and compliance from day one.</p>
+          <div class="mt-4 space-y-2">
+            <a href="/cloud-redundancy.html" class="text-blue-600 hover:underline text-sm">→ Disaster Recovery & Redundancy</a><br/>
+            <a href="/cloud-hybrid.html" class="text-blue-600 hover:underline text-sm">→ Hybrid Cloud Architecture Hardening</a>
+          </div>
+        </div>
 
-      <div class="grid md:grid-cols-3 gap-6">
-        <div class="card bg-white p-6">
-          <h3 class="text-xl font-bold mb-2">Cloud Migration</h3>
-          <p class="text-gray-600">Seamless transition to Microsoft Azure cloud.</p>
-          <div class="mt-4 space-y-2">
-            <a href="/cloud-redundancy.html" class="text-blue-600 hover:underline text-sm">→ Failover & Redundancy</a><br/>
-            <a href="/cloud-hybrid.html" class="text-blue-600 hover:underline text-sm">→ Hybrid Cloud Architecture</a>
-          </div>
-        </div>
+        <div class="card bg-white p-6">
+          <h3 class="text-xl font-bold mb-2">Managed IT Infrastructure</h3>
+                    <p class="text-gray-600">End-to-end management of your technology stack, focusing on uptime, patch management, and business continuity (NOC Services).</p>
+          <div class="mt-4 space-y-2">
+            <a href="/it-noc.html" class="text-blue-600 hover:underline text-sm">→ Proactive NOC Services</a><br/>
+            <a href="/it-soc.html" class="text-blue-600 hover:underline text-sm">→ Dedicated SOC Services</a>
+          </div>
+        </div>
 
-        <div class="card bg-white p-6">
-          <h3 class="text-xl font-bold mb-2">IT Infrastructure</h3>
-          <p class="text-gray-600">End-to-end management of your technology stack.</p>
-          <div class="mt-4 space-y-2">
-            <a href="/it-noc.html" class="text-blue-600 hover:underline text-sm">→ NOC Services</a><br/>
-            <a href="/it-soc.html" class="text-blue-600 hover:underline text-sm">→ SOC Services</a>
-          </div>
-        </div>
+        <div class="card bg-white p-6">
+          <h3 class="text-xl font-bold mb-2">Advanced Cybersecurity</h3>
+                    <p class="text-gray-600">Expert defense against ransomware, data breaches, and ensuring regulatory compliance with 24/7 managed detection and response (MDR).</p>
+          <div class="mt-4 flex flex-wrap gap-3">
+            <a href="/solutions/cybershield/" class="btn-primary text-white px-4 py-2 rounded-lg inline-block">Explore CyberShield</a>
+            <a href="/solutions/cybershield/easm-console.html" class="border px-4 py-2 rounded-lg inline-block hover:bg-gray-50">EASM Demo</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        <div class="card bg-white p-6">
-          <h3 class="text-xl font-bold mb-2">Cybersecurity</h3>
-          <p class="text-gray-600">Defense against ransomware and data breaches.</p>
-          <div class="mt-4 flex flex-wrap gap-3">
-            <a href="/solutions/cybershield/" class="btn-primary text-white px-4 py-2 rounded-lg inline-block">Explore CyberShield</a>
-            <a href="/solutions/cybershield/easm-console.html" class="border px-4 py-2 rounded-lg inline-block hover:bg-gray-50">EASM demo</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+    <section class="py-14 bg-blue-700 text-white">
+    <div class="container mx-auto px-6 text-center">
+      <h2 class="text-3xl font-bold mb-4">Ready to reduce risk and guarantee uptime?</h2>
+            <p class="text-lg opacity-90 mb-6">Schedule 20 minutes: Receive a security posture review and clear next steps.</p>
+      <div class="flex flex-col md:flex-row justify-center gap-4">
+        <a href="https://calendly.com/mauricioromeroca" class="bg-white text-blue-700 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100">Book Your Consultation</a>
+                <a href="/services/tools.html" class="btn-primary text-white px-6 py-3 rounded-lg font-semibold">View Resources</a>
+      </div>
+    </div>
+  </section>
 
-  <!-- ===== CTA final ===== -->
-  <section class="py-14 bg-blue-700 text-white">
-    <div class="container mx-auto px-6 text-center">
-      <h2 class="text-3xl font-bold mb-4">Ready to reduce risk and downtime?</h2>
-      <p class="text-lg opacity-90 mb-6">Agendemos 20 minutos: revisión de postura y siguientes pasos.</p>
-      <div class="flex flex-col md:flex-row justify-center gap-4">
-        <a href="https://calendly.com/mauricioromeroca" class="bg-white text-blue-700 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100">Book a Call</a>
-        <a href="/services/tools.html" class="btn-primary text-white px-6 py-3 rounded-lg font-semibold">Abrir Tools</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer centralizado -->
-  <div id="app-footer"></div>
+    <div id="app-footer"></div>
 
 <script>
-    (function(){
-      const fb = document.getElementById('fallback-header');
-      if (!fb) return; // Si no existe, no hace nada
+    (function(){
+      const fb = document.getElementById('fallback-header');
+      if (!fb) return; // Si no existe, no hace nada
 
-      function removeFallback() {
-          const mount = document.getElementById('app-header');
-          // Verificar que el header inyectado esté visible (o al menos el mountpoint exista)
-          // y que el fallback todavia esté en el DOM.
-          if (mount && fb.parentNode) {
-              fb.parentNode.removeChild(fb);
-              console.log('[swap] Fallback header removed.');
-              return true; // Éxito
-          }
-          return false;
-      }
+      function removeFallback() {
+          const mount = document.getElementById('app-header');
+          // Verificar que el header inyectado esté visible (o al menos el mountpoint exista)
+          // y que el fallback todavia esté en el DOM.
+          if (mount && fb.parentNode) {
+              fb.parentNode.removeChild(fb);
+              console.log('[swap] Fallback header removed.');
+              return true; // Éxito
+          }
+          return false;
+      }
 
-      // Intentar remover inmediatamente si los scripts de nav.js se cargan rápido
-      removeFallback();
+      // Intentar remover inmediatamente si los scripts de nav.js se cargan rápido
+      removeFallback();
 
-      // Intentos adicionales con timeout, que es lo que falla en las subpáginas
-      setTimeout(removeFallback, 100);
-      setTimeout(removeFallback, 500);
-      setTimeout(removeFallback, 1200);
-    })();
+      // Intentos adicionales con timeout, que es lo que falla en las subpáginas
+      setTimeout(removeFallback, 100);
+      setTimeout(removeFallback, 500);
+      setTimeout(removeFallback, 1200);
+    })();
 </script>
 
-  <!-- ========= HOTFIX SUBMENU SOLUTIONS (funciona aunque nav.js tarde) ========= -->
-  <script>
-  (function(){
-    function wire(btn, menu){
-      if(!btn || !menu || btn.dataset.wired) return;
+    <script>
+  (function(){
+    function wire(btn, menu){
+      if(!btn || !menu || btn.dataset.wired) return;
 
-      // asegurar hidden inicial
-      if(!menu.classList.contains('hidden')) menu.classList.add('hidden');
+      // asegurar hidden inicial
+      if(!menu.classList.contains('hidden')) menu.classList.add('hidden');
 
-      const open  = ()=>{ menu.classList.remove('hidden'); btn.setAttribute('aria-expanded','true'); };
-      const close = ()=>{ menu.classList.add('hidden');  btn.setAttribute('aria-expanded','false'); };
-      const toggle= (e)=>{ e && (e.preventDefault(), e.stopPropagation()); menu.classList.contains('hidden') ? open() : close(); };
+      const open  = ()=>{ menu.classList.remove('hidden'); btn.setAttribute('aria-expanded','true'); };
+      const close = ()=>{ menu.classList.add('hidden');  btn.setAttribute('aria-expanded','false'); };
+      const toggle= (e)=>{ e && (e.preventDefault(), e.stopPropagation()); menu.classList.contains('hidden') ? open() : close(); };
 
-      btn.addEventListener('click', toggle);
-      btn.addEventListener('mouseenter', open);
-      menu.addEventListener('mouseleave', ()=> setTimeout(close, 120));
+      btn.addEventListener('click', toggle);
+      btn.addEventListener('mouseenter', open);
+      menu.addEventListener('mouseleave', ()=> setTimeout(close, 120));
 
-      document.addEventListener('click', (e)=>{ if(!menu.contains(e.target) && e.target!==btn) close(); });
-      document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') close(); });
+      document.addEventListener('click', (e)=>{ if(!menu.contains(e.target) && e.target!==btn) close(); });
+      document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') close(); });
 
-      btn.dataset.wired='1';
-    }
+      btn.dataset.wired='1';
+    }
 
-    function tryWire(){
-      const btn  = document.getElementById('navSolutionsBtn')
-              || document.querySelector('[data-nav="solutions-btn"]')
-              || document.getElementById('solutionsBtn');
-      const menu = document.getElementById('navSolutionsMenu')
-              || document.querySelector('[data-nav="solutions-menu"]')
-              || document.getElementById('solutionsMenu');
+    function tryWire(){
+      const btn  = document.getElementById('navSolutionsBtn')
+              || document.querySelector('[data-nav="solutions-btn"]')
+              || document.getElementById('solutionsBtn');
+      const menu = document.getElementById('navSolutionsMenu')
+              || document.querySelector('[data-nav="solutions-menu"]')
+              || document.getElementById('solutionsMenu');
 
-      wire(btn, menu);
-    }
+      wire(btn, menu);
+    }
 
-    // Reintentos por si nav.js monta tarde
-    document.addEventListener('DOMContentLoaded', ()=>{
-      setTimeout(tryWire,   0);
-      setTimeout(tryWire, 200);
-      setTimeout(tryWire, 600);
-      setTimeout(tryWire,1200);
-    });
-    window.addEventListener('load', ()=> setTimeout(tryWire, 300));
-  })();
-  </script>
-  <!-- ======================================================================== -->
-  <!-- siempre justo antes de </body> y solo una vez por página -->
-<!-- Nav/Footer (con versión para romper caché) -->
-<script defer src="/js/nav.js?v=6"></script>
+    // Reintentos por si nav.js monta tarde
+    document.addEventListener('DOMContentLoaded', ()=>{
+      setTimeout(tryWire,   0);
+      setTimeout(tryWire, 200);
+      setTimeout(tryWire, 600);
+      setTimeout(tryWire,1200);
+    });
+    window.addEventListener('load', ()=> setTimeout(tryWire, 300));
+  })();
+  </script>
+    <script defer src="/js/nav.js?v=6"></script>
 <script defer src="/js/footer.js?v=6"></script>
 <script defer src="/js/fix-nav.js?v=6"></script>
 </body>
