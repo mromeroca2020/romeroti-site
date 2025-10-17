@@ -177,21 +177,32 @@
   <!-- Footer centralizado -->
   <div id="app-footer"></div>
 
-  <!-- Oculta el fallback cuando nav.js inyecta el header en #app-header -->
-  <script>
+<script>
     (function(){
-      function swapIfReady(){
-        const mount = document.getElementById('app-header');
-        const fb = document.getElementById('fallback-header');
-        if(mount && mount.childElementCount > 0 && fb){
-          fb.parentNode.removeChild(fb);
-        }
+      const fb = document.getElementById('fallback-header');
+      if (!fb) return; // Si no existe, no hace nada
+
+      function removeFallback() {
+          const mount = document.getElementById('app-header');
+          // Verificar que el header inyectado esté visible (o al menos el mountpoint exista)
+          // y que el fallback todavia esté en el DOM.
+          if (mount && fb.parentNode) {
+              fb.parentNode.removeChild(fb);
+              console.log('[swap] Fallback header removed.');
+              return true; // Éxito
+          }
+          return false;
       }
-      document.addEventListener('DOMContentLoaded', swapIfReady);
-      window.addEventListener('load', ()=>setTimeout(swapIfReady, 60));
-      setTimeout(swapIfReady, 800); // último intento por si hay cache lento/CDN
+
+      // Intentar remover inmediatamente si los scripts de nav.js se cargan rápido
+      removeFallback();
+
+      // Intentos adicionales con timeout, que es lo que falla en las subpáginas
+      setTimeout(removeFallback, 100);
+      setTimeout(removeFallback, 500);
+      setTimeout(removeFallback, 1200);
     })();
-  </script>
+</script>
 
   <!-- ========= HOTFIX SUBMENU SOLUTIONS (funciona aunque nav.js tarde) ========= -->
   <script>
