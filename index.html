@@ -178,31 +178,32 @@
   <div id="app-footer"></div>
 
 <script>
-    (function(){
-      const fb = document.getElementById('fallback-header');
-      if (!fb) return; // Si no existe, no hace nada
+  (function(){
+    const fb = document.getElementById('fallback-header');
+    if (!fb) return;
 
-      function removeFallback() {
-          const mount = document.getElementById('app-header');
-          // Verificar que el header inyectado esté visible (o al menos el mountpoint exista)
-          // y que el fallback todavia esté en el DOM.
-          if (mount && fb.parentNode) {
-              fb.parentNode.removeChild(fb);
-              console.log('[swap] Fallback header removed.');
-              return true; // Éxito
-          }
-          return false;
+    function removeFallbackSafely() {
+      const mount = document.getElementById('app-header');
+      // ✅ Solo retiramos el fallback si YA existe un <header> inyectado por nav.js
+      const injected = mount && mount.querySelector('header');
+      if (injected && fb.parentNode) {
+        fb.parentNode.removeChild(fb);
+        console.log('[swap] Fallback header removed (nav.js ready).');
+        return true;
       }
+      return false;
+    }
 
-      // Intentar remover inmediatamente si los scripts de nav.js se cargan rápido
-      removeFallback();
-
-      // Intentos adicionales con timeout, que es lo que falla en las subpáginas
-      setTimeout(removeFallback, 100);
-      setTimeout(removeFallback, 500);
-      setTimeout(removeFallback, 1200);
-    })();
+    // Intento inmediato + reintentos por si nav.js tarda
+    if (!removeFallbackSafely()) {
+      setTimeout(removeFallbackSafely, 150);
+      setTimeout(removeFallbackSafely, 400);
+      setTimeout(removeFallbackSafely, 1000);
+      setTimeout(removeFallbackSafely, 2000);
+    }
+  })();
 </script>
+
 
   <!-- ========= HOTFIX SUBMENU SOLUTIONS (funciona aunque nav.js tarde) ========= -->
   <script>
