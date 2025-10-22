@@ -1,1 +1,233 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>RomanoTI Solutions | Infrastructure TI & Cybersécurité</title>
+
+  <!-- Favicons -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16.png">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#2563eb">
+  <meta name="theme-color" content="#2563eb">
+
+  <!-- Tailwind + Montserrat -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    body{font-family:'Montserrat',sans-serif;background:#f8f9fa;color:#111827;scroll-behavior:smooth}
+    .hero-bg{background:linear-gradient(135deg,#1e3a8a 0%,#2563eb 100%)}
+    .btn-primary{background:#2563EB;transition:all .2s}
+    .btn-primary:hover{background:#1D4ED8;transform:translateY(-1px);box-shadow:0 6px 18px -10px rgba(37,99,235,.7)}
+    .card{border-radius:14px;box-shadow:0 12px 32px -16px rgba(2,6,23,.2)}
+    .badge{display:inline-block;border:1px solid #cbd5e1;border-radius:999px;padding:4px 10px;font-size:12px;background:#f8fafc}
+  </style>
+</head>
+<body class="bg-gray-50">
+
+  <!-- Punto de montaje del header global -->
+  <div id="app-header"></div>
+
+  <!-- ===== Header fallback (se oculta cuando nav.js monta el real) ===== -->
+  <header id="fallback-header" class="bg-white shadow-sm sticky top-0 z-40">
+    <div class="container mx-auto px-6 py-3">
+      <div class="flex items-center justify-between">
+        <a href="/fr/" class="flex items-center font-bold text-xl text-gray-900">
+          <span class="bg-blue-600 text-white rounded-full w-10 h-10 grid place-items-center mr-3">R</span>
+          RomanoTI Solutions (chargement…)
+        </a>
+        <a href="/fr/solutions/" class="bg-blue-600 text-white px-4 py-2 rounded-lg">Solutions</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== Hero ===== -->
+  <section class="hero-bg text-white">
+    <div class="container mx-auto px-6 py-20 text-center">
+      <h1 class="text-4xl md:text-5xl font-bold mb-6">Infrastructure TI & Cybersécurité professionnelles</h1>
+      <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
+        Expertise certifiée Microsoft & Cisco, détection 24/7, confinement rapide des incidents et moins d’interruptions.
+      </p>
+      <div class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-6">
+        <a href="tel:4386309157" class="btn-primary text-white px-8 py-3 rounded-lg font-semibold">Assistance d’urgence</a>
+        <a href="https://calendly.com/mauricioromeroca" class="bg-white text-blue-700 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100">
+          Réserver une consultation gratuite
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Bandeau EASM ===== -->
+  <section class="bg-blue-50 border-t border-b border-blue-100">
+    <div class="container mx-auto px-6 py-4 flex flex-col md:flex-row items-center justify-between gap-3">
+      <div class="text-blue-900 font-semibold">
+        Votre domaine est-il exposé&nbsp;? Lancez un scan EASM rapide.
+      </div>
+      <div class="flex gap-3">
+        <a href="/fr/solutions/cybershield/easm-console.html" class="bg-white border px-5 py-2 rounded-lg font-medium hover:bg-gray-50">
+          Voir la démo EASM
+        </a>
+        <a href="/fr/solutions/cybershield/" class="btn-primary text-white px-5 py-2 rounded-lg font-medium">
+          Découvrir CyberShield (MDR)
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== À propos ===== -->
+  <section id="about-us" class="py-14 bg-white">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-10">
+        <h2 class="text-3xl font-bold">À propos de RomanoTI Solutions</h2>
+        <p class="text-xl text-gray-600 max-w-2xl mx-auto">Plus de 10 ans d’excellence en infrastructure TI et cybersécurité</p>
+      </div>
+      <div class="max-w-4xl mx-auto text-lg text-gray-700 space-y-6">
+        <p>RomanoTI Solutions apporte plus de 10 ans d’expérience pratique en infrastructure TI d’entreprise, migration vers le cloud et cybersécurité. Nous aidons les PME à sécuriser leurs données, optimiser leurs réseaux et migrer vers des plateformes cloud modernes.</p>
+        <p>Chaque entreprise est unique&nbsp;: nous adaptons nos services à vos besoins.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Pourquoi nous choisir ===== -->
+  <section class="py-14">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-10">
+        <h2 class="text-3xl font-bold">Pourquoi nous choisir pour la cybersécurité</h2>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto">Moins de surface d’attaque, détection plus précoce et réponses guidées.</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="card bg-white p-6">
+          <div class="badge">EASM + Hardening</div>
+          <h3 class="text-xl font-bold mt-2 mb-2">Nous réduisons l’exposition</h3>
+          <p class="text-gray-600">Découverte de sous-domaines, ports et posture email (SPF/DMARC/DKIM) pour fermer les failles avant une attaque.</p>
+          <a href="/fr/solutions/cybershield/easm-console.html" class="text-blue-600 hover:underline mt-3 inline-block">Essayer EASM →</a>
+        </div>
+        <div class="card bg-white p-6">
+          <div class="badge">SOC / MDR 24×7</div>
+          <h3 class="text-xl font-bold mt-2 mb-2">Détection & Réponse</h3>
+          <p class="text-gray-600">Corrélation d’événements (Wazuh/ELK), IOCs/IOAs et playbooks de confinement&nbsp;: isoler l’hôte, bloquer IP, réinitialiser les identifiants.</p>
+          <a href="/fr/it-soc.html" class="text-blue-600 hover:underline mt-3 inline-block">Voir le SOC →</a>
+        </div>
+        <div class="card bg-white p-6">
+          <div class="badge">NOC + Résilience</div>
+          <h3 class="text-xl font-bold mt-2 mb-2">Disponibilité d’abord</h3>
+          <p class="text-gray-600">Supervision des services (HTTP/TLS/DNS) et de capacité&nbsp;; rapports exécutifs pour planifier la croissance sans surprises.</p>
+          <a href="/fr/it-noc.html" class="text-blue-600 hover:underline mt-3 inline-block">Voir le NOC →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Services clés ===== -->
+  <section id="services" class="py-14">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-10">
+        <h2 class="text-3xl font-bold">Services clés</h2>
+        <p class="text-xl text-gray-600 max-w-2xl mx-auto">Solutions TI complètes adaptées à votre entreprise</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="card bg-white p-6">
+          <h3 class="text-xl font-bold mb-2">Migration vers le Cloud</h3>
+          <p class="text-gray-600">Transition fluide vers Microsoft Azure.</p>
+          <div class="mt-4 space-y-2">
+            <a href="/fr/cloud-redundancy.html" class="text-blue-600 hover:underline text-sm">→ Basculement & Redondance</a><br/>
+            <a href="/fr/cloud-hybrid.html" class="text-blue-600 hover:underline text-sm">→ Architecture Cloud Hybride</a>
+          </div>
+        </div>
+
+        <div class="card bg-white p-6">
+          <h3 class="text-xl font-bold mb-2">Infrastructure TI</h3>
+          <p class="text-gray-600">Gestion de bout en bout de votre stack technologique.</p>
+          <div class="mt-4 space-y-2">
+            <a href="/fr/it-noc.html" class="text-blue-600 hover:underline text-sm">→ Services NOC</a><br/>
+            <a href="/fr/it-soc.html" class="text-blue-600 hover:underline text-sm">→ Services SOC</a>
+          </div>
+        </div>
+
+        <div class="card bg-white p-6">
+          <h3 class="text-xl font-bold mb-2">Cybersécurité</h3>
+          <p class="text-gray-600">Protection contre les rançongiciels et les fuites de données.</p>
+          <div class="mt-4 flex flex-wrap gap-3">
+            <a href="/fr/solutions/cybershield/" class="btn-primary text-white px-4 py-2 rounded-lg inline-block">Explorer CyberShield</a>
+            <a href="/fr/solutions/cybershield/easm-console.html" class="border px-4 py-2 rounded-lg inline-block hover:bg-gray-50">Démo EASM</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA final ===== -->
+  <section class="py-14 bg-blue-700 text-white">
+    <div class="container mx-auto px-6 text-center">
+      <h2 class="text-3xl font-bold mb-4">Prêt à réduire les risques et les arrêts&nbsp;?</h2>
+      <p class="text-lg opacity-90 mb-6">Planifions une évaluation de posture de 20&nbsp;minutes.</p>
+      <div class="flex flex-col md:flex-row justify-center gap-4">
+        <a href="https://calendly.com/mauricioromeroca" class="bg-white text-blue-700 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100">Réserver un appel</a>
+        <a href="/fr/services/tools.html" class="btn-primary text-white px-6 py-3 rounded-lg font-semibold">Ouvrir Tools</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer global -->
+  <div id="app-footer"></div>
+
+  <!-- Quita el fallback sólo si el header real ya está montado -->
+  <script>
+    (function(){
+      const fb = document.getElementById('fallback-header');
+      if (!fb) return;
+      function removeFallbackSafely() {
+        const mount = document.getElementById('app-header');
+        const injected = mount && mount.querySelector('header');
+        if (injected && fb.parentNode) { fb.parentNode.removeChild(fb); return true; }
+        return false;
+      }
+      if (!removeFallbackSafely()) {
+        setTimeout(removeFallbackSafely,150);
+        setTimeout(removeFallbackSafely,400);
+        setTimeout(removeFallbackSafely,1000);
+        setTimeout(removeFallbackSafely,2000);
+      }
+    })();
+  </script>
+
+  <!-- Hotfix submenu Solutions -->
+  <script>
+    (function(){
+      function wire(btn, menu){
+        if(!btn || !menu || btn.dataset.wired) return;
+        if(!menu.classList.contains('hidden')) menu.classList.add('hidden');
+        const open=()=>{menu.classList.remove('hidden');btn.setAttribute('aria-expanded','true');};
+        const close=()=>{menu.classList.add('hidden');btn.setAttribute('aria-expanded','false');};
+        const toggle=(e)=>{e&&(e.preventDefault(),e.stopPropagation());menu.classList.contains('hidden')?open():close();};
+        btn.addEventListener('click',toggle);
+        btn.addEventListener('mouseenter',open);
+        menu.addEventListener('mouseleave',()=>setTimeout(close,120));
+        document.addEventListener('click',(e)=>{if(!menu.contains(e.target)&&e.target!==btn) close();});
+        document.addEventListener('keydown',(e)=>{if(e.key==='Escape') close();});
+        btn.dataset.wired='1';
+      }
+      function tryWire(){
+        const btn=document.getElementById('navSolutionsBtn')||document.querySelector('[data-nav="solutions-btn"]')||document.getElementById('solutionsBtn');
+        const menu=document.getElementById('navSolutionsMenu')||document.querySelector('[data-nav="solutions-menu"]')||document.getElementById('solutionsMenu');
+        wire(btn,menu);
+      }
+      document.addEventListener('DOMContentLoaded',()=>{
+        setTimeout(tryWire,0);setTimeout(tryWire,200);setTimeout(tryWire,600);setTimeout(tryWire,1200);
+      });
+      window.addEventListener('load',()=>setTimeout(tryWire,300));
+    })();
+  </script>
+
+  <!-- Cargas GLOBALES — rutas absolutas -->
+  <script defer src="/js/nav.js?v=6"></script>
+  <script defer src="/js/footer.js?v=6"></script>
+  <script defer src="/js/fix-nav.js?v=6"></script>
+</body>
+</html>
 
