@@ -1,13 +1,8 @@
-<!-- /js/nav.js -->
-<script>
 (function(){
   // ============ 0) Señal de arranque para debugging ============
   console.log('[nav] booting…');
 
   // ============ 1) Detección de idioma por ruta ============
-  // - Si la URL comienza con /en/ -> inglés
-  // - Si comienza con /fr/ -> francés
-  // - En cualquier otro caso -> español
   const path = location.pathname;
   const lang = path.startsWith('/en/') ? 'en' : path.startsWith('/fr/') ? 'fr' : 'es';
   const base = lang === 'en' ? '/en' : lang === 'fr' ? '/fr' : '';
@@ -45,7 +40,6 @@
   const I18N = I18N_MAP[lang];
 
   // ============ 3) Generar header ============
-  // Nota: Forzamos .html en Quick Audit para evitar 404 en entornos sin "pretty URLs".
   const html = `
   <header class="bg-white/95 backdrop-blur sticky top-0 z-50 border-b border-gray-100" id="navHeader">
     <div class="container mx-auto px-6 py-3">
@@ -58,7 +52,6 @@
         <nav class="hidden md:flex items-center space-x-8">
           <a href="${base || '/'}" class="text-gray-700 hover:text-blue-600">${I18N.home}</a>
 
-          <!-- Dropdown Solutions -->
           <div class="relative" id="navSolutionsRoot">
             <button id="navSolutionsBtn"
                     class="text-gray-700 hover:text-blue-600 inline-flex items-center"
@@ -85,7 +78,6 @@
           <a href="${base}/it-soc.html"         class="text-gray-700 hover:text-blue-600">${I18N.soc}</a>
           <a href="https://calendly.com/mauricioromeroca" class="bg-blue-600 text-white px-5 py-2 rounded-lg font-medium">${I18N.book}</a>
 
-          <!-- Selector de idioma -->
           <div class="relative" id="langRoot">
             <button id="langBtn" class="text-gray-500 hover:text-blue-600 inline-flex items-center" aria-haspopup="true" aria-expanded="false">
               🌐 ${I18N.lang}
@@ -99,7 +91,6 @@
           </div>
         </nav>
 
-        <!-- Mobile: CTA directo -->
         <div class="md:hidden">
           <a href="${base}/solutions/" class="bg-blue-600 text-white px-4 py-2 rounded-lg">${I18N.solutions}</a>
         </div>
@@ -117,14 +108,12 @@
       temp.innerHTML = html;
       document.body.insertBefore(temp.firstElementChild, document.body.firstChild);
     }
-    // Señales de "NAV listo" para que otros scripts (fallback) sepan que ya pueden retirar el header temporal
     document.documentElement.setAttribute('data-nav-mounted','1');
     window.ROMANOTI_NAV_READY = true;
   }
 
   // ============ 5) Cableado de menús ============
   function wireMenus(){
-    // --- Solutions ---
     const btn  = document.getElementById('navSolutionsBtn');
     const menu = document.getElementById('navSolutionsMenu');
     const root = document.getElementById('navSolutionsRoot');
@@ -133,40 +122,31 @@
       const open  = () => { menu.classList.remove('hidden'); btn.setAttribute('aria-expanded','true'); };
       const close = () => { menu.classList.add('hidden');  btn.setAttribute('aria-expanded','false'); };
       const toggle= (e)=>{ e && (e.preventDefault(), e.stopPropagation()); menu.classList.contains('hidden') ? open() : close(); };
-
       btn.addEventListener('click', toggle);
       btn.addEventListener('mouseenter', open);
       root && root.addEventListener('mouseleave', ()=> setTimeout(close, 120));
       document.addEventListener('click', (e)=>{ if (!menu.contains(e.target) && e.target !== btn) close(); });
       document.addEventListener('keydown', (e)=>{ if (e.key === 'Escape') close(); });
       root && (root.style.overflow = 'visible');
-
       btn.dataset.wired = '1';
     }
 
-    // --- Selector de idioma ---
     const langBtn  = document.getElementById('langBtn');
     const langMenu = document.getElementById('langMenu');
     const langRoot = document.getElementById('langRoot');
 
     if (langBtn && langMenu && !langBtn.dataset.wired){
-      const open  = ()=> langMenu.classList.remove('hidden');
       const close = ()=> langMenu.classList.add('hidden');
-
       langBtn.addEventListener('click', (e)=>{ e.preventDefault(); e.stopPropagation(); langMenu.classList.toggle('hidden'); });
       langRoot && langRoot.addEventListener('mouseleave', ()=> setTimeout(close, 120));
       document.addEventListener('click', (e)=>{ if (!langMenu.contains(e.target) && e.target !== langBtn) close(); });
 
-      // Cambia idioma preservando ruta:
-      // - borra prefijo /en o /fr actual
-      // - agrega el nuevo si aplica
-      const clean = (p)=> p.replace(/^\/(en|fr)(?=\/)/,''); // ejemplo: /en/solutions -> /solutions
+      const clean = (p)=> p.replace(/^\/(en|fr)(?=\/)/,'');
       const current = clean(location.pathname);
-
       langMenu.querySelectorAll('a[data-lang]').forEach(a=>{
         a.addEventListener('click', (e)=>{
           e.preventDefault();
-          const target = a.dataset.lang; // 'en' | 'fr' | 'es'
+          const target = a.dataset.lang;
           const prefix = target==='en' ? '/en' : target==='fr' ? '/fr' : '';
           location.href = prefix + current + location.search + location.hash;
         });
@@ -178,7 +158,6 @@
 
   // ============ 6) Boot ============
   function boot(){ mountHeader(); wireMenus(); console.log('[nav] mounted & wired'); }
-
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', ()=> {
       boot();
@@ -191,4 +170,3 @@
     setTimeout(wireMenus,800);
   }
 })();
-</script>
