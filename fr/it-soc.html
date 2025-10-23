@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <!-- CHANGE: Título en francés -->
+  <title>Services SOC | RomanoTI Solutions</title>
+
+  <!-- Tailwind CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- FAVICONS unificados -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16.png">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#2563eb">
+  <meta name="theme-color" content="#2563eb">
+
+  <style>
+    /* CHANGE: estilos iguales a NOC para coherencia visual */
+    body{font-family:'Montserrat',sans-serif;background:#f8f9fa;color:#333;scroll-behavior:smooth}
+    .hero-bg{background:linear-gradient(135deg,#1e3a8a 0%,#2563eb 100%)}
+    .btn-primary{background:#2563EB;transition:all .3s}
+    .btn-primary:hover{background:#1D4ED8;transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.15)}
+    .feature-card{transition:all .3s;border-radius:.5rem;box-shadow:0 1px 3px rgba(0,0,0,.1)}
+    .feature-card:hover{transform:translateY(-6px);box-shadow:0 12px 30px -8px rgba(37,99,235,.15)}
+  </style>
+</head>
+<body class="bg-gray-50">
+
+  <!-- Header centralizado -->
+  <div id="app-header"></div>
+
+  <!-- ===== Hero SOC ===== -->
+  <section class="hero-bg text-white py-28">
+    <div class="container mx-auto px-6 text-center">
+      <!-- CHANGE: Encabezado/claim en FR -->
+      <h1 class="text-4xl md:text-5xl font-bold mb-6">Services SOC (MDR)</h1>
+      <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
+        Détection et réponse 24/7 contre le rançongiciel, les intrusions et les incidents — pour vos réseaux on-prem et cloud.
+      </p>
+      <div class="flex flex-col md:flex-row justify-center gap-4">
+        <a href="https://calendly.com/mauricioromeroca" class="bg-white text-blue-700 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100">
+          Réserver une consultation
+        </a>
+        <a href="/solutions/cybershield/soc-console.html" class="btn-primary text-white px-8 py-3 rounded-lg font-semibold">
+          Ouvrir la console SOC
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Valeur / modules SOC ===== -->
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-12">
+        <!-- CHANGE: Título sección -->
+        <h2 class="text-3xl font-bold">Ce que nous livrons</h2>
+        <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+          SIEM, EDR et playbooks de réponse dirigée pour réduire le temps de détection, contenir l’incident plus vite et préserver la continuité.
+        </p>
+      </div>
+
+      <!-- SIEM & Corrélation -->
+      <div class="feature-card p-8 rounded-lg shadow-sm bg-white mb-8">
+        <h3 class="text-xl font-bold mb-4">SIEM & Corrélation</h3>
+        <p class="mb-6">
+          Agrégation et corrélation des événements de sécurité (Wazuh/ELK, règles Sigma, IOCs/IOAs) pour identifier les comportements anormaux et les mouvements latéraux.
+        </p>
+        <div class="grid md:grid-cols-3 gap-6">
+          <div class="bg-blue-50 p-6 rounded-lg">
+            <h4 class="font-bold text-lg mb-3">Sources</h4>
+            <p>Endpoints, serveurs, annuaires, pare-feu, cloud (API/Logs), SaaS (O365).</p>
+          </div>
+          <div class="bg-blue-50 p-6 rounded-lg">
+            <h4 class="font-bold text-lg mb-3">Corrélation</h4>
+            <p>Règles Sigma, détection TTP MITRE ATT&CK, anomalies et listes d’indicateurs.</p>
+          </div>
+          <div class="bg-blue-50 p-6 rounded-lg">
+            <h4 class="font-bold text-lg mb-3">Reporting</h4>
+            <p>Rapports exécutifs mensuels et tableaux de bord temps réel.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- EDR / Détection & Contention -->
+      <div class="feature-card p-8 rounded-lg shadow-sm bg-white mb-8">
+        <h3 class="text-xl font-bold mb-4">EDR : Détection & Contention</h3>
+        <p class="mb-6">
+          Déploiement d’agents, télémétrie avancée et actions de containment pour isoler l’hôte, bloquer des IPs malveillantes et couper la propagation.
+        </p>
+        <div class="grid md:grid-cols-3 gap-6">
+          <div class="bg-blue-50 p-6 rounded-lg">
+            <h4 class="font-bold text-lg mb-3">Capteurs</h4>
+            <p>Windows, Linux, macOS : collecte d’événements, fichiers, processus, réseau.</p>
+          </div>
+          <div class="bg-blue-50 p-6 rounded-lg">
+            <h4 class="font-bold text-lg mb-3">Réponse</h4>
+            <p>Isolation de l’endpoint, blocage IP/Domaine, purge d’artefacts, reset d’identifiants.</p>
+          </div>
+          <div class="bg-blue-50 p-6 rounded-lg">
+            <h4 class="font-bold text-lg mb-3">SLAs</h4>
+            <p>Accusé de réception rapide et guidage pas-à-pas jusqu’au rétablissement.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Playbooks & ITSM -->
+      <div class="feature-card p-8 rounded-lg shadow-sm bg-white mb-8">
+        <h3 class="text-xl font-bold mb-4">Playbooks & Gestion des incidents</h3>
+        <p class="mb-6">
+          Processus ITIL : Détection → Qualification → Contention → Éradication → Rétablissement, tracés dans l’outil ITSM avec preuves et horodatages.
+        </p>
+        <div class="grid md:grid-cols-3 gap-6">
+          <div class="bg-blue-50 p-6 rounded-lg">
+            <h4 class="font-bold text-lg mb-3">ITSM</h4>
+            <p>Jira Service Management / Zammad, file L1/L2/L3, pistes d’audit et SLA visibles.</p>
+          </div>
+          <div class="bg-blue-50 p-6 rounded-lg">
+            <h4 class="font-bold text-lg mb-3">Playbooks</h4>
+            <p>Rançongiciel, phishing, C2, exfiltration, privilèges anormaux, compte compromis.</p>
+          </div>
+          <div class="bg-blue-50 p-6 rounded-lg">
+            <h4 class="font-bold text-lg mb-3">Communication</h4>
+            <p>Canaux d’alerte email/Teams/Slack et rapports d’incident exécutifs.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Conformité & Posture -->
+      <div class="feature-card p-8 rounded-lg shadow-sm bg-white">
+        <h3 class="text-xl font-bold mb-4">Conformité & Posture</h3>
+        <p class="mb-6">
+          Contrôles de posture email (SPF/DMARC/DKIM), renforcement cloud (CIS Benchmarks) et artefacts pour audits (journaux, horodatages, actions).
+        </p>
+        <div class="grid md:grid-cols-3 gap-6">
+          <div class="bg-blue-50 p-6 rounded-lg">
+            <h4 class="font-bold text-lg mb-3">Email</h4>
+            <p>Vérifications DMARC/SPF/DKIM pour réduire l’usurpation et le phishing.</p>
+          </div>
+          <div class="bg-blue-50 p-6 rounded-lg">
+            <h4 class="font-bold text-lg mb-3">Cloud</h4>
+            <p>Évaluations de configuration (Azure/M365), inventaire d’expositions externes.</p>
+          </div>
+          <div class="bg-blue-50 p-6 rounded-lg">
+            <h4 class="font-bold text-lg mb-3">Audit</h4>
+            <p>Rapports pour exigences locales (ex. Loi 25 au Québec) et audits clients.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA ===== -->
+  <section class="py-16 bg-blue-700 text-white">
+    <div class="container mx-auto text-center">
+      <h2 class="text-3xl font-bold mb-6">Prêt à renforcer votre sécurité ?</h2>
+      <p class="text-xl mb-8">Planifions une session de 20 minutes pour cadrer le POV (proof of value) et les prochaines étapes.</p>
+      <div class="flex flex-col md:flex-row justify-center gap-4">
+        <a href="https://calendly.com/mauricioromeroca" class="bg-white text-blue-700 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100">
+          Réserver un appel
+        </a>
+        <a href="/solutions/cybershield/soc-console.html" class="btn-primary text-white px-8 py-3 rounded-lg font-semibold">
+          Ouvrir la console SOC
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer centralizado -->
+  <div id="app-footer"></div>
+
+  <!-- Carga del header/footer centralizados -->
+  <!-- siempre justo antes de </body> y solo una vez por página -->
+  <!-- CHANGE: mismas versiones de los scripts que en el resto del sitio -->
+  <script defer src="/js/nav.js?v=6"></script>
+  <script defer src="/js/footer.js?v=6"></script>
+  <script defer src="/js/fix-nav.js?v=6"></script>
+</body>
+</html>
