@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <!-- =========================================================
+    Fichier : /fr/solutions/cybershield/index.html
+    Objet   : Landing de CyberShield (MDR) - Version FR
+    Notes   :
+      - Favicons RomanoTI (avec cache-buster)
+      - Navbar unifiée + dropdown Solutions (inchangé)
+      - Structure et classes conservées à l’identique
+      - Hotfix universel du menu (/js/fix-nav.js)
+  ========================================================== -->
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>CyberShield | Sécurité gérée par RomanoTI</title>
+
+  <!-- ===== Favicons RomanoTI (unifiés) ===== -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png?v=4">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png?v=4">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16.png?v=4">
+  <link rel="shortcut icon" href="/favicon.ico?v=4" type="image/x-icon">
+  <link rel="mask-icon" href="/img/safari-pinned-tab.svg?v=4" color="#2563eb">
+  <meta name="theme-color" content="#2563eb">
+
+  <!-- ===== CSS + Polices ===== -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- ===== Styles locaux ===== -->
+  <style>
+    body{font-family:'Montserrat',sans-serif}
+    .hero-bg{background:linear-gradient(135deg,#1e3a8a 0%,#2563eb 100%)}
+    .btn-primary{background:#2563EB;transition:all .2s}
+    .btn-primary:hover{background:#1D4ED8;transform:translateY(-1px);box-shadow:0 6px 18px -10px rgba(37,99,235,.7)}
+    .card{border:1px solid #e5e7eb;border-radius:16px;box-shadow:0 10px 30px -12px rgba(0,0,0,.12)}
+    .badge{display:inline-block;border:1px solid #cbd5e1;border-radius:999px;padding:4px 10px;font-size:12px;background:#f8fafc}
+    .logo-badge{background:#2563EB}
+    /* Compatibilité pour le dropdown (legacy / hotfix) */
+    .dropdown{display:none}
+    .dropdown.show{display:block}
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-900">
+
+  <div id="app-header"></div>
+
+  <!-- =================== Héros =================== -->
+  <section class="hero-bg text-white">
+    <div class="container mx-auto px-6 py-20 text-center">
+      <span class="badge border-white text-white">Managed Detection & Response</span>
+      <h1 class="text-4xl md:text-5xl font-bold mt-4">CyberShield</h1>
+      <p class="text-xl md:text-2xl mt-4 max-w-3xl mx-auto">
+        Détection et réponse 24×7 contre le rançongiciel, les intrusions et les pannes — pour les réseaux on-prem et cloud.
+      </p>
+
+      <div class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-6 mt-6">
+        <a href="https://calendly.com/mauricioromeroca"
+           class="btn-primary text-white px-6 py-3 rounded-lg font-semibold inline-flex items-center justify-center">Réserver une démo</a>
+        <a href="/it-soc.html"
+           class="bg-white text-blue-700 px-6 py-3 rounded-lg font-semibold inline-flex items-center justify-center hover:bg-gray-100">Voir les détails SOC</a>
+        <a href="/solutions/cybershield/soc-console.html"
+           class="bg-white text-blue-700 px-6 py-3 rounded-lg font-semibold inline-flex items-center justify-center hover:bg-gray-100">Ouvrir la console SOC</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================== Ce qui est inclus =================== -->
+  <section class="py-14 bg-white">
+    <div class="container mx-auto px-6">
+      <h2 class="text-3xl font-bold text-center">Ce qui est inclus</h2>
+      <p class="text-gray-600 text-center max-w-2xl mx-auto mt-2">
+        Nous combinons NOC (disponibilité) + SOC (sécurité) + protection email pour couvrir les risques réels.
+      </p>
+
+      <div class="grid md:grid-cols-3 gap-6 mt-10">
+        <!-- NOC -->
+        <div class="card p-6 bg-white">
+          <h3 class="text-xl font-bold mb-2">NOC 24×7</h3>
+          <ul class="text-gray-700 list-disc ml-5 space-y-1">
+            <li>Uptime / HTTP / TLS / DNS / Ports</li>
+            <li>Alertes par email/Teams/Slack</li>
+            <li>Rapport mensuel de performance</li>
+          </ul>
+        </div>
+        <!-- SOC -->
+        <div class="card p-6 bg-white">
+          <h3 class="text-xl font-bold mb-2">SOC (MDR)</h3>
+          <ul class="text-gray-700 list-disc ml-5 space-y-1">
+            <li>EDR + corrélation d’événements</li>
+            <li>Cas d’usage : ransomware / C2 / mouvement latéral</li>
+            <li>Playbooks et réponse guidée</li>
+          </ul>
+        </div>
+        <!-- Email -->
+        <div class="card p-6 bg-white">
+          <h3 class="text-xl font-bold mb-2">Sécurité Email</h3>
+          <ul class="text-gray-700 list-disc ml-5 space-y-1">
+            <li>Contrôles de posture SPF/DMARC/DKIM</li>
+            <li>Authentification avancée</li>
+            <li>Sensibilisation (optionnel)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================== Forfaits =================== -->
+  <section class="py-14">
+    <div class="container mx-auto px-6">
+      <h2 class="text-3xl font-bold text-center">Forfaits</h2>
+      <div class="grid md:grid-cols-3 gap-6 mt-10">
+        <!-- Starter -->
+        <div class="card bg-white p-6">
+          <div class="badge">Starter</div>
+          <h3 class="text-xl font-bold mt-2 mb-2">Petites équipes</h3>
+          <ul class="text-gray-700 list-disc ml-5 space-y-1">
+            <li>NOC Essentials</li>
+            <li>Email sécurisé (1 domaine)</li>
+            <li>Support aux heures ouvrables</li>
+          </ul>
+        </div>
+        <!-- Growth -->
+        <div class="card bg-white p-6 border-blue-600">
+          <div class="badge bg-blue-50 border-blue-200">Recommandé</div>
+          <h3 class="text-xl font-bold mt-2 mb-2">Growth</h3>
+          <ul class="text-gray-700 list-disc ml-5 space-y-1">
+            <li>NOC + SOC (MDR)</li>
+            <li>Email sécurisé (2 domaines)</li>
+            <li>Support étendu</li>
+          </ul>
+        </div>
+        <!-- Enterprise -->
+        <div class="card bg-white p-6">
+          <div class="badge">Enterprise</div>
+          <h3 class="text-xl font-bold mt-2 mb-2">Exploitation 24×7</h3>
+          <ul class="text-gray-700 list-disc ml-5 space-y-1">
+            <li>NOC + SOC avancés</li>
+            <li>Intégrations SIEM/ITSM</li>
+            <li>SLA critiques</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="text-center mt-10">
+        <a href="https://calendly.com/mauricioromeroca" class="btn-primary text-white px-8 py-3 rounded-lg font-semibold">Devis / Démo</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================== Pied de page =================== -->
+  <footer class="bg-gray-900 text-white py-8">
+    <div class="container mx-auto px-6 text-center">
+      <p>© 2025 RomanoTI Solutions. Tous droits réservés.</p>
+      <p class="mt-2">Au service du Canada</p>
+    </div>
+  </footer>
+
+  <!-- =================== Scripts =================== -->
+
+  <!-- Fallback du dropdown (robuste ; n’interfère pas avec /js/fix-nav.js) -->
+  <script>
+    (function(){
+      const btn  = document.getElementById('solutionsBtn');
+      const menu = document.getElementById('solutionsMenu');
+      if(!btn || !menu) return;
+
+      function open(){ menu.classList.add('show'); menu.classList.remove('hidden'); menu.style.display='block'; btn.setAttribute('aria-expanded','true'); }
+      function close(){ menu.classList.remove('show'); menu.classList.add('hidden'); menu.style.display=''; btn.setAttribute('aria-expanded','false'); }
+      function isOpen(){ return menu.classList.contains('show') || !menu.classList.contains('hidden') || menu.style.display==='block'; }
+      function toggle(){ isOpen()? close() : open(); }
+
+      btn.addEventListener('click',(e)=>{ e.preventDefault(); e.stopPropagation(); toggle(); });
+      document.addEventListener('click',(e)=>{ if(!menu.contains(e.target) && e.target!==btn) close(); });
+      document.addEventListener('keydown',(e)=>{ if(e.key==='Escape') close(); });
+
+      // Survol pour confort UX
+      btn.addEventListener('mouseenter', open);
+      btn.parentNode.addEventListener('mouseleave', ()=>setTimeout(close,120));
+    })();
+  </script>
+
+  <!-- Hotfix universel pour le menu “Solutions” -->
+  <!-- toujours juste avant </body> et une seule fois par page -->
+  <script defer src="/js/nav.js?v=2025-01"></script>
+  <script defer src="/js/footer.js?v=2025-01"></script>
+  <script defer src="/js/fix-nav.js?v=2025-01"></script>
+</body>
+</html>
