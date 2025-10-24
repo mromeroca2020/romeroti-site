@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>SOC Console | RomanoTI Solutions</title>
+
+  <!-- Favicons (cache-buster) -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png?v=4">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png?v=4">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16.png?v=4">
+  <link rel="shortcut icon" href="/favicon.ico?v=4">
+  <link rel="mask-icon" href="/img/safari-pinned-tab.svg?v=4" color="#2563eb">
+  <meta name="theme-color" content="#2563eb">
+
+  <!-- Tailwind + Montserrat -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    body{font-family:'Montserrat',sans-serif}
+    .hero-bg{background:linear-gradient(135deg,#1e3a8a 0%,#2563eb 100%)}
+    .card{border:1px solid #e5e7eb;border-radius:16px;box-shadow:0 10px 30px -12px rgba(0,0,0,.12)}
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-900">
+  <!-- Header mountpoint -->
+  <div id="app-header"></div>
+
+  <!-- Hero -->
+  <section class="hero-bg text-white">
+    <div class="container mx-auto px-6 py-20 text-center">
+      <h1 class="text-4xl md:text-5xl font-bold">SOC Console</h1>
+      <p class="text-xl md:text-2xl mt-4 max-w-3xl mx-auto">
+        Live view for alerts, triage and response demos.
+      </p>
+      <div class="mt-6">
+        <a href="https://calendly.com/mauricioromeroca" class="bg-white text-blue-700 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100">
+          Book a demo
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Demo area (sustituye por tu embed real si aplica) -->
+  <section class="py-12 bg-white">
+    <div class="container mx-auto px-6">
+      <div class="card bg-white p-6">
+        <h2 class="text-2xl font-bold mb-2">Demo</h2>
+        <p class="text-gray-600 mb-4">This is a placeholder for the SOC dashboard/console embed.</p>
+        <div class="bg-gray-900 text-gray-100 rounded-lg p-4 text-sm">
+          <p>Embed your console here (iframe or app component).</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer mountpoint -->
+  <div id="app-footer"></div>
+
+  <!-- Nav/Footer (cache-buster) -->
+  <script defer src="/js/nav.js?v=6"></script>
+  <script defer src="/js/footer.js?v=6"></script>
+  <script defer src="/js/fix-nav.js?v=6"></script>
+</body>
+</html>
