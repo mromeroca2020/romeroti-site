@@ -1,14 +1,36 @@
 /assets/*    /assets/:splat    200
+
+# ============================================================
+# 🔧 FIX: Se añadió este bloque para que Netlify sirva la página
+# /services/tools.html correctamente, evitando que sea redirigida
+# por el catch-all "/* /index.html 200" (que captura todo).
+# Las rutas específicas deben ir SIEMPRE antes del catch-all.
+# ============================================================
+
+/services/tools.html    /services/tools.html    200     # sirve directamente el HTML
+/services/tools         /services/tools.html    200     # permite acceder sin la extensión .html
+/services/tools/*       /services/tools/:splat  200     # mantiene funcionamiento de subrutas internas
+
+# ============================================================
+# ⚠️ IMPORTANTE: El catch-all se deja después para que siga
+# manejando las demás rutas del sitio (SPA, páginas dinámicas, etc.)
+# ============================================================
+
 /*           /index.html       200
+
+# ============================================================
+# 🔁 Reglas originales de páginas específicas y redirecciones
+# Se mantienen sin cambios.
+# ============================================================
+
 /soc/console    /solutions/cybershield/soc-console.html 200
 /soc-console    /solutions/cybershield/soc-console.html 200
 /solutions/cybershield/quick-audit     /solutions/cybershield/quick-audit.html 200!
 /solutions/cybershield/quick-audit/    /solutions/cybershield/quick-audit.html 200!
-/solutions/cybershield/quick-audit   /solutions/cybershield/quick-audit.html  200
-/en/solutions/cybershield/quick-audit  /en/solutions/cybershield/quick-audit.html  200
-/fr/solutions/cybershield/quick-audit  /fr/solutions/cybershield/quick-audit.html  200
+/solutions/cybershield/quick-audit     /solutions/cybershield/quick-audit.html 200
+/en/solutions/cybershield/quick-audit  /en/solutions/cybershield/quick-audit.html 200
+/fr/solutions/cybershield/quick-audit  /fr/solutions/cybershield/quick-audit.html 200
 http://romeroti-solutions.com/*                https://romeroti-solutions.com/:splat  301!
 http://www.romeroti-solutions.com/*            https://romeroti-solutions.com/:splat  301!
 https://www.romeroti-solutions.com/*           https://romeroti-solutions.com/:splat  301!
 https://*.netlify.app/*                        https://romeroti-solutions.com/:splat  301!
-
