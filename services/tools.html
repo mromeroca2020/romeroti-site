@@ -1,8 +1,60 @@
 <!doctype html>
 <html lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Romanoti Tools | Diagnostics & Inventory</title>
 
-<body>
+  <!-- Favicons unificados (igual que home) -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16.png">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#2563eb">
+  <meta name="theme-color" content="#2563eb">
 
+  <!-- Tailwind + Montserrat (igual que en home) -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Estilos mínimos para clases personalizadas usadas en esta página -->
+  <style>
+    body{font-family:'Montserrat',sans-serif;background:#f8f9fa;color:#111827;scroll-behavior:smooth}
+    .wrap{max-width:1100px;margin:0 auto;padding:16px}
+    .card{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:16px;margin-top:14px;box-shadow:0 12px 32px -16px rgba(2,6,23,.15)}
+    .row{display:flex;gap:10px;flex-wrap:wrap}
+    .btn{border:1px solid #d1d5db;padding:.5rem .8rem;border-radius:10px;background:#f9fafb;cursor:pointer}
+    .btn:hover{background:#f3f4f6}
+    .btn-sm{padding:.35rem .6rem;font-size:.9rem}
+    .btn-primary{border-color:#2563EB;background:#2563EB;color:#fff}
+    .btn-primary:hover{filter:brightness(1.05)}
+    input{border:1px solid #d1d5db;border-radius:10px;padding:.45rem .6rem}
+    pre{background:#0f172a;color:#e5e7eb;padding:12px;border-radius:10px;overflow:auto}
+    .section-title{font-size:20px;font-weight:700;margin-bottom:6px}
+    .muted{color:#6b7280}
+    .hidden{display:none}
+    footer{margin-top:40px;background:#0f172a;color:#fff}
+  </style>
+</head>
+
+<body class="bg-gray-50">
+  <!-- Mountpoint del header centralizado -->
+  <div id="app-header"></div>
+
+  <!-- Fallback header (se oculta cuando nav.js inyecta el real) -->
+  <header id="fallback-header" class="bg-white shadow-sm sticky top-0 z-40">
+    <div class="container mx-auto px-6 py-3">
+      <div class="flex items-center justify-between">
+        <a href="/" class="flex items-center font-bold text-xl text-gray-900">
+          <span class="bg-blue-600 text-white rounded-full w-10 h-10 grid place-items-center mr-3">R</span>
+          RomanoTI Solutions (Loading...)
+        </a>
+        <a href="/solutions/" class="bg-blue-600 text-white px-4 py-2 rounded-lg">Solutions</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- === CONTENIDO ORIGINAL === -->
   <div class="wrap" style="margin-top:20px; margin-bottom:56px">
 
     <!-- Server Diagnostic -->
@@ -93,7 +145,7 @@
     </div>
 
     <!-- Tools (auth) + Login -->
-    <div class="grid grid-cols-2">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
       <!-- Login -->
       <div class="card" id="loginCard">
         <div class="section-title">Login</div>
@@ -166,7 +218,7 @@
       </div>
     </div>
 
-    <h3 style="margin:22px 0 8px">Salida</h3>
+    <h3 style="margin:22px 0 8px" class="text-xl font-bold">Salida</h3>
     <pre id="out"></pre>
   </div>
 
@@ -178,18 +230,22 @@
     </div>
   </footer>
 
+<!-- ======= SCRIPTS DE LA PÁGINA (tu lógica) ======= -->
 <script>
   // ===== Config =====
   const CP_API  = 'https://romanoti-tools-api.onrender.com'; // Control Plane
   const API_BASE = localStorage.getItem('romanoti_api') || CP_API;
-  document.getElementById('apiBaseShown').textContent = API_BASE;
+  document.addEventListener('DOMContentLoaded', ()=> {
+    var el = document.getElementById('apiBaseShown');
+    if (el) el.textContent = API_BASE;
+  });
 
   // ===== Utils =====
   const $  = (id) => document.getElementById(id);
   const on = (id, type, fn) => { const el = $(id); if (el) el.addEventListener(type, fn); };
   const token = () => sessionStorage.getItem('romanoti_token');
 
-  function show(id, on=true){ $(id).classList[on?'remove':'add']('hidden'); }
+  function show(id, onState=true){ const e=$(id); if(!e) return; e.classList[onState?'remove':'add']('hidden'); }
   function logTo(preId, obj){
     const el = $(preId);
     try { el.textContent = (typeof obj==='string') ? obj : JSON.stringify(obj,null,2); }
@@ -199,7 +255,7 @@
 
   // ===== Netlify function: pretty JSON =====
   async function runTool() {
-    $('diagOut').textContent = 'Running…';
+    const o = $('diagOut'); if (o) o.textContent = 'Running…';
     try {
       const res  = await fetch('/.netlify/functions/run-tool?pretty=1&indent=2',{headers:{'Accept':'application/json'}});
       const text = await res.text();
@@ -217,7 +273,7 @@
 
   // ===== Auth =====
   function setAuthedUI(){
-    if(token()){ show('loginCard', false); show('toolsCard', true); $('whoami').textContent = $('user').value || 'session'; }
+    if(token()){ show('loginCard', false); show('toolsCard', true); const u=$('user'); $('whoami').textContent = (u&&u.value)||'session'; }
     else       { show('toolsCard', false); show('loginCard', true); $('whoami').textContent = ''; }
   }
 
@@ -239,7 +295,7 @@
       $('loginMsg').textContent = 'OK';
     }catch(e){ $('loginMsg').innerHTML = `<span style="color:#c33">${e}</span>`; }
   }
-  function logout(){ sessionStorage.removeItem('romanoti_token'); setAuthedUI(); $('out').textContent=''; }
+  function logout(){ sessionStorage.removeItem('romanoti_token'); setAuthedUI(); const o=$('out'); if(o) o.textContent=''; }
 
   // ===== Generic authed call =====
   async function call(method, path, body=null){
@@ -371,23 +427,44 @@
   on('btnEmailDNS','click',checkEmailDNS);
 
   // init
-  setAuthedUI();
+  document.addEventListener('DOMContentLoaded', setAuthedUI);
 </script>
 
-<!-- Fallback local del dropdown (por si /js/fix-nav.js no alcanza a correr) -->
+<!-- ======= HOTFIX SUBMENU SOLUTIONS (igual que home) ======= -->
 <script>
   (function(){
-    const btn = document.getElementById('navSolutionsBtn');
-    const menu = document.getElementById('navSolutionsMenu');
-    if(!btn || !menu) return;
-    const toggle = ()=> menu.classList.toggle('show');
-    const close  = ()=> menu.classList.remove('show');
-    btn.addEventListener('click', (e)=>{ e.preventDefault(); e.stopPropagation(); toggle(); });
-    document.addEventListener('click', (e)=>{ if(!menu.contains(e.target) && e.target!==btn) close(); });
-    document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') close(); });
+    function wire(btn, menu){
+      if(!btn || !menu || btn.dataset.wired) return;
+      if(!menu.classList.contains('hidden')) menu.classList.add('hidden');
+      const open=()=>{menu.classList.remove('hidden');btn.setAttribute('aria-expanded','true');};
+      const close=()=>{menu.classList.add('hidden');btn.setAttribute('aria-expanded','false');};
+      const toggle=(e)=>{e&&(e.preventDefault(),e.stopPropagation());menu.classList.contains('hidden')?open():close();};
+      btn.addEventListener('click',toggle); btn.addEventListener('mouseenter',open);
+      menu.addEventListener('mouseleave',()=>setTimeout(close,120));
+      document.addEventListener('click',(e)=>{if(!menu.contains(e.target)&&e.target!==btn) close();});
+      document.addEventListener('keydown',(e)=>{ if(e.key==='Escape') close();});
+      btn.dataset.wired='1';
+    }
+    function tryWire(){
+      const btn  = document.getElementById('navSolutionsBtn')
+              || document.querySelector('[data-nav="solutions-btn"]')
+              || document.getElementById('solutionsBtn');
+      const menu = document.getElementById('navSolutionsMenu')
+              || document.querySelector('[data-nav="solutions-menu"]')
+              || document.getElementById('solutionsMenu');
+      wire(btn, menu);
+    }
+    document.addEventListener('DOMContentLoaded', ()=>{
+      setTimeout(tryWire,0);setTimeout(tryWire,200);setTimeout(tryWire,600);setTimeout(tryWire,1200);
+    });
+    window.addEventListener('load', ()=> setTimeout(tryWire,300));
   })();
 </script>
 
+<!-- Nav/Footer (con cache-busting) -->
+<script defer src="/js/nav.js?v=7"></script>
+<script defer src="/js/footer.js?v=7"></script>
+<script defer src="/js/fix-nav.js?v=7"></script>
 
 </body>
 </html>
