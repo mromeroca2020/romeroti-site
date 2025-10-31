@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- =========================================================
+    Archivo: /es/it-soc.html
+    Base: copia 1:1 de /it-soc.html
+    Cambios:
+      - Traducción ES del contenido visible (títulos, párrafos, labels).
+      - Conservado: estructura, IDs, scripts, endpoints, favicons y nav/footer centralizados.
+  ========================================================== -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Servicios SOC | RomanoTI Solutions</title>
+
+  <!-- Tailwind CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Favicons (mismos que root) -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png?v=4">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png?v=4">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16.png?v=4">
+  <link rel="shortcut icon" href="/favicon.ico?v=4">
+  <link rel="mask-icon" href="/img/safari-pinned-tab.svg?v=4" color="#2563eb">
+  <meta name="theme-color" content="#2563eb">
+
+  <style>
+    body{font-family:'Montserrat',sans-serif;background:#f8f9fa;color:#333;scroll-behavior:smooth}
+    .hero-bg{background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%)}
+    .btn-primary{background:#2563EB;transition:all .3s}
+    .btn-primary:hover{background:#1D4ED8;transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.15)}
+    .feature-card{transition:all .3s;border-radius:.5rem;box-shadow:0 1px 3px rgba(0,0,0,.1)}
+    .feature-card:hover{transform:translateY(-6px);box-shadow:0 12px 30px -8px rgba(37,99,235,.15)}
+    pre.tools-out{background:#0e1116;color:#eaeef3;padding:10px;border-radius:8px;max-height:40vh;overflow:auto}
+    .badge{display:inline-flex;align-items:center;padding:.2rem .5rem;border-radius:.5rem;font-size:.75rem;font-weight:600}
+    .badge-ok{background:#ecfdf5;color:#065f46;border:1px solid #a7f3d0}
+    .badge-warn{background:#fffbeb;color:#92400e;border:1px solid #fcd34d}
+    .badge-err{background:#fef2f2;color:#991b1b;border:1px solid #fecaca}
+  </style>
+</head>
+<body class="bg-gray-50">
+
+  <!-- Encabezado centralizado -->
+  <div id="app-header"></div>
+
+  <!-- ===== Hero SOC ===== -->
+  <section class="hero-bg text-white py-28">
+    <div class="container mx-auto px-6 text-center">
+      <h1 class="text-4xl md:text-5xl font-bold mb-6">Servicios SOC</h1>
+      <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
+        Detección de amenazas, análisis de logs y respuesta a incidentes — 24/7
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== Marketing SOC ===== -->
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold">Qué entregamos</h2>
+        <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+          Supervisión de seguridad centralizada, triaje de alertas y respuesta rápida a incidentes.
+        </p>
+      </div>
+
+      <div class="feature-card p-8 rounded-lg shadow-sm bg-white mb-8">
+        <h3 class="text-xl font-bold mb-4">Supervisión de seguridad y detección de amenazas</h3>
+        <p class="mb-6">Correlación SIEM (Wazuh/ELK), reglas Sigma, detección IOC/IOA y alertas en tiempo real.</p>
+        <div class="grid md:grid-cols-3 gap-6">
+          <div class="bg-green-50 p-6 rounded-lg">
+            <h4 class="font-bold text-lg mb-3">Plataforma</h4>
+            <p>Wazuh, ELK/OpenSearch, Zeek, Suricata (según perímetro)</p>
+          </div>
+          <div class="bg-green-50 p-6 rounded-lg">
+            <h4 class="font-bold text-lg mb-3">Cobertura</h4>
+            <p>Endpoints, servidores, firewalls, O365/Azure AD, SaaS</p>
+          </div>
+          <div class="bg-green-50 p-6 rounded-lg">
+            <h4 class="font-bold text-lg mb-3">Clasificación</h4>
+            <p>Clasificación L1/L2 con playbooks reproducibles</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="feature-card p-8 rounded-lg shadow-sm bg-white mb-8">
+        <h3 class="text-xl font-bold mb-4">Postura de seguridad del correo</h3>
+        <p class="mb-6">Validación de MX, SPF, DKIM y DMARC para reducir la suplantación y el spoofing.</p>
+        <div class="grid md:grid-cols-3 gap-6">
+          <div class="bg-green-50 p-6 rounded-lg">
+            <h4 class="font-bold text-lg mb-3">MX</h4>
+            <p>Enrutamiento adecuado; Null-MX si el dominio no recibe correos</p>
+          </div>
+          <div class="bg-green-50 p-6 rounded-lg">
+            <h4 class="font-bold text-lg mb-3">SPF</h4>
+            <p>Mecanismos autorizados, longitud y sintaxis</p>
+          </div>
+          <div class="bg-green-50 p-6 rounded-lg">
+            <h4 class="font-bold text-lg mb-3">DMARC</h4>
+            <p>Política p/quarantine/reject y reportes</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="feature-card p-8 rounded-lg shadow-sm bg-white">
+        <h3 class="text-xl font-bold mb-4">Respuesta a incidentes</h3>
+        <p class="mb-6">Playbooks para phishing, ransomware, C2 y exfiltración. Evidencias y post-mortem.</p>
+        <div class="grid md:grid-cols-3 gap-6">
+          <div class="bg-green-50 p-6 rounded-lg">
+            <h4 class="font-bold text-lg mb-3">Contramedidas</h4>
+            <p>Aislar host, bloquear IOC, revocar tokens</p>
+          </div>
+          <div class="bg-green-50 p-6 rounded-lg">
+            <h4 class="font-bold text-lg mb-3">Erradicación</h4>
+            <p>Eliminar persistencia, restablecer integridad</p>
+          </div>
+          <div class="bg-green-50 p-6 rounded-lg">
+            <h4 class="font-bold text-lg mb-3">Lecciones</h4>
+            <p>Informe ejecutivo y mejoras de control</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Herramientas SOC rápidas ===== -->
+  <section id="soc-tools" class="py-16 bg-white">
+    <div class="container mx-auto px-6 max-w-6xl">
+      <div class="text-center mb-10">
+        <h2 class="text-3xl font-bold">Herramientas SOC rápidas</h2>
+        <p class="text-xl text-gray-600">Verifica la postura del correo y el cifrado TLS en segundos</p>
+      </div>
+
+      <!-- Configuración: API Key -->
+      <div class="bg-white rounded-lg shadow-sm border p-6 mb-10">
+        <h3 class="text-xl font-semibold mb-2">Configuración</h3>
+        <p class="text-gray-600 mb-4">Tu <b>Org API Key</b> (se almacena en tu navegador, no en el servidor).</p>
+        <div class="flex flex-col md:flex-row gap-4 items-start md:items-end">
+          <div class="flex-1">
+            <label for="orgKey" class="block text-sm font-medium text-gray-700">Org API Key</label>
+            <input id="orgKey" type="password" class="mt-1 w-full border rounded-lg px-3 py-2"
+                   placeholder="pega tu API key (ej.: MiSecreto123$)">
+          </div>
+          <button id="btnSaveKey" class="btn-primary text-white px-5 py-2 rounded-lg font-medium">
+            Guardar
+          </button>
+        </div>
+        <p id="keyMsg" class="text-sm text-gray-500 mt-2"></p>
+      </div>
+
+      <!-- Herramientas -->
+      <div class="grid md:grid-cols-3 gap-8">
+        <!-- Postura de correo -->
+        <div class="feature-card p-6 bg-white rounded-lg shadow-sm border">
+          <h3 class="text-lg font-bold mb-3">Postura de seguridad del correo</h3>
+          <p class="text-gray-600 mb-4">Consulta MX / SPF / DMARC para un dominio.</p>
+          <label class="block text-sm font-medium text-gray-700">Dominio</label>
+          <input id="espDomain" class="w-full border rounded-lg px-3 py-2 mb-3" placeholder="example.com" value="example.com">
+          <button id="btnEspCheck" class="btn-primary text-white px-4 py-2 rounded-lg font-medium">Ejecutar</button>
+          <div id="espBadges" class="mt-3 space-x-2"></div>
+          <pre id="espOut" class="tools-out mt-3"></pre>
+          <p class="text-xs text-gray-500 mt-2">Consejo: Null MX (0 .) indica que el dominio <b>no</b> recibe correos (RFC 7505).</p>
+        </div>
+
+        <!-- Búsqueda DKIM -->
+        <div class="feature-card p-6 bg-white rounded-lg shadow-sm border">
+          <h3 class="text-lg font-bold mb-3">Búsqueda DKIM</h3>
+          <p class="text-gray-600 mb-4">Consulta el registro TXT de un selector DKIM.</p>
+          <label class="block text-sm font-medium text-gray-700">Dominio</label>
+          <input id="dkimDomain" class="w-full border rounded-lg px-3 py-2 mb-3" placeholder="example.com" value="example.com">
+          <label class="block text-sm font-medium text-gray-700">Selector</label>
+          <input id="dkimSelector" class="w-full border rounded-lg px-3 py-2 mb-3" placeholder="selector1" value="selector1">
+          <button id="btnDkimCheck" class="btn-primary text-white px-4 py-2 rounded-lg font-medium">Ejecutar</button>
+          <pre id="dkimOut" class="tools-out mt-3"></pre>
+          <p class="text-xs text-gray-500 mt-2">Consulta TXT en <code>selector._domainkey.domain</code>.</p>
+        </div>
+
+        <!-- Vencimiento de certificado TLS -->
+        <div class="feature-card p-6 bg-white rounded-lg shadow-sm border">
+          <h3 class="text-lg font-bold mb-3">Vencimiento del certificado TLS</h3>
+          <p class="text-gray-600 mb-4">Verifica el vencimiento y el emisor del certificado.</p>
+          <label class="block text-sm font-medium text-gray-700">Host</label>
+          <input id="tlsHost" class="w-full border rounded-lg px-3 py-2 mb-3" placeholder="example.com" value="example.com">
+          <label class="block text-sm font-medium text-gray-700">Puerto</label>
+          <input id="tlsPort" type="number" min="1" max="65535" value="443" class="w-full border rounded-lg px-3 py-2 mb-3">
+          <button id="btnTlsCheck" class="btn-primary text-white px-4 py-2 rounded-lg font-medium">Ejecutar</button>
+          <pre id="tlsOut" class="tools-out mt-3"></pre>
+          <p class="text-xs text-gray-500 mt-2">
+            Nota: esta verificación espera TLS directo (HTTPS:443 o SMTPS:465). <b>STARTTLS</b> (SMTP:25/587) no está soportado.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Caja de herramientas SOC (Live) ===== -->
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-6 max-w-6xl">
+      <div class="text-center mb-10">
+        <h2 class="text-3cxl md:text-3xl font-bold">Caja de herramientas SOC (Live)</h2>
+        <p class="text-xl text-gray-600">
+          Demos de alertas y respuesta: <code>/soc/alerts</code>, <code>/soc/alerts/recent</code>, <code>/soc/playbooks/run</code>
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8">
+        <!-- Enviar una alerta -->
+        <div class="feature-card p-6 bg-white rounded-lg shadow-sm border">
+          <h3 class="text-lg font-bold mb-3">Enviar una alerta (demo)</h3>
+          <div class="grid grid-cols-2 gap-3 mb-3">
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Origen</label>
+              <select id="alSource" class="w-full border rounded-lg px-3 py-2">
+                <option>edr</option>
+                <option>wazuh</option>
+                <option>firewall</option>
+                <option>ids</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Severidad</label>
+              <select id="alSeverity" class="w-full border rounded-lg px-3 py-2">
+                <option>low</option>
+                <option>medium</option>
+                <option>high</option>
+                <option>critical</option>
+              </select>
+            </div>
+          </div>
+          <input id="alTitle" class="w-full border rounded-lg px-3 py-2 mb-3" placeholder="Título (ej.: PowerShell sospechoso)">
+          <textarea id="alDetails" rows="5" class="w-full border rounded-lg px-3 py-2 mb-3" placeholder='Detalles JSON (ej.: {"host":"pc-01","user":"alice"})'></textarea>
+          <button id="btnSendAlert" class="btn-primary text-white px-4 py-2 rounded-lg">Enviar alerta</button>
+          <pre id="outAlert" class="tools-out mt-3"></pre>
+        </div>
+
+        <!-- Alertas recientes -->
+        <div class="feature-card p-6 bg-white rounded-lg shadow-sm border">
+          <h3 class="text-lg font-bold mb-3">Alertas recientes</h3>
+          <div class="flex items-center gap-3 mb-3">
+            <label class="text-sm text-gray-700">Límite</label>
+            <input id="alLimit" type="number" value="10" min="1" max="200" class="w-24 border rounded-lg px-3 py-2">
+            <button id="btnFetchAlerts" class="btn-primary text-white px-4 py-2 rounded-lg">Actualizar</button>
+          </div>
+          <pre id="outAlerts" class="tools-out"></pre>
+        </div>
+
+        <!-- Playbooks -->
+        <div class="feature-card p-6 bg-white rounded-lg shadow-sm border md:col-span-2">
+          <h3 class="text-lg font-bold mb-3">Ejecutar un playbook (simulación)</h3>
+          <div class="grid md:grid-cols-3 gap-3">
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Playbook</label>
+              <select id="pbId" class="w-full border rounded-lg px-3 py-2">
+                <option value="isolate-host">isolate-host</option>
+                <option value="reset-user">reset-user</option>
+                <option value="block-ip">block-ip</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Objetivo</label>
+              <input id="pbTarget" class="w-full border rounded-lg px-3 py-2" placeholder="host/usuario/IP">
+            </div>
+            <div class="flex items-end">
+              <button id="btnRunPB" class="btn-primary text-white px-4 py-2 rounded-lg w-full">Ejecutar</button>
+            </div>
+          </div>
+          <pre id="outPB" class="tools-out mt-3"></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer centralizado -->
+  <div id="app-footer"></div>
+
+  <!-- JS (sin cambios de lógica): Quick Tools + Live Toolbox -->
+  <script>
+  const API_BASE = 'https://romanoti-tools-api.onrender.com';
+  const $ = (id) => document.getElementById(id);
+  function pretty(preId, data){ const el=$(preId); try{ el.textContent=(typeof data==='string')?data:JSON.stringify(data,null,2);}catch{ el.textContent=String(data);} }
+  function msg(id, text){ $(id).textContent = text || ''; }
+  function badge(text, type='ok'){ const s=document.createElement('span'); s.className=\`badge \${type==='ok'?'badge-ok':type==='warn'?'badge-warn':'badge-err'}\`; s.textContent=text; return s; }
+
+  function loadKey(){ $('orgKey').value = localStorage.getItem('romanoti_org_key') || ''; }
+  function saveKey(){ const k=$('orgKey').value.trim(); localStorage.setItem('romanoti_org_key', k); msg('keyMsg', k?'✅ API Key guardada localmente.':'API Key vacía.'); }
+  function getKeyOrWarn(){ const k=$('orgKey').value.trim() || localStorage.getItem('romanoti_org_key') || ''; if(!k) alert('Ingresa primero tu Org API Key.'); return k; }
+
+  async function runEmailPosture(){
+    const key=getKeyOrWarn(); if(!key) return;
+    const domain=$('espDomain').value.trim();
+    $('espOut').textContent='Procesando…'; $('espBadges').innerHTML='';
+    try{
+      const res=await fetch(\`\${API_BASE}/ext/emaildns\`,{method:'POST',headers:{'x-api-key':key,'content-type':'application/json','accept':'application/json'},body:JSON.stringify({domain})});
+      const data=await res.json();
+
+      const mx=data.mx||[];
+      if(mx.length===1 && (typeof mx[0]==='string') && mx[0].trim()==='0 .'){ $('espBadges').appendChild(badge('Null MX (no recibe correos)','warn')); }
+      else if(mx.length>0){ $('espBadges').appendChild(badge('MX OK','ok')); } else { $('espBadges').appendChild(badge('MX faltante','err')); }
+
+      const spf=(data.spf||[]).find(s=>s.toLowerCase().startsWith('v=spf1'));
+      if(spf) $('espBadges').appendChild(badge('SPF OK','ok')); else $('espBadges').appendChild(badge('SPF faltante','err'));
+
+      const dmarc=(data.dmarc||[]).find(s=>s.toLowerCase().startsWith('v=dmarc1'));
+      if(dmarc){ const pol=(dmarc.toLowerCase().match(/p=(none|quarantine|reject)/)||[,'none'])[1]; $('espBadges').appendChild(badge(\`DMARC p=\${pol}\`, pol==='reject'?'ok':pol==='quarantine'?'warn':'err')); }
+      else { $('espBadges').appendChild(badge('DMARC faltante','err')); }
+
+      pretty('espOut', data);
+    }catch(e){ pretty('espOut',{error:String(e)}); }
+  }
+
+  async function runDkimLookup(){
+    const key=getKeyOrWarn(); if(!key) return;
+    const domain=$('dkimDomain').value.trim(); const selector=$('dkimSelector').value.trim();
+    if(!domain || !selector){ pretty('dkimOut',{error:'Indica dominio y selector'}); return; }
+    const qname=\`\${selector}._domainkey.\${domain}\`; $('dkimOut').textContent=\`Consulta TXT sobre \${qname} …\`;
+    try{
+      const res=await fetch(\`\${API_BASE}/noc/dns-lookup\`,{method:'POST',headers:{'x-api-key':key,'content-type':'application/json','accept':'application/json'},body:JSON.stringify({domain:qname,type:'TXT'})});
+      const data=await res.json(); pretty('dkimOut', data);
+    }catch(e){ pretty('dkimOut',{error:String(e)}); }
+  }
+
+  async function runTlsCheck(){
+    const key=getKeyOrWarn(); if(!key) return;
+    const host=$('tlsHost').value.trim(); const port=parseInt($('tlsPort').value||'443',10);
+    $('tlsOut').textContent='Procesando…';
+    try{
+      const res=await fetch(\`\${API_BASE}/ext/tls\`,{method:'POST',headers:{'x-api-key':key,'content-type':'application/json','accept':'application/json'},body:JSON.stringify({host,port})});
+      const data=await res.json(); pretty('tlsOut', data);
+    }catch(e){ pretty('tlsOut',{error:String(e)}); }
+  }
+
+  async function socPost(path, body){ const key=getKeyOrWarn(); if(!key) return {ok:false,status:0,error:'Falta API key'}; try{ const res=await fetch(API_BASE+path,{method:'POST',headers:{'x-api-key':key,'content-type':'application/json','accept':'application/json'},body:JSON.stringify(body||{})}); const text=await res.text(); try{return{ok:res.ok,status:res.status,data:JSON.parse(text)}}catch{return{ok:res.ok,status:res.status,data:text}} }catch(e){return{ok:false,status:0,error:String(e)}}}
+  async function socGet(path){ const key=getKeyOrWarn(); if(!key) return {ok:false,status:0,error:'Falta API key'}; try{ const res=await fetch(API_BASE+path,{headers:{'x-api-key':key,'accept':'application/json'}}); const text=await res.text(); try{return{ok:res.ok,status:res.status,data:JSON.parse(text)}}catch{return{ok:res.ok,status:res.status,data:text}} }catch(e){return{ok:false,status:0,error:String(e)}}}
+
+  async function sendAlert(){
+    const source=$('alSource').value.trim().toLowerCase();
+    const severity=$('alSeverity').value.trim().toLowerCase();
+    const title=$('alTitle').value.trim();
+    let details={}; const raw=$('alDetails').value.trim();
+    if(raw){ try{details=JSON.parse(raw);}catch(e){ pretty('outAlert',{error:'JSON inválido en los detalles',e:String(e)}); return; } }
+    if(!title){ pretty('outAlert',{error:'Falta título'}); return; }
+    pretty('outAlert','Enviando…');
+    const resp=socPost('/soc/alerts',{source,severity,title,details});
+    resp.then(r=>pretty('outAlert', r));
+  }
+
+  async function fetchAlerts(){
+    const limit=Math.max(1, Math.min(200, parseInt(($('alLimit').value||'10'),10)));
+    pretty('outAlerts','Cargando…');
+    const resp=await socGet('/soc/alerts/recent?limit='+encodeURIComponent(limit));
+    pretty('outAlerts', resp);
+  }
+
+  async function runPlaybook(){
+    const playbook_id=$('pbId').value;
+    const target=$('pbTarget').value.trim();
+    pretty('outPB','Ejecutando…');
+    const resp=await socPost('/soc/playbooks/run',{playbook_id,target});
+    pretty('outPB', resp);
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    loadKey();
+    $('btnSaveKey').addEventListener('click', saveKey);
+
+    // Herramientas rápidas
+    $('btnEspCheck').addEventListener('click', runEmailPosture);
+    $('btnDkimCheck').addEventListener('click', runDkimLookup);
+    $('btnTlsCheck').addEventListener('click', runTlsCheck);
+
+    // Caja de herramientas Live
+    $('btnSendAlert').addEventListener('click', sendAlert);
+    $('btnFetchAlerts').addEventListener('click', fetchAlerts);
+    $('btnRunPB').addEventListener('click', runPlaybook);
+  });
+  </script>
+
+  <!-- Fallback del menú “Solutions” (sin cambios) -->
+  <script>
+    (function(){
+      function wire(btn, menu){
+        if(!btn || !menu || btn.dataset.wired) return;
+        const open  = ()=>{ menu.classList.remove('hidden'); btn.setAttribute('aria-expanded','true'); };
+        const close = ()=>{ menu.classList.add('hidden');  btn.setAttribute('aria-expanded','false'); };
+        const toggle= ()=> (menu.classList.contains('hidden') ? open() : close());
+        btn.addEventListener('click', (e)=>{ e.preventDefault(); e.stopPropagation(); toggle(); });
+        document.addEventListener('click', (e)=>{ if(!menu.contains(e.target) && e.target!==btn) close(); });
+        document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') close(); });
+        btn.dataset.wired='1';
+      }
+      function tryWire(){
+        const btn  = document.getElementById('navSolutionsBtn') || document.getElementById('solutionsBtn') || document.getElementById('fb-solutions-btn');
+        const menu = document.getElementById('navSolutionsMenu')|| document.getElementById('solutionsMenu')|| document.getElementById('fb-solutions-menu');
+        wire(btn, menu);
+      }
+      document.addEventListener('DOMContentLoaded', ()=>{ tryWire(); setTimeout(tryWire, 250); setTimeout(tryWire, 800); });
+    })();
+  </script>
+
+  <!-- Nav/Footer centralizados -->
+  <script defer src="/js/nav.js?v=6"></script>
+  <script defer src="/js/footer.js?v=6"></script>
+  <script defer src="/js/fix-nav.js?v=6"></script>
+</body>
+</html>
