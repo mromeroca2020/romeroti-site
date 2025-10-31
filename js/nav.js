@@ -4,18 +4,23 @@
 
   // ============ 1) Detección de idioma por ruta ============
   const path = location.pathname;
-  const lang = path.startsWith('/en/') ? 'en' : path.startsWith('/fr/') ? 'fr' : 'es';
-  const base = lang === 'en' ? '/en' : lang === 'fr' ? '/fr' : '';
+  const lang = path.startsWith('/en/') ? 'en'
+             : path.startsWith('/fr/') ? 'fr'
+             : path.startsWith('/es/') ? 'es'
+             : 'es'; // fallback -> español en /es/
+  const base = lang === 'en' ? '/en'
+             : lang === 'fr' ? '/fr'
+             : '/es';
 
   // ============ 2) Textos por idioma ============
   const I18N_MAP = {
     es: {
       brand:'RomanoTI Solutions',
-      home:'Home', solutions:'Solutions', tools:'Tools',
+      home:'Inicio', solutions:'Soluciones', tools:'Herramientas',
       noc:'NOC', soc:'SOC', book:'Agendar',
-      overview:'Overview', mdr:'CyberShield (MDR)', socConsole:'SOC Console',
-      easm:'EASM Console', fieldKit:'Field Kit (engineers)',
-      quickAudit:'Quick Audit', pov:'POV 14 días',
+      overview:'Resumen', mdr:'CyberShield (MDR)', socConsole:'Consola SOC',
+      easm:'Consola EASM', fieldKit:'Field Kit (ingenieros)',
+      quickAudit:'Auditoría rápida', pov:'POV 14 días',
       lang:'Idioma', en:'English', fr:'Français', es:'Español'
     },
     en: {
@@ -44,13 +49,13 @@
   <header class="bg-white/95 backdrop-blur sticky top-0 z-50 border-b border-gray-100" id="navHeader">
     <div class="container mx-auto px-6 py-3">
       <div class="flex items-center justify-between">
-        <a href="${base || '/'}" class="flex items-center font-bold text-xl text-gray-900">
+        <a href="${base}/" class="flex items-center font-bold text-xl text-gray-900">
           <span class="bg-blue-600 text-white rounded-full w-10 h-10 grid place-items-center mr-3">R</span>
           ${I18N.brand}
         </a>
 
         <nav class="hidden md:flex items-center space-x-8">
-          <a href="${base || '/'}" class="text-gray-700 hover:text-blue-600">${I18N.home}</a>
+          <a href="${base}/" class="text-gray-700 hover:text-blue-600">${I18N.home}</a>
 
           <div class="relative" id="navSolutionsRoot">
             <button id="navSolutionsBtn"
@@ -141,13 +146,17 @@
       langRoot && langRoot.addEventListener('mouseleave', ()=> setTimeout(close, 120));
       document.addEventListener('click', (e)=>{ if (!langMenu.contains(e.target) && e.target !== langBtn) close(); });
 
-      const clean = (p)=> p.replace(/^\/(en|fr)(?=\/)/,'');
+      // Limpia prefijo de idioma actual (/en, /fr, /es) para mantener la misma ruta
+      const clean = (p)=> p.replace(/^\/(en|fr|es)(?=\/)/,'');
       const current = clean(location.pathname);
+
       langMenu.querySelectorAll('a[data-lang]').forEach(a=>{
         a.addEventListener('click', (e)=>{
           e.preventDefault();
           const target = a.dataset.lang;
-          const prefix = target==='en' ? '/en' : target==='fr' ? '/fr' : '';
+          const prefix = target==='en' ? '/en'
+                       : target==='fr' ? '/fr'
+                       : '/es';
           location.href = prefix + current + location.search + location.hash;
         });
       });
