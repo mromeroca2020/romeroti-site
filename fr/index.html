@@ -30,7 +30,15 @@
 
   <!-- Punto de montaje del header global -->
   <div id="app-header"></div>
-
+  <!-- Temporary language bar (until nav.js gets the switcher) -->
+  <div class="langbar text-sm bg-gray-100 border-b">
+    <div class="container mx-auto px-6 py-2 flex gap-4">
+      <span>Language:</span>
+      <a href="/en/" class="font-semibold">English</a>
+      <a href="/fr/">Français</a>
+      <a href="/">Español</a>
+    </div>
+  </div>
   <!-- ===== Header fallback (se oculta cuando nav.js monta el real) ===== -->
   <header id="fallback-header" class="bg-white shadow-sm sticky top-0 z-40">
     <div class="container mx-auto px-6 py-3">
