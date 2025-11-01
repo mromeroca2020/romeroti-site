@@ -33,6 +33,16 @@
   <!-- Mountpoint del header centralizado -->
   <div id="app-header"></div>
 
+      <!-- Temporary language bar (until nav.js gets the switcher) -->
+  <div class="langbar text-sm bg-gray-100 border-b">
+    <div class="container mx-auto px-6 py-2 flex gap-4">
+      <span>Language:</span>
+      <a href="/en/" class="font-semibold">English</a>
+      <a href="/fr/">Français</a>
+      <a href="/">Español</a>
+    </div>
+  </div>
+
   <!-- ===== Header FALLBACK (se oculta si nav.js inyecta el header) ===== -->
   <header id="fallback-header" class="bg-white shadow-sm sticky top-0 z-40">
     <div class="container mx-auto px-6 py-3">
