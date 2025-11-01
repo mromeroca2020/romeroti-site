@@ -1,18 +1,49 @@
 (function(){
-  // ============ 0) Señal de arranque para debugging ============
+  // ============================================================
+  // RomanoTI nav.js — Header global + selector de idioma + menú
+  // ============================================================
+  // Cambios clave:
+  // 1) Detección de idioma por ruta: soporta /en, /fr, /es (fallback: /es)
+  // 2) Selector de idioma robusto:
+  //    - Intenta ir a la misma ruta en el idioma elegido
+  //    - Verifica con HEAD si la ruta existe
+  //    - Si no existe, hace fallback al home de ese idioma (/es/ /en/ /fr/)
+  //    - Normaliza rutas (quita /index.html, dobles barras, etc.)
+  // 3) Montaje del header aunque no exista #app-header (lo inserta al inicio)
+  // 4) Cableado del submenú "Solutions" con hover/click y cierre fuera/ESC
+  //
+  // Requisitos:
+  // - Añadir en TODAS las páginas:
+  //   <div id="app-header"></div>
+  //   <div id="app-footer"></div>   (si usas footer.js)
+  //   <script defer src="/js/nav.js?v=6"></script>
+  //
+  // Notas hosting:
+  // - Si tu hosting bloquea HEAD (raro), el try/catch ya hace fallback al home.
+  // - Si usas reglas en _redirects que redirigen a /index.html inglés,
+  //   este script evita ese "rebote" gracias al fallback inmediato al home del idioma.
+  // ============================================================
+
+  // 0) Señal de arranque para debugging
   console.log('[nav] booting…');
 
-  // ============ 1) Detección de idioma por ruta ============
-  const path = location.pathname;
+  // 1) Detección de idioma por ruta
+  const path = location.pathname || '/';
+  // lang actual por prefijo: /en /fr /es ; si nada coincide → 'es'
   const lang = path.startsWith('/en/') ? 'en'
+             : path === '/en'        ? 'en'
              : path.startsWith('/fr/') ? 'fr'
+             : path === '/fr'        ? 'fr'
              : path.startsWith('/es/') ? 'es'
-             : 'es'; // fallback -> español en /es/
+             : path === '/es'        ? 'es'
+             : 'es';
+
+  // base (prefijo a usar en enlaces del nav)
   const base = lang === 'en' ? '/en'
              : lang === 'fr' ? '/fr'
              : '/es';
 
-  // ============ 2) Textos por idioma ============
+  // 2) Textos por idioma
   const I18N_MAP = {
     es: {
       brand:'RomanoTI Solutions',
@@ -44,7 +75,7 @@
   };
   const I18N = I18N_MAP[lang];
 
-  // ============ 3) Generar header ============
+  // 3) HTML del header
   const html = `
   <header class="bg-white/95 backdrop-blur sticky top-0 z-50 border-b border-gray-100" id="navHeader">
     <div class="container mx-auto px-6 py-3">
@@ -103,7 +134,7 @@
     </div>
   </header>`;
 
-  // ============ 4) Montaje ============
+  // 4) Montaje del header (con fallback si no existe #app-header)
   function mountHeader(){
     const mount = document.getElementById('app-header');
     if (mount) {
@@ -117,8 +148,44 @@
     window.ROMANOTI_NAV_READY = true;
   }
 
-  // ============ 5) Cableado de menús ============
+  // ---- Helpers idioma ----
+
+  // Limpia el prefijo de idioma actual (/en, /fr, /es) y normaliza la ruta
+  function cleanPath(p){
+    if (!p) return '/';
+    // quita /en /fr /es tanto si hay slash después como si no
+    let out = p.replace(/^\/(en|fr|es)(?=\/|$)/, '');
+    if (!out) out = '/';
+    // normaliza dobles barras
+    out = out.replace(/\/{2,}/g, '/');
+    // quita index.html final redundante
+    out = out.replace(/\/index\.html$/i, '/');
+    return out;
+  }
+
+  // Ir a idioma elegido: intenta misma ruta; si 404/blocked → fallback al home
+  async function goToLanguage(targetLang){
+    const prefix   = targetLang === 'en' ? '/en' : targetLang === 'fr' ? '/fr' : '/es';
+    const current  = cleanPath(location.pathname);
+    const target   = prefix + (current.startsWith('/') ? current : '/' + current);
+    const fallback = prefix + '/';
+
+    // Si estamos en file:// o HEAD bloqueado, el catch nos llevará al fallback
+    try{
+      const res = await fetch(target, { method:'HEAD' });
+      if (res.ok) {
+        location.href = target + location.search + location.hash;
+      } else {
+        location.href = fallback;
+      }
+    }catch(_){
+      location.href = fallback;
+    }
+  }
+
+  // 5) Cableado de menús (Solutions + Idioma)
   function wireMenus(){
+    // ---- Solutions submenu ----
     const btn  = document.getElementById('navSolutionsBtn');
     const menu = document.getElementById('navSolutionsMenu');
     const root = document.getElementById('navSolutionsRoot');
@@ -136,6 +203,7 @@
       btn.dataset.wired = '1';
     }
 
+    // ---- Language menu ----
     const langBtn  = document.getElementById('langBtn');
     const langMenu = document.getElementById('langMenu');
     const langRoot = document.getElementById('langRoot');
@@ -146,18 +214,11 @@
       langRoot && langRoot.addEventListener('mouseleave', ()=> setTimeout(close, 120));
       document.addEventListener('click', (e)=>{ if (!langMenu.contains(e.target) && e.target !== langBtn) close(); });
 
-      // Limpia prefijo de idioma actual (/en, /fr, /es) para mantener la misma ruta
-      const clean = (p)=> p.replace(/^\/(en|fr|es)(?=\/)/,'');
-      const current = clean(location.pathname);
-
       langMenu.querySelectorAll('a[data-lang]').forEach(a=>{
         a.addEventListener('click', (e)=>{
           e.preventDefault();
-          const target = a.dataset.lang;
-          const prefix = target==='en' ? '/en'
-                       : target==='fr' ? '/fr'
-                       : '/es';
-          location.href = prefix + current + location.search + location.hash;
+          const targetLang = a.dataset.lang || 'es';
+          goToLanguage(targetLang);
         });
       });
 
@@ -165,11 +226,12 @@
     }
   }
 
-  // ============ 6) Boot ============
+  // 6) Boot
   function boot(){ mountHeader(); wireMenus(); console.log('[nav] mounted & wired'); }
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', ()=> {
       boot();
+      // Retrys por si el DOM tardó
       setTimeout(wireMenus,200);
       setTimeout(wireMenus,800);
     });
