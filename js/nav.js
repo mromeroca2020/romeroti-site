@@ -220,14 +220,11 @@
     }
   }
 
-     // 5) Cableado de menús (Services + Solutions + Idioma)
+       // 5) Cableado de menús (Services + Solutions + Idioma)
   function wireMenus(){
 
-    // 🔹 Helper genérico para dropdowns tipo Services / Solutions
-    function setupDropdown(btnId, menuId){
-      const btn  = document.getElementById(btnId);
-      const menu = document.getElementById(menuId);
-
+    // Helper genérico para dropdowns tipo Services / Solutions
+    function setupDropdown(btn, menu){
       if (!btn || !menu || btn.dataset.wired) return;
 
       const open  = () => {
@@ -262,10 +259,14 @@
     }
 
     // ---- Services submenu ----
-    setupDropdown('navServicesBtn','navServicesMenu');
+    const servicesBtn  = document.getElementById('navServicesBtn');
+    const servicesMenu = document.getElementById('navServicesMenu');
+    setupDropdown(servicesBtn, servicesMenu);
 
     // ---- Solutions submenu ----
-    setupDropdown('navSolutionsBtn','navSolutionsMenu');
+    const solutionsBtn  = document.getElementById('navSolutionsBtn');
+    const solutionsMenu = document.getElementById('navSolutionsMenu');
+    setupDropdown(solutionsBtn, solutionsMenu);
 
     // ---- Language menu (igual que ya teníamos, sin mouseleave) ----
     const langBtn  = document.getElementById('langBtn');
@@ -299,17 +300,18 @@
 
 
 
+
   // 6) Boot
-  function boot(){ mountHeader(); wireMenus(); console.log('[nav] mounted & wired'); }
+  function boot(){
+    mountHeader();
+    wireMenus();
+    console.log('[nav] mounted & wired');
+  }
+
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', ()=> {
-      boot();
-      setTimeout(wireMenus,200);
-      setTimeout(wireMenus,800);
-    });
+    document.addEventListener('DOMContentLoaded', boot);
   } else {
     boot();
-    setTimeout(wireMenus,200);
-    setTimeout(wireMenus,800);
   }
 })();
+
