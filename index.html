@@ -49,12 +49,50 @@
   <!-- ===== Header FALLBACK (se oculta si nav.js inyecta el header) ===== -->
   <header id="fallback-header" class="bg-white shadow-sm sticky top-0 z-40">
     <div class="container mx-auto px-6 py-3">
-      <div class="flex items-center justify-between">
+      <div class="flex items-center justify-between gap-4">
+        <!-- Logo / Brand -->
         <a href="/" class="flex items-center font-bold text-xl text-gray-900">
           <span class="bg-blue-600 text-white rounded-full w-10 h-10 grid place-items-center mr-3">R</span>
           RomanoTI Solutions (Loading...)
         </a>
-        <a href="/solutions/" class="bg-blue-600 text-white px-4 py-2 rounded-lg">Solutions</a>
+
+        <!-- Nav principal (fallback) -->
+        <nav class="hidden md:flex items-center space-x-6 text-sm font-medium text-gray-700">
+          <a href="/" class="hover:text-blue-600">Home</a>
+
+          <!-- Dropdown: SERVICES -->
+          <div class="relative group">
+            <button class="inline-flex items-center gap-1 hover:text-blue-600 focus:outline-none">
+              <span>Services</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.25a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z" clip-rule="evenodd" />
+              </svg>
+            </button>
+            <!-- Menú desplegable Services -->
+            <div class="absolute right-0 mt-2 w-64 bg-white border border-gray-200 rounded-xl shadow-lg py-2 z-30 hidden group-hover:block">
+              <a href="/services/cloud-migration" class="block px-4 py-2 text-sm hover:bg-gray-50">Cloud Migration</a>
+              <a href="/services/it-infrastructure" class="block px-4 py-2 text-sm hover:bg-gray-50">IT Infrastructure</a>
+              <a href="/services/cybersecurity" class="block px-4 py-2 text-sm hover:bg-gray-50">Cybersecurity</a>
+              <a href="/services/data-center" class="block px-4 py-2 text-sm hover:bg-gray-50">Data Center &amp; Virtualization</a>
+              <a href="/services/disaster-recovery" class="block px-4 py-2 text-sm hover:bg-gray-50">Backups &amp; Disaster Recovery</a>
+              <a href="/services/noc" class="block px-4 py-2 text-sm hover:bg-gray-50">NOC Services</a>
+            </div>
+          </div>
+
+          <!-- Link a Solutions (sin dropdown aquí; el dropdown real lo inyecta nav.js) -->
+          <a href="/solutions/" class="hover:text-blue-600">Solutions</a>
+
+          <!-- Otros enlaces básicos -->
+          <a href="/services/tools.html" class="hover:text-blue-600">Tools</a>
+          <a href="/it-noc.html" class="hover:text-blue-600">NOC</a>
+          <a href="/it-soc.html" class="hover:text-blue-600">SOC</a>
+        </nav>
+
+        <!-- Botón Book Now (siempre visible en fallback) -->
+        <a href="https://calendly.com/mauricioromeroca"
+           class="btn-primary text-white px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap">
+          Book Now
+        </a>
       </div>
     </div>
   </header>
@@ -273,5 +311,3 @@
 
 </body>
 </html>
-
-
