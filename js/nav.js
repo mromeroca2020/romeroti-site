@@ -219,25 +219,54 @@
     }
   }
 
-  // 5) Cableado de menús (Solutions + Idioma)
+   // 5) Cableado de menús (Services + Solutions + Idioma)
   function wireMenus(){
-    // ---- Solutions submenu ----
-    const btn  = document.getElementById('navSolutionsBtn');
-    const menu = document.getElementById('navSolutionsMenu');
-    const root = document.getElementById('navSolutionsRoot');
 
-    if (btn && menu && !btn.dataset.wired) {
-      const open  = () => { menu.classList.remove('hidden'); btn.setAttribute('aria-expanded','true'); };
-      const close = () => { menu.classList.add('hidden');  btn.setAttribute('aria-expanded','false'); };
-      const toggle= (e)=>{ e && (e.preventDefault(), e.stopPropagation()); menu.classList.contains('hidden') ? open() : close(); };
+    // Helper para dropdowns tipo "Services" y "Solutions"
+    function wireDropdown(rootId, btnId, menuId){
+      const btn  = document.getElementById(btnId);
+      const menu = document.getElementById(menuId);
+      const root = document.getElementById(rootId);
+
+      if (!btn || !menu || btn.dataset.wired) return;
+
+      const open  = () => {
+        menu.classList.remove('hidden');
+        btn.setAttribute('aria-expanded','true');
+      };
+      const close = () => {
+        menu.classList.add('hidden');
+        btn.setAttribute('aria-expanded','false');
+      };
+      const toggle = (e) => {
+        e && (e.preventDefault(), e.stopPropagation());
+        menu.classList.contains('hidden') ? open() : close();
+      };
+
+      // Click en el botón abre/cierra
       btn.addEventListener('click', toggle);
+      // Hover también abre (como en muchas páginas corporativas)
       btn.addEventListener('mouseenter', open);
+      // Al salir del bloque raíz, cerramos con un pequeño delay
       root && root.addEventListener('mouseleave', ()=> setTimeout(close, 120));
-      document.addEventListener('click', (e)=>{ if (!menu.contains(e.target) && e.target !== btn) close(); });
-      document.addEventListener('keydown', (e)=>{ if (e.key === 'Escape') close(); });
+
+      // Cerrar al hacer click fuera o con ESC
+      document.addEventListener('click', (e)=> {
+        if (!menu.contains(e.target) && e.target !== btn) close();
+      });
+      document.addEventListener('keydown', (e)=> {
+        if (e.key === 'Escape') close();
+      });
+
       root && (root.style.overflow = 'visible');
       btn.dataset.wired = '1';
     }
+
+    // ---- Services submenu ----
+    wireDropdown('navServicesRoot','navServicesBtn','navServicesMenu');
+
+    // ---- Solutions submenu ----
+    wireDropdown('navSolutionsRoot','navSolutionsBtn','navSolutionsMenu');
 
     // ---- Language menu ----
     const langBtn  = document.getElementById('langBtn');
@@ -247,26 +276,22 @@
     if (langBtn && langMenu && !langBtn.dataset.wired){
       const close = ()=> langMenu.classList.add('hidden');
 
-      // Al hacer clic en el botón 🌐 se abre/cierra el menú de idioma
+      // Abrir/cerrar menú de idioma con click en 🌐
       langBtn.addEventListener('click', (e)=>{ 
         e.preventDefault(); 
         e.stopPropagation(); 
         langMenu.classList.toggle('hidden'); 
       });
 
-      // 🔴 IMPORTANTE:
-      // Antes teníamos:
-      //   langRoot && langRoot.addEventListener('mouseleave', ()=> setTimeout(close, 120));
-      // Eso hacía que el menú se cerrara casi de inmediato
-      // cuando movías el mouse hacia las opciones (comportamiento "intermitente").
-      // Lo eliminamos para que el usuario pueda bajar tranquilamente y seleccionar el idioma.
+      // 🔴 Recordatorio: NO usamos mouseleave aquí
+      // porque eso causaba "intermitencia" al intentar seleccionar un idioma.
 
-      // Cerrar cuando se hace clic fuera del menú
+      // Cerrar cuando se hace clic fuera
       document.addEventListener('click', (e)=>{ 
         if (!langMenu.contains(e.target) && e.target !== langBtn) close(); 
       });
 
-      // Al hacer clic en una opción de idioma, cambiamos de idioma
+      // Cambiar idioma al hacer clic en una opción
       langMenu.querySelectorAll('a[data-lang]').forEach(a=>{
         a.addEventListener('click', (e)=>{
           e.preventDefault();
@@ -278,6 +303,7 @@
       langBtn.dataset.wired = '1';
     }
   }
+
 
 
   // 6) Boot
