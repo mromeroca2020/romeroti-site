@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Data Center & Virtualization | RomanoTI Solutions</title>
+
+  <!-- Tailwind + Montserrat (igual que en index) -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    body{font-family:'Montserrat',sans-serif;background:#f8f9fa;color:#111827;scroll-behavior:smooth}
+    .hero-bg{background:linear-gradient(135deg,#1e3a8a 0%,#2563eb 100%)}
+    .btn-primary{background:#2563EB;transition:all .2s}
+    .btn-primary:hover{background:#1D4ED8;transform:translateY(-1px);box-shadow:0 6px 18px -10px rgba(37,99,235,.7)}
+    .card{border-radius:14px;box-shadow:0 12px 32px -16px rgba(2,6,23,.2)}
+    .badge{display:inline-block;border:1px solid #cbd5e1;border-radius:999px;padding:4px 10px;font-size:12px;background:#f8fafc}
+  </style>
+</head>
+<body class="bg-gray-50">
+
+  <!-- Header global -->
+  <div id="app-header"></div>
+
+  <!-- ===== Hero Data Center ===== -->
+  <section class="hero-bg text-white">
+    <div class="container mx-auto px-6 py-16 md:py-20">
+      <div class="max-w-3xl">
+        <h1 class="text-3xl md:text-4xl font-bold mb-4">
+          Data Center & Virtualization Services
+        </h1>
+        <p class="text-lg md:text-xl mb-6">
+          High-availability, secure and efficient data center architectures for SMBs and mid-size organizations.
+          From on-prem to hybrid cloud, we help you modernize without downtime.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-3">
+          <a href="https://calendly.com/mauricioromeroca"
+             class="btn-primary text-white px-6 py-3 rounded-lg font-semibold text-sm">
+            Book a Data Center Consultation
+          </a>
+          <a href="tel:4386309157"
+             class="bg-white text-blue-700 px-6 py-3 rounded-lg font-semibold text-sm hover:bg-gray-100">
+            Talk to an engineer
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Intro ===== -->
+  <main class="py-12 md:py-16">
+    <div class="container mx-auto px-6 max-w-5xl space-y-12">
+
+      <section>
+        <h2 class="text-2xl md:text-3xl font-bold mb-3">Why your data center matters</h2>
+        <p class="text-gray-700 text-lg">
+          For many businesses, the data center is still the heart of operations: file servers, line-of-business
+          applications, databases, backups and security controls all live there. Poor design or aging hardware
+          quickly becomes visible as slowness, outages and security incidents.
+        </p>
+        <p class="text-gray-700 mt-4">
+          RomanoTI Solutions designs and maintains data center environments with a clear goal:
+          <span class="font-semibold">availability first, security by design, and predictable costs.</span>
+        </p>
+      </section>
+
+      <!-- ===== Pillars ===== -->
+      <section>
+        <h2 class="text-2xl font-bold mb-5">What we help you improve</h2>
+        <div class="grid md:grid-cols-3 gap-6">
+          <div class="card bg-white p-6">
+            <div class="badge">Availability</div>
+            <h3 class="text-xl font-semibold mt-3 mb-2">Always-on infrastructure</h3>
+            <p class="text-gray-700 text-sm">
+              Redundant hosts, storage and network paths to keep your core services running even during failures.
+            </p>
+          </div>
+          <div class="card bg-white p-6">
+            <div class="badge">Performance</div>
+            <h3 class="text-xl font-semibold mt-3 mb-2">Faster apps & databases</h3>
+            <p class="text-gray-700 text-sm">
+              Right-sizing CPU, RAM and storage tiers so users feel systems are responsive, not “laggy”.
+            </p>
+          </div>
+          <div class="card bg-white p-6">
+            <div class="badge">Security</div>
+            <h3 class="text-xl font-semibold mt-3 mb-2">Segmented & monitored</h3>
+            <p class="text-gray-700 text-sm">
+              Network segmentation, hardened hypervisors and integration with SOC / logging platforms.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== Services grid ===== -->
+      <section>
+        <h2 class="text-2xl font-bold mb-5">Data Center & Virtualization services</h2>
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="card bg-white p-6">
+            <h3 class="text-xl font-semibold mb-2">Architecture & Design</h3>
+            <p class="text-gray-700 text-sm mb-3">
+              We review your current environment and design a modern architecture based on your size and budget.
+            </p>
+            <ul class="list-disc list-inside text-gray-700 text-sm space-y-1">
+              <li>Rack, power and cooling planning</li>
+              <li>Server, storage and network topology</li>
+              <li>Segmentation between users, servers and management</li>
+              <li>High-availability design (clusters, failover, load balancing)</li>
+            </ul>
+          </div>
+
+          <div class="card bg-white p-6">
+            <h3 class="text-xl font-semibold mb-2">Virtualization Platforms</h3>
+            <p class="text-gray-700 text-sm mb-3">
+              Consolidate workloads on secure, well-configured virtualization platforms.
+            </p>
+            <ul class="list-disc list-inside text-gray-700 text-sm space-y-1">
+              <li>Hyper-V, VMware or KVM environments</li>
+              <li>Template and image management</li>
+              <li>Resource pools and capacity planning</li>
+              <li>Secure remote access for administrators</li>
+            </ul>
+          </div>
+
+          <div class="card bg-white p-6">
+            <h3 class="text-xl font-semibold mb-2">Backups & Disaster Recovery</h3>
+            <p class="text-gray-700 text-sm mb-3">
+              We design backup and recovery strategies you can actually test and rely on.
+            </p>
+            <ul class="list-disc list-inside text-gray-700 text-sm space-y-1">
+              <li>Image-level and file-level backups</li>
+              <li>Off-site / cloud replication</li>
+              <li>RPO / RTO objectives aligned with the business</li>
+              <li>Disaster Recovery runbooks and testing</li>
+            </ul>
+          </div>
+
+          <div class="card bg-white p-6">
+            <h3 class="text-xl font-semibold mb-2">Monitoring & Capacity</h3>
+            <p class="text-gray-700 text-sm mb-3">
+              Visibility on health, performance and growth, integrated with your NOC / SOC when needed.
+            </p>
+            <ul class="list-disc list-inside text-gray-700 text-sm space-y-1">
+              <li>Host, VM and storage monitoring</li>
+              <li>Alerts integrated with ticketing or on-call rotations</li>
+              <li>Capacity and growth reports for management</li>
+              <li>Recommendations to avoid unplanned outages</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== Engagement model ===== -->
+      <section>
+        <h2 class="text-2xl font-bold mb-4">How we work with you</h2>
+        <div class="grid md:grid-cols-3 gap-6">
+          <div class="card bg-white p-6">
+            <h3 class="font-semibold mb-2">1. Assessment</h3>
+            <p class="text-gray-700 text-sm">
+              Short workshop to understand your current environment, risks and priorities.
+            </p>
+          </div>
+          <div class="card bg-white p-6">
+            <h3 class="font-semibold mb-2">2. Design & Plan</h3>
+            <p class="text-gray-700 text-sm">
+              We deliver a high-level design, migration steps and a clear timeline with business impact.
+            </p>
+          </div>
+          <div class="card bg-white p-6">
+            <h3 class="font-semibold mb-2">3. Implementation & Handover</h3>
+            <p class="text-gray-700 text-sm">
+              We implement together with your team and leave documentation and runbooks ready.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== CTA final ===== -->
+      <section class="card bg-white p-8 text-center">
+        <h2 class="text-2xl font-bold mb-3">Ready to modernize your data center?</h2>
+        <p class="text-gray-700 mb-5">
+          Whether you want to refresh hardware, move to a virtualized cluster or prepare for cloud and hybrid
+          scenarios, we can start with a focused assessment.
+        </p>
+        <div class="flex flex-col sm:flex-row justify-center gap-3">
+          <a href="https://calendly.com/mauricioromeroca"
+             class="btn-primary text-white px-6 py-3 rounded-lg font-semibold text-sm">
+            Book a 30-min call
+          </a>
+          <a href="mailto:info@romanoti-solutions.com"
+             class="border border-blue-600 text-blue-700 px-6 py-3 rounded-lg font-semibold text-sm hover:bg-blue-50">
+            Request a proposal
+          </a>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Footer global -->
+  <div id="app-footer"></div>
+
+  <!-- Scripts de nav/footer -->
+  <script defer src="/js/nav.js?v=7"></script>
+  <script defer src="/js/footer.js?v=7"></script>
+</body>
+</html>
