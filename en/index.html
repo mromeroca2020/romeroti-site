@@ -37,25 +37,61 @@
   <!-- Mount for dynamic header -->
   <div id="app-header"></div>
 
-  <!-- Fallback Header (English) -->
+  <!-- ================================================================= -->
+  <!-- FIX: FULL REPLACEMENT OF FALLBACK HEADER FOR EN (STRUCTURE FIXED) -->
+  <!-- ================================================================= -->
 <header id="fallback-header" class="bg-white shadow-sm sticky top-0 z-40">
-  <div class="container mx-auto px-6 py-3">
-    <div class="flex items-center justify-between">
-      <a href="/en/" class="flex items-center font-bold text-xl text-gray-900">
-        <span class="bg-blue-600 text-white rounded-full w-10 h-10 grid place-items-center mr-3">R</span>
-        RomanoTI Solutions (loading…)
-      </a>
+  <div class="container mx-auto px-6 py-3 flex items-center justify-between">
 
-      <!-- Button required for nav.js -->
-      <a 
-        href="/en/solutions/" 
-        data-nav="solutions-btn"
-        class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
-         Solutions
-      </a>
-    </div>
+    <!-- LOGO -->
+    <!-- FIX: Same logo block as ES -->
+    <a href="/en/" class="flex items-center font-bold text-xl text-gray-900">
+      <span class="bg-blue-600 text-white rounded-full w-10 h-10 grid place-items-center mr-3">R</span>
+      RomanoTI Solutions (Loading…)
+    </a>
+
+    <!-- FIX: Full navigation restored (mirrors ES version) -->
+    <nav>
+      <ul class="flex items-center gap-6 text-gray-800 font-medium">
+
+        <li>
+          <a href="/en/" class="hover:text-blue-600 transition">Home</a>
+        </li>
+
+        <!-- FIX IMPORTANT: Solutions button must be inside a relative <li> for nav.js -->
+        <li class="relative">
+          <button 
+            data-nav="solutions-btn" 
+            class="hover:text-blue-600 transition">
+            Solutions
+          </button>
+        </li>
+
+        <li>
+          <a href="/en/services/" class="hover:text-blue-600 transition">Services</a>
+        </li>
+
+        <li>
+          <a href="/en/tools/" class="hover:text-blue-600 transition">Tools</a>
+        </li>
+
+        <li>
+          <a href="/en/noc/" class="hover:text-blue-600 transition">NOC</a>
+        </li>
+
+        <li>
+          <a href="/en/soc/" class="hover:text-blue-600 transition">SOC</a>
+        </li>
+
+      </ul>
+    </nav>
+
   </div>
 </header>
+  <!-- ================================================================= -->
+  <!-- END FIX -->
+  <!-- ================================================================= -->
+
 
 
   <!-- ===== Hero ===== -->
