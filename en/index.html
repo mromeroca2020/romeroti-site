@@ -37,20 +37,15 @@
   <!-- Mount for dynamic header -->
   <div id="app-header"></div>
 
-  <!-- ================================================================= -->
-  <!-- FIX: FULL REPLACEMENT OF FALLBACK HEADER FOR EN (STRUCTURE FIXED) -->
-  <!-- ================================================================= -->
 <header id="fallback-header" class="bg-white shadow-sm sticky top-0 z-40">
   <div class="container mx-auto px-6 py-3 flex items-center justify-between">
 
-    <!-- LOGO -->
-    <!-- FIX: Same logo block as ES -->
+    <!-- FIX 1: Logo corrected to match header.js -->
     <a href="/en/" class="flex items-center font-bold text-xl text-gray-900">
-      <span class="bg-blue-600 text-white rounded-full w-10 h-10 grid place-items-center mr-3">R</span>
-      RomanoTI Solutions (Loading…)
+      <img src="/img/logo-romanoti-blue.png" class="w-10 h-10 mr-3" alt="RomanoTI Logo">
+      <span>RomanoTI Solutions</span>
     </a>
 
-    <!-- FIX: Full navigation restored (mirrors ES version) -->
     <nav>
       <ul class="flex items-center gap-6 text-gray-800 font-medium">
 
@@ -58,11 +53,8 @@
           <a href="/en/" class="hover:text-blue-600 transition">Home</a>
         </li>
 
-        <!-- FIX IMPORTANT: Solutions button must be inside a relative <li> for nav.js -->
         <li class="relative">
-          <button 
-            data-nav="solutions-btn" 
-            class="hover:text-blue-600 transition">
+          <button data-nav="solutions-btn" class="hover:text-blue-600 transition">
             Solutions
           </button>
         </li>
@@ -88,13 +80,8 @@
 
   </div>
 </header>
-  <!-- ================================================================= -->
-  <!-- END FIX -->
-  <!-- ================================================================= -->
 
-
-
-  <!-- ===== Hero ===== -->
+  <!-- Hero -->
   <section class="hero-bg text-white">
     <div class="container mx-auto px-6 py-20 text-center">
       <h1 class="text-4xl md:text-5xl font-bold mb-6">Professional IT Infrastructure & Cybersecurity</h1>
@@ -110,7 +97,7 @@
     </div>
   </section>
 
-  <!-- ===== CTA strip ===== -->
+  <!-- CTA strip -->
   <section class="bg-blue-50 border-t border-b border-blue-100">
     <div class="container mx-auto px-6 py-4 flex flex-col md:flex-row items-center justify-between gap-3">
       <div class="text-blue-900 font-semibold">
@@ -127,7 +114,7 @@
     </div>
   </section>
 
-  <!-- ===== About ===== -->
+  <!-- About -->
   <section id="about-us" class="py-14 bg-white">
     <div class="container mx-auto px-6">
       <div class="text-center mb-10">
@@ -141,7 +128,7 @@
     </div>
   </section>
 
-  <!-- ===== Why choose us ===== -->
+  <!-- Why choose us -->
   <section class="py-14">
     <div class="container mx-auto px-6">
       <div class="text-center mb-10">
@@ -176,14 +163,14 @@
     </div>
   </section>
 
-  <!-- ===== CTA ===== -->
+  <!-- CTA -->
   <section class="py-14 bg-blue-700 text-white">
     <div class="container mx-auto px-6 text-center">
       <h2 class="text-3xl font-bold mb-4">Ready to reduce risk and downtime?</h2>
       <p class="text-lg opacity-90 mb-6">Book 20 minutes: posture review and next steps.</p>
       <div class="flex flex-col md:flex-row justify-center gap-4">
         <a href="https://calendly.com/mauricioromeroca" class="bg-white text-blue-700 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100">Book a Call</a>
-        <a href="/services/tools.html" class="btn-primary text-white px-6 py-3 rounded-lg font-semibold">Open Tools</a>
+        <a href="/en/tools/" class="btn-primary text-white px-6 py-3 rounded-lg font-semibold">Open Tools</a>
       </div>
     </div>
   </section>
