@@ -106,7 +106,7 @@
         <nav class="hidden md:flex items-center space-x-8">
           <a href="${base}/" class="text-gray-700 hover:text-blue-600">${I18N.home}</a>
 
-          <!-- 🔹 Dropdown Services (ahora controlado por JS, igual que Solutions) -->
+                   <!-- 🔹 Dropdown Services -->
           <div class="relative" id="navServicesRoot">
             <button id="navServicesBtn"
                     class="text-gray-700 hover:text-blue-600 inline-flex items-center"
@@ -127,6 +127,7 @@
               <a href="${base}/services/noc"               class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem">${I18N.serviceNOC}</a>
             </div>
           </div>
+
 
 
           <!-- Dropdown: Solutions -->
