@@ -178,12 +178,33 @@
   <!-- Footer -->
   <div id="app-footer"></div>
 
-  <!-- Scripts -->
-<!-- siempre justo antes de </body> y solo una vez por página -->
-<!-- Nav/Footer unificados (v7) -->
-<script defer src="/js/nav.js?v=7"></script>
-<script defer src="/js/footer.js?v=7"></script>
-<script defer src="/js/fix-nav.js?v=7"></script>
+  <!-- Footer global -->
+  <div id="app-footer"></div>
+
+  <!-- Quita el fallback sólo si el header real ya está montado -->
+  <script>
+    (function(){
+      const fb = document.getElementById('fallback-header');
+      if (!fb) return;
+      function removeFallbackSafely() {
+        const mount = document.getElementById('app-header');
+        const injected = mount && mount.querySelector('header');
+        if (injected && fb.parentNode) { fb.parentNode.removeChild(fb); return true; }
+        return false;
+      }
+      if (!removeFallbackSafely()) {
+        setTimeout(removeFallbackSafely,150);
+        setTimeout(removeFallbackSafely,400);
+        setTimeout(removeFallbackSafely,1000);
+        setTimeout(removeFallbackSafely,2000);
+      }
+    })();
+  </script>
+
+  <!-- Nav/Footer unificados (v7) -->
+  <script defer src="/js/nav.js?v=7"></script>
+  <script defer src="/js/footer.js?v=7"></script>
+  <script defer src="/js/fix-nav.js?v=7"></script>
 </body>
 </html>
 
