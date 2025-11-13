@@ -1,160 +1,243 @@
-/* ================================
-   NAV.JS – RomanoTI Solutions v9
-   Multi-language ES / EN / FR
-   ================================ */
+(function(){
+  // ============================================================
+  // RomanoTI nav.js — Header global + selector de idioma + menú
+  // ============================================================
+  // Cambios clave:
+  // 1) Detección de idioma por ruta: soporta /en, /fr, /es (fallback: /es)
+  // 2) Selector de idioma robusto:
+  //    - Intenta ir a la misma ruta en el idioma elegido
+  //    - Verifica con HEAD si la ruta existe
+  //    - Si no existe, hace fallback al home de ese idioma (/es/ /en/ /fr/)
+  //    - Normaliza rutas (quita /index.html, dobles barras, etc.)
+  // 3) Montaje del header aunque no exista #app-header (lo inserta al inicio)
+  // 4) Cableado del submenú "Solutions" con hover/click y cierre fuera/ESC
+  //
+  // Requisitos:
+  // - Añadir en TODAS las páginas:
+  //   <div id="app-header"></div>
+  //   <div id="app-footer"></div>   (si usas footer.js)
+  //   <script defer src="/js/nav.js?v=6"></script>
+  //
+  // Notas hosting:
+  // - Si tu hosting bloquea HEAD (raro), el try/catch ya hace fallback al home.
+  // - Si usas reglas en _redirects que redirigen a /index.html inglés,
+  //   este script evita ese "rebote" gracias al fallback inmediato al home del idioma.
+  // ============================================================
 
-(function () {
+  // 0) Señal de arranque para debugging
+  console.log('[nav] booting…');
 
-  /* -----------------------------
-     Detect Language by URL
-  ----------------------------- */
-  function detectLang() {
-    const path = window.location.pathname;
+  // 1) Detección de idioma por ruta
+  const path = location.pathname || '/';
+  // lang actual por prefijo: /en /fr /es ; si nada coincide → 'es'
+  const lang = path.startsWith('/en/') ? 'en'
+             : path === '/en'        ? 'en'
+             : path.startsWith('/fr/') ? 'fr'
+             : path === '/fr'        ? 'fr'
+             : path.startsWith('/es/') ? 'es'
+             : path === '/es'        ? 'es'
+             : 'es';
 
-    if (path === "/" || path.startsWith("/es") || path.startsWith("/index")) {
-      return "es";
-    }
-    if (path.startsWith("/en")) {
-      return "en";
-    }
-    if (path.startsWith("/fr")) {
-      return "fr";
-    }
-    return "es";
-  }
+  // base (prefijo a usar en enlaces del nav)
+  const base = lang === 'en' ? '/en'
+             : lang === 'fr' ? '/fr'
+             : '/es';
 
-  const lang = detectLang();
-
-
-  /* -----------------------------
-     Solutions Menu Routes
-  ----------------------------- */
-  const SOL = {
+  // 2) Textos por idioma
+  const I18N_MAP = {
     es: {
-      cloud: "/solutions/cloud-migration/",
-      infra: "/solutions/infrastructure/",
-      cyber: "/solutions/cybershield/",
-      datacenter: "/solutions/datacenter/",
-      backup: "/solutions/backups/",
-      noc: "/solutions/noc/"
+      brand:'RomanoTI Solutions',
+      home:'Inicio', solutions:'Soluciones', tools:'Herramientas',
+      noc:'NOC', soc:'SOC', book:'Agendar',
+      overview:'Resumen', mdr:'CyberShield (MDR)', socConsole:'Consola SOC',
+      easm:'Consola EASM', fieldKit:'Field Kit (ingenieros)',
+      quickAudit:'Auditoría rápida', pov:'POV 14 días',
+      lang:'Idioma', en:'English', fr:'Français', es:'Español'
     },
     en: {
-      cloud: "/en/solutions/cloud-migration/",
-      infra: "/en/solutions/infrastructure/",
-      cyber: "/en/solutions/cybershield/",
-      datacenter: "/en/solutions/datacenter/",
-      backup: "/en/solutions/backups/",
-      noc: "/en/solutions/noc/"
+      brand:'RomanoTI Solutions',
+      home:'Home', solutions:'Solutions', tools:'Tools',
+      noc:'NOC', soc:'SOC', book:'Book Now',
+      overview:'Overview', mdr:'CyberShield (MDR)', socConsole:'SOC Console',
+      easm:'EASM Console', fieldKit:'Field Kit (engineers)',
+      quickAudit:'Quick Audit', pov:'14-day POV',
+      lang:'Language', en:'English', fr:'Français', es:'Español'
     },
     fr: {
-      cloud: "/fr/solutions/cloud-migration/",
-      infra: "/fr/solutions/infrastructure/",
-      cyber: "/fr/solutions/cybershield/",
-      datacenter: "/fr/solutions/datacenter/",
-      backup: "/fr/solutions/backups/",
-      noc: "/fr/solutions/noc/"
+      brand:'RomanoTI Solutions',
+      home:'Accueil', solutions:'Solutions', tools:'Outils',
+      noc:'NOC', soc:'SOC', book:'Prendre RDV',
+      overview:'Aperçu', mdr:'CyberShield (MDR)', socConsole:'Console SOC',
+      easm:'Console EASM', fieldKit:'Field Kit (ingénieurs)',
+      quickAudit:'Audit rapide', pov:'POV 14 jours',
+      lang:'Langue', en:'English', fr:'Français', es:'Español'
     }
   };
+  const I18N = I18N_MAP[lang];
 
-  const L = SOL[lang];
+  // 3) HTML del header
+  const html = `
+  <header class="bg-white/95 backdrop-blur sticky top-0 z-50 border-b border-gray-100" id="navHeader">
+    <div class="container mx-auto px-6 py-3">
+      <div class="flex items-center justify-between">
+        <a href="${base}/" class="flex items-center font-bold text-xl text-gray-900">
+          <span class="bg-blue-600 text-white rounded-full w-10 h-10 grid place-items-center mr-3">R</span>
+          ${I18N.brand}
+        </a>
 
+        <nav class="hidden md:flex items-center space-x-8">
+          <a href="${base}/" class="text-gray-700 hover:text-blue-600">${I18N.home}</a>
 
-  /* -----------------------------
-     Build Solutions Menu HTML
-  ----------------------------- */
-  function buildSolutionsMenu() {
+          <div class="relative" id="navSolutionsRoot">
+            <button id="navSolutionsBtn"
+                    class="text-gray-700 hover:text-blue-600 inline-flex items-center"
+                    aria-haspopup="true" aria-expanded="false" aria-controls="navSolutionsMenu">
+              ${I18N.solutions}
+              <svg class="ml-1 w-4 h-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.58l3.71-3.35a.75.75 0 111.02 1.1l-4.2 3.79a.75.75 0 01-1.02 0l-4.2-3.79a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
+            </button>
+            <div id="navSolutionsMenu"
+                 class="absolute right-0 mt-2 w-80 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5 hidden"
+                 role="menu" aria-labelledby="navSolutionsBtn">
+              <a href="${base}/solutions/"                              class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem">${I18N.overview}</a>
+              <a href="${base}/solutions/cybershield/"                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem">${I18N.mdr}</a>
+              <a href="${base}/solutions/cybershield/soc-console.html"  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem">${I18N.socConsole}</a>
+              <a href="${base}/solutions/cybershield/easm-console.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem">${I18N.easm}</a>
+              <a href="${base}/solutions/cybershield/field-kit.html"    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem">${I18N.fieldKit}</a>
+              <div class="border-t my-1"></div>
+              <a href="${base}/solutions/cybershield/quick-audit.html"  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem">${I18N.quickAudit}</a>
+              <a href="${base}/solutions/cybershield/pov-14d.html"      class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem">${I18N.pov}</a>
+            </div>
+          </div>
 
-    return `
-      <div id="solutionsMenu" 
-           class="absolute left-0 mt-3 w-64 bg-white rounded-xl shadow-xl border border-gray-100 hidden"
-           data-nav="solutions-menu">
+          <a href="${base}/services/tools.html" class="text-gray-700 hover:text-blue-600">${I18N.tools}</a>
+          <a href="${base}/it-noc.html"         class="text-gray-700 hover:text-blue-600">${I18N.noc}</a>
+          <a href="${base}/it-soc.html"         class="text-gray-700 hover:text-blue-600">${I18N.soc}</a>
+          <a href="https://calendly.com/mauricioromeroca" class="bg-blue-600 text-white px-5 py-2 rounded-lg font-medium">${I18N.book}</a>
 
-        <ul class="py-2 text-gray-800">
-          <li><a id="nav-cloud" href="${L.cloud}" class="block px-4 py-2 hover:bg-gray-100">Cloud Migration</a></li>
-          <li><a id="nav-infra" href="${L.infra}" class="block px-4 py-2 hover:bg-gray-100">Infrastructure</a></li>
-          <li><a id="nav-cyber" href="${L.cyber}" class="block px-4 py-2 hover:bg-gray-100">Cybersecurity (MDR)</a></li>
-          <li><a id="nav-dc" href="${L.datacenter}" class="block px-4 py-2 hover:bg-gray-100">Datacenter</a></li>
-          <li><a id="nav-backup" href="${L.backup}" class="block px-4 py-2 hover:bg-gray-100">Backups</a></li>
-          <li><a id="nav-noc" href="${L.noc}" class="block px-4 py-2 hover:bg-gray-100">NOC</a></li>
-        </ul>
+          <div class="relative" id="langRoot">
+            <button id="langBtn" class="text-gray-500 hover:text-blue-600 inline-flex items-center" aria-haspopup="true" aria-expanded="false">
+              🌐 ${I18N.lang}
+              <svg class="ml-1 w-4 h-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.58l3.71-3.35a.75.75 0 111.02 1.1l-4.2 3.79a.75.75 0 01-1.02 0l-4.2-3.79a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
+            </button>
+            <div id="langMenu" class="absolute right-0 mt-2 w-44 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5 hidden">
+              <a href="#" data-lang="en" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">🇬🇧 ${I18N_MAP.en.en}</a>
+              <a href="#" data-lang="fr" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">🇫🇷 ${I18N_MAP.fr.fr}</a>
+              <a href="#" data-lang="es" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">🇪🇸 ${I18N_MAP.es.es}</a>
+            </div>
+          </div>
+        </nav>
+
+        <div class="md:hidden">
+          <a href="${base}/solutions/" class="bg-blue-600 text-white px-4 py-2 rounded-lg">${I18N.solutions}</a>
+        </div>
       </div>
-    `;
+    </div>
+  </header>`;
+
+  // 4) Montaje del header (con fallback si no existe #app-header)
+  function mountHeader(){
+    const mount = document.getElementById('app-header');
+    if (mount) {
+      mount.innerHTML = html;
+    } else {
+      const temp = document.createElement('div');
+      temp.innerHTML = html;
+      document.body.insertBefore(temp.firstElementChild, document.body.firstChild);
+    }
+    document.documentElement.setAttribute('data-nav-mounted','1');
+    window.ROMANOTI_NAV_READY = true;
   }
 
+  // ---- Helpers idioma ----
 
-  /* -----------------------------
-     Inject menu under button
-  ----------------------------- */
-  function injectMenu(btn) {
-    if (!btn) return;
-
-    // Avoid injecting twice
-    if (document.querySelector("[data-nav='solutions-menu']")) return;
-
-    const wrapper = document.createElement("div");
-    wrapper.innerHTML = buildSolutionsMenu();
-    btn.parentNode.appendChild(wrapper.firstElementChild);
+  // Limpia el prefijo de idioma actual (/en, /fr, /es) y normaliza la ruta
+  function cleanPath(p){
+    if (!p) return '/';
+    // quita /en /fr /es tanto si hay slash después como si no
+    let out = p.replace(/^\/(en|fr|es)(?=\/|$)/, '');
+    if (!out) out = '/';
+    // normaliza dobles barras
+    out = out.replace(/\/{2,}/g, '/');
+    // quita index.html final redundante
+    out = out.replace(/\/index\.html$/i, '/');
+    return out;
   }
 
+  // Ir a idioma elegido: intenta misma ruta; si 404/blocked → fallback al home
+  async function goToLanguage(targetLang){
+    const prefix   = targetLang === 'en' ? '/en' : targetLang === 'fr' ? '/fr' : '/es';
+    const current  = cleanPath(location.pathname);
+    const target   = prefix + (current.startsWith('/') ? current : '/' + current);
+    const fallback = prefix + '/';
 
-  /* -----------------------------
-     Menu open/close behavior
-  ----------------------------- */
-  function wireMenu(btn, menu) {
-    if (!btn || !menu) return;
+    // Si estamos en file:// o HEAD bloqueado, el catch nos llevará al fallback
+    try{
+      const res = await fetch(target, { method:'HEAD' });
+      if (res.ok) {
+        location.href = target + location.search + location.hash;
+      } else {
+        location.href = fallback;
+      }
+    }catch(_){
+      location.href = fallback;
+    }
+  }
 
-    let closeTimeout = null;
+  // 5) Cableado de menús (Solutions + Idioma)
+  function wireMenus(){
+    // ---- Solutions submenu ----
+    const btn  = document.getElementById('navSolutionsBtn');
+    const menu = document.getElementById('navSolutionsMenu');
+    const root = document.getElementById('navSolutionsRoot');
 
-    function open() {
-      clearTimeout(closeTimeout);
-      menu.classList.remove("hidden");
+    if (btn && menu && !btn.dataset.wired) {
+      const open  = () => { menu.classList.remove('hidden'); btn.setAttribute('aria-expanded','true'); };
+      const close = () => { menu.classList.add('hidden');  btn.setAttribute('aria-expanded','false'); };
+      const toggle= (e)=>{ e && (e.preventDefault(), e.stopPropagation()); menu.classList.contains('hidden') ? open() : close(); };
+      btn.addEventListener('click', toggle);
+      btn.addEventListener('mouseenter', open);
+      root && root.addEventListener('mouseleave', ()=> setTimeout(close, 120));
+      document.addEventListener('click', (e)=>{ if (!menu.contains(e.target) && e.target !== btn) close(); });
+      document.addEventListener('keydown', (e)=>{ if (e.key === 'Escape') close(); });
+      root && (root.style.overflow = 'visible');
+      btn.dataset.wired = '1';
     }
 
-    function close() {
-      menu.classList.add("hidden");
+    // ---- Language menu ----
+    const langBtn  = document.getElementById('langBtn');
+    const langMenu = document.getElementById('langMenu');
+    const langRoot = document.getElementById('langRoot');
+
+    if (langBtn && langMenu && !langBtn.dataset.wired){
+      const close = ()=> langMenu.classList.add('hidden');
+      langBtn.addEventListener('click', (e)=>{ e.preventDefault(); e.stopPropagation(); langMenu.classList.toggle('hidden'); });
+      langRoot && langRoot.addEventListener('mouseleave', ()=> setTimeout(close, 120));
+      document.addEventListener('click', (e)=>{ if (!langMenu.contains(e.target) && e.target !== langBtn) close(); });
+
+      langMenu.querySelectorAll('a[data-lang]').forEach(a=>{
+        a.addEventListener('click', (e)=>{
+          e.preventDefault();
+          const targetLang = a.dataset.lang || 'es';
+          goToLanguage(targetLang);
+        });
+      });
+
+      langBtn.dataset.wired = '1';
     }
-
-    // Desktop hover
-    btn.addEventListener("mouseenter", open);
-    menu.addEventListener("mouseenter", open);
-    btn.addEventListener("mouseleave", () => closeTimeout = setTimeout(close, 120));
-    menu.addEventListener("mouseleave", () => closeTimeout = setTimeout(close, 120));
-
-    // Mobile tap
-    btn.addEventListener("click", (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      menu.classList.contains("hidden") ? open() : close();
-    });
-
-    // Close on outside click
-    document.addEventListener("click", (e) => {
-      if (!menu.contains(e.target) && e.target !== btn) close();
-    });
-
   }
 
-
-  /* -----------------------------
-     Boot on load
-  ----------------------------- */
-  function bootMenu() {
-    const btn = document.querySelector("[data-nav='solutions-btn']");
-    if (!btn) return;
-
-    injectMenu(btn);
-
-    // Need small delay so menu exists
-    setTimeout(() => {
-      const menu = document.querySelector("[data-nav='solutions-menu']");
-      wireMenu(btn, menu);
-    }, 60);
+  // 6) Boot
+  function boot(){ mountHeader(); wireMenus(); console.log('[nav] mounted & wired'); }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', ()=> {
+      boot();
+      // Retrys por si el DOM tardó
+      setTimeout(wireMenus,200);
+      setTimeout(wireMenus,800);
+    });
+  } else {
+    boot();
+    setTimeout(wireMenus,200);
+    setTimeout(wireMenus,800);
   }
-
-  document.addEventListener("DOMContentLoaded", () => {
-    setTimeout(bootMenu, 150);
-    setTimeout(bootMenu, 500);
-    setTimeout(bootMenu, 1200);
-  });
-
 })();
