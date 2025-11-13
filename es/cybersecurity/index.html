@@ -206,35 +206,33 @@
     })();
   </script>
 
-  <!-- Hotfix submenu Solutions -->
+  <!-- Footer global -->
+  <div id="app-footer"></div>
+
+  <!-- Quita el fallback sólo si el header real ya está montado -->
   <script>
     (function(){
-      function wire(btn, menu){
-        if(!btn || !menu || btn.dataset.wired) return;
-        if(!menu.classList.contains('hidden')) menu.classList.add('hidden');
-        const open=()=>{menu.classList.remove('hidden');btn.setAttribute('aria-expanded','true');};
-        const close=()=>{menu.classList.add('hidden');btn.setAttribute('aria-expanded','false');};
-        const toggle=(e)=>{e&&(e.preventDefault(),e.stopPropagation());menu.classList.contains('hidden')?open():close();};
-        btn.addEventListener('click',toggle);
-        btn.addEventListener('mouseenter',open);
-        menu.addEventListener('mouseleave',()=>setTimeout(close,120));
-        document.addEventListener('click',(e)=>{if(!menu.contains(e.target)&&e.target!==btn) close();});
-        document.addEventListener('keydown',(e)=>{if(e.key==='Escape') close();});
-        btn.dataset.wired='1';
+      const fb = document.getElementById('fallback-header');
+      if (!fb) return;
+      function removeFallbackSafely() {
+        const mount = document.getElementById('app-header');
+        const injected = mount && mount.querySelector('header');
+        if (injected && fb.parentNode) { fb.parentNode.removeChild(fb); return true; }
+        return false;
       }
-      function tryWire(){
-        const btn=document.getElementById('navSolutionsBtn')||document.querySelector('[data-nav="solutions-btn"]')||document.getElementById('solutionsBtn');
-        const menu=document.getElementById('navSolutionsMenu')||document.querySelector('[data-nav="solutions-menu"]')||document.getElementById('solutionsMenu');
-        wire(btn,menu);
+      if (!removeFallbackSafely()) {
+        setTimeout(removeFallbackSafely,150);
+        setTimeout(removeFallbackSafely,400);
+        setTimeout(removeFallbackSafely,1000);
+        setTimeout(removeFallbackSafely,2000);
       }
-      document.addEventListener('DOMContentLoaded',()=>{setTimeout(tryWire,0);setTimeout(tryWire,200);setTimeout(tryWire,600);setTimeout(tryWire,1200);});
-      window.addEventListener('load',()=>setTimeout(tryWire,300));
     })();
   </script>
 
-  <!-- Cargas GLOBALES -->
-  <script defer src="/js/nav.js?v=6"></script>
-  <script defer src="/js/footer.js?v=6"></script>
-  <script defer src="/js/fix-nav.js?v=6"></script>
+  <!-- Nav/Footer unificados (v7) -->
+  <script defer src="/js/nav.js?v=7"></script>
+  <script defer src="/js/footer.js?v=7"></script>
+  <script defer src="/js/fix-nav.js?v=7"></script>
 </body>
 </html>
+
