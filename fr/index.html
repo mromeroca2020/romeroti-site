@@ -40,6 +40,26 @@
 
   <!-- Punto de montaje del header global -->
   <div id="app-header"></div>
+  <!-- ===== En-tête Fallback (Français) ===== -->
+<header id="fallback-header" class="bg-white shadow-sm sticky top-0 z-40">
+  <div class="container mx-auto px-6 py-3">
+    <div class="flex items-center justify-between">
+      <a href="/fr/" class="flex items-center font-bold text-xl text-gray-900">
+        <span class="bg-blue-600 text-white rounded-full w-10 h-10 grid place-items-center mr-3">R</span>
+        RomanoTI Solutions (chargement…)
+      </a>
+
+      <!-- Required button for nav.js initialization -->
+      <a 
+        href="/fr/solutions/"
+        data-nav="solutions-btn"
+        class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+         Solutions
+      </a>
+    </div>
+  </div>
+</header>
+
 
   <!-- ===== Header fallback (se oculta cuando nav.js monta el real) ===== -->
   <header id="fallback-header" class="bg-white shadow-sm sticky top-0 z-40">
