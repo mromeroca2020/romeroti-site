@@ -241,10 +241,27 @@
 
     if (langBtn && langMenu && !langBtn.dataset.wired){
       const close = ()=> langMenu.classList.add('hidden');
-      langBtn.addEventListener('click', (e)=>{ e.preventDefault(); e.stopPropagation(); langMenu.classList.toggle('hidden'); });
-      langRoot && langRoot.addEventListener('mouseleave', ()=> setTimeout(close, 120));
-      document.addEventListener('click', (e)=>{ if (!langMenu.contains(e.target) && e.target !== langBtn) close(); });
 
+      // Al hacer clic en el botón 🌐 se abre/cierra el menú de idioma
+      langBtn.addEventListener('click', (e)=>{ 
+        e.preventDefault(); 
+        e.stopPropagation(); 
+        langMenu.classList.toggle('hidden'); 
+      });
+
+      // 🔴 IMPORTANTE:
+      // Antes teníamos:
+      //   langRoot && langRoot.addEventListener('mouseleave', ()=> setTimeout(close, 120));
+      // Eso hacía que el menú se cerrara casi de inmediato
+      // cuando movías el mouse hacia las opciones (comportamiento "intermitente").
+      // Lo eliminamos para que el usuario pueda bajar tranquilamente y seleccionar el idioma.
+
+      // Cerrar cuando se hace clic fuera del menú
+      document.addEventListener('click', (e)=>{ 
+        if (!langMenu.contains(e.target) && e.target !== langBtn) close(); 
+      });
+
+      // Al hacer clic en una opción de idioma, cambiamos de idioma
       langMenu.querySelectorAll('a[data-lang]').forEach(a=>{
         a.addEventListener('click', (e)=>{
           e.preventDefault();
@@ -256,6 +273,7 @@
       langBtn.dataset.wired = '1';
     }
   }
+
 
   // 6) Boot
   function boot(){ mountHeader(); wireMenus(); console.log('[nav] mounted & wired'); }
