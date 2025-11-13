@@ -248,7 +248,7 @@
       // Hover también abre (como en muchas páginas corporativas)
       btn.addEventListener('mouseenter', open);
       // Al salir del bloque raíz, cerramos con un pequeño delay
-      root && root.addEventListener('mouseleave', ()=> setTimeout(close, 120));
+      //root && root.addEventListener('mouseleave', ()=> setTimeout(close, 120));
 
       // Cerrar al hacer click fuera o con ESC
       document.addEventListener('click', (e)=> {
