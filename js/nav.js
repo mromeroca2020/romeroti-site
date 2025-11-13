@@ -106,23 +106,28 @@
         <nav class="hidden md:flex items-center space-x-8">
           <a href="${base}/" class="text-gray-700 hover:text-blue-600">${I18N.home}</a>
 
-          <!-- 🔹 NUEVO: Dropdown Services -->
-          <div class="relative group">
-            <button class="text-gray-700 hover:text-blue-600 inline-flex items-center" aria-haspopup="true" aria-expanded="false">
+          <!-- 🔹 Dropdown Services (ahora controlado por JS, igual que Solutions) -->
+          <div class="relative" id="navServicesRoot">
+            <button id="navServicesBtn"
+                    class="text-gray-700 hover:text-blue-600 inline-flex items-center"
+                    aria-haspopup="true" aria-expanded="false" aria-controls="navServicesMenu">
               ${I18N.services}
               <svg class="ml-1 w-4 h-4" viewBox="0 0 20 20" fill="currentColor">
                 <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.58l3.71-3.35a.75.75 0 111.02 1.1l-4.2 3.79a.75.75 0 01-1.02 0l-4.2-3.79a.75.75 0 01.02-1.06z" clip-rule="evenodd"/>
               </svg>
             </button>
-            <div class="absolute right-0 mt-2 w-72 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5 py-2 hidden group-hover:block z-40">
-              <a href="${base}/services/cloud-migration"   class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">${I18N.serviceCloud}</a>
-              <a href="${base}/services/it-infrastructure" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">${I18N.serviceInfra}</a>
-              <a href="${base}/services/cybersecurity"     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">${I18N.serviceCyber}</a>
-              <a href="${base}/services/data-center"       class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">${I18N.serviceDC}</a>
-              <a href="${base}/services/disaster-recovery" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">${I18N.serviceDR}</a>
-              <a href="${base}/services/noc"               class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">${I18N.serviceNOC}</a>
+            <div id="navServicesMenu"
+                 class="absolute right-0 mt-2 w-72 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5 py-2 hidden z-40"
+                 role="menu" aria-labelledby="navServicesBtn">
+              <a href="${base}/services/cloud-migration"   class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem">${I18N.serviceCloud}</a>
+              <a href="${base}/services/it-infrastructure" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem">${I18N.serviceInfra}</a>
+              <a href="${base}/services/cybersecurity"     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem">${I18N.serviceCyber}</a>
+              <a href="${base}/services/data-center"       class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem">${I18N.serviceDC}</a>
+              <a href="${base}/services/disaster-recovery" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem">${I18N.serviceDR}</a>
+              <a href="${base}/services/noc"               class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem">${I18N.serviceNOC}</a>
             </div>
           </div>
+
 
           <!-- Dropdown: Solutions -->
           <div class="relative" id="navSolutionsRoot">
