@@ -1,1 +1,471 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Romanoti Tools | Diagnostics & Inventory</title>
+
+  <!-- Favicons unificados (igual que home) -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16.png">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#2563eb">
+  <meta name="theme-color" content="#2563eb">
+
+  <!-- Tailwind + Montserrat (igual que en home) -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Estilos mínimos para clases personalizadas usadas en esta página -->
+  <style>
+    body{font-family:'Montserrat',sans-serif;background:#f8f9fa;color:#111827;scroll-behavior:smooth}
+    .wrap{max-width:1100px;margin:0 auto;padding:16px}
+    .card{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:16px;margin-top:14px;box-shadow:0 12px 32px -16px rgba(2,6,23,.15)}
+    .row{display:flex;gap:10px;flex-wrap:wrap}
+    .btn{border:1px solid #d1d5db;padding:.5rem .8rem;border-radius:10px;background:#f9fafb;cursor:pointer}
+    .btn:hover{background:#f3f4f6}
+    .btn-sm{padding:.35rem .6rem;font-size:.9rem}
+    .btn-primary{border-color:#2563EB;background:#2563EB;color:#fff}
+    .btn-primary:hover{filter:brightness(1.05)}
+    input{border:1px solid #d1d5db;border-radius:10px;padding:.45rem .6rem}
+    pre{background:#0f172a;color:#e5e7eb;padding:12px;border-radius:10px;overflow:auto}
+    .section-title{font-size:20px;font-weight:700;margin-bottom:6px}
+    .muted{color:#6b7280}
+    .hidden{display:none}
+    footer{margin-top:40px;background:#0f172a;color:#fff}
+  </style>
+</head>
+
+<body class="bg-gray-50">
+  <!-- Mountpoint del header centralizado -->
+  <div id="app-header"></div>
+
+  <!-- Fallback header (se oculta cuando nav.js inyecta el real) -->
+  <header id="fallback-header" class="bg-white shadow-sm sticky top-0 z-40">
+    <div class="container mx-auto px-6 py-3">
+      <div class="flex items-center justify-between">
+        <a href="/" class="flex items-center font-bold text-xl text-gray-900">
+          <span class="bg-blue-600 text-white rounded-full w-10 h-10 grid place-items-center mr-3">R</span>
+          RomanoTI Solutions (Loading...)
+        </a>
+        <a href="/solutions/" class="bg-blue-600 text-white px-4 py-2 rounded-lg">Solutions</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- === CONTENIDO ORIGINAL === -->
+  <div class="wrap" style="margin-top:20px; margin-bottom:56px">
+
+    <!-- Server Diagnostic -->
+    <div class="card">
+      <div class="row" style="justify-content:space-between;align-items:center">
+        <div>
+          <div class="section-title">Server Diagnostic (Netlify Function)</div>
+          <div class="muted">Ejecuta <code>/.netlify/functions/run-tool</code> y muestra el JSON bonito.</div>
+        </div>
+        <button id="btnRunDiag" class="btn btn-primary">⚡ Run Diagnostic</button>
+      </div>
+      <pre id="diagOut"></pre>
+    </div>
+
+    <!-- On-Prem Agent -->
+    <div class="card">
+      <div class="section-title">On-Prem Agent (LAN Inventory)</div>
+      <div class="muted" style="margin-bottom:10px">
+        Instala este agente en una PC/VM dentro de tu red. Hará un inventario básico (hosts activos, IP local, etc.)
+        y enviará el reporte al Control Plane de RomanoTI.
+      </div>
+
+      <div class="row" style="align-items:flex-end">
+        <div>
+          <div><b>Org API Key</b></div>
+          <input id="orgKey" type="password" placeholder="pega aquí tu API key" style="min-width:320px">
+          <div class="muted" style="font-size:12px">Se usa solo para generar comandos y consultar reportes. No se guarda.</div>
+        </div>
+        <div>
+          <div><b>Agent name (opcional)</b></div>
+          <input id="agentName" placeholder="ej: rome-office-01">
+        </div>
+      </div>
+
+      <div class="row" style="margin-top:10px">
+        <button id="btnLinux" class="btn">Linux / macOS</button>
+        <button id="btnWindows" class="btn">Windows</button>
+        <button id="btnCopyCmd" class="btn">Copiar comando</button>
+      </div>
+
+      <pre id="agentCmd"></pre>
+      <div class="muted" style="font-size:12px">
+        El comando descarga el agente, configura <code>ROMANOTI_API</code> y <code>ROMANOTI_KEY</code>, y ejecuta un
+        escaneo rápido. Luego hace POST a <code>/client/report</code>.
+      </div>
+
+      <hr style="border:none;border-top:1px solid #e5e7eb;margin:14px 0">
+
+      <div class="row" style="gap:8px">
+        <button id="btnLatestReport" class="btn btn-primary btn-sm">Ver último reporte</button>
+        <button id="btnViewIfaces" class="btn btn-sm">Ver Interfaces (tabla)</button>
+        <button id="btnExportCSV" class="btn btn-sm">Exportar LAN a CSV</button>
+        <button id="btnDownloadJSON" class="btn btn-sm">Descargar JSON</button>
+      </div>
+      <div class="muted" style="font-size:12px">Sin datos para mostrar.</div>
+      <pre id="agentOut"></pre>
+    </div>
+
+    <!-- External checks -->
+    <div class="card">
+      <div class="section-title">External Checks</div>
+      <div class="muted" style="margin-bottom:8px">
+        Diagnósticos rápidos sobre dominios externos.
+      </div>
+
+      <!-- TLS cert -->
+      <div class="card" style="margin-top:8px">
+        <div class="section-title" style="font-size:18px">TLS Certificate Check</div>
+        <div class="row">
+          <input id="tlsHost" placeholder="host (ej: example.com)" style="min-width:240px">
+          <input id="tlsPort" type="number" value="443" min="1" max="65535" style="width:100px">
+          <button id="btnTLS" class="btn btn-sm">Check TLS</button>
+        </div>
+        <div class="muted" style="font-size:12px">Llama a <code>/ext/tls</code> y devuelve emisor, sujeto y expiración.</div>
+        <pre id="tlsOut"></pre>
+      </div>
+
+      <!-- Email DNS -->
+      <div class="card" style="margin-top:12px">
+        <div class="section-title" style="font-size:18px">Email DNS Check</div>
+        <div class="row">
+          <input id="dnsDomain" placeholder="dominio (ej: midominio.com)" style="min-width:260px">
+          <button id="btnEmailDNS" class="btn btn-sm">Check Email DNS</button>
+        </div>
+        <div class="muted" style="font-size:12px">Llama a <code>/ext/emaildns</code> y muestra MX / SPF / DMARC.</div>
+        <pre id="dnsOut"></pre>
+      </div>
+    </div>
+
+    <!-- Tools (auth) + Login -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <!-- Login -->
+      <div class="card" id="loginCard">
+        <div class="section-title">Login</div>
+        <div class="muted" style="margin-bottom:8px">Necesario para usar Ping/Traceroute/Port Scan contra el backend.</div>
+        <div class="row">
+          <input id="user" placeholder="usuario (ej: eng1)" style="min-width:180px">
+          <input id="pass" placeholder="password" type="password" style="min-width:180px">
+        </div>
+        <div class="row" style="margin-top:10px">
+          <button id="btnLogin" class="btn btn-primary">Iniciar sesión</button>
+          <button id="btnLogout" class="btn">Cerrar sesión</button>
+        </div>
+        <div class="muted" style="margin-top:10px;font-size:12px">
+          API: <code id="apiBaseShown"></code>. Puedes sobreescribirla con
+          <code>localStorage.setItem('romanoti_api','http://127.0.0.1:8000')</code> y recargar.
+        </div>
+        <div id="loginMsg" class="muted" style="margin-top:6px"></div>
+      </div>
+
+      <!-- Herramientas autenticadas -->
+      <div class="card hidden" id="toolsCard">
+        <div class="row" style="align-items:center;justify-content:space-between">
+          <div>
+            <div class="section-title" style="margin:0">Herramientas</div>
+            <div class="muted">Autenticado como: <b id="whoami"></b></div>
+          </div>
+          <button class="btn" id="btnLogoutTop">Cerrar sesión</button>
+        </div>
+
+        <div class="card" style="margin-top:12px">
+          <div class="section-title" style="font-size:18px">Sistema</div>
+          <div class="row">
+            <button class="btn btn-sm" id="btnSysInfo">/system/info</button>
+            <button class="btn btn-sm" id="btnNetInfo">/network/info</button>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:12px">
+          <div class="section-title" style="font-size:18px">Ping</div>
+          <div class="row">
+            <input id="pingHost" placeholder="host (ej: 8.8.8.8)" value="8.8.8.8" style="min-width:170px">
+            <input id="pingCount" type="number" min="1" max="10" value="4" style="width:80px">
+            <button class="btn btn-sm" id="btnPing">Enviar</button>
+          </div>
+          <div class="muted" style="font-size:12px">Si el backend aún no implementa <code>/network/ping</code>, verás “endpoint no disponible”.</div>
+        </div>
+
+        <div class="card" style="margin-top:12px">
+          <div class="section-title" style="font-size:18px">Traceroute</div>
+          <div class="row">
+            <input id="traceHost" placeholder="host (ej: 8.8.8.8)" value="8.8.8.8" style="min-width:170px">
+            <button class="btn btn-sm" id="btnTrace">Enviar</button>
+          </div>
+          <div class="muted" style="font-size:12px">Si el backend aún no implementa <code>/network/traceroute</code>, verás “endpoint no disponible”.</div>
+        </div>
+
+        <div class="card" style="margin-top:12px">
+          <div class="section-title" style="font-size:18px">Port Scan</div>
+          <div class="row">
+            <input id="scanHost" placeholder="host (IP/hostname)" style="min-width:200px">
+            <input id="scanStart" type="number" min="1" max="65535" value="1" style="width:90px">
+            <input id="scanEnd" type="number" min="1" max="65535" value="1024" style="width:90px">
+          </div>
+          <div class="row" style="margin-top:6px">
+            <input id="scanPorts" placeholder="puertos (opcional: 80,443,22)" style="min-width:280px">
+            <button class="btn btn-sm" id="btnScan">Escanear</button>
+          </div>
+          <div class="muted" style="font-size:12px">Si indicas “puertos”, se ignoran start/end. Compatible con tu endpoint actual.</div>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="margin:22px 0 8px" class="text-xl font-bold">Salida</h3>
+    <pre id="out"></pre>
+  </div>
+
+  <!-- ===== Footer embebido ===== -->
+  <footer class="bg-gray-900 text-white py-8">
+    <div class="container mx-auto px-6 text-center">
+      <p>© 2025 RomanoTI Solutions. All rights reserved.</p>
+      <p class="mt-2">Serving Canada</p>
+    </div>
+  </footer>
+
+<!-- ======= SCRIPTS DE LA PÁGINA (tu lógica) ======= -->
+<script>
+  // ===== Config =====
+  const CP_API  = 'https://romanoti-tools-api.onrender.com'; // Control Plane
+  const API_BASE = localStorage.getItem('romanoti_api') || CP_API;
+  document.addEventListener('DOMContentLoaded', ()=> {
+    var el = document.getElementById('apiBaseShown');
+    if (el) el.textContent = API_BASE;
+  });
+
+  // ===== Utils =====
+  const $  = (id) => document.getElementById(id);
+  const on = (id, type, fn) => { const el = $(id); if (el) el.addEventListener(type, fn); };
+  const token = () => sessionStorage.getItem('romanoti_token');
+
+  function show(id, onState=true){ const e=$(id); if(!e) return; e.classList[onState?'remove':'add']('hidden'); }
+  function logTo(preId, obj){
+    const el = $(preId);
+    try { el.textContent = (typeof obj==='string') ? obj : JSON.stringify(obj,null,2); }
+    catch { el.textContent = String(obj); }
+  }
+  function log(obj){ logTo('out', obj); }
+
+  // ===== Netlify function: pretty JSON =====
+  async function runTool() {
+    const o = $('diagOut'); if (o) o.textContent = 'Running…';
+    try {
+      const res  = await fetch('/.netlify/functions/run-tool?pretty=1&indent=2',{headers:{'Accept':'application/json'}});
+      const text = await res.text();
+      try {
+        const data = JSON.parse(text);
+        const toShow = (data && typeof data === 'object' && 'output' in data) ? data.output : data;
+        $('diagOut').textContent = JSON.stringify(toShow, null, 2);
+      } catch {
+        $('diagOut').textContent = text;
+      }
+    } catch (err) {
+      $('diagOut').textContent = '❌ Error: ' + String(err);
+    }
+  }
+
+  // ===== Auth =====
+  function setAuthedUI(){
+    if(token()){ show('loginCard', false); show('toolsCard', true); const u=$('user'); $('whoami').textContent = (u&&u.value)||'session'; }
+    else       { show('toolsCard', false); show('loginCard', true); $('whoami').textContent = ''; }
+  }
+
+  async function login(){
+    $('loginMsg').textContent = 'Autenticando…';
+    try{
+      const body = new URLSearchParams();
+      body.append('username', $('user').value);
+      body.append('password', $('pass').value);
+      const res = await fetch(`${API_BASE}/auth/token`, {
+        method:'POST', headers:{'Content-Type':'application/x-www-form-urlencoded'}, body
+      });
+      const text = await res.text();
+      if(!res.ok){ $('loginMsg').innerHTML = `<span style="color:#c33">Login falló: ${res.status}</span>`; return; }
+      const data = JSON.parse(text); // {access_token, token_type}
+      sessionStorage.setItem('romanoti_token', data.access_token);
+      setAuthedUI();
+      log({login:'ok', ...data});
+      $('loginMsg').textContent = 'OK';
+    }catch(e){ $('loginMsg').innerHTML = `<span style="color:#c33">${e}</span>`; }
+  }
+  function logout(){ sessionStorage.removeItem('romanoti_token'); setAuthedUI(); const o=$('out'); if(o) o.textContent=''; }
+
+  // ===== Generic authed call =====
+  async function call(method, path, body=null){
+    try{
+      const res  = await fetch(`${API_BASE}${path}`, {
+        method,
+        headers:{ 'Authorization': `Bearer ${token()}`, 'Content-Type':'application/json' },
+        body: body ? JSON.stringify(body) : null
+      });
+      const text = await res.text();
+      if(!res.ok){
+        if(res.status===404)  { log({error:'endpoint no disponible', path, status:res.status, body:text}); }
+        else                  { log({error:'HTTP error', path, status:res.status, body:text}); }
+        return;
+      }
+      try{ log(JSON.parse(text)); }catch{ log(text); }
+    }catch(e){ log(String(e)); }
+  }
+
+  // ===== Tools actions (authed) =====
+  async function doPing(){ await call('POST','/network/ping',{ host:$('pingHost').value, count:Number($('pingCount').value||4) }); }
+  async function doTrace(){ await call('POST','/network/traceroute',{ host:$('traceHost').value }); }
+  async function doScan(){
+    const payload = {
+      host:$('scanHost').value,
+      start:Number($('scanStart').value||1),
+      end:Number($('scanEnd').value||1024)
+    };
+    const portsStr = $('scanPorts').value.trim();
+    if(portsStr){ payload.ports = portsStr.split(',').map(p=>parseInt(p.trim(),10)).filter(Boolean); }
+    await call('POST','/network/portscan', payload);
+  }
+
+  // ===== On-Prem Agent (LAN) =====
+  let lastCmd = '';
+
+  function buildLinuxCmd(){
+    const key  = $('orgKey').value.trim();
+    const name = $('agentName').value.trim();
+    const tag  = name ? ` ROMANOTI_AGENT="${name}"` : '';
+    return [
+      `curl -fsSL ${location.origin}/assets/agent/romanoti-agent.sh -o romanoti-agent.sh`,
+      `chmod +x romanoti-agent.sh`,
+      `ROMANOTI_API="${CP_API}" ROMANOTI_KEY="${key}"${tag} ./romanoti-agent.sh`
+    ].join(' && ');
+  }
+
+  function buildWindowsCmd(){
+    const key  = $('orgKey').value.trim();
+    const name = $('agentName').value.trim();
+    let cmd = `powershell -NoProfile -ExecutionPolicy Bypass -Command "`
+            + `Invoke-WebRequest -UseBasicParsing -Uri '${location.origin}/assets/agent/romanoti-agent.ps1' -OutFile 'romanoti-agent.ps1'; `
+            + `$env:ROMANOTI_API='${CP_API}'; $env:ROMANOTI_KEY='${key}'; `;
+    if(name) cmd += `$env:ROMANOTI_AGENT='${name}'; `;
+    cmd += `powershell -ExecutionPolicy Bypass -File .\\romanoti-agent.ps1"`;
+    return cmd;
+  }
+
+  async function fetchLatestReport(){
+    const key = $('orgKey').value.trim();
+    if(!key){ $('agentOut').textContent = 'Ingresa tu Org API Key.'; return; }
+    $('agentOut').textContent = 'Consultando…';
+    try{
+      const res  = await fetch(`${CP_API}/client/reports/latest`, { headers:{'x-api-key': key, 'accept':'application/json'} });
+      const text = await res.text();
+      try{ $('agentOut').textContent = JSON.stringify(JSON.parse(text), null, 2); }
+      catch{ $('agentOut').textContent = text; }
+    }catch(e){ $('agentOut').textContent = String(e); }
+  }
+
+  // ===== External checks (require x-api-key) =====
+  async function checkTLS(){
+    const host = $('tlsHost').value.trim();
+    const port = Number($('tlsPort').value||443);
+    const key  = $('orgKey').value.trim();
+    if(!key){ $('tlsOut').textContent = 'Ingresa tu Org API Key.'; return; }
+
+    $('tlsOut').textContent = 'Consultando…';
+    try{
+      const res = await fetch(`${CP_API}/ext/tls`, {
+        method:'POST',
+        headers:{'Content-Type':'application/json','x-api-key': key},
+        body: JSON.stringify({host, port})
+      });
+      const text = await res.text();
+      try{ $('tlsOut').textContent = JSON.stringify(JSON.parse(text), null, 2); }
+      catch{ $('tlsOut').textContent = text; }
+    }catch(e){ $('tlsOut').textContent = String(e); }
+  }
+
+  async function checkEmailDNS(){
+    const domain = $('dnsDomain').value.trim();
+    const key    = $('orgKey').value.trim();
+    if(!key){ $('dnsOut').textContent = 'Ingresa tu Org API Key.'; return; }
+
+    $('dnsOut').textContent = 'Consultando…';
+    try{
+      const res = await fetch(`${CP_API}/ext/emaildns`, {
+        method:'POST',
+        headers:{'Content-Type':'application/json','x-api-key': key},
+        body: JSON.stringify({domain})
+      });
+      const text = await res.text();
+      try{ $('dnsOut').textContent = JSON.stringify(JSON.parse(text), null, 2); }
+      catch{ $('dnsOut').textContent = text; }
+    }catch(e){ $('dnsOut').textContent = String(e); }
+  }
+
+  // ===== Wire events =====
+  on('btnRunDiag','click',runTool);
+
+  on('btnLogin','click',login);
+  on('btnLogout','click',logout);
+  on('btnLogoutTop','click',logout);
+
+  on('btnSysInfo','click',()=>call('GET','/system/info'));
+  on('btnNetInfo','click',()=>call('GET','/network/info'));
+
+  on('btnPing','click',doPing);
+  on('btnTrace','click',doTrace);
+  on('btnScan','click',doScan);
+
+  on('btnLinux','click',()=>{ lastCmd = buildLinuxCmd(); $('agentCmd').textContent = lastCmd; });
+  on('btnWindows','click',()=>{ lastCmd = buildWindowsCmd(); $('agentCmd').textContent = lastCmd; });
+  on('btnCopyCmd','click',()=>{ if(lastCmd) navigator.clipboard.writeText(lastCmd); });
+  on('btnLatestReport','click',fetchLatestReport);
+
+  on('btnTLS','click',checkTLS);
+  on('btnEmailDNS','click',checkEmailDNS);
+
+  // init
+  document.addEventListener('DOMContentLoaded', setAuthedUI);
+</script>
+
+<!-- ======= HOTFIX SUBMENU SOLUTIONS (igual que home) ======= -->
+<script>
+  (function(){
+    function wire(btn, menu){
+      if(!btn || !menu || btn.dataset.wired) return;
+      if(!menu.classList.contains('hidden')) menu.classList.add('hidden');
+      const open=()=>{menu.classList.remove('hidden');btn.setAttribute('aria-expanded','true');};
+      const close=()=>{menu.classList.add('hidden');btn.setAttribute('aria-expanded','false');};
+      const toggle=(e)=>{e&&(e.preventDefault(),e.stopPropagation());menu.classList.contains('hidden')?open():close();};
+      btn.addEventListener('click',toggle); btn.addEventListener('mouseenter',open);
+      menu.addEventListener('mouseleave',()=>setTimeout(close,120));
+      document.addEventListener('click',(e)=>{if(!menu.contains(e.target)&&e.target!==btn) close();});
+      document.addEventListener('keydown',(e)=>{ if(e.key==='Escape') close();});
+      btn.dataset.wired='1';
+    }
+    function tryWire(){
+      const btn  = document.getElementById('navSolutionsBtn')
+              || document.querySelector('[data-nav="solutions-btn"]')
+              || document.getElementById('solutionsBtn');
+      const menu = document.getElementById('navSolutionsMenu')
+              || document.querySelector('[data-nav="solutions-menu"]')
+              || document.getElementById('solutionsMenu');
+      wire(btn, menu);
+    }
+    document.addEventListener('DOMContentLoaded', ()=>{
+      setTimeout(tryWire,0);setTimeout(tryWire,200);setTimeout(tryWire,600);setTimeout(tryWire,1200);
+    });
+    window.addEventListener('load', ()=> setTimeout(tryWire,300));
+  })();
+</script>
+
+<!-- Nav/Footer (con cache-busting) -->
+<script defer src="/js/nav.js?v=7"></script>
+<script defer src="/js/footer.js?v=7"></script>
+<script defer src="/js/fix-nav.js?v=7"></script>
+
+</body>
+</html>
 
