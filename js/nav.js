@@ -18,13 +18,18 @@
 
   // 1) Detección de idioma por ruta
   const path = location.pathname || '/';
-  const lang = path.startsWith('/en/') ? 'en'
-             : path === '/en'        ? 'en'
-             : path.startsWith('/fr/') ? 'fr'
-             : path === '/fr'        ? 'fr'
-             : path.startsWith('/es/') ? 'es'
-             : path === '/es'        ? 'es'
-             : 'es';
+
+  // 👇 Nueva lógica:
+  // - "/" se considera inglés
+  // - /en, /fr, /es siguen funcionando igual
+  const lang = path === '/'              ? 'en'
+             : path.startsWith('/en/')   ? 'en'
+             : path === '/en'           ? 'en'
+             : path.startsWith('/fr/')  ? 'fr'
+             : path === '/fr'           ? 'fr'
+             : path.startsWith('/es/')  ? 'es'
+             : path === '/es'           ? 'es'
+             : 'en';  // fallback seguro
 
   const base = lang === 'en' ? '/en'
              : lang === 'fr' ? '/fr'
