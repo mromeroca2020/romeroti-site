@@ -219,14 +219,13 @@
     }
   }
 
-   // 5) Cableado de menús (Services + Solutions + Idioma)
+     // 5) Cableado de menús (Services + Solutions + Idioma)
   function wireMenus(){
 
-    // Helper para dropdowns tipo "Services" y "Solutions"
-    function wireDropdown(rootId, btnId, menuId){
+    // 🔹 Helper genérico para dropdowns tipo Services / Solutions
+    function setupDropdown(btnId, menuId){
       const btn  = document.getElementById(btnId);
       const menu = document.getElementById(menuId);
-      const root = document.getElementById(rootId);
 
       if (!btn || !menu || btn.dataset.wired) return;
 
@@ -243,55 +242,47 @@
         menu.classList.contains('hidden') ? open() : close();
       };
 
-      // Click en el botón abre/cierra
+      // ✅ Solo click para abrir/cerrar (sin hover, sin mouseleave)
       btn.addEventListener('click', toggle);
-      // Hover también abre (como en muchas páginas corporativas)
-      btn.addEventListener('mouseenter', open);
-      // Al salir del bloque raíz, cerramos con un pequeño delay
-      //root && root.addEventListener('mouseleave', ()=> setTimeout(close, 120));
 
-      // Cerrar al hacer click fuera o con ESC
+      // Cerrar al hacer click fuera
       document.addEventListener('click', (e)=> {
-        if (!menu.contains(e.target) && e.target !== btn) close();
+        if (!menu.contains(e.target) && e.target !== btn) {
+          close();
+        }
       });
+
+      // Cerrar con ESC
       document.addEventListener('keydown', (e)=> {
         if (e.key === 'Escape') close();
       });
 
-      root && (root.style.overflow = 'visible');
       btn.dataset.wired = '1';
     }
 
     // ---- Services submenu ----
-    wireDropdown('navServicesRoot','navServicesBtn','navServicesMenu');
+    setupDropdown('navServicesBtn','navServicesMenu');
 
     // ---- Solutions submenu ----
-    wireDropdown('navSolutionsRoot','navSolutionsBtn','navSolutionsMenu');
+    setupDropdown('navSolutionsBtn','navSolutionsMenu');
 
-    // ---- Language menu ----
+    // ---- Language menu (igual que ya teníamos, sin mouseleave) ----
     const langBtn  = document.getElementById('langBtn');
     const langMenu = document.getElementById('langMenu');
-    const langRoot = document.getElementById('langRoot');
 
     if (langBtn && langMenu && !langBtn.dataset.wired){
       const close = ()=> langMenu.classList.add('hidden');
 
-      // Abrir/cerrar menú de idioma con click en 🌐
       langBtn.addEventListener('click', (e)=>{ 
         e.preventDefault(); 
         e.stopPropagation(); 
         langMenu.classList.toggle('hidden'); 
       });
 
-      // 🔴 Recordatorio: NO usamos mouseleave aquí
-      // porque eso causaba "intermitencia" al intentar seleccionar un idioma.
-
-      // Cerrar cuando se hace clic fuera
       document.addEventListener('click', (e)=>{ 
         if (!langMenu.contains(e.target) && e.target !== langBtn) close(); 
       });
 
-      // Cambiar idioma al hacer clic en una opción
       langMenu.querySelectorAll('a[data-lang]').forEach(a=>{
         a.addEventListener('click', (e)=>{
           e.preventDefault();
@@ -303,6 +294,7 @@
       langBtn.dataset.wired = '1';
     }
   }
+
 
 
 
