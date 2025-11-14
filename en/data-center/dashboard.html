@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>RomanoTI | Datacenter Monitoring</title>
+
+  <!-- Favicons (ajusta rutas si hace falta) -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16.png">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <meta name="theme-color" content="#2563eb">
+
+  <!-- Tailwind + Montserrat (igual que el sitio) -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Chart.js para gráficos -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+  <style>
+    body{
+      font-family:'Montserrat',sans-serif;
+      background:#0f172a;  /* fondo oscuro tipo SOC/NOC */
+      color:#e5e7eb;
+      scroll-behavior:smooth;
+    }
+    .card{
+      border-radius:16px;
+      background:rgba(15,23,42,0.9);
+      box-shadow:0 18px 45px -25px rgba(15,23,42,0.9);
+      border:1px solid rgba(148,163,184,0.25);
+    }
+    .grid-bg{
+      background-image:radial-gradient(circle at 1px 1px, rgba(148,163,184,0.3) 1px, transparent 0);
+      background-size:18px 18px;
+    }
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      border-radius:999px;
+      font-size:11px;
+      padding:3px 10px;
+      border:1px solid rgba(148,163,184,0.6);
+      background:rgba(15,23,42,0.8);
+    }
+  </style>
+</head>
+<body class="bg-slate-950">
+
+  <!-- Header global -->
+  <div id="app-header"></div>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main class="min-h-screen pt-6 pb-16">
+    <section class="container mx-auto px-4 md:px-8">
+
+      <!-- Encabezado de la página -->
+      <header class="mb-8">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+          <div>
+            <div class="inline-flex items-center gap-2 text-xs uppercase tracking-wide text-sky-300 mb-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              Live Datacenter Monitoring
+            </div>
+            <h1 class="text-3xl md:text-4xl font-bold text-slate-50">
+              Datacenter Operations &amp; Environmental Dashboard
+            </h1>
+            <p class="mt-2 text-sm md:text-base text-slate-300 max-w-2xl">
+              Unified view for temperature, humidity, power, critical racks and application health.  
+              Designed for RomanoTI internal SOC/NOC engineers.
+            </p>
+          </div>
+
+          <!-- Selector rápido de site / tenant (mock por ahora) -->
+          <div class="flex flex-col items-start md:items-end gap-2">
+            <div class="text-xs uppercase tracking-wide text-slate-400">Active Datacenter</div>
+            <select id="siteSelect" class="bg-slate-900 border border-slate-600 text-slate-100 text-sm rounded-lg px-3 py-1.5 focus:outline-none focus:ring-1 focus:ring-sky-500">
+              <!-- Se llena desde JS -->
+            </select>
+            <div class="text-xs text-slate-400">
+              Access: <span class="text-emerald-400 font-semibold">MFA enforced · Encrypted tunnel</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- RESUMEN SUPERIOR -->
+      <section class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+        <!-- Global status -->
+        <div class="card p-4 flex flex-col justify-between">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs uppercase tracking-wide text-slate-400">Overall Status</span>
+            <span id="statusBadge" class="badge">
+              <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+              Stable
+            </span>
+          </div>
+          <div class="text-2xl font-semibold text-slate-50" id="statusHeadline">
+            All systems nominal
+          </div>
+          <p class="mt-2 text-xs text-slate-400" id="statusSub">
+            No active critical alarms. Monitoring 24×7 via secure tunnel.
+          </p>
+        </div>
+
+        <!-- Temperature -->
+        <div class="card p-4">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs uppercase tracking-wide text-slate-400">Avg. Temperature</span>
+            <span class="badge">Recommended: 18–27°C</span>
+          </div>
+          <div class="flex items-baseline gap-2">
+            <span id="tempAvg" class="text-3xl font-semibold text-slate-50">--</span>
+            <span class="text-sm text-slate-400">°C</span>
+          </div>
+          <p class="mt-1 text-xs text-slate-400" id="tempComment">Loading…</p>
+        </div>
+
+        <!-- Humidity -->
+        <div class="card p-4">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs uppercase tracking-wide text-slate-400">Avg. Humidity</span>
+            <span class="badge">Recommended: 40–60%</span>
+          </div>
+          <div class="flex items-baseline gap-2">
+            <span id="humAvg" class="text-3xl font-semibold text-slate-50">--</span>
+            <span class="text-sm text-slate-400">%</span>
+          </div>
+          <p class="mt-1 text-xs text-slate-400" id="humComment">Loading…</p>
+        </div>
+
+        <!-- Power -->
+        <div class="card p-4">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs uppercase tracking-wide text-slate-400">Power Load</span>
+            <span class="badge">UPS · Grid · Battery</span>
+          </div>
+          <div class="flex items-baseline gap-2">
+            <span id="powerLoad" class="text-3xl font-semibold text-slate-50">--</span>
+            <span class="text-sm text-slate-400">%</span>
+          </div>
+          <p class="mt-1 text-xs text-slate-400" id="powerComment">Loading…</p>
+        </div>
+      </section>
+
+      <!-- ZONA PRINCIPAL: Gráficos + Tabla -->
+      <section class="grid grid-cols-1 xl:grid-cols-[2fr,1.2fr] gap-6">
+
+        <!-- Columna izquierda: gráficos -->
+        <div class="space-y-6">
+          <!-- Gráfico Temp/Humidity -->
+          <div class="card p-4 md:p-5 grid-bg">
+            <div class="flex items-center justify-between mb-4">
+              <div>
+                <h2 class="text-sm font-semibold text-slate-50">Environmental Trends (last 24h)</h2>
+                <p class="text-xs text-slate-400">Average per rack · Auto-refreshed when site changes</p>
+              </div>
+              <span class="text-xs text-slate-500" id="envSiteLabel">Site: --</span>
+            </div>
+            <div class="h-64">
+              <canvas id="envChart"></canvas>
+            </div>
+          </div>
+
+          <!-- Gráfico energía -->
+          <div class="card p-4 md:p-5">
+            <div class="flex items-center justify-between mb-4">
+              <div>
+                <h2 class="text-sm font-semibold text-slate-50">Power Distribution</h2>
+                <p class="text-xs text-slate-400">Current load by source</p>
+              </div>
+            </div>
+            <div class="h-56">
+              <canvas id="powerChart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Columna derecha: tabla de racks / apps -->
+        <div class="space-y-6">
+          <!-- Tabla de racks -->
+          <div class="card p-4 md:p-5">
+            <div class="flex items-center justify-between mb-3">
+              <h2 class="text-sm font-semibold text-slate-50">Racks &amp; Rooms</h2>
+              <span class="text-xs text-slate-400" id="rackCount">-- racks</span>
+            </div>
+            <div class="overflow-x-auto">
+              <table class="min-w-full text-xs text-left text-slate-300">
+                <thead class="text-slate-400 text-[11px] uppercase border-b border-slate-700">
+                  <tr>
+                    <th class="py-2 pr-3">Rack / Room</th>
+                    <th class="py-2 pr-3">Temp</th>
+                    <th class="py-2 pr-3">Humidity</th>
+                    <th class="py-2 pr-3">Power</th>
+                    <th class="py-2 pr-3">Critical Apps</th>
+                    <th class="py-2 pr-3">Status</th>
+                  </tr>
+                </thead>
+                <tbody id="rackTableBody" class="divide-y divide-slate-800"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Resumen de aplicaciones -->
+          <div class="card p-4 md:p-5">
+            <div class="flex items-center justify-between mb-3">
+              <h2 class="text-sm font-semibold text-slate-50">Application Health</h2>
+              <span id="appsSummary" class="text-xs text-slate-400">-- OK · -- Degraded · -- Down</span>
+            </div>
+            <div id="appsChips" class="flex flex-wrap gap-2 text-xs"></div>
+          </div>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <!-- Footer global -->
+  <div id="app-footer"></div>
+
+  <!-- Nav/Footer de tu sitio -->
+  <script defer src="/js/nav.js?v=8"></script>
+  <script defer src="/js/footer.js?v=8"></script>
+  <script defer src="/js/fix-nav.js?v=8"></script>
+
+  <!-- ================================
+       LÓGICA DEL DASHBOARD (MOCK DATA)
+       ================================ -->
+  <script>
+    // 🔹 MOCK DATA: aquí luego cambias a fetch('/api/datacenter/status?...')
+    const MOCK_SITES = [
+      {
+        id: "mtl-dc1",
+        name: "MTL-DC1 · Primary",
+        status: "stable",
+        statusHeadline: "All systems nominal",
+        statusSub: "No critical alarms · UPS on normal mode.",
+        env: {
+          avgTemp: 23.4,
+          avgHum: 47,
+          avgPowerLoad: 62,
+          history: {
+            labels: ["00h","04h","08h","12h","16h","20h","24h"],
+            temp:   [22.5, 23.0, 24.2, 24.5, 23.8, 23.1, 22.9],
+            hum:    [45,   46,   48,   49,   47,   46,   45]
+          },
+          power: {
+            grid: 55,
+            ups:  35,
+            battery: 10
+          }
+        },
+        racks: [
+          { id:"Room A / Rack 1", temp:24.1, hum:48, power:65, apps:["Core DB","ERP"], status:"ok" },
+          { id:"Room A / Rack 2", temp:23.8, hum:47, power:61, apps:["Web Frontend"], status:"ok" },
+          { id:"Room B / Rack 3", temp:25.3, hum:52, power:78, apps:["Backup Node"], status:"warning" },
+          { id:"Room B / Rack 4", temp:22.5, hum:44, power:55, apps:["Monitoring"], status:"ok" }
+        ],
+        apps: [
+          { name:"Core DB Cluster", status:"ok" },
+          { name:"ERP Frontend", status:"ok" },
+          { name:"VPN Gateway", status:"degraded" },
+          { name:"Backup Scheduler", status:"ok" },
+          { name:"Legacy App X", status:"down" }
+        ]
+      },
+      {
+        id: "ott-edge",
+        name: "OTT-EDGE · Secondary",
+        status: "warning",
+        statusHeadline: "Minor alarms in cooling",
+        statusSub: "Humidity is approaching upper threshold in Room B.",
+        env: {
+          avgTemp: 25.1,
+          avgHum: 61,
+          avgPowerLoad: 74,
+          history: {
+            labels: ["00h","04h","08h","12h","16h","20h","24h"],
+            temp:   [24.0, 24.4, 25.0, 26.3, 26.0, 25.5, 25.1],
+            hum:    [55,   57,   59,   62,   63,   62,   61]
+          },
+          power: {
+            grid: 40,
+            ups:  45,
+            battery: 15
+          }
+        },
+        racks: [
+          { id:"Room B / Rack 7", temp:26.4, hum:63, power:80, apps:["Edge Cache"], status:"warning" },
+          { id:"Room B / Rack 8", temp:25.9, hum:61, power:76, apps:["Local DB"], status:"ok" },
+          { id:"MDF / Rack 1",   temp:24.1, hum:58, power:69, apps:["Switch Core"], status:"ok" }
+        ],
+        apps: [
+          { name:"Edge Cache", status:"warning" },
+          { name:"Local DB", status:"ok" },
+          { name:"Telemetry Ingest", status:"ok" }
+        ]
+      }
+    ];
+
+    let currentSiteId = "mtl-dc1";
+    let envChartInstance = null;
+    let powerChartInstance = null;
+
+    function getCurrentSite(){
+      return MOCK_SITES.find(s => s.id === currentSiteId) || MOCK_SITES[0];
+    }
+
+    function initSiteSelector(){
+      const select = document.getElementById("siteSelect");
+      if (!select) return;
+      select.innerHTML = "";
+      MOCK_SITES.forEach(site => {
+        const opt = document.createElement("option");
+        opt.value = site.id;
+        opt.textContent = site.name;
+        select.appendChild(opt);
+      });
+      select.value = currentSiteId;
+      select.addEventListener("change", () => {
+        currentSiteId = select.value;
+        renderDashboard();
+      });
+    }
+
+    function renderSummary(site){
+      const statusBadge = document.getElementById("statusBadge");
+      const statusHeadline = document.getElementById("statusHeadline");
+      const statusSub = document.getElementById("statusSub");
+      const tempAvg = document.getElementById("tempAvg");
+      const humAvg = document.getElementById("humAvg");
+      const powerLoad = document.getElementById("powerLoad");
+      const tempComment = document.getElementById("tempComment");
+      const humComment = document.getElementById("humComment");
+      const powerComment = document.getElementById("powerComment");
+
+      if (!statusBadge) return;
+
+      // Estado global
+      statusBadge.classList.remove("border-emerald-400","border-amber-400","border-rose-400");
+      const dot = statusBadge.querySelector("span");
+      if (dot) dot.className = "w-2 h-2 rounded-full";
+
+      if (site.status === "stable"){
+        statusBadge.classList.add("border-emerald-400");
+        if (dot) dot.classList.add("bg-emerald-400");
+      } else if (site.status === "warning"){
+        statusBadge.classList.add("border-amber-400");
+        if (dot) dot.classList.add("bg-amber-400");
+      } else {
+        statusBadge.classList.add("border-rose-400");
+        if (dot) dot.classList.add("bg-rose-400");
+      }
+
+      statusHeadline.textContent = site.statusHeadline;
+      statusSub.textContent = site.statusSub;
+
+      tempAvg.textContent = site.env.avgTemp.toFixed(1);
+      humAvg.textContent = site.env.avgHum.toFixed(0);
+      powerLoad.textContent = site.env.avgPowerLoad.toFixed(0);
+
+      // comentarios simples
+      tempComment.textContent = site.env.avgTemp < 18 || site.env.avgTemp > 27
+        ? "Outside recommended ASHRAE range – verify cooling."
+        : "Within recommended range for most equipment.";
+      humComment.textContent = site.env.avgHum < 40 || site.env.avgHum > 60
+        ? "Humidity drifting from recommended range – check dehumidifiers."
+        : "Humidity in controlled range.";
+      powerComment.textContent = site.env.avgPowerLoad > 80
+        ? "High load on power systems – check redundancy and UPS capacity."
+        : "Healthy power utilization.";
+    }
+
+    function renderEnvChart(site){
+      const ctx = document.getElementById("envChart");
+      const labelSpan = document.getElementById("envSiteLabel");
+      if (labelSpan) labelSpan.textContent = "Site: " + site.name;
+      if (!ctx) return;
+
+      if (envChartInstance) envChartInstance.destroy();
+
+      envChartInstance = new Chart(ctx, {
+        type: "line",
+        data: {
+          labels: site.env.history.labels,
+          datasets: [
+            {
+              label: "Temperature (°C)",
+              data: site.env.history.temp,
+              borderWidth: 2,
+              tension: 0.3
+            },
+            {
+              label: "Humidity (%)",
+              data: site.env.history.hum,
+              borderWidth: 2,
+              borderDash: [4,4],
+              tension: 0.3
+            }
+          ]
+        },
+        options: {
+          responsive:true,
+          maintainAspectRatio:false,
+          plugins:{
+            legend:{ labels:{ color:"#e5e7eb", font:{ size:11 } } }
+          },
+          scales:{
+            x:{ ticks:{ color:"#9ca3af", font:{ size:10 } }, grid:{ color:"rgba(55,65,81,0.3)" } },
+            y:{ ticks:{ color:"#9ca3af", font:{ size:10 } }, grid:{ color:"rgba(55,65,81,0.3)" } }
+          }
+        }
+      });
+    }
+
+    function renderPowerChart(site){
+      const ctx = document.getElementById("powerChart");
+      if (!ctx) return;
+      if (powerChartInstance) powerChartInstance.destroy();
+
+      const p = site.env.power;
+      powerChartInstance = new Chart(ctx, {
+        type:"doughnut",
+        data:{
+          labels:["Grid","UPS","Battery"],
+          datasets:[{
+            data:[p.grid, p.ups, p.battery],
+            borderWidth:0,
+          }]
+        },
+        options:{
+          plugins:{
+            legend:{ position:"bottom", labels:{ color:"#e5e7eb", font:{ size:11 } } }
+          },
+          cutout:"55%"
+        }
+      });
+    }
+
+    function renderRacks(site){
+      const body = document.getElementById("rackTableBody");
+      const rackCount = document.getElementById("rackCount");
+      if (!body) return;
+      body.innerHTML = "";
+      rackCount.textContent = site.racks.length + " racks";
+
+      site.racks.forEach(rack => {
+        const tr = document.createElement("tr");
+        const statusColor = rack.status === "ok" ? "bg-emerald-500"
+                            : rack.status === "warning" ? "bg-amber-400"
+                            : "bg-rose-500";
+        tr.innerHTML = `
+          <td class="py-2 pr-3 text-xs">${rack.id}</td>
+          <td class="py-2 pr-3 text-xs">${rack.temp.toFixed(1)}°C</td>
+          <td class="py-2 pr-3 text-xs">${rack.hum.toFixed(0)}%</td>
+          <td class="py-2 pr-3 text-xs">${rack.power.toFixed(0)}%</td>
+          <td class="py-2 pr-3 text-xs text-slate-300">${(rack.apps || []).join(", ")}</td>
+          <td class="py-2 pr-3 text-xs">
+            <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-slate-900 border border-slate-600">
+              <span class="w-1.5 h-1.5 rounded-full ${statusColor}"></span>
+              <span class="capitalize">${rack.status}</span>
+            </span>
+          </td>
+        `;
+        body.appendChild(tr);
+      });
+    }
+
+    function renderApps(site){
+      const chips = document.getElementById("appsChips");
+      const summary = document.getElementById("appsSummary");
+      if (!chips) return;
+      chips.innerHTML = "";
+
+      let ok=0, warning=0, down=0;
+      site.apps.forEach(app => {
+        if (app.status === "ok") ok++;
+        else if (app.status === "warning") warning++;
+        else down++;
+
+        const color =
+          app.status === "ok"      ? "border-emerald-500 text-emerald-300"
+        : app.status === "warning" ? "border-amber-400 text-amber-300"
+        : "border-rose-500 text-rose-300";
+
+        const span = document.createElement("span");
+        span.className = `px-2 py-1 rounded-full border text-[11px] bg-slate-900/60 ${color}`;
+        span.textContent = app.name + " · " + app.status.toUpperCase();
+        chips.appendChild(span);
+      });
+
+      if (summary) {
+        summary.textContent = `${ok} OK · ${warning} Degraded · ${down} Down`;
+      }
+    }
+
+    function renderDashboard(){
+      const site = getCurrentSite();
+      renderSummary(site);
+      renderEnvChart(site);
+      renderPowerChart(site);
+      renderRacks(site);
+      renderApps(site);
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      initSiteSelector();
+      renderDashboard();
+    });
+  </script>
+
+</body>
+</html>
