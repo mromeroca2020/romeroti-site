@@ -1,3 +1,4 @@
+
 (function(){
   // ============================================================
   // RomanoTI nav.js — Header global + selector de idioma + menú
@@ -11,34 +12,26 @@
   //    - Normaliza rutas (quita /index.html, dobles barras, etc.)
   // 3) Montaje del header aunque no exista #app-header (lo inserta al inicio)
   // 4) Cableado del submenú "Solutions" con hover/click y cierre fuera/ESC
-  //
-  // Requisitos:
-  // - Añadir en TODAS las páginas:
-  //   <div id="app-header"></div>
-  //   <div id="app-footer"></div>   (si usas footer.js)
-  //   <script defer src="/js/nav.js?v=6"></script>
-  //
-  // Notas hosting:
-  // - Si tu hosting bloquea HEAD (raro), el try/catch ya hace fallback al home.
-  // - Si usas reglas en _redirects que redirigen a /index.html inglés,
-  //   este script evita ese "rebote" gracias al fallback inmediato al home del idioma.
+  // 5) NUEVO: Menú "Services" (solo CSS, sin JS extra; soporta EN/FR/ES)
   // ============================================================
 
-  // 0) Señal de arranque para debugging
   console.log('[nav] booting…');
 
   // 1) Detección de idioma por ruta
   const path = location.pathname || '/';
-  // lang actual por prefijo: /en /fr /es ; si nada coincide → 'es'
-  const lang = path.startsWith('/en/') ? 'en'
-             : path === '/en'        ? 'en'
-             : path.startsWith('/fr/') ? 'fr'
-             : path === '/fr'        ? 'fr'
-             : path.startsWith('/es/') ? 'es'
-             : path === '/es'        ? 'es'
-             : 'es';
 
-  // base (prefijo a usar en enlaces del nav)
+  // 👇 Nueva lógica:
+  // - "/" se considera inglés
+  // - /en, /fr, /es siguen funcionando igual
+  const lang = path === '/'              ? 'en'
+             : path.startsWith('/en/')   ? 'en'
+             : path === '/en'           ? 'en'
+             : path.startsWith('/fr/')  ? 'fr'
+             : path === '/fr'           ? 'fr'
+             : path.startsWith('/es/')  ? 'es'
+             : path === '/es'           ? 'es'
+             : 'en';  // fallback seguro
+
   const base = lang === 'en' ? '/en'
              : lang === 'fr' ? '/fr'
              : '/es';
@@ -49,10 +42,20 @@
       brand:'RomanoTI Solutions',
       home:'Inicio', solutions:'Soluciones', tools:'Herramientas',
       noc:'NOC', soc:'SOC', book:'Agendar',
+      // Menú Solutions
       overview:'Resumen', mdr:'CyberShield (MDR)', socConsole:'Consola SOC',
       easm:'Consola EASM', fieldKit:'Field Kit (ingenieros)',
       quickAudit:'Auditoría rápida', pov:'POV 14 días',
-      lang:'Idioma', en:'English', fr:'Français', es:'Español'
+      // Language
+      lang:'Idioma', en:'English', fr:'Français', es:'Español',
+      // 🔹 NUEVO: Menú Services
+      services:'Servicios',
+      serviceCloud:'Cloud Migration',
+      serviceInfra:'Infraestructura TI',
+      serviceCyber:'Ciberseguridad',
+      serviceDC:'Data Center & Virtualización',
+      serviceDR:'Backups y DRP',
+      serviceNOC:'Servicios NOC'
     },
     en: {
       brand:'RomanoTI Solutions',
@@ -61,7 +64,15 @@
       overview:'Overview', mdr:'CyberShield (MDR)', socConsole:'SOC Console',
       easm:'EASM Console', fieldKit:'Field Kit (engineers)',
       quickAudit:'Quick Audit', pov:'14-day POV',
-      lang:'Language', en:'English', fr:'Français', es:'Español'
+      lang:'Language', en:'English', fr:'Français', es:'Español',
+      // 🔹 NEW: Services menu
+      services:'Services',
+      serviceCloud:'Cloud Migration',
+      serviceInfra:'IT Infrastructure',
+      serviceCyber:'Cybersecurity',
+      serviceDC:'Data Center & Virtualization',
+      serviceDR:'Backups & Disaster Recovery',
+      serviceNOC:'NOC Services'
     },
     fr: {
       brand:'RomanoTI Solutions',
@@ -70,7 +81,15 @@
       overview:'Aperçu', mdr:'CyberShield (MDR)', socConsole:'Console SOC',
       easm:'Console EASM', fieldKit:'Field Kit (ingénieurs)',
       quickAudit:'Audit rapide', pov:'POV 14 jours',
-      lang:'Langue', en:'English', fr:'Français', es:'Español'
+      lang:'Langue', en:'English', fr:'Français', es:'Español',
+      // 🔹 NOUVEAU : menu Services
+      services:'Services',
+      serviceCloud:'Migration vers le cloud',
+      serviceInfra:'Infrastructure TI',
+      serviceCyber:'Cybersécurité',
+      serviceDC:'Centre de données & Virtualisation',
+      serviceDR:'Sauvegardes & PRA',
+      serviceNOC:'Services NOC'
     }
   };
   const I18N = I18N_MAP[lang];
@@ -88,6 +107,30 @@
         <nav class="hidden md:flex items-center space-x-8">
           <a href="${base}/" class="text-gray-700 hover:text-blue-600">${I18N.home}</a>
 
+          <!-- 🔹 Dropdown Services (ahora controlado por JS, igual que Solutions) -->
+          <div class="relative" id="navServicesRoot">
+            <button id="navServicesBtn"
+                    class="text-gray-700 hover:text-blue-600 inline-flex items-center"
+                    aria-haspopup="true" aria-expanded="false" aria-controls="navServicesMenu">
+              ${I18N.services}
+              <svg class="ml-1 w-4 h-4" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.58l3.71-3.35a.75.75 0 111.02 1.1l-4.2 3.79a.75.75 0 01-1.02 0l-4.2-3.79a.75.75 0 01.02-1.06z" clip-rule="evenodd"/>
+              </svg>
+            </button>
+            <div id="navServicesMenu"
+                 class="absolute right-0 mt-2 w-72 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5 py-2 hidden z-40"
+                 role="menu" aria-labelledby="navServicesBtn">
+              <a href="${base}/services/cloud-migration"   class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem">${I18N.serviceCloud}</a>
+              <a href="${base}/services/it-infrastructure" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem">${I18N.serviceInfra}</a>
+              <a href="${base}/services/cybersecurity"     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem">${I18N.serviceCyber}</a>
+              <a href="${base}/services/data-center"       class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem">${I18N.serviceDC}</a>
+              <a href="${base}/services/disaster-recovery" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem">${I18N.serviceDR}</a>
+              <a href="${base}/services/noc"               class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem">${I18N.serviceNOC}</a>
+            </div>
+          </div>
+
+
+          <!-- Dropdown: Solutions -->
           <div class="relative" id="navSolutionsRoot">
             <button id="navSolutionsBtn"
                     class="text-gray-700 hover:text-blue-600 inline-flex items-center"
@@ -127,6 +170,7 @@
           </div>
         </nav>
 
+        <!-- Vista móvil: botón directo a Solutions (Services se podrá tratar luego si quieres) -->
         <div class="md:hidden">
           <a href="${base}/solutions/" class="bg-blue-600 text-white px-4 py-2 rounded-lg">${I18N.solutions}</a>
         </div>
@@ -149,28 +193,21 @@
   }
 
   // ---- Helpers idioma ----
-
-  // Limpia el prefijo de idioma actual (/en, /fr, /es) y normaliza la ruta
   function cleanPath(p){
     if (!p) return '/';
-    // quita /en /fr /es tanto si hay slash después como si no
     let out = p.replace(/^\/(en|fr|es)(?=\/|$)/, '');
     if (!out) out = '/';
-    // normaliza dobles barras
     out = out.replace(/\/{2,}/g, '/');
-    // quita index.html final redundante
     out = out.replace(/\/index\.html$/i, '/');
     return out;
   }
 
-  // Ir a idioma elegido: intenta misma ruta; si 404/blocked → fallback al home
   async function goToLanguage(targetLang){
     const prefix   = targetLang === 'en' ? '/en' : targetLang === 'fr' ? '/fr' : '/es';
     const current  = cleanPath(location.pathname);
     const target   = prefix + (current.startsWith('/') ? current : '/' + current);
     const fallback = prefix + '/';
 
-    // Si estamos en file:// o HEAD bloqueado, el catch nos llevará al fallback
     try{
       const res = await fetch(target, { method:'HEAD' });
       if (res.ok) {
@@ -210,10 +247,27 @@
 
     if (langBtn && langMenu && !langBtn.dataset.wired){
       const close = ()=> langMenu.classList.add('hidden');
-      langBtn.addEventListener('click', (e)=>{ e.preventDefault(); e.stopPropagation(); langMenu.classList.toggle('hidden'); });
-      langRoot && langRoot.addEventListener('mouseleave', ()=> setTimeout(close, 120));
-      document.addEventListener('click', (e)=>{ if (!langMenu.contains(e.target) && e.target !== langBtn) close(); });
 
+      // Al hacer clic en el botón 🌐 se abre/cierra el menú de idioma
+      langBtn.addEventListener('click', (e)=>{ 
+        e.preventDefault(); 
+        e.stopPropagation(); 
+        langMenu.classList.toggle('hidden'); 
+      });
+
+      // 🔴 IMPORTANTE:
+      // Antes teníamos:
+      //   langRoot && langRoot.addEventListener('mouseleave', ()=> setTimeout(close, 120));
+      // Eso hacía que el menú se cerrara casi de inmediato
+      // cuando movías el mouse hacia las opciones (comportamiento "intermitente").
+      // Lo eliminamos para que el usuario pueda bajar tranquilamente y seleccionar el idioma.
+
+      // Cerrar cuando se hace clic fuera del menú
+      document.addEventListener('click', (e)=>{ 
+        if (!langMenu.contains(e.target) && e.target !== langBtn) close(); 
+      });
+
+      // Al hacer clic en una opción de idioma, cambiamos de idioma
       langMenu.querySelectorAll('a[data-lang]').forEach(a=>{
         a.addEventListener('click', (e)=>{
           e.preventDefault();
@@ -226,12 +280,12 @@
     }
   }
 
+
   // 6) Boot
   function boot(){ mountHeader(); wireMenus(); console.log('[nav] mounted & wired'); }
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', ()=> {
       boot();
-      // Retrys por si el DOM tardó
       setTimeout(wireMenus,200);
       setTimeout(wireMenus,800);
     });
