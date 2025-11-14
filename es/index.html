@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>RomanoTI Solutions | Infraestructura TI y Ciberseguridad</title>
+
+  <!-- Favicons -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16.png">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#2563eb">
+  <meta name="theme-color" content="#2563eb">
+
+  <!-- Tailwind + Montserrat -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    body{font-family:'Montserrat',sans-serif;background:#f8f9fa;color:#111827;scroll-behavior:smooth}
+    .hero-bg{background:linear-gradient(135deg,#1e3a8a 0%,#2563eb 100%)}
+    .btn-primary{background:#2563EB;transition:all .2s}
+    .btn-primary:hover{background:#1D4ED8;transform:translateY(-1px);box-shadow:0 6px 18px -10px rgba(37,99,235,.7)}
+    .card{border-radius:14px;box-shadow:0 12px 32px -16px rgba(2,6,23,.2)}
+    .badge{display:inline-block;border:1px solid #cbd5e1;border-radius:999px;padding:4px 10px;font-size:12px;background:#f8fafc}
+  </style>
+</head>
+<body class="bg-gray-50">
+
+  <!-- Barra de idioma temporal (hasta que nav.js tenga el selector) -->
+  <div class="langbar text-sm bg-gray-100 border-b">
+    <div class="container mx-auto px-6 py-2 flex gap-4">
+      <span>Idioma:</span>
+      <a href="/en/" class="font-semibold">English</a>
+      <a href="/fr/" class="font-semibold">Français</a>
+      <a href="/es/" class="font-semibold">Español</a>
+    </div>
+  </div>
+
+  <script>
+  // ===========================
+  // Barra de idioma (ES home)
+  // Marca en negrilla el idioma
+  // según la URL actual.
+  // NO toca nav.js ni los menús.
+  // ===========================
+  (function () {
+    const path = window.location.pathname || "/";
+
+    // Detectar idioma por la ruta
+    // - /en o /en/... → en
+    // - /fr o /fr/... → fr
+    // - / o /es/...   → es (por defecto)
+    let current = "es";
+    if (path === "/en" || path.startsWith("/en/")) {
+      current = "en";
+    } else if (path === "/fr" || path.startsWith("/fr/")) {
+      current = "fr";
+    } else if (path === "/es" || path.startsWith("/es/")) {
+      current = "es";
+    }
+
+    const bar = document.querySelector(".langbar");
+    if (!bar) return;
+
+    bar.querySelectorAll("a").forEach((a) => {
+      const href = a.getAttribute("href") || "";
+
+      const isCurrent =
+        (current === "en" && href.startsWith("/en")) ||
+        (current === "fr" && href.startsWith("/fr")) ||
+        (current === "es" && (href === "/" || href.startsWith("/es")));
+
+      if (isCurrent) {
+        // Aplicar negrilla al idioma actual
+        a.classList.add("font-semibold");
+      } else {
+        a.classList.remove("font-semibold");
+      }
+    });
+  })();
+</script>
+
+
+  <!-- Punto de montaje del header global -->
+  <div id="app-header"></div>
+
+  <!-- ===== Encabezado fallback (se oculta cuando nav.js monta el real) ===== -->
+  <header id="fallback-header" class="bg-white shadow-sm sticky top-0 z-40">
+    <div class="container mx-auto px-6 py-3">
+      <div class="flex items-center justify-between">
+        <a href="/es/" class="flex items-center font-bold text-xl text-gray-900">
+          <span class="bg-blue-600 text-white rounded-full w-10 h-10 grid place-items-center mr-3">R</span>
+          RomanoTI Solutions (cargando…)
+        </a>
+        <a href="/es/solutions/" class="bg-blue-600 text-white px-4 py-2 rounded-lg">Soluciones</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== Hero ===== -->
+  <section class="hero-bg text-white">
+    <div class="container mx-auto px-6 py-20 text-center">
+      <h1 class="text-4xl md:text-5xl font-bold mb-6">Infraestructura TI y Ciberseguridad profesional</h1>
+      <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
+        Experiencia certificada por Microsoft y Cisco, detección 24/7, contención rápida de incidentes y menos interrupciones.
+      </p>
+      <div class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-6">
+        <a href="tel:4386309157" class="btn-primary text-white px-8 py-3 rounded-lg font-semibold">Asistencia de emergencia</a>
+        <a href="https://calendly.com/mauricioromeroca" class="bg-white text-blue-700 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100">
+          Reservar una consulta gratuita
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Banner EASM ===== -->
+  <section class="bg-blue-50 border-t border-b border-blue-100">
+    <div class="container mx-auto px-6 py-4 flex flex-col md:flex-row items-center justify-between gap-3">
+      <div class="text-blue-900 font-semibold">
+        ¿Tu dominio está expuesto? Ejecuta un escaneo EASM rápido.
+      </div>
+      <div class="flex gap-3">
+        <a href="/es/solutions/cybershield/easm-console.html" class="bg-white border px-5 py-2 rounded-lg font-medium hover:bg-gray-50">
+          Ver la demo EASM
+        </a>
+        <a href="/es/solutions/cybershield/" class="btn-primary text-white px-5 py-2 rounded-lg font-medium">
+          Descubrir CyberShield (MDR)
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Sobre nosotros ===== -->
+  <section id="about-us" class="py-14 bg-white">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-10">
+        <h2 class="text-3xl font-bold">Acerca de RomanoTI Solutions</h2>
+        <p class="text-xl text-gray-600 max-w-2xl mx-auto">Más de 10 años de excelencia en infraestructura TI y ciberseguridad</p>
+      </div>
+      <div class="max-w-4xl mx-auto text-lg text-gray-700 space-y-6">
+        <p>RomanoTI Solutions aporta más de 10 años de experiencia práctica en infraestructura TI empresarial, migración a la nube y ciberseguridad. Ayudamos a las PYMES a proteger sus datos, optimizar sus redes y migrar a plataformas modernas en la nube.</p>
+        <p>Cada empresa es única: adaptamos nuestros servicios a tus necesidades.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Por qué elegirnos ===== -->
+  <section class="py-14">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-10">
+        <h2 class="text-3xl font-bold">Por qué elegirnos para la ciberseguridad</h2>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto">Menor superficie de ataque, detección más temprana y respuestas guiadas.</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="card bg-white p-6">
+          <div class="badge">EASM + Endurecimiento</div>
+          <h3 class="text-xl font-bold mt-2 mb-2">Reducimos la exposición</h3>
+          <p class="text-gray-600">Descubrimiento de subdominios, puertos y postura de correo (SPF/DMARC/DKIM) para cerrar vulnerabilidades antes de un ataque.</p>
+          <a href="/es/solutions/cybershield/easm-console.html" class="text-blue-600 hover:underline mt-3 inline-block">Probar EASM →</a>
+        </div>
+        <div class="card bg-white p-6">
+          <div class="badge">SOC / MDR 24×7</div>
+          <h3 class="text-xl font-bold mt-2 mb-2">Detección y Respuesta</h3>
+          <p class="text-gray-600">Correlación de eventos (Wazuh/ELK), IOCs/IOAs y guías de contención: aislar el host, bloquear IP y restablecer credenciales.</p>
+          <a href="/es/it-soc.html" class="text-blue-600 hover:underline mt-3 inline-block">Ver el SOC →</a>
+        </div>
+        <div class="card bg-white p-6">
+          <div class="badge">NOC + Resiliencia</div>
+          <h3 class="text-xl font-bold mt-2 mb-2">Disponibilidad primero</h3>
+          <p class="text-gray-600">Supervisión de servicios (HTTP/TLS/DNS) y capacidad; informes ejecutivos para planificar el crecimiento sin sorpresas.</p>
+          <a href="/es/it-noc.html" class="text-blue-600 hover:underline mt-3 inline-block">Ver el NOC →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Servicios clave ===== -->
+  <section id="services" class="py-14">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-10">
+        <h2 class="text-3xl font-bold">Servicios clave</h2>
+        <p class="text-xl text-gray-600 max-w-2xl mx-auto">Soluciones TI completas adaptadas a tu empresa</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="card bg-white p-6">
+          <h3 class="text-xl font-bold mb-2">Migración a la Nube</h3>
+          <p class="text-gray-600">Transición fluida a Microsoft Azure.</p>
+          <div class="mt-4 space-y-2">
+            <a href="/es/cloud-redundancy.html" class="text-blue-600 hover:underline text-sm">→ Conmutación y Redundancia</a><br/>
+            <a href="/es/cloud-hybrid.html" class="text-blue-600 hover:underline text-sm">→ Arquitectura Híbrida en la Nube</a>
+          </div>
+        </div>
+
+        <div class="card bg-white p-6">
+          <h3 class="text-xl font-bold mb-2">Infraestructura TI</h3>
+          <p class="text-gray-600">Gestión integral de tu stack tecnológico.</p>
+          <div class="mt-4 space-y-2">
+            <a href="/es/it-noc.html" class="text-blue-600 hover:underline text-sm">→ Servicios NOC</a><br/>
+            <a href="/es/it-soc.html" class="text-blue-600 hover:underline text-sm">→ Servicios SOC</a>
+          </div>
+        </div>
+
+        <div class="card bg-white p-6">
+          <h3 class="text-xl font-bold mb-2">Ciberseguridad</h3>
+          <p class="text-gray-600">Protección contra ransomware y filtraciones de datos.</p>
+          <div class="mt-4 flex flex-wrap gap-3">
+            <a href="/es/solutions/cybershield/" class="btn-primary text-white px-4 py-2 rounded-lg inline-block">Explorar CyberShield</a>
+            <a href="/es/solutions/cybershield/easm-console.html" class="border px-4 py-2 rounded-lg inline-block hover:bg-gray-50">Demo EASM</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA final ===== -->
+  <section class="py-14 bg-blue-700 text-white">
+    <div class="container mx-auto px-6 text-center">
+      <h2 class="text-3xl font-bold mb-4">¿Listo para reducir riesgos y tiempos de inactividad?</h2>
+      <p class="text-lg opacity-90 mb-6">Planifiquemos una evaluación de postura de 20 minutos.</p>
+      <div class="flex flex-col md:flex-row justify-center gap-4">
+        <a href="https://calendly.com/mauricioromeroca" class="bg-white text-blue-700 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100">Reservar una llamada</a>
+        <a href="/es/services/tools.html" class="btn-primary text-white px-6 py-3 rounded-lg font-semibold">Abrir Tools</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer global -->
+  <div id="app-footer"></div>
+
+  <!-- Quita el fallback sólo si el header real ya está montado -->
+  <script>
+    (function(){
+      const fb = document.getElementById('fallback-header');
+      if (!fb) return;
+      function removeFallbackSafely() {
+        const mount = document.getElementById('app-header');
+        const injected = mount && mount.querySelector('header');
+        if (injected && fb.parentNode) { fb.parentNode.removeChild(fb); return true; }
+        return false;
+      }
+      if (!removeFallbackSafely()) {
+        setTimeout(removeFallbackSafely,150);
+        setTimeout(removeFallbackSafely,400);
+        setTimeout(removeFallbackSafely,1000);
+        setTimeout(removeFallbackSafely,2000);
+      }
+    })();
+  </script>
+
+  <!-- Footer global -->
+  <div id="app-footer"></div>
+
+  <!-- Quita el fallback sólo si el header real ya está montado -->
+  <script>
+    (function(){
+      const fb = document.getElementById('fallback-header');
+      if (!fb) return;
+      function removeFallbackSafely() {
+        const mount = document.getElementById('app-header');
+        const injected = mount && mount.querySelector('header');
+        if (injected && fb.parentNode) { fb.parentNode.removeChild(fb); return true; }
+        return false;
+      }
+      if (!removeFallbackSafely()) {
+        setTimeout(removeFallbackSafely,150);
+        setTimeout(removeFallbackSafely,400);
+        setTimeout(removeFallbackSafely,1000);
+        setTimeout(removeFallbackSafely,2000);
+      }
+    })();
+  </script>
+
+  <!-- Nav/Footer unificados (v7) -->
+  <script defer src="/js/nav.js?v=8"></script>
+  <script defer src="/js/footer.js?v=8"></script>
+  <script defer src="/js/fix-nav.js?v=8"></script>
+
+    <!-- Nav/Footer unified -->
+  <script defer src="/js/nav.js?v=8"></script>
+  <script defer src="/js/footer.js?v=8"></script>
+  <script defer src="/js/fix-nav.js?v=8"></script>
+
+  <!-- ================================
+       LANG BAR: resaltar idioma activo
+       ================================ -->
+  <script>
+    (function () {
+      var path = window.location.pathname || "/";
+
+      // Enlaces de la barra de idioma
+      var enLink = document.querySelector('.langbar a[href="/en/"]');
+      var frLink = document.querySelector('.langbar a[href="/fr/"]');
+      var esLink = document.querySelector('.langbar a[href="/es/"]');
+
+      // Si no existe la barra, salimos sin hacer nada
+      if (!enLink && !frLink && !esLink) return;
+
+      // Quitar negrilla a todos
+      [enLink, frLink, esLink].forEach(function (a) {
+        if (a) a.classList.remove("font-semibold");
+      });
+
+      // Detectar idioma por la URL y aplicar negrilla
+      if (path.startsWith("/en/")) {
+        if (enLink) enLink.classList.add("font-semibold");
+      } else if (path.startsWith("/fr/")) {
+        if (frLink) frLink.classList.add("font-semibold");
+      } else {
+        // Español: raíz "/" o cualquier ruta "/es/..."
+        if (esLink) esLink.classList.add("font-semibold");
+      }
+    })();
+  </script>
+
+
+</body>
+</html>
