@@ -220,7 +220,7 @@
     }
   }
 
-  // 5) Cableado de menús (Solutions + Idioma)
+   // 5) Cableado de menús (Solutions + Services + Idioma)
   function wireMenus(){
     // ---- Solutions submenu ----
     const btn  = document.getElementById('navSolutionsBtn');
@@ -228,16 +228,65 @@
     const root = document.getElementById('navSolutionsRoot');
 
     if (btn && menu && !btn.dataset.wired) {
-      const open  = () => { menu.classList.remove('hidden'); btn.setAttribute('aria-expanded','true'); };
-      const close = () => { menu.classList.add('hidden');  btn.setAttribute('aria-expanded','false'); };
-      const toggle= (e)=>{ e && (e.preventDefault(), e.stopPropagation()); menu.classList.contains('hidden') ? open() : close(); };
+      const open  = () => { 
+        menu.classList.remove('hidden'); 
+        btn.setAttribute('aria-expanded','true'); 
+      };
+      const close = () => { 
+        menu.classList.add('hidden');  
+        btn.setAttribute('aria-expanded','false'); 
+      };
+      const toggle = (e) => {
+        if (e) { e.preventDefault(); e.stopPropagation(); }
+        menu.classList.contains('hidden') ? open() : close();
+      };
+
       btn.addEventListener('click', toggle);
       btn.addEventListener('mouseenter', open);
       root && root.addEventListener('mouseleave', ()=> setTimeout(close, 120));
-      document.addEventListener('click', (e)=>{ if (!menu.contains(e.target) && e.target !== btn) close(); });
-      document.addEventListener('keydown', (e)=>{ if (e.key === 'Escape') close(); });
+      document.addEventListener('click', (e)=>{ 
+        if (!menu.contains(e.target) && e.target !== btn) close(); 
+      });
+      document.addEventListener('keydown', (e)=>{ 
+        if (e.key === 'Escape') close(); 
+      });
       root && (root.style.overflow = 'visible');
       btn.dataset.wired = '1';
+    }
+
+    // ---- Services submenu ----
+    const sBtn  = document.getElementById('navServicesBtn');
+    const sMenu = document.getElementById('navServicesMenu');
+    const sRoot = document.getElementById('navServicesRoot');
+
+    if (sBtn && sMenu && !sBtn.dataset.wired) {
+      const sOpen  = () => {
+        sMenu.classList.remove('hidden');
+        sBtn.setAttribute('aria-expanded','true');
+      };
+      const sClose = () => {
+        sMenu.classList.add('hidden');
+        sBtn.setAttribute('aria-expanded','false');
+      };
+      const sToggle = (e) => {
+        if (e) { e.preventDefault(); e.stopPropagation(); }
+        sMenu.classList.contains('hidden') ? sOpen() : sClose();
+      };
+
+      sBtn.addEventListener('click', sToggle);
+      sBtn.addEventListener('mouseenter', sOpen);
+      sRoot && sRoot.addEventListener('mouseleave', () => setTimeout(sClose, 120));
+
+      document.addEventListener('click', (e) => {
+        if (!sMenu.contains(e.target) && e.target !== sBtn) sClose();
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') sClose();
+      });
+
+      sRoot && (sRoot.style.overflow = 'visible');
+      sBtn.dataset.wired = '1';
     }
 
     // ---- Language menu ----
@@ -254,13 +303,6 @@
         e.stopPropagation(); 
         langMenu.classList.toggle('hidden'); 
       });
-
-      // 🔴 IMPORTANTE:
-      // Antes teníamos:
-      //   langRoot && langRoot.addEventListener('mouseleave', ()=> setTimeout(close, 120));
-      // Eso hacía que el menú se cerrara casi de inmediato
-      // cuando movías el mouse hacia las opciones (comportamiento "intermitente").
-      // Lo eliminamos para que el usuario pueda bajar tranquilamente y seleccionar el idioma.
 
       // Cerrar cuando se hace clic fuera del menú
       document.addEventListener('click', (e)=>{ 
