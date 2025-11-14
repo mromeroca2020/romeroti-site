@@ -233,6 +233,45 @@
   <script defer src="/js/nav.js?v=8"></script>
   <script defer src="/js/footer.js?v=8"></script>
   <script defer src="/js/fix-nav.js?v=8"></script>
+
+    <!-- Nav/Footer unified -->
+  <script defer src="/js/nav.js?v=8"></script>
+  <script defer src="/js/footer.js?v=8"></script>
+  <script defer src="/js/fix-nav.js?v=8"></script>
+
+  <!-- ================================
+       LANG BAR: resaltar idioma activo
+       ================================ -->
+  <script>
+    (function () {
+      var path = window.location.pathname || "/";
+
+      // Enlaces de la barra de idioma
+      var enLink = document.querySelector('.langbar a[href="/en/"]');
+      var frLink = document.querySelector('.langbar a[href="/fr/"]');
+      var esLink = document.querySelector('.langbar a[href="/"]');
+
+      // Si no existe la barra, salimos sin hacer nada
+      if (!enLink && !frLink && !esLink) return;
+
+      // Quitar negrilla a todos
+      [enLink, frLink, esLink].forEach(function (a) {
+        if (a) a.classList.remove("font-semibold");
+      });
+
+      // Detectar idioma por la URL y aplicar negrilla
+      if (path.startsWith("/en/")) {
+        if (enLink) enLink.classList.add("font-semibold");
+      } else if (path.startsWith("/fr/")) {
+        if (frLink) frLink.classList.add("font-semibold");
+      } else {
+        // Español: raíz "/" o cualquier ruta "/es/..."
+        if (esLink) esLink.classList.add("font-semibold");
+      }
+    })();
+  </script>
+
+
 </body>
 </html>
 
