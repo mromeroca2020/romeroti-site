@@ -1,4 +1,3 @@
-
 (function(){
   // ============================================================
   // RomanoTI nav.js — Header global + selector de idioma + menú
@@ -12,7 +11,8 @@
   //    - Normaliza rutas (quita /index.html, dobles barras, etc.)
   // 3) Montaje del header aunque no exista #app-header (lo inserta al inicio)
   // 4) Cableado del submenú "Solutions" con hover/click y cierre fuera/ESC
-  // 5) NUEVO: Menú "Services" (solo CSS, sin JS extra; soporta EN/FR/ES)
+  // 5) Menú "Services" (dropdown)
+  // 6) NUEVO: Ítem de menú "DC Monitor" que apunta al dashboard
   // ============================================================
 
   console.log('[nav] booting…');
@@ -20,16 +20,15 @@
   // 1) Detección de idioma por ruta
   const path = location.pathname || '/';
 
-  // 👇 Nueva lógica:
   // - "/" se considera inglés
   // - /en, /fr, /es siguen funcionando igual
   const lang = path === '/'              ? 'en'
              : path.startsWith('/en/')   ? 'en'
-             : path === '/en'           ? 'en'
-             : path.startsWith('/fr/')  ? 'fr'
-             : path === '/fr'           ? 'fr'
-             : path.startsWith('/es/')  ? 'es'
-             : path === '/es'           ? 'es'
+             : path === '/en'            ? 'en'
+             : path.startsWith('/fr/')   ? 'fr'
+             : path === '/fr'            ? 'fr'
+             : path.startsWith('/es/')   ? 'es'
+             : path === '/es'            ? 'es'
              : 'en';  // fallback seguro
 
   const base = lang === 'en' ? '/en'
@@ -48,14 +47,16 @@
       quickAudit:'Auditoría rápida', pov:'POV 14 días',
       // Language
       lang:'Idioma', en:'English', fr:'Français', es:'Español',
-      // 🔹 NUEVO: Menú Services
+      // Menú Services
       services:'Servicios',
       serviceCloud:'Cloud Migration',
       serviceInfra:'Infraestructura TI',
       serviceCyber:'Ciberseguridad',
       serviceDC:'Data Center & Virtualización',
       serviceDR:'Backups y DRP',
-      serviceNOC:'Servicios NOC'
+      serviceNOC:'Servicios NOC',
+      // 🔹 NUEVO: etiqueta para el item de menú del dashboard
+      dcMonitor:'DC Monitor'
     },
     en: {
       brand:'RomanoTI Solutions',
@@ -65,14 +66,16 @@
       easm:'EASM Console', fieldKit:'Field Kit (engineers)',
       quickAudit:'Quick Audit', pov:'14-day POV',
       lang:'Language', en:'English', fr:'Français', es:'Español',
-      // 🔹 NEW: Services menu
+      // Services menu
       services:'Services',
       serviceCloud:'Cloud Migration',
       serviceInfra:'IT Infrastructure',
       serviceCyber:'Cybersecurity',
       serviceDC:'Data Center & Virtualization',
       serviceDR:'Backups & Disaster Recovery',
-      serviceNOC:'NOC Services'
+      serviceNOC:'NOC Services',
+      // 🔹 NEW: label for dashboard menu item
+      dcMonitor:'DC Monitor'
     },
     fr: {
       brand:'RomanoTI Solutions',
@@ -82,14 +85,16 @@
       easm:'Console EASM', fieldKit:'Field Kit (ingénieurs)',
       quickAudit:'Audit rapide', pov:'POV 14 jours',
       lang:'Langue', en:'English', fr:'Français', es:'Español',
-      // 🔹 NOUVEAU : menu Services
+      // Menu Services
       services:'Services',
       serviceCloud:'Migration vers le cloud',
       serviceInfra:'Infrastructure TI',
       serviceCyber:'Cybersécurité',
       serviceDC:'Centre de données & Virtualisation',
       serviceDR:'Sauvegardes & PRA',
-      serviceNOC:'Services NOC'
+      serviceNOC:'Services NOC',
+      // 🔹 NOUVEAU : libellé pour le menu du dashboard
+      dcMonitor:'DC Monitor'
     }
   };
   const I18N = I18N_MAP[lang];
@@ -107,7 +112,7 @@
         <nav class="hidden md:flex items-center space-x-8">
           <a href="${base}/" class="text-gray-700 hover:text-blue-600">${I18N.home}</a>
 
-          <!-- 🔹 Dropdown Services (ahora controlado por JS, igual que Solutions) -->
+          <!-- 🔹 Dropdown Services -->
           <div class="relative" id="navServicesRoot">
             <button id="navServicesBtn"
                     class="text-gray-700 hover:text-blue-600 inline-flex items-center"
@@ -128,7 +133,6 @@
               <a href="${base}/services/noc"               class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem">${I18N.serviceNOC}</a>
             </div>
           </div>
-
 
           <!-- Dropdown: Solutions -->
           <div class="relative" id="navSolutionsRoot">
@@ -154,6 +158,12 @@
 
           <a href="${base}/services/tools.html" class="text-gray-700 hover:text-blue-600">${I18N.tools}</a>
           <a href="${base}/it-noc.html"         class="text-gray-700 hover:text-blue-600">${I18N.noc}</a>
+
+          <!-- 🔹 NUEVO: enlace directo al dashboard de Data Center
+               Usamos siempre /en/data-center/dashboard.html para que funcione
+               aunque aún no existan /fr/... o /es/... -->
+          <a href="/en/data-center/dashboard.html" class="text-gray-700 hover:text-blue-600">${I18N.dcMonitor}</a>
+
           <a href="${base}/it-soc.html"         class="text-gray-700 hover:text-blue-600">${I18N.soc}</a>
           <a href="https://calendly.com/mauricioromeroca" class="bg-blue-600 text-white px-5 py-2 rounded-lg font-medium">${I18N.book}</a>
 
@@ -170,7 +180,7 @@
           </div>
         </nav>
 
-        <!-- Vista móvil: botón directo a Solutions (Services se podrá tratar luego si quieres) -->
+        <!-- Vista móvil: botón directo a Solutions -->
         <div class="md:hidden">
           <a href="${base}/solutions/" class="bg-blue-600 text-white px-4 py-2 rounded-lg">${I18N.solutions}</a>
         </div>
@@ -220,7 +230,7 @@
     }
   }
 
-   // 5) Cableado de menús (Solutions + Services + Idioma)
+  // 5) Cableado de menús (Solutions + Services + Idioma)
   function wireMenus(){
     // ---- Solutions submenu ----
     const btn  = document.getElementById('navSolutionsBtn');
@@ -297,19 +307,19 @@
     if (langBtn && langMenu && !langBtn.dataset.wired){
       const close = ()=> langMenu.classList.add('hidden');
 
-      // Al hacer clic en el botón 🌐 se abre/cierra el menú de idioma
+      // Botón 🌐 abre/cierra menú
       langBtn.addEventListener('click', (e)=>{ 
         e.preventDefault(); 
         e.stopPropagation(); 
         langMenu.classList.toggle('hidden'); 
       });
 
-      // Cerrar cuando se hace clic fuera del menú
+      // Cerrar clic fuera
       document.addEventListener('click', (e)=>{ 
         if (!langMenu.contains(e.target) && e.target !== langBtn) close(); 
       });
 
-      // Al hacer clic en una opción de idioma, cambiamos de idioma
+      // Cambio de idioma
       langMenu.querySelectorAll('a[data-lang]').forEach(a=>{
         a.addEventListener('click', (e)=>{
           e.preventDefault();
@@ -321,7 +331,6 @@
       langBtn.dataset.wired = '1';
     }
   }
-
 
   // 6) Boot
   function boot(){ mountHeader(); wireMenus(); console.log('[nav] mounted & wired'); }
