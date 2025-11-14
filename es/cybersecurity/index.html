@@ -38,6 +38,51 @@
     </div>
   </div>
 
+  <script>
+  // ===========================
+  // Barra de idioma (ES home)
+  // Marca en negrilla el idioma
+  // según la URL actual.
+  // NO toca nav.js ni los menús.
+  // ===========================
+  (function () {
+    const path = window.location.pathname || "/";
+
+    // Detectar idioma por la ruta
+    // - /en o /en/... → en
+    // - /fr o /fr/... → fr
+    // - / o /es/...   → es (por defecto)
+    let current = "es";
+    if (path === "/en" || path.startsWith("/en/")) {
+      current = "en";
+    } else if (path === "/fr" || path.startsWith("/fr/")) {
+      current = "fr";
+    } else if (path === "/es" || path.startsWith("/es/")) {
+      current = "es";
+    }
+
+    const bar = document.querySelector(".langbar");
+    if (!bar) return;
+
+    bar.querySelectorAll("a").forEach((a) => {
+      const href = a.getAttribute("href") || "";
+
+      const isCurrent =
+        (current === "en" && href.startsWith("/en")) ||
+        (current === "fr" && href.startsWith("/fr")) ||
+        (current === "es" && (href === "/" || href.startsWith("/es")));
+
+      if (isCurrent) {
+        // Aplicar negrilla al idioma actual
+        a.classList.add("font-semibold");
+      } else {
+        a.classList.remove("font-semibold");
+      }
+    });
+  })();
+</script>
+
+
   <!-- Punto de montaje del header global -->
   <div id="app-header"></div>
 
