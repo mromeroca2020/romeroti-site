@@ -34,6 +34,17 @@
 
 <body class="bg-gray-50">
 
+  <!-- ✳️ Language top bar (igual que en ES, pero marcada English) -->
+  <div class="langbar text-sm bg-gray-100 border-b">
+    <div class="container mx-auto px-6 py-2 flex gap-4">
+      <span>Language:</span>
+      <a href="/en/" class="font-semibold">English</a>
+      <a href="/fr/">Français</a>
+      <a href="/">Español</a>
+    </div>
+  </div>
+  <!-- ✳️ FIN language bar -->
+
   <!-- Mount for dynamic header -->
   <div id="app-header"></div>
 
@@ -43,7 +54,7 @@
 <header id="fallback-header" class="bg-white shadow-sm sticky top-0 z-40">
   <div class="container mx-auto px-6 py-3 flex items-center justify-between">
 
-    <!-- ✅ ÚNICO CAMBIO: logo alineado con header.js -->
+    <!-- ✅ ÚNICO CAMBIO previo: logo alineado con header.js -->
     <a href="/en/" class="flex items-center font-bold text-xl text-gray-900">
       <img src="/img/logo-romanoti-blue.png" class="w-10 h-10 mr-3" alt="RomanoTI Logo">
       <span>RomanoTI Solutions</span>
