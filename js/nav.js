@@ -1,103 +1,108 @@
-(function(){
+(function () {
   // ============================================================
   // RomanoTI nav.js — Header global + selector de idioma + menú
   // ============================================================
-  // Cambios clave:
-  // 1) Detección de idioma por ruta: soporta /en, /fr, /es (fallback: /es)
-  // 2) Selector de idioma robusto:
-  //    - Intenta ir a la misma ruta en el idioma elegido
-  //    - Verifica con HEAD si la ruta existe
-  //    - Si no existe, hace fallback al home de ese idioma (/es/ /en/ /fr/)
-  //    - Normaliza rutas (quita /index.html, dobles barras, etc.)
-  // 3) Montaje del header aunque no exista #app-header (lo inserta al inicio)
-  // 4) Cableado del submenú "Solutions" con hover/click y cierre fuera/ESC
-  // 5) Menú "Services" (dropdown)
-  // 6) NUEVO: Ítem de menú "DC Monitor" que apunta al dashboard
+  // 🔒 IMPORTANTE (PRODUCCIÓN):
+  // Este archivo puede llegar a incluirse accidentalmente 2 veces en HTML.
+  // Para NO romper producción, añadimos un "guard" global que:
+  // - evita montar el header dos veces
+  // - evita cablear listeners duplicados
+  //
+  // ✅ FIX 1: Guard global anti-doble-carga
+  // ✅ FIX 2: Persistir idioma en localStorage antes de redirigir (evita doble click)
+  // ✅ FIX 3: HEAD con cache:'no-store' + fallback seguro
   // ============================================================
+
+  // ------------------------------------------------------------
+  // GUARD ANTI-DOBLE-CARGA (si nav.js se carga 2 veces por error)
+  // ------------------------------------------------------------
+  if (window.__ROMANOTI_NAV_BOOTED__) {
+    // Si este log aparece, significa que nav.js se está cargando 2 veces en la página.
+    console.warn('[nav] Already booted. Skipping duplicate init.');
+    return;
+  }
+  window.__ROMANOTI_NAV_BOOTED__ = true;
 
   console.log('[nav] booting…');
 
   // 1) Detección de idioma por ruta
   const path = location.pathname || '/';
 
-  // - "/" se considera inglés
+  // - "/" se considera inglés (tu convención actual)
   // - /en, /fr, /es siguen funcionando igual
-  const lang = path === '/'              ? 'en'
-             : path.startsWith('/en/')   ? 'en'
-             : path === '/en'            ? 'en'
-             : path.startsWith('/fr/')   ? 'fr'
-             : path === '/fr'            ? 'fr'
-             : path.startsWith('/es/')   ? 'es'
-             : path === '/es'            ? 'es'
-             : 'en';  // fallback seguro
+  const lang =
+    path === '/' ? 'en'
+      : path.startsWith('/en/') ? 'en'
+        : path === '/en' ? 'en'
+          : path.startsWith('/fr/') ? 'fr'
+            : path === '/fr' ? 'fr'
+              : path.startsWith('/es/') ? 'es'
+                : path === '/es' ? 'es'
+                  : 'en'; // fallback seguro
 
   const base = lang === 'en' ? '/en'
-             : lang === 'fr' ? '/fr'
-             : '/es';
+    : lang === 'fr' ? '/fr'
+      : '/es';
 
   // 2) Textos por idioma
   const I18N_MAP = {
     es: {
-      brand:'RomanoTI Solutions',
-      home:'Inicio', solutions:'Soluciones', tools:'Herramientas',
-      noc:'NOC', soc:'SOC', book:'Agendar',
+      brand: 'RomanoTI Solutions',
+      home: 'Inicio', solutions: 'Soluciones', tools: 'Herramientas',
+      noc: 'NOC', soc: 'SOC', book: 'Agendar',
       // Menú Solutions
-      overview:'Resumen', mdr:'CyberShield (MDR)', socConsole:'Consola SOC',
-      easm:'Consola EASM', fieldKit:'Field Kit (ingenieros)',
-      quickAudit:'Auditoría rápida', pov:'POV 14 días',
+      overview: 'Resumen', mdr: 'CyberShield (MDR)', socConsole: 'Consola SOC',
+      easm: 'Consola EASM', fieldKit: 'Field Kit (ingenieros)',
+      quickAudit: 'Auditoría rápida', pov: 'POV 14 días',
       // Language
-      lang:'Idioma', en:'English', fr:'Français', es:'Español',
+      lang: 'Idioma', en: 'English', fr: 'Français', es: 'Español',
       // Menú Services
-      services:'Servicios',
-      serviceCloud:'Cloud Migration',
-      serviceInfra:'Infraestructura TI',
-      serviceCyber:'Ciberseguridad',
-      serviceDC:'Data Center & Virtualización',
-      serviceDR:'Backups y DRP',
-      serviceNOC:'Servicios NOC',
-      // 🔹 NUEVO: etiqueta para el item de menú del dashboard
-      dcMonitor:'DC Monitor'
+      services: 'Servicios',
+      serviceCloud: 'Cloud Migration',
+      serviceInfra: 'Infraestructura TI',
+      serviceCyber: 'Ciberseguridad',
+      serviceDC: 'Data Center & Virtualización',
+      serviceDR: 'Backups y DRP',
+      serviceNOC: 'Servicios NOC',
+      dcMonitor: 'DC Monitor'
     },
     en: {
-      brand:'RomanoTI Solutions',
-      home:'Home', solutions:'Solutions', tools:'Tools',
-      noc:'NOC', soc:'SOC', book:'Book Now',
-      overview:'Overview', mdr:'CyberShield (MDR)', socConsole:'SOC Console',
-      easm:'EASM Console', fieldKit:'Field Kit (engineers)',
-      quickAudit:'Quick Audit', pov:'14-day POV',
-      lang:'Language', en:'English', fr:'Français', es:'Español',
-      // Services menu
-      services:'Services',
-      serviceCloud:'Cloud Migration',
-      serviceInfra:'IT Infrastructure',
-      serviceCyber:'Cybersecurity',
-      serviceDC:'Data Center & Virtualization',
-      serviceDR:'Backups & Disaster Recovery',
-      serviceNOC:'NOC Services',
-      // 🔹 NEW: label for dashboard menu item
-      dcMonitor:'DC Monitor'
+      brand: 'RomanoTI Solutions',
+      home: 'Home', solutions: 'Solutions', tools: 'Tools',
+      noc: 'NOC', soc: 'SOC', book: 'Book Now',
+      overview: 'Overview', mdr: 'CyberShield (MDR)', socConsole: 'SOC Console',
+      easm: 'EASM Console', fieldKit: 'Field Kit (engineers)',
+      quickAudit: 'Quick Audit', pov: '14-day POV',
+      lang: 'Language', en: 'English', fr: 'Français', es: 'Español',
+      services: 'Services',
+      serviceCloud: 'Cloud Migration',
+      serviceInfra: 'IT Infrastructure',
+      serviceCyber: 'Cybersecurity',
+      serviceDC: 'Data Center & Virtualization',
+      serviceDR: 'Backups & Disaster Recovery',
+      serviceNOC: 'NOC Services',
+      dcMonitor: 'DC Monitor'
     },
     fr: {
-      brand:'RomanoTI Solutions',
-      home:'Accueil', solutions:'Solutions', tools:'Outils',
-      noc:'NOC', soc:'SOC', book:'Prendre RDV',
-      overview:'Aperçu', mdr:'CyberShield (MDR)', socConsole:'Console SOC',
-      easm:'Console EASM', fieldKit:'Field Kit (ingénieurs)',
-      quickAudit:'Audit rapide', pov:'POV 14 jours',
-      lang:'Langue', en:'English', fr:'Français', es:'Español',
-      // Menu Services
-      services:'Services',
-      serviceCloud:'Migration vers le cloud',
-      serviceInfra:'Infrastructure TI',
-      serviceCyber:'Cybersécurité',
-      serviceDC:'Centre de données & Virtualisation',
-      serviceDR:'Sauvegardes & PRA',
-      serviceNOC:'Services NOC',
-      // 🔹 NOUVEAU : libellé pour le menu du dashboard
-      dcMonitor:'DC Monitor'
+      brand: 'RomanoTI Solutions',
+      home: 'Accueil', solutions: 'Solutions', tools: 'Outils',
+      noc: 'NOC', soc: 'SOC', book: 'Prendre RDV',
+      overview: 'Aperçu', mdr: 'CyberShield (MDR)', socConsole: 'Console SOC',
+      easm: 'Console EASM', fieldKit: 'Field Kit (ingénieurs)',
+      quickAudit: 'Audit rapide', pov: 'POV 14 jours',
+      lang: 'Langue', en: 'English', fr: 'Français', es: 'Español',
+      services: 'Services',
+      serviceCloud: 'Migration vers le cloud',
+      serviceInfra: 'Infrastructure TI',
+      serviceCyber: 'Cybersécurité',
+      serviceDC: 'Centre de données & Virtualisation',
+      serviceDR: 'Sauvegardes & PRA',
+      serviceNOC: 'Services NOC',
+      dcMonitor: 'DC Monitor'
     }
   };
-  const I18N = I18N_MAP[lang];
+
+  const I18N = I18N_MAP[lang] || I18N_MAP.en; // ✅ fallback extra
 
   // 3) HTML del header
   const html = `
@@ -112,7 +117,7 @@
         <nav class="hidden md:flex items-center space-x-8">
           <a href="${base}/" class="text-gray-700 hover:text-blue-600">${I18N.home}</a>
 
-          <!-- 🔹 Dropdown Services -->
+          <!-- Dropdown Services -->
           <div class="relative" id="navServicesRoot">
             <button id="navServicesBtn"
                     class="text-gray-700 hover:text-blue-600 inline-flex items-center"
@@ -134,7 +139,7 @@
             </div>
           </div>
 
-          <!-- Dropdown: Solutions -->
+          <!-- Dropdown Solutions -->
           <div class="relative" id="navSolutionsRoot">
             <button id="navSolutionsBtn"
                     class="text-gray-700 hover:text-blue-600 inline-flex items-center"
@@ -159,9 +164,7 @@
           <a href="${base}/services/tools.html" class="text-gray-700 hover:text-blue-600">${I18N.tools}</a>
           <a href="${base}/it-noc.html"         class="text-gray-700 hover:text-blue-600">${I18N.noc}</a>
 
-          <!-- 🔹 NUEVO: enlace directo al dashboard de Data Center
-               Usamos siempre /en/data-center/dashboard.html para que funcione
-               aunque aún no existan /fr/... o /es/... -->
+          <!-- DC Monitor (siempre en /en por ahora) -->
           <a href="/en/data-center/dashboard.html" class="text-gray-700 hover:text-blue-600">${I18N.dcMonitor}</a>
 
           <a href="${base}/it-soc.html"         class="text-gray-700 hover:text-blue-600">${I18N.soc}</a>
@@ -180,7 +183,6 @@
           </div>
         </nav>
 
-        <!-- Vista móvil: botón directo a Solutions -->
         <div class="md:hidden">
           <a href="${base}/solutions/" class="bg-blue-600 text-white px-4 py-2 rounded-lg">${I18N.solutions}</a>
         </div>
@@ -189,7 +191,15 @@
   </header>`;
 
   // 4) Montaje del header (con fallback si no existe #app-header)
-  function mountHeader(){
+  function mountHeader() {
+    // ✅ FIX: si ya existe un header inyectado, no lo reinyectamos.
+    // Esto protege producción cuando nav.js se carga 2 veces.
+    if (document.documentElement.getAttribute('data-nav-mounted') === '1') {
+      console.warn('[nav] Header already mounted, skipping mount.');
+      window.ROMANOTI_NAV_READY = true;
+      return;
+    }
+
     const mount = document.getElementById('app-header');
     if (mount) {
       mount.innerHTML = html;
@@ -198,12 +208,13 @@
       temp.innerHTML = html;
       document.body.insertBefore(temp.firstElementChild, document.body.firstChild);
     }
-    document.documentElement.setAttribute('data-nav-mounted','1');
+
+    document.documentElement.setAttribute('data-nav-mounted', '1');
     window.ROMANOTI_NAV_READY = true;
   }
 
   // ---- Helpers idioma ----
-  function cleanPath(p){
+  function cleanPath(p) {
     if (!p) return '/';
     let out = p.replace(/^\/(en|fr|es)(?=\/|$)/, '');
     if (!out) out = '/';
@@ -212,39 +223,48 @@
     return out;
   }
 
-  async function goToLanguage(targetLang){
-    const prefix   = targetLang === 'en' ? '/en' : targetLang === 'fr' ? '/fr' : '/es';
-    const current  = cleanPath(location.pathname);
-    const target   = prefix + (current.startsWith('/') ? current : '/' + current);
+  async function goToLanguage(targetLang) {
+    // ✅ FIX: Persistimos el idioma ANTES de redirigir.
+    // Esto evita el "primer click queda en inglés" si otras páginas/scripts
+    // leen el idioma desde localStorage o lo usan como estado.
+    try { localStorage.setItem('lang', targetLang); } catch (e) {}
+
+    const prefix = targetLang === 'en' ? '/en' : targetLang === 'fr' ? '/fr' : '/es';
+    const current = cleanPath(location.pathname);
+    const target = prefix + (current.startsWith('/') ? current : '/' + current);
     const fallback = prefix + '/';
 
-    try{
-      const res = await fetch(target, { method:'HEAD' });
+    try {
+      // ✅ FIX: cache:'no-store' evita respuestas cacheadas raras (CDN/Netlify/Render)
+      const res = await fetch(target, { method: 'HEAD', cache: 'no-store' });
+
+      // Nota: algunos setups con rewrites devuelven 200 aunque el archivo no exista.
+      // Por eso el fallback sigue existiendo.
       if (res.ok) {
         location.href = target + location.search + location.hash;
       } else {
         location.href = fallback;
       }
-    }catch(_){
+    } catch (_) {
       location.href = fallback;
     }
   }
 
   // 5) Cableado de menús (Solutions + Services + Idioma)
-  function wireMenus(){
+  function wireMenus() {
     // ---- Solutions submenu ----
-    const btn  = document.getElementById('navSolutionsBtn');
+    const btn = document.getElementById('navSolutionsBtn');
     const menu = document.getElementById('navSolutionsMenu');
     const root = document.getElementById('navSolutionsRoot');
 
     if (btn && menu && !btn.dataset.wired) {
-      const open  = () => { 
-        menu.classList.remove('hidden'); 
-        btn.setAttribute('aria-expanded','true'); 
+      const open = () => {
+        menu.classList.remove('hidden');
+        btn.setAttribute('aria-expanded', 'true');
       };
-      const close = () => { 
-        menu.classList.add('hidden');  
-        btn.setAttribute('aria-expanded','false'); 
+      const close = () => {
+        menu.classList.add('hidden');
+        btn.setAttribute('aria-expanded', 'false');
       };
       const toggle = (e) => {
         if (e) { e.preventDefault(); e.stopPropagation(); }
@@ -253,30 +273,31 @@
 
       btn.addEventListener('click', toggle);
       btn.addEventListener('mouseenter', open);
-      root && root.addEventListener('mouseleave', ()=> setTimeout(close, 120));
-      document.addEventListener('click', (e)=>{ 
-        if (!menu.contains(e.target) && e.target !== btn) close(); 
+      root && root.addEventListener('mouseleave', () => setTimeout(close, 120));
+      document.addEventListener('click', (e) => {
+        if (!menu.contains(e.target) && e.target !== btn) close();
       });
-      document.addEventListener('keydown', (e)=>{ 
-        if (e.key === 'Escape') close(); 
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') close();
       });
+
       root && (root.style.overflow = 'visible');
       btn.dataset.wired = '1';
     }
 
     // ---- Services submenu ----
-    const sBtn  = document.getElementById('navServicesBtn');
+    const sBtn = document.getElementById('navServicesBtn');
     const sMenu = document.getElementById('navServicesMenu');
     const sRoot = document.getElementById('navServicesRoot');
 
     if (sBtn && sMenu && !sBtn.dataset.wired) {
-      const sOpen  = () => {
+      const sOpen = () => {
         sMenu.classList.remove('hidden');
-        sBtn.setAttribute('aria-expanded','true');
+        sBtn.setAttribute('aria-expanded', 'true');
       };
       const sClose = () => {
         sMenu.classList.add('hidden');
-        sBtn.setAttribute('aria-expanded','false');
+        sBtn.setAttribute('aria-expanded', 'false');
       };
       const sToggle = (e) => {
         if (e) { e.preventDefault(); e.stopPropagation(); }
@@ -300,28 +321,25 @@
     }
 
     // ---- Language menu ----
-    const langBtn  = document.getElementById('langBtn');
+    const langBtn = document.getElementById('langBtn');
     const langMenu = document.getElementById('langMenu');
-    const langRoot = document.getElementById('langRoot');
 
-    if (langBtn && langMenu && !langBtn.dataset.wired){
-      const close = ()=> langMenu.classList.add('hidden');
+    if (langBtn && langMenu && !langBtn.dataset.wired) {
+      const close = () => langMenu.classList.add('hidden');
 
-      // Botón 🌐 abre/cierra menú
-      langBtn.addEventListener('click', (e)=>{ 
-        e.preventDefault(); 
-        e.stopPropagation(); 
-        langMenu.classList.toggle('hidden'); 
+      langBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        langMenu.classList.toggle('hidden');
       });
 
-      // Cerrar clic fuera
-      document.addEventListener('click', (e)=>{ 
-        if (!langMenu.contains(e.target) && e.target !== langBtn) close(); 
+      document.addEventListener('click', (e) => {
+        if (!langMenu.contains(e.target) && e.target !== langBtn) close();
       });
 
-      // Cambio de idioma
-      langMenu.querySelectorAll('a[data-lang]').forEach(a=>{
-        a.addEventListener('click', (e)=>{
+      // Cambio de idioma (redirige a /en /fr /es manteniendo el path si existe)
+      langMenu.querySelectorAll('a[data-lang]').forEach(a => {
+        a.addEventListener('click', (e) => {
           e.preventDefault();
           const targetLang = a.dataset.lang || 'es';
           goToLanguage(targetLang);
@@ -333,16 +351,23 @@
   }
 
   // 6) Boot
-  function boot(){ mountHeader(); wireMenus(); console.log('[nav] mounted & wired'); }
+  function boot() {
+    mountHeader();
+    wireMenus();
+    console.log('[nav] mounted & wired');
+  }
+
+  // ✅ Se mantiene tu lógica original de reintentos.
+  // Con el guard global + data-nav-mounted, ya no habrá doble-montaje.
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', ()=> {
+    document.addEventListener('DOMContentLoaded', () => {
       boot();
-      setTimeout(wireMenus,200);
-      setTimeout(wireMenus,800);
+      setTimeout(wireMenus, 200);
+      setTimeout(wireMenus, 800);
     });
   } else {
     boot();
-    setTimeout(wireMenus,200);
-    setTimeout(wireMenus,800);
+    setTimeout(wireMenus, 200);
+    setTimeout(wireMenus, 800);
   }
 })();
