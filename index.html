@@ -39,6 +39,12 @@
   <div class="langbar text-sm bg-gray-100 border-b">
     <div class="container mx-auto px-6 py-2 flex gap-4">
       <span>Language:</span>
+
+      <!-- ============================================================
+           CHANGE #1.1 (LANG URLS):
+           Landing "/" es INGLÉS, pero mantenemos también /en/ (inglés).
+           Español debe ir a /es/ (no a "/").
+           ============================================================ -->
       <a href="/en/" class="font-semibold">English</a>
       <a href="/fr/">Français</a>
       <a href="/es/">Español</a>
@@ -56,7 +62,7 @@
   <!-- ============================================================
        CHANGE #3 (FIX DUPLICATE nav.js LOAD):
        Antes cargabas nav.js aquí con v=6 y también al final con v=8.
-       Eso ejecutaba nav.js DOS veces.
+       Eso ejecutaba nav.js DOS veces y genera "primer click raro".
        Se eliminó este script aquí (lo dejamos solo al final con v=9).
        ============================================================ -->
   <!-- ❌ REMOVED: <script defer src="/js/nav.js?v=6"></script> -->
@@ -133,7 +139,12 @@
   <section class="bg-blue-50 border-t border-b border-blue-100">
     <div class="container mx-auto px-6 py-4 flex flex-col md:flex-row items-center justify-between gap-3">
       <div class="text-blue-900 font-semibold">
-        ¿Is your domain exposed? Run a quick EASM now.
+        <!-- ============================================================
+             CHANGE #4 (TYPO CLEANUP):
+             Tenías "¿Is your domain..." con signo español.
+             Lo dejamos limpio en inglés.
+             ============================================================ -->
+        Is your domain exposed? Run a quick EASM now.
       </div>
       <div class="flex gap-3">
         <a href="/solutions/cybershield/easm-console.html" class="bg-white border px-5 py-2 rounded-lg font-medium hover:bg-gray-50">
@@ -173,19 +184,19 @@
           <div class="badge">EASM + Hardening</div>
           <h3 class="text-xl font-bold mt-2 mb-2">We reduce exposure</h3>
           <p class="text-gray-600">Discover subdomains, ports, and email posture (SPF/DMARC/DKIM) to close gaps before an attack.</p>
-          <a href="/solutions/cybershield/easm-console.html" class="text-blue-600 hover:underline mt-3 inline-block">Probar EASM →</a>
+          <a href="/solutions/cybershield/easm-console.html" class="text-blue-600 hover:underline mt-3 inline-block">Try EASM →</a>
         </div>
         <div class="card bg-white p-6">
           <div class="badge">SOC / MDR 24×7</div>
           <h3 class="text-xl font-bold mt-2 mb-2">Detection & Response</h3>
           <p class="text-gray-600">Event correlation (Wazuh/ELK), IOCs/IOAs and containment playbooks: isolate host, block IP, reset credentials.</p>
-          <a href="/it-soc.html" class="text-blue-600 hover:underline mt-3 inline-block">Ver SOC →</a>
+          <a href="/it-soc.html" class="text-blue-600 hover:underline mt-3 inline-block">See SOC →</a>
         </div>
         <div class="card bg-white p-6">
           <div class="badge">NOC + Resilience</div>
           <h3 class="text-xl font-bold mt-2 mb-2">Availability first</h3>
           <p class="text-gray-600">Service monitoring (HTTP/TLS/DNS) and capacity; executive reports to plan for growth without surprises.</p>
-          <a href="/it-noc.html" class="text-blue-600 hover:underline mt-3 inline-block">Ver NOC →</a>
+          <a href="/it-noc.html" class="text-blue-600 hover:underline mt-3 inline-block">See NOC →</a>
         </div>
       </div>
     </div>
@@ -237,7 +248,7 @@
       <p class="text-lg opacity-90 mb-6">Let's schedule a 20-minute posture check and next steps.</p>
       <div class="flex flex-col md:flex-row justify-center gap-4">
         <a href="https://calendly.com/mauricioromeroca" class="bg-white text-blue-700 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100">Book a Call</a>
-        <a href="/services/tools.html" class="btn-primary text-white px-6 py-3 rounded-lg font-semibold">Abrir Tools</a>
+        <a href="/services/tools.html" class="btn-primary text-white px-6 py-3 rounded-lg font-semibold">Open Tools</a>
       </div>
     </div>
   </section>
@@ -275,7 +286,7 @@
   </script>
 
   <!-- ============================================================
-       CHANGE #4 (DISABLE HOTFIX):
+       CHANGE #5 (DISABLE HOTFIX):
        Este HOTFIX agrega listeners al submenú Solutions.
        nav.js YA hace el cableado, así que deja doble listener y puede causar bugs.
        Lo dejamos comentado. Si una página específica no carga nav.js,
@@ -325,8 +336,7 @@
   -->
 
   <!-- ============================================================
-       CHANGE #5 (SINGLE LOAD SCRIPTS):
-       Antes cargabas nav.js 2 veces (v=6 y v=8).
+       CHANGE #6 (SINGLE LOAD SCRIPTS):
        Dejamos SOLO una carga aquí con v=9 para romper caché.
        ============================================================ -->
   <script defer src="/js/nav.js?v=9"></script>
@@ -334,19 +344,18 @@
   <script defer src="/js/fix-nav.js?v=9"></script>
 
   <!-- ============================================================
-       CHANGE #6 (LANG BAR FIX):
-       Antes esLink buscaba href="/", pero tu español real es "/es/".
-       Ahora resalta correctamente el idioma.
+       CHANGE #7 (LANG BAR HIGHLIGHT FIX):
+       MUY IMPORTANTE: Landing "/" debe marcar ENGLISH (no español).
+       - "/" y "/en/" => English
+       - "/fr/" => Français
+       - "/es/" => Español
        ============================================================ -->
   <script>
     (function () {
       var path = window.location.pathname || "/";
 
-      // Enlaces de la barra de idioma
       var enLink = document.querySelector('.langbar a[href="/en/"]');
       var frLink = document.querySelector('.langbar a[href="/fr/"]');
-
-      // ✅ FIX: el link de español es /es/
       var esLink = document.querySelector('.langbar a[href="/es/"]');
 
       if (!enLink && !frLink && !esLink) return;
@@ -355,13 +364,16 @@
         if (a) a.classList.remove("font-semibold");
       });
 
-      if (path.startsWith("/en/")) {
+      // ✅ Landing "/" se considera INGLÉS
+      if (path === "/" || path.startsWith("/en/")) {
         if (enLink) enLink.classList.add("font-semibold");
       } else if (path.startsWith("/fr/")) {
         if (frLink) frLink.classList.add("font-semibold");
-      } else {
-        // Español: raíz "/" o cualquier ruta "/es/..."
+      } else if (path.startsWith("/es/")) {
         if (esLink) esLink.classList.add("font-semibold");
+      } else {
+        // Si cae aquí, por seguridad marcamos inglés (landing default)
+        if (enLink) enLink.classList.add("font-semibold");
       }
     })();
   </script>
