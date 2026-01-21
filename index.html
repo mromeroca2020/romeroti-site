@@ -26,9 +26,16 @@
     .badge{display:inline-block;border:1px solid #cbd5e1;border-radius:999px;padding:4px 10px;font-size:12px;background:#f8fafc}
   </style>
 </head>
-  
 
-      <!-- Temporary language bar (until nav.js gets the switcher) -->
+<body class="bg-gray-50">
+
+  <!-- ============================================================
+       CHANGE #1 (FIX HTML):
+       Antes esta "langbar" estaba FUERA de <body>, lo cual es HTML inválido
+       y puede causar comportamientos raros en distintos navegadores.
+       La movimos dentro del body.
+       ============================================================ -->
+  <!-- Temporary language bar (until nav.js fully replaces it everywhere) -->
   <div class="langbar text-sm bg-gray-100 border-b">
     <div class="container mx-auto px-6 py-2 flex gap-4">
       <span>Language:</span>
@@ -38,13 +45,21 @@
     </div>
   </div>
 
-  
-<body class="bg-gray-50">
-<div id="app-header"></div>
-<script defer src="/js/nav.js?v=6"></script>
-  
-    <!-- Mountpoint del header centralizado -->
+  <!-- ============================================================
+       CHANGE #2 (FIX DUPLICATE MOUNTPOINT):
+       Antes tenías 2 veces <div id="app-header"></div>.
+       Eso causa race conditions y montaje inconsistente.
+       Dejamos SOLO UNO.
+       ============================================================ -->
   <div id="app-header"></div>
+
+  <!-- ============================================================
+       CHANGE #3 (FIX DUPLICATE nav.js LOAD):
+       Antes cargabas nav.js aquí con v=6 y también al final con v=8.
+       Eso ejecutaba nav.js DOS veces.
+       Se eliminó este script aquí (lo dejamos solo al final con v=9).
+       ============================================================ -->
+  <!-- ❌ REMOVED: <script defer src="/js/nav.js?v=6"></script> -->
 
   <!-- ===== Header FALLBACK (se oculta si nav.js inyecta el header) ===== -->
   <header id="fallback-header" class="bg-white shadow-sm sticky top-0 z-40">
@@ -230,89 +245,99 @@
   <!-- Footer centralizado -->
   <div id="app-footer"></div>
 
-<script>
-  (function(){
-    const fb = document.getElementById('fallback-header');
-    if (!fb) return;
-
-    function removeFallbackSafely() {
-      const mount = document.getElementById('app-header');
-      // ✅ Solo retiramos el fallback si YA existe un <header> inyectado por nav.js
-      const injected = mount && mount.querySelector('header');
-      if (injected && fb.parentNode) {
-        fb.parentNode.removeChild(fb);
-        console.log('[swap] Fallback header removed (nav.js ready).');
-        return true;
-      }
-      return false;
-    }
-
-    // Intento inmediato + reintentos por si nav.js tarda
-    if (!removeFallbackSafely()) {
-      setTimeout(removeFallbackSafely, 150);
-      setTimeout(removeFallbackSafely, 400);
-      setTimeout(removeFallbackSafely, 1000);
-      setTimeout(removeFallbackSafely, 2000);
-    }
-  })();
-</script>
-
-
-  <!-- ========= HOTFIX SUBMENU SOLUTIONS (funciona aunque nav.js tarde) ========= -->
+  <!-- ============================================================
+       Fallback remover (se mantiene igual, ya que es correcto)
+       ============================================================ -->
   <script>
-  (function(){
-    function wire(btn, menu){
-      if(!btn || !menu || btn.dataset.wired) return;
+    (function () {
+      const fb = document.getElementById('fallback-header');
+      if (!fb) return;
 
-      // asegurar hidden inicial
-      if(!menu.classList.contains('hidden')) menu.classList.add('hidden');
+      function removeFallbackSafely() {
+        const mount = document.getElementById('app-header');
+        // ✅ Solo retiramos el fallback si YA existe un <header> inyectado por nav.js
+        const injected = mount && mount.querySelector('header');
+        if (injected && fb.parentNode) {
+          fb.parentNode.removeChild(fb);
+          console.log('[swap] Fallback header removed (nav.js ready).');
+          return true;
+        }
+        return false;
+      }
 
-      const open  = ()=>{ menu.classList.remove('hidden'); btn.setAttribute('aria-expanded','true'); };
-      const close = ()=>{ menu.classList.add('hidden');  btn.setAttribute('aria-expanded','false'); };
-      const toggle= (e)=>{ e && (e.preventDefault(), e.stopPropagation()); menu.classList.contains('hidden') ? open() : close(); };
-
-      btn.addEventListener('click', toggle);
-      btn.addEventListener('mouseenter', open);
-      menu.addEventListener('mouseleave', ()=> setTimeout(close, 120));
-
-      document.addEventListener('click', (e)=>{ if(!menu.contains(e.target) && e.target!==btn) close(); });
-      document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') close(); });
-
-      btn.dataset.wired='1';
-    }
-
-    function tryWire(){
-      const btn  = document.getElementById('navSolutionsBtn')
-              || document.querySelector('[data-nav="solutions-btn"]')
-              || document.getElementById('solutionsBtn');
-      const menu = document.getElementById('navSolutionsMenu')
-              || document.querySelector('[data-nav="solutions-menu"]')
-              || document.getElementById('solutionsMenu');
-
-      wire(btn, menu);
-    }
-
-    // Reintentos por si nav.js monta tarde
-    document.addEventListener('DOMContentLoaded', ()=>{
-      setTimeout(tryWire,   0);
-      setTimeout(tryWire, 200);
-      setTimeout(tryWire, 600);
-      setTimeout(tryWire,1200);
-    });
-    window.addEventListener('load', ()=> setTimeout(tryWire, 300));
-  })();
+      if (!removeFallbackSafely()) {
+        setTimeout(removeFallbackSafely, 150);
+        setTimeout(removeFallbackSafely, 400);
+        setTimeout(removeFallbackSafely, 1000);
+        setTimeout(removeFallbackSafely, 2000);
+      }
+    })();
   </script>
-  <!-- ======================================================================== -->
-  <!-- siempre justo antes de </body> y solo una vez por página -->
-<!-- Nav/Footer (con versión para romper caché) -->
-  <!-- Nav/Footer unified -->
-  <script defer src="/js/nav.js?v=8"></script>
-  <script defer src="/js/footer.js?v=8"></script>
-  <script defer src="/js/fix-nav.js?v=8"></script>
 
-  <!-- ================================
-       LANG BAR: resaltar idioma activo
-       ================================ -->
+  <!-- ============================================================
+       CHANGE #4 (DISABLE HOTFIX):
+       Este HOTFIX agrega listeners al submenú Solutions.
+       nav.js YA hace el cableado, así que deja doble listener y puede causar bugs.
+       Lo dejamos comentado. Si una página específica no carga nav.js,
+       lo reactivamos solo en esa página.
+       ============================================================ -->
+  <!--
+  <script>
+    (function(){
+      function wire(btn, menu){
+        if(!btn || !menu || btn.dataset.wired) return;
+        if(!menu.classList.contains('hidden')) menu.classList.add('hidden');
+
+        const open  = ()=>{ menu.classList.remove('hidden'); btn.setAttribute('aria-expanded','true'); };
+        const close = ()=>{ menu.classList.add('hidden');  btn.setAttribute('aria-expanded','false'); };
+        const toggle= (e)=>{ e && (e.preventDefault(), e.stopPropagation()); menu.classList.contains('hidden') ? open() : close(); };
+
+        btn.addEventListener('click', toggle);
+        btn.addEventListener('mouseenter', open);
+        menu.addEventListener('mouseleave', ()=> setTimeout(close, 120));
+
+        document.addEventListener('click', (e)=>{ if(!menu.contains(e.target) && e.target!==btn) close(); });
+        document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') close(); });
+
+        btn.dataset.wired='1';
+      }
+
+      function tryWire(){
+        const btn  = document.getElementById('navSolutionsBtn')
+                || document.querySelector('[data-nav="solutions-btn"]')
+                || document.getElementById('solutionsBtn');
+        const menu = document.getElementById('navSolutionsMenu')
+                || document.querySelector('[data-nav="solutions-menu"]')
+                || document.getElementById('solutionsMenu');
+
+        wire(btn, menu);
+      }
+
+      document.addEventListener('DOMContentLoaded', ()=>{
+        setTimeout(tryWire,   0);
+        setTimeout(tryWire, 200);
+        setTimeout(tryWire, 600);
+        setTimeout(tryWire,1200);
+      });
+      window.addEventListener('load', ()=> setTimeout(tryWire, 300));
+    })();
+  </script>
+  -->
+
+  <!-- ============================================================
+       CHANGE #5 (SINGLE LOAD SCRIPTS):
+       Antes cargabas nav.js 2 veces (v=6 y v=8).
+       Dejamos SOLO una carga aquí con v=9 para romper caché.
+       ============================================================ -->
+  <script defer src="/js/nav.js?v=9"></script>
+  <script defer src="/js/footer.js?v=9"></script>
+  <script defer src="/js/fix-nav.js?v=9"></script>
+
+  <!-- ============================================================
+       CHANGE #6 (LANG BAR FIX):
+       Antes esLink buscaba href="/", pero tu español real es "/es/".
+       Ahora resalta correctamente el idioma.
+       ============================================================ -->
   <script>
     (function () {
       var path = window.location.pathname || "/";
@@ -320,17 +345,16 @@
       // Enlaces de la barra de idioma
       var enLink = document.querySelector('.langbar a[href="/en/"]');
       var frLink = document.querySelector('.langbar a[href="/fr/"]');
-      var esLink = document.querySelector('.langbar a[href="/"]');
 
-      // Si no existe la barra, salimos sin hacer nada
+      // ✅ FIX: el link de español es /es/
+      var esLink = document.querySelector('.langbar a[href="/es/"]');
+
       if (!enLink && !frLink && !esLink) return;
 
-      // Quitar negrilla a todos
       [enLink, frLink, esLink].forEach(function (a) {
         if (a) a.classList.remove("font-semibold");
       });
 
-      // Detectar idioma por la URL y aplicar negrilla
       if (path.startsWith("/en/")) {
         if (enLink) enLink.classList.add("font-semibold");
       } else if (path.startsWith("/fr/")) {
@@ -342,9 +366,5 @@
     })();
   </script>
 
-</body>
-</html>
-
-  
 </body>
 </html>
