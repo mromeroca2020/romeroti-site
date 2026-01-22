@@ -298,24 +298,56 @@
       btn.dataset.wired = '1';
     }
 
-    const sBtn = document.getElementById('navServicesBtn');
-    const sMenu = document.getElementById('navServicesMenu');
-    const sRoot = document.getElementById('navServicesRoot');
+const sBtn = document.getElementById('navServicesBtn');
+const sMenu = document.getElementById('navServicesMenu');
+const sRoot = document.getElementById('navServicesRoot');
 
-    if (sBtn && sMenu && !sBtn.dataset.wired) {
-      const sOpen = () => { sMenu.classList.remove('hidden'); sBtn.setAttribute('aria-expanded', 'true'); };
-      const sClose = () => { sMenu.classList.add('hidden'); sBtn.setAttribute('aria-expanded', 'false'); };
-      const sToggle = (e) => { if (e) { e.preventDefault(); e.stopPropagation(); } sMenu.classList.contains('hidden') ? sOpen() : sClose(); };
+if (sBtn && sMenu && !sBtn.dataset.wired) {
+  let closeTimer = null;
 
-      sBtn.addEventListener('click', sToggle);
-      sBtn.addEventListener('mouseenter', sOpen);
-      sRoot && sRoot.addEventListener('mouseleave', () => setTimeout(sClose, 120));
-      document.addEventListener('click', (e) => { if (!sMenu.contains(e.target) && e.target !== sBtn) sClose(); });
-      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') sClose(); });
+  const sOpen = () => {
+    clearTimeout(closeTimer);
+    sMenu.classList.remove('hidden');
+    sBtn.setAttribute('aria-expanded', 'true');
+  };
 
-      sRoot && (sRoot.style.overflow = 'visible');
-      sBtn.dataset.wired = '1';
-    }
+  const sClose = () => {
+    sMenu.classList.add('hidden');
+    sBtn.setAttribute('aria-expanded', 'false');
+  };
+
+  const scheduleClose = () => {
+    closeTimer = setTimeout(sClose, 250); // delay seguro
+  };
+
+  // Hover estable
+  sBtn.addEventListener('mouseenter', sOpen);
+  sMenu.addEventListener('mouseenter', () => clearTimeout(closeTimer));
+
+  sBtn.addEventListener('mouseleave', scheduleClose);
+  sMenu.addEventListener('mouseleave', scheduleClose);
+
+  // Click toggle (opcional, útil en touchpads)
+  sBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    sMenu.classList.contains('hidden') ? sOpen() : sClose();
+  });
+
+  // Click fuera
+  document.addEventListener('click', (e) => {
+    if (!sRoot.contains(e.target)) sClose();
+  });
+
+  // ESC
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') sClose();
+  });
+
+  sRoot.style.overflow = 'visible';
+  sBtn.dataset.wired = '1';
+}
+
 
     const langBtn = document.getElementById('langBtn');
     const langMenu = document.getElementById('langMenu');
