@@ -1,59 +1,70 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <title>Download Smart Hands Demo</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Smart Hands Assistant | RomanoTI</title>
+
+  <link rel="stylesheet" href="/css/styles.css" />
 </head>
-<body style="padding:60px; font-family:Arial;">
 
-<h1>Smart Hands Assistant — Demo Download</h1>
+<body>
+  <!-- Header/Nav (inyectado por JS) -->
+  <div id="site-nav"></div>
 
-<p>Please complete the form to access the evaluation package.</p>
+  <main class="container">
+    <section class="hero">
+      <h1>Smart Hands Assistant</h1>
+      <p class="subtitle">
+        Standardisation des opérations physiques en centre de données.
+        Réduisez les erreurs humaines. Validez la compatibilité avant intervention.
+        Générez des runbooks et des journaux d’audit structurés.
+      </p>
 
-<form name="smart-hands-demo" method="POST" data-netlify="true">
-  <input type="hidden" name="form-name" value="smart-hands-demo">
+      <div class="cta-row">
+        <a class="btn btn-primary" href="/fr/downloads/smart-hands-demo.html">Télécharger la démo (15 jours)</a>
+        <a class="btn btn-secondary" href="/fr/contact.html#book">Planifier un pilote</a>
+      </div>
+    </section>
 
-  <p>
-    <label>Full Name:<br>
-      <input type="text" name="name" required>
-    </label>
-  </p>
+    <section class="section">
+      <h2>Pourquoi c’est important</h2>
+      <ul>
+        <li>Évite les erreurs sur liens single-path (gate d’autorisation)</li>
+        <li>Valide compatibilité RJ45 / SFP / SFP+ / optiques / câble</li>
+        <li>Procédures standardisées (runbook pas-à-pas)</li>
+        <li>Journaux d’audit exploitables (ops log + audit JSONL)</li>
+        <li>Meilleure protection SLA & uptime</li>
+      </ul>
+    </section>
 
-  <p>
-    <label>Company:<br>
-      <input type="text" name="company" required>
-    </label>
-  </p>
+    <section class="section">
+      <h2>Comment ça fonctionne</h2>
+      <ol>
+        <li>Chargement du ticket (.txt)</li>
+        <li>Analyse automatique du LinkLabel</li>
+        <li>Validation redondance & compatibilité</li>
+        <li>Génération runbook + ticket summary + audit trail</li>
+      </ol>
+    </section>
 
-  <p>
-    <label>Corporate Email:<br>
-      <input type="email" name="email" required>
-    </label>
-  </p>
+    <section class="section">
+      <h2>Ce que vous obtenez</h2>
+      <ul>
+        <li>Runbook (texte) prêt à exécuter</li>
+        <li>Ticket Summary copy/paste (ServiceNow)</li>
+        <li>Rapport dans <code>/reports</code></li>
+        <li>Logs dans <code>/logs</code> (ops + audit)</li>
+      </ul>
+    </section>
+  </main>
 
-  <p>
-    <button type="submit">Access Demo</button>
-  </p>
-</form>
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2026 RomanoTI Solutions Inc. All rights reserved.</p>
+    </div>
+  </footer>
 
-<hr>
-
-<p>
-  After submission, download the demo package below:
-</p>
-
-<a href="/downloads/demo/Romanoti-SmartHands-Demo.zip">
-  Download Demo Package
-</a>
-
-<hr>
-
-<p>
-  Prefer a guided pilot? 
-  <a href="https://calendly.com/YOUR_CALENDLY_LINK" target="_blank">
-    Schedule a Pilot Call
-  </a>
-</p>
-
+  <script src="/js/nav.js"></script>
 </body>
 </html>
