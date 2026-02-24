@@ -1,56 +1,70 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <title>Smart Hands Assistant | Romanoti Solutions</title>
-  <link rel="stylesheet" href="../../css/styles.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Smart Hands Assistant | RomanoTI</title>
+
+  <link rel="stylesheet" href="/css/styles.css" />
 </head>
+
 <body>
+  <!-- Header/Nav (inyectado por JS) -->
+  <div id="site-nav"></div>
 
-<section style="padding:60px; text-align:center;">
-  <h1>Smart Hands Assistant</h1>
-  <h3>Standardisation des opérations physiques en centre de données</h3>
+  <main class="container">
+    <section class="hero">
+      <h1>Smart Hands Assistant</h1>
+      <p class="subtitle">
+        Standardisation des opérations physiques en centre de données.
+        Réduisez les erreurs humaines. Validez la compatibilité avant intervention.
+        Générez des runbooks et des journaux d’audit structurés.
+      </p>
 
-  <p>
-    Réduisez les erreurs humaines.
-    Validez la compatibilité avant intervention.
-    Générez des runbooks et journaux d’audit structurés.
-  </p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="/fr/downloads/smart-hands-demo.html">Télécharger la démo (15 jours)</a>
+        <a class="btn btn-secondary" href="/fr/contact.html#book">Planifier un pilote</a>
+      </div>
+    </section>
 
-  <div style="margin-top:30px;">
-    <a href="/downloads/" style="padding:14px 30px; background:#000; color:#fff; text-decoration:none;">
-      Télécharger la démo
-    </a>
+    <section class="section">
+      <h2>Pourquoi c’est important</h2>
+      <ul>
+        <li>Évite les erreurs sur liens single-path (gate d’autorisation)</li>
+        <li>Valide compatibilité RJ45 / SFP / SFP+ / optiques / câble</li>
+        <li>Procédures standardisées (runbook pas-à-pas)</li>
+        <li>Journaux d’audit exploitables (ops log + audit JSONL)</li>
+        <li>Meilleure protection SLA & uptime</li>
+      </ul>
+    </section>
 
-    <a href="https://calendly.com/YOUR_CALENDLY_LINK" target="_blank"
-       style="padding:14px 30px; border:1px solid #000; margin-left:20px; text-decoration:none;">
-      Planifier un pilote
-    </a>
-  </div>
-</section>
+    <section class="section">
+      <h2>Comment ça fonctionne</h2>
+      <ol>
+        <li>Chargement du ticket (.txt)</li>
+        <li>Analyse automatique du LinkLabel</li>
+        <li>Validation redondance & compatibilité</li>
+        <li>Génération runbook + ticket summary + audit trail</li>
+      </ol>
+    </section>
 
-<hr>
+    <section class="section">
+      <h2>Ce que vous obtenez</h2>
+      <ul>
+        <li>Runbook (texte) prêt à exécuter</li>
+        <li>Ticket Summary copy/paste (ServiceNow)</li>
+        <li>Rapport dans <code>/reports</code></li>
+        <li>Logs dans <code>/logs</code> (ops + audit)</li>
+      </ul>
+    </section>
+  </main>
 
-<section style="padding:60px;">
-  <h2>Pourquoi c’est important</h2>
-  <ul>
-    <li>Éviter les erreurs sur liens single-path</li>
-    <li>Valider compatibilité RJ45 / SFP / optiques</li>
-    <li>Procédures standardisées</li>
-    <li>Journaux d’audit exploitables</li>
-    <li>Protection SLA et uptime</li>
-  </ul>
-</section>
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2026 RomanoTI Solutions Inc. All rights reserved.</p>
+    </div>
+  </footer>
 
-<section style="padding:60px; background:#f5f5f5;">
-  <h2>Comment ça fonctionne</h2>
-  <ol>
-    <li>Chargement du ticket (.txt)</li>
-    <li>Analyse automatique du LinkLabel</li>
-    <li>Validation redondance & compatibilité</li>
-    <li>Génération runbook + audit trail</li>
-  </ol>
-</section>
-
+  <script src="/js/nav.js"></script>
 </body>
 </html>
