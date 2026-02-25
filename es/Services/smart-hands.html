@@ -1,58 +1,73 @@
 <!doctype html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Smart Hands Assistant | RomanoTI</title>
-  <link rel="stylesheet" href="../../css/styles.css" />
+
+  <!-- IMPORTANT: use ABSOLUTE paths -->
+  <link rel="stylesheet" href="/css/styles.css" />
 </head>
 
 <body>
+  <!-- Header/Nav injected by /js/nav.js -->
   <div id="site-nav"></div>
 
   <main class="container">
     <section class="hero">
       <h1>Smart Hands Assistant</h1>
       <p class="subtitle">
-        Estandariza operaciones físicas en datacenter.<br>
-        Reduce errores humanos. Valida compatibilidad antes de intervenir.<br>
-        Genera runbooks y registros de auditoría estructurados.
+        Standardize physical datacenter operations.<br>
+        Reduce human errors. Validate compatibility before intervention.<br>
+        Generate step-by-step runbooks and structured audit logs.
       </p>
 
       <div class="cta-row">
-        <a class="btn btn-primary" href="/downloads/smart-hands-demo.html">Descargar demo (15 días)</a>
-        <a class="btn btn-secondary" href="/es/contact.html#book">Agendar un piloto</a>
+        <!-- Direct ZIP download -->
+        <a class="btn btn-primary" href="/downloads/RomanotiSmartHandsAssistant_Demo_15d.zip">
+          Download Demo (15 days)
+        </a>
+
+        <!-- Optional: demo landing page -->
+        <a class="btn btn-secondary" href="/downloads/smart-hands-demo.html">
+          Demo details
+        </a>
+
+        <!-- Pilot scheduling -->
+        <a class="btn btn-secondary" href="/en/contact.html#book">
+          Schedule a Pilot
+        </a>
       </div>
     </section>
 
     <section class="section">
-      <h2>Por qué es importante</h2>
+      <h2>Why it matters</h2>
       <ul>
-        <li>Evita errores en enlaces single-path (gate de autorización)</li>
-        <li>Valida compatibilidad RJ45 / SFP / SFP+ / ópticos / cable</li>
-        <li>Procedimientos estandarizados (paso a paso)</li>
-        <li>Auditoría usable (ops log + audit JSONL)</li>
-        <li>Mejor protección de SLA & uptime</li>
+        <li>Prevents risky actions on single-path links (authorization gate)</li>
+        <li>Validates RJ45 / SFP / SFP+ / optics / cable compatibility</li>
+        <li>Standardized procedures (step-by-step runbooks)</li>
+        <li>Actionable audit trail (ops log + audit JSONL)</li>
+        <li>Better SLA protection & uptime</li>
       </ul>
     </section>
 
     <section class="section">
-      <h2>Cómo funciona</h2>
+      <h2>How it works</h2>
       <ol>
-        <li>Carga del ticket (.txt)</li>
-        <li>Parseo automático del LinkLabel</li>
-        <li>Validación de redundancia y compatibilidad</li>
-        <li>Generación de runbook + resumen + auditoría</li>
+        <li>Load ticket (.txt)</li>
+        <li>Auto-parse LinkLabel</li>
+        <li>Redundancy & compatibility validation</li>
+        <li>Generate runbook + ticket summary + audit trail</li>
       </ol>
     </section>
 
     <section class="section">
-      <h2>Qué obtienes</h2>
+      <h2>What you get</h2>
       <ul>
-        <li>Runbook listo para ejecutar</li>
-        <li>Ticket Summary copy/paste (ServiceNow)</li>
-        <li>Reporte en <code>/reports</code></li>
-        <li>Logs en <code>/logs</code> (ops + audit)</li>
+        <li>Ready-to-execute runbook</li>
+        <li>Copy/paste Ticket Summary (ServiceNow)</li>
+        <li>Report in <code>/reports</code></li>
+        <li>Logs in <code>/logs</code> (ops + audit)</li>
       </ul>
     </section>
   </main>
@@ -63,6 +78,7 @@
     </div>
   </footer>
 
-  <script src="../../js/nav.js"></script>
+  <!-- IMPORTANT: absolute path -->
+  <script src="/js/nav.js"></script>
 </body>
 </html>
