@@ -4,10 +4,13 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Smart Hands Assistant | RomanoTI</title>
- <link rel="stylesheet" href="../../css/styles.css" />
+
+  <!-- IMPORTANT: use ABSOLUTE paths -->
+  <link rel="stylesheet" href="/css/styles.css" />
 </head>
 
 <body>
+  <!-- Header/Nav injected by /js/nav.js -->
   <div id="site-nav"></div>
 
   <main class="container">
@@ -20,8 +23,20 @@
       </p>
 
       <div class="cta-row">
-        <a class="btn btn-primary" href="/downloads/smart-hands-demo.html">Download Demo (15 days)</a>
-        <a class="btn btn-secondary" href="/en/contact.html#book">Schedule a Pilot</a>
+        <!-- Direct ZIP download -->
+        <a class="btn btn-primary" href="/downloads/RomanotiSmartHandsAssistant_Demo_15d.zip">
+          Download Demo (15 days)
+        </a>
+
+        <!-- Optional: demo landing page -->
+        <a class="btn btn-secondary" href="/downloads/smart-hands-demo.html">
+          Demo details
+        </a>
+
+        <!-- Pilot scheduling -->
+        <a class="btn btn-secondary" href="/en/contact.html#book">
+          Schedule a Pilot
+        </a>
       </div>
     </section>
 
@@ -63,6 +78,7 @@
     </div>
   </footer>
 
-  <script src="../../js/nav.js"></script>
+  <!-- IMPORTANT: absolute path -->
+  <script src="/js/nav.js"></script>
 </body>
 </html>
