@@ -7,11 +7,11 @@
 # Las rutas específicas deben ir SIEMPRE antes del catch-all.
 # ============================================================
 
-/services/tools.html    /services/tools.html    200     # sirve directamente el HTML
-/services/tools         /services/tools.html    200     # permite acceder sin la extensión .html
-/services/tools/*       /services/tools/:splat  200     # mantiene funcionamiento de subrutas internas
+/services/tools.html    /services/tools.html    200
+/services/tools         /services/tools.html    200
+/services/tools/*       /services/tools/:splat  200
 /booking                /booking.html           200
-/thank-you              /thank-you.html         200
+/thank-you              /thank-you.html
 
 # ============================================================
 # ⚠️ IMPORTANTE: El catch-all se deja después para que siga
