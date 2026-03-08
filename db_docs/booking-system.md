@@ -33,3 +33,15 @@ The form collects the following information:
 ## Form Processing
 
 The form uses Netlify's form handling:
+This architecture allows Romanoti Solutions to provide consultation booking without relying on third-party scheduling platforms.
+## Files
+
+Main files involved in the booking system:
+
+booking.html  
+thank-you.html  
+db_docs/booking-system.md
+
+The booking page is deployed through Netlify and accessible at:
+
+https://romanoti-solutions.netlify.app/booking
