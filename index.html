@@ -5,7 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>RomanoTI Solutions | IT Infrastructure & Cybersecurity</title>
 
-  <!-- Favicons unificados -->
+  <!-- ============================================================
+       CHANGE #1 (FAVICONS):
+       Se mantienen igual. No requieren cambios para el sistema de booking.
+       ============================================================ -->
   <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16.png">
@@ -30,21 +33,12 @@
 <body class="bg-gray-50">
 
   <!-- ============================================================
-       CHANGE #1 (FIX HTML):
-       Antes esta "langbar" estaba FUERA de <body>, lo cual es HTML inválido
-       y puede causar comportamientos raros en distintos navegadores.
-       La movimos dentro del body.
+       CHANGE #2 (LANGBAR FIX):
+       La barra de idioma permanece dentro de <body>, lo cual es correcto.
        ============================================================ -->
-  <!-- Temporary language bar (until nav.js fully replaces it everywhere) -->
   <div class="langbar text-sm bg-gray-100 border-b">
     <div class="container mx-auto px-6 py-2 flex gap-4">
       <span>Language:</span>
-
-      <!-- ============================================================
-           CHANGE #1.1 (LANG URLS):
-           Landing "/" es INGLÉS, pero mantenemos también /en/ (inglés).
-           Español debe ir a /es/ (no a "/").
-           ============================================================ -->
       <a href="/en/" class="font-semibold">English</a>
       <a href="/fr/">Français</a>
       <a href="/es/">Español</a>
@@ -52,22 +46,12 @@
   </div>
 
   <!-- ============================================================
-       CHANGE #2 (FIX DUPLICATE MOUNTPOINT):
-       Antes tenías 2 veces <div id="app-header"></div>.
-       Eso causa race conditions y montaje inconsistente.
-       Dejamos SOLO UNO.
+       CHANGE #3 (SINGLE HEADER MOUNT):
+       Dejamos un solo contenedor para nav.js.
        ============================================================ -->
   <div id="app-header"></div>
 
-  <!-- ============================================================
-       CHANGE #3 (FIX DUPLICATE nav.js LOAD):
-       Antes cargabas nav.js aquí con v=6 y también al final con v=8.
-       Eso ejecutaba nav.js DOS veces y genera "primer click raro".
-       Se eliminó este script aquí (lo dejamos solo al final con v=9).
-       ============================================================ -->
-  <!-- ❌ REMOVED: <script defer src="/js/nav.js?v=6"></script> -->
-
-  <!-- ===== Header FALLBACK (se oculta si nav.js inyecta el header) ===== -->
+  <!-- ===== Header FALLBACK ===== -->
   <header id="fallback-header" class="bg-white shadow-sm sticky top-0 z-40">
     <div class="container mx-auto px-6 py-3">
       <div class="flex items-center justify-between gap-4">
@@ -89,7 +73,7 @@
                 <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.25a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z" clip-rule="evenodd" />
               </svg>
             </button>
-            <!-- Menú desplegable Services -->
+
             <div class="absolute right-0 mt-2 w-64 bg-white border border-gray-200 rounded-xl shadow-lg py-2 z-30 hidden group-hover:block">
               <a href="/services/cloud-migration" class="block px-4 py-2 text-sm hover:bg-gray-50">Cloud Migration</a>
               <a href="/services/it-infrastructure" class="block px-4 py-2 text-sm hover:bg-gray-50">IT Infrastructure</a>
@@ -100,24 +84,25 @@
             </div>
           </div>
 
-          <!-- Link a Solutions (sin dropdown aquí; el dropdown real lo inyecta nav.js) -->
           <a href="/solutions/" class="hover:text-blue-600">Solutions</a>
-
-          <!-- Otros enlaces básicos -->
           <a href="/services/tools.html" class="hover:text-blue-600">Tools</a>
           <a href="/it-noc.html" class="hover:text-blue-600">NOC</a>
           <a href="/it-soc.html" class="hover:text-blue-600">SOC</a>
         </nav>
 
-        <!-- Botón Book Now (siempre visible en fallback) -->
-        <a href="https://calendly.com/info-romanoti"
+        <!-- ============================================================
+             CHANGE #4 (BOOK NOW LINK):
+             Se elimina Calendly del flujo visible.
+             Ahora el botón lleva al booking propio del sitio con el servicio
+             "Free Consultation" ya preseleccionado.
+             ============================================================ -->
+        <a href="/booking.html?service=Free%20Consultation"
            class="btn-primary text-white px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap">
           Book Now
         </a>
       </div>
     </div>
   </header>
-  <!-- =============================================================== -->
 
   <!-- ===== Hero ===== -->
   <section class="hero-bg text-white">
@@ -126,10 +111,24 @@
       <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
         Microsoft & Cisco Certified Expert with 10+ years in cloud, virtualization, and cybersecurity
       </p>
+
       <div class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-6">
-        <a href="tel:4386309157" class="btn-primary text-white px-8 py-3 rounded-lg font-semibold">Emergency Support</a>
-        <a href="/booking.html" class="btn-primary">
-            Free Consultation
+        <!-- ============================================================
+             CHANGE #5 (EMERGENCY SUPPORT):
+             Antes usaba tel:. Ahora lleva al formulario de booking propio
+             con el servicio "Emergency Support" preseleccionado.
+             ============================================================ -->
+        <a href="/booking.html?service=Emergency%20Support" class="btn-primary text-white px-8 py-3 rounded-lg font-semibold">
+          Emergency Support
+        </a>
+
+        <!-- ============================================================
+             CHANGE #6 (FREE CONSULTATION):
+             Se añade el parámetro service para que el formulario abra ya
+             configurado correctamente.
+             ============================================================ -->
+        <a href="/booking.html?service=Free%20Consultation" class="btn-primary text-white px-8 py-3 rounded-lg font-semibold">
+          Free Consultation
         </a>
       </div>
     </div>
@@ -139,11 +138,6 @@
   <section class="bg-blue-50 border-t border-b border-blue-100">
     <div class="container mx-auto px-6 py-4 flex flex-col md:flex-row items-center justify-between gap-3">
       <div class="text-blue-900 font-semibold">
-        <!-- ============================================================
-             CHANGE #4 (TYPO CLEANUP):
-             Tenías "¿Is your domain..." con signo español.
-             Lo dejamos limpio en inglés.
-             ============================================================ -->
         Is your domain exposed? Run a quick EASM now.
       </div>
       <div class="flex gap-3">
@@ -171,7 +165,7 @@
     </div>
   </section>
 
-  <!-- ===== Why Cyber (enfoque) ===== -->
+  <!-- ===== Why Cyber ===== -->
   <section class="py-14">
     <div class="container mx-auto px-6">
       <div class="text-center mb-10">
@@ -247,7 +241,13 @@
       <h2 class="text-3xl font-bold mb-4">Ready to reduce risk and downtime?</h2>
       <p class="text-lg opacity-90 mb-6">Let's schedule a 20-minute posture check and next steps.</p>
       <div class="flex flex-col md:flex-row justify-center gap-4">
-        <a href="https://calendly.com/info-romanoti" class="bg-white text-blue-700 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100">Book a Call</a>
+        <!-- ============================================================
+             CHANGE #7 (FINAL CTA BOOKING):
+             El CTA final ya no usa Calendly. Usa el booking propio.
+             ============================================================ -->
+        <a href="/booking.html?service=Free%20Consultation" class="bg-white text-blue-700 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100">
+          Book a Call
+        </a>
         <a href="/services/tools.html" class="btn-primary text-white px-6 py-3 rounded-lg font-semibold">Open Tools</a>
       </div>
     </div>
@@ -257,7 +257,8 @@
   <div id="app-footer"></div>
 
   <!-- ============================================================
-       Fallback remover (se mantiene igual, ya que es correcto)
+       CHANGE #8 (FALLBACK REMOVER):
+       Se mantiene la lógica actual porque es correcta.
        ============================================================ -->
   <script>
     (function () {
@@ -266,7 +267,6 @@
 
       function removeFallbackSafely() {
         const mount = document.getElementById('app-header');
-        // ✅ Solo retiramos el fallback si YA existe un <header> inyectado por nav.js
         const injected = mount && mount.querySelector('header');
         if (injected && fb.parentNode) {
           fb.parentNode.removeChild(fb);
@@ -285,70 +285,14 @@
     })();
   </script>
 
-  <!-- ============================================================
-       CHANGE #5 (DISABLE HOTFIX):
-       Este HOTFIX agrega listeners al submenú Solutions.
-       nav.js YA hace el cableado, así que deja doble listener y puede causar bugs.
-       Lo dejamos comentado. Si una página específica no carga nav.js,
-       lo reactivamos solo en esa página.
-       ============================================================ -->
-  <!--
-  <script>
-    (function(){
-      function wire(btn, menu){
-        if(!btn || !menu || btn.dataset.wired) return;
-        if(!menu.classList.contains('hidden')) menu.classList.add('hidden');
-
-        const open  = ()=>{ menu.classList.remove('hidden'); btn.setAttribute('aria-expanded','true'); };
-        const close = ()=>{ menu.classList.add('hidden');  btn.setAttribute('aria-expanded','false'); };
-        const toggle= (e)=>{ e && (e.preventDefault(), e.stopPropagation()); menu.classList.contains('hidden') ? open() : close(); };
-
-        btn.addEventListener('click', toggle);
-        btn.addEventListener('mouseenter', open);
-        menu.addEventListener('mouseleave', ()=> setTimeout(close, 120));
-
-        document.addEventListener('click', (e)=>{ if(!menu.contains(e.target) && e.target!==btn) close(); });
-        document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') close(); });
-
-        btn.dataset.wired='1';
-      }
-
-      function tryWire(){
-        const btn  = document.getElementById('navSolutionsBtn')
-                || document.querySelector('[data-nav="solutions-btn"]')
-                || document.getElementById('solutionsBtn');
-        const menu = document.getElementById('navSolutionsMenu')
-                || document.querySelector('[data-nav="solutions-menu"]')
-                || document.getElementById('solutionsMenu');
-
-        wire(btn, menu);
-      }
-
-      document.addEventListener('DOMContentLoaded', ()=>{
-        setTimeout(tryWire,   0);
-        setTimeout(tryWire, 200);
-        setTimeout(tryWire, 600);
-        setTimeout(tryWire,1200);
-      });
-      window.addEventListener('load', ()=> setTimeout(tryWire, 300));
-    })();
-  </script>
-  -->
-
-  <!-- ============================================================
-       CHANGE #6 (SINGLE LOAD SCRIPTS):
-       Dejamos SOLO una carga aquí con v=9 para romper caché.
-       ============================================================ -->
+  <!-- Scripts únicos -->
   <script defer src="/js/nav.js?v=9"></script>
   <script defer src="/js/footer.js?v=9"></script>
   <script defer src="/js/fix-nav.js?v=9"></script>
 
   <!-- ============================================================
-       CHANGE #7 (LANG BAR HIGHLIGHT FIX):
-       MUY IMPORTANTE: Landing "/" debe marcar ENGLISH (no español).
-       - "/" y "/en/" => English
-       - "/fr/" => Français
-       - "/es/" => Español
+       CHANGE #9 (LANG HIGHLIGHT):
+       Se mantiene igual porque ya está correcto.
        ============================================================ -->
   <script>
     (function () {
@@ -364,7 +308,6 @@
         if (a) a.classList.remove("font-semibold");
       });
 
-      // ✅ Landing "/" se considera INGLÉS
       if (path === "/" || path.startsWith("/en/")) {
         if (enLink) enLink.classList.add("font-semibold");
       } else if (path.startsWith("/fr/")) {
@@ -372,7 +315,6 @@
       } else if (path.startsWith("/es/")) {
         if (esLink) esLink.classList.add("font-semibold");
       } else {
-        // Si cae aquí, por seguridad marcamos inglés (landing default)
         if (enLink) enLink.classList.add("font-semibold");
       }
     })();
