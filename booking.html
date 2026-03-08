@@ -82,6 +82,15 @@ Schedule a consultation with Romanoti Solutions for IT support,
 cybersecurity, cloud infrastructure, or network troubleshooting.
 </p>
 
+<!-- ============================================================
+     CHANGE #1 (NETLIFY FORM ENABLED):
+     Este formulario ahora usa Netlify Forms.
+     - name="booking"
+     - method="POST"
+     - data-netlify="true"
+     - action="/thank-you.html"
+     Esto permite guardar y notificar sin backend adicional.
+     ============================================================ -->
 <form name="booking" method="POST" data-netlify="true" action="/thank-you.html">
 <input type="hidden" name="form-name" value="booking">
 
@@ -126,6 +135,11 @@ cybersecurity, cloud infrastructure, or network troubleshooting.
 
 </div>
 
+<!-- ============================================================
+     CHANGE #2 (AUTO SERVICE SELECTION):
+     Si la URL viene con ?service=Free%20Consultation o
+     ?service=Emergency%20Support, el select se ajusta automáticamente.
+     ============================================================ -->
 <script>
 const params = new URLSearchParams(window.location.search);
 const service = params.get("service");
