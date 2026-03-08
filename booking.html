@@ -73,6 +73,23 @@ opacity:0.92;
 
 <body>
 
+<!-- ============================================================
+     CHANGE #1 (HIDDEN BACKUP FORM FOR NETLIFY):
+     Este formulario oculto ayuda a que Netlify detecte el formulario
+     "booking" de forma más confiable durante el build.
+     No se muestra al usuario.
+     ============================================================ -->
+<form name="booking" netlify hidden>
+  <input type="text" name="fullname">
+  <input type="email" name="email">
+  <input type="text" name="phone">
+  <input type="text" name="company">
+  <input type="text" name="service">
+  <input type="text" name="date">
+  <input type="text" name="time">
+  <textarea name="issue"></textarea>
+</form>
+
 <div class="container">
 
 <h1>Book Your IT Consultation</h1>
@@ -83,13 +100,13 @@ cybersecurity, cloud infrastructure, or network troubleshooting.
 </p>
 
 <!-- ============================================================
-     CHANGE #1 (NETLIFY FORM ENABLED):
-     Este formulario ahora usa Netlify Forms.
+     CHANGE #2 (PRIMARY NETLIFY FORM):
+     Formulario principal conectado a Netlify Forms.
      - name="booking"
      - method="POST"
      - data-netlify="true"
      - action="/thank-you.html"
-     Esto permite guardar y notificar sin backend adicional.
+     Esto permite registrar leads y luego redirigir a la página de confirmación.
      ============================================================ -->
 <form name="booking" method="POST" data-netlify="true" action="/thank-you.html">
 <input type="hidden" name="form-name" value="booking">
@@ -136,9 +153,10 @@ cybersecurity, cloud infrastructure, or network troubleshooting.
 </div>
 
 <!-- ============================================================
-     CHANGE #2 (AUTO SERVICE SELECTION):
-     Si la URL viene con ?service=Free%20Consultation o
-     ?service=Emergency%20Support, el select se ajusta automáticamente.
+     CHANGE #3 (AUTO SERVICE SELECTION):
+     Si la URL contiene ?service=Free%20Consultation o
+     ?service=Emergency%20Support, el formulario selecciona
+     automáticamente el servicio correspondiente.
      ============================================================ -->
 <script>
 const params = new URLSearchParams(window.location.search);
