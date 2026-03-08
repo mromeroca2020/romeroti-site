@@ -2,11 +2,12 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Book a Consultation | Romanoti Solutions</title>
 
 <style>
 body{
-font-family:Arial;
+font-family:Arial, sans-serif;
 background:#0f172a;
 color:white;
 margin:0;
@@ -22,10 +23,21 @@ h1{
 margin-bottom:10px;
 }
 
+p{
+margin-bottom:25px;
+line-height:1.5;
+}
+
 form{
 background:#111827;
 padding:30px;
 border-radius:10px;
+}
+
+label{
+display:block;
+margin-bottom:6px;
+font-weight:bold;
 }
 
 input,select,textarea{
@@ -36,6 +48,12 @@ border-radius:6px;
 border:1px solid #555;
 background:#0f172a;
 color:white;
+box-sizing:border-box;
+}
+
+textarea{
+min-height:120px;
+resize:vertical;
 }
 
 button{
@@ -45,6 +63,10 @@ border:none;
 border-radius:6px;
 font-weight:bold;
 cursor:pointer;
+}
+
+button:hover{
+opacity:0.92;
 }
 </style>
 </head>
@@ -60,33 +82,34 @@ Schedule a consultation with Romanoti Solutions for IT support,
 cybersecurity, cloud infrastructure, or network troubleshooting.
 </p>
 
-<form>
+<form name="booking" method="POST" data-netlify="true" action="/thank-you.html">
+<input type="hidden" name="form-name" value="booking">
 
-<label>Full Name</label>
-<input type="text" required>
+<label for="fullname">Full Name</label>
+<input id="fullname" name="fullname" type="text" required>
 
-<label>Email</label>
-<input type="email" required>
+<label for="email">Email</label>
+<input id="email" name="email" type="email" required>
 
-<label>Phone</label>
-<input type="text">
+<label for="phone">Phone</label>
+<input id="phone" name="phone" type="text">
 
-<label>Company</label>
-<input type="text">
+<label for="company">Company</label>
+<input id="company" name="company" type="text">
 
-<label>Service</label>
-<select>
+<label for="service">Service</label>
+<select id="service" name="service">
 <option>Free Consultation</option>
 <option>Emergency Support</option>
 <option>Network Support</option>
 <option>Cybersecurity Review</option>
 </select>
 
-<label>Preferred Date</label>
-<input type="date">
+<label for="date">Preferred Date</label>
+<input id="date" name="date" type="date">
 
-<label>Preferred Time</label>
-<select>
+<label for="time">Preferred Time</label>
+<select id="time" name="time">
 <option>09:00 AM</option>
 <option>10:00 AM</option>
 <option>11:00 AM</option>
@@ -95,14 +118,22 @@ cybersecurity, cloud infrastructure, or network troubleshooting.
 <option>03:00 PM</option>
 </select>
 
-<label>Describe your issue</label>
-<textarea></textarea>
+<label for="issue">Describe your issue</label>
+<textarea id="issue" name="issue"></textarea>
 
 <button type="submit">Request Appointment</button>
-
 </form>
 
 </div>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+const service = params.get("service");
+if (service) {
+  const serviceSelect = document.querySelector('select[name="service"]');
+  if (serviceSelect) serviceSelect.value = service;
+}
+</script>
 
 </body>
 </html>
