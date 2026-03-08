@@ -11,7 +11,6 @@
 /services/tools         /services/tools.html    200
 /services/tools/*       /services/tools/:splat  200
 /booking                /booking.html           200
-/thank-you              /thank-you.html
 
 # ============================================================
 # ⚠️ IMPORTANTE: El catch-all se deja después para que siga
@@ -32,7 +31,7 @@
 /solutions/cybershield/quick-audit     /solutions/cybershield/quick-audit.html 200
 /en/solutions/cybershield/quick-audit  /en/solutions/cybershield/quick-audit.html 200
 /fr/solutions/cybershield/quick-audit  /fr/solutions/cybershield/quick-audit.html 200
-http://romeroti-solutions.com/*                https://romeroti-solutions.com/:splat  301!
-http://www.romeroti-solutions.com/*            https://romeroti-solutions.com/:splat  301!
-https://www.romeroti-solutions.com/*           https://romeroti-solutions.com/:splat  301!
-https://*.netlify.app/*                        https://romeroti-solutions.com/:splat  301!
+http://romanoti-solutions.com/*                https://romanoti-solutions.com/:splat  301!
+http://www.romanoti-solutions.com/*            https://romanoti-solutions.com/:splat  301!
+https://www.romanoti-solutions.com/*           https://romanoti-solutions.com/:splat  301!
+https://*.netlify.app/*                        https://romanoti-solutions.com/:splat  301!
