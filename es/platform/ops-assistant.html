@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>Romanoti Ops Assistant | Romanoti Solutions</title>
+
+<meta
+name="description"
+content="Romanoti Ops Assistant es el componente de inteligencia operativa de la plataforma Romanoti."
+/>
+
+<link rel="stylesheet" href="../css/styles.css" />
+
+<style>
+
+:root{
+--primary-blue:#2f5bdb;
+--primary-blue-dark:#2449b3;
+--primary-blue-soft:#eaf0ff;
+
+--romanoti-gold:#d6b46b;
+
+--text-dark:#1f2937;
+--text-body:#5f6f8a;
+--text-light:#ffffff;
+
+--border-light:#d9e1f0;
+--bg-page:#f5f7fb;
+--bg-section:#ffffff;
+
+--shadow-soft:0 10px 25px rgba(31,41,55,.08);
+
+--max-width:1180px;
+--radius-lg:20px;
+--radius-md:14px;
+--radius-sm:10px;
+}
+
+*{box-sizing:border-box}
+
+body{
+margin:0;
+font-family:Arial,Helvetica,sans-serif;
+background:var(--bg-page);
+color:var(--text-dark);
+line-height:1.6;
+}
+
+a{text-decoration:none;color:inherit}
+
+.container{
+width:min(var(--max-width),calc(100% - 32px));
+margin:auto;
+}
+
+.topbar{
+background:#fff;
+border-bottom:1px solid var(--border-light);
+position:sticky;
+top:0;
+z-index:100;
+}
+
+.topbar-inner{
+display:flex;
+align-items:center;
+justify-content:space-between;
+min-height:72px;
+}
+
+.brand{
+display:flex;
+align-items:center;
+gap:12px;
+font-weight:700;
+}
+
+.brand-badge{
+width:36px;
+height:36px;
+border-radius:50%;
+background:var(--primary-blue);
+color:#fff;
+display:flex;
+align-items:center;
+justify-content:center;
+}
+
+.nav{
+display:flex;
+gap:18px;
+}
+
+.nav a{
+color:var(--text-body);
+font-size:.95rem;
+}
+
+.nav a:hover{
+color:var(--primary-blue);
+}
+
+.hero{
+background:linear-gradient(135deg,var(--primary-blue-dark),var(--primary-blue));
+color:#fff;
+padding:76px 0 84px;
+}
+
+.hero-grid{
+display:grid;
+grid-template-columns:1.15fr .85fr;
+gap:28px;
+align-items:center;
+}
+
+h1{
+font-size:clamp(2.2rem,4vw,4rem);
+margin-bottom:18px;
+}
+
+.hero p{
+font-size:1.08rem;
+max-width:720px;
+}
+
+.actions{
+display:flex;
+gap:14px;
+margin-top:24px;
+}
+
+.btn{
+display:inline-flex;
+align-items:center;
+justify-content:center;
+min-height:46px;
+padding:0 18px;
+border-radius:var(--radius-sm);
+font-weight:700;
+}
+
+.btn-primary{
+background:#fff;
+color:var(--primary-blue);
+}
+
+.btn-secondary{
+background:rgba(255,255,255,.08);
+border:1px solid rgba(255,255,255,.25);
+color:#fff;
+}
+
+.hero-card{
+background:rgba(255,255,255,.10);
+border:1px solid rgba(255,255,255,.18);
+border-radius:var(--radius-lg);
+padding:24px;
+}
+
+.section{
+padding:56px 0;
+background:#fff;
+border-top:1px solid #edf1f7;
+}
+
+.section h2{
+text-align:center;
+font-size:2rem;
+margin-bottom:10px;
+}
+
+.section-intro{
+text-align:center;
+max-width:760px;
+margin:auto;
+margin-bottom:30px;
+color:var(--text-body);
+}
+
+.two-col{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:22px;
+}
+
+.card{
+background:#fff;
+border:1px solid var(--border-light);
+border-radius:var(--radius-lg);
+padding:28px;
+box-shadow:var(--shadow-soft);
+}
+
+.bullets{
+padding-left:20px;
+color:var(--text-body);
+}
+
+.feature-grid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:18px;
+margin-top:22px;
+}
+
+.feature-item{
+background:#fff;
+border:1px solid var(--border-light);
+border-radius:var(--radius-md);
+padding:22px;
+box-shadow:var(--shadow-soft);
+}
+
+.feature-item h3{
+color:var(--primary-blue);
+margin-bottom:10px;
+}
+
+.cta{
+padding:60px 0 80px;
+background:var(--bg-page);
+}
+
+.cta-box{
+background:linear-gradient(135deg,#fff,var(--primary-blue-soft));
+border-radius:24px;
+padding:34px;
+border:1px solid var(--border-light);
+}
+
+.footer{
+background:#fff;
+border-top:1px solid var(--border-light);
+padding:26px 0 38px;
+text-align:center;
+color:var(--text-body);
+}
+
+@media(max-width:980px){
+
+.hero-grid,
+.two-col,
+.feature-grid{
+grid-template-columns:1fr;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header class="topbar">
+<div class="container topbar-inner">
+
+<div class="brand">
+<div class="brand-badge">R</div>
+RomanoTI Solutions <small>Ops Assistant</small>
+</div>
+
+<nav class="nav">
+<a href="../index.html">Inicio</a>
+<a href="index.html">Platform</a>
+<a href="../services.html">Servicios</a>
+<a href="../contact.html">Contacto</a>
+</nav>
+
+</div>
+</header>
+
+<main>
+
+<section class="hero">
+<div class="container hero-grid">
+
+<div>
+
+<h1>Interpreta tu infraestructura con inteligencia operativa</h1>
+
+<p>
+Romanoti Ops Assistant es la capa de inteligencia operativa de la plataforma Romanoti.
+Está diseñado para ayudar a los equipos a comprender resultados técnicos,
+reducir la ambigüedad y tomar decisiones con mayor claridad.
+</p>
+
+<div class="actions">
+<a class="btn btn-primary" href="../contact.html">Solicitar información</a>
+<a class="btn btn-secondary" href="netpilot.html">Ver NetPilot</a>
+</div>
+
+</div>
+
+<aside class="hero-card">
+
+<h3>Para qué sirve Ops Assistant</h3>
+
+<p>
+Ops Assistant transforma resultados técnicos en interpretación guiada,
+permitiendo a los equipos entender qué revisar y dónde enfocar esfuerzos.
+</p>
+
+</aside>
+
+</div>
+</section>
+
+<section class="section">
+
+<div class="container">
+
+<h2>Por qué importa Ops Assistant</h2>
+
+<p class="section-intro">
+La visibilidad por sí sola no es suficiente.  
+Los equipos también necesitan interpretar resultados y comprender
+qué acciones tomar a continuación.
+</p>
+
+<div class="two-col">
+
+<div class="card">
+
+<h3>El problema</h3>
+
+<ul class="bullets">
+<li>Demasiada información técnica</li>
+<li>Prioridades poco claras</li>
+<li>Interpretación lenta de resultados</li>
+<li>Ambigüedad operativa</li>
+</ul>
+
+</div>
+
+<div class="card">
+
+<h3>El enfoque de Ops Assistant</h3>
+
+<ul class="bullets">
+<li>Interpretación operativa</li>
+<li>Contexto técnico guiado</li>
+<li>Soporte para investigación técnica</li>
+<li>Recomendaciones de siguientes pasos</li>
+</ul>
+
+</div>
+
+</div>
+
+</div>
+</section>
+
+<section class="section">
+
+<div class="container">
+
+<h2>Ops Assistant dentro de la plataforma Romanoti</h2>
+
+<p class="section-intro">
+Ops Assistant conecta los resultados técnicos con decisiones operativas.
+Trabaja junto a NetPilot para convertir visibilidad en acción.
+</p>
+
+<div class="two-col">
+
+<div class="card">
+
+<h3>Rol de Ops Assistant</h3>
+
+<p>
+Ayuda a responder la pregunta:
+<strong>¿Qué significan estos resultados y qué debemos revisar ahora?</strong>
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>Conectado con NetPilot</h3>
+
+<p>
+NetPilot descubre infraestructura.  
+Ops Assistant interpreta los resultados.
+</p>
+
+<a class="btn btn-secondary" href="netpilot.html">Abrir NetPilot</a>
+
+</div>
+
+</div>
+
+</div>
+</section>
+
+<section class="cta">
+
+<div class="container">
+
+<div class="cta-box">
+
+<h2>Ops Assistant es la capa de inteligencia de Romanoti.</h2>
+
+<p>
+Forma parte de la evolución de Romanoti hacia un modelo de plataforma,
+manteniendo la continuidad del sitio actual.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+</main>
+
+<footer class="footer">
+Romanoti Solutions — página de producto Ops Assistant
+</footer>
+
+</body>
+</html>
