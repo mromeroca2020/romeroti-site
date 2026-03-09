@@ -12,30 +12,40 @@
   <style>
     :root {
       --bg: #0b1220;
+      --bg-deep: #08101d;
       --panel: #121a2b;
       --panel-2: #182338;
       --text: #f3f6fb;
       --muted: #b8c2d6;
       --line: rgba(255,255,255,0.08);
-      --accent: #7dd3fc;
-      --accent-2: #c4b5fd;
+
+      /* Romanoti brand colors */
+      --accent: #2563eb;
+      --accent-2: #1e3a8a;
       --gold: #d6b46b;
+      --gold-soft: rgba(214,180,107,0.10);
+      --blue-soft: rgba(37,99,235,0.12);
+
       --max: 1180px;
     }
 
     * { box-sizing: border-box; }
+
     body {
       margin: 0;
       font-family: Arial, Helvetica, sans-serif;
       background:
-        radial-gradient(circle at top right, rgba(125,211,252,0.12), transparent 20%),
-        radial-gradient(circle at top left, rgba(196,181,253,0.10), transparent 18%),
-        var(--bg);
+        radial-gradient(circle at top right, rgba(37,99,235,0.18), transparent 20%),
+        radial-gradient(circle at top left, rgba(30,58,138,0.20), transparent 18%),
+        linear-gradient(180deg, var(--bg-deep) 0%, var(--bg) 100%);
       color: var(--text);
       line-height: 1.6;
     }
 
-    a { color: inherit; text-decoration: none; }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
     .container {
       width: min(var(--max), calc(100% - 32px));
@@ -47,7 +57,7 @@
       top: 0;
       z-index: 50;
       backdrop-filter: blur(10px);
-      background: rgba(11,18,32,0.78);
+      background: rgba(8,16,29,0.84);
       border-bottom: 1px solid var(--line);
     }
 
@@ -79,10 +89,11 @@
     .nav a {
       color: var(--muted);
       font-size: 0.95rem;
+      transition: color 0.2s ease;
     }
 
     .nav a:hover {
-      color: var(--text);
+      color: var(--gold);
     }
 
     .hero {
@@ -99,12 +110,12 @@
     .eyebrow {
       display: inline-block;
       padding: 8px 12px;
-      border: 1px solid var(--line);
+      border: 1px solid rgba(214,180,107,0.28);
       border-radius: 999px;
-      color: var(--accent);
+      color: var(--gold);
       font-size: 0.84rem;
       margin-bottom: 18px;
-      background: rgba(255,255,255,0.03);
+      background: rgba(214,180,107,0.08);
     }
 
     h1 {
@@ -146,8 +157,9 @@
     }
 
     .btn-secondary {
-      background: rgba(255,255,255,0.03);
+      background: rgba(37,99,235,0.10);
       color: var(--text);
+      border-color: rgba(37,99,235,0.28);
     }
 
     .btn:hover {
@@ -266,7 +278,7 @@
     }
 
     .cta-box {
-      background: linear-gradient(135deg, rgba(214,180,107,0.14), rgba(125,211,252,0.10));
+      background: linear-gradient(135deg, rgba(214,180,107,0.14), rgba(37,99,235,0.10));
       border: 1px solid var(--line);
       border-radius: 24px;
       padding: 28px;
