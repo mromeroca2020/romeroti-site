@@ -1,7 +1,7 @@
 (function () {
   // ============================================================
   // RomanoTI nav.js — Header global + selector de idioma + menú
-  // ============================================================
+  // ============================================================ 
   // OBJETIVO (según tu requerimiento actual):
   // ✅ Landing "/" = INGLÉS
   // ✅ /en/ = Inglés (alterno)
