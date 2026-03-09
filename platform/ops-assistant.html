@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- =======================================================
+       CONFIGURACIÓN BÁSICA
+       ======================================================= -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- SEO -->
+  <title>Romanoti Ops Assistant | Romanoti Solutions</title>
+  <meta
+    name="description"
+    content="Romanoti Ops Assistant is the operational intelligence component of the Romanoti platform."
+  />
+
+  <!-- Hoja global existente -->
+  <link rel="stylesheet" href="../css/styles.css" />
+
+  <style>
+    :root {
+      --primary-blue: #2f5bdb;
+      --primary-blue-dark: #2449b3;
+      --primary-blue-soft: #eaf0ff;
+
+      --romanoti-gold: #d6b46b;
+
+      --text-dark: #1f2937;
+      --text-body: #5f6f8a;
+      --text-light: #ffffff;
+
+      --border-light: #d9e1f0;
+      --bg-page: #f5f7fb;
+      --bg-section: #ffffff;
+      --bg-soft: #eef2f8;
+
+      --shadow-soft: 0 10px 25px rgba(31, 41, 55, 0.08);
+
+      --max-width: 1180px;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --radius-sm: 10px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg-page);
+      color: var(--text-dark);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(var(--max-width), calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    /* =======================================================
+       HEADER
+       ======================================================= */
+    .topbar {
+      background: #ffffff;
+      border-bottom: 1px solid var(--border-light);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .topbar-inner {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-dark);
+    }
+
+    .brand-badge {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--primary-blue);
+      color: white;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1rem;
+    }
+
+    .brand span small {
+      color: var(--romanoti-gold);
+      font-weight: 700;
+      display: inline-block;
+      margin-left: 4px;
+    }
+
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      align-items: center;
+    }
+
+    .nav a {
+      color: var(--text-body);
+      font-size: 0.95rem;
+      transition: color 0.2s ease;
+    }
+
+    .nav a:hover {
+      color: var(--primary-blue);
+    }
+
+    .nav .book-btn {
+      background: var(--primary-blue);
+      color: var(--text-light);
+      padding: 10px 18px;
+      border-radius: var(--radius-sm);
+      font-weight: 700;
+    }
+
+    .nav .book-btn:hover {
+      background: var(--primary-blue-dark);
+      color: var(--text-light);
+    }
+
+    /* =======================================================
+       HERO
+       ======================================================= */
+    .hero {
+      background: linear-gradient(135deg, var(--primary-blue-dark), var(--primary-blue));
+      color: white;
+      padding: 76px 0 84px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.14);
+      border: 1px solid rgba(255,255,255,0.18);
+      color: #ffffff;
+      font-size: 0.84rem;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      margin: 0 0 18px;
+      font-size: clamp(2.2rem, 4vw, 4rem);
+      line-height: 1.08;
+      max-width: 820px;
+    }
+
+    .hero p {
+      margin: 0 0 28px;
+      font-size: 1.08rem;
+      color: rgba(255,255,255,0.90);
+      max-width: 760px;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0 18px;
+      border-radius: var(--radius-sm);
+      border: 1px solid transparent;
+      font-weight: 700;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: #ffffff;
+      color: var(--primary-blue);
+    }
+
+    .btn-primary:hover {
+      background: #f4f7ff;
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.08);
+      color: #ffffff;
+      border-color: rgba(255,255,255,0.25);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.14);
+    }
+
+    .hero-card {
+      background: rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.12);
+    }
+
+    .hero-card h3 {
+      margin-top: 0;
+      margin-bottom: 10px;
+      font-size: 1.3rem;
+    }
+
+    .hero-card p {
+      color: rgba(255,255,255,0.88);
+      margin-bottom: 18px;
+    }
+
+    .mini-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .mini-item {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: var(--radius-md);
+      padding: 16px;
+    }
+
+    .mini-item strong {
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .mini-item span {
+      font-size: 0.92rem;
+      color: rgba(255,255,255,0.88);
+    }
+
+    /* =======================================================
+       SECCIONES
+       ======================================================= */
+    .section {
+      padding: 56px 0;
+      background: var(--bg-section);
+      border-top: 1px solid #edf1f7;
+    }
+
+    .section.alt {
+      background: var(--bg-page);
+    }
+
+    .section h2 {
+      margin: 0 0 12px;
+      font-size: clamp(1.8rem, 2.2vw, 2.6rem);
+      text-align: center;
+      color: var(--text-dark);
+    }
+
+    .section-intro {
+      max-width: 860px;
+      margin: 0 auto 28px;
+      text-align: center;
+      color: var(--text-body);
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+      margin-top: 20px;
+    }
+
+    .card {
+      background: #ffffff;
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .card h3 {
+      margin-top: 0;
+      margin-bottom: 12px;
+      font-size: 1.35rem;
+      color: var(--text-dark);
+    }
+
+    .card p {
+      color: var(--text-body);
+      margin-top: 0;
+    }
+
+    .bullets {
+      padding-left: 20px;
+      color: var(--text-body);
+      margin: 14px 0 0;
+    }
+
+    .bullets li {
+      margin-bottom: 8px;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-top: 22px;
+    }
+
+    .feature-item {
+      background: #ffffff;
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-md);
+      padding: 22px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .feature-item h3 {
+      margin-top: 0;
+      margin-bottom: 10px;
+      font-size: 1.1rem;
+      color: var(--primary-blue);
+    }
+
+    .feature-item p {
+      margin: 0;
+      color: var(--text-body);
+    }
+
+    .cta {
+      padding: 60px 0 80px;
+      background: var(--bg-page);
+    }
+
+    .cta-box {
+      background: linear-gradient(135deg, #ffffff, var(--primary-blue-soft));
+      border: 1px solid var(--border-light);
+      border-radius: 24px;
+      padding: 34px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .cta-box h2 {
+      text-align: left;
+      margin-top: 0;
+      margin-bottom: 12px;
+    }
+
+    .cta-box p {
+      color: var(--text-body);
+      max-width: 860px;
+      margin: 0 0 22px;
+    }
+
+    .footer {
+      background: #ffffff;
+      border-top: 1px solid var(--border-light);
+      padding: 26px 0 38px;
+      color: var(--text-body);
+      font-size: 0.95rem;
+      text-align: center;
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid,
+      .two-col,
+      .feature-grid,
+      .mini-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .topbar-inner {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 14px 0;
+      }
+
+      .hero {
+        padding: 56px 0 64px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- =======================================================
+       CABECERA
+       ======================================================= -->
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <div class="brand">
+        <div class="brand-badge">R</div>
+        <span>RomanoTI Solutions <small>Ops Assistant</small></span>
+      </div>
+
+      <nav class="nav">
+        <a href="../index.html">Home</a>
+        <a href="index.html">Platform</a>
+        <a href="../services.html">Services</a>
+        <a href="../contact.html">Contact</a>
+        <a class="book-btn" href="../booking.html">Book Now</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- =====================================================
+         HERO
+         ===================================================== -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">Romanoti Platform / Ops Assistant</div>
+          <h1>Interpret infrastructure with operational intelligence.</h1>
+          <p>
+            Romanoti Ops Assistant is the operational intelligence layer of the Romanoti platform.
+            It is designed to help teams understand findings, reduce ambiguity, and move toward
+            better technical decisions with more confidence.
+          </p>
+
+          <div class="actions">
+            <a class="btn btn-primary" href="../contact.html">Request information</a>
+            <a class="btn btn-secondary" href="netpilot.html">See NetPilot</a>
+          </div>
+        </div>
+
+        <aside class="hero-card">
+          <h3>What Ops Assistant is built for</h3>
+          <p>
+            Ops Assistant helps transform raw technical findings into guided interpretation,
+            helping teams understand what to review and where to focus next.
+          </p>
+
+          <div class="mini-grid">
+            <div class="mini-item">
+              <strong>Interpretation</strong>
+              <span>Help teams understand findings faster.</span>
+            </div>
+            <div class="mini-item">
+              <strong>Guidance</strong>
+              <span>Provide operational direction and context.</span>
+            </div>
+            <div class="mini-item">
+              <strong>Clarity</strong>
+              <span>Reduce uncertainty in technical review.</span>
+            </div>
+            <div class="mini-item">
+              <strong>Decision support</strong>
+              <span>Strengthen next-step thinking for teams.</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         PROBLEMA
+         ===================================================== -->
+    <section class="section">
+      <div class="container">
+        <h2>Why Ops Assistant matters</h2>
+        <p class="section-intro">
+          Discovery alone is not enough. Teams also need help understanding what findings mean,
+          what should be reviewed next, and how to move from visibility toward operational clarity.
+        </p>
+
+        <div class="two-col">
+          <div class="card">
+            <h3>The problem</h3>
+            <p>
+              Technical environments generate findings, signals, and complexity, but teams are often
+              left without enough structured interpretation to act efficiently.
+            </p>
+            <ul class="bullets">
+              <li>Too much raw information</li>
+              <li>Unclear technical priorities</li>
+              <li>Slow understanding of findings</li>
+              <li>Operational ambiguity during review</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3>The Ops Assistant approach</h3>
+            <p>
+              Ops Assistant is designed to sit on top of discovery and diagnostics, helping teams
+              interpret findings and move toward better operational decisions.
+            </p>
+            <ul class="bullets">
+              <li>Operational interpretation</li>
+              <li>Guided technical thinking</li>
+              <li>Support for investigation</li>
+              <li>Next-step recommendation logic</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         CAPACIDADES
+         ===================================================== -->
+    <section class="section alt">
+      <div class="container">
+        <h2>Core capabilities</h2>
+        <p class="section-intro">
+          Ops Assistant represents the intelligence layer of Romanoti, helping connect findings with operational meaning.
+        </p>
+
+        <div class="feature-grid">
+          <div class="feature-item">
+            <h3>Operational guidance</h3>
+            <p>Help teams understand what findings may require review.</p>
+          </div>
+          <div class="feature-item">
+            <h3>Insight generation</h3>
+            <p>Support structured interpretation of technical visibility.</p>
+          </div>
+          <div class="feature-item">
+            <h3>Troubleshooting support</h3>
+            <p>Improve how teams navigate investigation and review.</p>
+          </div>
+          <div class="feature-item">
+            <h3>Decision support</h3>
+            <p>Strengthen next-step clarity within technical operations.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         ROL DENTRO DE LA PLATAFORMA
+         ===================================================== -->
+    <section class="section">
+      <div class="container">
+        <h2>Ops Assistant inside the Romanoti platform</h2>
+        <p class="section-intro">
+          Ops Assistant is the layer that helps Romanoti move beyond visibility. It sits after discovery,
+          helping teams interpret findings and create a more intelligent operational model.
+        </p>
+
+        <div class="two-col">
+          <div class="card">
+            <h3>Ops Assistant role</h3>
+            <p>
+              Ops Assistant focuses on interpretation and guidance. It is the part of Romanoti
+              that helps answer: <strong>what does this mean, and what should we review next?</strong>
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>Connected to NetPilot</h3>
+            <p>
+              NetPilot helps reveal infrastructure visibility. Ops Assistant helps interpret those findings.
+              Together, they define the product logic of the Romanoti platform.
+            </p>
+            <a class="btn btn-secondary" href="netpilot.html">Open NetPilot</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         CTA FINAL
+         ===================================================== -->
+    <section class="cta">
+      <div class="container">
+        <div class="cta-box">
+          <h2>Ops Assistant is the intelligence layer of the Romanoti future.</h2>
+          <p>
+            This page introduces Ops Assistant as the interpretation and guidance layer in the Romanoti platform vision,
+            while preserving the continuity of the current site and brand.
+          </p>
+          <div class="actions">
+            <a class="btn btn-secondary" href="../contact.html">Contact Romanoti</a>
+            <a class="btn btn-primary" href="index.html">Back to Platform</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- =======================================================
+       FOOTER
+       ======================================================= -->
+  <footer class="footer">
+    <div class="container">
+      Romanoti Solutions — Ops Assistant product direction page.
+    </div>
+  </footer>
+</body>
+</html>
