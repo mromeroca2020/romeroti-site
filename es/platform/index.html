@@ -299,6 +299,9 @@
       color: var(--text-body);
     }
 
+    /* =======================================================
+       FLUJO ROMANOTI
+       ======================================================= */
     .flow {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -336,6 +339,50 @@
       color: var(--text-body);
     }
 
+    /* =======================================================
+       DIAGRAMA DE ARQUITECTURA
+       ======================================================= */
+    .diagram-row {
+      display: grid;
+      grid-template-columns: 1fr 80px 1fr 80px 1fr;
+      gap: 0;
+      align-items: center;
+      margin-top: 18px;
+    }
+
+    .diagram-box {
+      background: #ffffff;
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-lg);
+      padding: 26px;
+      box-shadow: var(--shadow-soft);
+      text-align: center;
+    }
+
+    .diagram-box h3 {
+      margin-top: 0;
+      margin-bottom: 10px;
+      font-size: 1.35rem;
+      color: var(--text-dark);
+    }
+
+    .diagram-box p {
+      color: var(--text-body);
+      margin-bottom: 0;
+    }
+
+    .diagram-arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      color: var(--primary-blue);
+      font-weight: 700;
+    }
+
+    /* =======================================================
+       TARJETAS DE PRODUCTO
+       ======================================================= */
     .cards {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -384,6 +431,69 @@
       border-color: var(--primary-blue-dark);
     }
 
+    /* =======================================================
+       USE CASES
+       ======================================================= */
+    .use-cases {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 20px;
+    }
+
+    .use-case {
+      background: #ffffff;
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-lg);
+      padding: 26px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .use-case h3 {
+      margin-top: 0;
+      margin-bottom: 12px;
+      font-size: 1.2rem;
+      color: var(--text-dark);
+    }
+
+    .use-case p {
+      color: var(--text-body);
+      margin-bottom: 0;
+    }
+
+    /* =======================================================
+       ENTERPRISE DEPLOYMENT
+       ======================================================= */
+    .deployment-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      margin-top: 20px;
+    }
+
+    .deployment-card {
+      background: #ffffff;
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .deployment-card h3 {
+      margin-top: 0;
+      margin-bottom: 12px;
+      font-size: 1.3rem;
+      color: var(--text-dark);
+    }
+
+    .deployment-card p,
+    .deployment-card li {
+      color: var(--text-body);
+    }
+
+    /* =======================================================
+       CTA FINAL
+       ======================================================= */
     .cta {
       padding: 60px 0 80px;
       background: var(--bg-page);
@@ -409,6 +519,9 @@
       margin: 0 0 22px;
     }
 
+    /* =======================================================
+       PIE DE PÁGINA
+       ======================================================= */
     .footer {
       background: #ffffff;
       border-top: 1px solid var(--border-light);
@@ -422,8 +535,16 @@
       .hero-grid,
       .cards,
       .flow,
-      .stats {
+      .stats,
+      .use-cases,
+      .deployment-grid,
+      .diagram-row {
         grid-template-columns: 1fr;
+      }
+
+      .diagram-arrow {
+        transform: rotate(90deg);
+        padding: 12px 0;
       }
 
       .topbar-inner {
@@ -548,6 +669,49 @@
     </section>
 
     <!-- =====================================================
+         DIAGRAMA DE ARQUITECTURA ROMANOTI
+         ===================================================== -->
+    <section class="section">
+      <div class="container">
+        <h2>Arquitectura de la plataforma Romanoti</h2>
+        <p class="section-intro">
+          Romanoti está estructurada como una plataforma conectada donde el descubrimiento,
+          la interpretación y la claridad operativa trabajan juntos.
+        </p>
+
+        <div class="diagram-row">
+          <div class="diagram-box">
+            <h3>NetPilot</h3>
+            <p>
+              Motor de descubrimiento y diagnósticos que identifica infraestructura,
+              servicios y exposición técnica.
+            </p>
+          </div>
+
+          <div class="diagram-arrow">→</div>
+
+          <div class="diagram-box">
+            <h3>Ops Assistant</h3>
+            <p>
+              Capa de inteligencia operativa que interpreta hallazgos
+              y guía a los equipos técnicos hacia las siguientes acciones.
+            </p>
+          </div>
+
+          <div class="diagram-arrow">→</div>
+
+          <div class="diagram-box">
+            <h3>Romanoti Platform</h3>
+            <p>
+              Modelo operativo unificado que conecta visibilidad,
+              interpretación y soporte para decisiones a nivel empresarial.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================
          COMPONENTES PRINCIPALES DE LA PLATAFORMA
          ===================================================== -->
     <section class="section alt">
@@ -587,6 +751,80 @@
             </ul>
             <a class="btn btn-secondary" href="ops-assistant.html">Abrir página de Ops Assistant</a>
           </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         USE CASES
+         ===================================================== -->
+    <section class="section">
+      <div class="container">
+        <h2>Casos de uso</h2>
+        <p class="section-intro">
+          Romanoti Platform está diseñada para entornos operativos reales,
+          no solo para un mensaje IT genérico.
+        </p>
+
+        <div class="use-cases">
+          <div class="use-case">
+            <h3>Descubrimiento de infraestructura</h3>
+            <p>
+              Identificar equipos, servicios y relaciones técnicas dentro de
+              entornos que han crecido sin visibilidad completa.
+            </p>
+          </div>
+
+          <div class="use-case">
+            <h3>Revisión operativa</h3>
+            <p>
+              Ayudar a los equipos técnicos a pasar de resultados brutos a una interpretación guiada
+              y a una mejor revisión de los siguientes pasos.
+            </p>
+          </div>
+
+          <div class="use-case">
+            <h3>Preparación empresarial</h3>
+            <p>
+              Apoyar a las organizaciones que necesitan un camino más estructurado entre
+              visibilidad de infraestructura e inteligencia operativa escalable.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         ENTERPRISE DEPLOYMENT
+         ===================================================== -->
+    <section class="section alt">
+      <div class="container">
+        <h2>Despliegue empresarial</h2>
+        <p class="section-intro">
+          Romanoti Platform está posicionada para modelos de despliegue controlados,
+          escalables y orientados a empresa.
+        </p>
+
+        <div class="deployment-grid">
+          <div class="deployment-card">
+            <h3>Enfoque de despliegue</h3>
+            <ul class="bullets">
+              <li>Estructura de producto modular</li>
+              <li>Despliegue progresivo por capacidad</li>
+              <li>Separación entre descubrimiento e interpretación</li>
+              <li>Preparada para integración y expansión futuras</li>
+            </ul>
+          </div>
+
+          <div class="deployment-card">
+            <h3>Valor empresarial</h3>
+            <ul class="bullets">
+              <li>Mayor visibilidad de la infraestructura</li>
+              <li>Interpretación más rápida de hallazgos técnicos</li>
+              <li>Soporte más estructurado para decisiones operativas</li>
+              <li>Base sólida para el crecimiento futuro de la plataforma</li>
+            </ul>
+          </div>
         </div>
       </div>
     </section>
