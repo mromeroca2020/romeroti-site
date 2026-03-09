@@ -84,14 +84,19 @@
             </div>
           </div>
 
+          <!-- ============================================================
+               CHANGE #4 (ADD PLATFORM TO FALLBACK NAV):
+               Se agrega acceso visible a la nueva capa Platform.
+               ============================================================ -->
           <a href="/solutions/" class="hover:text-blue-600">Solutions</a>
+          <a href="/platform/index.html" class="hover:text-blue-600">Platform</a>
           <a href="/services/tools.html" class="hover:text-blue-600">Tools</a>
           <a href="/it-noc.html" class="hover:text-blue-600">NOC</a>
           <a href="/it-soc.html" class="hover:text-blue-600">SOC</a>
         </nav>
 
         <!-- ============================================================
-             CHANGE #4 (BOOK NOW LINK):
+             CHANGE #5 (BOOK NOW LINK):
              Se mantiene el booking propio del sitio y se usa la ruta
              estable con archivo físico .html para evitar problemas de routing.
              ============================================================ -->
@@ -113,7 +118,7 @@
 
       <div class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-6">
         <!-- ============================================================
-             CHANGE #5 (EMERGENCY SUPPORT):
+             CHANGE #6 (EMERGENCY SUPPORT):
              Se corrige la ruta para usar /booking.html en lugar de /booking.
              Esto evita fallos por _redirects o rutas limpias no resueltas.
              ============================================================ -->
@@ -122,7 +127,7 @@
         </a>
 
         <!-- ============================================================
-             CHANGE #6 (FREE CONSULTATION):
+             CHANGE #7 (FREE CONSULTATION):
              Se corrige la ruta para usar /booking.html en lugar de /booking.
              ============================================================ -->
         <a href="/booking.html?service=Free%20Consultation" class="btn-primary text-white px-8 py-3 rounded-lg font-semibold">
@@ -145,6 +150,54 @@
         <a href="/solutions/cybershield/" class="btn-primary text-white px-5 py-2 rounded-lg font-medium">
           Meet CyberShield (MDR)
         </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       CHANGE #8 (NEW PLATFORM SECTION):
+       Nueva sección en la home para introducir Romanoti Platform,
+       NetPilot y Ops Assistant sin alterar el resto del sitio.
+       ============================================================ -->
+  <section class="py-14 bg-white border-b">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-10">
+        <h2 class="text-3xl font-bold">Romanoti Platform</h2>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+          A new product-driven direction for infrastructure discovery and operational intelligence.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="card bg-white p-6 border border-gray-100">
+          <div class="badge">Platform Vision</div>
+          <h3 class="text-xl font-bold mt-2 mb-2">A scalable future</h3>
+          <p class="text-gray-600">
+            Romanoti is evolving from pure services into a platform model that connects visibility,
+            diagnostics, and operational intelligence.
+          </p>
+          <a href="/platform/index.html" class="text-blue-600 hover:underline mt-3 inline-block">Explore Platform →</a>
+        </div>
+
+        <div class="card bg-white p-6 border border-gray-100">
+          <div class="badge">NetPilot</div>
+          <h3 class="text-xl font-bold mt-2 mb-2">Infrastructure discovery</h3>
+          <p class="text-gray-600">
+            NetPilot is the discovery and diagnostics layer designed to help identify devices,
+            services, and technical structure across environments.
+          </p>
+          <a href="/platform/netpilot.html" class="text-blue-600 hover:underline mt-3 inline-block">Open NetPilot →</a>
+        </div>
+
+        <div class="card bg-white p-6 border border-gray-100">
+          <div class="badge">Ops Assistant</div>
+          <h3 class="text-xl font-bold mt-2 mb-2">Operational intelligence</h3>
+          <p class="text-gray-600">
+            Ops Assistant helps interpret findings, reduce ambiguity, and support better
+            operational decisions across technical environments.
+          </p>
+          <a href="/platform/ops-assistant.html" class="text-blue-600 hover:underline mt-3 inline-block">Open Ops Assistant →</a>
+        </div>
       </div>
     </div>
   </section>
@@ -240,7 +293,7 @@
       <p class="text-lg opacity-90 mb-6">Let's schedule a 20-minute posture check and next steps.</p>
       <div class="flex flex-col md:flex-row justify-center gap-4">
         <!-- ============================================================
-             CHANGE #7 (FINAL CTA BOOKING):
+             CHANGE #9 (FINAL CTA BOOKING):
              El CTA final usa booking propio con ruta física estable.
              ============================================================ -->
         <a href="/booking.html?service=Free%20Consultation" class="bg-white text-blue-700 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100">
@@ -255,7 +308,7 @@
   <div id="app-footer"></div>
 
   <!-- ============================================================
-       CHANGE #8 (FALLBACK REMOVER):
+       CHANGE #10 (FALLBACK REMOVER):
        Se mantiene la lógica actual porque es correcta.
        ============================================================ -->
   <script>
@@ -289,7 +342,7 @@
   <script defer src="/js/fix-nav.js?v=9"></script>
 
   <!-- ============================================================
-       CHANGE #9 (LANG HIGHLIGHT):
+       CHANGE #11 (LANG HIGHLIGHT):
        Se mantiene igual porque ya está correcto.
        ============================================================ -->
   <script>
