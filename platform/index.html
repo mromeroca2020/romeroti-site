@@ -1,45 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
   <!-- =======================================================
        BASIC CONFIGURATION
        ======================================================= -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- =======================================================
-       SEO
-       ======================================================= -->
-
+  <!-- SEO -->
   <title>Romanoti Platform | Romanoti Solutions</title>
-
   <meta
     name="description"
     content="Romanoti Platform connects infrastructure discovery and operational intelligence through NetPilot and Ops Assistant."
   />
 
-  <!-- =======================================================
-       GLOBAL STYLESHEET
-       ======================================================= -->
-
-  <link rel="stylesheet" href="../css/styles.css">
-
-  <!-- =======================================================
-       PAGE STYLES
-       ======================================================= -->
+  <!-- GLOBAL SITE STYLES -->
+  <link rel="stylesheet" href="../css/styles.css" />
 
   <style>
-
-    /* =======================================================
-       COLOR SYSTEM
-       Romanoti design tokens
-       ======================================================= */
-
     :root {
-
       --primary-blue: #2f5bdb;
       --primary-blue-dark: #2449b3;
       --primary-blue-soft: #eaf0ff;
@@ -48,610 +27,593 @@
 
       --text-dark: #1f2937;
       --text-body: #5f6f8a;
+      --text-light: #ffffff;
 
       --border-light: #d9e1f0;
-
       --bg-page: #f5f7fb;
       --bg-section: #ffffff;
+      --bg-soft: #eef2f8;
 
       --shadow-soft: 0 10px 25px rgba(31, 41, 55, 0.08);
 
+      --max-width: 1180px;
       --radius-lg: 20px;
       --radius-md: 14px;
       --radius-sm: 10px;
-
-      --max-width: 1180px;
-
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
-
       margin: 0;
       font-family: Arial, Helvetica, sans-serif;
       background: var(--bg-page);
       color: var(--text-dark);
       line-height: 1.6;
-
     }
 
     a {
-      text-decoration: none;
       color: inherit;
+      text-decoration: none;
     }
 
     .container {
-
       width: min(var(--max-width), calc(100% - 32px));
-      margin: auto;
-
+      margin: 0 auto;
     }
 
     /* =======================================================
        HEADER
        ======================================================= */
-
     .topbar {
-
       background: #ffffff;
       border-bottom: 1px solid var(--border-light);
       position: sticky;
       top: 0;
       z-index: 100;
-
     }
 
     .topbar-inner {
-
       min-height: 72px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-
+      gap: 20px;
     }
 
     .brand {
-
       display: flex;
       align-items: center;
       gap: 12px;
+      font-size: 1.05rem;
       font-weight: 700;
-
+      color: var(--text-dark);
     }
 
     .brand-badge {
-
       width: 36px;
       height: 36px;
       border-radius: 50%;
       background: var(--primary-blue);
       color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-    }
-
-    .nav {
-
-      display: flex;
-      gap: 18px;
-
-    }
-
-    .nav a {
-
-      color: var(--text-body);
-      font-size: 0.95rem;
-
-    }
-
-    .nav a:hover {
-
-      color: var(--primary-blue);
-
-    }
-
-    /* =======================================================
-       HERO SECTION
-       Platform introduction
-       ======================================================= */
-
-    .hero {
-
-      background: linear-gradient(135deg, var(--primary-blue-dark), var(--primary-blue));
-      color: white;
-      padding: 80px 0;
-
-    }
-
-    .hero-grid {
-
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 32px;
-      align-items: center;
-
-    }
-
-    h1 {
-
-      font-size: clamp(2.3rem, 4vw, 4rem);
-      margin-bottom: 18px;
-
-    }
-
-    .hero p {
-
-      font-size: 1.1rem;
-      max-width: 720px;
-
-    }
-
-    .actions {
-
-      display: flex;
-      gap: 14px;
-      margin-top: 26px;
-
-    }
-
-    .btn {
-
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: 12px 20px;
+      font-weight: 700;
+      font-size: 1rem;
+    }
+
+    .brand span small {
+      color: var(--romanoti-gold);
+      font-weight: 700;
+      display: inline-block;
+      margin-left: 4px;
+    }
+
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      align-items: center;
+    }
+
+    .nav a {
+      color: var(--text-body);
+      font-size: 0.95rem;
+      transition: color 0.2s ease;
+    }
+
+    .nav a:hover {
+      color: var(--primary-blue);
+    }
+
+    .nav .book-btn {
+      background: var(--primary-blue);
+      color: var(--text-light);
+      padding: 10px 18px;
       border-radius: var(--radius-sm);
       font-weight: 700;
+    }
 
+    .nav .book-btn:hover {
+      background: var(--primary-blue-dark);
+      color: var(--text-light);
+    }
+
+    /* =======================================================
+       HERO
+       ======================================================= */
+    .hero {
+      background: linear-gradient(135deg, var(--primary-blue-dark), var(--primary-blue));
+      color: var(--text-light);
+      padding: 78px 0 84px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.14);
+      border: 1px solid rgba(255,255,255,0.18);
+      color: #ffffff;
+      font-size: 0.84rem;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      margin: 0 0 18px;
+      font-size: clamp(2.2rem, 4vw, 4rem);
+      line-height: 1.08;
+      max-width: 820px;
+    }
+
+    .hero p {
+      margin: 0 0 28px;
+      font-size: 1.08rem;
+      color: rgba(255,255,255,0.90);
+      max-width: 760px;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0 18px;
+      border-radius: var(--radius-sm);
+      border: 1px solid transparent;
+      font-weight: 700;
+      transition: all 0.2s ease;
+      cursor: pointer;
     }
 
     .btn-primary {
-
-      background: white;
+      background: #ffffff;
       color: var(--primary-blue);
+    }
 
+    .btn-primary:hover {
+      background: #f4f7ff;
     }
 
     .btn-secondary {
+      background: rgba(255,255,255,0.08);
+      color: #ffffff;
+      border-color: rgba(255,255,255,0.25);
+    }
 
-      background: rgba(255, 255, 255, .1);
-      border: 1px solid rgba(255, 255, 255, .25);
-      color: white;
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.14);
+    }
 
+    .hero-card {
+      background: rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.12);
+    }
+
+    .mini-label {
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #dce8ff;
+      margin-bottom: 10px;
+    }
+
+    .hero-card h3 {
+      margin-top: 0;
+      margin-bottom: 12px;
+      font-size: 1.4rem;
+      line-height: 1.2;
+    }
+
+    .hero-card p {
+      color: rgba(255,255,255,0.88);
+      margin-bottom: 18px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .stat {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: var(--radius-md);
+      padding: 16px;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.1rem;
+      margin-bottom: 4px;
+      color: #ffffff;
+    }
+
+    .stat div {
+      color: rgba(255,255,255,0.88);
+      font-size: 0.92rem;
     }
 
     /* =======================================================
-       PLATFORM FLOW
+       GENERIC SECTIONS
        ======================================================= */
-
     .section {
+      padding: 56px 0;
+      background: var(--bg-section);
+      border-top: 1px solid #edf1f7;
+    }
 
-      padding: 60px 0;
-      background: white;
-
+    .section.alt {
+      background: var(--bg-page);
     }
 
     .section h2 {
-
+      margin: 0 0 12px;
+      font-size: clamp(1.8rem, 2.2vw, 2.6rem);
       text-align: center;
-      font-size: 2rem;
-
+      color: var(--text-dark);
     }
 
     .section-intro {
-
+      max-width: 860px;
+      margin: 0 auto 28px;
       text-align: center;
-      max-width: 760px;
-      margin: 0 auto 30px;
       color: var(--text-body);
-
-    }
-
-    .flow {
-
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
-
-    }
-
-    .flow-item {
-
-      background: white;
-      border: 1px solid var(--border-light);
-      border-radius: var(--radius-md);
-      padding: 22px;
-      box-shadow: var(--shadow-soft);
-
-    }
-
-    .flow-item span {
-
-      color: var(--primary-blue);
-      font-size: .8rem;
-      text-transform: uppercase;
-      font-weight: 700;
-
-    }
-
-    .flow-item strong {
-
-      display: block;
-      margin: 8px 0;
-
     }
 
     /* =======================================================
-       ARCHITECTURE DIAGRAM
-       New sales section: platform architecture
+       GRID / CARDS
        ======================================================= */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 22px;
+      margin-top: 20px;
+    }
 
-    .diagram {
-
+    .cards-3 {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-      align-items: stretch;
-
+      gap: 22px;
+      margin-top: 20px;
     }
 
-    .diagram-box {
+    .cards-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 22px;
+      margin-top: 20px;
+    }
 
-      background: white;
+    .card {
+      background: #ffffff;
       border: 1px solid var(--border-light);
       border-radius: var(--radius-lg);
-      padding: 26px;
+      padding: 28px;
       box-shadow: var(--shadow-soft);
-      text-align: center;
-
     }
 
-    .diagram-box h3 {
-
+    .card h3 {
       margin-top: 0;
-      margin-bottom: 10px;
-
+      margin-bottom: 12px;
+      font-size: 1.35rem;
+      color: var(--text-dark);
     }
 
-    .diagram-box p {
-
+    .card p {
       color: var(--text-body);
-      margin-bottom: 0;
-
+      margin-top: 0;
     }
 
-    .diagram-arrow {
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2rem;
-      color: var(--primary-blue);
-      font-weight: 700;
-
+    .bullets {
+      padding-left: 20px;
+      color: var(--text-body);
+      margin: 16px 0 24px;
     }
 
+    .bullets li {
+      margin-bottom: 8px;
+    }
+
+    .badge {
+      display: inline-block;
+      border: 1px solid var(--border-light);
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-size: 12px;
+      background: #f8fafc;
+      color: var(--text-body);
+    }
+
+    /* =======================================================
+       ARCHITECTURE FLOW
+       ======================================================= */
     .diagram-row {
-
       display: grid;
       grid-template-columns: 1fr 80px 1fr 80px 1fr;
       gap: 0;
       align-items: center;
-
+      margin-top: 18px;
     }
 
-    /* =======================================================
-       PRODUCT CARDS
-       ======================================================= */
-
-    .cards {
-
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 24px;
-
-    }
-
-    .card {
-
-      background: white;
-      border: 1px solid var(--border-light);
-      border-radius: var(--radius-lg);
-      padding: 28px;
-      box-shadow: var(--shadow-soft);
-
-    }
-
-    .card h3 {
-
-      margin-top: 0;
-
-    }
-
-    .bullets {
-
-      padding-left: 18px;
-
-    }
-
-    .bullets li {
-
-      margin-bottom: 6px;
-
-    }
-
-    /* =======================================================
-       USE CASES
-       New sales section for customer scenarios
-       ======================================================= */
-
-    .use-cases {
-
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-
-    }
-
-    .use-case {
-
-      background: white;
+    .diagram-box {
+      background: #ffffff;
       border: 1px solid var(--border-light);
       border-radius: var(--radius-lg);
       padding: 26px;
       box-shadow: var(--shadow-soft);
-
+      text-align: center;
     }
 
-    .use-case h3 {
-
+    .diagram-box h3 {
       margin-top: 0;
-      margin-bottom: 12px;
-
+      margin-bottom: 10px;
+      font-size: 1.35rem;
+      color: var(--text-dark);
     }
 
-    .use-case p {
-
+    .diagram-box p {
       color: var(--text-body);
       margin-bottom: 0;
+    }
 
+    .diagram-arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      color: var(--primary-blue);
+      font-weight: 700;
     }
 
     /* =======================================================
-       ENTERPRISE DEPLOYMENT
-       New enterprise credibility section
+       CTA
        ======================================================= */
-
-    .deployment-grid {
-
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 24px;
-
+    .cta {
+      padding: 60px 0 80px;
+      background: var(--bg-page);
     }
 
-    .deployment-card {
-
-      background: white;
+    .cta-box {
+      background: linear-gradient(135deg, #ffffff, var(--primary-blue-soft));
       border: 1px solid var(--border-light);
-      border-radius: var(--radius-lg);
-      padding: 28px;
+      border-radius: 24px;
+      padding: 34px;
       box-shadow: var(--shadow-soft);
-
     }
 
-    .deployment-card h3 {
-
+    .cta-box h2 {
+      text-align: left;
       margin-top: 0;
       margin-bottom: 12px;
-
     }
 
-    .deployment-card p,
-    .deployment-card li {
-
+    .cta-box p {
       color: var(--text-body);
-
+      max-width: 860px;
+      margin: 0 0 22px;
     }
 
     /* =======================================================
        FOOTER
        ======================================================= */
-
     .footer {
-
-      padding: 30px 0;
-      text-align: center;
+      background: #ffffff;
+      border-top: 1px solid var(--border-light);
+      padding: 26px 0 38px;
       color: var(--text-body);
-
+      font-size: 0.95rem;
+      text-align: center;
     }
 
-    /* =======================================================
-       RESPONSIVE
-       ======================================================= */
-
-    @media(max-width:980px){
-
+    @media (max-width: 980px) {
       .hero-grid,
-      .flow,
       .cards,
-      .use-cases,
-      .deployment-grid,
-      .diagram,
-      .diagram-row{
-
-        grid-template-columns:1fr;
-
+      .cards-3,
+      .cards-4,
+      .stats,
+      .diagram-row {
+        grid-template-columns: 1fr;
       }
 
-      .diagram-arrow{
+      .diagram-arrow {
         transform: rotate(90deg);
         padding: 12px 0;
       }
 
+      .topbar-inner {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 14px 0;
+      }
+
+      .nav {
+        gap: 14px;
+      }
+
+      .hero {
+        padding: 56px 0 64px;
+      }
     }
-
   </style>
-
 </head>
-
 <body>
-
   <!-- =======================================================
        HEADER
        ======================================================= -->
-
   <header class="topbar">
-
     <div class="container topbar-inner">
-
       <div class="brand">
         <div class="brand-badge">R</div>
-        Romanoti Solutions <small>Platform</small>
+        <span>RomanoTI Solutions <small>Platform</small></span>
       </div>
 
       <nav class="nav">
         <a href="../index.html">Home</a>
         <a href="../services.html">Services</a>
+        <a href="../solutions/index.html">Solutions</a>
         <a href="../contact.html">Contact</a>
+        <a class="book-btn" href="../booking.html">Book Now</a>
       </nav>
-
     </div>
-
   </header>
 
-  <!-- =======================================================
-       MAIN CONTENT
-       ======================================================= -->
-
   <main>
-
     <!-- =====================================================
          HERO
+         Página principal de producto / plataforma
          ===================================================== -->
-
     <section class="hero">
-
       <div class="container hero-grid">
-
         <div>
-
-          <h1>Operate infrastructure with intelligence</h1>
-
+          <div class="eyebrow">Infrastructure discovery + operational intelligence</div>
+          <h1>Romanoti Platform for modern infrastructure operations.</h1>
           <p>
-            Romanoti Platform connects infrastructure discovery with operational
-            intelligence, allowing teams to move from visibility to decision making.
+            Romanoti Platform connects infrastructure discovery, diagnostics,
+            and operational intelligence into a structured model designed for
+            modern enterprise environments.
           </p>
 
           <div class="actions">
-
-            <a class="btn btn-primary" href="netpilot.html">
-              Explore NetPilot
-            </a>
-
-            <a class="btn btn-secondary" href="ops-assistant.html">
-              Meet Ops Assistant
-            </a>
-
+            <a class="btn btn-primary" href="netpilot.html">Explore NetPilot</a>
+            <a class="btn btn-secondary" href="ops-assistant.html">Explore Ops Assistant</a>
           </div>
-
         </div>
 
-      </div>
+        <aside class="hero-card">
+          <div class="mini-label">Platform direction</div>
+          <h3>A product-driven architecture built to support operational clarity.</h3>
+          <p>
+            Romanoti is evolving toward a platform model that helps organizations
+            understand infrastructure faster, reduce ambiguity, and support more
+            disciplined technical decision-making.
+          </p>
 
+          <div class="stats">
+            <div class="stat">
+              <strong>Discovery</strong>
+              <div>NetPilot infrastructure visibility</div>
+            </div>
+            <div class="stat">
+              <strong>Intelligence</strong>
+              <div>Ops Assistant decision support</div>
+            </div>
+            <div class="stat">
+              <strong>Scalability</strong>
+              <div>Enterprise-ready platform direction</div>
+            </div>
+          </div>
+        </aside>
+      </div>
     </section>
 
     <!-- =====================================================
-         PLATFORM MODEL
+         WHY ROMANOTI PLATFORM
+         Bloque movido desde la home
          ===================================================== -->
-
     <section class="section">
-
       <div class="container">
-
-        <h2>The Romanoti Platform Model</h2>
-
+        <h2>Why Romanoti Platform</h2>
         <p class="section-intro">
-          Romanoti connects infrastructure discovery with operational interpretation,
-          creating a modern platform for infrastructure intelligence.
+          Romanoti helps technical teams understand infrastructure faster
+          and make better operational decisions across complex IT environments.
         </p>
 
-        <div class="flow">
-
-          <div class="flow-item">
-
-            <span>Step 01</span>
-            <strong>Discover</strong>
-
-            NetPilot identifies infrastructure,
-            services and technical exposure.
-
+        <div class="cards-4">
+          <div class="card">
+            <div class="badge">Discovery</div>
+            <h3>Infrastructure visibility</h3>
+            <p>
+              Automatically discover infrastructure components, services, and
+              technical exposure across complex environments.
+            </p>
           </div>
 
-          <div class="flow-item">
-
-            <span>Step 02</span>
-            <strong>Interpret</strong>
-
-            Ops Assistant helps teams understand
-            what findings actually mean.
-
+          <div class="card">
+            <div class="badge">Diagnostics</div>
+            <h3>Operational diagnostics</h3>
+            <p>
+              Understand technical issues faster through structured diagnostics
+              and infrastructure analysis.
+            </p>
           </div>
 
-          <div class="flow-item">
-
-            <span>Step 03</span>
-            <strong>Operate</strong>
-
-            Teams gain operational clarity
-            and better decision making.
-
+          <div class="card">
+            <div class="badge">Intelligence</div>
+            <h3>Operational intelligence</h3>
+            <p>
+              Transform raw infrastructure data into meaningful insights
+              that help guide operational decisions.
+            </p>
           </div>
 
-          <div class="flow-item">
-
-            <span>Step 04</span>
-            <strong>Scale</strong>
-
-            The Romanoti ecosystem expands
-            without rebuilding the platform.
-
+          <div class="card">
+            <div class="badge">Scalability</div>
+            <h3>Enterprise scalability</h3>
+            <p>
+              Designed to support growing environments and evolving
+              enterprise infrastructure architectures.
+            </p>
           </div>
-
         </div>
-
       </div>
-
     </section>
 
     <!-- =====================================================
-         ARCHITECTURE DIAGRAM
-         New section to visually explain the product value
+         ARCHITECTURE
+         Diagrama fuerte de producto
          ===================================================== -->
-
-    <section class="section">
-
+    <section class="section alt">
       <div class="container">
-
-        <h2>Romanoti Platform Architecture</h2>
-
+        <h2>How Romanoti Platform Works</h2>
         <p class="section-intro">
-          Romanoti is structured as a connected platform where discovery,
-          interpretation and operational clarity work together.
+          Romanoti connects infrastructure discovery with operational intelligence
+          through a clear and scalable product flow.
         </p>
 
         <div class="diagram-row">
-
           <div class="diagram-box">
             <h3>NetPilot</h3>
             <p>
-              Discovery and diagnostics engine that identifies infrastructure,
-              services and technical exposure.
+              Discovers infrastructure, devices, services, and technical exposure.
             </p>
           </div>
 
@@ -660,8 +622,7 @@
           <div class="diagram-box">
             <h3>Ops Assistant</h3>
             <p>
-              Operational intelligence layer that interprets findings
-              and guides technical teams toward next actions.
+              Interprets findings, reduces ambiguity, and supports next-step decisions.
             </p>
           </div>
 
@@ -670,195 +631,182 @@
           <div class="diagram-box">
             <h3>Romanoti Platform</h3>
             <p>
-              Unified operational model that connects visibility,
-              interpretation and enterprise decision support.
+              Unifies discovery and operational intelligence into a scalable enterprise model.
             </p>
           </div>
-
         </div>
-
       </div>
-
-    </section>
-
-    <!-- =====================================================
-         PRODUCTS
-         ===================================================== -->
-
-    <section class="section">
-
-      <div class="container">
-
-        <h2>Platform Components</h2>
-
-        <p class="section-intro">
-          Romanoti currently includes two core product layers.
-        </p>
-
-        <div class="cards">
-
-          <!-- NetPilot -->
-
-          <div class="card">
-
-            <h3>Romanoti NetPilot</h3>
-
-            <p>
-              Infrastructure discovery and diagnostics engine.
-            </p>
-
-            <ul class="bullets">
-              <li>Network discovery</li>
-              <li>Device identification</li>
-              <li>Service detection</li>
-              <li>Infrastructure visibility</li>
-            </ul>
-
-            <a class="btn btn-secondary" href="netpilot.html">
-              Open NetPilot
-            </a>
-
-          </div>
-
-          <!-- Ops Assistant -->
-
-          <div class="card">
-
-            <h3>Romanoti Ops Assistant</h3>
-
-            <p>
-              Operational intelligence and interpretation layer.
-            </p>
-
-            <ul class="bullets">
-              <li>Operational guidance</li>
-              <li>Insight generation</li>
-              <li>Troubleshooting assistance</li>
-              <li>Decision support</li>
-            </ul>
-
-            <a class="btn btn-secondary" href="ops-assistant.html">
-              Open Ops Assistant
-            </a>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-    <!-- =====================================================
-         USE CASES
-         New section focused on customer buying scenarios
-         ===================================================== -->
-
-    <section class="section">
-
-      <div class="container">
-
-        <h2>Use Cases</h2>
-
-        <p class="section-intro">
-          Romanoti Platform is designed to support real operational environments,
-          not only generic IT messaging.
-        </p>
-
-        <div class="use-cases">
-
-          <div class="use-case">
-            <h3>Infrastructure Discovery</h3>
-            <p>
-              Identify devices, services and technical relationships across
-              environments that have grown without full visibility.
-            </p>
-          </div>
-
-          <div class="use-case">
-            <h3>Operational Review</h3>
-            <p>
-              Help technical teams move from raw findings to guided interpretation
-              and next-step operational review.
-            </p>
-          </div>
-
-          <div class="use-case">
-            <h3>Enterprise Readiness</h3>
-            <p>
-              Support organizations that need a more structured path from
-              infrastructure visibility to scalable operational intelligence.
-            </p>
-          </div>
-
-        </div>
-
-      </div>
-
     </section>
 
     <!-- =====================================================
          ENTERPRISE DEPLOYMENT
-         New section to make the platform look enterprise-ready
+         Bloque movido desde la home
          ===================================================== -->
-
     <section class="section">
-
       <div class="container">
-
         <h2>Enterprise Deployment</h2>
-
         <p class="section-intro">
-          Romanoti Platform is being positioned for controlled, scalable and
-          enterprise-oriented deployment models.
+          Romanoti Platform is designed to integrate with modern infrastructure
+          environments while supporting different operational deployment models.
         </p>
 
-        <div class="deployment-grid">
-
-          <div class="deployment-card">
-
-            <h3>Deployment Approach</h3>
-
-            <ul class="bullets">
-              <li>Modular product structure</li>
-              <li>Progressive rollout by capability</li>
-              <li>Separation between discovery and interpretation layers</li>
-              <li>Ready for future integration and expansion</li>
-            </ul>
-
+        <div class="cards-4">
+          <div class="card">
+            <div class="badge">On-Premise</div>
+            <h3>Local infrastructure</h3>
+            <p>
+              Deploy Romanoti components inside internal networks to support
+              discovery, diagnostics, and operational visibility.
+            </p>
           </div>
 
-          <div class="deployment-card">
-
-            <h3>Enterprise Value</h3>
-
-            <ul class="bullets">
-              <li>Improved infrastructure visibility</li>
-              <li>Faster interpretation of technical findings</li>
-              <li>More structured decision support for operations</li>
-              <li>Foundation for future platform growth</li>
-            </ul>
-
+          <div class="card">
+            <div class="badge">Hybrid</div>
+            <h3>Hybrid infrastructure</h3>
+            <p>
+              Connect on-premise environments with cloud platforms while maintaining
+              operational understanding across distributed systems.
+            </p>
           </div>
 
+          <div class="card">
+            <div class="badge">Cloud</div>
+            <h3>Cloud environments</h3>
+            <p>
+              Support infrastructure hosted on platforms such as Microsoft Azure
+              or other modern cloud environments.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="badge">SOC / NOC</div>
+            <h3>Operational integration</h3>
+            <p>
+              Integrate discovery and diagnostics insights into security
+              operations centers and network operations workflows.
+            </p>
+          </div>
         </div>
-
       </div>
-
     </section>
 
+    <!-- =====================================================
+         PLATFORM COMPONENTS
+         ===================================================== -->
+    <section class="section alt">
+      <div class="container">
+        <h2>Core platform components</h2>
+        <p class="section-intro">
+          These are the two main product directions that define Romanoti Platform.
+        </p>
+
+        <div class="cards">
+          <article class="card">
+            <h3>Romanoti NetPilot</h3>
+            <p>
+              Infrastructure discovery and diagnostics designed to provide visibility into
+              network environments, systems, and services.
+            </p>
+            <ul class="bullets">
+              <li>Network discovery</li>
+              <li>Device identification</li>
+              <li>Service detection</li>
+              <li>Diagnostics support</li>
+            </ul>
+            <a class="btn btn-primary" href="netpilot.html">Open NetPilot</a>
+          </article>
+
+          <article class="card">
+            <h3>Romanoti Ops Assistant</h3>
+            <p>
+              Operational intelligence designed to help teams interpret findings and make
+              better technical decisions with less friction.
+            </p>
+            <ul class="bullets">
+              <li>Operational guidance</li>
+              <li>Insight generation</li>
+              <li>Troubleshooting support</li>
+              <li>Next-step recommendations</li>
+            </ul>
+            <a class="btn btn-primary" href="ops-assistant.html">Open Ops Assistant</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         PLATFORM PREVIEW
+         Bloque movido desde la home
+         ===================================================== -->
+    <section class="section">
+      <div class="container">
+        <h2>Romanoti Platform Preview</h2>
+        <p class="section-intro">
+          Explore the core components of Romanoti Platform and discover how
+          infrastructure visibility and operational intelligence work together.
+        </p>
+
+        <div class="cards-3">
+          <div class="card">
+            <div class="badge">Discovery Engine</div>
+            <h3>NetPilot</h3>
+            <p>
+              Infrastructure discovery and diagnostics to identify devices,
+              services, and technical exposure across modern environments.
+            </p>
+            <a href="netpilot.html" class="btn btn-primary">Explore NetPilot</a>
+          </div>
+
+          <div class="card">
+            <div class="badge">Intelligence Layer</div>
+            <h3>Ops Assistant</h3>
+            <p>
+              Operational intelligence designed to interpret findings,
+              reduce ambiguity, and support guided technical decisions.
+            </p>
+            <a href="ops-assistant.html" class="btn btn-primary">Explore Ops Assistant</a>
+          </div>
+
+          <div class="card">
+            <div class="badge">Platform Overview</div>
+            <h3>Romanoti Platform</h3>
+            <p>
+              A connected operational model that brings discovery,
+              diagnostics, and decision support into one scalable direction.
+            </p>
+            <a href="index.html" class="btn btn-primary">Explore Platform</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         FINAL CTA
+         ===================================================== -->
+    <section class="cta">
+      <div class="container">
+        <div class="cta-box">
+          <h2>Ready to explore Romanoti Platform in more depth?</h2>
+          <p>
+            Discover the product architecture, review the core components,
+            and request a technical conversation focused on your environment.
+          </p>
+          <div class="actions">
+            <a class="btn btn-primary" href="../contact.html">Request Technical Demo</a>
+            <a class="btn btn-secondary" href="netpilot.html">Start with NetPilot</a>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
   <!-- =======================================================
        FOOTER
        ======================================================= -->
-
   <footer class="footer">
-
-    Romanoti Solutions — Platform architecture overview
-
+    <div class="container">
+      Romanoti Solutions — platform product page for infrastructure discovery and operational intelligence.
+    </div>
   </footer>
-
 </body>
-
 </html>
