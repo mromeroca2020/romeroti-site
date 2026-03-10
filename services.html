@@ -1,30 +1,368 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Services | Romano TI Solutions</title>
-    <meta name="description" content="IT support, cybersecurity, and cloud migration services in Montréal.">
-</head>
-<body>
-    <header>
-        <!-- Same header as index.html -->
-    </header>
+  <!-- =======================================================
+       BASIC CONFIGURATION
+       ======================================================= -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <section class="services">
-        <h2>Our Services</h2>
-        <div class="service-card">
-            <h3>Technical Support</h3>
-            <p>Hardware and software troubleshooting.</p>
+  <!-- =======================================================
+       SEO
+       ======================================================= -->
+  <title>Services | RomanoTI Solutions</title>
+  <meta
+    name="description"
+    content="Explore RomanoTI Solutions services in infrastructure, cybersecurity, cloud migration, NOC, SOC, and enterprise technical operations."
+  />
+
+  <!-- =======================================================
+       FAVICONS
+       ======================================================= -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16.png">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#2563eb">
+  <meta name="theme-color" content="#2563eb">
+
+  <!-- =======================================================
+       TAILWIND + TYPOGRAPHY
+       ======================================================= -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- =======================================================
+       PAGE STYLES
+       ======================================================= -->
+  <style>
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: #f8f9fa;
+      color: #111827;
+      scroll-behavior: smooth;
+    }
+
+    .hero-bg {
+      background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+    }
+
+    .btn-primary {
+      background: #2563EB;
+      transition: all .2s;
+    }
+
+    .btn-primary:hover {
+      background: #1D4ED8;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 18px -10px rgba(37,99,235,.7);
+    }
+
+    .card {
+      border-radius: 16px;
+      box-shadow: 0 12px 32px -16px rgba(2,6,23,.18);
+    }
+
+    .badge {
+      display: inline-block;
+      border: 1px solid #cbd5e1;
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-size: 12px;
+      background: #f8fafc;
+      color: #475569;
+    }
+  </style>
+</head>
+
+<body class="bg-gray-50">
+
+  <!-- =======================================================
+       HEADER MOUNTPOINT
+       ======================================================= -->
+  <div id="app-header"></div>
+
+  <!-- =======================================================
+       FALLBACK HEADER
+       ======================================================= -->
+  <header id="fallback-header" class="bg-white shadow-sm sticky top-0 z-40">
+    <div class="container mx-auto px-6 py-3">
+      <div class="flex items-center justify-between gap-4">
+        <a href="/" class="flex items-center font-bold text-xl text-gray-900">
+          <span class="bg-blue-600 text-white rounded-full w-10 h-10 grid place-items-center mr-3">R</span>
+          RomanoTI Solutions (Loading...)
+        </a>
+
+        <a href="/booking.html?service=Free%20Consultation"
+           class="btn-primary text-white px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap">
+          Book Now
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- =====================================================
+         HERO
+         ===================================================== -->
+    <section class="hero-bg text-white">
+      <div class="container mx-auto px-6 py-16 text-center">
+        <div class="badge bg-white bg-opacity-10 border-white border-opacity-20 text-white mb-5">
+          Services / Enterprise Support
         </div>
-        <div class="service-card">
-            <h3>Network Management</h3>
-            <p>Firewall, VPN, and monitoring setup.</p>
-        </div>
+
+        <h1 class="text-4xl md:text-5xl font-bold mb-5">
+          Technical services for modern infrastructure environments
+        </h1>
+
+        <p class="text-xl md:text-2xl max-w-3xl mx-auto text-blue-50">
+          RomanoTI Solutions supports organizations with infrastructure, cloud, cybersecurity,
+          and operational capabilities designed for visibility, resilience, and technical clarity.
+        </p>
+      </div>
     </section>
 
-    <footer>
-        <!-- Same footer as index.html -->
-    </footer>
+    <!-- =====================================================
+         INTRO
+         ===================================================== -->
+    <section class="py-14 bg-white">
+      <div class="container mx-auto px-6 text-center">
+        <h2 class="text-3xl font-bold mb-4">Core service areas</h2>
+        <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+          These services represent the current operational and technical strengths of RomanoTI Solutions,
+          aligned with the broader Romanoti platform vision.
+        </p>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         SERVICE CARDS
+         ===================================================== -->
+    <section class="pb-14 bg-white">
+      <div class="container mx-auto px-6">
+        <div class="grid md:grid-cols-3 gap-6">
+
+          <!-- Cloud Migration -->
+          <article class="card bg-white p-8 border border-gray-100">
+            <div class="badge mb-4">Cloud</div>
+            <h3 class="text-2xl font-bold mb-3">Cloud Migration</h3>
+            <p class="text-gray-600 mb-4">
+              Support for organizations moving from traditional infrastructure into more modern
+              cloud and hybrid operating models.
+            </p>
+            <ul class="list-disc list-inside text-gray-600 space-y-1 mb-6">
+              <li>Hybrid cloud architecture</li>
+              <li>Infrastructure transition planning</li>
+              <li>Operational continuity</li>
+              <li>Resilience and redundancy</li>
+            </ul>
+            <a href="/cloud-hybrid.html" class="text-blue-600 hover:underline font-semibold">
+              Explore cloud services →
+            </a>
+          </article>
+
+          <!-- IT Infrastructure -->
+          <article class="card bg-white p-8 border border-gray-100">
+            <div class="badge mb-4">Infrastructure</div>
+            <h3 class="text-2xl font-bold mb-3">IT Infrastructure</h3>
+            <p class="text-gray-600 mb-4">
+              Infrastructure services designed to improve technical visibility, system reliability,
+              and day-to-day operational support across enterprise environments.
+            </p>
+            <ul class="list-disc list-inside text-gray-600 space-y-1 mb-6">
+              <li>Systems and network operations</li>
+              <li>Infrastructure diagnostics</li>
+              <li>Technical support and administration</li>
+              <li>Monitoring and operational review</li>
+            </ul>
+            <a href="/it-noc.html" class="text-blue-600 hover:underline font-semibold">
+              See infrastructure operations →
+            </a>
+          </article>
+
+          <!-- Cybersecurity -->
+          <article class="card bg-white p-8 border border-gray-100">
+            <div class="badge mb-4">Security</div>
+            <h3 class="text-2xl font-bold mb-3">Cybersecurity</h3>
+            <p class="text-gray-600 mb-4">
+              Security-oriented services that help reduce exposure, improve detection,
+              and support technical response across modern infrastructure.
+            </p>
+            <ul class="list-disc list-inside text-gray-600 space-y-1 mb-6">
+              <li>Attack surface visibility</li>
+              <li>Threat detection support</li>
+              <li>SOC-oriented workflows</li>
+              <li>Operational risk reduction</li>
+            </ul>
+            <a href="/solutions/cybershield/" class="text-blue-600 hover:underline font-semibold">
+              Explore cybersecurity →
+            </a>
+          </article>
+
+          <!-- NOC -->
+          <article class="card bg-white p-8 border border-gray-100">
+            <div class="badge mb-4">NOC</div>
+            <h3 class="text-2xl font-bold mb-3">NOC Services</h3>
+            <p class="text-gray-600 mb-4">
+              Network operations capabilities designed to improve service continuity,
+              monitoring visibility, and operational readiness.
+            </p>
+            <ul class="list-disc list-inside text-gray-600 space-y-1 mb-6">
+              <li>Service availability monitoring</li>
+              <li>Operational status visibility</li>
+              <li>Incident awareness</li>
+              <li>Infrastructure continuity support</li>
+            </ul>
+            <a href="/it-noc.html" class="text-blue-600 hover:underline font-semibold">
+              Open NOC page →
+            </a>
+          </article>
+
+          <!-- SOC -->
+          <article class="card bg-white p-8 border border-gray-100">
+            <div class="badge mb-4">SOC</div>
+            <h3 class="text-2xl font-bold mb-3">SOC Services</h3>
+            <p class="text-gray-600 mb-4">
+              Security operations support that aligns monitoring, detection, and
+              guided response across critical technical environments.
+            </p>
+            <ul class="list-disc list-inside text-gray-600 space-y-1 mb-6">
+              <li>Security monitoring</li>
+              <li>Threat visibility</li>
+              <li>Response-oriented workflows</li>
+              <li>Operational escalation support</li>
+            </ul>
+            <a href="/it-soc.html" class="text-blue-600 hover:underline font-semibold">
+              Open SOC page →
+            </a>
+          </article>
+
+          <!-- Tools / Diagnostics -->
+          <article class="card bg-white p-8 border border-gray-100">
+            <div class="badge mb-4">Diagnostics</div>
+            <h3 class="text-2xl font-bold mb-3">Technical Tools</h3>
+            <p class="text-gray-600 mb-4">
+              Infrastructure and diagnostic tools used to support visibility,
+              inventory, certificate checks, and technical review workflows.
+            </p>
+            <ul class="list-disc list-inside text-gray-600 space-y-1 mb-6">
+              <li>Server diagnostics</li>
+              <li>LAN inventory</li>
+              <li>TLS certificate checks</li>
+              <li>Email DNS validation</li>
+            </ul>
+            <a href="/services/tools.html" class="text-blue-600 hover:underline font-semibold">
+              Open tools console →
+            </a>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         PLATFORM RELATION
+         ===================================================== -->
+    <section class="py-14 bg-gray-50 border-t border-b">
+      <div class="container mx-auto px-6 text-center">
+        <h2 class="text-3xl font-bold mb-4">How services connect with Romanoti Platform</h2>
+        <p class="text-lg text-gray-600 max-w-3xl mx-auto mb-8">
+          RomanoTI services are increasingly aligned with a broader product and platform direction,
+          where diagnostics, visibility, and operational intelligence work together.
+        </p>
+
+        <div class="grid md:grid-cols-3 gap-6">
+          <div class="card bg-white p-6 border border-gray-100">
+            <div class="badge mb-3">Discovery</div>
+            <h3 class="text-xl font-bold mb-2">NetPilot alignment</h3>
+            <p class="text-gray-600">
+              Infrastructure discovery and diagnostics reinforce operational visibility
+              across customer environments.
+            </p>
+          </div>
+
+          <div class="card bg-white p-6 border border-gray-100">
+            <div class="badge mb-3">Intelligence</div>
+            <h3 class="text-xl font-bold mb-2">Ops Assistant direction</h3>
+            <p class="text-gray-600">
+              Findings from operations and diagnostics can evolve into guided decision support.
+            </p>
+          </div>
+
+          <div class="card bg-white p-6 border border-gray-100">
+            <div class="badge mb-3">Scalability</div>
+            <h3 class="text-xl font-bold mb-2">Platform growth</h3>
+            <p class="text-gray-600">
+              Services today support the transition toward a more scalable platform model tomorrow.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         CTA
+         ===================================================== -->
+    <section class="py-14 bg-white">
+      <div class="container mx-auto px-6 text-center">
+        <h2 class="text-3xl font-bold mb-4">Need a focused technical conversation?</h2>
+        <p class="text-lg text-gray-600 max-w-2xl mx-auto mb-6">
+          Book a consultation or contact Romanoti to discuss infrastructure, security,
+          diagnostics, or platform-related needs.
+        </p>
+
+        <div class="flex flex-col md:flex-row justify-center gap-4">
+          <a href="/booking.html?service=Free%20Consultation"
+             class="btn-primary text-white px-6 py-3 rounded-lg font-semibold">
+            Book a Call
+          </a>
+
+          <a href="/contact.html"
+             class="border border-gray-300 px-6 py-3 rounded-lg font-semibold hover:bg-gray-50">
+            Contact Romanoti
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- =======================================================
+       FOOTER MOUNTPOINT
+       ======================================================= -->
+  <div id="app-footer"></div>
+
+  <!-- =======================================================
+       FALLBACK HEADER REMOVER
+       ======================================================= -->
+  <script>
+    (function () {
+      const fb = document.getElementById('fallback-header');
+      if (!fb) return;
+
+      function removeFallbackSafely() {
+        const mount = document.getElementById('app-header');
+        const injected = mount && mount.querySelector('header');
+        if (injected && fb.parentNode) {
+          fb.parentNode.removeChild(fb);
+          return true;
+        }
+        return false;
+      }
+
+      if (!removeFallbackSafely()) {
+        setTimeout(removeFallbackSafely, 150);
+        setTimeout(removeFallbackSafely, 400);
+        setTimeout(removeFallbackSafely, 1000);
+        setTimeout(removeFallbackSafely, 2000);
+      }
+    })();
+  </script>
+
+  <!-- =======================================================
+       NAV / FOOTER SCRIPTS
+       ======================================================= -->
+  <script defer src="/js/nav.js?v=7"></script>
+  <script defer src="/js/footer.js?v=7"></script>
+  <script defer src="/js/fix-nav.js?v=7"></script>
 </body>
 </html>
