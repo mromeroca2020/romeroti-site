@@ -1,25 +1,8 @@
 (function () {
   // ============================================================
   // RomanoTI nav.js — Header global + selector de idioma + menú
-  // ============================================================ 
-  // OBJETIVO (según tu requerimiento actual):
-  // ✅ Landing "/" = INGLÉS
-  // ✅ /en/ = Inglés (alterno)
-  // ✅ /fr/ = Francés
-  // ✅ Español = "/" (porque en producción HOY no existe /es/ público)
-  //
-  // FIX PRINCIPAL:
-  // - El idioma ES no puede apuntar a "/es/" si tu producción usa "/".
-  // - Y cuando estás en "/", el "base" de inglés no debe ser "/en",
-  //   debe ser "/" para que el sitio sea coherente.
-  //
-  // CHANGE NUEVO:
-  // ✅ Se agrega "Platform" al menú dinámico principal.
   // ============================================================
 
-  // ------------------------------------------------------------
-  // GUARD ANTI-DOBLE-CARGA
-  // ------------------------------------------------------------
   if (window.__ROMANOTI_NAV_BOOTED__) {
     console.warn('[nav] Already booted. Skipping duplicate init.');
     return;
@@ -29,37 +12,29 @@
   console.log('[nav] booting…');
 
   // ============================================================
-  // CHANGE #1: Detectar idioma real de producción
-  // - "/" = inglés (landing)
-  // - "/en/..." = inglés
-  // - "/fr/..." = francés
-  // - "/es/..." NO se usa aquí porque producción no lo expone
-  //   (si en el futuro publicas /es/, te dejo nota abajo)
+  // Detect language
+  // "/" and most root pages = English
+  // "/fr" = French
+  // "/es" = Spanish only if explicitly present
   // ============================================================
-const path = location.pathname || '/';
+  const path = location.pathname || '/';
 
-const lang =
-  (path === '/' || path.startsWith('/en/') || path === '/en' || (!path.startsWith('/fr/') && !path.startsWith('/es/'))) ? 'en'
-  : (path.startsWith('/fr/') || path === '/fr') ? 'fr'
-  : 'es';
+  const lang =
+    (path === '/' || path.startsWith('/en/') || path === '/en' || (!path.startsWith('/fr/') && !path.startsWith('/es/'))) ? 'en'
+    : (path.startsWith('/fr/') || path === '/fr') ? 'fr'
+    : 'es';
 
   // ============================================================
-  // CHANGE #2: base por idioma
-  // - INGLÉS:
-  //    * si estás en "/" => base = "" (usa rutas raíz)
-  //    * si estás en "/en/..." => base = "/en"
-  // - FRANCÉS: base = "/fr"
-  // - ESPAÑOL: base = "" (porque español vive en "/")
+  // Base paths
+  // Keep EN in root for now
+  // Keep FR under /fr
+  // Keep ES in root too until /es is fully deployed
   // ============================================================
-const base =
-  (lang === 'en') ? ''
-  : (lang === 'fr') ? '/fr'
-  : '/es';
+  const base =
+    (lang === 'en') ? ''
+    : (lang === 'fr') ? '/fr'
+    : '';
 
-  // ============================================================
-  // CHANGE #3: Textos por idioma
-  // Se agrega "platform" al diccionario
-  // ============================================================
   const I18N_MAP = {
     es: {
       brand: 'RomanoTI Solutions',
@@ -115,18 +90,8 @@ const base =
   };
 
   const I18N = I18N_MAP[lang] || I18N_MAP.en;
-
-  // ============================================================
-  // CHANGE #4: Links del header deben respetar base "" cuando corresponde
-  // base="" => "/"
-  // base="/en" => "/en/"
-  // ============================================================
   const homeHref = (base ? `${base}/` : '/');
 
-  // ============================================================
-  // CHANGE #5: Header HTML dinámico
-  // Se agrega el enlace a /platform/index.html
-  // ============================================================
   const html = `
   <header class="bg-white/95 backdrop-blur sticky top-0 z-50 border-b border-gray-100" id="navHeader">
     <div class="container mx-auto px-6 py-3">
@@ -151,12 +116,12 @@ const base =
             <div id="navServicesMenu"
                  class="absolute right-0 mt-2 w-72 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5 py-2 hidden z-40"
                  role="menu" aria-labelledby="navServicesBtn">
-              <a href="${base}/services/cloud-migration"   class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem">${I18N.serviceCloud}</a>
+              <a href="${base}/services/cloud-migration" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem">${I18N.serviceCloud}</a>
               <a href="${base}/services/it-infrastructure" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem">${I18N.serviceInfra}</a>
-              <a href="${base}/services/cybersecurity"     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem">${I18N.serviceCyber}</a>
-              <a href="${base}/services/data-center"       class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem">${I18N.serviceDC}</a>
+              <a href="${base}/services/cybersecurity" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem">${I18N.serviceCyber}</a>
+              <a href="${base}/services/data-center" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem">${I18N.serviceDC}</a>
               <a href="${base}/services/disaster-recovery" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem">${I18N.serviceDR}</a>
-              <a href="${base}/services/noc"               class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem">${I18N.serviceNOC}</a>
+              <a href="${base}/services/noc" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem">${I18N.serviceNOC}</a>
             </div>
           </div>
 
@@ -165,39 +130,38 @@ const base =
                     class="text-gray-700 hover:text-blue-600 inline-flex items-center"
                     aria-haspopup="true" aria-expanded="false" aria-controls="navSolutionsMenu">
               ${I18N.solutions}
-              <svg class="ml-1 w-4 h-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.58l3.71-3.35a.75.75 0 111.02 1.1l-4.2 3.79a.75.75 0 01-1.02 0l-4.2-3.79a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
+              <svg class="ml-1 w-4 h-4" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.58l3.71-3.35a.75.75 0 111.02 1.1l-4.2 3.79a.75.75 0 01-1.02 0l-4.2-3.79a.75.75 0 01.02-1.06z" clip-rule="evenodd"/>
+              </svg>
             </button>
             <div id="navSolutionsMenu"
                  class="absolute right-0 mt-2 w-80 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5 hidden"
                  role="menu" aria-labelledby="navSolutionsBtn">
-              <a href="${base}/solutions/"                              class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem">${I18N.overview}</a>
-              <a href="${base}/solutions/cybershield/"                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem">${I18N.mdr}</a>
-              <a href="${base}/solutions/cybershield/soc-console.html"  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem">${I18N.socConsole}</a>
+              <a href="${base}/solutions/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem">${I18N.overview}</a>
+              <a href="${base}/solutions/cybershield/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem">${I18N.mdr}</a>
+              <a href="${base}/solutions/cybershield/soc-console.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem">${I18N.socConsole}</a>
               <a href="${base}/solutions/cybershield/easm-console.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem">${I18N.easm}</a>
-              <a href="${base}/solutions/cybershield/field-kit.html"    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem">${I18N.fieldKit}</a>
+              <a href="${base}/solutions/cybershield/field-kit.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem">${I18N.fieldKit}</a>
               <div class="border-t my-1"></div>
-              <a href="${base}/solutions/cybershield/quick-audit.html"  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem">${I18N.quickAudit}</a>
-              <a href="${base}/solutions/cybershield/pov-14d.html"      class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem">${I18N.pov}</a>
+              <a href="${base}/solutions/cybershield/quick-audit.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem">${I18N.quickAudit}</a>
+              <a href="${base}/solutions/cybershield/pov-14d.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem">${I18N.pov}</a>
             </div>
           </div>
 
-          <!-- ============================================================
-               CHANGE #6 (ADD PLATFORM TO DYNAMIC NAV):
-               Enlace global a la nueva capa de plataforma.
-               Se deja fijo en raíz porque /platform existe como nueva capa común.
-               ============================================================ -->
           <a href="/platform/index.html" class="text-gray-700 hover:text-blue-600">${I18N.platform}</a>
           <a href="${base}/services/tools.html" class="text-gray-700 hover:text-blue-600">${I18N.tools}</a>
-          <a href="${base}/it-noc.html"         class="text-gray-700 hover:text-blue-600">${I18N.noc}</a>
+          <a href="${base}/it-noc.html" class="text-gray-700 hover:text-blue-600">${I18N.noc}</a>
           <a href="/en/data-center/dashboard.html" class="text-gray-700 hover:text-blue-600">${I18N.dcMonitor}</a>
-          <a href="${base}/it-soc.html"         class="text-gray-700 hover:text-blue-600">${I18N.soc}</a>
+          <a href="${base}/it-soc.html" class="text-gray-700 hover:text-blue-600">${I18N.soc}</a>
 
           <a href="https://calendly.com/mauricioromeroca" class="bg-blue-600 text-white px-5 py-2 rounded-lg font-medium">${I18N.book}</a>
 
           <div class="relative" id="langRoot">
             <button id="langBtn" class="text-gray-500 hover:text-blue-600 inline-flex items-center" aria-haspopup="true" aria-expanded="false">
               🌐 ${I18N.lang}
-              <svg class="ml-1 w-4 h-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.58l3.71-3.35a.75.75 0 111.02 1.1l-4.2 3.79a.75.75 0 01-1.02 0l-4.2-3.79a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
+              <svg class="ml-1 w-4 h-4" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.58l3.71-3.35a.75.75 0 111.02 1.1l-4.2 3.79a.75.75 0 01-1.02 0l-4.2-3.79a.75.75 0 01.02-1.06z" clip-rule="evenodd"/>
+              </svg>
             </button>
             <div id="langMenu" class="absolute right-0 mt-2 w-44 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5 hidden">
               <a href="#" data-lang="en" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">🇬🇧 ${I18N_MAP.en.en}</a>
@@ -237,12 +201,7 @@ const base =
   function cleanPath(p) {
     if (!p) return '/';
 
-    // ============================================================
-    // CHANGE #7:
-    // Quitamos /en o /fr del inicio para reusar el path al cambiar idioma
-    // y NO usamos /es en producción (es raíz).
-    // ============================================================
-    let out = p.replace(/^\/(en|fr)(?=\/|$)/, '');
+    let out = p.replace(/^\/(en|fr|es)(?=\/|$)/, '');
     if (!out) out = '/';
     out = out.replace(/\/{2,}/g, '/');
     out = out.replace(/\/index\.html$/i, '/');
@@ -254,12 +213,6 @@ const base =
 
     const current = cleanPath(location.pathname);
 
-    // ============================================================
-    // CHANGE #8 (RUTAS REALES):
-    // EN -> si estás yendo a home "/", usa "/"
-    // FR -> "/fr"
-    // ES -> "/" (porque español vive en raíz en producción)
-    // ============================================================
     let prefix, fallback;
 
     if (targetLang === 'en') {
