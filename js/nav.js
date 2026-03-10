@@ -36,12 +36,12 @@
   // - "/es/..." NO se usa aquí porque producción no lo expone
   //   (si en el futuro publicas /es/, te dejo nota abajo)
   // ============================================================
-  const path = location.pathname || '/';
+const path = location.pathname || '/';
 
-  const lang =
-    (path === '/' || path.startsWith('/en/') || path === '/en') ? 'en'
-    : (path.startsWith('/fr/') || path === '/fr') ? 'fr'
-    : 'es';
+const lang =
+  (path === '/' || path.startsWith('/en/') || path === '/en' || (!path.startsWith('/fr/') && !path.startsWith('/es/'))) ? 'en'
+  : (path.startsWith('/fr/') || path === '/fr') ? 'fr'
+  : 'es';
 
   // ============================================================
   // CHANGE #2: base por idioma
