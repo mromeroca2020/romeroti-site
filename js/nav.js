@@ -51,11 +51,10 @@ const lang =
   // - FRANCÉS: base = "/fr"
   // - ESPAÑOL: base = "" (porque español vive en "/")
   // ============================================================
-  const enBase = (path === '/') ? '' : '/en';
-  const base =
-    (lang === 'en') ? enBase
-    : (lang === 'fr') ? '/fr'
-    : '';
+const base =
+  (lang === 'en') ? ''
+  : (lang === 'fr') ? '/fr'
+  : '/es';
 
   // ============================================================
   // CHANGE #3: Textos por idioma
