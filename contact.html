@@ -1,15 +1,370 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Contact Us | RomanoTI Solutions</title>
+  <!-- =======================================================
+       BASIC CONFIGURATION
+       ======================================================= -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- =======================================================
+       SEO
+       ======================================================= -->
+  <title>Contact Romanoti | RomanoTI Solutions</title>
+  <meta
+    name="description"
+    content="Contact RomanoTI Solutions for infrastructure services, cybersecurity, Romanoti Platform, NetPilot, Ops Assistant, and technical demo requests."
+  />
+
+  <!-- =======================================================
+       FAVICONS
+       ======================================================= -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16.png">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#2563eb">
+  <meta name="theme-color" content="#2563eb">
+
+  <!-- =======================================================
+       TAILWIND + TYPOGRAPHY
+       ======================================================= -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- =======================================================
+       PAGE STYLES
+       ======================================================= -->
+  <style>
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: #f8f9fa;
+      color: #111827;
+      scroll-behavior: smooth;
+    }
+
+    .hero-bg {
+      background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+    }
+
+    .btn-primary {
+      background: #2563EB;
+      transition: all .2s;
+    }
+
+    .btn-primary:hover {
+      background: #1D4ED8;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 18px -10px rgba(37,99,235,.7);
+    }
+
+    .card {
+      border-radius: 16px;
+      box-shadow: 0 12px 32px -16px rgba(2,6,23,.18);
+    }
+
+    .badge {
+      display: inline-block;
+      border: 1px solid #cbd5e1;
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-size: 12px;
+      background: #f8fafc;
+      color: #475569;
+    }
+
+    .input-ui,
+    .select-ui,
+    .textarea-ui {
+      width: 100%;
+      border: 1px solid #d1d5db;
+      border-radius: 12px;
+      padding: 12px 14px;
+      background: #fff;
+      transition: border-color .2s, box-shadow .2s;
+      outline: none;
+    }
+
+    .input-ui:focus,
+    .select-ui:focus,
+    .textarea-ui:focus {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 3px rgba(37,99,235,.12);
+    }
+
+    .textarea-ui {
+      min-height: 160px;
+      resize: vertical;
+    }
+  </style>
 </head>
-<body>
-    <form action="https://formsubmit.co/info@romanoti-solutions.com" method="POST">
-        <input type="text" name="name" placeholder="Name" required>
-        <input type="email" name="email" placeholder="Email" required>
-        <textarea name="message" placeholder="Message" required></textarea>
-        <button type="submit">Send</button>
-    </form>
+
+<body class="bg-gray-50">
+
+  <!-- =======================================================
+       HEADER MOUNTPOINT
+       Header centralizado vía nav.js
+       ======================================================= -->
+  <div id="app-header"></div>
+
+  <!-- =======================================================
+       FALLBACK HEADER
+       Se elimina cuando nav.js inyecta el header real
+       ======================================================= -->
+  <header id="fallback-header" class="bg-white shadow-sm sticky top-0 z-40">
+    <div class="container mx-auto px-6 py-3">
+      <div class="flex items-center justify-between gap-4">
+        <a href="/" class="flex items-center font-bold text-xl text-gray-900">
+          <span class="bg-blue-600 text-white rounded-full w-10 h-10 grid place-items-center mr-3">R</span>
+          RomanoTI Solutions (Loading...)
+        </a>
+
+        <a href="/booking.html?service=Free%20Consultation"
+           class="btn-primary text-white px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap">
+          Book Now
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- =====================================================
+         HERO
+         ===================================================== -->
+    <section class="hero-bg text-white">
+      <div class="container mx-auto px-6 py-16 text-center">
+        <div class="badge bg-white bg-opacity-10 border-white border-opacity-20 text-white mb-5">
+          Contact / Technical Inquiry
+        </div>
+
+        <h1 class="text-4xl md:text-5xl font-bold mb-5">
+          Contact Romanoti
+        </h1>
+
+        <p class="text-xl md:text-2xl max-w-3xl mx-auto text-blue-50">
+          Tell us what you need — infrastructure services, cybersecurity, Romanoti Platform,
+          NetPilot, Ops Assistant, or a technical demo.
+        </p>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         CONTACT SECTION
+         ===================================================== -->
+    <section class="py-14 bg-white">
+      <div class="container mx-auto px-6">
+        <div class="grid md:grid-cols-2 gap-8 items-start">
+
+          <!-- ===============================================
+               LEFT COLUMN
+               Context and value
+               =============================================== -->
+          <div class="card bg-white border border-gray-100 p-8">
+            <div class="badge mb-4">Romanoti Solutions</div>
+
+            <h2 class="text-3xl font-bold mb-4">
+              Let’s start the conversation
+            </h2>
+
+            <p class="text-gray-600 mb-6">
+              Use this form to reach Romanoti Solutions for technical services,
+              platform discussions, product questions, or demo requests.
+            </p>
+
+            <div class="space-y-5 text-gray-700">
+              <div>
+                <h3 class="font-semibold text-lg mb-1">What you can contact us about</h3>
+                <ul class="list-disc list-inside text-gray-600 space-y-1">
+                  <li>Romanoti Platform</li>
+                  <li>NetPilot and Ops Assistant</li>
+                  <li>Cybersecurity and attack surface review</li>
+                  <li>NOC / SOC capabilities</li>
+                  <li>Infrastructure and cloud services</li>
+                  <li>Technical demo requests</li>
+                </ul>
+              </div>
+
+              <div>
+                <h3 class="font-semibold text-lg mb-1">Best use of this form</h3>
+                <p class="text-gray-600">
+                  Share enough context so we can understand your environment,
+                  your area of interest, and the type of support or conversation you need.
+                </p>
+              </div>
+
+              <div>
+                <h3 class="font-semibold text-lg mb-1">Response intent</h3>
+                <p class="text-gray-600">
+                  This page is designed for serious inquiries related to infrastructure,
+                  security, visibility, diagnostics, and platform-oriented technical work.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- ===============================================
+               RIGHT COLUMN
+               Contact form
+               =============================================== -->
+          <div class="card bg-white border border-gray-100 p-8">
+            <div class="badge mb-4">Request / Inquiry Form</div>
+
+            <h2 class="text-2xl font-bold mb-6">
+              Send your message
+            </h2>
+
+            <!-- =================================================
+                 FORM
+                 FormSubmit integration preserved
+                 ================================================= -->
+            <form action="https://formsubmit.co/info@romanoti-solutions.com" method="POST" class="space-y-5">
+              <!-- =============================================
+                   Hidden settings for FormSubmit
+                   ============================================= -->
+              <input type="hidden" name="_subject" value="New Romanoti website inquiry">
+              <input type="hidden" name="_captcha" value="false">
+              <input type="hidden" name="_template" value="table">
+              <input type="hidden" name="_next" value="https://romanoti-solutions.com/contact.html?sent=1">
+
+              <div>
+                <label for="name" class="block text-sm font-semibold mb-2">Full Name</label>
+                <input
+                  id="name"
+                  name="name"
+                  type="text"
+                  class="input-ui"
+                  placeholder="Your full name"
+                  required
+                />
+              </div>
+
+              <div>
+                <label for="company" class="block text-sm font-semibold mb-2">Company / Organization</label>
+                <input
+                  id="company"
+                  name="company"
+                  type="text"
+                  class="input-ui"
+                  placeholder="Your company or organization"
+                />
+              </div>
+
+              <div>
+                <label for="email" class="block text-sm font-semibold mb-2">Work Email</label>
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  class="input-ui"
+                  placeholder="you@company.com"
+                  required
+                />
+              </div>
+
+              <div>
+                <label for="interest" class="block text-sm font-semibold mb-2">Area of Interest</label>
+                <select id="interest" name="interest" class="select-ui" required>
+                  <option value="">Select an option</option>
+                  <option>Romanoti Platform</option>
+                  <option>NetPilot</option>
+                  <option>Ops Assistant</option>
+                  <option>Cybersecurity</option>
+                  <option>NOC / SOC</option>
+                  <option>Infrastructure Services</option>
+                  <option>Technical Demo</option>
+                  <option>General Inquiry</option>
+                </select>
+              </div>
+
+              <div>
+                <label for="message" class="block text-sm font-semibold mb-2">Message</label>
+                <textarea
+                  id="message"
+                  name="message"
+                  class="textarea-ui"
+                  placeholder="Tell us about your environment, your objective, and how Romanoti may help."
+                  required
+                ></textarea>
+              </div>
+
+              <div class="pt-2">
+                <button
+                  type="submit"
+                  class="btn-primary text-white px-6 py-3 rounded-lg font-semibold w-full md:w-auto"
+                >
+                  Send Message
+                </button>
+              </div>
+            </form>
+
+            <!-- =============================================
+                 Helper note
+                 ============================================= -->
+            <p class="text-sm text-gray-500 mt-5">
+              By submitting this form, your message will be sent to the Romanoti contact inbox for review.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         OPTIONAL CTA
+         ===================================================== -->
+    <section class="py-14 bg-gray-50 border-t">
+      <div class="container mx-auto px-6 text-center">
+        <h2 class="text-3xl font-bold mb-4">
+          Prefer a scheduled conversation?
+        </h2>
+        <p class="text-lg text-gray-600 max-w-2xl mx-auto mb-6">
+          Book a focused call if you already know your area of interest and want to discuss next steps directly.
+        </p>
+
+        <a href="/booking.html?service=Free%20Consultation"
+           class="btn-primary text-white px-6 py-3 rounded-lg font-semibold inline-block">
+          Book a Call
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- =======================================================
+       FOOTER MOUNT
+       ======================================================= -->
+  <div id="app-footer"></div>
+
+  <!-- =======================================================
+       FALLBACK HEADER REMOVER
+       ======================================================= -->
+  <script>
+    (function () {
+      const fb = document.getElementById('fallback-header');
+      if (!fb) return;
+
+      function removeFallbackSafely() {
+        const mount = document.getElementById('app-header');
+        const injected = mount && mount.querySelector('header');
+        if (injected && fb.parentNode) {
+          fb.parentNode.removeChild(fb);
+          return true;
+        }
+        return false;
+      }
+
+      if (!removeFallbackSafely()) {
+        setTimeout(removeFallbackSafely, 150);
+        setTimeout(removeFallbackSafely, 400);
+        setTimeout(removeFallbackSafely, 1000);
+        setTimeout(removeFallbackSafely, 2000);
+      }
+    })();
+  </script>
+
+  <!-- =======================================================
+       NAV / FOOTER SCRIPTS
+       ======================================================= -->
+  <script defer src="/js/nav.js?v=7"></script>
+  <script defer src="/js/footer.js?v=7"></script>
+  <script defer src="/js/fix-nav.js?v=7"></script>
 </body>
 </html>
