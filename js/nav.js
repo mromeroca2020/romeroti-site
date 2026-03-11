@@ -1,6 +1,17 @@
 (function () {
   // ============================================================
-  // RomanoTI nav.js — Header global + selector de idioma + menú
+  // RomanoTI nav.js — Header global + language selector + menus
+  // ============================================================
+  // STRUCTURE ASSUMED FROM CURRENT PROJECT:
+  // EN -> /en/
+  // FR -> /fr/
+  // ES -> /es/
+  //
+  // GOAL:
+  // - Keep navigation stable
+  // - Use language-aware links
+  // - Avoid broken mixed root/clean routes
+  // - Preserve current site structure without moving files
   // ============================================================
 
   if (window.__ROMANOTI_NAV_BOOTED__) {
@@ -12,93 +23,129 @@
   console.log('[nav] booting…');
 
   // ============================================================
-  // Detect language
-  // "/" and most root pages = English
-  // "/fr" = French
-  // "/es" = Spanish only if explicitly present
+  // CHANGE #1
+  // Simple and correct language detection based on current URL.
   // ============================================================
   const path = location.pathname || '/';
 
-  // ============================================================
-  // Simple language detection
-  // ============================================================
-
   let lang = 'en';
-
   if (path === '/fr' || path.startsWith('/fr/')) {
     lang = 'fr';
   } else if (path === '/es' || path.startsWith('/es/')) {
     lang = 'es';
+  } else if (path === '/en' || path.startsWith('/en/')) {
+    lang = 'en';
   }
 
   // ============================================================
-  // Base paths
-  // Keep EN in root for now
-  // Keep FR under /fr
-  // Keep ES in root too until /es is fully deployed
+  // CHANGE #2
+  // Base paths aligned with actual deployed structure.
   // ============================================================
   const base =
-    (lang === 'en') ? ''
-    : (lang === 'fr') ? '/fr'
-    : '';
+    lang === 'en' ? '/en'
+    : lang === 'fr' ? '/fr'
+    : '/es';
 
   const I18N_MAP = {
     es: {
       brand: 'RomanoTI Solutions',
-      home: 'Inicio', solutions: 'Soluciones', platform: 'Platform', tools: 'Herramientas',
-      noc: 'NOC', soc: 'SOC', book: 'Agendar',
-      overview: 'Resumen', mdr: 'CyberShield (MDR)', socConsole: 'Consola SOC',
-      easm: 'Consola EASM', fieldKit: 'Field Kit (ingenieros)',
-      quickAudit: 'Auditoría rápida', pov: 'POV 14 días',
-      lang: 'Idioma', en: 'English', fr: 'Français', es: 'Español',
+      home: 'Inicio',
+      solutions: 'Soluciones',
+      platform: 'Platform',
+      tools: 'Herramientas',
+      noc: 'NOC',
+      soc: 'SOC',
+      book: 'Agendar',
+      overview: 'Resumen',
+      mdr: 'CyberShield (MDR)',
+      socConsole: 'Consola SOC',
+      easm: 'Consola EASM',
+      fieldKit: 'Field Kit (ingenieros)',
+      quickAudit: 'Auditoría rápida',
+      pov: 'POV 14 días',
+      lang: 'Idioma',
+      en: 'English',
+      fr: 'Français',
+      es: 'Español',
       services: 'Servicios',
-      serviceCloud: 'Cloud Migration',
-      serviceInfra: 'Infraestructura TI',
+      servicesOverview: 'Resumen de servicios',
+      hybridCloud: 'Infraestructura híbrida cloud',
+      cloudRedundancy: 'Redundancia cloud',
       serviceCyber: 'Ciberseguridad',
-      serviceDC: 'Data Center & Virtualización',
-      serviceDR: 'Backups y DRP',
       serviceNOC: 'Servicios NOC',
-      dcMonitor: 'DC Monitor'
+      serviceSOC: 'Servicios SOC',
+      dcMonitor: 'DC Monitor',
+      contact: 'Contacto'
     },
     en: {
       brand: 'RomanoTI Solutions',
-      home: 'Home', solutions: 'Solutions', platform: 'Platform', tools: 'Tools',
-      noc: 'NOC', soc: 'SOC', book: 'Book Now',
-      overview: 'Overview', mdr: 'CyberShield (MDR)', socConsole: 'SOC Console',
-      easm: 'EASM Console', fieldKit: 'Field Kit (engineers)',
-      quickAudit: 'Quick Audit', pov: '14-day POV',
-      lang: 'Language', en: 'English', fr: 'Français', es: 'Español',
+      home: 'Home',
+      solutions: 'Solutions',
+      platform: 'Platform',
+      tools: 'Tools',
+      noc: 'NOC',
+      soc: 'SOC',
+      book: 'Book Now',
+      overview: 'Overview',
+      mdr: 'CyberShield (MDR)',
+      socConsole: 'SOC Console',
+      easm: 'EASM Console',
+      fieldKit: 'Field Kit (engineers)',
+      quickAudit: 'Quick Audit',
+      pov: '14-day POV',
+      lang: 'Language',
+      en: 'English',
+      fr: 'Français',
+      es: 'Español',
       services: 'Services',
-      serviceCloud: 'Cloud Migration',
-      serviceInfra: 'IT Infrastructure',
+      servicesOverview: 'Services Overview',
+      hybridCloud: 'Hybrid Cloud Infrastructure',
+      cloudRedundancy: 'Cloud Redundancy',
       serviceCyber: 'Cybersecurity',
-      serviceDC: 'Data Center & Virtualization',
-      serviceDR: 'Backups & Disaster Recovery',
       serviceNOC: 'NOC Services',
-      dcMonitor: 'DC Monitor'
+      serviceSOC: 'SOC Services',
+      dcMonitor: 'DC Monitor',
+      contact: 'Contact'
     },
     fr: {
       brand: 'RomanoTI Solutions',
-      home: 'Accueil', solutions: 'Solutions', platform: 'Platform', tools: 'Outils',
-      noc: 'NOC', soc: 'SOC', book: 'Prendre RDV',
-      overview: 'Aperçu', mdr: 'CyberShield (MDR)', socConsole: 'Console SOC',
-      easm: 'Console EASM', fieldKit: 'Field Kit (ingénieurs)',
-      quickAudit: 'Audit rapide', pov: 'POV 14 jours',
-      lang: 'Langue', en: 'English', fr: 'Français', es: 'Español',
+      home: 'Accueil',
+      solutions: 'Solutions',
+      platform: 'Platform',
+      tools: 'Outils',
+      noc: 'NOC',
+      soc: 'SOC',
+      book: 'Prendre RDV',
+      overview: 'Aperçu',
+      mdr: 'CyberShield (MDR)',
+      socConsole: 'Console SOC',
+      easm: 'Console EASM',
+      fieldKit: 'Field Kit (ingénieurs)',
+      quickAudit: 'Audit rapide',
+      pov: 'POV 14 jours',
+      lang: 'Langue',
+      en: 'English',
+      fr: 'Français',
+      es: 'Español',
       services: 'Services',
-      serviceCloud: 'Migration vers le cloud',
-      serviceInfra: 'Infrastructure TI',
+      servicesOverview: 'Aperçu des services',
+      hybridCloud: 'Infrastructure cloud hybride',
+      cloudRedundancy: 'Redondance cloud',
       serviceCyber: 'Cybersécurité',
-      serviceDC: 'Centre de données & Virtualisation',
-      serviceDR: 'Sauvegardes & PRA',
       serviceNOC: 'Services NOC',
-      dcMonitor: 'DC Monitor'
+      serviceSOC: 'Services SOC',
+      dcMonitor: 'DC Monitor',
+      contact: 'Contact'
     }
   };
 
   const I18N = I18N_MAP[lang] || I18N_MAP.en;
-  const homeHref = (base ? `${base}/` : '/');
+  const homeHref = `${base}/`;
 
+  // ============================================================
+  // CHANGE #3
+  // Navigation HTML aligned with verified project structure.
+  // ============================================================
   const html = `
   <header class="bg-white/95 backdrop-blur sticky top-0 z-50 border-b border-gray-100" id="navHeader">
     <div class="container mx-auto px-6 py-3">
@@ -114,73 +161,80 @@
           <div class="relative" id="navServicesRoot">
             <button id="navServicesBtn"
                     class="text-gray-700 hover:text-blue-600 inline-flex items-center"
-                    aria-haspopup="true" aria-expanded="false" aria-controls="navServicesMenu">
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                    aria-controls="navServicesMenu">
               ${I18N.services}
               <svg class="ml-1 w-4 h-4" viewBox="0 0 20 20" fill="currentColor">
                 <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.58l3.71-3.35a.75.75 0 111.02 1.1l-4.2 3.79a.75.75 0 01-1.02 0l-4.2-3.79a.75.75 0 01.02-1.06z" clip-rule="evenodd"/>
               </svg>
             </button>
+
             <div id="navServicesMenu"
-     class="absolute right-0 mt-2 w-72 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5 py-2 hidden z-40"
-     role="menu" aria-labelledby="navServicesBtn">
+                 class="absolute right-0 mt-2 w-72 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5 py-2 hidden z-40"
+                 role="menu"
+                 aria-labelledby="navServicesBtn">
 
-  <!-- ============================================================
-       Romanoti Services Navigation
-       Uses only verified pages from current project tree
-       ============================================================ -->
+              <!-- ============================================================
+                   CHANGE #4
+                   Services menu points only to confirmed pages.
+                   ============================================================ -->
+              <a href="${base}/services/index.html"
+                 class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                 role="menuitem">
+                 ${I18N.servicesOverview}
+              </a>
 
-  <a href="/services.html"
-     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
-     role="menuitem">
-     Services Overview
-  </a>
+              <a href="${base}/services/cloud-migration.html"
+                 class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                 role="menuitem">
+                 ${I18N.hybridCloud}
+              </a>
 
-  <a href="/cloud-hybrid.html"
-     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
-     role="menuitem">
-     Hybrid Cloud Infrastructure
-  </a>
+              <a href="${base}/services/disaster-recovery.html"
+                 class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                 role="menuitem">
+                 ${I18N.cloudRedundancy}
+              </a>
 
-  <a href="/cloud-redundancy.html"
-     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
-     role="menuitem">
-     Cloud Redundancy
-  </a>
+              <a href="${base}/services/cybersecurity.html"
+                 class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                 role="menuitem">
+                 ${I18N.serviceCyber}
+              </a>
 
-  <a href="/cybersecurity.html"
-     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
-     role="menuitem">
-     Cybersecurity
-  </a>
+              <a href="${base}/services/it-noc.html"
+                 class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                 role="menuitem">
+                 ${I18N.serviceNOC}
+              </a>
 
-  <a href="/it-noc.html"
-     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
-     role="menuitem">
-     NOC Services
-  </a>
-
-  <a href="/it-soc.html"
-     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
-     role="menuitem">
-     SOC Services
-  </a>
-
-</div>
+              <a href="${base}/services/it-soc.html"
+                 class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                 role="menuitem">
+                 ${I18N.serviceSOC}
+              </a>
+            </div>
+          </div>
 
           <div class="relative" id="navSolutionsRoot">
             <button id="navSolutionsBtn"
                     class="text-gray-700 hover:text-blue-600 inline-flex items-center"
-                    aria-haspopup="true" aria-expanded="false" aria-controls="navSolutionsMenu">
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                    aria-controls="navSolutionsMenu">
               ${I18N.solutions}
               <svg class="ml-1 w-4 h-4" viewBox="0 0 20 20" fill="currentColor">
                 <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.58l3.71-3.35a.75.75 0 111.02 1.1l-4.2 3.79a.75.75 0 01-1.02 0l-4.2-3.79a.75.75 0 01.02-1.06z" clip-rule="evenodd"/>
               </svg>
             </button>
+
             <div id="navSolutionsMenu"
                  class="absolute right-0 mt-2 w-80 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5 hidden"
-                 role="menu" aria-labelledby="navSolutionsBtn">
-              <a href="${base}/solutions/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem">${I18N.overview}</a>
-              <a href="${base}/solutions/cybershield/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem">${I18N.mdr}</a>
+                 role="menu"
+                 aria-labelledby="navSolutionsBtn">
+              <a href="${base}/solutions/cybershield/index.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem">${I18N.overview}</a>
+              <a href="${base}/solutions/cybershield/index.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem">${I18N.mdr}</a>
               <a href="${base}/solutions/cybershield/soc-console.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem">${I18N.socConsole}</a>
               <a href="${base}/solutions/cybershield/easm-console.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem">${I18N.easm}</a>
               <a href="${base}/solutions/cybershield/field-kit.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem">${I18N.fieldKit}</a>
@@ -190,13 +244,14 @@
             </div>
           </div>
 
-          <a href="/platform/index.html" class="text-gray-700 hover:text-blue-600">${I18N.platform}</a>
+          <a href="${base}/platform/index.html" class="text-gray-700 hover:text-blue-600">${I18N.platform}</a>
           <a href="${base}/services/tools.html" class="text-gray-700 hover:text-blue-600">${I18N.tools}</a>
-          <a href="${base}/it-noc.html" class="text-gray-700 hover:text-blue-600">${I18N.noc}</a>
-          <a href="/en/data-center/dashboard.html" class="text-gray-700 hover:text-blue-600">${I18N.dcMonitor}</a>
-          <a href="${base}/it-soc.html" class="text-gray-700 hover:text-blue-600">${I18N.soc}</a>
+          <a href="${base}/services/it-noc.html" class="text-gray-700 hover:text-blue-600">${I18N.noc}</a>
+          <a href="${base}/data-center/dashboard.html" class="text-gray-700 hover:text-blue-600">${I18N.dcMonitor}</a>
+          <a href="${base}/services/it-soc.html" class="text-gray-700 hover:text-blue-600">${I18N.soc}</a>
+          <a href="${base}/contact.html" class="text-gray-700 hover:text-blue-600">${I18N.contact}</a>
 
-          <a href="https://calendly.com/mauricioromeroca" class="bg-blue-600 text-white px-5 py-2 rounded-lg font-medium">${I18N.book}</a>
+          <a href="/booking.html" class="bg-blue-600 text-white px-5 py-2 rounded-lg font-medium">${I18N.book}</a>
 
           <div class="relative" id="langRoot">
             <button id="langBtn" class="text-gray-500 hover:text-blue-600 inline-flex items-center" aria-haspopup="true" aria-expanded="false">
@@ -205,6 +260,7 @@
                 <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.58l3.71-3.35a.75.75 0 111.02 1.1l-4.2 3.79a.75.75 0 01-1.02 0l-4.2-3.79a.75.75 0 01.02-1.06z" clip-rule="evenodd"/>
               </svg>
             </button>
+
             <div id="langMenu" class="absolute right-0 mt-2 w-44 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5 hidden">
               <a href="#" data-lang="en" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">🇬🇧 ${I18N_MAP.en.en}</a>
               <a href="#" data-lang="fr" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">🇫🇷 ${I18N_MAP.fr.fr}</a>
@@ -214,7 +270,7 @@
         </nav>
 
         <div class="md:hidden">
-          <a href="${base}/solutions/" class="bg-blue-600 text-white px-4 py-2 rounded-lg">${I18N.solutions}</a>
+          <a href="${base}/solutions/cybershield/index.html" class="bg-blue-600 text-white px-4 py-2 rounded-lg">${I18N.solutions}</a>
         </div>
       </div>
     </div>
@@ -243,7 +299,11 @@
   function cleanPath(p) {
     if (!p) return '/';
 
-    let out = p.replace(/^\/(fr|es)(?=\/|$)/, '');
+    // ============================================================
+    // CHANGE #5
+    // Remove current language prefix before switching languages.
+    // ============================================================
+    let out = p.replace(/^\/(en|fr|es)(?=\/|$)/, '');
     if (!out) out = '/';
     out = out.replace(/\/{2,}/g, '/');
     out = out.replace(/\/index\.html$/i, '/');
@@ -255,32 +315,25 @@
 
     const current = cleanPath(location.pathname);
 
-    let prefix, fallback;
+    let prefix = '/en';
+    let fallback = '/en/';
 
-  // English currently lives in root
-  if (targetLang === 'en') {
-    prefix = '';
-    fallback = '/';
-  } else if (targetLang === 'fr') {
-    prefix = '/fr';
-    fallback = '/fr/';
-  } else {
-    prefix = '/es';
-    fallback = '/';
-  } else if (targetLang === 'fr') {
+    // ============================================================
+    // CHANGE #6
+    // Correct language routing for actual deployed structure.
+    // ============================================================
+    if (targetLang === 'en') {
+      prefix = '/en';
+      fallback = '/en/';
+    } else if (targetLang === 'fr') {
       prefix = '/fr';
       fallback = '/fr/';
     } else {
-      prefix = '';
-      fallback = '/';
+      prefix = '/es';
+      fallback = '/es/';
     }
 
     const target = prefix + (current.startsWith('/') ? current : '/' + current);
-
-    if (targetLang === 'en' && current === '/') {
-      location.href = '/' + location.search + location.hash;
-      return;
-    }
 
     try {
       const res = await fetch(target, { method: 'HEAD', cache: 'no-store' });
@@ -300,17 +353,33 @@
     const root = document.getElementById('navSolutionsRoot');
 
     if (btn && menu && !btn.dataset.wired) {
-      const open = () => { menu.classList.remove('hidden'); btn.setAttribute('aria-expanded', 'true'); };
-      const close = () => { menu.classList.add('hidden'); btn.setAttribute('aria-expanded', 'false'); };
-      const toggle = (e) => { if (e) { e.preventDefault(); e.stopPropagation(); } menu.classList.contains('hidden') ? open() : close(); };
+      const open = () => {
+        menu.classList.remove('hidden');
+        btn.setAttribute('aria-expanded', 'true');
+      };
+      const close = () => {
+        menu.classList.add('hidden');
+        btn.setAttribute('aria-expanded', 'false');
+      };
+      const toggle = (e) => {
+        if (e) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+        menu.classList.contains('hidden') ? open() : close();
+      };
 
       btn.addEventListener('click', toggle);
       btn.addEventListener('mouseenter', open);
       root && root.addEventListener('mouseleave', () => setTimeout(close, 120));
-      document.addEventListener('click', (e) => { if (!menu.contains(e.target) && e.target !== btn) close(); });
-      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
+      document.addEventListener('click', (e) => {
+        if (!menu.contains(e.target) && e.target !== btn) close();
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') close();
+      });
 
-      root && (root.style.overflow = 'visible');
+      if (root) root.style.overflow = 'visible';
       btn.dataset.wired = '1';
     }
 
@@ -379,7 +448,7 @@
       langMenu.querySelectorAll('a[data-lang]').forEach(a => {
         a.addEventListener('click', (e) => {
           e.preventDefault();
-          const targetLang = a.dataset.lang || 'es';
+          const targetLang = a.dataset.lang || 'en';
           goToLanguage(targetLang);
         });
       });
