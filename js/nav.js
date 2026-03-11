@@ -19,10 +19,17 @@
   // ============================================================
   const path = location.pathname || '/';
 
-  const lang =
-    (path === '/' || path.startsWith('/en/') || path === '/en' || (!path.startsWith('/fr/') && !path.startsWith('/es/'))) ? 'en'
-    : (path.startsWith('/fr/') || path === '/fr') ? 'fr'
-    : 'es';
+  // ============================================================
+  // Simple language detection
+  // ============================================================
+
+  let lang = 'en';
+
+  if (path === '/fr' || path.startsWith('/fr/')) {
+    lang = 'fr';
+  } else if (path === '/es' || path.startsWith('/es/')) {
+    lang = 'es';
+  }
 
   // ============================================================
   // Base paths
