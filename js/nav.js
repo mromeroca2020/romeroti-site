@@ -114,16 +114,51 @@
               </svg>
             </button>
             <div id="navServicesMenu"
-                 class="absolute right-0 mt-2 w-72 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5 py-2 hidden z-40"
-                 role="menu" aria-labelledby="navServicesBtn">
-              <a href="${base}/services/cloud-migration" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem">${I18N.serviceCloud}</a>
-              <a href="${base}/services/it-infrastructure" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem">${I18N.serviceInfra}</a>
-              <a href="${base}/services/cybersecurity" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem">${I18N.serviceCyber}</a>
-              <a href="${base}/services/data-center" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem">${I18N.serviceDC}</a>
-              <a href="${base}/services/disaster-recovery" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem">${I18N.serviceDR}</a>
-              <a href="${base}/services/noc" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem">${I18N.serviceNOC}</a>
-            </div>
-          </div>
+     class="absolute right-0 mt-2 w-72 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5 py-2 hidden z-40"
+     role="menu" aria-labelledby="navServicesBtn">
+
+  <!-- ============================================================
+       Romanoti Services Navigation
+       Uses only verified pages from current project tree
+       ============================================================ -->
+
+  <a href="/services.html"
+     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+     role="menuitem">
+     Services Overview
+  </a>
+
+  <a href="/cloud-hybrid.html"
+     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+     role="menuitem">
+     Hybrid Cloud Infrastructure
+  </a>
+
+  <a href="/cloud-redundancy.html"
+     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+     role="menuitem">
+     Cloud Redundancy
+  </a>
+
+  <a href="/cybersecurity.html"
+     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+     role="menuitem">
+     Cybersecurity
+  </a>
+
+  <a href="/it-noc.html"
+     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+     role="menuitem">
+     NOC Services
+  </a>
+
+  <a href="/it-soc.html"
+     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+     role="menuitem">
+     SOC Services
+  </a>
+
+</div>
 
           <div class="relative" id="navSolutionsRoot">
             <button id="navSolutionsBtn"
