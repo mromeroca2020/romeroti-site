@@ -250,10 +250,17 @@
 
     let prefix, fallback;
 
-    if (targetLang === 'en') {
-      prefix = '/en';
-      fallback = '/';
-    } else if (targetLang === 'fr') {
+  // English currently lives in root
+  if (targetLang === 'en') {
+    prefix = '';
+    fallback = '/';
+  } else if (targetLang === 'fr') {
+    prefix = '/fr';
+    fallback = '/fr/';
+  } else {
+    prefix = '/es';
+    fallback = '/';
+  } else if (targetLang === 'fr') {
       prefix = '/fr';
       fallback = '/fr/';
     } else {
