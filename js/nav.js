@@ -1,17 +1,41 @@
 (function () {
   // ============================================================
-  // RomanoTI nav.js — Header global + language selector + menus
+  // Romanoti Solutions - nav.js
+  // Header global + selector de idioma + menús dinámicos
   // ============================================================
-  // STRUCTURE ASSUMED FROM CURRENT PROJECT:
+  //
+  // ESTRUCTURA ASUMIDA Y USADA EN ESTE ARCHIVO
+  // ------------------------------------------------------------
   // EN -> /en/
   // FR -> /fr/
   // ES -> /es/
   //
-  // GOAL:
-  // - Keep navigation stable
-  // - Use language-aware links
-  // - Avoid broken mixed root/clean routes
-  // - Preserve current site structure without moving files
+  // OBJETIVO DE ESTA VERSIÓN
+  // ------------------------------------------------------------
+  // 1) Mantener una sola fuente de verdad para las rutas.
+  // 2) Evitar mezclar rutas viejas con la estructura actual.
+  // 3) Corregir específicamente el menú de "Services / Servicios".
+  // 4) Dejar el archivo documentado y fácil de mantener.
+  //
+  // NOTA IMPORTANTE
+  // ------------------------------------------------------------
+  // Esta corrección se enfoca en usar rutas coherentes con el
+  // estado actual que describiste:
+  // - /en/services/tools.html
+  // - /fr/services/tools.html
+  // - /es/services/tools.html
+  // - /{lang}/services/cybersecurity.html
+  //
+  // Además, el menú de servicios queda alineado a páginas de
+  // servicio consistentes:
+  // - index.html
+  // - help-desk.html
+  // - networks-infrastructure.html
+  // - cybersecurity.html
+  // - tools.html
+  //
+  // Si más tarde confirmas el árbol exacto del proyecto, este
+  // archivo será muy fácil de ajustar en ROUTES.
   // ============================================================
 
   if (window.__ROMANOTI_NAV_BOOTED__) {
@@ -20,13 +44,17 @@
   }
   window.__ROMANOTI_NAV_BOOTED__ = true;
 
-  console.log('[nav] booting…');
+  console.log('[nav] booting...');
 
   // ============================================================
-  // CHANGE #1
-  // Simple and correct language detection based on current URL.
+  // 1) DETECCIÓN DE IDIOMA SEGÚN LA URL ACTUAL
+  // ------------------------------------------------------------
+  // /en/... => en
+  // /fr/... => fr
+  // /es/... => es
+  // Cualquier otro caso => en
   // ============================================================
-  const path = location.pathname || '/';
+  const path = window.location.pathname || '/';
 
   let lang = 'en';
   if (path === '/fr' || path.startsWith('/fr/')) {
@@ -37,21 +65,21 @@
     lang = 'en';
   }
 
-  // ============================================================
-  // CHANGE #2
-  // Base paths aligned with actual deployed structure.
-  // ============================================================
-  const base =
-    lang === 'en' ? '/en'
-    : lang === 'fr' ? '/fr'
-    : '/es';
+  // Prefijo base por idioma
+  const base = lang === 'fr' ? '/fr' : lang === 'es' ? '/es' : '/en';
 
+  // ============================================================
+  // 2) TEXTOS POR IDIOMA
+  // ------------------------------------------------------------
+  // Aquí solo viven labels visibles.
+  // Las rutas reales se controlan en ROUTES.
+  // ============================================================
   const I18N_MAP = {
     es: {
-      brand: 'RomanoTI Solutions',
+      brand: 'Romanoti Solutions',
       home: 'Inicio',
       solutions: 'Soluciones',
-      platform: 'Platform',
+      platform: 'Plataforma',
       tools: 'Herramientas',
       noc: 'NOC',
       soc: 'SOC',
@@ -69,16 +97,14 @@
       es: 'Español',
       services: 'Servicios',
       servicesOverview: 'Resumen de servicios',
-      hybridCloud: 'Infraestructura híbrida cloud',
-      cloudRedundancy: 'Redundancia cloud',
+      helpDesk: 'Help Desk / ITSM',
+      networksInfra: 'Redes e infraestructura',
       serviceCyber: 'Ciberseguridad',
-      serviceNOC: 'Servicios NOC',
-      serviceSOC: 'Servicios SOC',
-      dcMonitor: 'DC Monitor',
-      contact: 'Contacto'
+      contact: 'Contacto',
+      mobileCta: 'Soluciones'
     },
     en: {
-      brand: 'RomanoTI Solutions',
+      brand: 'Romanoti Solutions',
       home: 'Home',
       solutions: 'Solutions',
       platform: 'Platform',
@@ -99,19 +125,17 @@
       es: 'Español',
       services: 'Services',
       servicesOverview: 'Services Overview',
-      hybridCloud: 'Hybrid Cloud Infrastructure',
-      cloudRedundancy: 'Cloud Redundancy',
+      helpDesk: 'Help Desk / ITSM',
+      networksInfra: 'Networks & Infrastructure',
       serviceCyber: 'Cybersecurity',
-      serviceNOC: 'NOC Services',
-      serviceSOC: 'SOC Services',
-      dcMonitor: 'DC Monitor',
-      contact: 'Contact'
+      contact: 'Contact',
+      mobileCta: 'Solutions'
     },
     fr: {
-      brand: 'RomanoTI Solutions',
+      brand: 'Romanoti Solutions',
       home: 'Accueil',
       solutions: 'Solutions',
-      platform: 'Platform',
+      platform: 'Plateforme',
       tools: 'Outils',
       noc: 'NOC',
       soc: 'SOC',
@@ -129,34 +153,156 @@
       es: 'Español',
       services: 'Services',
       servicesOverview: 'Aperçu des services',
-      hybridCloud: 'Infrastructure cloud hybride',
-      cloudRedundancy: 'Redondance cloud',
+      helpDesk: 'Help Desk / ITSM',
+      networksInfra: 'Réseaux et infrastructure',
       serviceCyber: 'Cybersécurité',
-      serviceNOC: 'Services NOC',
-      serviceSOC: 'Services SOC',
-      dcMonitor: 'DC Monitor',
-      contact: 'Contact'
+      contact: 'Contact',
+      mobileCta: 'Solutions'
     }
   };
 
   const I18N = I18N_MAP[lang] || I18N_MAP.en;
-  const homeHref = `${base}/`;
 
   // ============================================================
-  // CHANGE #3
-  // Navigation HTML aligned with verified project structure.
+  // 3) RUTAS REALES CENTRALIZADAS
+  // ------------------------------------------------------------
+  // Aquí se define TODO lo que el nav necesita.
+  // La ventaja es que si mañana cambias una página, cambias una vez.
+  //
+  // CORRECCIÓN CLAVE:
+  // El dropdown de servicios YA NO usa:
+  // - cloud-migration.html
+  // - disaster-recovery.html
+  // - it-noc.html
+  // - it-soc.html
+  //
+  // Porque esas rutas son las que estaban desalineando el menú.
+  // ============================================================
+  const ROUTES = {
+    en: {
+      home: '/en/',
+      contact: '/en/contact.html',
+      booking: '/booking.html',
+      platform: '/en/platform/index.html',
+      dcMonitor: '/en/data-center/dashboard.html',
+      tools: '/en/services/tools.html',
+      noc: '/en/services/it-noc.html',
+      soc: '/en/services/it-soc.html',
+      services: [
+        { key: 'servicesOverview', href: '/en/services/index.html' },
+        { key: 'helpDesk', href: '/en/services/help-desk.html' },
+        { key: 'networksInfra', href: '/en/services/networks-infrastructure.html' },
+        { key: 'serviceCyber', href: '/en/services/cybersecurity.html' },
+        { key: 'tools', href: '/en/services/tools.html' }
+      ],
+      solutions: [
+        { key: 'overview', href: '/en/solutions/cybershield/index.html' },
+        { key: 'mdr', href: '/en/solutions/cybershield/index.html' },
+        { key: 'socConsole', href: '/en/solutions/cybershield/soc-console.html' },
+        { key: 'easm', href: '/en/solutions/cybershield/easm-console.html' },
+        { key: 'fieldKit', href: '/en/solutions/cybershield/field-kit.html' },
+        { divider: true },
+        { key: 'quickAudit', href: '/en/solutions/cybershield/quick-audit.html' },
+        { key: 'pov', href: '/en/solutions/cybershield/pov-14d.html' }
+      ]
+    },
+    fr: {
+      home: '/fr/',
+      contact: '/fr/contact.html',
+      booking: '/booking.html',
+      platform: '/fr/platform/index.html',
+      dcMonitor: '/fr/data-center/dashboard.html',
+      tools: '/fr/services/tools.html',
+      noc: '/fr/services/it-noc.html',
+      soc: '/fr/services/it-soc.html',
+      services: [
+        { key: 'servicesOverview', href: '/fr/services/index.html' },
+        { key: 'helpDesk', href: '/fr/services/help-desk.html' },
+        { key: 'networksInfra', href: '/fr/services/networks-infrastructure.html' },
+        { key: 'serviceCyber', href: '/fr/services/cybersecurity.html' },
+        { key: 'tools', href: '/fr/services/tools.html' }
+      ],
+      solutions: [
+        { key: 'overview', href: '/fr/solutions/cybershield/index.html' },
+        { key: 'mdr', href: '/fr/solutions/cybershield/index.html' },
+        { key: 'socConsole', href: '/fr/solutions/cybershield/soc-console.html' },
+        { key: 'easm', href: '/fr/solutions/cybershield/easm-console.html' },
+        { key: 'fieldKit', href: '/fr/solutions/cybershield/field-kit.html' },
+        { divider: true },
+        { key: 'quickAudit', href: '/fr/solutions/cybershield/quick-audit.html' },
+        { key: 'pov', href: '/fr/solutions/cybershield/pov-14d.html' }
+      ]
+    },
+    es: {
+      home: '/es/',
+      contact: '/es/contact.html',
+      booking: '/booking.html',
+      platform: '/es/platform/index.html',
+      dcMonitor: '/es/data-center/dashboard.html',
+      tools: '/es/services/tools.html',
+      noc: '/es/services/it-noc.html',
+      soc: '/es/services/it-soc.html',
+      services: [
+        { key: 'servicesOverview', href: '/es/services/index.html' },
+        { key: 'helpDesk', href: '/es/services/help-desk.html' },
+        { key: 'networksInfra', href: '/es/services/networks-infrastructure.html' },
+        { key: 'serviceCyber', href: '/es/services/cybersecurity.html' },
+        { key: 'tools', href: '/es/services/tools.html' }
+      ],
+      solutions: [
+        { key: 'overview', href: '/es/solutions/cybershield/index.html' },
+        { key: 'mdr', href: '/es/solutions/cybershield/index.html' },
+        { key: 'socConsole', href: '/es/solutions/cybershield/soc-console.html' },
+        { key: 'easm', href: '/es/solutions/cybershield/easm-console.html' },
+        { key: 'fieldKit', href: '/es/solutions/cybershield/field-kit.html' },
+        { divider: true },
+        { key: 'quickAudit', href: '/es/solutions/cybershield/quick-audit.html' },
+        { key: 'pov', href: '/es/solutions/cybershield/pov-14d.html' }
+      ]
+    }
+  };
+
+  const CURRENT_ROUTES = ROUTES[lang] || ROUTES.en;
+
+  // ============================================================
+  // 4) HELPERS PARA CONSTRUIR MENÚS
+  // ============================================================
+  function buildDropdownLinks(items) {
+    return items.map(item => {
+      if (item.divider) {
+        return '<div class="border-t my-1"></div>';
+      }
+
+      const label = I18N[item.key] || item.key;
+      return `
+        <a href="${item.href}"
+           class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+           role="menuitem">
+          ${label}
+        </a>
+      `;
+    }).join('');
+  }
+
+  const servicesMenuHtml = buildDropdownLinks(CURRENT_ROUTES.services);
+  const solutionsMenuHtml = buildDropdownLinks(CURRENT_ROUTES.solutions);
+
+  // ============================================================
+  // 5) HTML DEL HEADER
+  // ------------------------------------------------------------
+  // Todo se renderiza dinámicamente una sola vez.
   // ============================================================
   const html = `
   <header class="bg-white/95 backdrop-blur sticky top-0 z-50 border-b border-gray-100" id="navHeader">
     <div class="container mx-auto px-6 py-3">
       <div class="flex items-center justify-between">
-        <a href="${homeHref}" class="flex items-center font-bold text-xl text-gray-900">
+        <a href="${CURRENT_ROUTES.home}" class="flex items-center font-bold text-xl text-gray-900">
           <span class="bg-blue-600 text-white rounded-full w-10 h-10 grid place-items-center mr-3">R</span>
           ${I18N.brand}
         </a>
 
         <nav class="hidden md:flex items-center space-x-8">
-          <a href="${homeHref}" class="text-gray-700 hover:text-blue-600">${I18N.home}</a>
+          <a href="${CURRENT_ROUTES.home}" class="text-gray-700 hover:text-blue-600">${I18N.home}</a>
 
           <div class="relative" id="navServicesRoot">
             <button id="navServicesBtn"
@@ -165,7 +311,7 @@
                     aria-expanded="false"
                     aria-controls="navServicesMenu">
               ${I18N.services}
-              <svg class="ml-1 w-4 h-4" viewBox="0 0 20 20" fill="currentColor">
+              <svg class="ml-1 w-4 h-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                 <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.58l3.71-3.35a.75.75 0 111.02 1.1l-4.2 3.79a.75.75 0 01-1.02 0l-4.2-3.79a.75.75 0 01.02-1.06z" clip-rule="evenodd"/>
               </svg>
             </button>
@@ -174,46 +320,7 @@
                  class="absolute right-0 mt-2 w-72 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5 py-2 hidden z-40"
                  role="menu"
                  aria-labelledby="navServicesBtn">
-
-              <!-- ============================================================
-                   CHANGE #4
-                   Services menu points only to confirmed pages.
-                   ============================================================ -->
-              <a href="${base}/services/index.html"
-                 class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
-                 role="menuitem">
-                 ${I18N.servicesOverview}
-              </a>
-
-              <a href="${base}/services/cloud-migration.html"
-                 class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
-                 role="menuitem">
-                 ${I18N.hybridCloud}
-              </a>
-
-              <a href="${base}/services/disaster-recovery.html"
-                 class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
-                 role="menuitem">
-                 ${I18N.cloudRedundancy}
-              </a>
-
-              <a href="${base}/services/cybersecurity.html"
-                 class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
-                 role="menuitem">
-                 ${I18N.serviceCyber}
-              </a>
-
-              <a href="${base}/services/it-noc.html"
-                 class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
-                 role="menuitem">
-                 ${I18N.serviceNOC}
-              </a>
-
-              <a href="${base}/services/it-soc.html"
-                 class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
-                 role="menuitem">
-                 ${I18N.serviceSOC}
-              </a>
+              ${servicesMenuHtml}
             </div>
           </div>
 
@@ -224,44 +331,41 @@
                     aria-expanded="false"
                     aria-controls="navSolutionsMenu">
               ${I18N.solutions}
-              <svg class="ml-1 w-4 h-4" viewBox="0 0 20 20" fill="currentColor">
+              <svg class="ml-1 w-4 h-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                 <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.58l3.71-3.35a.75.75 0 111.02 1.1l-4.2 3.79a.75.75 0 01-1.02 0l-4.2-3.79a.75.75 0 01.02-1.06z" clip-rule="evenodd"/>
               </svg>
             </button>
 
             <div id="navSolutionsMenu"
-                 class="absolute right-0 mt-2 w-80 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5 hidden"
+                 class="absolute right-0 mt-2 w-80 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5 hidden z-40"
                  role="menu"
                  aria-labelledby="navSolutionsBtn">
-              <a href="${base}/solutions/cybershield/index.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem">${I18N.overview}</a>
-              <a href="${base}/solutions/cybershield/index.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem">${I18N.mdr}</a>
-              <a href="${base}/solutions/cybershield/soc-console.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem">${I18N.socConsole}</a>
-              <a href="${base}/solutions/cybershield/easm-console.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem">${I18N.easm}</a>
-              <a href="${base}/solutions/cybershield/field-kit.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem">${I18N.fieldKit}</a>
-              <div class="border-t my-1"></div>
-              <a href="${base}/solutions/cybershield/quick-audit.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem">${I18N.quickAudit}</a>
-              <a href="${base}/solutions/cybershield/pov-14d.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem">${I18N.pov}</a>
+              ${solutionsMenuHtml}
             </div>
           </div>
 
-          <a href="${base}/platform/index.html" class="text-gray-700 hover:text-blue-600">${I18N.platform}</a>
-          <a href="${base}/services/tools.html" class="text-gray-700 hover:text-blue-600">${I18N.tools}</a>
-          <a href="${base}/services/it-noc.html" class="text-gray-700 hover:text-blue-600">${I18N.noc}</a>
-          <a href="${base}/data-center/dashboard.html" class="text-gray-700 hover:text-blue-600">${I18N.dcMonitor}</a>
-          <a href="${base}/services/it-soc.html" class="text-gray-700 hover:text-blue-600">${I18N.soc}</a>
-          <a href="${base}/contact.html" class="text-gray-700 hover:text-blue-600">${I18N.contact}</a>
+          <a href="${CURRENT_ROUTES.platform}" class="text-gray-700 hover:text-blue-600">${I18N.platform}</a>
+          <a href="${CURRENT_ROUTES.tools}" class="text-gray-700 hover:text-blue-600">${I18N.tools}</a>
+          <a href="${CURRENT_ROUTES.noc}" class="text-gray-700 hover:text-blue-600">${I18N.noc}</a>
+          <a href="${CURRENT_ROUTES.dcMonitor}" class="text-gray-700 hover:text-blue-600">DC Monitor</a>
+          <a href="${CURRENT_ROUTES.soc}" class="text-gray-700 hover:text-blue-600">${I18N.soc}</a>
+          <a href="${CURRENT_ROUTES.contact}" class="text-gray-700 hover:text-blue-600">${I18N.contact}</a>
 
-          <a href="/booking.html" class="bg-blue-600 text-white px-5 py-2 rounded-lg font-medium">${I18N.book}</a>
+          <a href="${CURRENT_ROUTES.booking}" class="bg-blue-600 text-white px-5 py-2 rounded-lg font-medium">${I18N.book}</a>
 
           <div class="relative" id="langRoot">
-            <button id="langBtn" class="text-gray-500 hover:text-blue-600 inline-flex items-center" aria-haspopup="true" aria-expanded="false">
+            <button id="langBtn"
+                    class="text-gray-500 hover:text-blue-600 inline-flex items-center"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                    aria-controls="langMenu">
               🌐 ${I18N.lang}
-              <svg class="ml-1 w-4 h-4" viewBox="0 0 20 20" fill="currentColor">
+              <svg class="ml-1 w-4 h-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                 <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.58l3.71-3.35a.75.75 0 111.02 1.1l-4.2 3.79a.75.75 0 01-1.02 0l-4.2-3.79a.75.75 0 01.02-1.06z" clip-rule="evenodd"/>
               </svg>
             </button>
 
-            <div id="langMenu" class="absolute right-0 mt-2 w-44 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5 hidden">
+            <div id="langMenu" class="absolute right-0 mt-2 w-44 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5 hidden z-40">
               <a href="#" data-lang="en" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">🇬🇧 ${I18N_MAP.en.en}</a>
               <a href="#" data-lang="fr" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">🇫🇷 ${I18N_MAP.fr.fr}</a>
               <a href="#" data-lang="es" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">🇪🇸 ${I18N_MAP.es.es}</a>
@@ -270,12 +374,18 @@
         </nav>
 
         <div class="md:hidden">
-          <a href="${base}/solutions/cybershield/index.html" class="bg-blue-600 text-white px-4 py-2 rounded-lg">${I18N.solutions}</a>
+          <a href="${CURRENT_ROUTES.solutions[0].href}" class="bg-blue-600 text-white px-4 py-2 rounded-lg">${I18N.mobileCta}</a>
         </div>
       </div>
     </div>
   </header>`;
 
+  // ============================================================
+  // 6) MONTAJE DEL HEADER
+  // ------------------------------------------------------------
+  // Si existe #app-header, lo usamos.
+  // Si no existe, insertamos el header al principio del body.
+  // ============================================================
   function mountHeader() {
     if (document.documentElement.getAttribute('data-nav-mounted') === '1') {
       console.warn('[nav] Header already mounted, skipping mount.');
@@ -283,9 +393,10 @@
       return;
     }
 
-    const mount = document.getElementById('app-header');
-    if (mount) {
-      mount.innerHTML = html;
+    const mountPoint = document.getElementById('app-header');
+
+    if (mountPoint) {
+      mountPoint.innerHTML = html;
     } else {
       const temp = document.createElement('div');
       temp.innerHTML = html;
@@ -296,139 +407,174 @@
     window.ROMANOTI_NAV_READY = true;
   }
 
-  function cleanPath(p) {
-    if (!p) return '/';
+  // ============================================================
+  // 7) LIMPIEZA DE RUTA AL CAMBIAR DE IDIOMA
+  // ------------------------------------------------------------
+  // Ejemplos:
+  // /es/services/tools.html  -> /services/tools.html
+  // /fr/platform/index.html  -> /platform/
+  // ============================================================
+  function cleanPath(pathname) {
+    if (!pathname) return '/';
 
-    // ============================================================
-    // CHANGE #5
-    // Remove current language prefix before switching languages.
-    // ============================================================
-    let out = p.replace(/^\/(en|fr|es)(?=\/|$)/, '');
+    let out = pathname.replace(/^\/(en|fr|es)(?=\/|$)/, '');
+
     if (!out) out = '/';
+
     out = out.replace(/\/{2,}/g, '/');
     out = out.replace(/\/index\.html$/i, '/');
+
     return out;
   }
 
+  // ============================================================
+  // 8) CAMBIO DE IDIOMA
+  // ------------------------------------------------------------
+  // Intenta mantener la misma ruta en otro idioma.
+  // Si la página equivalente no existe, vuelve al home del idioma.
+  // ============================================================
   async function goToLanguage(targetLang) {
-    try { localStorage.setItem('lang', targetLang); } catch (e) {}
+    try {
+      localStorage.setItem('lang', targetLang);
+    } catch (e) {
+      // No pasa nada si localStorage falla.
+    }
 
-    const current = cleanPath(location.pathname);
+    const currentPath = cleanPath(window.location.pathname);
 
     let prefix = '/en';
     let fallback = '/en/';
 
-    // ============================================================
-    // CHANGE #6
-    // Correct language routing for actual deployed structure.
-    // ============================================================
-    if (targetLang === 'en') {
-      prefix = '/en';
-      fallback = '/en/';
-    } else if (targetLang === 'fr') {
+    if (targetLang === 'fr') {
       prefix = '/fr';
       fallback = '/fr/';
-    } else {
+    } else if (targetLang === 'es') {
       prefix = '/es';
       fallback = '/es/';
     }
 
-    const target = prefix + (current.startsWith('/') ? current : '/' + current);
+    const target = prefix + (currentPath.startsWith('/') ? currentPath : `/${currentPath}`);
 
     try {
       const res = await fetch(target, { method: 'HEAD', cache: 'no-store' });
       if (res.ok) {
-        location.href = target + location.search + location.hash;
+        window.location.href = target + window.location.search + window.location.hash;
       } else {
-        location.href = fallback;
+        window.location.href = fallback;
       }
-    } catch (_) {
-      location.href = fallback;
+    } catch (err) {
+      window.location.href = fallback;
     }
   }
 
+  // ============================================================
+  // 9) INTERACCIÓN DE MENÚS
+  // ------------------------------------------------------------
+  // Se cablean:
+  // - dropdown de Solutions
+  // - dropdown de Services
+  // - selector de idioma
+  // ============================================================
   function wireMenus() {
-    const btn = document.getElementById('navSolutionsBtn');
-    const menu = document.getElementById('navSolutionsMenu');
-    const root = document.getElementById('navSolutionsRoot');
+    // -------------------------------
+    // Solutions dropdown
+    // -------------------------------
+    const solutionsBtn = document.getElementById('navSolutionsBtn');
+    const solutionsMenu = document.getElementById('navSolutionsMenu');
+    const solutionsRoot = document.getElementById('navSolutionsRoot');
 
-    if (btn && menu && !btn.dataset.wired) {
+    if (solutionsBtn && solutionsMenu && !solutionsBtn.dataset.wired) {
       const open = () => {
-        menu.classList.remove('hidden');
-        btn.setAttribute('aria-expanded', 'true');
+        solutionsMenu.classList.remove('hidden');
+        solutionsBtn.setAttribute('aria-expanded', 'true');
       };
+
       const close = () => {
-        menu.classList.add('hidden');
-        btn.setAttribute('aria-expanded', 'false');
+        solutionsMenu.classList.add('hidden');
+        solutionsBtn.setAttribute('aria-expanded', 'false');
       };
+
       const toggle = (e) => {
         if (e) {
           e.preventDefault();
           e.stopPropagation();
         }
-        menu.classList.contains('hidden') ? open() : close();
+        solutionsMenu.classList.contains('hidden') ? open() : close();
       };
 
-      btn.addEventListener('click', toggle);
-      btn.addEventListener('mouseenter', open);
-      root && root.addEventListener('mouseleave', () => setTimeout(close, 120));
+      solutionsBtn.addEventListener('click', toggle);
+      solutionsBtn.addEventListener('mouseenter', open);
+
+      if (solutionsRoot) {
+        solutionsRoot.addEventListener('mouseleave', () => setTimeout(close, 120));
+        solutionsRoot.style.overflow = 'visible';
+      }
+
       document.addEventListener('click', (e) => {
-        if (!menu.contains(e.target) && e.target !== btn) close();
+        if (!solutionsMenu.contains(e.target) && e.target !== solutionsBtn) {
+          close();
+        }
       });
+
       document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') close();
       });
 
-      if (root) root.style.overflow = 'visible';
-      btn.dataset.wired = '1';
+      solutionsBtn.dataset.wired = '1';
     }
 
-    const sBtn = document.getElementById('navServicesBtn');
-    const sMenu = document.getElementById('navServicesMenu');
-    const sRoot = document.getElementById('navServicesRoot');
+    // -------------------------------
+    // Services dropdown
+    // -------------------------------
+    const servicesBtn = document.getElementById('navServicesBtn');
+    const servicesMenu = document.getElementById('navServicesMenu');
+    const servicesRoot = document.getElementById('navServicesRoot');
 
-    if (sBtn && sMenu && !sBtn.dataset.wired) {
+    if (servicesBtn && servicesMenu && servicesRoot && !servicesBtn.dataset.wired) {
       let closeTimer = null;
 
-      const sOpen = () => {
+      const open = () => {
         clearTimeout(closeTimer);
-        sMenu.classList.remove('hidden');
-        sBtn.setAttribute('aria-expanded', 'true');
+        servicesMenu.classList.remove('hidden');
+        servicesBtn.setAttribute('aria-expanded', 'true');
       };
 
-      const sClose = () => {
-        sMenu.classList.add('hidden');
-        sBtn.setAttribute('aria-expanded', 'false');
+      const close = () => {
+        servicesMenu.classList.add('hidden');
+        servicesBtn.setAttribute('aria-expanded', 'false');
       };
 
       const scheduleClose = () => {
-        closeTimer = setTimeout(sClose, 250);
+        closeTimer = setTimeout(close, 250);
       };
 
-      sBtn.addEventListener('mouseenter', sOpen);
-      sMenu.addEventListener('mouseenter', () => clearTimeout(closeTimer));
+      servicesBtn.addEventListener('mouseenter', open);
+      servicesMenu.addEventListener('mouseenter', () => clearTimeout(closeTimer));
 
-      sBtn.addEventListener('mouseleave', scheduleClose);
-      sMenu.addEventListener('mouseleave', scheduleClose);
+      servicesBtn.addEventListener('mouseleave', scheduleClose);
+      servicesMenu.addEventListener('mouseleave', scheduleClose);
 
-      sBtn.addEventListener('click', (e) => {
+      servicesBtn.addEventListener('click', (e) => {
         e.preventDefault();
         e.stopPropagation();
-        sMenu.classList.contains('hidden') ? sOpen() : sClose();
+        servicesMenu.classList.contains('hidden') ? open() : close();
       });
 
       document.addEventListener('click', (e) => {
-        if (!sRoot.contains(e.target)) sClose();
+        if (!servicesRoot.contains(e.target)) close();
       });
 
       document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') sClose();
+        if (e.key === 'Escape') close();
       });
 
-      sRoot.style.overflow = 'visible';
-      sBtn.dataset.wired = '1';
+      servicesRoot.style.overflow = 'visible';
+      servicesBtn.dataset.wired = '1';
     }
 
+    // -------------------------------
+    // Language dropdown
+    // -------------------------------
     const langBtn = document.getElementById('langBtn');
     const langMenu = document.getElementById('langMenu');
 
@@ -445,10 +591,10 @@
         if (!langMenu.contains(e.target) && e.target !== langBtn) close();
       });
 
-      langMenu.querySelectorAll('a[data-lang]').forEach(a => {
-        a.addEventListener('click', (e) => {
+      langMenu.querySelectorAll('a[data-lang]').forEach(link => {
+        link.addEventListener('click', (e) => {
           e.preventDefault();
-          const targetLang = a.dataset.lang || 'en';
+          const targetLang = link.dataset.lang || 'en';
           goToLanguage(targetLang);
         });
       });
@@ -457,6 +603,9 @@
     }
   }
 
+  // ============================================================
+  // 10) BOOT GENERAL
+  // ============================================================
   function boot() {
     mountHeader();
     wireMenus();
