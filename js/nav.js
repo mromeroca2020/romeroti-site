@@ -243,7 +243,7 @@
   function cleanPath(p) {
     if (!p) return '/';
 
-    let out = p.replace(/^\/(en|fr|es)(?=\/|$)/, '');
+    let out = p.replace(/^\/(fr|es)(?=\/|$)/, '');
     if (!out) out = '/';
     out = out.replace(/\/{2,}/g, '/');
     out = out.replace(/\/index\.html$/i, '/');
