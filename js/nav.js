@@ -31,6 +31,13 @@
   //   mientras se confirma si existen más páginas reales ahí.
   // - Se eliminan del menú principal NOC / SOC / DC Monitor
   //   para evitar ruido y dispersión narrativa.
+  //
+  // CHANGE #28
+  // ------------------------------------------------------------
+  // Se actualiza el branding del header para usar el logo oficial
+  // horizontal de Romanoti en lugar del círculo con letra "R".
+  // Archivo esperado:
+  // /images/romanoti-logo-horizontal-final.png
   // ============================================================
 
   if (window.__ROMANOTI_NAV_BOOTED__) {
@@ -154,8 +161,6 @@
 
   // ============================================================
   // 3) RUTAS REALES CONFIRMADAS
-  // ------------------------------------------------------------
-  // Importante: aquí SOLO van rutas reales del árbol actual.
   // ============================================================
   const ROUTES = {
     en: {
@@ -267,9 +272,18 @@
   <header class="bg-white/95 backdrop-blur sticky top-0 z-50 border-b border-gray-100" id="navHeader">
     <div class="container mx-auto px-6 py-3">
       <div class="flex items-center justify-between">
-        <a href="${CURRENT.home}" class="flex items-center font-bold text-xl text-gray-900">
-          <span class="bg-blue-600 text-white rounded-full w-10 h-10 grid place-items-center mr-3">R</span>
-          ${I18N.brand}
+        <!-- ============================================================
+             CHANGE #29 (OFFICIAL LOGO IN HEADER)
+             Se usa el logo horizontal oficial de Romanoti.
+             Si en algún entorno no carga la imagen, se mantiene
+             el alt con el nombre de la marca.
+             ============================================================ -->
+        <a href="${CURRENT.home}" class="flex items-center text-gray-900 shrink-0">
+          <img
+            src="/images/romanoti-logo-horizontal-final.png"
+            alt="${I18N.brand}"
+            class="h-12 w-auto object-contain"
+          >
         </a>
 
         <nav class="hidden md:flex items-center space-x-8">
@@ -397,9 +411,6 @@
 
   // ============================================================
   // 8) CAMBIO DE IDIOMA
-  // ------------------------------------------------------------
-  // Intenta llevar al usuario a la misma ruta en otro idioma.
-  // Si no existe, cae al home del idioma destino.
   // ============================================================
   async function goToLanguage(targetLang) {
     try {
