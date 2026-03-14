@@ -34,11 +34,153 @@
 
   <style>
     body{font-family:'Montserrat',sans-serif;background:#f8f9fa;color:#111827;scroll-behavior:smooth}
-    .hero-bg{background:linear-gradient(135deg,#1e3a8a 0%,#2563eb 100%)}
     .btn-primary{background:#2563EB;transition:all .2s}
     .btn-primary:hover{background:#1D4ED8;transform:translateY(-1px);box-shadow:0 6px 18px -10px rgba(37,99,235,.7)}
     .card{border-radius:14px;box-shadow:0 12px 32px -16px rgba(2,6,23,.2)}
     .badge{display:inline-block;border:1px solid #cbd5e1;border-radius:999px;padding:4px 10px;font-size:12px;background:#f8fafc}
+
+    /* =========================================================
+       CHANGE #26 (NEW HERO STYLES)
+       Se agregan los estilos del nuevo hero corporativo con
+       banner visual, overlay oscuro, CTAs y badges técnicos.
+       ========================================================= */
+    .romanoti-hero{
+      position:relative;
+      min-height:88vh;
+      display:flex;
+      align-items:center;
+      overflow:hidden;
+      background:#081120;
+      color:#fff;
+    }
+
+    .romanoti-hero__bg{
+      position:absolute;
+      inset:0;
+      z-index:0;
+    }
+
+    .romanoti-hero__bg img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      object-position:center;
+      display:block;
+    }
+
+    .romanoti-hero__overlay{
+      position:absolute;
+      inset:0;
+      z-index:1;
+      background:
+        linear-gradient(90deg, rgba(5,10,20,.88) 0%, rgba(5,10,20,.70) 45%, rgba(5,10,20,.35) 100%),
+        linear-gradient(180deg, rgba(5,10,20,.15) 0%, rgba(5,10,20,.45) 100%);
+    }
+
+    .romanoti-hero__content{
+      position:relative;
+      z-index:2;
+      max-width:760px;
+      padding:120px 8% 90px;
+    }
+
+    .romanoti-hero__eyebrow{
+      margin:0 0 18px;
+      font-size:13px;
+      font-weight:600;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      color:#7dd3fc;
+    }
+
+    .romanoti-hero__title{
+      margin:0 0 22px;
+      font-size:clamp(2.5rem,5vw,4.8rem);
+      line-height:1.02;
+      font-weight:800;
+      letter-spacing:-.03em;
+      color:#fff;
+    }
+
+    .romanoti-hero__subtitle{
+      margin:0 0 32px;
+      max-width:680px;
+      font-size:clamp(1rem,1.4vw,1.18rem);
+      line-height:1.75;
+      color:rgba(255,255,255,.88);
+    }
+
+    .romanoti-hero__buttons{
+      display:flex;
+      flex-wrap:wrap;
+      gap:14px;
+      margin-bottom:28px;
+    }
+
+    .romanoti-btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:48px;
+      padding:0 22px;
+      border-radius:999px;
+      font-weight:700;
+      font-size:.95rem;
+      text-decoration:none;
+      transition:all .25s ease;
+      border:1px solid transparent;
+    }
+
+    .romanoti-btn--primary{
+      background:linear-gradient(135deg,#2563eb 0%,#38bdf8 100%);
+      color:#fff;
+      box-shadow:0 10px 30px rgba(37,99,235,.28);
+    }
+
+    .romanoti-btn--primary:hover{
+      transform:translateY(-2px);
+      box-shadow:0 14px 36px rgba(37,99,235,.36);
+    }
+
+    .romanoti-btn--secondary{
+      background:rgba(255,255,255,.06);
+      color:#fff;
+      border-color:rgba(255,255,255,.2);
+      backdrop-filter:blur(6px);
+    }
+
+    .romanoti-btn--secondary:hover{
+      background:rgba(255,255,255,.12);
+      transform:translateY(-2px);
+    }
+
+    .romanoti-hero__badges{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+
+    .romanoti-hero__badges span{
+      display:inline-flex;
+      align-items:center;
+      padding:9px 14px;
+      border-radius:999px;
+      background:rgba(17,24,39,.68);
+      border:1px solid rgba(125,211,252,.18);
+      color:#dbeafe;
+      font-size:.88rem;
+      font-weight:600;
+      letter-spacing:.01em;
+    }
+
+    @media (max-width:768px){
+      .romanoti-hero{min-height:auto}
+      .romanoti-hero__content{padding:96px 7% 70px}
+      .romanoti-hero__title{font-size:2.5rem}
+      .romanoti-hero__subtitle{font-size:1rem;line-height:1.65}
+      .romanoti-hero__buttons{flex-direction:column;align-items:stretch}
+      .romanoti-btn{width:100%}
+    }
   </style>
 </head>
 
@@ -107,47 +249,44 @@
     </div>
   </header>
 
-  <!-- ===== Hero ===== -->
-  <section class="hero-bg text-white">
-    <div class="container mx-auto px-6 py-20 text-center">
+  <!-- =========================================================
+       CHANGE #27 (NEW HERO SECTION)
+       Se reemplaza el hero anterior por un bloque más visual,
+       más corporativo y alineado con el banner futurista de
+       Romanoti Solutions.
+       Archivo esperado: /images/romanoti-hero-banner.png
+       ========================================================= -->
+  <section class="romanoti-hero">
+    <div class="romanoti-hero__bg">
+      <img src="/images/romanoti-hero-banner.png" alt="Romanoti Solutions Banner">
+    </div>
 
-      <!-- ============================================================
-           CHANGE #6 (HERO POSITIONING):
-           Se actualiza el mensaje principal para reflejar la evolución
-           de RomanoTI hacia una plataforma de infraestructura inteligente.
-           ============================================================ -->
-      <h1 class="text-4xl md:text-5xl font-bold mb-6">
-        Infrastructure Discovery &amp; Operational Intelligence
+    <div class="romanoti-hero__overlay"></div>
+
+    <div class="romanoti-hero__content">
+      <p class="romanoti-hero__eyebrow">Government &amp; Enterprise Technology Services</p>
+
+      <h1 class="romanoti-hero__title">
+        Infrastructure Discovery &amp;<br>
+        Operational Intelligence
       </h1>
 
-      <!-- ============================================================
-           CHANGE #7 (HERO MESSAGE UPDATE):
-           Se amplía el mensaje para incluir la visión de plataforma
-           Romanoti junto con la experiencia en infraestructura.
-           ============================================================ -->
-      <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
-        Romanoti combines enterprise infrastructure expertise with a new platform model
-        for discovery, diagnostics, and operational intelligence.
+      <p class="romanoti-hero__subtitle">
+        Romanoti combines enterprise infrastructure expertise with a platform-driven model
+        for discovery, diagnostics, cybersecurity support, and operational intelligence
+        across modern technical environments.
       </p>
 
-      <div class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-6">
+      <div class="romanoti-hero__buttons">
+        <a href="/platform/index.html" class="romanoti-btn romanoti-btn--primary">Explore Platform</a>
+        <a href="/booking.html?service=Free%20Consultation" class="romanoti-btn romanoti-btn--secondary">Free Consultation</a>
+      </div>
 
-        <!-- ============================================================
-             CHANGE #8 (HERO PLATFORM CTA):
-             Se agrega acceso directo a Romanoti Platform desde el Hero.
-             Esto mejora navegación y posicionamiento del producto.
-             ============================================================ -->
-        <a href="/platform/index.html" class="btn-primary text-white px-8 py-3 rounded-lg font-semibold">
-          Explore Platform
-        </a>
-
-        <!-- ============================================================
-             CHANGE #9 (FREE CONSULTATION):
-             Se mantiene el CTA comercial principal del sitio.
-             ============================================================ -->
-        <a href="/booking.html?service=Free%20Consultation" class="btn-primary text-white px-8 py-3 rounded-lg font-semibold">
-          Free Consultation
-        </a>
+      <div class="romanoti-hero__badges">
+        <span>Infrastructure</span>
+        <span>Cloud</span>
+        <span>Cybersecurity</span>
+        <span>Operations</span>
       </div>
     </div>
   </section>
@@ -418,12 +557,7 @@ Romanoti combines exposure monitoring, threat detection, and operational respons
       </div>
     </div>
   </section>
-<!-- ============================================================
-     CHANGE #22 (USE CASES SECTION):
-     Nueva sección para mostrar escenarios reales donde Romanoti
-     aporta valor. Esto ayuda a que la web se sienta más enterprise
-     y orientada a clientes concretos.
-     ============================================================ -->
+
 <section class="py-14 bg-white border-t border-b">
   <div class="container mx-auto px-6">
 
@@ -436,11 +570,6 @@ Romanoti combines exposure monitoring, threat detection, and operational respons
     </div>
 
     <div class="grid md:grid-cols-4 gap-6">
-
-      <!-- ============================================================
-           CHANGE #22A:
-           Caso de uso 1: MSP / Managed Services
-           ============================================================ -->
       <div class="card bg-white p-6 border border-gray-100">
         <div class="badge">MSP / Service Providers</div>
         <h3 class="text-xl font-bold mt-2 mb-2">Multi-environment visibility</h3>
@@ -450,10 +579,6 @@ Romanoti combines exposure monitoring, threat detection, and operational respons
         </p>
       </div>
 
-      <!-- ============================================================
-           CHANGE #22B:
-           Caso de uso 2: SMB Infrastructure
-           ============================================================ -->
       <div class="card bg-white p-6 border border-gray-100">
         <div class="badge">SMB Infrastructure</div>
         <h3 class="text-xl font-bold mt-2 mb-2">Structured IT operations</h3>
@@ -463,10 +588,6 @@ Romanoti combines exposure monitoring, threat detection, and operational respons
         </p>
       </div>
 
-      <!-- ============================================================
-           CHANGE #22C:
-           Caso de uso 3: Government / Regulated environments
-           ============================================================ -->
       <div class="card bg-white p-6 border border-gray-100">
         <div class="badge">Government / Regulated IT</div>
         <h3 class="text-xl font-bold mt-2 mb-2">Operational control and clarity</h3>
@@ -476,10 +597,6 @@ Romanoti combines exposure monitoring, threat detection, and operational respons
         </p>
       </div>
 
-      <!-- ============================================================
-           CHANGE #22D:
-           Caso de uso 4: Hybrid / Cloud environments
-           ============================================================ -->
       <div class="card bg-white p-6 border border-gray-100">
         <div class="badge">Hybrid & Cloud Environments</div>
         <h3 class="text-xl font-bold mt-2 mb-2">Discovery across modern infrastructure</h3>
@@ -488,15 +605,10 @@ Romanoti combines exposure monitoring, threat detection, and operational respons
           cloud, and evolving enterprise infrastructure.
         </p>
       </div>
-
     </div>
   </div>
 </section>
-  <!-- ============================================================
-     CHANGE #23 (WHY ROMANOTI PLATFORM SECTION):
-     Nueva sección para explicar los pilares de Romanoti Platform
-     y reforzar el posicionamiento del producto.
-     ============================================================ -->
+
 <section class="py-14 bg-gray-50 border-t border-b">
   <div class="container mx-auto px-6">
 
@@ -509,11 +621,6 @@ Romanoti combines exposure monitoring, threat detection, and operational respons
     </div>
 
     <div class="grid md:grid-cols-4 gap-6">
-
-      <!-- ============================================================
-           CHANGE #23A
-           Pilar 1: Infrastructure Discovery
-           ============================================================ -->
       <div class="card bg-white p-6 border border-gray-100">
         <div class="badge">Discovery</div>
         <h3 class="text-xl font-bold mt-2 mb-2">Infrastructure visibility</h3>
@@ -523,10 +630,6 @@ Romanoti combines exposure monitoring, threat detection, and operational respons
         </p>
       </div>
 
-      <!-- ============================================================
-           CHANGE #23B
-           Pilar 2: Diagnostics
-           ============================================================ -->
       <div class="card bg-white p-6 border border-gray-100">
         <div class="badge">Diagnostics</div>
         <h3 class="text-xl font-bold mt-2 mb-2">Operational diagnostics</h3>
@@ -536,10 +639,6 @@ Romanoti combines exposure monitoring, threat detection, and operational respons
         </p>
       </div>
 
-      <!-- ============================================================
-           CHANGE #23C
-           Pilar 3: Intelligence
-           ============================================================ -->
       <div class="card bg-white p-6 border border-gray-100">
         <div class="badge">Intelligence</div>
         <h3 class="text-xl font-bold mt-2 mb-2">Operational intelligence</h3>
@@ -549,10 +648,6 @@ Romanoti combines exposure monitoring, threat detection, and operational respons
         </p>
       </div>
 
-      <!-- ============================================================
-           CHANGE #23D
-           Pilar 4: Scalability
-           ============================================================ -->
       <div class="card bg-white p-6 border border-gray-100">
         <div class="badge">Scalability</div>
         <h3 class="text-xl font-bold mt-2 mb-2">Enterprise scalability</h3>
@@ -561,18 +656,11 @@ Romanoti combines exposure monitoring, threat detection, and operational respons
           enterprise infrastructure architectures.
         </p>
       </div>
-
     </div>
 
   </div>
 </section>
-  <!-- ============================================================
-     CHANGE #24 (ENTERPRISE DEPLOYMENT SECTION):
-     Nueva sección para mostrar cómo Romanoti Platform puede
-     desplegarse en distintos entornos empresariales.
-     Esto refuerza el posicionamiento de la plataforma como
-     software enterprise listo para producción.
-     ============================================================ -->
+
 <section class="py-14 bg-white border-t border-b">
   <div class="container mx-auto px-6">
 
@@ -585,11 +673,6 @@ Romanoti combines exposure monitoring, threat detection, and operational respons
     </div>
 
     <div class="grid md:grid-cols-4 gap-6">
-
-      <!-- ============================================================
-           CHANGE #24A
-           Deployment: On-Premise
-           ============================================================ -->
       <div class="card bg-white p-6 border border-gray-100">
         <div class="badge">On-Premise</div>
         <h3 class="text-xl font-bold mt-2 mb-2">Local infrastructure</h3>
@@ -599,10 +682,6 @@ Romanoti combines exposure monitoring, threat detection, and operational respons
         </p>
       </div>
 
-      <!-- ============================================================
-           CHANGE #24B
-           Deployment: Hybrid Infrastructure
-           ============================================================ -->
       <div class="card bg-white p-6 border border-gray-100">
         <div class="badge">Hybrid</div>
         <h3 class="text-xl font-bold mt-2 mb-2">Hybrid infrastructure</h3>
@@ -612,10 +691,6 @@ Romanoti combines exposure monitoring, threat detection, and operational respons
         </p>
       </div>
 
-      <!-- ============================================================
-           CHANGE #24C
-           Deployment: Cloud Environments
-           ============================================================ -->
       <div class="card bg-white p-6 border border-gray-100">
         <div class="badge">Cloud</div>
         <h3 class="text-xl font-bold mt-2 mb-2">Cloud environments</h3>
@@ -625,10 +700,6 @@ Romanoti combines exposure monitoring, threat detection, and operational respons
         </p>
       </div>
 
-      <!-- ============================================================
-           CHANGE #24D
-           Deployment: SOC / NOC Integration
-           ============================================================ -->
       <div class="card bg-white p-6 border border-gray-100">
         <div class="badge">SOC / NOC</div>
         <h3 class="text-xl font-bold mt-2 mb-2">Operational integration</h3>
@@ -637,16 +708,11 @@ Romanoti combines exposure monitoring, threat detection, and operational respons
           operations centers and network operations workflows.
         </p>
       </div>
-
     </div>
 
   </div>
 </section>
-<!-- ============================================================
-     CHANGE #25 (ROMANOTI PLATFORM PREVIEW SECTION):
-     Nueva sección comercial para presentar la plataforma como
-     producto visible y generar acción: explorar o solicitar demo.
-     ============================================================ -->
+
 <section class="py-14 bg-gray-50 border-t border-b">
   <div class="container mx-auto px-6">
 
@@ -659,11 +725,6 @@ Romanoti combines exposure monitoring, threat detection, and operational respons
     </div>
 
     <div class="grid md:grid-cols-3 gap-6 mb-10">
-
-      <!-- ============================================================
-           CHANGE #25A
-           Platform component: NetPilot
-           ============================================================ -->
       <div class="card bg-white p-6 border border-gray-100">
         <div class="badge">Discovery Engine</div>
         <h3 class="text-xl font-bold mt-2 mb-2">NetPilot</h3>
@@ -676,10 +737,6 @@ Romanoti combines exposure monitoring, threat detection, and operational respons
         </a>
       </div>
 
-      <!-- ============================================================
-           CHANGE #25B
-           Platform component: Ops Assistant
-           ============================================================ -->
       <div class="card bg-white p-6 border border-gray-100">
         <div class="badge">Intelligence Layer</div>
         <h3 class="text-xl font-bold mt-2 mb-2">Ops Assistant</h3>
@@ -692,10 +749,6 @@ Romanoti combines exposure monitoring, threat detection, and operational respons
         </a>
       </div>
 
-      <!-- ============================================================
-           CHANGE #25C
-           Platform component: Overview
-           ============================================================ -->
       <div class="card bg-white p-6 border border-gray-100">
         <div class="badge">Platform Overview</div>
         <h3 class="text-xl font-bold mt-2 mb-2">Romanoti Platform</h3>
@@ -707,13 +760,8 @@ Romanoti combines exposure monitoring, threat detection, and operational respons
           Explore Platform →
         </a>
       </div>
-
     </div>
 
-    <!-- ============================================================
-         CHANGE #25D
-         CTA row for conversion
-         ============================================================ -->
     <div class="flex flex-col md:flex-row justify-center gap-4 text-center">
       <a href="/platform/index.html"
          class="btn-primary text-white px-6 py-3 rounded-lg font-semibold">
@@ -728,7 +776,7 @@ Romanoti combines exposure monitoring, threat detection, and operational respons
 
   </div>
 </section>
-  
+
   <!-- ===== Core services ===== -->
   <section id="services" class="py-14">
     <div class="container mx-auto px-6">
