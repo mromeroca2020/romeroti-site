@@ -11,8 +11,7 @@
   // ------------------------------------------------------------
   // 1) Usar SOLO rutas confirmadas del proyecto actual.
   // 2) No inventar páginas no verificadas.
-  // 3) No mezclar Services con Platform.
-  // 4) Mantener compatibilidad con:
+  // 3) Mantener compatibilidad con:
   //    - GitHub
   //    - Netlify
   //    - Render
@@ -24,20 +23,20 @@
   // FR -> /fr/
   // ES -> /es/
   //
-  // NOTAS IMPORTANTES
+  // CHANGE #82
   // ------------------------------------------------------------
-  // - services/index.html NO existe, por eso no se usa.
-  // - Platform queda como link directo a /platform/index.html
-  //   mientras se confirma si existen más páginas reales ahí.
-  // - Se eliminan del menú principal NOC / SOC / DC Monitor
-  //   para evitar ruido y dispersión narrativa.
+  // Se actualizan las rutas del menú para alinearlas con la
+  // estructura real actual del repositorio:
   //
-  // CHANGE #28
-  // ------------------------------------------------------------
-  // Se actualiza el branding del header para usar el logo oficial
-  // horizontal de Romanoti en lugar del círculo con letra "R".
-  // Archivo esperado:
-  // /images/romanoti-logo-horizontal-final.png
+  // services/helpdesk.html
+  // services/networks.html
+  // services/cybersecurity.html
+  // solutions/index.html
+  // enterprise/government-business.html
+  // why-romanoti.html
+  //
+  // Se conserva la estructura completa del nav existente
+  // para no romper dropdowns, idioma, wiring ni responsive.
   // ============================================================
 
   if (window.__ROMANOTI_NAV_BOOTED__) {
@@ -62,8 +61,6 @@
     lang = 'en';
   }
 
-  const base = lang === 'fr' ? '/fr' : lang === 'es' ? '/es' : '/en';
-
   // ============================================================
   // 2) TEXTOS POR IDIOMA
   // ============================================================
@@ -74,6 +71,8 @@
       services: 'Servicios',
       solutions: 'Soluciones',
       platform: 'Plataforma',
+      enterprise: 'Enterprise',
+      whyRomanoti: 'Por qué Romanoti',
       contact: 'Contacto',
       book: 'Agendar',
       lang: 'Idioma',
@@ -83,13 +82,9 @@
       cybersecurity: 'Ciberseguridad',
       tools: 'Herramientas y diagnóstico',
 
-      overview: 'Resumen',
-      mdr: 'CyberShield (MDR)',
-      socConsole: 'Consola SOC',
-      easmConsole: 'Consola EASM',
-      fieldKit: 'Field Kit',
-      quickAudit: 'Auditoría rápida',
-      pov14: 'POV 14 días',
+      solutionsOverview: 'Resumen de soluciones',
+      platformOverview: 'Resumen de plataforma',
+      governmentBusiness: 'Government & Enterprise',
 
       en: 'English',
       fr: 'Français',
@@ -103,6 +98,8 @@
       services: 'Services',
       solutions: 'Solutions',
       platform: 'Platform',
+      enterprise: 'Enterprise',
+      whyRomanoti: 'Why Romanoti',
       contact: 'Contact',
       book: 'Book Now',
       lang: 'Language',
@@ -112,13 +109,9 @@
       cybersecurity: 'Cybersecurity',
       tools: 'Tools & Diagnostics',
 
-      overview: 'Overview',
-      mdr: 'CyberShield (MDR)',
-      socConsole: 'SOC Console',
-      easmConsole: 'EASM Console',
-      fieldKit: 'Field Kit',
-      quickAudit: 'Quick Audit',
-      pov14: '14-day POV',
+      solutionsOverview: 'Solutions Overview',
+      platformOverview: 'Platform Overview',
+      governmentBusiness: 'Government & Enterprise',
 
       en: 'English',
       fr: 'Français',
@@ -132,6 +125,8 @@
       services: 'Services',
       solutions: 'Solutions',
       platform: 'Plateforme',
+      enterprise: 'Entreprise',
+      whyRomanoti: 'Pourquoi Romanoti',
       contact: 'Contact',
       book: 'Prendre RDV',
       lang: 'Langue',
@@ -141,13 +136,9 @@
       cybersecurity: 'Cybersécurité',
       tools: 'Outils et diagnostic',
 
-      overview: 'Aperçu',
-      mdr: 'CyberShield (MDR)',
-      socConsole: 'Console SOC',
-      easmConsole: 'Console EASM',
-      fieldKit: 'Field Kit',
-      quickAudit: 'Audit rapide',
-      pov14: 'POV 14 jours',
+      solutionsOverview: 'Aperçu des solutions',
+      platformOverview: 'Aperçu de la plateforme',
+      governmentBusiness: 'Government & Enterprise',
 
       en: 'English',
       fr: 'Français',
@@ -161,80 +152,75 @@
 
   // ============================================================
   // 3) RUTAS REALES CONFIRMADAS
+  // ------------------------------------------------------------
+  // Nota:
+  // Hoy el sitio ya tiene varias páginas en raíz sin versión /en /fr /es.
+  // Para no romper navegación, se apuntan a las rutas reales existentes.
   // ============================================================
   const ROUTES = {
     en: {
-      home: '/en/',
-      platform: '/en/platform/index.html',
-      contact: '/en/contact.html',
+      home: '/',
+      platform: '/platform/index.html',
+      enterprise: '/enterprise/government-business.html',
+      whyRomanoti: '/why-romanoti.html',
+      contact: '/contact.html',
       booking: '/booking.html',
 
       services: [
-        { key: 'helpDesk', href: '/en/services/help-desk.html' },
-        { key: 'networksInfra', href: '/en/services/networks-infrastructure.html' },
-        { key: 'cybersecurity', href: '/en/services/cybersecurity.html' },
-        { key: 'tools', href: '/en/services/tools.html' }
+        { key: 'helpDesk', href: '/services/helpdesk.html' },
+        { key: 'networksInfra', href: '/services/networks.html' },
+        { key: 'cybersecurity', href: '/services/cybersecurity.html' },
+        { key: 'tools', href: '/services/tools.html' }
       ],
 
       solutions: [
-        { key: 'overview', href: '/en/solutions/cybershield/index.html' },
-        { key: 'mdr', href: '/en/solutions/cybershield/index.html' },
-        { key: 'socConsole', href: '/en/solutions/cybershield/soc-console.html' },
-        { key: 'easmConsole', href: '/en/solutions/cybershield/easm-console.html' },
-        { key: 'fieldKit', href: '/en/solutions/cybershield/field-kit.html' },
-        { divider: true },
-        { key: 'quickAudit', href: '/en/solutions/cybershield/quick-audit.html' },
-        { key: 'pov14', href: '/en/solutions/cybershield/pov-14d.html' }
+        { key: 'solutionsOverview', href: '/solutions/index.html' },
+        { key: 'platformOverview', href: '/platform/index.html' },
+        { key: 'governmentBusiness', href: '/enterprise/government-business.html' }
       ]
     },
 
     fr: {
-      home: '/fr/',
-      platform: '/fr/platform/index.html',
-      contact: '/fr/contact.html',
+      home: '/',
+      platform: '/platform/index.html',
+      enterprise: '/enterprise/government-business.html',
+      whyRomanoti: '/why-romanoti.html',
+      contact: '/contact.html',
       booking: '/booking.html',
 
       services: [
-        { key: 'helpDesk', href: '/fr/services/help-desk.html' },
-        { key: 'networksInfra', href: '/fr/services/networks-infrastructure.html' },
-        { key: 'cybersecurity', href: '/fr/services/cybersecurity.html' },
-        { key: 'tools', href: '/fr/services/tools.html' }
+        { key: 'helpDesk', href: '/services/helpdesk.html' },
+        { key: 'networksInfra', href: '/services/networks.html' },
+        { key: 'cybersecurity', href: '/services/cybersecurity.html' },
+        { key: 'tools', href: '/services/tools.html' }
       ],
 
       solutions: [
-        { key: 'overview', href: '/fr/solutions/cybershield/index.html' },
-        { key: 'mdr', href: '/fr/solutions/cybershield/index.html' },
-        { key: 'socConsole', href: '/fr/solutions/cybershield/soc-console.html' },
-        { key: 'easmConsole', href: '/fr/solutions/cybershield/easm-console.html' },
-        { key: 'fieldKit', href: '/fr/solutions/cybershield/field-kit.html' },
-        { divider: true },
-        { key: 'quickAudit', href: '/fr/solutions/cybershield/quick-audit.html' },
-        { key: 'pov14', href: '/fr/solutions/cybershield/pov-14d.html' }
+        { key: 'solutionsOverview', href: '/solutions/index.html' },
+        { key: 'platformOverview', href: '/platform/index.html' },
+        { key: 'governmentBusiness', href: '/enterprise/government-business.html' }
       ]
     },
 
     es: {
-      home: '/es/',
-      platform: '/es/platform/index.html',
-      contact: '/es/contact.html',
+      home: '/',
+      platform: '/platform/index.html',
+      enterprise: '/enterprise/government-business.html',
+      whyRomanoti: '/why-romanoti.html',
+      contact: '/contact.html',
       booking: '/booking.html',
 
       services: [
-        { key: 'helpDesk', href: '/es/services/help-desk.html' },
-        { key: 'networksInfra', href: '/es/services/networks-infrastructure.html' },
-        { key: 'cybersecurity', href: '/es/services/cybersecurity.html' },
-        { key: 'tools', href: '/es/services/tools.html' }
+        { key: 'helpDesk', href: '/services/helpdesk.html' },
+        { key: 'networksInfra', href: '/services/networks.html' },
+        { key: 'cybersecurity', href: '/services/cybersecurity.html' },
+        { key: 'tools', href: '/services/tools.html' }
       ],
 
       solutions: [
-        { key: 'overview', href: '/es/solutions/cybershield/index.html' },
-        { key: 'mdr', href: '/es/solutions/cybershield/index.html' },
-        { key: 'socConsole', href: '/es/solutions/cybershield/soc-console.html' },
-        { key: 'easmConsole', href: '/es/solutions/cybershield/easm-console.html' },
-        { key: 'fieldKit', href: '/es/solutions/cybershield/field-kit.html' },
-        { divider: true },
-        { key: 'quickAudit', href: '/es/solutions/cybershield/quick-audit.html' },
-        { key: 'pov14', href: '/es/solutions/cybershield/pov-14d.html' }
+        { key: 'solutionsOverview', href: '/solutions/index.html' },
+        { key: 'platformOverview', href: '/platform/index.html' },
+        { key: 'governmentBusiness', href: '/enterprise/government-business.html' }
       ]
     }
   };
@@ -273,10 +259,7 @@
     <div class="container mx-auto px-6 py-3">
       <div class="flex items-center justify-between">
         <!-- ============================================================
-             CHANGE #29 (OFFICIAL LOGO IN HEADER)
-             Se usa el logo horizontal oficial de Romanoti.
-             Si en algún entorno no carga la imagen, se mantiene
-             el alt con el nombre de la marca.
+             LOGO OFICIAL
              ============================================================ -->
         <a href="${CURRENT.home}" class="flex items-center text-gray-900 shrink-0">
           <img
@@ -310,9 +293,6 @@
             </div>
           </div>
 
-          <!-- PLATFORM -->
-          <a href="${CURRENT.platform}" class="text-gray-700 hover:text-blue-600">${I18N.platform}</a>
-
           <!-- SOLUTIONS -->
           <div class="relative" id="navSolutionsRoot">
             <button id="navSolutionsBtn"
@@ -333,6 +313,15 @@
               ${solutionsMenuHtml}
             </div>
           </div>
+
+          <!-- PLATFORM -->
+          <a href="${CURRENT.platform}" class="text-gray-700 hover:text-blue-600">${I18N.platform}</a>
+
+          <!-- ENTERPRISE -->
+          <a href="${CURRENT.enterprise}" class="text-gray-700 hover:text-blue-600">${I18N.enterprise}</a>
+
+          <!-- WHY ROMANOTI -->
+          <a href="${CURRENT.whyRomanoti}" class="text-gray-700 hover:text-blue-600">${I18N.whyRomanoti}</a>
 
           <a href="${CURRENT.contact}" class="text-gray-700 hover:text-blue-600">${I18N.contact}</a>
 
@@ -411,6 +400,11 @@
 
   // ============================================================
   // 8) CAMBIO DE IDIOMA
+  // ------------------------------------------------------------
+  // Nota:
+  // Como varias páginas actuales existen solo en raíz, el cambio
+  // de idioma cae elegantemente a / cuando la ruta traducida
+  // no exista todavía.
   // ============================================================
   async function goToLanguage(targetLang) {
     try {
@@ -420,14 +414,14 @@
     const currentPath = cleanPath(window.location.pathname);
 
     let prefix = '/en';
-    let fallback = '/en/';
+    let fallback = '/';
 
     if (targetLang === 'fr') {
       prefix = '/fr';
-      fallback = '/fr/';
+      fallback = '/';
     } else if (targetLang === 'es') {
       prefix = '/es';
-      fallback = '/es/';
+      fallback = '/';
     }
 
     const target = prefix + (currentPath.startsWith('/') ? currentPath : `/${currentPath}`);
