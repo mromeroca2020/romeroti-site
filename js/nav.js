@@ -282,7 +282,7 @@
           <img
             src="/images/romanoti-logo-transparent.png"
             alt="${I18N.brand}"
-            class="h-20 w-auto object-contain block"
+            class="h-20 w-auto object-cover block"
             onerror="this.onerror=null;this.src='/images/romanoti-icon.png';"
           >
         </a>
