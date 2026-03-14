@@ -9,21 +9,25 @@
 
   <!-- =======================================================
        SEO
+       CHANGE #35
+       Se corrige branding RomanoTI -> Romanoti
        ======================================================= -->
-  <title>Contact Romanoti | RomanoTI Solutions</title>
+  <title>Contact Romanoti | Romanoti Solutions</title>
   <meta
     name="description"
-    content="Contact RomanoTI Solutions for infrastructure services, cybersecurity, Romanoti Platform, NetPilot, Ops Assistant, and technical demo requests."
+    content="Contact Romanoti Solutions for infrastructure services, cybersecurity, Romanoti Platform, NetPilot, Ops Assistant, and technical demo requests."
   />
 
   <!-- =======================================================
        FAVICONS
+       CHANGE #36
+       Se alinean con la estructura nueva del proyecto
+       usando /images en lugar de /img
        ======================================================= -->
-  <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16.png">
-  <link rel="shortcut icon" href="/favicon.ico">
-  <link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#2563eb">
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/romanoti-icon.png">
+  <link rel="icon" type="image/png" href="/images/romanoti-icon.png">
+  <link rel="apple-touch-icon" href="/images/romanoti-icon.png">
   <meta name="theme-color" content="#2563eb">
 
   <!-- =======================================================
@@ -34,6 +38,9 @@
 
   <!-- =======================================================
        PAGE STYLES
+       CHANGE #37
+       Se agregan estilos del hero corporativo y se mantiene
+       la UI del formulario
        ======================================================= -->
   <style>
     body {
@@ -41,10 +48,6 @@
       background: #f8f9fa;
       color: #111827;
       scroll-behavior: smooth;
-    }
-
-    .hero-bg {
-      background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
     }
 
     .btn-primary {
@@ -96,6 +99,91 @@
       min-height: 160px;
       resize: vertical;
     }
+
+    /* =======================================================
+       CONTACT HERO
+       CHANGE #38
+       Hero más corporativo y consistente con el homepage
+       ======================================================= */
+    .romanoti-contact-hero {
+      position: relative;
+      min-height: 52vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      background: #081120;
+      color: #fff;
+    }
+
+    .romanoti-contact-hero__bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .romanoti-contact-hero__bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+
+    .romanoti-contact-hero__overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background:
+        linear-gradient(90deg, rgba(5,10,20,.88) 0%, rgba(5,10,20,.70) 45%, rgba(5,10,20,.38) 100%),
+        linear-gradient(180deg, rgba(5,10,20,.18) 0%, rgba(5,10,20,.45) 100%);
+    }
+
+    .romanoti-contact-hero__content {
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+      padding: 90px 24px 80px;
+    }
+
+    .romanoti-contact-hero__eyebrow {
+      margin-bottom: 16px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: #7dd3fc;
+    }
+
+    .romanoti-contact-hero__title {
+      font-size: clamp(2.4rem, 5vw, 4.4rem);
+      line-height: 1.03;
+      font-weight: 800;
+      margin-bottom: 18px;
+    }
+
+    .romanoti-contact-hero__subtitle {
+      font-size: clamp(1rem, 1.5vw, 1.2rem);
+      line-height: 1.75;
+      color: rgba(255,255,255,.88);
+      max-width: 780px;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 768px) {
+      .romanoti-contact-hero {
+        min-height: auto;
+      }
+
+      .romanoti-contact-hero__content {
+        padding: 72px 20px 62px;
+      }
+
+      .romanoti-contact-hero__title {
+        font-size: 2.4rem;
+      }
+    }
   </style>
 </head>
 
@@ -109,14 +197,19 @@
 
   <!-- =======================================================
        FALLBACK HEADER
-       Se elimina cuando nav.js inyecta el header real
+       CHANGE #39
+       Se actualiza branding del fallback para no romper
+       la consistencia visual antes de que monte nav.js
        ======================================================= -->
   <header id="fallback-header" class="bg-white shadow-sm sticky top-0 z-40">
     <div class="container mx-auto px-6 py-3">
       <div class="flex items-center justify-between gap-4">
-        <a href="/" class="flex items-center font-bold text-xl text-gray-900">
-          <span class="bg-blue-600 text-white rounded-full w-10 h-10 grid place-items-center mr-3">R</span>
-          RomanoTI Solutions (Loading...)
+        <a href="/" class="flex items-center text-gray-900">
+          <img
+            src="/images/romanoti-logo-horizontal-final.png"
+            alt="Romanoti Solutions"
+            class="h-12 w-auto object-contain"
+          >
         </a>
 
         <a href="/booking.html?service=Free%20Consultation"
@@ -129,21 +222,30 @@
 
   <main>
     <!-- =====================================================
-         HERO
+         CONTACT HERO
+         CHANGE #40
+         Se reemplaza el hero simple por uno alineado con el
+         banner corporativo del sitio principal
+         Archivo esperado:
+         /images/romanoti-hero-banner.png
          ===================================================== -->
-    <section class="hero-bg text-white">
-      <div class="container mx-auto px-6 py-16 text-center">
-        <div class="badge bg-white bg-opacity-10 border-white border-opacity-20 text-white mb-5">
-          Contact / Technical Inquiry
-        </div>
+    <section class="romanoti-contact-hero">
+      <div class="romanoti-contact-hero__bg">
+        <img src="/images/romanoti-hero-banner.png" alt="Romanoti Solutions Contact Banner">
+      </div>
 
-        <h1 class="text-4xl md:text-5xl font-bold mb-5">
+      <div class="romanoti-contact-hero__overlay"></div>
+
+      <div class="romanoti-contact-hero__content">
+        <div class="romanoti-contact-hero__eyebrow">Contact • Technical Inquiry • Demo Request</div>
+
+        <h1 class="romanoti-contact-hero__title">
           Contact Romanoti
         </h1>
 
-        <p class="text-xl md:text-2xl max-w-3xl mx-auto text-blue-50">
-          Tell us what you need — infrastructure services, cybersecurity, Romanoti Platform,
-          NetPilot, Ops Assistant, or a technical demo.
+        <p class="romanoti-contact-hero__subtitle">
+          Tell us what you need — infrastructure services, cybersecurity,
+          Romanoti Platform, NetPilot, Ops Assistant, or a focused technical demo.
         </p>
       </div>
     </section>
@@ -218,9 +320,6 @@
                  FormSubmit integration preserved
                  ================================================= -->
             <form action="https://formsubmit.co/info@romanoti-solutions.com" method="POST" class="space-y-5">
-              <!-- =============================================
-                   Hidden settings for FormSubmit
-                   ============================================= -->
               <input type="hidden" name="_subject" value="New Romanoti website inquiry">
               <input type="hidden" name="_captcha" value="false">
               <input type="hidden" name="_template" value="table">
@@ -297,9 +396,6 @@
               </div>
             </form>
 
-            <!-- =============================================
-                 Helper note
-                 ============================================= -->
             <p class="text-sm text-gray-500 mt-5">
               By submitting this form, your message will be sent to the Romanoti contact inbox for review.
             </p>
@@ -362,9 +458,11 @@
 
   <!-- =======================================================
        NAV / FOOTER SCRIPTS
+       CHANGE #41
+       Se incrementa versión para evitar caché viejo
        ======================================================= -->
-  <script defer src="/js/nav.js?v=7"></script>
-  <script defer src="/js/footer.js?v=7"></script>
-  <script defer src="/js/fix-nav.js?v=7"></script>
+  <script defer src="/js/nav.js?v=10"></script>
+  <script defer src="/js/footer.js?v=10"></script>
+  <script defer src="/js/fix-nav.js?v=10"></script>
 </body>
 </html>
