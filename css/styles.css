@@ -1,1 +1,306 @@
+/* =======================================================
+   ROMANOTI GLOBAL DESIGN SYSTEM
+   Romanoti Solutions
+   ======================================================= */
 
+/* =======================================================
+   VARIABLES
+   ======================================================= */
+
+:root{
+
+--primary-blue:#2563eb;
+--primary-blue-dark:#1d4ed8;
+--primary-blue-soft:#eaf2ff;
+
+--bg-dark:#081120;
+--bg-page:#f5f7fb;
+--bg-card:#ffffff;
+
+--text-dark:#111827;
+--text-body:#5f6f8a;
+--text-light:#ffffff;
+
+--border-light:#d9e1f0;
+
+--shadow-soft:0 12px 32px -16px rgba(2,6,23,.18);
+--shadow-card:0 8px 22px rgba(2,6,23,.10);
+
+--radius-xl:24px;
+--radius-lg:18px;
+--radius-md:14px;
+--radius-sm:10px;
+
+--max-width:1180px;
+
+}
+
+/* =======================================================
+   BASE
+   ======================================================= */
+
+*{
+box-sizing:border-box;
+}
+
+body{
+margin:0;
+font-family:'Montserrat',sans-serif;
+background:var(--bg-page);
+color:var(--text-dark);
+line-height:1.6;
+}
+
+a{
+text-decoration:none;
+color:inherit;
+}
+
+/* =======================================================
+   CONTAINER
+   ======================================================= */
+
+.container{
+width:min(var(--max-width), calc(100% - 32px));
+margin:0 auto;
+}
+
+/* =======================================================
+   SECTIONS
+   ======================================================= */
+
+.section{
+padding:60px 0;
+}
+
+.section-light{
+background:white;
+}
+
+.section-gray{
+background:var(--bg-page);
+}
+
+.section-title{
+font-size:2.2rem;
+font-weight:800;
+margin-bottom:16px;
+}
+
+.section-intro{
+max-width:760px;
+color:var(--text-body);
+margin-bottom:30px;
+}
+
+/* =======================================================
+   HERO
+   ======================================================= */
+
+.hero{
+position:relative;
+min-height:60vh;
+display:flex;
+align-items:center;
+overflow:hidden;
+background:var(--bg-dark);
+color:white;
+}
+
+.hero-overlay{
+position:absolute;
+inset:0;
+background:linear-gradient(
+90deg,
+rgba(5,10,20,.90) 0%,
+rgba(5,10,20,.72) 50%,
+rgba(5,10,20,.35) 100%
+);
+}
+
+.hero-content{
+position:relative;
+z-index:2;
+max-width:900px;
+padding:90px 0;
+}
+
+.hero-title{
+font-size:clamp(2.5rem,4vw,4rem);
+font-weight:800;
+margin-bottom:20px;
+}
+
+.hero-subtitle{
+font-size:1.15rem;
+color:rgba(255,255,255,.9);
+}
+
+/* =======================================================
+   BUTTONS
+   ======================================================= */
+
+.btn{
+display:inline-flex;
+align-items:center;
+justify-content:center;
+padding:12px 20px;
+border-radius:12px;
+font-weight:700;
+transition:all .2s ease;
+cursor:pointer;
+border:none;
+}
+
+.btn-primary{
+background:linear-gradient(
+135deg,
+var(--primary-blue),
+#38bdf8
+);
+color:white;
+}
+
+.btn-primary:hover{
+transform:translateY(-1px);
+box-shadow:0 10px 24px rgba(37,99,235,.25);
+}
+
+.btn-secondary{
+background:white;
+border:1px solid var(--border-light);
+color:var(--text-dark);
+}
+
+.btn-secondary:hover{
+background:#f8fafc;
+}
+
+/* =======================================================
+   CARDS
+   ======================================================= */
+
+.card{
+background:var(--bg-card);
+border:1px solid var(--border-light);
+border-radius:var(--radius-lg);
+padding:28px;
+box-shadow:var(--shadow-soft);
+}
+
+.card h3{
+margin-top:0;
+margin-bottom:10px;
+}
+
+.card p{
+color:var(--text-body);
+}
+
+/* =======================================================
+   GRID
+   ======================================================= */
+
+.grid-2{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:28px;
+}
+
+.grid-3{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:24px;
+}
+
+.grid-4{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:22px;
+}
+
+/* =======================================================
+   BADGES
+   ======================================================= */
+
+.badge{
+display:inline-block;
+border:1px solid var(--border-light);
+border-radius:999px;
+padding:4px 12px;
+font-size:12px;
+background:#f8fafc;
+color:#475569;
+}
+
+/* =======================================================
+   FORMS
+   ======================================================= */
+
+label{
+display:block;
+margin-bottom:6px;
+font-weight:600;
+font-size:.95rem;
+}
+
+input,
+select,
+textarea{
+width:100%;
+padding:12px 14px;
+margin-bottom:16px;
+border-radius:12px;
+border:1px solid #d1d5db;
+background:white;
+font-family:'Montserrat',sans-serif;
+outline:none;
+transition:border-color .2s,box-shadow .2s;
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+border-color:var(--primary-blue);
+box-shadow:0 0 0 3px rgba(37,99,235,.12);
+}
+
+textarea{
+min-height:140px;
+resize:vertical;
+}
+
+/* =======================================================
+   FOOTER
+   ======================================================= */
+
+.footer{
+background:white;
+border-top:1px solid var(--border-light);
+padding:28px 0;
+text-align:center;
+color:var(--text-body);
+font-size:.9rem;
+}
+
+/* =======================================================
+   RESPONSIVE
+   ======================================================= */
+
+@media(max-width:980px){
+
+.grid-2,
+.grid-3,
+.grid-4{
+grid-template-columns:1fr;
+}
+
+.hero-content{
+padding:70px 0;
+}
+
+.hero-title{
+font-size:2.4rem;
+}
+
+}
