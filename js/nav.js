@@ -37,6 +37,15 @@
   //
   // Se conserva la estructura completa del nav existente
   // para no romper dropdowns, idioma, wiring ni responsive.
+  //
+  // CHANGE #84
+  // ------------------------------------------------------------
+  // Se corrige únicamente la ruta del logo del header:
+  // ANTES: /images/romanoti-logo-horizontal-final.png
+  // AHORA: /images/romanoti-logo-transparent.png
+  //
+  // Este cambio se hace porque el archivo real confirmado en el repo
+  // es /images/romanoti-logo-transparent.png
   // ============================================================
 
   if (window.__ROMANOTI_NAV_BOOTED__) {
@@ -260,10 +269,12 @@
       <div class="flex items-center justify-between">
         <!-- ============================================================
              LOGO OFICIAL
+             CHANGE #84
+             Se corrige la ruta del logo al archivo real existente.
              ============================================================ -->
         <a href="${CURRENT.home}" class="flex items-center text-gray-900 shrink-0">
           <img
-            src="/images/romanoti-logo-horizontal-final.png"
+            src="/images/romanoti-logo-transparent.png"
             alt="${I18N.brand}"
             class="h-12 w-auto object-contain"
           >
