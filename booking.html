@@ -1,171 +1,595 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Book a Consultation | Romanoti Solutions</title>
+  <!-- =======================================================
+       BASIC CONFIGURATION
+       ======================================================= -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
-body{
-font-family:Arial, sans-serif;
-background:#0f172a;
-color:white;
-margin:0;
-padding:40px;
-}
+  <!-- =======================================================
+       SEO
+       CHANGE #64
+       Se mantiene foco comercial y branding consistente
+       ======================================================= -->
+  <title>Book a Consultation | Romanoti Solutions</title>
+  <meta
+    name="description"
+    content="Book a consultation with Romanoti Solutions for infrastructure services, cybersecurity, cloud support, and operational platform discussions."
+  >
 
-.container{
-max-width:800px;
-margin:auto;
-}
+  <!-- =======================================================
+       FAVICONS
+       CHANGE #65
+       Se alinean con la estructura actual /images
+       ======================================================= -->
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/romanoti-icon.png">
+  <link rel="icon" type="image/png" href="/images/romanoti-icon.png">
+  <link rel="apple-touch-icon" href="/images/romanoti-icon.png">
+  <meta name="theme-color" content="#2563eb">
 
-h1{
-margin-bottom:10px;
-}
+  <!-- =======================================================
+       TYPOGRAPHY
+       ======================================================= -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
 
-p{
-margin-bottom:25px;
-line-height:1.5;
-}
+  <style>
+    :root{
+      --primary-blue:#2563eb;
+      --primary-blue-dark:#1d4ed8;
+      --primary-blue-soft:#eaf2ff;
 
-form{
-background:#111827;
-padding:30px;
-border-radius:10px;
-}
+      --bg-dark:#081120;
+      --bg-page:#f5f7fb;
+      --bg-card:#ffffff;
 
-label{
-display:block;
-margin-bottom:6px;
-font-weight:bold;
-}
+      --text-dark:#111827;
+      --text-body:#5f6f8a;
+      --text-light:#ffffff;
 
-input,select,textarea{
-width:100%;
-padding:10px;
-margin-bottom:15px;
-border-radius:6px;
-border:1px solid #555;
-background:#0f172a;
-color:white;
-box-sizing:border-box;
-}
+      --border-light:#d9e1f0;
+      --shadow-soft:0 12px 32px -16px rgba(2,6,23,.18);
 
-textarea{
-min-height:120px;
-resize:vertical;
-}
+      --radius-xl:24px;
+      --radius-lg:18px;
+      --radius-md:14px;
+      --radius-sm:10px;
 
-button{
-background:#f59e0b;
-padding:12px 20px;
-border:none;
-border-radius:6px;
-font-weight:bold;
-cursor:pointer;
-}
+      --max-width:1180px;
+    }
 
-button:hover{
-opacity:0.92;
-}
-</style>
+    *{box-sizing:border-box}
+
+    body{
+      font-family:'Montserrat',sans-serif;
+      background:var(--bg-page);
+      color:var(--text-dark);
+      margin:0;
+      line-height:1.6;
+    }
+
+    a{
+      color:inherit;
+      text-decoration:none;
+    }
+
+    .container{
+      width:min(var(--max-width), calc(100% - 32px));
+      margin:0 auto;
+    }
+
+    /* =======================================================
+       HERO
+       CHANGE #66
+       Hero visual alineado al resto del sitio
+       ======================================================= */
+    .booking-hero{
+      position:relative;
+      min-height:52vh;
+      display:flex;
+      align-items:center;
+      overflow:hidden;
+      background:var(--bg-dark);
+      color:#fff;
+    }
+
+    .booking-hero__bg{
+      position:absolute;
+      inset:0;
+      z-index:0;
+    }
+
+    .booking-hero__bg img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      object-position:center;
+      display:block;
+    }
+
+    .booking-hero__overlay{
+      position:absolute;
+      inset:0;
+      z-index:1;
+      background:
+        linear-gradient(90deg, rgba(5,10,20,.90) 0%, rgba(5,10,20,.72) 48%, rgba(5,10,20,.38) 100%),
+        linear-gradient(180deg, rgba(5,10,20,.18) 0%, rgba(5,10,20,.45) 100%);
+    }
+
+    .booking-hero__content{
+      position:relative;
+      z-index:2;
+      max-width:900px;
+      margin:0 auto;
+      text-align:center;
+      padding:88px 24px 76px;
+    }
+
+    .booking-hero__eyebrow{
+      display:inline-block;
+      margin-bottom:18px;
+      padding:8px 14px;
+      border-radius:999px;
+      background:rgba(255,255,255,.12);
+      border:1px solid rgba(255,255,255,.18);
+      color:#fff;
+      font-size:.84rem;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+
+    .booking-hero__title{
+      margin:0 0 16px;
+      font-size:clamp(2.3rem, 4vw, 4.2rem);
+      line-height:1.05;
+      font-weight:800;
+      color:#fff;
+    }
+
+    .booking-hero__subtitle{
+      margin:0 auto;
+      max-width:780px;
+      color:rgba(255,255,255,.88);
+      font-size:clamp(1rem, 1.4vw, 1.18rem);
+      line-height:1.75;
+    }
+
+    /* =======================================================
+       BOOKING SECTION
+       ======================================================= */
+    .booking-section{
+      padding:56px 0 72px;
+      background:#fff;
+    }
+
+    .booking-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:28px;
+      align-items:start;
+    }
+
+    .card{
+      background:var(--bg-card);
+      border:1px solid var(--border-light);
+      border-radius:var(--radius-xl);
+      padding:30px;
+      box-shadow:var(--shadow-soft);
+    }
+
+    .badge{
+      display:inline-block;
+      border:1px solid var(--border-light);
+      border-radius:999px;
+      padding:4px 10px;
+      font-size:12px;
+      background:#f8fafc;
+      color:#475569;
+      margin-bottom:16px;
+    }
+
+    .card h2{
+      margin:0 0 14px;
+      font-size:2rem;
+      line-height:1.2;
+      color:var(--text-dark);
+    }
+
+    .card p{
+      color:var(--text-body);
+      margin-top:0;
+      margin-bottom:18px;
+    }
+
+    .list{
+      padding-left:20px;
+      color:var(--text-body);
+      margin:0;
+    }
+
+    .list li{
+      margin-bottom:8px;
+    }
+
+    /* =======================================================
+       FORM
+       ======================================================= */
+    form{
+      margin:0;
+    }
+
+    label{
+      display:block;
+      margin-bottom:6px;
+      font-weight:700;
+      font-size:.95rem;
+      color:var(--text-dark);
+    }
+
+    input,select,textarea{
+      width:100%;
+      padding:12px 14px;
+      margin-bottom:16px;
+      border-radius:12px;
+      border:1px solid #d1d5db;
+      background:#fff;
+      color:var(--text-dark);
+      box-sizing:border-box;
+      font-family:'Montserrat',sans-serif;
+      outline:none;
+      transition:border-color .2s, box-shadow .2s;
+    }
+
+    input:focus,select:focus,textarea:focus{
+      border-color:var(--primary-blue);
+      box-shadow:0 0 0 3px rgba(37,99,235,.12);
+    }
+
+    textarea{
+      min-height:130px;
+      resize:vertical;
+    }
+
+    .form-actions{
+      padding-top:6px;
+    }
+
+    button{
+      background:linear-gradient(135deg, var(--primary-blue) 0%, #38bdf8 100%);
+      color:#fff;
+      padding:14px 22px;
+      border:none;
+      border-radius:12px;
+      font-weight:800;
+      cursor:pointer;
+      transition:all .2s ease;
+      min-height:48px;
+      font-family:'Montserrat',sans-serif;
+    }
+
+    button:hover{
+      transform:translateY(-1px);
+      box-shadow:0 10px 24px rgba(37,99,235,.22);
+    }
+
+    .small-note{
+      font-size:.9rem;
+      color:#64748b;
+      margin-top:16px;
+    }
+
+    /* =======================================================
+       CTA STRIP
+       ======================================================= */
+    .booking-strip{
+      padding:48px 0 64px;
+      background:var(--bg-page);
+      border-top:1px solid #e7edf7;
+    }
+
+    .booking-strip__box{
+      background:linear-gradient(135deg, #ffffff, var(--primary-blue-soft));
+      border:1px solid var(--border-light);
+      border-radius:24px;
+      padding:30px;
+      box-shadow:var(--shadow-soft);
+      text-align:center;
+    }
+
+    .booking-strip__box h2{
+      margin:0 0 12px;
+      font-size:2rem;
+    }
+
+    .booking-strip__box p{
+      margin:0 auto 18px;
+      max-width:760px;
+      color:var(--text-body);
+    }
+
+    .booking-strip__actions{
+      display:flex;
+      justify-content:center;
+      flex-wrap:wrap;
+      gap:12px;
+    }
+
+    .secondary-link{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:46px;
+      padding:0 18px;
+      border-radius:12px;
+      border:1px solid var(--border-light);
+      background:#fff;
+      color:var(--text-dark);
+      font-weight:700;
+    }
+
+    .secondary-link:hover{
+      background:#f8fafc;
+    }
+
+    @media (max-width:980px){
+      .booking-grid{
+        grid-template-columns:1fr;
+      }
+
+      .booking-hero{
+        min-height:auto;
+      }
+
+      .booking-hero__content{
+        padding:72px 20px 62px;
+      }
+
+      .booking-hero__title{
+        font-size:2.5rem;
+      }
+    }
+  </style>
 </head>
 
 <body>
+  <!-- =======================================================
+       GLOBAL HEADER
+       CHANGE #67
+       Se usa nav.js como header oficial
+       ======================================================= -->
+  <div id="app-header"></div>
 
-<!-- ============================================================
-     CHANGE #1 (HIDDEN BACKUP FORM FOR NETLIFY):
-     Este formulario oculto ayuda a que Netlify detecte el formulario
-     "booking" de forma más confiable durante el build.
-     No se muestra al usuario.
-     ============================================================ -->
-<form name="booking" netlify hidden>
-  <input type="text" name="fullname">
-  <input type="email" name="email">
-  <input type="text" name="phone">
-  <input type="text" name="company">
-  <input type="text" name="service">
-  <input type="text" name="date">
-  <input type="text" name="time">
-  <textarea name="issue"></textarea>
-</form>
+  <!-- =======================================================
+       FALLBACK HEADER
+       CHANGE #68
+       Solo visible mientras nav.js monta el header real
+       ======================================================= -->
+  <header id="fallback-header" class="bg-white shadow-sm sticky top-0 z-40">
+    <div class="container" style="padding-top:12px;padding-bottom:12px;display:flex;align-items:center;justify-content:space-between;gap:20px;">
+      <a href="/en/" class="flex items-center text-gray-900">
+        <img
+          src="/images/romanoti-logo-horizontal-final.png"
+          alt="Romanoti Solutions"
+          style="height:48px;width:auto;object-fit:contain;"
+        >
+      </a>
 
-<div class="container">
+      <a href="/booking.html?service=Free%20Consultation"
+         style="background:#2563eb;color:#fff;padding:10px 18px;border-radius:10px;font-weight:700;">
+        Book Now
+      </a>
+    </div>
+  </header>
 
-<h1>Book Your IT Consultation</h1>
+  <!-- ============================================================
+       CHANGE #69 (HIDDEN BACKUP FORM FOR NETLIFY)
+       Formulario oculto para asegurar detección en Netlify
+       ============================================================ -->
+  <form name="booking" netlify hidden>
+    <input type="text" name="fullname">
+    <input type="email" name="email">
+    <input type="text" name="phone">
+    <input type="text" name="company">
+    <input type="text" name="service">
+    <input type="text" name="date">
+    <input type="text" name="time">
+    <textarea name="issue"></textarea>
+  </form>
 
-<p>
-Schedule a consultation with Romanoti Solutions for IT support,
-cybersecurity, cloud infrastructure, or network troubleshooting.
-</p>
+  <main>
+    <!-- =====================================================
+         HERO
+         CHANGE #70
+         Hero corporativo alineado al resto del sitio
+         ===================================================== -->
+    <section class="booking-hero">
+      <div class="booking-hero__bg">
+        <img src="/images/romanoti-hero-banner.png" alt="Romanoti Booking Banner">
+      </div>
 
-<!-- ============================================================
-     CHANGE #2 (PRIMARY NETLIFY FORM):
-     Formulario principal conectado a Netlify Forms.
-     - name="booking"
-     - method="POST"
-     - data-netlify="true"
-     - action="/thank-you.html"
-     Esto permite registrar leads y luego redirigir a la página de confirmación.
-     ============================================================ -->
-<form name="booking" method="POST" data-netlify="true" action="/thank-you.html">
-<input type="hidden" name="form-name" value="booking">
+      <div class="booking-hero__overlay"></div>
 
-<label for="fullname">Full Name</label>
-<input id="fullname" name="fullname" type="text" required>
+      <div class="booking-hero__content">
+        <div class="booking-hero__eyebrow">Consultation • Technical Review • Booking</div>
+        <h1 class="booking-hero__title">Book your consultation with Romanoti.</h1>
+        <p class="booking-hero__subtitle">
+          Schedule a conversation with Romanoti Solutions for IT infrastructure,
+          cybersecurity, cloud support, NOC / SOC topics, or platform-related guidance.
+        </p>
+      </div>
+    </section>
 
-<label for="email">Email</label>
-<input id="email" name="email" type="email" required>
+    <!-- =====================================================
+         BOOKING CONTENT
+         ===================================================== -->
+    <section class="booking-section">
+      <div class="container">
+        <div class="booking-grid">
 
-<label for="phone">Phone</label>
-<input id="phone" name="phone" type="text">
+          <!-- LEFT COLUMN -->
+          <div class="card">
+            <div class="badge">Romanoti Solutions</div>
+            <h2>Let’s plan the right conversation</h2>
+            <p>
+              This booking form is designed for organizations or professionals
+              seeking a structured conversation around infrastructure, security,
+              visibility, diagnostics, or platform direction.
+            </p>
 
-<label for="company">Company</label>
-<input id="company" name="company" type="text">
+            <h3 style="margin-top:24px;margin-bottom:10px;font-size:1.1rem;">What you can book</h3>
+            <ul class="list">
+              <li>Free consultation</li>
+              <li>Emergency support request</li>
+              <li>Network support discussion</li>
+              <li>Cybersecurity review</li>
+              <li>Platform-related inquiry</li>
+            </ul>
 
-<label for="service">Service</label>
-<select id="service" name="service">
-<option>Free Consultation</option>
-<option>Emergency Support</option>
-<option>Network Support</option>
-<option>Cybersecurity Review</option>
-</select>
+            <h3 style="margin-top:24px;margin-bottom:10px;font-size:1.1rem;">Before submitting</h3>
+            <p>
+              Share enough context so we understand your area of interest,
+              your preferred timing, and the type of support or review you need.
+            </p>
+          </div>
 
-<label for="date">Preferred Date</label>
-<input id="date" name="date" type="date">
+          <!-- RIGHT COLUMN / FORM -->
+          <div class="card">
+            <div class="badge">Booking Form</div>
+            <h2>Request your appointment</h2>
+            <p>
+              Fill out the form below and Romanoti will review your request.
+            </p>
 
-<label for="time">Preferred Time</label>
-<select id="time" name="time">
-<option>09:00 AM</option>
-<option>10:00 AM</option>
-<option>11:00 AM</option>
-<option>01:00 PM</option>
-<option>02:00 PM</option>
-<option>03:00 PM</option>
-</select>
+            <!-- ============================================================
+                 CHANGE #71 (PRIMARY NETLIFY FORM)
+                 Se mantiene Netlify Forms con action hacia thank-you
+                 ============================================================ -->
+            <form name="booking" method="POST" data-netlify="true" action="/thank-you.html">
+              <input type="hidden" name="form-name" value="booking">
 
-<label for="issue">Describe your issue</label>
-<textarea id="issue" name="issue"></textarea>
+              <label for="fullname">Full Name</label>
+              <input id="fullname" name="fullname" type="text" required>
 
-<button type="submit">Request Appointment</button>
-</form>
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" required>
 
-</div>
+              <label for="phone">Phone</label>
+              <input id="phone" name="phone" type="text">
 
-<!-- ============================================================
-     CHANGE #3 (AUTO SERVICE SELECTION):
-     Si la URL contiene ?service=Free%20Consultation o
-     ?service=Emergency%20Support, el formulario selecciona
-     automáticamente el servicio correspondiente.
-     ============================================================ -->
-<script>
-const params = new URLSearchParams(window.location.search);
-const service = params.get("service");
-if (service) {
-  const serviceSelect = document.querySelector('select[name="service"]');
-  if (serviceSelect) serviceSelect.value = service;
-}
-</script>
+              <label for="company">Company</label>
+              <input id="company" name="company" type="text">
 
+              <label for="service">Service</label>
+              <select id="service" name="service">
+                <option>Free Consultation</option>
+                <option>Emergency Support</option>
+                <option>Network Support</option>
+                <option>Cybersecurity Review</option>
+              </select>
+
+              <label for="date">Preferred Date</label>
+              <input id="date" name="date" type="date">
+
+              <label for="time">Preferred Time</label>
+              <select id="time" name="time">
+                <option>09:00 AM</option>
+                <option>10:00 AM</option>
+                <option>11:00 AM</option>
+                <option>01:00 PM</option>
+                <option>02:00 PM</option>
+                <option>03:00 PM</option>
+              </select>
+
+              <label for="issue">Describe your issue</label>
+              <textarea id="issue" name="issue"></textarea>
+
+              <div class="form-actions">
+                <button type="submit">Request Appointment</button>
+              </div>
+            </form>
+
+            <p class="small-note">
+              By submitting this form, your request will be captured through Netlify Forms and routed for Romanoti review.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         BOTTOM CTA
+         ===================================================== -->
+    <section class="booking-strip">
+      <div class="container">
+        <div class="booking-strip__box">
+          <h2>Need more context before booking?</h2>
+          <p>
+            Explore Romanoti Platform or contact us directly if you want to understand the right entry point before requesting an appointment.
+          </p>
+          <div class="booking-strip__actions">
+            <a href="/platform/index.html" class="secondary-link">Explore Platform</a>
+            <a href="/contact.html" class="secondary-link">Contact Romanoti</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- =======================================================
+       GLOBAL FOOTER
+       CHANGE #72
+       Se usa footer.js en vez de footer local
+       ======================================================= -->
+  <div id="app-footer"></div>
+
+  <!-- =======================================================
+       FALLBACK HEADER REMOVER
+       ======================================================= -->
+  <script>
+    (function () {
+      const fb = document.getElementById('fallback-header');
+      if (!fb) return;
+
+      function removeFallbackSafely() {
+        const mount = document.getElementById('app-header');
+        const injected = mount && mount.querySelector('header');
+        if (injected && fb.parentNode) {
+          fb.parentNode.removeChild(fb);
+          return true;
+        }
+        return false;
+      }
+
+      if (!removeFallbackSafely()) {
+        setTimeout(removeFallbackSafely, 150);
+        setTimeout(removeFallbackSafely, 400);
+        setTimeout(removeFallbackSafely, 1000);
+        setTimeout(removeFallbackSafely, 2000);
+      }
+    })();
+  </script>
+
+  <!-- ============================================================
+       CHANGE #73 (AUTO SERVICE SELECTION)
+       Si viene ?service=... en URL, se autoselecciona
+       ============================================================ -->
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const service = params.get("service");
+    if (service) {
+      const serviceSelect = document.querySelector('select[name="service"]');
+      if (serviceSelect) serviceSelect.value = service;
+    }
+  </script>
+
+  <!-- =======================================================
+       GLOBAL SCRIPTS
+       CHANGE #74
+       Se conectan nav y footer globales
+       ======================================================= -->
+  <script defer src="/js/nav.js?v=10"></script>
+  <script defer src="/js/footer.js?v=10"></script>
+  <script defer src="/js/fix-nav.js?v=10"></script>
 </body>
 </html>
