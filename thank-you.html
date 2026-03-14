@@ -1,49 +1,344 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Thank You | Romanoti Solutions</title>
+  <!-- =======================================================
+       BASIC CONFIGURATION
+       ======================================================= -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
-body{
-font-family:Arial;
-background:#0f172a;
-color:white;
-margin:0;
-display:flex;
-align-items:center;
-justify-content:center;
-height:100vh;
-text-align:center;
-}
+  <!-- =======================================================
+       SEO
+       CHANGE #75
+       Página de confirmación alineada con Romanoti
+       ======================================================= -->
+  <title>Thank You | Romanoti Solutions</title>
+  <meta
+    name="description"
+    content="Thank you for contacting Romanoti Solutions. Your request has been received and will be reviewed shortly."
+  >
 
-.box{
-max-width:700px;
-}
+  <!-- =======================================================
+       FAVICONS
+       CHANGE #76
+       Se alinean con la estructura actual /images
+       ======================================================= -->
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/romanoti-icon.png">
+  <link rel="icon" type="image/png" href="/images/romanoti-icon.png">
+  <link rel="apple-touch-icon" href="/images/romanoti-icon.png">
+  <meta name="theme-color" content="#2563eb">
 
-a{
-color:#f59e0b;
-text-decoration:none;
-font-weight:bold;
-}
-</style>
+  <!-- =======================================================
+       TYPOGRAPHY
+       ======================================================= -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --primary-blue:#2563eb;
+      --primary-blue-dark:#1d4ed8;
+      --primary-blue-soft:#eaf2ff;
+
+      --bg-dark:#081120;
+      --bg-page:#f5f7fb;
+
+      --text-dark:#111827;
+      --text-body:#5f6f8a;
+      --text-light:#ffffff;
+
+      --border-light:#d9e1f0;
+      --shadow-soft:0 12px 32px -16px rgba(2,6,23,.18);
+
+      --radius-xl:24px;
+      --radius-lg:18px;
+      --radius-md:14px;
+      --max-width:980px;
+    }
+
+    *{box-sizing:border-box}
+
+    body{
+      margin:0;
+      font-family:'Montserrat',sans-serif;
+      background:var(--bg-page);
+      color:var(--text-dark);
+    }
+
+    a{
+      color:inherit;
+      text-decoration:none;
+    }
+
+    .container{
+      width:min(var(--max-width), calc(100% - 32px));
+      margin:0 auto;
+    }
+
+    /* =======================================================
+       HERO / CONFIRMATION AREA
+       CHANGE #77
+       Página de confirmación con visual consistente
+       ======================================================= */
+    .thankyou-hero{
+      position:relative;
+      min-height:72vh;
+      display:flex;
+      align-items:center;
+      overflow:hidden;
+      background:var(--bg-dark);
+      color:#fff;
+    }
+
+    .thankyou-hero__bg{
+      position:absolute;
+      inset:0;
+      z-index:0;
+    }
+
+    .thankyou-hero__bg img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      object-position:center;
+      display:block;
+    }
+
+    .thankyou-hero__overlay{
+      position:absolute;
+      inset:0;
+      z-index:1;
+      background:
+        linear-gradient(90deg, rgba(5,10,20,.90) 0%, rgba(5,10,20,.72) 48%, rgba(5,10,20,.38) 100%),
+        linear-gradient(180deg, rgba(5,10,20,.18) 0%, rgba(5,10,20,.45) 100%);
+    }
+
+    .thankyou-hero__content{
+      position:relative;
+      z-index:2;
+      width:min(var(--max-width), calc(100% - 32px));
+      margin:0 auto;
+      padding:88px 0 76px;
+      display:flex;
+      justify-content:center;
+    }
+
+    .thankyou-card{
+      width:100%;
+      max-width:760px;
+      background:rgba(255,255,255,.10);
+      border:1px solid rgba(255,255,255,.18);
+      border-radius:28px;
+      padding:38px;
+      text-align:center;
+      box-shadow:0 20px 50px rgba(0,0,0,.12);
+      backdrop-filter:blur(8px);
+    }
+
+    .thankyou-badge{
+      display:inline-block;
+      margin-bottom:18px;
+      padding:8px 14px;
+      border-radius:999px;
+      background:rgba(255,255,255,.12);
+      border:1px solid rgba(255,255,255,.18);
+      color:#fff;
+      font-size:.84rem;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+
+    .thankyou-card h1{
+      margin:0 0 14px;
+      font-size:clamp(2.3rem, 4vw, 4rem);
+      line-height:1.05;
+      font-weight:800;
+      color:#fff;
+    }
+
+    .thankyou-card p{
+      margin:0 auto 16px;
+      max-width:620px;
+      color:rgba(255,255,255,.88);
+      font-size:1.06rem;
+      line-height:1.75;
+    }
+
+    .thankyou-actions{
+      display:flex;
+      justify-content:center;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-top:24px;
+    }
+
+    .btn-primary{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:48px;
+      padding:0 20px;
+      border-radius:12px;
+      background:linear-gradient(135deg, var(--primary-blue) 0%, #38bdf8 100%);
+      color:#fff;
+      font-weight:800;
+      transition:all .2s ease;
+    }
+
+    .btn-primary:hover{
+      transform:translateY(-1px);
+      box-shadow:0 10px 24px rgba(37,99,235,.22);
+    }
+
+    .btn-secondary{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:48px;
+      padding:0 20px;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,.22);
+      background:rgba(255,255,255,.08);
+      color:#fff;
+      font-weight:700;
+    }
+
+    .btn-secondary:hover{
+      background:rgba(255,255,255,.14);
+    }
+
+    @media (max-width:768px){
+      .thankyou-hero{
+        min-height:auto;
+      }
+
+      .thankyou-hero__content{
+        padding:72px 0 62px;
+      }
+
+      .thankyou-card{
+        padding:28px 22px;
+      }
+
+      .thankyou-actions{
+        flex-direction:column;
+      }
+
+      .btn-primary,
+      .btn-secondary{
+        width:100%;
+      }
+    }
+  </style>
 </head>
 
 <body>
+  <!-- =======================================================
+       GLOBAL HEADER
+       CHANGE #78
+       Se usa nav.js como header oficial
+       ======================================================= -->
+  <div id="app-header"></div>
 
-<div class="box">
-<h1>Thank you</h1>
+  <!-- =======================================================
+       FALLBACK HEADER
+       CHANGE #79
+       Solo visible mientras nav.js monta el header real
+       ======================================================= -->
+  <header id="fallback-header" class="bg-white shadow-sm sticky top-0 z-40">
+    <div class="container" style="padding-top:12px;padding-bottom:12px;display:flex;align-items:center;justify-content:space-between;gap:20px;">
+      <a href="/en/" class="flex items-center text-gray-900">
+        <img
+          src="/images/romanoti-logo-horizontal-final.png"
+          alt="Romanoti Solutions"
+          style="height:48px;width:auto;object-fit:contain;"
+        >
+      </a>
 
-<p>
-Your appointment request has been received.
-Romanoti Solutions will contact you shortly.
-</p>
+      <a href="/booking.html?service=Free%20Consultation"
+         style="background:#2563eb;color:#fff;padding:10px 18px;border-radius:10px;font-weight:700;">
+        Book Now
+      </a>
+    </div>
+  </header>
 
-<p>
-<a href="/">Return to homepage</a>
-</p>
+  <main>
+    <!-- =====================================================
+         THANK YOU HERO
+         ===================================================== -->
+    <section class="thankyou-hero">
+      <div class="thankyou-hero__bg">
+        <img src="/images/romanoti-hero-banner.png" alt="Romanoti Thank You Banner">
+      </div>
 
-</div>
+      <div class="thankyou-hero__overlay"></div>
 
+      <div class="thankyou-hero__content">
+        <div class="thankyou-card">
+          <div class="thankyou-badge">Confirmation Received</div>
+
+          <h1>Thank you.</h1>
+
+          <p>
+            Your request has been received successfully.
+            Romanoti Solutions will review your submission and contact you shortly.
+          </p>
+
+          <p>
+            In the meantime, you can continue exploring our platform,
+            services, and technical direction.
+          </p>
+
+          <div class="thankyou-actions">
+            <a href="/en/" class="btn-primary">Return to Homepage</a>
+            <a href="/platform/index.html" class="btn-secondary">Explore Platform</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- =======================================================
+       GLOBAL FOOTER
+       CHANGE #80
+       Se usa footer.js en vez de footer local
+       ======================================================= -->
+  <div id="app-footer"></div>
+
+  <!-- =======================================================
+       FALLBACK HEADER REMOVER
+       ======================================================= -->
+  <script>
+    (function () {
+      const fb = document.getElementById('fallback-header');
+      if (!fb) return;
+
+      function removeFallbackSafely() {
+        const mount = document.getElementById('app-header');
+        const injected = mount && mount.querySelector('header');
+        if (injected && fb.parentNode) {
+          fb.parentNode.removeChild(fb);
+          return true;
+        }
+        return false;
+      }
+
+      if (!removeFallbackSafely()) {
+        setTimeout(removeFallbackSafely, 150);
+        setTimeout(removeFallbackSafely, 400);
+        setTimeout(removeFallbackSafely, 1000);
+        setTimeout(removeFallbackSafely, 2000);
+      }
+    })();
+  </script>
+
+  <!-- =======================================================
+       GLOBAL SCRIPTS
+       CHANGE #81
+       Se conectan nav y footer globales
+       ======================================================= -->
+  <script defer src="/js/nav.js?v=10"></script>
+  <script defer src="/js/footer.js?v=10"></script>
+  <script defer src="/js/fix-nav.js?v=10"></script>
 </body>
-</html> 
+</html>
