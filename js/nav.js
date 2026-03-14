@@ -40,12 +40,18 @@
   //
   // CHANGE #84
   // ------------------------------------------------------------
-  // Se corrige únicamente la ruta del logo del header:
-  // ANTES: /images/romanoti-logo-horizontal-final.png
-  // AHORA: /images/romanoti-logo-transparent.png
+  // Se corrige la imagen del logo del header:
+  // ANTES: /images/romanoti-logo-transparent.png
+  // AHORA: /images/logo.png
   //
-  // Este cambio se hace porque el archivo real confirmado en el repo
-  // es /images/romanoti-logo-transparent.png
+  // Motivo:
+  // - El PNG transparente sí existe, pero visualmente se está
+  //   mostrando demasiado pequeño en producción por su recorte.
+  // - /images/logo.png es más adecuado para el header.
+  //
+  // Además:
+  // - Se agrega fallback automático a /images/romanoti-icon.png
+  // - Se ajusta la altura visual del logo a h-10
   // ============================================================
 
   if (window.__ROMANOTI_NAV_BOOTED__) {
@@ -270,13 +276,14 @@
         <!-- ============================================================
              LOGO OFICIAL
              CHANGE #84
-             Se corrige la ruta del logo al archivo real existente.
+             Se usa /images/logo.png y fallback a romanoti-icon.png
              ============================================================ -->
         <a href="${CURRENT.home}" class="flex items-center text-gray-900 shrink-0">
           <img
-            src="/images/romanoti-logo-transparent.png"
+            src="/images/logo.png"
             alt="${I18N.brand}"
-            class="h-12 w-auto object-contain"
+            class="h-10 w-auto object-contain"
+            onerror="this.onerror=null;this.src='/images/romanoti-icon.png';"
           >
         </a>
 
@@ -411,11 +418,6 @@
 
   // ============================================================
   // 8) CAMBIO DE IDIOMA
-  // ------------------------------------------------------------
-  // Nota:
-  // Como varias páginas actuales existen solo en raíz, el cambio
-  // de idioma cae elegantemente a / cuando la ruta traducida
-  // no exista todavía.
   // ============================================================
   async function goToLanguage(targetLang) {
     try {
