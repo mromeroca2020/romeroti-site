@@ -280,9 +280,9 @@
              ============================================================ -->
       <a href="${CURRENT.home}" class="flex items-center shrink-0">
         <img
-          src="/images/romanoti-logo-master.png"
+          src="/images/romanoti-logo-small.svg"
           alt="${I18N.brand}"
-          class="h-14 md:h-16 w-auto object-contain block"
+          class="h-10 md:h-12 w-auto object-contain block"
           onerror="this.onerror=null;this.src='/images/romanoti-icon.png';"
         >
       </a>
