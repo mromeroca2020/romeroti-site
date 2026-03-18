@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
+  <!-- ========================================================= -->
+  <!-- BASIC META                                                -->
+  <!-- ========================================================= -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -12,32 +14,54 @@
     content="Romanoti Solutions provides network and infrastructure services including visibility, diagnostics, architecture review, and operational support for modern IT environments."
   >
 
+  <!-- ========================================================= -->
+  <!-- FAVICONS / BRANDING                                       -->
+  <!-- ========================================================= -->
   <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/romanoti-icon.png">
   <link rel="icon" type="image/png" href="/images/romanoti-icon.png">
   <link rel="apple-touch-icon" href="/images/romanoti-icon.png">
   <meta name="theme-color" content="#2563eb">
 
-  <link rel="stylesheet" href="../css/styles.css">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <!-- ========================================================= -->
+  <!-- GLOBAL UI FRAMEWORK                                       -->
+  <!-- IMPORTANT:
+       nav.js and footer.js use Tailwind utility classes.
+       This page MUST load Tailwind or the global header/footer
+       will appear broken.
+  -->
+  <!-- ========================================================= -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 
+  <!-- ========================================================= -->
+  <!-- PAGE STYLES                                               -->
+  <!-- ========================================================= -->
+  <link rel="stylesheet" href="../css/styles.css">
+
+  <!-- ========================================================= -->
+  <!-- FONTS                                                     -->
+  <!-- ========================================================= -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
 </head>
 
 <body>
-
-  <!-- GLOBAL HEADER -->
+  <!-- ========================================================= -->
+  <!-- GLOBAL HEADER MOUNT POINT                                 -->
+  <!-- Injected by /js/nav.js                                    -->
+  <!-- ========================================================= -->
   <div id="app-header"></div>
 
   <main>
-
-    <!-- HERO -->
+    <!-- ======================================================= -->
+    <!-- HERO                                                    -->
+    <!-- ======================================================= -->
     <section class="hero">
       <div class="hero-overlay"></div>
 
       <div class="container hero-content">
         <div class="badge" style="margin-bottom:16px;">Infrastructure • Networks • Operations</div>
 
-        <h1 class="hero-title">Networks & Infrastructure Services</h1>
+        <h1 class="hero-title">Networks &amp; Infrastructure Services</h1>
 
         <p class="hero-subtitle">
           Romanoti Solutions helps organizations improve infrastructure visibility,
@@ -52,7 +76,9 @@
       </div>
     </section>
 
-    <!-- WHY IT MATTERS -->
+    <!-- ======================================================= -->
+    <!-- WHY IT MATTERS                                          -->
+    <!-- ======================================================= -->
     <section class="section section-light">
       <div class="container">
         <h2 class="section-title">Why networks and infrastructure matter</h2>
@@ -91,7 +117,9 @@
       </div>
     </section>
 
-    <!-- SERVICES INCLUDED -->
+    <!-- ======================================================= -->
+    <!-- SERVICES INCLUDED                                       -->
+    <!-- ======================================================= -->
     <section class="section section-gray">
       <div class="container">
         <h2 class="section-title">What we provide</h2>
@@ -147,7 +175,9 @@
       </div>
     </section>
 
-    <!-- PLATFORM CONNECTION -->
+    <!-- ======================================================= -->
+    <!-- PLATFORM CONNECTION                                     -->
+    <!-- ======================================================= -->
     <section class="section section-light">
       <div class="container">
         <h2 class="section-title">Connected to Romanoti Platform</h2>
@@ -181,7 +211,9 @@
       </div>
     </section>
 
-    <!-- USE CASES -->
+    <!-- ======================================================= -->
+    <!-- USE CASES                                               -->
+    <!-- ======================================================= -->
     <section class="section section-gray">
       <div class="container">
         <h2 class="section-title">Where this service helps most</h2>
@@ -217,7 +249,9 @@
       </div>
     </section>
 
-    <!-- CTA -->
+    <!-- ======================================================= -->
+    <!-- CTA                                                     -->
+    <!-- ======================================================= -->
     <section class="section section-light">
       <div class="container">
         <div class="card">
@@ -235,32 +269,23 @@
         </div>
       </div>
     </section>
-
   </main>
 
-  <!-- GLOBAL FOOTER -->
-<div id="app-footer"></div>
+  <!-- ========================================================= -->
+  <!-- GLOBAL FOOTER MOUNT POINT                                 -->
+  <!-- Injected by /js/footer.js                                 -->
+  <!-- ========================================================= -->
+  <div id="app-footer"></div>
 
-<script defer src="/js/nav.js?v=30"></script>
-<script defer src="/js/footer.js?v=30"></script>
+  <!-- ========================================================= -->
+  <!-- GLOBAL SCRIPTS                                            -->
+  <!-- IMPORTANT:
+       Use nav.js as the only active global header system.
+       footer.js mounts the shared footer.
+       Do NOT add header.js or fix-nav.js here.
+  -->
+  <!-- ========================================================= -->
+  <script defer src="/js/nav.js?v=30"></script>
+  <script defer src="/js/footer.js?v=30"></script>
 </body>
-</html><!DOCTYPE html>
-<html lang="en">
-<head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Networks & Infrastructure Services | Romanoti Solutions</title>
-
-<meta name="description"
-content="Romanoti Solutions provides network and infrastructure services including visibility, diagnostics, architecture review, and operational support for modern IT environments.">
-
-<link rel="icon" type="image/x-icon" href="/images/favicon.ico">
-<link rel="icon" type="image/png" sizes="32x32" href="/images/romanoti-icon.png">
-<link rel="icon" type="image/png" href="/images/romanoti-icon.png">
-<link rel="apple-touch-icon" href="/images/romanoti-icon.png">
-<meta name="theme-color" content="#2563eb">
-
-<link rel="stylesheet" href="../css/styles.css">
-<link
+</html>
