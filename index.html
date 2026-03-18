@@ -173,6 +173,49 @@
       .romanoti-hero__buttons{flex-direction:column;align-items:stretch}
       .romanoti-btn{width:100%}
     }
+    .romanoti-hero-logo-wrap{
+  margin-bottom: 24px;
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(18px);
+  animation: heroLogoFade 1.2s ease-out forwards;
+}
+
+.romanoti-hero-logo{
+  max-width: 420px;
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 0 14px rgba(56, 189, 248, 0.16));
+  animation:
+    heroLogoFloat 5s ease-in-out infinite 1.2s,
+    heroLogoGlow 4s ease-in-out infinite 1.2s;
+}
+
+@keyframes heroLogoFade{
+  to{
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes heroLogoFloat{
+  0%,100%{
+    transform: translateY(0);
+  }
+  50%{
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes heroLogoGlow{
+  0%,100%{
+    filter: drop-shadow(0 0 14px rgba(56, 189, 248, 0.16));
+  }
+  50%{
+    filter: drop-shadow(0 0 24px rgba(56, 189, 248, 0.28));
+  }
+}
   </style>
 </head>
 
