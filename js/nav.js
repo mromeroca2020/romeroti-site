@@ -278,14 +278,14 @@
              CHANGE #84
              Se usa /images/logo.png y fallback a romanoti-icon.png
              ============================================================ -->
-        <a href="${CURRENT.home}" class="flex items-center text-gray-900 shrink-0">
-          <img
-            src="/images/romanoti-logo-transparent.png"
-            alt="${I18N.brand}"
-            class="h-20 w-auto object-cover block"
-            onerror="this.onerror=null;this.src='/images/romanoti-icon.png';"
-          >
-        </a>
+      <a href="${CURRENT.home}" class="flex items-center shrink-0">
+        <img
+          src="/images/romanoti-logo-master.png"
+          alt="${I18N.brand}"
+          class="h-14 md:h-16 w-auto object-contain block"
+          onerror="this.onerror=null;this.src='/images/romanoti-icon.png';"
+        >
+      </a>
 
         <nav class="hidden md:flex items-center space-x-8">
           <a href="${CURRENT.home}" class="text-gray-700 hover:text-blue-600">${I18N.home}</a>
