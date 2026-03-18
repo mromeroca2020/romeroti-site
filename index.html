@@ -177,8 +177,8 @@
   margin-bottom: 24px;
   display: inline-block;
   opacity: 0;
-  transform: translateY(18px);
-  animation: heroLogoFade 1.2s ease-out forwards;
+  transform: translateY(24px) scale(0.96);
+  animation: heroLogoIntro 1.4s cubic-bezier(.22,1,.36,1) forwards;
 }
 
 .romanoti-hero-logo{
@@ -186,34 +186,55 @@
   width: 100%;
   height: auto;
   display: block;
-  filter: drop-shadow(0 0 14px rgba(56, 189, 248, 0.16));
+  transform-origin: center;
+  filter:
+    drop-shadow(0 0 12px rgba(56, 189, 248, 0.16))
+    drop-shadow(0 0 26px rgba(37, 99, 235, 0.10));
   animation:
-    heroLogoFloat 5s ease-in-out infinite 1.2s,
-    heroLogoGlow 4s ease-in-out infinite 1.2s;
+    heroLogoFloatPro 6s ease-in-out infinite 1.4s,
+    heroLogoGlowPro 4.5s ease-in-out infinite 1.4s;
 }
 
-@keyframes heroLogoFade{
-  to{
+@keyframes heroLogoIntro{
+  0%{
+    opacity: 0;
+    transform: translateY(24px) scale(0.96);
+  }
+  60%{
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(-4px) scale(1.01);
+  }
+  100%{
+    opacity: 1;
+    transform: translateY(0) scale(1);
   }
 }
 
-@keyframes heroLogoFloat{
+@keyframes heroLogoFloatPro{
   0%,100%{
     transform: translateY(0);
   }
+  25%{
+    transform: translateY(-4px);
+  }
   50%{
-    transform: translateY(-5px);
+    transform: translateY(-8px);
+  }
+  75%{
+    transform: translateY(-3px);
   }
 }
 
-@keyframes heroLogoGlow{
+@keyframes heroLogoGlowPro{
   0%,100%{
-    filter: drop-shadow(0 0 14px rgba(56, 189, 248, 0.16));
+    filter:
+      drop-shadow(0 0 12px rgba(56, 189, 248, 0.16))
+      drop-shadow(0 0 26px rgba(37, 99, 235, 0.10));
   }
   50%{
-    filter: drop-shadow(0 0 24px rgba(56, 189, 248, 0.28));
+    filter:
+      drop-shadow(0 0 22px rgba(56, 189, 248, 0.28))
+      drop-shadow(0 0 40px rgba(37, 99, 235, 0.18));
   }
 }
   </style>
