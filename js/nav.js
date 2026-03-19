@@ -177,7 +177,7 @@
       home: '/',
       platform: '/platform/index.html',
       enterprise: '/enterprise/government-business.html',
-      whyRomanoti: '/why-romanoti.html',
+      whyRomanoti: '/solutions/why-romanoti.html',
       contact: '/contact.html',
       booking: '/booking.html',
 
@@ -199,7 +199,7 @@
       home: '/',
       platform: '/platform/index.html',
       enterprise: '/enterprise/government-business.html',
-      whyRomanoti: '/why-romanoti.html',
+      whyRomanoti: '/solutions/why-romanoti.html',
       contact: '/contact.html',
       booking: '/booking.html',
 
@@ -221,7 +221,7 @@
       home: '/',
       platform: '/platform/index.html',
       enterprise: '/enterprise/government-business.html',
-      whyRomanoti: '/why-romanoti.html',
+      whyRomanoti: '/solutions/why-romanoti.html',
       contact: '/contact.html',
       booking: '/booking.html',
 
