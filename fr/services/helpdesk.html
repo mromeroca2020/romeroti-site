@@ -19,15 +19,17 @@ content="Romanoti fournit des services Help Desk et ITSM structurés pour assure
 <script src="https://cdn.tailwindcss.com"></script>
 
 <!-- Romanoti dynamic navigation -->
-<script defer src="/js/nav.js"></script>
 
+  <link rel="stylesheet" href="/css/styles.css">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
 </head>
 
 
 <body class="bg-white text-gray-900 antialiased">
+  <div id="app-header"></div>
 
 <!-- NAVIGATION -->
-<div id="app-header"></div>
 
 
 <main>
@@ -180,8 +182,11 @@ les tendances et les performances du support.
 
 
 <!-- FOOTER -->
-<div id="app-footer"></div>
 
 
+
+  <div id="app-footer"></div>
+  <script src="/js/nav.js"></script>
+  <script src="/js/footer.js"></script>
 </body>
 </html>

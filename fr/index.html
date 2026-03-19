@@ -25,24 +25,15 @@
     .card{border-radius:14px;box-shadow:0 12px 32px -16px rgba(2,6,23,.2)}
     .badge{display:inline-block;border:1px solid #cbd5e1;border-radius:999px;padding:4px 10px;font-size:12px;background:#f8fafc}
   </style>
+  <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body class="bg-gray-50">
+  <div id="app-header"></div>
 
   <!-- Punto de montaje del header global -->
-  <div id="app-header"></div>
   <!-- ===== En-tête Fallback (Français) ===== -->
   <!-- ===== Header fallback (se oculta cuando nav.js monta el real) ===== -->
-  <header id="fallback-header" class="bg-white shadow-sm sticky top-0 z-40">
-    <div class="container mx-auto px-6 py-3">
-      <div class="flex items-center justify-between">
-        <a href="/fr/" class="flex items-center font-bold text-xl text-gray-900">
-          <span class="bg-blue-600 text-white rounded-full w-10 h-10 grid place-items-center mr-3">R</span>
-          RomanoTI Solutions (chargement…)
-        </a>
-        <a href="/fr/solutions/" class="bg-blue-600 text-white px-4 py-2 rounded-lg">Solutions</a>
-      </div>
-    </div>
-  </header>
+  
 
   <!-- ===== Hero ===== -->
   <section class="hero-bg text-white">
@@ -174,7 +165,6 @@
   </section>
 
   <!-- Footer global -->
-  <div id="app-footer"></div>
 
   <!-- Quita el fallback sólo si el header real ya está montado -->
   <script>
@@ -238,6 +228,10 @@
   </script>
 
 
+
+  <div id="app-footer"></div>
+  <script src="/js/nav.js"></script>
+  <script src="/js/footer.js"></script>
 </body>
 </html>
 

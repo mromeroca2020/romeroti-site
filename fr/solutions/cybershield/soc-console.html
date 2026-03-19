@@ -22,10 +22,11 @@
     .hero-bg{background:linear-gradient(135deg,#1e3a8a 0%,#2563eb 100%)}
     .card{border:1px solid #e5e7eb;border-radius:16px;box-shadow:0 10px 30px -12px rgba(0,0,0,.12)}
   </style>
+  <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body class="bg-gray-50 text-gray-900">
-  <!-- Point de montage du header -->
   <div id="app-header"></div>
+  <!-- Point de montage du header -->
 
   <!-- Hero -->
   <section class="hero-bg text-white">
@@ -56,11 +57,14 @@
   </section>
 
   <!-- Footer -->
-  <div id="app-footer"></div>
 
   <!-- Nav/Footer (cache-buster) -->
   <script defer src="/js/nav.js?v=6"></script>
   <script defer src="/js/footer.js?v=6"></script>
   <script defer src="/js/fix-nav.js?v=6"></script>
+
+  <div id="app-footer"></div>
+  <script src="/js/nav.js"></script>
+  <script src="/js/footer.js"></script>
 </body>
 </html>

@@ -42,11 +42,12 @@
     .badge-warn{background:#fffbeb;color:#92400e;border:1px solid #fcd34d}
     .badge-err{background:#fef2f2;color:#991b1b;border:1px solid #fecaca}
   </style>
+  <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body class="bg-gray-50">
+  <div id="app-header"></div>
 
   <!-- Mountpoint del header centralizado -->
-  <div id="app-header"></div>
 
  
 
@@ -277,7 +278,6 @@
   </section>
 
   <!-- Footer centralizado -->
-  <div id="app-footer"></div>
 
   <!-- ====== JS SOC (Quick Tools + Live Toolbox) ====== -->
   <script>
@@ -407,7 +407,11 @@
   </script>
 
   <!-- Carga del header/footer centralizados -->
-<!-- siempre justo antes de </body> y solo una vez por página -->
+<!-- siempre justo antes de 
+  <div id="app-footer"></div>
+  <script src="/js/nav.js"></script>
+  <script src="/js/footer.js"></script>
+</body> y solo una vez por página -->
 <!-- Nav/Footer (con versión para romper caché) -->
 <script defer src="/js/nav.js?v=6"></script>
 <script defer src="/js/footer.js?v=6"></script>

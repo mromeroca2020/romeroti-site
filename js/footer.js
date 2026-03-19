@@ -110,7 +110,7 @@
       platform: '/platform/index.html',
       solutions: '/solutions/index.html',
       enterprise: '/enterprise/government-business.html',
-      whyRomanoti: '/why-romanoti.html',
+      whyRomanoti: '/solutions/why-romanoti.html',
       contact: '/contact.html',
       booking: '/booking.html'
     },
@@ -120,7 +120,7 @@
       platform: '/platform/index.html',
       solutions: '/solutions/index.html',
       enterprise: '/enterprise/government-business.html',
-      whyRomanoti: '/why-romanoti.html',
+      whyRomanoti: '/solutions/why-romanoti.html',
       contact: '/contact.html',
       booking: '/booking.html'
     },
@@ -130,7 +130,7 @@
       platform: '/platform/index.html',
       solutions: '/solutions/index.html',
       enterprise: '/enterprise/government-business.html',
-      whyRomanoti: '/why-romanoti.html',
+      whyRomanoti: '/solutions/why-romanoti.html',
       contact: '/contact.html',
       booking: '/booking.html'
     }

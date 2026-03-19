@@ -47,45 +47,19 @@
       background:rgba(15,23,42,0.8);
     }
   </style>
+  <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body class="bg-slate-950">
+  <div id="app-header"></div>
 
   <!-- Header global -->
-  <div id="app-header"></div>
 
   <!-- CONTENIDO PRINCIPAL -->
   <main class="min-h-screen pt-6 pb-16">
     <section class="container mx-auto px-4 md:px-8">
 
       <!-- Encabezado de la página -->
-      <header class="mb-8">
-        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-          <div>
-            <div class="inline-flex items-center gap-2 text-xs uppercase tracking-wide text-sky-300 mb-2">
-              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-              Live Datacenter Monitoring
-            </div>
-            <h1 class="text-3xl md:text-4xl font-bold text-slate-50">
-              Datacenter Operations &amp; Environmental Dashboard
-            </h1>
-            <p class="mt-2 text-sm md:text-base text-slate-300 max-w-2xl">
-              Unified view for temperature, humidity, power, critical racks and application health.  
-              Designed for RomanoTI internal SOC/NOC engineers.
-            </p>
-          </div>
-
-          <!-- Selector rápido de site / tenant (mock por ahora) -->
-          <div class="flex flex-col items-start md:items-end gap-2">
-            <div class="text-xs uppercase tracking-wide text-slate-400">Active Datacenter</div>
-            <select id="siteSelect" class="bg-slate-900 border border-slate-600 text-slate-100 text-sm rounded-lg px-3 py-1.5 focus:outline-none focus:ring-1 focus:ring-sky-500">
-              <!-- Se llena desde JS -->
-            </select>
-            <div class="text-xs text-slate-400">
-              Access: <span class="text-emerald-400 font-semibold">MFA enforced · Encrypted tunnel</span>
-            </div>
-          </div>
-        </div>
-      </header>
+      
 
       <!-- RESUMEN SUPERIOR -->
       <section class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
@@ -218,7 +192,6 @@
   </main>
 
   <!-- Footer global -->
-  <div id="app-footer"></div>
 
   <!-- Nav/Footer de tu sitio -->
   <script defer src="/js/nav.js?v=8"></script>
@@ -511,5 +484,9 @@
     });
   </script>
 
+
+  <div id="app-footer"></div>
+  <script src="/js/nav.js"></script>
+  <script src="/js/footer.js"></script>
 </body>
 </html>

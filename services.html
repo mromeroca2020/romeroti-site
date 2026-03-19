@@ -73,33 +73,20 @@
       color: #475569;
     }
   </style>
+  <link rel="stylesheet" href="/css/styles.css">
 </head>
 
 <body class="bg-gray-50">
+  <div id="app-header"></div>
 
   <!-- =======================================================
        HEADER MOUNTPOINT
        ======================================================= -->
-  <div id="app-header"></div>
 
   <!-- =======================================================
        FALLBACK HEADER
        ======================================================= -->
-  <header id="fallback-header" class="bg-white shadow-sm sticky top-0 z-40">
-    <div class="container mx-auto px-6 py-3">
-      <div class="flex items-center justify-between gap-4">
-        <a href="/" class="flex items-center font-bold text-xl text-gray-900">
-          <span class="bg-blue-600 text-white rounded-full w-10 h-10 grid place-items-center mr-3">R</span>
-          RomanoTI Solutions (Loading...)
-        </a>
-
-        <a href="/booking.html?service=Free%20Consultation"
-           class="btn-primary text-white px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap">
-          Book Now
-        </a>
-      </div>
-    </div>
-  </header>
+  
 
   <main>
     <!-- =====================================================
@@ -329,7 +316,6 @@
   <!-- =======================================================
        FOOTER MOUNTPOINT
        ======================================================= -->
-  <div id="app-footer"></div>
 
   <!-- =======================================================
        FALLBACK HEADER REMOVER
@@ -364,5 +350,9 @@
   <script defer src="/js/nav.js?v=7"></script>
   <script defer src="/js/footer.js?v=7"></script>
   <script defer src="/js/fix-nav.js?v=7"></script>
+
+  <div id="app-footer"></div>
+  <script src="/js/nav.js"></script>
+  <script src="/js/footer.js"></script>
 </body>
 </html>
