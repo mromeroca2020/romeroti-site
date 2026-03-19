@@ -5,28 +5,20 @@
 
    OBJETIVO
    ------------------------------------------------------------
-   Footer global con estética más premium y enterprise:
-   - fondo más oscuro
+   Footer global con estética enterprise:
+   - fondo oscuro profundo
    - textura tecnológica sutil
+   - mejor contraste
    - navegación limpia
    - CTA visible
    - soporte multilenguaje básico (EN / FR / ES)
 
-   PRINCIPIOS DE ESTA VERSIÓN
+   CAMBIOS DE ESTA VERSIÓN
    ------------------------------------------------------------
-   1) Mejorar contraste y legibilidad
-   2) Reducir texto innecesario
-   3) Mantener enlaces principales del sitio
-   4) Agregar una identidad visual más tecnológica
-   5) Evitar imágenes stock o fondos recargados
-   6) Mantener compatibilidad con la estructura actual
-
-   NOTA
-   ------------------------------------------------------------
-   Este archivo monta dinámicamente el footer dentro de:
-     <div id="app-footer"></div>
-
-   Si no existe ese contenedor, lo crea automáticamente.
+   - Se aumenta el contraste del texto
+   - Se corrigen palabras que se perdían sobre el fondo
+   - Se refuerza la jerarquía visual
+   - Se mantiene el fondo tech sutil sin imagen externa
 */
 
 (function () {
@@ -104,10 +96,6 @@
 
   // ============================================================
   // 3) RUTAS REALES DEL SITIO ACTUAL
-  // ------------------------------------------------------------
-  // Nota:
-  // Las rutas siguen apuntando a páginas reales existentes.
-  // La localización completa por idioma se hará después.
   // ============================================================
   const ROUTES = {
     en: {
@@ -145,103 +133,86 @@
 
   // ============================================================
   // 4) HTML DEL FOOTER
-  // ------------------------------------------------------------
-  // Diseño:
-  // - base oscura profunda
-  // - overlay con patrón tecnológico sutil hecho con CSS
-  // - tres columnas limpias
-  // - CTA visible
-  // - barra inferior simple
   // ============================================================
   const html = `
-  <footer class="relative mt-12 text-gray-300 overflow-hidden border-t border-gray-800">
+  <footer class="relative mt-12 text-gray-200 overflow-hidden border-t border-gray-800">
 
-    <!-- ======================================================
-         BACKGROUND BASE
-         ====================================================== -->
+    <!-- BACKGROUND BASE -->
     <div class="absolute inset-0 bg-gradient-to-br from-black via-gray-950 to-slate-950"></div>
 
-    <!-- ======================================================
-         TECH GRID OVERLAY
-         Patrón sutil generado con CSS, sin imagen externa
-         ====================================================== -->
+    <!-- TECH GRID OVERLAY -->
     <div
       class="absolute inset-0 opacity-10"
       style="
         background-image:
-          radial-gradient(circle at 1px 1px, rgba(255,255,255,0.16) 1px, transparent 0),
-          linear-gradient(90deg, rgba(59,130,246,0.08) 1px, transparent 1px),
-          linear-gradient(rgba(59,130,246,0.06) 1px, transparent 1px);
+          radial-gradient(circle at 1px 1px, rgba(255,255,255,0.14) 1px, transparent 0),
+          linear-gradient(90deg, rgba(59,130,246,0.05) 1px, transparent 1px),
+          linear-gradient(rgba(59,130,246,0.04) 1px, transparent 1px);
         background-size: 42px 42px, 120px 120px, 120px 120px;
         background-position: center;
       ">
     </div>
 
-    <!-- ======================================================
-         SOFT BLUE GLOW
-         ====================================================== -->
-    <div class="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_top_right,rgba(37,99,235,0.20),transparent_35%),radial-gradient(circle_at_bottom_left,rgba(56,189,248,0.12),transparent_28%)]"></div>
+    <!-- SOFT LIGHT / GLOW -->
+    <div
+      class="absolute inset-0"
+      style="
+        background:
+          radial-gradient(circle at top right, rgba(37,99,235,0.10), transparent 30%),
+          radial-gradient(circle at bottom left, rgba(56,189,248,0.06), transparent 25%);
+      ">
+    </div>
 
-    <!-- ======================================================
-         CONTENT
-         ====================================================== -->
+    <!-- CONTENT -->
     <div class="relative container mx-auto px-6 py-12">
 
       <div class="grid md:grid-cols-3 gap-10">
 
-        <!-- =========================================
-             BRAND
-             ========================================= -->
+        <!-- BRAND -->
         <div>
           <h3 class="text-lg font-semibold text-white mb-2">
             ${I18N.brand}
           </h3>
-          <p class="text-sm text-gray-400">
+          <p class="text-sm text-gray-300">
             ${I18N.tagline}
           </p>
         </div>
 
-        <!-- =========================================
-             NAVIGATION
-             ========================================= -->
+        <!-- NAVIGATION -->
         <div>
-          <h4 class="text-xs uppercase tracking-wider text-gray-500 mb-3">
+          <h4 class="text-xs uppercase tracking-wider text-gray-400 font-semibold mb-3">
             ${I18N.company}
           </h4>
 
           <nav class="grid grid-cols-2 gap-2 text-sm">
-            <a href="${CURRENT.home}" class="hover:text-white transition">${I18N.home}</a>
-            <a href="${CURRENT.platform}" class="hover:text-white transition">${I18N.platform}</a>
-            <a href="${CURRENT.solutions}" class="hover:text-white transition">${I18N.solutions}</a>
-            <a href="${CURRENT.enterprise}" class="hover:text-white transition">${I18N.enterprise}</a>
-            <a href="${CURRENT.whyRomanoti}" class="hover:text-white transition">${I18N.whyRomanoti}</a>
-            <a href="${CURRENT.contact}" class="hover:text-white transition">${I18N.contact}</a>
+            <a href="${CURRENT.home}" class="text-gray-200 hover:text-white transition">${I18N.home}</a>
+            <a href="${CURRENT.platform}" class="text-gray-200 hover:text-white transition">${I18N.platform}</a>
+            <a href="${CURRENT.solutions}" class="text-gray-200 hover:text-white transition">${I18N.solutions}</a>
+            <a href="${CURRENT.enterprise}" class="text-gray-200 hover:text-white transition">${I18N.enterprise}</a>
+            <a href="${CURRENT.whyRomanoti}" class="text-gray-200 hover:text-white transition">${I18N.whyRomanoti}</a>
+            <a href="${CURRENT.contact}" class="text-gray-200 hover:text-white transition">${I18N.contact}</a>
           </nav>
         </div>
 
-        <!-- =========================================
-             CTA / POSITIONING
-             ========================================= -->
+        <!-- CTA / POSITIONING -->
         <div>
-          <h4 class="text-xs uppercase tracking-wider text-gray-500 mb-3">
+          <h4 class="text-xs uppercase tracking-wider text-gray-400 font-semibold mb-3">
             ${I18N.services}
           </h4>
 
-          <p class="text-sm text-gray-400 mb-4 leading-6">
+          <p class="text-sm text-gray-300 mb-4 leading-6">
             ${I18N.positioning}
           </p>
 
           <a href="${CURRENT.booking}"
-             class="inline-block px-4 py-2 text-sm bg-blue-600 text-white rounded-md hover:bg-blue-500 transition shadow-lg shadow-blue-900/20">
+             class="inline-block px-4 py-2 text-sm bg-blue-600 text-white rounded-md hover:bg-blue-500 transition shadow-lg">
             ${I18N.cta}
           </a>
         </div>
       </div>
 
-      <!-- =========================================
-           BOTTOM BAR
-           ========================================= -->
-      <div class="border-t border-gray-800 mt-10 pt-6 flex flex-col md:flex-row md:justify-between text-xs text-gray-500 gap-2">
+      <!-- BOTTOM BAR -->
+      <div class="border-t border-gray-800 mt-10 pt-6 flex flex-col md:flex-row md:justify-between text-xs text-gray-400 gap-2">
         <div>&copy; <span id="footerYear"></span> ${I18N.brand}. ${I18N.rights}</div>
         <div>${I18N.bottomNote}</div>
       </div>
