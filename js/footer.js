@@ -5,25 +5,20 @@
 
    OBJETIVO
    ------------------------------------------------------------
-   Footer global premium y coherente con el branding enterprise
-   de Romanoti Solutions.
+   Footer global premium, oscuro, legible y consistente con el
+   branding enterprise de Romanoti Solutions.
 
    ESTA VERSIÓN INCLUYE
    ------------------------------------------------------------
-   1) Fondo más oscuro y elegante
-   2) Patrón tecnológico sutil hecho con CSS
-   3) Glow reducido para no afectar la legibilidad
-   4) Mejor contraste en textos, navegación y barra inferior
-   5) Navegación más limpia
-   6) CTA visible
-   7) Soporte multilenguaje básico (EN / FR / ES)
-
-   PROBLEMAS CORREGIDOS
-   ------------------------------------------------------------
-   - El footer anterior se veía deslavado en algunas zonas
-   - Algunas palabras se perdían por exceso de glow / brillo
-   - La barra inferior tenía contraste insuficiente
-   - La navegación se sentía menos clara de lo deseado
+   1) Fondo oscuro profundo
+   2) Patrón tecnológico sutil con CSS
+   3) Glow reducido
+   4) Mejor contraste general
+   5) Barra inferior con fondo más oscuro para evitar que
+      el texto se pierda
+   6) Navegación limpia
+   7) CTA visible
+   8) Soporte multilenguaje básico (EN / FR / ES)
 
    NOTA
    ------------------------------------------------------------
@@ -108,10 +103,6 @@
 
   // ============================================================
   // 3) RUTAS REALES DEL SITIO ACTUAL
-  // ------------------------------------------------------------
-  // Nota:
-  // La localización completa por idioma se hará después.
-  // Por ahora se usan rutas reales existentes en producción.
   // ============================================================
   const ROUTES = {
     en: {
@@ -149,28 +140,14 @@
 
   // ============================================================
   // 4) HTML DEL FOOTER
-  // ------------------------------------------------------------
-  // Diseño:
-  // - Base oscura profunda
-  // - Patrón tech sutil con CSS
-  // - Glow controlado
-  // - Tres columnas limpias
-  // - CTA visible
-  // - Barra inferior con mejor contraste
   // ============================================================
   const html = `
   <footer class="relative mt-12 text-gray-200 overflow-hidden border-t border-gray-800">
 
-    <!-- ======================================================
-         BACKGROUND BASE
-         Fondo oscuro profundo
-         ====================================================== -->
+    <!-- BACKGROUND BASE -->
     <div class="absolute inset-0 bg-gradient-to-br from-black via-gray-950 to-slate-950"></div>
 
-    <!-- ======================================================
-         TECH GRID OVERLAY
-         Patrón tecnológico sutil sin imagen externa
-         ====================================================== -->
+    <!-- TECH GRID OVERLAY -->
     <div
       class="absolute inset-0 opacity-10"
       style="
@@ -183,29 +160,22 @@
       ">
     </div>
 
-    <!-- ======================================================
-         SOFT LIGHT / GLOW
-         Reducido para no borrar contraste del texto
-         ====================================================== -->
+    <!-- SOFT GLOW -->
     <div
       class="absolute inset-0"
       style="
         background:
-          radial-gradient(circle at top right, rgba(37,99,235,0.05), transparent 40%),
-          radial-gradient(circle at bottom left, rgba(56,189,248,0.03), transparent 35%);
+          radial-gradient(circle at top right, rgba(37,99,235,0.04), transparent 42%),
+          radial-gradient(circle at bottom left, rgba(56,189,248,0.02), transparent 36%);
       ">
     </div>
 
-    <!-- ======================================================
-         CONTENT
-         ====================================================== -->
+    <!-- CONTENT -->
     <div class="relative container mx-auto px-6 py-12">
 
       <div class="grid md:grid-cols-3 gap-10">
 
-        <!-- =========================================
-             BRAND
-             ========================================= -->
+        <!-- BRAND -->
         <div>
           <h3 class="text-lg font-semibold text-white mb-2">
             ${I18N.brand}
@@ -215,9 +185,7 @@
           </p>
         </div>
 
-        <!-- =========================================
-             NAVIGATION
-             ========================================= -->
+        <!-- NAVIGATION -->
         <div>
           <h4 class="text-xs uppercase tracking-wider text-gray-400 font-semibold mb-3">
             ${I18N.company}
@@ -233,9 +201,7 @@
           </nav>
         </div>
 
-        <!-- =========================================
-             CTA / POSITIONING
-             ========================================= -->
+        <!-- CTA / POSITIONING -->
         <div>
           <h4 class="text-xs uppercase tracking-wider text-gray-400 font-semibold mb-3">
             ${I18N.services}
@@ -252,13 +218,12 @@
         </div>
       </div>
 
-      <!-- =========================================
-           BOTTOM BAR
-           Se aumenta el contraste del texto inferior
-           ========================================= -->
-      <div class="border-t border-gray-700 mt-10 pt-6 flex flex-col md:flex-row md:justify-between text-xs gap-2">
-        <div class="text-gray-300">&copy; <span id="footerYear"></span> ${I18N.brand}. ${I18N.rights}</div>
-        <div class="text-gray-400">${I18N.bottomNote}</div>
+      <!-- BOTTOM BAR WRAP -->
+      <div class="mt-10">
+        <div class="bg-black/35 border border-gray-800 rounded-md px-4 py-4 flex flex-col md:flex-row md:justify-between text-xs gap-2">
+          <div class="text-gray-200">&copy; <span id="footerYear"></span> ${I18N.brand}. ${I18N.rights}</div>
+          <div class="text-gray-300 md:text-right">${I18N.bottomNote}</div>
+        </div>
       </div>
 
     </div>
