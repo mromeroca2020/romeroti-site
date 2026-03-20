@@ -5,29 +5,40 @@
   <!-- =========================================================
     Archivo: /solutions/cybershield/easm-console.html
     Propósito: Consola EASM (External Attack Surface Management)
-    Cambios clave:
-      - Navbar unificado (IDs: solutionsBtn / solutionsMenu)
-      - Favicons RomanoTI corregidos (con cache-buster)
-      - Enlaces “Solutions” consistentes
-      - Fallback de dropdown robusto (+ /js/fix-nav.js)
+
+    Cambios aplicados en esta versión:
+      - Header global manejado por /js/nav.js
+      - Se eliminó la antigua barra manual de idiomas
+      - Favicons corregidos para usar la estructura real actual:
+          /images/romanoti-icon.png
+          /images/favicon.ico
+      - Branding corregido de "RomanoTI" a "Romanoti Solutions"
+      - Se conserva compatibilidad con Netlify + HTML estático
+      - Se conserva fallback del menú Solutions
   ========================================================== -->
+
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>CyberShield – EASM Console | RomanoTI</title>
+  <title>CyberShield – EASM Console | Romanoti Solutions</title>
 
-  <!-- Favicons (RomanoTI) -->
-  <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png?v=4">
-  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png?v=4">
-  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16.png?v=4">
-  <link rel="shortcut icon" href="/favicon.ico?v=4" type="image/x-icon">
-  <link rel="mask-icon" href="/img/safari-pinned-tab.svg?v=4" color="#2563eb">
+  <!-- =========================================================
+    FAVICONS OFICIALES ROMANOTI
+    ---------------------------------------------------------
+    Se eliminan rutas antiguas /img/... porque la estructura
+    actual del proyecto usa /images/...
+  ========================================================== -->
+  <link rel="icon" type="image/png" href="/images/romanoti-icon.png?v=2">
+  <link rel="shortcut icon" href="/images/favicon.ico?v=2" type="image/x-icon">
+  <link rel="apple-touch-icon" href="/images/romanoti-icon.png?v=2">
   <meta name="theme-color" content="#2563eb">
 
   <!-- Tailwind + Fuente -->
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
 
-  <!-- Estilos locales -->
+  <!-- =========================================================
+    ESTILOS LOCALES DE LA CONSOLA
+  ========================================================== -->
   <style>
     body{font-family:'Montserrat',sans-serif;background:#f8f9fa;color:#0f172a}
     .hero-bg{background:linear-gradient(135deg,#1e3a8a 0%,#2563eb 100%)}
@@ -40,16 +51,21 @@
     .ok{background:#ecfdf5;color:#065f46;border:1px solid #a7f3d0}
     .warn{background:#fffbeb;color:#92400e;border:1px solid #fcd34d}
     .err{background:#fef2f2;color:#991b1b;border:1px solid #fecaca}
+
     /* compatibilidad dropdown legacy + tailwind */
     .dropdown{display:none}
     .dropdown.show{display:block}
   </style>
 </head>
+
 <body class="bg-gray-50">
 
- <div id="app-header"></div>
+  <!-- Header global inyectado por nav.js -->
+  <div id="app-header"></div>
 
-  <!-- ===== HERO ===== -->
+  <!-- =========================================================
+    HERO
+  ========================================================== -->
   <section class="hero-bg text-white">
     <div class="container mx-auto px-6 py-14">
       <span class="badge border-white text-white">External Attack Surface Management</span>
@@ -60,9 +76,12 @@
     </div>
   </section>
 
-  <!-- ===== SETTINGS / RUN ===== -->
+  <!-- =========================================================
+    SETTINGS / RUN
+  ========================================================== -->
   <section class="py-10">
     <div class="container mx-auto px-6 max-w-6xl grid md:grid-cols-3 gap-6">
+
       <!-- Settings -->
       <div class="card p-6 bg-white">
         <h3 class="text-xl font-semibold mb-2">Settings</h3>
@@ -87,6 +106,7 @@
       <!-- Runner -->
       <div class="card p-6 bg-white md:col-span-2">
         <h3 class="text-xl font-semibold mb-2">Run EASM Scan</h3>
+
         <div class="grid md:grid-cols-2 gap-4">
           <div>
             <label class="block text-sm font-medium text-gray-700">Domain</label>
@@ -121,7 +141,7 @@ api"></textarea>
           </label>
         </div>
 
-        <div class="mt-5 flex gap-3">
+        <div class="mt-5 flex gap-3 flex-wrap">
           <button id="btnRun" class="btn-primary text-white px-5 py-2 rounded-lg font-medium">Run Scan</button>
           <button id="btnDlJson" class="bg-white border px-5 py-2 rounded-lg font-medium hover:bg-gray-50">Download JSON</button>
           <button id="btnCopyMd" class="bg-white border px-5 py-2 rounded-lg font-medium hover:bg-gray-50">Copy Markdown</button>
@@ -137,15 +157,22 @@ api"></textarea>
     </div>
   </section>
 
-  <!-- ===== FOOTER ===== -->
+  <!-- =========================================================
+    FOOTER VISUAL LOCAL
+    Nota:
+    Si más adelante decides dejar solo el footer global,
+    este bloque puede eliminarse.
+  ========================================================== -->
   <footer class="bg-gray-900 text-white py-8">
     <div class="container mx-auto px-6 text-center">
-      <p>© 2025 RomanoTI Solutions. All rights reserved.</p>
+      <p>© 2025 Romanoti Solutions. All rights reserved.</p>
       <p class="mt-2">Serving Canada</p>
     </div>
   </footer>
 
-  <!-- ===== JS (lógica de la herramienta) ===== -->
+  <!-- =========================================================
+    JS - LÓGICA DE LA HERRAMIENTA
+  ========================================================== -->
   <script>
   (function(){
     const API_BASE = 'https://romanoti-tools-api.onrender.com';
@@ -170,6 +197,7 @@ api"></textarea>
       span.textContent = text;
       return span;
     }
+
     function pretty(preId, data){
       const el = $(preId);
       try { el.textContent = JSON.stringify(data, null, 2); }
@@ -181,14 +209,20 @@ api"></textarea>
       if(!key){ alert('Ingresa tu Org API Key'); throw new Error('missing key'); }
       const res = await fetch(`${API_BASE}${path}`, {
         method: 'POST',
-        headers: { 'x-api-key': key, 'content-type':'application/json', 'accept':'application/json' },
+        headers: {
+          'x-api-key': key,
+          'content-type':'application/json',
+          'accept':'application/json'
+        },
         body: JSON.stringify(body)
       });
       const text = await res.text();
       try { return JSON.parse(text); } catch { return text; }
     }
 
-    // ===== RUN SCAN =====
+    // =========================================================
+    // RUN SCAN
+    // =========================================================
     $('btnRun').addEventListener('click', async () => {
       const domain = $('inDomain').value.trim();
       if(!domain){ alert('Ingresa un dominio'); return; }
@@ -203,8 +237,8 @@ api"></textarea>
 
       try{
         const payload = { domain, timeout_ms, verify_tls };
-        if(subs.length)  payload.subdomains   = subs;
-        if(ports.length) payload.check_ports  = ports;
+        if(subs.length)  payload.subdomains  = subs;
+        if(ports.length) payload.check_ports = ports;
 
         const data = await postJson('/easm/scan', payload);
         pretty('outRaw', data);
@@ -212,30 +246,29 @@ api"></textarea>
         // Build quick summary
         const box = $('summaryPills');
         if(data && typeof data === 'object'){
-          // Risk score
           if(typeof data.risk_score === 'number'){
             const rs = data.risk_score;
             const type = rs >= 85 ? 'ok' : (rs >= 70 ? 'warn' : 'err');
             box.appendChild(pill(`Risk Score: ${rs}`, type));
           }
-          // TLS
+
           const tls = data.tls || {};
           if(typeof tls.days_left === 'number'){
             const t = tls.days_left >= 30 ? 'ok' : 'warn';
             box.appendChild(pill(`TLS: ${tls.days_left} days left`, t));
           }
           if(tls.verified_chain === false) box.appendChild(pill('TLS chain: NOT VERIFIED', 'err'));
-          // Email posture
+
           const ep = (data.email_posture && data.email_posture.summary) || {};
           if(ep.dmarc_policy){
             const pol = String(ep.dmarc_policy).toLowerCase();
             const t = pol === 'reject' ? 'ok' : (pol === 'quarantine' ? 'warn' : 'err');
             box.appendChild(pill(`DMARC: ${pol}`, t));
           }
-          // Subdomains (contador)
+
           const subsCount = Array.isArray(data.subdomains) ? data.subdomains.length : 0;
           box.appendChild(pill(`Subdomains checked: ${subsCount}`, 'ok'));
-          // Findings
+
           const f = Array.isArray(data.findings) ? data.findings : [];
           if(f.length){
             const sevRank = {critical:3, high:2, medium:1, low:0};
@@ -251,7 +284,9 @@ api"></textarea>
       }
     });
 
-    // ===== DOWNLOAD JSON =====
+    // =========================================================
+    // DOWNLOAD JSON
+    // =========================================================
     $('btnDlJson').addEventListener('click', () => {
       const text = $('outRaw').textContent || '';
       try {
@@ -266,7 +301,9 @@ api"></textarea>
       }
     });
 
-    // ===== COPY MARKDOWN =====
+    // =========================================================
+    // COPY MARKDOWN
+    // =========================================================
     $('btnCopyMd').addEventListener('click', () => {
       const text = $('outRaw').textContent || '';
       let md = '# EASM Summary\n';
@@ -292,7 +329,9 @@ api"></textarea>
       alert('Resumen copiado en Markdown ✅');
     });
 
-    // ===== POWERSHELL GENERATOR =====
+    // =========================================================
+    // POWERSHELL GENERATOR
+    // =========================================================
     $('btnGenPS').addEventListener('click', () => {
       const key = $('orgKey').value.trim() || localStorage.getItem(KEY_K) || '';
       if(!key){ alert('Ingresa tu Org API Key'); return; }
@@ -321,7 +360,9 @@ api"></textarea>
       $('psOut').textContent = ps;
     });
 
-    // ===== DOWNLOAD .PS1 =====
+    // =========================================================
+    // DOWNLOAD .PS1
+    // =========================================================
     $('btnDlPS').addEventListener('click', () => {
       const key = $('orgKey').value.trim() || localStorage.getItem(KEY_K) || '';
       if(!key){ alert('Ingresa tu Org API Key'); return; }
@@ -334,7 +375,7 @@ api"></textarea>
       const subsPS  = subs.length ? '@("'+subs.join('","')+'")' : '$null';
       const portsPS = ports.length ? '@('+ports.join(',')+')' : '$null';
 
-      const script = `# RomanoTI – EASM Scan
+      const script = `# Romanoti – EASM Scan
 param(
   [Parameter(Mandatory=$true)][string]$Domain = "${domain}",
   [string[]]$Subdomains = ${subsPS},
@@ -381,21 +422,51 @@ if($res.findings){
   })();
   </script>
 
-  <!-- ===== Fallback de dropdown (robusto; no interfiere con fix-nav.js) ===== -->
+  <!-- =========================================================
+    FALLBACK DE DROPDOWN
+    Robusto; no interfiere con fix-nav.js
+  ========================================================== -->
   <script>
     (function(){
       const btn  = document.getElementById('solutionsBtn');
       const menu = document.getElementById('solutionsMenu');
       if(!btn || !menu) return;
 
-      function open(){ menu.classList.add('show'); menu.classList.remove('hidden'); menu.style.display='block'; btn.setAttribute('aria-expanded','true'); }
-      function close(){ menu.classList.remove('show'); menu.classList.add('hidden'); menu.style.display=''; btn.setAttribute('aria-expanded','false'); }
-      function isOpen(){ return menu.classList.contains('show') || !menu.classList.contains('hidden') || menu.style.display==='block'; }
-      function toggle(){ isOpen()? close() : open(); }
+      function open(){
+        menu.classList.add('show');
+        menu.classList.remove('hidden');
+        menu.style.display='block';
+        btn.setAttribute('aria-expanded','true');
+      }
 
-      btn.addEventListener('click',(e)=>{ e.preventDefault(); e.stopPropagation(); toggle(); });
-      document.addEventListener('click',(e)=>{ if(!menu.contains(e.target) && e.target!==btn) close(); });
-      document.addEventListener('keydown',(e)=>{ if(e.key==='Escape') close(); });
+      function close(){
+        menu.classList.remove('show');
+        menu.classList.add('hidden');
+        menu.style.display='';
+        btn.setAttribute('aria-expanded','false');
+      }
+
+      function isOpen(){
+        return menu.classList.contains('show') || !menu.classList.contains('hidden') || menu.style.display==='block';
+      }
+
+      function toggle(){
+        isOpen() ? close() : open();
+      }
+
+      btn.addEventListener('click',(e)=>{
+        e.preventDefault();
+        e.stopPropagation();
+        toggle();
+      });
+
+      document.addEventListener('click',(e)=>{
+        if(!menu.contains(e.target) && e.target!==btn) close();
+      });
+
+      document.addEventListener('keydown',(e)=>{
+        if(e.key==='Escape') close();
+      });
 
       // Hover como refuerzo
       btn.addEventListener('mouseenter', open);
@@ -403,10 +474,11 @@ if($res.findings){
     })();
   </script>
 
-  <!-- ===== HOTFIX universal del menú Solutions ===== -->
-  <!-- siempre justo antes de </body> y solo una vez por página -->
-<script defer src="/js/nav.js?v=2025-01"></script>
-<script defer src="/js/footer.js?v=2025-01"></script>
-<script defer src="/js/fix-nav.js?v=2025-01"></script>
+  <!-- =========================================================
+    JS GLOBALES DEL SITIO
+  ========================================================== -->
+  <script defer src="/js/nav.js?v=2025-01"></script>
+  <script defer src="/js/footer.js?v=2025-01"></script>
+  <script defer src="/js/fix-nav.js?v=2025-01"></script>
 </body>
 </html>
