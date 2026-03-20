@@ -26,32 +26,21 @@
   // CHANGE #82
   // ------------------------------------------------------------
   // Se actualizan las rutas del menú para alinearlas con la
-  // estructura real actual del repositorio:
-  //
-  // services/helpdesk.html
-  // services/networks.html
-  // services/cybersecurity.html
-  // solutions/index.html
-  // enterprise/government-business.html
-  // why-romanoti.html
-  //
-  // Se conserva la estructura completa del nav existente
-  // para no romper dropdowns, idioma, wiring ni responsive.
+  // estructura real actual del repositorio.
   //
   // CHANGE #84
   // ------------------------------------------------------------
-  // Se corrige la imagen del logo del header:
-  // ANTES: /images/romanoti-logo-transparent.png
-  // AHORA: /images/logo.png
+  // Se corrige la imagen del logo del header.
   //
-  // Motivo:
-  // - El PNG transparente sí existe, pero visualmente se está
-  //   mostrando demasiado pequeño en producción por su recorte.
-  // - /images/logo.png es más adecuado para el header.
+  // CHANGE #85
+  // ------------------------------------------------------------
+  // Se simplifica el selector de idioma:
+  // ANTES: 🌐 Language / Idioma / Langue
+  // AHORA: EN / FR / ES
   //
   // Además:
-  // - Se agrega fallback automático a /images/romanoti-icon.png
-  // - Se ajusta la altura visual del logo a h-10
+  // - El dropdown de idioma usa etiquetas cortas.
+  // - Se corrigen rutas de Why Romanoti para fr y es.
   // ============================================================
 
   if (window.__ROMANOTI_NAV_BOOTED__) {
@@ -90,7 +79,7 @@
       whyRomanoti: 'Por qué Romanoti',
       contact: 'Contacto',
       book: 'Agendar',
-      lang: 'Idioma',
+      lang: '',
 
       helpDesk: 'Help Desk / ITSM',
       networksInfra: 'Redes e infraestructura',
@@ -101,9 +90,9 @@
       platformOverview: 'Resumen de plataforma',
       governmentBusiness: 'Government & Enterprise',
 
-      en: 'English',
-      fr: 'Français',
-      es: 'Español',
+      en: 'EN',
+      fr: 'FR',
+      es: 'ES',
 
       mobileCta: 'Soluciones'
     },
@@ -117,7 +106,7 @@
       whyRomanoti: 'Why Romanoti',
       contact: 'Contact',
       book: 'Book Now',
-      lang: 'Language',
+      lang: '',
 
       helpDesk: 'Help Desk / ITSM',
       networksInfra: 'Networks & Infrastructure',
@@ -128,9 +117,9 @@
       platformOverview: 'Platform Overview',
       governmentBusiness: 'Government & Enterprise',
 
-      en: 'English',
-      fr: 'Français',
-      es: 'Español',
+      en: 'EN',
+      fr: 'FR',
+      es: 'ES',
 
       mobileCta: 'Solutions'
     },
@@ -144,7 +133,7 @@
       whyRomanoti: 'Pourquoi Romanoti',
       contact: 'Contact',
       book: 'Prendre RDV',
-      lang: 'Langue',
+      lang: '',
 
       helpDesk: 'Help Desk / ITSM',
       networksInfra: 'Réseaux et infrastructure',
@@ -155,9 +144,9 @@
       platformOverview: 'Aperçu de la plateforme',
       governmentBusiness: 'Government & Enterprise',
 
-      en: 'English',
-      fr: 'Français',
-      es: 'Español',
+      en: 'EN',
+      fr: 'FR',
+      es: 'ES',
 
       mobileCta: 'Solutions'
     }
@@ -167,10 +156,6 @@
 
   // ============================================================
   // 3) RUTAS REALES CONFIRMADAS
-  // ------------------------------------------------------------
-  // Nota:
-  // Hoy el sitio ya tiene varias páginas en raíz sin versión /en /fr /es.
-  // Para no romper navegación, se apuntan a las rutas reales existentes.
   // ============================================================
   const ROUTES = {
     en: {
@@ -199,7 +184,7 @@
       home: '/',
       platform: '/platform/index.html',
       enterprise: '/enterprise/government-business.html',
-      whyRomanoti: '/why-romanoti.html',
+      whyRomanoti: '/solutions/why-romanoti.html',
       contact: '/contact.html',
       booking: '/booking.html',
 
@@ -221,7 +206,7 @@
       home: '/',
       platform: '/platform/index.html',
       enterprise: '/enterprise/government-business.html',
-      whyRomanoti: '/why-romanoti.html',
+      whyRomanoti: '/solutions/why-romanoti.html',
       contact: '/contact.html',
       booking: '/booking.html',
 
@@ -275,17 +260,15 @@
       <div class="flex items-center justify-between">
         <!-- ============================================================
              LOGO OFICIAL
-             CHANGE #84
-             Se usa /images/logo.png y fallback a romanoti-icon.png
              ============================================================ -->
-      <a href="${CURRENT.home}" class="flex items-center shrink-0">
-        <img
-          src="/images/romanoti-logo-small.svg"
-          alt="${I18N.brand}"
-          class="h-12 md:h-14 w-auto object-contain block"
-          onerror="this.onerror=null;this.src='/images/romanoti-icon.png';"
-        >
-      </a>
+        <a href="${CURRENT.home}" class="flex items-center shrink-0">
+          <img
+            src="/images/romanoti-logo-small.svg"
+            alt="${I18N.brand}"
+            class="h-12 md:h-14 w-auto object-contain block"
+            onerror="this.onerror=null;this.src='/images/romanoti-icon.png';"
+          >
+        </a>
 
         <nav class="hidden md:flex items-center space-x-8">
           <a href="${CURRENT.home}" class="text-gray-700 hover:text-blue-600">${I18N.home}</a>
@@ -341,8 +324,10 @@
           <!-- WHY ROMANOTI -->
           <a href="${CURRENT.whyRomanoti}" class="text-gray-700 hover:text-blue-600">${I18N.whyRomanoti}</a>
 
+          <!-- CONTACT -->
           <a href="${CURRENT.contact}" class="text-gray-700 hover:text-blue-600">${I18N.contact}</a>
 
+          <!-- BOOKING -->
           <a href="${CURRENT.booking}" class="bg-blue-600 text-white px-5 py-2 rounded-lg font-medium hover:bg-blue-700 transition">
             ${I18N.book}
           </a>
@@ -350,20 +335,21 @@
           <!-- LANGUAGE -->
           <div class="relative" id="langRoot">
             <button id="langBtn"
-                    class="text-gray-500 hover:text-blue-600 inline-flex items-center"
+                    class="text-gray-500 hover:text-blue-600 inline-flex items-center font-medium"
                     aria-haspopup="true"
                     aria-expanded="false"
                     aria-controls="langMenu">
-              🌐 ${I18N.lang}
+              EN / FR / ES
               <svg class="ml-1 w-4 h-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                 <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.58l3.71-3.35a.75.75 0 111.02 1.1l-4.2 3.79a.75.75 0 01-1.02 0l-4.2-3.79a.75.75 0 01.02-1.06z" clip-rule="evenodd"/>
               </svg>
             </button>
 
-            <div id="langMenu" class="absolute right-0 mt-2 w-44 rounded-lg bg-white shadow-lg ring-1 ring-black/5 hidden z-40">
-              <a href="#" data-lang="en" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">🇬🇧 ${I18N_MAP.en.en}</a>
-              <a href="#" data-lang="fr" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">🇫🇷 ${I18N_MAP.fr.fr}</a>
-              <a href="#" data-lang="es" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">🇪🇸 ${I18N_MAP.es.es}</a>
+            <div id="langMenu"
+                 class="absolute right-0 mt-2 w-28 rounded-lg bg-white shadow-lg ring-1 ring-black/5 hidden z-40">
+              <a href="#" data-lang="en" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">EN</a>
+              <a href="#" data-lang="fr" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">FR</a>
+              <a href="#" data-lang="es" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">ES</a>
             </div>
           </div>
         </nav>
