@@ -5,20 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Romanoti Solutions | IT Infrastructure, Cybersecurity & Operational Support</title>
 
-    <!-- ========================================================= -->
-    <!-- ROMANOTI OFFICIAL BRANDING / FAVICONS                     -->
-    <!-- Este bloque define los iconos oficiales del sitio web    -->
-    <!-- Los archivos se encuentran en: /images                   -->
-    <!-- Se eliminó el uso de /img porque la estructura actual    -->
-    <!-- del repositorio utiliza la carpeta /images               -->
-    <!-- ========================================================= -->
-
-    <link rel="icon" type="image/svg+xml" href="/images/romanoti-icon.svg">
-    <link rel="icon" type="image/png" sizes="32x32" href="/images/romanoti-icon.png">
-    <link rel="icon" type="image/png" href="/images/romanoti-icon.png">
-    <link rel="shortcut icon" href="/images/favicon.ico">
-    <link rel="apple-touch-icon" href="/images/romanoti-icon.png">
-    <meta name="theme-color" content="#2563eb">
+  <!-- ========================================================= -->
+  <!-- ROMANOTI OFFICIAL BRANDING / FAVICONS                     -->
+  <!-- ========================================================= -->
+  <link rel="icon" type="image/svg+xml" href="/images/romanoti-icon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/romanoti-icon.png">
+  <link rel="icon" type="image/png" href="/images/romanoti-icon.png">
+  <link rel="shortcut icon" href="/images/favicon.ico">
+  <link rel="apple-touch-icon" href="/images/romanoti-icon.png">
+  <meta name="theme-color" content="#2563eb">
 
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -154,20 +149,21 @@
       .romanoti-hero__buttons{flex-direction:column;align-items:stretch}
       .romanoti-btn{width:100%}
     }
-      .romanoti-hero-logo-wrap{
-      margin-bottom: 24px;
-      display: inline-block;
-      opacity: 0;
-      transform: translateY(24px) scale(0.96);
-      animation: heroLogoIntro 1.4s cubic-bezier(.22,1,.36,1) forwards;
+
+    .romanoti-hero-logo-wrap{
+      margin-bottom:24px;
+      display:inline-block;
+      opacity:0;
+      transform:translateY(24px) scale(0.96);
+      animation:heroLogoIntro 1.4s cubic-bezier(.22,1,.36,1) forwards;
     }
 
-      .romanoti-hero-logo{
-      max-width: 420px;
-      width: 100%;
-      height: auto;
-      display: block;
-      transform-origin: center;
+    .romanoti-hero-logo{
+      max-width:420px;
+      width:100%;
+      height:auto;
+      display:block;
+      transform-origin:center;
       filter:
         drop-shadow(0 0 12px rgba(56, 189, 248, 0.16))
         drop-shadow(0 0 26px rgba(37, 99, 235, 0.10));
@@ -178,31 +174,31 @@
 
     @keyframes heroLogoIntro{
       0%{
-        opacity: 0;
-        transform: translateY(24px) scale(0.96);
+        opacity:0;
+        transform:translateY(24px) scale(0.96);
       }
       60%{
-        opacity: 1;
-        transform: translateY(-4px) scale(1.01);
+        opacity:1;
+        transform:translateY(-4px) scale(1.01);
       }
       100%{
-        opacity: 1;
-        transform: translateY(0) scale(1);
+        opacity:1;
+        transform:translateY(0) scale(1);
       }
     }
 
     @keyframes heroLogoFloatPro{
       0%,100%{
-        transform: translateY(0);
+        transform:translateY(0);
       }
       25%{
-        transform: translateY(-4px);
+        transform:translateY(-4px);
       }
       50%{
-        transform: translateY(-8px);
+        transform:translateY(-8px);
       }
       75%{
-        transform: translateY(-3px);
+        transform:translateY(-3px);
       }
     }
 
@@ -218,42 +214,46 @@
           drop-shadow(0 0 40px rgba(37, 99, 235, 0.18));
       }
     }
-        .romanoti-trust{
-      background: #0b1220;
-      padding: 28px 0;
-      text-align: center;
-      border-top: 1px solid rgba(255,255,255,0.05);
+
+    .romanoti-trust{
+      background:#0b1220;
+      padding:28px 0;
+      text-align:center;
+      border-top:1px solid rgba(255,255,255,0.05);
     }
 
     .romanoti-trust__text{
-      color: #94a3b8;
-      font-size: 0.9rem;
-      margin-bottom: 14px;
-      letter-spacing: 0.5px;
+      color:#94a3b8;
+      font-size:.9rem;
+      margin-bottom:14px;
+      letter-spacing:.5px;
     }
 
     .romanoti-trust__items{
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 18px;
+      display:flex;
+      justify-content:center;
+      flex-wrap:wrap;
+      gap:18px;
     }
 
     .romanoti-trust__items span{
-      color: #e2e8f0;
-      font-size: 0.85rem;
-      padding: 6px 12px;
-      border: 1px solid rgba(148,163,184,0.2);
-      border-radius: 999px;
-      background: rgba(255,255,255,0.02);
+      color:#e2e8f0;
+      font-size:.85rem;
+      padding:6px 12px;
+      border:1px solid rgba(148,163,184,0.2);
+      border-radius:999px;
+      background:rgba(255,255,255,0.02);
     }
-    </style>
+  </style>
 </head>
 
 <body class="bg-gray-50">
 
   <div id="app-header"></div>
 
+  <!-- ========================================================= -->
+  <!-- HERO                                                      -->
+  <!-- ========================================================= -->
   <section class="romanoti-hero">
     <div class="romanoti-hero__bg">
       <img src="/images/romanoti-hero-banner.png" alt="Romanoti Solutions Banner">
@@ -262,13 +262,12 @@
     <div class="romanoti-hero__overlay"></div>
 
     <div class="romanoti-hero__content">
-
       <p class="romanoti-hero__eyebrow">
         Government &amp; Enterprise Technology Services
       </p>
 
       <div class="romanoti-hero-logo-wrap">
-        <img 
+        <img
           src="/images/romanoti-hero-logo.png"
           alt="Romanoti Solutions Inc"
           class="romanoti-hero-logo"
@@ -288,10 +287,12 @@
         <a href="/services.html" class="romanoti-btn romanoti-btn--primary">Explore Solutions</a>
         <a href="/booking.html?service=Free%20Consultation" class="romanoti-btn romanoti-btn--secondary">Book a Consultation</a>
       </div>
-
     </div>
   </section>
 
+  <!-- ========================================================= -->
+  <!-- TRUST STRIP                                               -->
+  <!-- ========================================================= -->
   <section class="romanoti-trust">
     <div class="romanoti-trust__container">
       <p class="romanoti-trust__text">
@@ -307,6 +308,9 @@
     </div>
   </section>
 
+  <!-- ========================================================= -->
+  <!-- CYBERSHIELD HIGHLIGHT                                     -->
+  <!-- ========================================================= -->
   <section class="bg-blue-50 border-t border-b border-blue-100">
     <div class="container mx-auto px-6 py-4 flex flex-col md:flex-row items-center justify-between gap-3">
       <div class="text-blue-900 font-semibold">
@@ -323,6 +327,9 @@
     </div>
   </section>
 
+  <!-- ========================================================= -->
+  <!-- SOLUTIONS & PLATFORM                                      -->
+  <!-- ========================================================= -->
   <section class="py-14 bg-white border-b">
     <div class="container mx-auto px-6">
       <div class="text-center mb-10">
@@ -384,100 +391,9 @@
     </div>
   </section>
 
-  <section class="py-12 bg-gray-50 border-t border-b">
-    <div class="container mx-auto px-6 text-center">
-      <h2 class="text-2xl font-bold mb-4">Trusted Technology Stack</h2>
-      <p class="text-gray-600 mb-8">
-        Romanoti solutions are built on modern enterprise infrastructure technologies.
-      </p>
-
-      <div class="flex flex-wrap justify-center gap-6 text-gray-700 font-semibold">
-        <span class="badge">Microsoft</span>
-        <span class="badge">Azure</span>
-        <span class="badge">Cisco</span>
-        <span class="badge">Linux</span>
-        <span class="badge">Docker</span>
-        <span class="badge">Wazuh</span>
-        <span class="badge">ELK Stack</span>
-        <span class="badge">Virtualization</span>
-      </div>
-    </div>
-  </section>
-
-  <section class="py-14 bg-gray-50 border-t border-b">
-    <div class="container mx-auto px-6">
-
-      <div class="text-center mb-10">
-        <h2 class="text-3xl font-bold">How Romanoti Solutions Connects Visibility &amp; Operations</h2>
-        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-          Romanoti connects infrastructure discovery with operational intelligence through a practical delivery model.
-        </p>
-      </div>
-
-      <div class="grid md:grid-cols-5 gap-4 items-center">
-        <div class="card bg-white p-6 border border-gray-100 text-center">
-          <div class="badge">Step 1</div>
-          <h3 class="text-xl font-bold mt-3 mb-2">Discover</h3>
-          <p class="text-gray-600">
-            Understand infrastructure, devices, services, and technical exposure.
-          </p>
-        </div>
-
-        <div class="text-center text-4xl font-bold text-blue-600 hidden md:block">→</div>
-        <div class="text-center text-3xl font-bold text-blue-600 md:hidden">↓</div>
-
-        <div class="card bg-white p-6 border border-gray-100 text-center">
-          <div class="badge">Step 2</div>
-          <h3 class="text-xl font-bold mt-3 mb-2">Interpret</h3>
-          <p class="text-gray-600">
-            Interprets findings, reduces ambiguity, and supports next-step decisions.
-          </p>
-        </div>
-
-        <div class="text-center text-4xl font-bold text-blue-600 hidden md:block">→</div>
-        <div class="text-center text-3xl font-bold text-blue-600 md:hidden">↓</div>
-
-        <div class="card bg-white p-6 border border-gray-100 text-center">
-          <div class="badge">Step 3</div>
-          <h3 class="text-xl font-bold mt-3 mb-2">Act</h3>
-          <p class="text-gray-600">
-            Turn visibility and operational insight into stronger execution and better planning.
-          </p>
-        </div>
-
-      </div>
-
-    </div>
-  </section>
-
-  <section id="about-us" class="py-14 bg-white">
-    <div class="container mx-auto px-6">
-      <div class="text-center mb-10">
-        <h2 class="text-3xl font-bold">About Romanoti</h2>
-        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-          Romanoti Solutions delivers infrastructure, cybersecurity, and operational services for modern enterprise environments.
-        </p>
-
-        <div class="mt-6">
-          <a href="/about.html" class="border px-6 py-3 rounded-lg font-semibold hover:bg-gray-50 inline-block">
-            Learn More About Romanoti
-          </a>
-        </div>
-      </div>
-
-      <div class="max-w-4xl mx-auto text-lg text-gray-700 space-y-6">
-        <p>
-          Romanoti Solutions provides IT infrastructure, cybersecurity, and operational services for organizations
-          that require secure, resilient, and scalable technology environments.
-        </p>
-        <p>
-          Our approach combines infrastructure engineering, cybersecurity practices, and operational intelligence
-          to help businesses and government organizations operate modern and secure IT environments.
-        </p>
-      </div>
-    </div>
-  </section>
-
+  <!-- ========================================================= -->
+  <!-- OPERATIONAL SECURITY & THREAT VISIBILITY                  -->
+  <!-- ========================================================= -->
   <section class="py-14">
     <div class="container mx-auto px-6">
       <div class="text-center mb-10">
@@ -496,6 +412,7 @@
           </p>
           <a href="/solutions/cybershield/easm-console.html" class="text-blue-600 hover:underline mt-3 inline-block">Try EASM →</a>
         </div>
+
         <div class="card bg-white p-6">
           <div class="badge">SOC / MDR 24×7</div>
           <h3 class="text-xl font-bold mt-2 mb-2">Threat Detection &amp; Response</h3>
@@ -505,6 +422,7 @@
           </p>
           <a href="/it-soc.html" class="text-blue-600 hover:underline mt-3 inline-block">See SOC →</a>
         </div>
+
         <div class="card bg-white p-6">
           <div class="badge">NOC + Resilience</div>
           <h3 class="text-xl font-bold mt-2 mb-2">Availability first</h3>
@@ -515,226 +433,10 @@
     </div>
   </section>
 
-  <section class="py-14 bg-white border-t border-b">
-    <div class="container mx-auto px-6">
-
-      <div class="text-center mb-10">
-        <h2 class="text-3xl font-bold">Use Cases</h2>
-        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-          Romanoti solutions are designed for real operational environments where visibility,
-          control, and technical decision-making matter.
-        </p>
-      </div>
-
-      <div class="grid md:grid-cols-4 gap-6">
-        <div class="card bg-white p-6 border border-gray-100">
-          <div class="badge">MSP / Service Providers</div>
-          <h3 class="text-xl font-bold mt-2 mb-2">Multi-environment visibility</h3>
-          <p class="text-gray-600">
-            Improve infrastructure discovery, monitoring, and operational review across
-            multiple customer environments with better technical visibility.
-          </p>
-        </div>
-
-        <div class="card bg-white p-6 border border-gray-100">
-          <div class="badge">SMB Infrastructure</div>
-          <h3 class="text-xl font-bold mt-2 mb-2">Structured IT operations</h3>
-          <p class="text-gray-600">
-            Help growing organizations move from reactive support toward a more structured
-            operational model with discovery, diagnostics, and guided response.
-          </p>
-        </div>
-
-        <div class="card bg-white p-6 border border-gray-100">
-          <div class="badge">Government / Regulated IT</div>
-          <h3 class="text-xl font-bold mt-2 mb-2">Operational control and clarity</h3>
-          <p class="text-gray-600">
-            Support technical teams that require stronger infrastructure understanding,
-            documented visibility, and more disciplined operational workflows.
-          </p>
-        </div>
-
-        <div class="card bg-white p-6 border border-gray-100">
-          <div class="badge">Hybrid &amp; Cloud Environments</div>
-          <h3 class="text-xl font-bold mt-2 mb-2">Discovery across modern infrastructure</h3>
-          <p class="text-gray-600">
-            Increase understanding of systems, services, and dependencies across hybrid,
-            cloud, and evolving enterprise infrastructure.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="py-14 bg-gray-50 border-t border-b">
-    <div class="container mx-auto px-6">
-
-      <div class="text-center mb-10">
-        <h2 class="text-3xl font-bold">Why Romanoti</h2>
-        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-          Romanoti helps technical teams understand infrastructure faster
-          and make better operational decisions across complex IT environments.
-        </p>
-      </div>
-
-      <div class="grid md:grid-cols-4 gap-6">
-        <div class="card bg-white p-6 border border-gray-100">
-          <div class="badge">Discovery</div>
-          <h3 class="text-xl font-bold mt-2 mb-2">Infrastructure visibility</h3>
-          <p class="text-gray-600">
-            Automatically discover infrastructure components, services, and
-            technical exposure across complex environments.
-          </p>
-        </div>
-
-        <div class="card bg-white p-6 border border-gray-100">
-          <div class="badge">Diagnostics</div>
-          <h3 class="text-xl font-bold mt-2 mb-2">Operational diagnostics</h3>
-          <p class="text-gray-600">
-            Understand technical issues faster through structured diagnostics
-            and infrastructure analysis.
-          </p>
-        </div>
-
-        <div class="card bg-white p-6 border border-gray-100">
-          <div class="badge">Intelligence</div>
-          <h3 class="text-xl font-bold mt-2 mb-2">Operational intelligence</h3>
-          <p class="text-gray-600">
-            Transform raw infrastructure data into meaningful insights
-            that help guide operational decisions.
-          </p>
-        </div>
-
-        <div class="card bg-white p-6 border border-gray-100">
-          <div class="badge">Scalability</div>
-          <h3 class="text-xl font-bold mt-2 mb-2">Enterprise scalability</h3>
-          <p class="text-gray-600">
-            Designed to support growing environments and evolving
-            enterprise infrastructure architectures.
-          </p>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <section class="py-14 bg-white border-t border-b">
-    <div class="container mx-auto px-6">
-
-      <div class="text-center mb-10">
-        <h2 class="text-3xl font-bold">Enterprise Deployment</h2>
-        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-          Romanoti Platform is designed to integrate with modern infrastructure
-          environments while supporting different operational deployment models.
-        </p>
-      </div>
-
-      <div class="grid md:grid-cols-4 gap-6">
-        <div class="card bg-white p-6 border border-gray-100">
-          <div class="badge">On-Premise</div>
-          <h3 class="text-xl font-bold mt-2 mb-2">Local infrastructure</h3>
-          <p class="text-gray-600">
-            Deploy Romanoti components inside internal networks to support
-            discovery, diagnostics, and operational visibility.
-          </p>
-        </div>
-
-        <div class="card bg-white p-6 border border-gray-100">
-          <div class="badge">Hybrid</div>
-          <h3 class="text-xl font-bold mt-2 mb-2">Hybrid infrastructure</h3>
-          <p class="text-gray-600">
-            Connect on-premise environments with cloud platforms while maintaining
-            operational understanding across distributed systems.
-          </p>
-        </div>
-
-        <div class="card bg-white p-6 border border-gray-100">
-          <div class="badge">Cloud</div>
-          <h3 class="text-xl font-bold mt-2 mb-2">Cloud environments</h3>
-          <p class="text-gray-600">
-            Support infrastructure hosted on platforms such as Microsoft Azure
-            or other modern cloud environments.
-          </p>
-        </div>
-
-        <div class="card bg-white p-6 border border-gray-100">
-          <div class="badge">SOC / NOC</div>
-          <h3 class="text-xl font-bold mt-2 mb-2">Operational integration</h3>
-          <p class="text-gray-600">
-            Integrate discovery and diagnostics insights into security
-            operations centers and network operations workflows.
-          </p>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <section class="py-14 bg-gray-50 border-t border-b">
-    <div class="container mx-auto px-6">
-
-      <div class="text-center mb-10">
-        <h2 class="text-3xl font-bold">Romanoti Platform Preview</h2>
-        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-          Explore the core components of Romanoti Platform and discover how
-          infrastructure visibility and operational intelligence work together.
-        </p>
-      </div>
-
-      <div class="grid md:grid-cols-3 gap-6 mb-10">
-        <div class="card bg-white p-6 border border-gray-100">
-          <div class="badge">Discovery Engine</div>
-          <h3 class="text-xl font-bold mt-2 mb-2">NetPilot</h3>
-          <p class="text-gray-600">
-            Infrastructure discovery and diagnostics to identify devices,
-            services, and technical exposure across modern environments.
-          </p>
-          <a href="/platform/netpilot.html" class="text-blue-600 hover:underline mt-3 inline-block">
-            Explore NetPilot →
-          </a>
-        </div>
-
-        <div class="card bg-white p-6 border border-gray-100">
-          <div class="badge">Intelligence Layer</div>
-          <h3 class="text-xl font-bold mt-2 mb-2">Ops Assistant</h3>
-          <p class="text-gray-600">
-            Operational intelligence designed to interpret findings,
-            reduce ambiguity, and support guided technical decisions.
-          </p>
-          <a href="/platform/ops-assistant.html" class="text-blue-600 hover:underline mt-3 inline-block">
-            Explore Ops Assistant →
-          </a>
-        </div>
-
-        <div class="card bg-white p-6 border border-gray-100">
-          <div class="badge">Platform Overview</div>
-          <h3 class="text-xl font-bold mt-2 mb-2">Romanoti Platform</h3>
-          <p class="text-gray-600">
-            A connected operational model that brings discovery,
-            diagnostics, and decision support into one scalable direction.
-          </p>
-          <a href="/platform/index.html" class="text-blue-600 hover:underline mt-3 inline-block">
-            Explore Platform →
-          </a>
-        </div>
-      </div>
-
-      <div class="flex flex-col md:flex-row justify-center gap-4 text-center">
-        <a href="/platform/index.html"
-           class="btn-primary text-white px-6 py-3 rounded-lg font-semibold">
-           Open Platform Overview
-        </a>
-
-        <a href="/contact.html"
-           class="border px-6 py-3 rounded-lg font-semibold hover:bg-white">
-           Request Technical Demo
-        </a>
-      </div>
-
-    </div>
-  </section>
-
-  <section id="services" class="py-14">
+  <!-- ========================================================= -->
+  <!-- CORE SERVICES                                             -->
+  <!-- ========================================================= -->
+  <section id="services" class="py-14 bg-white border-t border-b">
     <div class="container mx-auto px-6">
       <div class="text-center mb-10">
         <h2 class="text-3xl font-bold">Core Services</h2>
@@ -781,6 +483,9 @@
     </div>
   </section>
 
+  <!-- ========================================================= -->
+  <!-- FINAL CTA                                                 -->
+  <!-- ========================================================= -->
   <section class="py-14 bg-blue-700 text-white">
     <div class="container mx-auto px-6 text-center">
       <h2 class="text-3xl font-bold mb-4">Ready to strengthen your infrastructure and security posture?</h2>
