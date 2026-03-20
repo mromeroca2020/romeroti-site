@@ -3,18 +3,19 @@
 <head>
 
   <!-- =========================================================
-    Archivo: /solutions/cybershield/easm-console.html
-    Propósito: Consola EASM (External Attack Surface Management)
+    File: /solutions/cybershield/easm-console.html
+    Purpose: EASM Console (External Attack Surface Management)
 
-    Cambios aplicados en esta versión:
-      - Header global manejado por /js/nav.js
-      - Se eliminó la antigua barra manual de idiomas
-      - Favicons corregidos para usar la estructura real actual:
+    Changes applied in this version:
+      - Unified global header handled by /js/nav.js
+      - Old manual language bar removed
+      - Favicons corrected to use the current real structure:
           /images/romanoti-icon.png
           /images/favicon.ico
-      - Branding corregido de "RomanoTI" a "Romanoti Solutions"
-      - Se conserva compatibilidad con Netlify + HTML estático
-      - Se conserva fallback del menú Solutions
+      - Branding corrected to "Romanoti Solutions"
+      - Interface text standardized in English
+      - Existing scan logic preserved
+      - Existing dropdown fallback preserved
   ========================================================== -->
 
   <meta charset="utf-8"/>
@@ -22,22 +23,19 @@
   <title>CyberShield – EASM Console | Romanoti Solutions</title>
 
   <!-- =========================================================
-    FAVICONS OFICIALES ROMANOTI
-    ---------------------------------------------------------
-    Se eliminan rutas antiguas /img/... porque la estructura
-    actual del proyecto usa /images/...
+    OFFICIAL ROMANOTI FAVICONS
   ========================================================== -->
   <link rel="icon" type="image/png" href="/images/romanoti-icon.png?v=2">
   <link rel="shortcut icon" href="/images/favicon.ico?v=2" type="image/x-icon">
   <link rel="apple-touch-icon" href="/images/romanoti-icon.png?v=2">
   <meta name="theme-color" content="#2563eb">
 
-  <!-- Tailwind + Fuente -->
+  <!-- Tailwind + Font -->
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
 
   <!-- =========================================================
-    ESTILOS LOCALES DE LA CONSOLA
+    LOCAL PAGE STYLES
   ========================================================== -->
   <style>
     body{font-family:'Montserrat',sans-serif;background:#f8f9fa;color:#0f172a}
@@ -52,7 +50,7 @@
     .warn{background:#fffbeb;color:#92400e;border:1px solid #fcd34d}
     .err{background:#fef2f2;color:#991b1b;border:1px solid #fecaca}
 
-    /* compatibilidad dropdown legacy + tailwind */
+    /* Legacy dropdown compatibility + tailwind */
     .dropdown{display:none}
     .dropdown.show{display:block}
   </style>
@@ -60,7 +58,7 @@
 
 <body class="bg-gray-50">
 
-  <!-- Header global inyectado por nav.js -->
+  <!-- Global header injected by nav.js -->
   <div id="app-header"></div>
 
   <!-- =========================================================
@@ -71,7 +69,7 @@
       <span class="badge border-white text-white">External Attack Surface Management</span>
       <h1 class="text-4xl md:text-5xl font-bold mt-3">EASM Console</h1>
       <p class="text-xl md:text-2xl mt-3 max-w-3xl">
-        Descubre exposición externa (DNS/Email/TLS/Subdominios/Puertos) y genera reportes listos para cliente.
+        Discover external exposure (DNS/Email/TLS/Subdomains/Ports) and generate client-ready reports.
       </p>
     </div>
   </section>
@@ -85,20 +83,20 @@
       <!-- Settings -->
       <div class="card p-6 bg-white">
         <h3 class="text-xl font-semibold mb-2">Settings</h3>
-        <p class="text-gray-600 mb-4">Tu <b>Org API Key</b> se guarda solo en tu navegador.</p>
+        <p class="text-gray-600 mb-4">Your <b>Org API Key</b> is stored locally in your browser.</p>
 
         <label class="block text-sm font-medium text-gray-700">Org API Key</label>
         <input id="orgKey" type="password" class="w-full border rounded-lg px-3 py-2 mt-1" placeholder="MySecret123$">
-        <button id="btnSaveKey" class="btn-primary text-white px-4 py-2 rounded-lg font-medium mt-3">Guardar</button>
+        <button id="btnSaveKey" class="btn-primary text-white px-4 py-2 rounded-lg font-medium mt-3">Save</button>
         <p id="keyMsg" class="text-xs text-gray-500 mt-2"></p>
 
         <hr class="my-6"/>
 
-        <h4 class="font-semibold mb-2">PowerShell (Integración)</h4>
-        <p class="text-gray-600 text-sm">Genera un comando y/o descarga un <code>.ps1</code> con tu API Key y parámetros actuales.</p>
+        <h4 class="font-semibold mb-2">PowerShell (Integration)</h4>
+        <p class="text-gray-600 text-sm">Generate a command and/or download a <code>.ps1</code> file with your API Key and current parameters.</p>
         <div class="space-y-2 mt-2">
-          <button id="btnGenPS" class="w-full btn-primary text-white px-4 py-2 rounded-lg font-medium">Generar PowerShell</button>
-          <button id="btnDlPS" class="w-full bg-gray-800 text-white px-4 py-2 rounded-lg font-medium hover:bg-black">Descargar .ps1</button>
+          <button id="btnGenPS" class="w-full btn-primary text-white px-4 py-2 rounded-lg font-medium">Generate PowerShell</button>
+          <button id="btnDlPS" class="w-full bg-gray-800 text-white px-4 py-2 rounded-lg font-medium hover:bg-black">Download .ps1</button>
         </div>
         <pre id="psOut" class="output mt-3" style="max-height:32vh"></pre>
       </div>
@@ -125,12 +123,12 @@
 vpn
 mail
 api"></textarea>
-            <p class="text-xs text-gray-500 mt-1">Uno por línea o separados por comas.</p>
+            <p class="text-xs text-gray-500 mt-1">One per line or comma separated.</p>
           </div>
           <div>
             <label class="block text-sm font-medium text-gray-700">Ports to check (optional)</label>
             <input id="inPorts" class="w-full border rounded-lg px-3 py-2 mt-1" placeholder="22,80,443,3389,445,25,587" value="22,80,443,3389,445,25,587">
-            <p class="text-xs text-gray-500 mt-1">Lista separada por comas (máx. ~30 recomendable).</p>
+            <p class="text-xs text-gray-500 mt-1">Comma-separated list (max ~30 recommended).</p>
           </div>
         </div>
 
@@ -158,10 +156,10 @@ api"></textarea>
   </section>
 
   <!-- =========================================================
-    FOOTER VISUAL LOCAL
-    Nota:
-    Si más adelante decides dejar solo el footer global,
-    este bloque puede eliminarse.
+    LOCAL VISUAL FOOTER
+    Note:
+    If you later decide to keep only the global footer,
+    this block can be removed.
   ========================================================== -->
   <footer class="bg-gray-900 text-white py-8">
     <div class="container mx-auto px-6 text-center">
@@ -171,7 +169,7 @@ api"></textarea>
   </footer>
 
   <!-- =========================================================
-    JS - LÓGICA DE LA HERRAMIENTA
+    JS - TOOL LOGIC
   ========================================================== -->
   <script>
   (function(){
@@ -188,7 +186,7 @@ api"></textarea>
     const saveKey = () => {
       const k = $('orgKey').value.trim();
       localStorage.setItem(KEY_K, k);
-      $('keyMsg').textContent = k ? '✅ API key guardada localmente.' : '';
+      $('keyMsg').textContent = k ? '✅ API key saved locally.' : '';
     };
 
     function pill(text, type='ok'){
@@ -206,7 +204,7 @@ api"></textarea>
 
     async function postJson(path, body){
       const key = $('orgKey').value.trim() || localStorage.getItem(KEY_K) || '';
-      if(!key){ alert('Ingresa tu Org API Key'); throw new Error('missing key'); }
+      if(!key){ alert('Enter your Org API Key'); throw new Error('missing key'); }
       const res = await fetch(`${API_BASE}${path}`, {
         method: 'POST',
         headers: {
@@ -225,7 +223,7 @@ api"></textarea>
     // =========================================================
     $('btnRun').addEventListener('click', async () => {
       const domain = $('inDomain').value.trim();
-      if(!domain){ alert('Ingresa un dominio'); return; }
+      if(!domain){ alert('Enter a domain'); return; }
 
       const subs  = toList($('inSubs').value);
       const ports = toList($('inPorts').value).map(x=>parseInt(x,10)).filter(n=>!isNaN(n));
@@ -297,7 +295,7 @@ api"></textarea>
         a.download = `easm-${Date.now()}.json`;
         a.click();
       } catch {
-        alert('El resultado no es JSON válido aún (ejecuta el scan primero).');
+        alert('Output is not valid JSON yet (run the scan first).');
       }
     });
 
@@ -326,7 +324,7 @@ api"></textarea>
         md += '_Run the scan first to populate results._\n';
       }
       navigator.clipboard.writeText(md);
-      alert('Resumen copiado en Markdown ✅');
+      alert('Summary copied to Markdown ✅');
     });
 
     // =========================================================
@@ -334,7 +332,7 @@ api"></textarea>
     // =========================================================
     $('btnGenPS').addEventListener('click', () => {
       const key = $('orgKey').value.trim() || localStorage.getItem(KEY_K) || '';
-      if(!key){ alert('Ingresa tu Org API Key'); return; }
+      if(!key){ alert('Enter your Org API Key'); return; }
 
       const domain = $('inDomain').value.trim() || 'example.com';
       const subs   = toList($('inSubs').value);
@@ -365,7 +363,7 @@ api"></textarea>
     // =========================================================
     $('btnDlPS').addEventListener('click', () => {
       const key = $('orgKey').value.trim() || localStorage.getItem(KEY_K) || '';
-      if(!key){ alert('Ingresa tu Org API Key'); return; }
+      if(!key){ alert('Enter your Org API Key'); return; }
 
       const domain = $('inDomain').value.trim() || 'example.com';
       const subs   = toList($('inSubs').value);
@@ -416,15 +414,15 @@ if($res.findings){
       a.click();
     });
 
-    // wire-up
+    // Wire-up
     $('btnSaveKey').addEventListener('click', saveKey);
     loadKey();
   })();
   </script>
 
   <!-- =========================================================
-    FALLBACK DE DROPDOWN
-    Robusto; no interfiere con fix-nav.js
+    DROPDOWN FALLBACK
+    Robust; does not interfere with fix-nav.js
   ========================================================== -->
   <script>
     (function(){
@@ -468,14 +466,14 @@ if($res.findings){
         if(e.key==='Escape') close();
       });
 
-      // Hover como refuerzo
+      // Hover reinforcement
       btn.addEventListener('mouseenter', open);
       btn.parentNode.addEventListener('mouseleave', ()=>setTimeout(close,120));
     })();
   </script>
 
   <!-- =========================================================
-    JS GLOBALES DEL SITIO
+    GLOBAL SITE JS
   ========================================================== -->
   <script defer src="/js/nav.js?v=2025-01"></script>
   <script defer src="/js/footer.js?v=2025-01"></script>
