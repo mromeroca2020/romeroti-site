@@ -172,73 +172,73 @@
   // Hoy el sitio ya tiene varias páginas en raíz sin versión /en /fr /es.
   // Para no romper navegación, se apuntan a las rutas reales existentes.
   // ============================================================
-  const ROUTES = {
-    en: {
-      home: '/',
-      platform: '/platform/index.html',
-      enterprise: '/enterprise/government-business.html',
-      whyRomanoti: '/solutions/why-romanoti.html',
-      contact: '/contact.html',
-      booking: '/booking.html',
+const ROUTES = {
+  en: {
+    home: '/en/index.html',
+    platform: '/en/data-center/index.html',
+    enterprise: '/enterprise/government-business.html',
+    whyRomanoti: '/solutions/why-romanoti.html',
+    contact: '/contact.html',
+    booking: '/booking.html',
 
-      services: [
-        { key: 'helpDesk', href: '/services/helpdesk.html' },
-        { key: 'networksInfra', href: '/services/networks.html' },
-        { key: 'cybersecurity', href: '/services/cybersecurity.html' },
-        { key: 'tools', href: '/services/tools.html' }
-      ],
+    services: [
+      { key: 'helpDesk', href: '/en/services/helpdesk.html' },
+      { key: 'networksInfra', href: '/en/services/networks.html' },
+      { key: 'cybersecurity', href: '/en/services/cybersecurity.html' },
+      { key: 'tools', href: '/en/services/tools.html' }
+    ],
 
-      solutions: [
-        { key: 'solutionsOverview', href: '/solutions/index.html' },
-        { key: 'platformOverview', href: '/platform/index.html' },
-        { key: 'governmentBusiness', href: '/enterprise/government-business.html' }
-      ]
-    },
+    solutions: [
+      { key: 'solutionsOverview', href: '/en/index.html' },
+      { key: 'platformOverview', href: '/en/data-center/index.html' },
+      { key: 'governmentBusiness', href: '/enterprise/government-business.html' }
+    ]
+  },
 
-    fr: {
-      home: '/',
-      platform: '/platform/index.html',
-      enterprise: '/enterprise/government-business.html',
-      whyRomanoti: '/solutions/why-romanoti.html',
-      contact: '/contact.html',
-      booking: '/booking.html',
+  fr: {
+    home: '/fr/index.html',
+    platform: '/fr/platform/index.html',
+    enterprise: '/enterprise/government-business.html',
+    whyRomanoti: '/fr/solutions/why-romanoti.html',
+    contact: '/contact.html',
+    booking: '/booking.html',
 
-      services: [
-        { key: 'helpDesk', href: '/services/helpdesk.html' },
-        { key: 'networksInfra', href: '/services/networks.html' },
-        { key: 'cybersecurity', href: '/services/cybersecurity.html' },
-        { key: 'tools', href: '/services/tools.html' }
-      ],
+    services: [
+      { key: 'helpDesk', href: '/fr/services/helpdesk.html' },
+      { key: 'networksInfra', href: '/fr/services/networks.html' },
+      { key: 'cybersecurity', href: '/fr/services/cybersecurity.html' },
+      { key: 'tools', href: '/fr/services/tools.html' }
+    ],
 
-      solutions: [
-        { key: 'solutionsOverview', href: '/solutions/index.html' },
-        { key: 'platformOverview', href: '/platform/index.html' },
-        { key: 'governmentBusiness', href: '/enterprise/government-business.html' }
-      ]
-    },
+    solutions: [
+      { key: 'solutionsOverview', href: '/fr/index.html' },
+      { key: 'platformOverview', href: '/fr/platform/index.html' },
+      { key: 'governmentBusiness', href: '/enterprise/government-business.html' }
+    ]
+  },
 
-    es: {
-      home: '/',
-      platform: '/platform/index.html',
-      enterprise: '/enterprise/government-business.html',
-      whyRomanoti: '/solutions/why-romanoti.html',
-      contact: '/contact.html',
-      booking: '/booking.html',
+  es: {
+    home: '/es/index.html',
+    platform: '/es/platform/index.html',
+    enterprise: '/enterprise/government-business.html',
+    whyRomanoti: '/es/solutions/why-romanoti.html',
+    contact: '/contact.html',
+    booking: '/booking.html',
 
-      services: [
-        { key: 'helpDesk', href: '/services/helpdesk.html' },
-        { key: 'networksInfra', href: '/services/networks.html' },
-        { key: 'cybersecurity', href: '/services/cybersecurity.html' },
-        { key: 'tools', href: '/services/tools.html' }
-      ],
+    services: [
+      { key: 'helpDesk', href: '/es/Services/helpdesk.html' },
+      { key: 'networksInfra', href: '/es/Services/networks.html' },
+      { key: 'cybersecurity', href: '/es/Services/cybersecurity.html' },
+      { key: 'tools', href: '/es/Services/tools.html' }
+    ],
 
-      solutions: [
-        { key: 'solutionsOverview', href: '/solutions/index.html' },
-        { key: 'platformOverview', href: '/platform/index.html' },
-        { key: 'governmentBusiness', href: '/enterprise/government-business.html' }
-      ]
-    }
-  };
+    solutions: [
+      { key: 'solutionsOverview', href: '/es/index.html' },
+      { key: 'platformOverview', href: '/es/platform/index.html' },
+      { key: 'governmentBusiness', href: '/enterprise/government-business.html' }
+    ]
+  }
+};
 
   const CURRENT = ROUTES[lang] || ROUTES.en;
 
