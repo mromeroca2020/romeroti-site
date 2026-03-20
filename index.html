@@ -799,32 +799,6 @@ Romanoti combines exposure monitoring, threat detection, and operational respons
   </section>
 
   <div id="app-footer"></div>
-
-  <script>
-    (function () {
-      const fb = document.getElementById('fallback-header');
-      if (!fb) return;
-
-      function removeFallbackSafely() {
-        const mount = document.getElementById('app-header');
-        const injected = mount && mount.querySelector('header');
-        if (injected && fb.parentNode) {
-          fb.parentNode.removeChild(fb);
-          console.log('[swap] Fallback header removed (nav.js ready).');
-          return true;
-        }
-        return false;
-      }
-
-      if (!removeFallbackSafely()) {
-        setTimeout(removeFallbackSafely, 150);
-        setTimeout(removeFallbackSafely, 400);
-        setTimeout(removeFallbackSafely, 1000);
-        setTimeout(removeFallbackSafely, 2000);
-      }
-    })();
-  </script>
-
   <script defer src="/js/nav.js?v=21"></script>
   <script defer src="/js/footer.js?v=11"></script>
 
