@@ -2,6 +2,21 @@
 <html lang="en">
 <head>
   <!-- =======================================================
+       FILE: /platform/ops-assistant.html
+       PURPOSE:
+       Romanoti Ops Assistant product page
+
+       CHANGELOG OF THIS VERSION
+       -------------------------------------------------------
+       1) Removes broken fallback header to avoid duplicate nav.
+       2) Uses global header injection through /js/nav.js only.
+       3) Adds Tailwind CSS so nav.js renders correctly.
+       4) Positions Ops Assistant as the operational intelligence
+          layer of the Romanoti platform.
+       5) Connects discovery, analysis, and resilience.
+       ======================================================= -->
+
+  <!-- =======================================================
        BASIC CONFIGURATION
        ======================================================= -->
   <meta charset="UTF-8" />
@@ -9,19 +24,15 @@
 
   <!-- =======================================================
        SEO
-       CHANGE #57
-       Branding alineado y foco en Ops Assistant
        ======================================================= -->
-  <title>Romanoti Ops Assistant | Romanoti Solutions</title>
+  <title>Romanoti Ops Assistant | Operational Intelligence</title>
   <meta
     name="description"
-    content="Romanoti Ops Assistant is the operational intelligence component of the Romanoti platform."
+    content="Romanoti Ops Assistant helps teams interpret infrastructure findings, reduce ambiguity, and move toward better technical decisions with operational intelligence."
   />
 
   <!-- =======================================================
        FAVICONS
-       CHANGE #58
-       Estructura unificada con /images
        ======================================================= -->
   <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/romanoti-icon.png">
@@ -29,17 +40,23 @@
   <link rel="apple-touch-icon" href="/images/romanoti-icon.png">
   <meta name="theme-color" content="#2563eb">
 
-  <!-- Hoja global existente -->
+  <!-- =======================================================
+       GLOBAL STYLES / FONTS
+       IMPORTANT:
+       Tailwind is required because nav.js uses Tailwind classes.
+       ======================================================= -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <link rel="stylesheet" href="../css/styles.css" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
 
+  <!-- =======================================================
+       LOCAL PAGE STYLES
+       ======================================================= -->
   <style>
     :root {
       --primary-blue: #2f5bdb;
       --primary-blue-dark: #2449b3;
       --primary-blue-soft: #eaf0ff;
-
-      --romanoti-gold: #d6b46b;
 
       --text-dark: #1f2937;
       --text-body: #5f6f8a;
@@ -48,7 +65,6 @@
       --border-light: #d9e1f0;
       --bg-page: #f5f7fb;
       --bg-section: #ffffff;
-      --bg-soft: #eef2f8;
 
       --shadow-soft: 0 10px 25px rgba(31, 41, 55, 0.08);
 
@@ -78,14 +94,9 @@
       margin: 0 auto;
     }
 
-    /* =======================================================
-       HERO
-       CHANGE #59
-       Hero alineado al sistema visual de Romanoti
-       ======================================================= */
     .ops-hero {
       position: relative;
-      min-height: 76vh;
+      min-height: 78vh;
       display: flex;
       align-items: center;
       overflow: hidden;
@@ -125,7 +136,7 @@
       align-items: center;
       width: min(var(--max-width), calc(100% - 32px));
       margin: 0 auto;
-      padding: 90px 0 84px;
+      padding: 100px 0 86px;
     }
 
     .eyebrow {
@@ -143,9 +154,9 @@
 
     h1 {
       margin: 0 0 18px;
-      font-size: clamp(2.2rem, 4vw, 4rem);
-      line-height: 1.08;
-      max-width: 820px;
+      font-size: clamp(2.2rem, 4vw, 4.2rem);
+      line-height: 1.06;
+      max-width: 860px;
       color: #ffffff;
       font-weight: 800;
     }
@@ -153,7 +164,7 @@
     .ops-hero p {
       margin: 0 0 28px;
       font-size: 1.08rem;
-      color: rgba(255,255,255,0.90);
+      color: rgba(255,255,255,.90);
       max-width: 760px;
     }
 
@@ -240,9 +251,6 @@
       color: rgba(255,255,255,0.88);
     }
 
-    /* =======================================================
-       SECTIONS
-       ======================================================= */
     .section {
       padding: 56px 0;
       background: var(--bg-section);
@@ -356,6 +364,16 @@
       margin: 0 0 22px;
     }
 
+    .mini-label {
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: #2563eb;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
     @media (max-width: 980px) {
       .ops-hero__grid,
       .two-col,
@@ -374,36 +392,15 @@
     }
   </style>
 </head>
+
 <body>
   <!-- =======================================================
        GLOBAL HEADER
-       CHANGE #60
-       Se usa nav.js como header oficial
+       IMPORTANT:
+       No fallback header is used anymore.
+       nav.js is the only source of truth for navigation.
        ======================================================= -->
   <div id="app-header"></div>
-
-  <!-- =======================================================
-       FALLBACK HEADER
-       CHANGE #61
-       Solo visible mientras nav.js monta el header real
-       ======================================================= -->
-  <header id="fallback-header" class="bg-white shadow-sm sticky top-0 z-40">
-    <div class="container" style="padding-top:12px;padding-bottom:12px;display:flex;align-items:center;justify-content:space-between;gap:20px;">
-      <a href="/en/" class="flex items-center text-gray-900">
-        <img
-          src="/images/romanoti-logo-horizontal-final.png"
-          alt="Romanoti Solutions"
-          style="height:48px;width:auto;object-fit:contain;"
-        >
-      </a>
-
-      <a href="/booking.html?service=Free%20Consultation"
-         class="btn-primary"
-         style="padding:10px 18px;border-radius:10px;color:#fff;font-weight:700;">
-        Book Now
-      </a>
-    </div>
-  </header>
 
   <main>
     <!-- =====================================================
@@ -419,38 +416,37 @@
       <div class="ops-hero__grid">
         <div>
           <div class="eyebrow">Romanoti Platform / Ops Assistant</div>
-          <h1>Interpret infrastructure with operational intelligence.</h1>
+          <h1>Turn infrastructure findings into operational decisions.</h1>
           <p>
             Romanoti Ops Assistant is the operational intelligence layer of the Romanoti platform.
-            It is designed to help teams understand findings, reduce ambiguity, and move toward
-            better technical decisions with more confidence.
+            It helps teams interpret findings, reduce ambiguity, and move toward faster, more confident technical decisions.
           </p>
 
           <div class="actions">
-            <a class="btn btn-primary" href="../contact.html">Request information</a>
-            <a class="btn btn-secondary" href="netpilot.html">See NetPilot</a>
+            <a class="btn btn-primary" href="/contact.html">Start Operational Assessment</a>
+            <a class="btn btn-secondary" href="/platform/netpilot.html">See NetPilot</a>
           </div>
         </div>
 
         <aside class="hero-card">
           <h3>What Ops Assistant is built for</h3>
           <p>
-            Ops Assistant helps transform raw technical findings into guided interpretation,
-            helping teams understand what to review and where to focus next.
+            Ops Assistant transforms technical findings into structured interpretation,
+            helping teams decide what matters, what to review, and what should happen next.
           </p>
 
           <div class="mini-grid">
             <div class="mini-item">
               <strong>Interpretation</strong>
-              <span>Help teams understand findings faster.</span>
+              <span>Understand findings with more context.</span>
             </div>
             <div class="mini-item">
               <strong>Guidance</strong>
-              <span>Provide operational direction and context.</span>
+              <span>Support operational review and prioritization.</span>
             </div>
             <div class="mini-item">
               <strong>Clarity</strong>
-              <span>Reduce uncertainty in technical review.</span>
+              <span>Reduce uncertainty in technical analysis.</span>
             </div>
             <div class="mini-item">
               <strong>Decision support</strong>
@@ -462,26 +458,27 @@
     </section>
 
     <!-- =====================================================
-         PROBLEM
+         WHY IT MATTERS
          ===================================================== -->
     <section class="section">
       <div class="container">
-        <h2>Why Ops Assistant matters</h2>
+        <div class="mini-label">Why Ops Assistant matters</div>
+        <h2>Visibility alone does not create operational confidence</h2>
         <p class="section-intro">
-          Discovery alone is not enough. Teams also need help understanding what findings mean,
-          what should be reviewed next, and how to move from visibility toward operational clarity.
+          Discovery is important, but teams also need help understanding what findings mean,
+          which issues deserve attention, and how to move from technical signals to operational action.
         </p>
 
         <div class="two-col">
           <div class="card">
             <h3>The problem</h3>
             <p>
-              Technical environments generate findings, signals, and complexity, but teams are often
-              left without enough structured interpretation to act efficiently.
+              Technical environments generate findings, alerts, and complexity,
+              but teams are often left without enough structured interpretation to act efficiently.
             </p>
             <ul class="bullets">
               <li>Too much raw information</li>
-              <li>Unclear technical priorities</li>
+              <li>Unclear priorities</li>
               <li>Slow understanding of findings</li>
               <li>Operational ambiguity during review</li>
             </ul>
@@ -490,12 +487,12 @@
           <div class="card">
             <h3>The Ops Assistant approach</h3>
             <p>
-              Ops Assistant is designed to sit on top of discovery and diagnostics, helping teams
-              interpret findings and move toward better operational decisions.
+              Ops Assistant helps teams interpret findings and move toward better operational decisions,
+              turning technical visibility into guided understanding.
             </p>
             <ul class="bullets">
               <li>Operational interpretation</li>
-              <li>Guided technical thinking</li>
+              <li>Guided technical review</li>
               <li>Support for investigation</li>
               <li>Next-step recommendation logic</li>
             </ul>
@@ -505,27 +502,28 @@
     </section>
 
     <!-- =====================================================
-         CAPABILITIES
+         CORE CAPABILITIES
          ===================================================== -->
     <section class="section alt">
       <div class="container">
-        <h2>Core capabilities</h2>
+        <div class="mini-label">Core capabilities</div>
+        <h2>Operational intelligence built on top of discovery</h2>
         <p class="section-intro">
-          Ops Assistant represents the intelligence layer of Romanoti, helping connect findings with operational meaning.
+          Ops Assistant is the intelligence layer of Romanoti, helping teams connect findings with operational meaning.
         </p>
 
         <div class="feature-grid">
           <div class="feature-item">
             <h3>Operational guidance</h3>
-            <p>Help teams understand what findings may require review.</p>
+            <p>Help teams understand which findings may require immediate review.</p>
           </div>
           <div class="feature-item">
             <h3>Insight generation</h3>
-            <p>Support structured interpretation of technical visibility.</p>
+            <p>Support structured interpretation of technical visibility and diagnostics.</p>
           </div>
           <div class="feature-item">
             <h3>Troubleshooting support</h3>
-            <p>Improve how teams navigate investigation and review.</p>
+            <p>Improve how teams navigate investigation, review, and escalation.</p>
           </div>
           <div class="feature-item">
             <h3>Decision support</h3>
@@ -536,10 +534,46 @@
     </section>
 
     <!-- =====================================================
-         ROLE INSIDE PLATFORM
+         FROM ANALYSIS TO RESILIENCE
          ===================================================== -->
     <section class="section">
       <div class="container">
+        <div class="mini-label">From analysis to action</div>
+        <h2>Ops Assistant helps teams decide what continuity strategy should protect</h2>
+        <p class="section-intro">
+          Once infrastructure findings are interpreted, organizations can make better decisions about resilience,
+          redundancy, and continuity priorities across critical systems.
+        </p>
+
+        <div class="two-col">
+          <div class="card">
+            <h3>What Ops Assistant helps clarify</h3>
+            <ul class="bullets">
+              <li>Which findings matter most</li>
+              <li>Which dependencies create operational risk</li>
+              <li>Where continuity planning should focus first</li>
+              <li>What needs escalation versus observation</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3>What comes next</h3>
+            <p>
+              Romanoti can use these insights to support Infrastructure Resilience & Continuity services,
+              helping organizations reduce downtime and strengthen operational stability.
+            </p>
+            <a class="btn btn-primary" href="/cloud-redundancy.html">Explore Infrastructure Resilience</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         ROLE INSIDE PLATFORM
+         ===================================================== -->
+    <section class="section alt">
+      <div class="container">
+        <div class="mini-label">Platform positioning</div>
         <h2>Ops Assistant inside the Romanoti platform</h2>
         <p class="section-intro">
           Ops Assistant is the layer that helps Romanoti move beyond visibility. It sits after discovery,
@@ -550,37 +584,38 @@
           <div class="card">
             <h3>Ops Assistant role</h3>
             <p>
-              Ops Assistant focuses on interpretation and guidance. It is the part of Romanoti
-              that helps answer: <strong>what does this mean, and what should we review next?</strong>
+              Ops Assistant focuses on interpretation and guidance.
+              It helps answer the second operational question:
+              <strong>What does this mean, and what should we review next?</strong>
             </p>
           </div>
 
           <div class="card">
             <h3>Connected to NetPilot</h3>
             <p>
-              NetPilot helps reveal infrastructure visibility. Ops Assistant helps interpret those findings.
+              NetPilot reveals infrastructure visibility. Ops Assistant interprets those findings.
               Together, they define the product logic of the Romanoti platform.
             </p>
-            <a class="btn btn-secondary" href="netpilot.html">Open NetPilot</a>
+            <a class="btn btn-secondary" href="/platform/netpilot.html">Open NetPilot</a>
           </div>
         </div>
       </div>
     </section>
 
     <!-- =====================================================
-         FINAL CTA
+         CTA
          ===================================================== -->
     <section class="cta">
       <div class="container">
         <div class="cta-box">
-          <h2>Ops Assistant is the intelligence layer of the Romanoti future.</h2>
+          <h2>Ops Assistant is the intelligence layer of the Romanoti ecosystem.</h2>
           <p>
-            This page introduces Ops Assistant as the interpretation and guidance layer in the Romanoti platform vision,
-            while preserving the continuity of the current site and brand.
+            Ops Assistant helps teams move from discovery to understanding, creating the operational clarity needed
+            to support resilience, escalation, and better decision-making.
           </p>
           <div class="actions">
-            <a class="btn btn-secondary" href="../contact.html">Contact Romanoti</a>
-            <a class="btn btn-primary" href="index.html">Back to Platform</a>
+            <a class="btn btn-secondary" href="/contact.html">Contact Romanoti</a>
+            <a class="btn btn-primary" href="/platform/index.html">Back to Platform</a>
           </div>
         </div>
       </div>
@@ -589,45 +624,14 @@
 
   <!-- =======================================================
        GLOBAL FOOTER
-       CHANGE #62
-       Se usa footer.js en vez de footer local
        ======================================================= -->
   <div id="app-footer"></div>
 
   <!-- =======================================================
-       FALLBACK HEADER REMOVER
-       ======================================================= -->
-  <script>
-    (function () {
-      const fb = document.getElementById('fallback-header');
-      if (!fb) return;
-
-      function removeFallbackSafely() {
-        const mount = document.getElementById('app-header');
-        const injected = mount && mount.querySelector('header');
-        if (injected && fb.parentNode) {
-          fb.parentNode.removeChild(fb);
-          return true;
-        }
-        return false;
-      }
-
-      if (!removeFallbackSafely()) {
-        setTimeout(removeFallbackSafely, 150);
-        setTimeout(removeFallbackSafely, 400);
-        setTimeout(removeFallbackSafely, 1000);
-        setTimeout(removeFallbackSafely, 2000);
-      }
-    })();
-  </script>
-
-  <!-- =======================================================
        GLOBAL SCRIPTS
-       CHANGE #63
-       Se conectan nav y footer globales
        ======================================================= -->
-  <script defer src="/js/nav.js?v=10"></script>
-  <script defer src="/js/footer.js?v=10"></script>
-  <script defer src="/js/fix-nav.js?v=10"></script>
+  <script defer src="/js/nav.js?v=11"></script>
+  <script defer src="/js/footer.js?v=11"></script>
+  <script defer src="/js/fix-nav.js?v=11"></script>
 </body>
 </html>
