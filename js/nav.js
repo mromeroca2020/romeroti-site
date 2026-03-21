@@ -41,6 +41,23 @@
   // Además:
   // - El dropdown de idioma usa etiquetas cortas.
   // - Se corrigen rutas de Why Romanoti para fr y es.
+  //
+  // CHANGE #86
+  // ------------------------------------------------------------
+  // Se agrega "How We Work" al menú principal:
+  // - nuevo label i18n en EN / FR / ES
+  // - nueva ruta confirmada:
+  //   /solutions/how-we-work.html
+  // - nuevo enlace visible en navegación desktop
+  //
+  // NOTA
+  // ------------------------------------------------------------
+  // Este cambio mantiene intacta la lógica actual del nav:
+  // - boot único
+  // - mount en #app-header
+  // - dropdowns Services / Solutions
+  // - selector de idioma
+  // - compatibilidad con estructura actual del proyecto
   // ============================================================
 
   if (window.__ROMANOTI_NAV_BOOTED__) {
@@ -77,6 +94,7 @@
       platform: 'Plataforma',
       enterprise: 'Enterprise',
       whyRomanoti: 'Por qué Romanoti',
+      howWeWork: 'Cómo trabajamos',
       contact: 'Contacto',
       book: 'Agendar',
       lang: '',
@@ -104,6 +122,7 @@
       platform: 'Platform',
       enterprise: 'Enterprise',
       whyRomanoti: 'Why Romanoti',
+      howWeWork: 'How We Work',
       contact: 'Contact',
       book: 'Book Now',
       lang: '',
@@ -131,6 +150,7 @@
       platform: 'Plateforme',
       enterprise: 'Entreprise',
       whyRomanoti: 'Pourquoi Romanoti',
+      howWeWork: 'Notre méthode',
       contact: 'Contact',
       book: 'Prendre RDV',
       lang: '',
@@ -163,6 +183,7 @@
       platform: '/platform/index.html',
       enterprise: '/enterprise/government-business.html',
       whyRomanoti: '/solutions/why-romanoti.html',
+      howWeWork: '/solutions/how-we-work.html',
       contact: '/contact.html',
       booking: '/booking.html',
 
@@ -185,6 +206,7 @@
       platform: '/platform/index.html',
       enterprise: '/enterprise/government-business.html',
       whyRomanoti: '/solutions/why-romanoti.html',
+      howWeWork: '/solutions/how-we-work.html',
       contact: '/contact.html',
       booking: '/booking.html',
 
@@ -207,6 +229,7 @@
       platform: '/platform/index.html',
       enterprise: '/enterprise/government-business.html',
       whyRomanoti: '/solutions/why-romanoti.html',
+      howWeWork: '/solutions/how-we-work.html',
       contact: '/contact.html',
       booking: '/booking.html',
 
@@ -258,6 +281,7 @@
   <header class="bg-white/95 backdrop-blur sticky top-0 z-50 border-b border-gray-100" id="navHeader">
     <div class="container mx-auto px-6 py-3">
       <div class="flex items-center justify-between">
+
         <!-- ============================================================
              LOGO OFICIAL
              ============================================================ -->
@@ -323,6 +347,9 @@
 
           <!-- WHY ROMANOTI -->
           <a href="${CURRENT.whyRomanoti}" class="text-gray-700 hover:text-blue-600">${I18N.whyRomanoti}</a>
+
+          <!-- HOW WE WORK -->
+          <a href="${CURRENT.howWeWork}" class="text-gray-700 hover:text-blue-600">${I18N.howWeWork}</a>
 
           <!-- CONTACT -->
           <a href="${CURRENT.contact}" class="text-gray-700 hover:text-blue-600">${I18N.contact}</a>
