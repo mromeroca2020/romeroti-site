@@ -1,109 +1,691 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Cómo Trabajamos | RomanoTI CyberShield</title>
+  <!-- =======================================================
+       FILE: /how-we-work.html
+       PURPOSE:
+       Corporate page explaining Romanoti's delivery model
 
-  <!-- Favicons -->
-  <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16.png">
-  <link rel="shortcut icon" href="/favicon.ico">
-  <link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#2563eb">
+       STRATEGIC POSITIONING
+       -------------------------------------------------------
+       This page is designed to explain how Romanoti works
+       with organizations in a structured, professional, and
+       enterprise-ready way.
+
+       KEY GOALS
+       -------------------------------------------------------
+       1) Show that Romanoti follows a disciplined process.
+       2) Position the company beyond ad-hoc technical support.
+       3) Connect services with the Romanoti platform model.
+       4) Support assessment-based entry and monthly service.
+       ======================================================= -->
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>How We Work | Romanoti Solutions</title>
+  <meta
+    name="description"
+    content="Learn how Romanoti Solutions works with organizations through structured assessment, discovery, operational intelligence, implementation, and continuity-focused service delivery."
+  />
+
+  <!-- =======================================================
+       FAVICONS
+       ======================================================= -->
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/romanoti-icon.png">
+  <link rel="icon" type="image/png" href="/images/romanoti-icon.png">
+  <link rel="apple-touch-icon" href="/images/romanoti-icon.png">
   <meta name="theme-color" content="#2563eb">
 
-  <!-- Tailwind + Montserrat -->
+  <!-- =======================================================
+       GLOBAL STYLES / FONTS
+       IMPORTANT:
+       nav.js requires Tailwind classes to render correctly.
+       ======================================================= -->
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
 
+  <!-- =======================================================
+       LOCAL PAGE STYLES
+       ======================================================= -->
   <style>
-    body{font-family:'Montserrat',sans-serif;background:#f8f9fa;color:#0f172a}
-    .hero-bg{background:linear-gradient(135deg,#1e3a8a 0%,#2563eb 100%)}
-    .card{border:1px solid #e5e7eb;border-radius:16px;box-shadow:0 10px 30px -12px rgba(0,0,0,.12)}
-    .btn-primary{background:#2563EB;transition:all .2s}
-    .btn-primary:hover{background:#1D4ED8;transform:translateY(-1px)}
-    .kpi{display:flex;flex-direction:column;align-items:center;justify-content:center;border:1px solid #e5e7eb;border-radius:16px;padding:14px;background:#fff}
+    :root {
+      --primary-blue: #2f5bdb;
+      --primary-blue-dark: #2449b3;
+      --primary-blue-soft: #eaf0ff;
+
+      --text-dark: #1f2937;
+      --text-body: #5f6f8a;
+
+      --border-light: #d9e1f0;
+      --bg-page: #f5f7fb;
+      --bg-section: #ffffff;
+
+      --shadow-soft: 0 10px 25px rgba(31, 41, 55, 0.08);
+
+      --max-width: 1180px;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --radius-sm: 10px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+      background: var(--bg-page);
+      color: var(--text-dark);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container-r {
+      width: min(var(--max-width), calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .hero {
+      position: relative;
+      min-height: 72vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      background: #081120;
+      color: white;
+    }
+
+    .hero__bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .hero__bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+
+    .hero__overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background:
+        linear-gradient(90deg, rgba(5,10,20,.90) 0%, rgba(5,10,20,.72) 48%, rgba(5,10,20,.36) 100%),
+        linear-gradient(180deg, rgba(5,10,20,.20) 0%, rgba(5,10,20,.48) 100%);
+    }
+
+    .hero__content {
+      position: relative;
+      z-index: 2;
+      width: min(var(--max-width), calc(100% - 32px));
+      margin: 0 auto;
+      padding: 96px 0 84px;
+      max-width: 900px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.14);
+      border: 1px solid rgba(255,255,255,0.18);
+      color: #ffffff;
+      font-size: 0.84rem;
+      margin-bottom: 18px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0 0 18px;
+      font-size: clamp(2.3rem, 4vw, 4.3rem);
+      line-height: 1.06;
+      color: #ffffff;
+      font-weight: 800;
+      max-width: 860px;
+    }
+
+    .hero p {
+      margin: 0 0 28px;
+      font-size: 1.08rem;
+      color: rgba(255,255,255,.90);
+      max-width: 760px;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0 18px;
+      border-radius: var(--radius-sm);
+      border: 1px solid transparent;
+      font-weight: 700;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: #ffffff;
+      color: var(--primary-blue);
+    }
+
+    .btn-primary:hover {
+      background: #f4f7ff;
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.08);
+      color: #ffffff;
+      border-color: rgba(255,255,255,0.25);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.14);
+    }
+
+    .section {
+      padding: 60px 0;
+      background: var(--bg-section);
+      border-top: 1px solid #edf1f7;
+    }
+
+    .section.alt {
+      background: var(--bg-page);
+    }
+
+    .mini-label {
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: #2563eb;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .section h2 {
+      margin: 0 0 12px;
+      font-size: clamp(1.9rem, 2.2vw, 2.8rem);
+      text-align: center;
+      color: var(--text-dark);
+    }
+
+    .section-intro {
+      max-width: 860px;
+      margin: 0 auto 28px;
+      text-align: center;
+      color: var(--text-body);
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 22px;
+    }
+
+    .grid-5 {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 18px;
+      margin-top: 28px;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+      margin-top: 20px;
+    }
+
+    .card {
+      background: #ffffff;
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .card h3 {
+      margin-top: 0;
+      margin-bottom: 12px;
+      font-size: 1.3rem;
+      color: var(--text-dark);
+    }
+
+    .card p {
+      margin-top: 0;
+      color: var(--text-body);
+    }
+
+    .process-card {
+      background: linear-gradient(180deg, #ffffff 0%, #f9fbff 100%);
+      border: 1px solid var(--border-light);
+      border-radius: 18px;
+      padding: 22px;
+      box-shadow: var(--shadow-soft);
+      height: 100%;
+    }
+
+    .step-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 999px;
+      background: var(--primary-blue-soft);
+      color: var(--primary-blue);
+      font-weight: 800;
+      margin-bottom: 14px;
+    }
+
+    .process-card h3 {
+      margin: 0 0 10px;
+      font-size: 1.08rem;
+      color: var(--text-dark);
+    }
+
+    .process-card p {
+      margin: 0;
+      color: var(--text-body);
+      font-size: 0.96rem;
+    }
+
+    .bullets {
+      padding-left: 20px;
+      color: var(--text-body);
+      margin: 14px 0 0;
+    }
+
+    .bullets li {
+      margin-bottom: 8px;
+    }
+
+    .cta-box {
+      background: linear-gradient(135deg, #ffffff, var(--primary-blue-soft));
+      border: 1px solid var(--border-light);
+      border-radius: 24px;
+      padding: 34px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .cta-box h2 {
+      text-align: left;
+      margin-top: 0;
+      margin-bottom: 12px;
+    }
+
+    .cta-box p {
+      color: var(--text-body);
+      max-width: 860px;
+      margin: 0 0 22px;
+    }
+
+    @media (max-width: 1100px) {
+      .grid-5 {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 860px) {
+      .grid-3,
+      .grid-5,
+      .two-col {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        min-height: auto;
+      }
+
+      .hero__content {
+        padding: 74px 0 64px;
+      }
+    }
   </style>
 </head>
+
 <body>
-  <!-- Header -->
+  <!-- =======================================================
+       GLOBAL HEADER
+       IMPORTANT:
+       No local header or fallback header is used here.
+       nav.js is the only source of truth for navigation.
+       ======================================================= -->
   <div id="app-header"></div>
 
-  <!-- Hero -->
-  <section class="hero-bg text-white">
-    <div class="container mx-auto px-6 py-14">
-      <h1 class="text-4xl md:text-5xl font-bold">Cómo Trabajamos</h1>
-      <p class="text-xl md:text-2xl mt-3 max-w-3xl">Proceso claro, SLAs y responsabilidades compartidas para obtener valor en semanas, no meses.</p>
-    </div>
-  </section>
+  <main>
+    <!-- =====================================================
+         HERO
+         ===================================================== -->
+    <section class="hero">
+      <div class="hero__bg">
+        <img src="/images/romanoti-hero-banner.png" alt="Romanoti Solutions Banner">
+      </div>
+      <div class="hero__overlay"></div>
 
-  <!-- Pasos -->
-  <section class="py-12">
-    <div class="container mx-auto px-6 max-w-5xl grid md:grid-cols-5 gap-6">
-      <div class="card bg-white p-5">
-        <h3 class="font-bold mb-1">1. Descubrimiento</h3>
-        <p class="text-gray-700 text-sm">Entendemos negocio, riesgos y herramientas actuales. Definimos alcance y objetivos de 30 días.</p>
-      </div>
-      <div class="card bg-white p-5">
-        <h3 class="font-bold mb-1">2. Detecciones clave</h3>
-        <p class="text-gray-700 text-sm">Habilitamos reglas anti-ransomware/C2 y conectores (M365, endpoints, red) para alertas accionables.</p>
-      </div>
-      <div class="card bg-white p-5">
-        <h3 class="font-bold mb-1">3. Onboarding</h3>
-        <p class="text-gray-700 text-sm">EASM + postura de correo (SPF/DKIM/DMARC). Inventario de exposición y plan de cierre.</p>
-      </div>
-      <div class="card bg-white p-5">
-        <h3 class="font-bold mb-1">4. Runbooks</h3>
-        <p class="text-gray-700 text-sm">Playbooks de respuesta (phishing, ransomware, C2). Roles, RTO y pasos de contención.</p>
-      </div>
-      <div class="card bg-white p-5">
-        <h3 class="font-bold mb-1">5. Mejora continua</h3>
-        <p class="text-gray-700 text-sm">Revisión mensual, métricas y roadmap trimestral para madurar controles y reducir ruido.</p>
-      </div>
-    </div>
-  </section>
+      <div class="hero__content">
+        <div class="eyebrow">How Romanoti Works</div>
+        <h1>We bring structure, clarity, and continuity to technical environments.</h1>
+        <p>
+          Romanoti Solutions works with organizations through a disciplined delivery model
+          that starts with assessment, moves through discovery and interpretation,
+          and evolves into implementation, resilience, and continuous operational support.
+        </p>
 
-  <!-- KPIs / SLAs -->
-  <section class="py-2">
-    <div class="container mx-auto px-6 max-w-5xl grid md:grid-cols-3 gap-6">
-      <div class="kpi">
-        <div class="text-3xl font-bold">15 min</div>
-        <div class="text-gray-600">SLA de atención en alertas críticas</div>
+        <div class="actions">
+          <a href="/contact.html" class="btn btn-primary">Start a consultation</a>
+          <a href="/platform/index.html" class="btn btn-secondary">Explore the platform</a>
+        </div>
       </div>
-      <div class="kpi">
-        <div class="text-3xl font-bold">30 días</div>
-        <div class="text-gray-600">DMARC “reject” (si aplica) o plan de ruta</div>
-      </div>
-      <div class="kpi">
-        <div class="text-3xl font-bold">+3</div>
-        <div class="text-gray-600">Quick wins en el primer mes</div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Entregables -->
-  <section class="py-12">
-    <div class="container mx-auto px-6 max-w-5xl card bg-white p-6">
-      <h2 class="text-2xl font-bold mb-3">Entregables</h2>
-      <ul class="list-disc ml-6 space-y-2 text-gray-700">
-        <li>Reporte EASM con priorización de riesgos y evidencias</li>
-        <li>Postura de correo (MX/SPF/DKIM/DMARC) y plan de cierre</li>
-        <li>Playbooks de incidentes (phishing / ransomware / C2)</li>
-        <li>Dashboard de alertas y reporte ejecutivo mensual</li>
-      </ul>
-      <div class="mt-5 flex gap-3">
-        <a class="btn-primary text-white px-6 py-2 rounded-lg font-semibold" href="/solutions/cybershield/pov-14d.html">Probar POV 14 días</a>
-        <a class="px-6 py-2 rounded-lg font-semibold border bg-white hover:bg-gray-50" href="/solutions/cybershield/">Ver CyberShield</a>
-      </div>
-    </div>
-  </section>
+    <!-- =====================================================
+         WHY OUR APPROACH MATTERS
+         ===================================================== -->
+    <section class="section">
+      <div class="container-r">
+        <div class="mini-label">Why our approach matters</div>
+        <h2>Technical support without structure creates risk</h2>
+        <p class="section-intro">
+          Many organizations operate with fragmented support, incomplete visibility,
+          and reactive decision-making. Romanoti is built to reduce that chaos
+          through a more disciplined and infrastructure-aware service model.
+        </p>
 
-  <!-- Footer -->
-  <div id="app-footer" class="mt-10"></div>
-<!-- Nav/Footer (con versión para romper caché) -->
-<script defer src="/js/nav.js?v=6"></script>
-<script defer src="/js/footer.js?v=6"></script>
-<script defer src="/js/fix-nav.js?v=6"></script>
+        <div class="grid-3">
+          <div class="card">
+            <h3>Reactive operations</h3>
+            <p>
+              Teams often work in response mode, only addressing issues after they affect service quality,
+              continuity, or user experience.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>Limited visibility</h3>
+            <p>
+              Without strong discovery and service visibility, organizations struggle to understand
+              what exists, what is exposed, and what depends on what.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>Unclear priorities</h3>
+            <p>
+              Technical findings alone do not create action. Organizations need guidance,
+              interpretation, and clear next steps.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         DELIVERY MODEL
+         ===================================================== -->
+    <section class="section alt">
+      <div class="container-r">
+        <div class="mini-label">Our delivery model</div>
+        <h2>How Romanoti engages with organizations</h2>
+        <p class="section-intro">
+          Romanoti follows a structured workflow that helps organizations move from uncertainty
+          to operational clarity, and from technical review to stronger execution.
+        </p>
+
+        <div class="grid-5">
+          <div class="process-card">
+            <div class="step-number">1</div>
+            <h3>Assess</h3>
+            <p>
+              We begin by understanding the environment, objectives, current issues,
+              and the level of operational maturity.
+            </p>
+          </div>
+
+          <div class="process-card">
+            <div class="step-number">2</div>
+            <h3>Discover</h3>
+            <p>
+              Through NetPilot and technical review, we establish visibility into systems,
+              services, exposure, and infrastructure structure.
+            </p>
+          </div>
+
+          <div class="process-card">
+            <div class="step-number">3</div>
+            <h3>Interpret</h3>
+            <p>
+              Ops Assistant helps transform findings into clearer understanding,
+              operational priorities, and decision support.
+            </p>
+          </div>
+
+          <div class="process-card">
+            <div class="step-number">4</div>
+            <h3>Execute</h3>
+            <p>
+              Romanoti supports implementation, hardening, remediation,
+              continuity improvements, and service stabilization.
+            </p>
+          </div>
+
+          <div class="process-card">
+            <div class="step-number">5</div>
+            <h3>Improve</h3>
+            <p>
+              We help organizations evolve toward stronger operational discipline
+              through ongoing service, review, and continuity-focused support.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         ENGAGEMENT MODELS
+         ===================================================== -->
+    <section class="section">
+      <div class="container-r">
+        <div class="mini-label">Engagement models</div>
+        <h2>Romanoti can engage at different levels</h2>
+        <p class="section-intro">
+          We do not force a single delivery model. Romanoti can support organizations
+          through an initial assessment, a targeted project, or a continuity-based monthly engagement.
+        </p>
+
+        <div class="grid-3">
+          <div class="card">
+            <h3>Assessment-first engagement</h3>
+            <p>
+              Ideal for organizations that need a structured review before deciding what to implement.
+            </p>
+            <ul class="bullets">
+              <li>Environment assessment</li>
+              <li>Discovery and visibility review</li>
+              <li>Findings and recommendations</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3>Project-based execution</h3>
+            <p>
+              Best for organizations that already know what needs to be designed, remediated,
+              stabilized, or implemented.
+            </p>
+            <ul class="bullets">
+              <li>Implementation work</li>
+              <li>Technical remediation</li>
+              <li>Resilience and continuity projects</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3>Monthly operational support</h3>
+            <p>
+              Designed for organizations that need continuity, visibility, guidance,
+              and ongoing technical partnership.
+            </p>
+            <ul class="bullets">
+              <li>Continuous review</li>
+              <li>Operational intelligence</li>
+              <li>Infrastructure-aware support</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         CONNECTED PLATFORM
+         ===================================================== -->
+    <section class="section alt">
+      <div class="container-r">
+        <div class="mini-label">Connected capabilities</div>
+        <h2>Services and platform work together</h2>
+        <p class="section-intro">
+          Romanoti is not only a service provider. We are building a connected operating model
+          where services, discovery, interpretation, and resilience reinforce each other.
+        </p>
+
+        <div class="two-col">
+          <div class="card">
+            <h3>NetPilot</h3>
+            <p>
+              NetPilot is the discovery layer. It helps organizations understand what exists
+              in their infrastructure, what is exposed, and where technical visibility is limited.
+            </p>
+            <a href="/platform/netpilot.html" class="btn btn-primary">Explore NetPilot</a>
+          </div>
+
+          <div class="card">
+            <h3>Ops Assistant</h3>
+            <p>
+              Ops Assistant is the interpretation layer. It helps teams move from technical findings
+              toward operational meaning, prioritization, and more confident next steps.
+            </p>
+            <a href="/platform/ops-assistant.html" class="btn btn-primary">Explore Ops Assistant</a>
+          </div>
+        </div>
+
+        <div class="two-col" style="margin-top: 22px;">
+          <div class="card">
+            <h3>Infrastructure Resilience & Continuity</h3>
+            <p>
+              When discovery and interpretation reveal critical dependencies or operational risk,
+              Romanoti supports resilience strategies such as failover, redundancy,
+              and continuity planning.
+            </p>
+            <a href="/cloud-redundancy.html" class="btn btn-primary">Explore Resilience</a>
+          </div>
+
+          <div class="card">
+            <h3>Service delivery with operational discipline</h3>
+            <p>
+              The Romanoti model connects assessment, platform intelligence, and technical execution
+              into one enterprise-ready delivery approach.
+            </p>
+            <ul class="bullets">
+              <li>Discovery</li>
+              <li>Interpretation</li>
+              <li>Implementation</li>
+              <li>Continuity</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         WHO THIS IS FOR
+         ===================================================== -->
+    <section class="section">
+      <div class="container-r">
+        <div class="mini-label">Who this is for</div>
+        <h2>Romanoti is built for organizations that need more than ad-hoc support</h2>
+        <p class="section-intro">
+          Our approach is especially relevant for teams that need structure, continuity,
+          and more confidence in how technical services are delivered.
+        </p>
+
+        <div class="grid-3">
+          <div class="card">
+            <h3>Government and regulated environments</h3>
+            <p>
+              Teams that need stronger visibility, documented understanding,
+              and more controlled technical operations.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>Growing infrastructure teams</h3>
+            <p>
+              Organizations moving from reactive support toward a more mature
+              and service-oriented operational model.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>Enterprise environments with continuity needs</h3>
+            <p>
+              Teams that cannot afford prolonged uncertainty around availability,
+              risk, or infrastructure dependencies.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         FINAL CTA
+         ===================================================== -->
+    <section class="section alt">
+      <div class="container-r">
+        <div class="cta-box">
+          <h2>Romanoti works through structure, not improvisation.</h2>
+          <p>
+            We help organizations move from fragmented technical support
+            toward a more disciplined model based on assessment, visibility,
+            operational intelligence, and continuity-focused execution.
+          </p>
+
+          <div class="actions">
+            <a href="/contact.html" class="btn btn-primary">Book a consultation</a>
+            <a href="/why-romanoti.html" class="btn btn-secondary" style="color:#1f2937;border-color:#cbd5e1;background:#fff;">Why Romanoti</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- =======================================================
+       GLOBAL FOOTER
+       ======================================================= -->
+  <div id="app-footer"></div>
+
+  <!-- =======================================================
+       GLOBAL SCRIPTS
+       ======================================================= -->
+  <script defer src="/js/nav.js?v=11"></script>
+  <script defer src="/js/footer.js?v=11"></script>
+  <script defer src="/js/fix-nav.js?v=11"></script>
 </body>
 </html>
