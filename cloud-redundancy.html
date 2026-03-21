@@ -1,232 +1,462 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Failover Cluster & Redundancy | RomanoTI Solutions</title>
+  <!-- =========================================================
+    File: /cloud-redundancy.html
+    Purpose: Failover Cluster & Redundancy service page
+    Brand: Romanoti Solutions
 
-    <!-- Tailwind CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    Changes in this version:
+      - Replaced old manual header with global nav.js header
+      - Corrected branding from RomanoTI to Romanoti Solutions
+      - Applied Romanoti visual structure and spacing
+      - Improved business-oriented messaging
+      - Added stronger CTA flow
+      - Connected service positioning with infrastructure/platform strategy
+      - Added official Romanoti favicon paths
+      - Kept current path for now: /cloud-redundancy.html
+        (recommended future move: /services/failover-redundancy.html)
+  ========================================================== -->
 
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Failover Cluster & Redundancy | Romanoti Solutions</title>
 
-    <!-- Favicon -->
-    <link rel="icon" href="https://ui-avatars.com/api/?name=R&background=1e40af&color=fff&size=64" type="image/png">
+  <meta
+    name="description"
+    content="Romanoti Solutions designs and implements failover cluster and redundancy services to reduce downtime, strengthen resilience, and protect mission-critical infrastructure."
+  >
 
-    <!-- Estilos personalizados -->
-    <style>
-        body {
-            font-family: 'Montserrat', sans-serif;
-            background-color: #f8f9fa;
-            color: #333;
-            scroll-behavior: smooth;
-        }
+  <!-- =========================================================
+    OFFICIAL ROMANOTI FAVICONS
+  ========================================================== -->
+  <link rel="icon" type="image/png" href="/images/romanoti-icon.png?v=2">
+  <link rel="shortcut icon" href="/images/favicon.ico?v=2" type="image/x-icon">
+  <link rel="apple-touch-icon" href="/images/romanoti-icon.png?v=2">
+  <meta name="theme-color" content="#2563eb">
 
-        .hero-bg {
-            background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
-        }
+  <!-- Tailwind CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 
-        .btn-primary {
-            background: #2563EB;
-            transition: all 0.3s ease;
-        }
-        .btn-primary:hover {
-            background: #1D4ED8;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        }
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
 
-        .service-card, .feature-card {
-            transition: all 0.3s ease;
-            border-radius: 0.5rem;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        }
-        .service-card:hover, .feature-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 12px 30px -8px rgba(37, 99, 235, 0.15);
-        }
+  <!-- =========================================================
+    LOCAL PAGE STYLES
+    Note:
+    These styles are kept local to avoid breaking the rest
+    of the site while the Romanoti redesign continues.
+  ========================================================== -->
+  <style>
+    body{
+      font-family:'Montserrat',sans-serif;
+      background:#f8fafc;
+      color:#0f172a;
+      scroll-behavior:smooth;
+    }
 
-        header, footer {
-            background: white;
-        }
+    .btn-primary{
+      background:#2563EB;
+      transition:all .25s ease;
+    }
 
-        .logo {
-            display: flex;
-            align-items: center;
-            font-weight: bold;
-            font-size: 1.5rem;
-        }
-        .logo-icon {
-            background: #2563EB;
-            color: white;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 12px;
-            font-size: 1.2rem;
-            font-weight: bold;
-        }
+    .btn-primary:hover{
+      background:#1D4ED8;
+      transform:translateY(-1px);
+      box-shadow:0 10px 24px -12px rgba(37,99,235,.5);
+    }
 
-        .check-icon {
-            width: 16px;
-            height: 16px;
-            background: #10b981;
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.75rem;
-            margin-right: 8px;
-        }
-    </style>
+    .btn-secondary{
+      border:1px solid rgba(255,255,255,.22);
+      color:#fff;
+      background:rgba(255,255,255,.06);
+      transition:all .25s ease;
+      backdrop-filter:blur(6px);
+    }
+
+    .btn-secondary:hover{
+      background:rgba(255,255,255,.12);
+      transform:translateY(-1px);
+    }
+
+    .hero-bg{
+      background:
+        linear-gradient(90deg, rgba(4,10,24,.88) 0%, rgba(4,10,24,.72) 45%, rgba(4,10,24,.42) 100%),
+        linear-gradient(135deg, #0b1220 0%, #0f1f3d 45%, #1d4ed8 100%);
+    }
+
+    .service-card,
+    .feature-card,
+    .value-card{
+      transition:all .25s ease;
+      border-radius:1rem;
+      box-shadow:0 10px 30px -18px rgba(2,6,23,.18);
+    }
+
+    .service-card:hover,
+    .feature-card:hover,
+    .value-card:hover{
+      transform:translateY(-5px);
+      box-shadow:0 18px 40px -20px rgba(37,99,235,.22);
+    }
+
+    .badge{
+      display:inline-block;
+      border:1px solid #cbd5e1;
+      border-radius:999px;
+      padding:4px 12px;
+      font-size:12px;
+      font-weight:600;
+      letter-spacing:.04em;
+      background:#f8fafc;
+    }
+
+    .hero-badge{
+      border-color:rgba(125,211,252,.28);
+      background:rgba(255,255,255,.06);
+      color:#7dd3fc;
+    }
+
+    .section-soft{
+      background:linear-gradient(180deg,#f8fafc 0%, #ffffff 100%);
+    }
+
+    .mini-label{
+      font-size:.78rem;
+      font-weight:700;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      color:#2563eb;
+    }
+  </style>
 </head>
+
 <body class="bg-gray-50">
 
-    <!-- Header -->
-    <header class="bg-white shadow-md sticky top-0 z-50">
-        <div class="container mx-auto px-6 py-3">
-            <div class="flex items-center justify-between">
-                <!-- Logo -->
-                <a href="/" class="logo flex items-center">
-                    <div class="logo-icon">R</div>
-                    <span>RomanoTI Solutions</span>
-                </a>
+  <!-- Global Romanoti header -->
+  <div id="app-header"></div>
 
-                <!-- Navegación -->
-                <nav class="hidden md:flex items-center space-x-8">
-                    <a href="/" class="text-gray-700 hover:text-blue-600 font-medium">Home</a>
-                    <a href="https://calendly.com/info-romanoti" class="btn-primary text-white px-5 py-2 rounded-lg font-medium">Book Now</a>
-                </nav>
-            </div>
-        </div>
-    </header>
+  <main>
+    <!-- =======================================================
+      HERO
+    ======================================================== -->
+    <section class="hero-bg text-white">
+      <div class="container mx-auto px-6 py-24 md:py-28">
+        <div class="max-w-4xl">
+          <span class="badge hero-badge">Infrastructure Resilience · Business Continuity · High Availability</span>
 
-    <!-- Hero -->
-    <section class="hero-bg text-white py-28">
-        <div class="container mx-auto px-6 text-center">
-            <h1 class="text-4xl md:text-5xl font-bold mb-6">Failover Cluster & Redundancy</h1>
-            <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">High-availability solutions to eliminate single points of failure and ensure business continuity</p>
+          <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mt-6">
+            Keep critical systems online with failover and redundancy
+          </h1>
+
+          <p class="text-xl md:text-2xl mt-6 max-w-3xl text-white/85 leading-relaxed">
+            Romanoti Solutions designs high-availability environments that reduce downtime,
+            eliminate single points of failure, and protect mission-critical operations.
+          </p>
+
+          <div class="mt-10 flex flex-col sm:flex-row gap-4">
+            <a href="/contact.html" class="btn-primary text-white px-6 py-3 rounded-xl font-semibold text-center">
+              Request a Consultation
+            </a>
+
+            <a href="/booking.html?service=Failover%20Redundancy%20Assessment" class="btn-secondary px-6 py-3 rounded-xl font-semibold text-center">
+              Book a Review
+            </a>
+          </div>
+
+          <p class="mt-8 text-sm text-white/60">
+            Designed for infrastructure teams, regulated environments, and organizations that cannot afford service interruption.
+          </p>
         </div>
+      </div>
     </section>
 
-    <!-- What We Deliver -->
-    <section class="py-16 bg-white">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold">What We Deliver</h2>
-                <p class="text-xl text-gray-600 max-w-2xl mx-auto">Design, implementation, and maintenance of failover clusters for critical workloads.</p>
-            </div>
-
-            <!-- High Availability -->
-            <div class="feature-card p-8 rounded-lg shadow-sm bg-white mb-8">
-                <h3 class="text-xl font-bold mb-4">High Availability (HA) Architecture</h3>
-                <p class="mb-6">Design and deployment of Windows Server Failover Clustering (WSFC) for SQL Server, file servers, and virtual machines.</p>
-                <div class="grid md:grid-cols-3 gap-6">
-                    <div class="bg-blue-50 p-6 rounded-lg">
-                        <h4 class="font-bold text-lg mb-3">Software</h4>
-                        <p>Windows Server 2016+, Failover Cluster Manager, Hyper-V, SQL Server Always On.</p>
-                    </div>
-                    <div class="bg-blue-50 p-6 rounded-lg">
-                        <h4 class="font-bold text-lg mb-3">Hardware</h4>
-                        <p>At least 2 physical or virtual servers, shared storage (SAN, iSCSI), redundant network paths.</p>
-                    </div>
-                    <div class="bg-blue-50 p-6 rounded-lg">
-                        <h4 class="font-bold text-lg mb-3">Human Intervention</h4>
-                        <p>Microsoft-certified engineers design, configure, and test failover scenarios.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Automatic Failover -->
-            <div class="feature-card p-8 rounded-lg shadow-sm bg-white mb-8">
-                <h3 class="text-xl font-bold mb-4">Automatic Failover and Recovery</h3>
-                <p class="mb-6">Zero-downtime failover for critical services with real-time health monitoring.</p>
-                <div class="grid md:grid-cols-3 gap-6">
-                    <div class="bg-blue-50 p-6 rounded-lg">
-                        <h4 class="font-bold text-lg mb-3">Software</h4>
-                        <p>Cluster-aware applications, heartbeat monitoring, quorum configuration.</p>
-                    </div>
-                    <div class="bg-blue-50 p-6 rounded-lg">
-                        <h4 class="font-bold text-lg mb-3">Hardware</h4>
-                        <p>Dedicated heartbeat network, redundant power supplies, dual NICs.</p>
-                    </div>
-                    <div class="bg-blue-50 p-6 rounded-lg">
-                        <h4 class="font-bold text-lg mb-3">Human Intervention</h4>
-                        <p>Engineers validate failover triggers and ensure automatic recovery works as expected.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Shared Storage -->
-            <div class="feature-card p-8 rounded-lg shadow-sm bg-white mb-8">
-                <h3 class="text-xl font-bold mb-4">Shared Storage Configuration</h3>
-                <p class="mb-6">Implementation of shared storage using SAN, iSCSI, or Azure shared disks.</p>
-                <div class="grid md:grid-cols-3 gap-6">
-                    <div class="bg-blue-50 p-6 rounded-lg">
-                        <h4 class="font-bold text-lg mb-3">Software</h4>
-                        <p>iSCSI Target, Storage Spaces Direct (S2D), Azure Shared Disks.</p>
-                    </div>
-                    <div class="bg-blue-50 p-6 rounded-lg">
-                        <h4 class="font-bold text-lg mb-3">Hardware</h4>
-                        <p>SAN/NAS storage, 10GbE network, dedicated storage network.</p>
-                    </div>
-                    <div class="bg-blue-50 p-6 rounded-lg">
-                        <h4 class="font-bold text-lg mb-3">Human Intervention</h4>
-                        <p>Storage specialists configure LUNs, zoning, and permissions for cluster access.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Testing & Documentation -->
-            <div class="feature-card p-8 rounded-lg shadow-sm bg-white">
-                <h3 class="text-xl font-bold mb-4">Failover Testing and Documentation</h3>
-                <p class="mb-6">Regular testing and full documentation of cluster behavior during failures.</p>
-                <div class="grid md:grid-cols-3 gap-6">
-                    <div class="bg-blue-50 p-6 rounded-lg">
-                        <h4 class="font-bold text-lg mb-3">Software</h4>
-                        <p>PowerShell scripts for automated testing, monitoring tools for validation.</p>
-                    </div>
-                    <div class="bg-blue-50 p-6 rounded-lg">
-                        <h4 class="font-bold text-lg mb-3">Hardware</h4>
-                        <p>Test environment mirroring production, isolated network.</p>
-                    </div>
-                    <div class="bg-blue-50 p-6 rounded-lg">
-                        <h4 class="font-bold text-lg mb-3">Human Intervention</h4>
-                        <p>Engineers conduct controlled failover tests and document results for compliance.</p>
-                    </div>
-                </div>
-            </div>
+    <!-- =======================================================
+      BUSINESS VALUE
+    ======================================================== -->
+    <section class="py-16 bg-white border-b border-slate-200">
+      <div class="container mx-auto px-6">
+        <div class="text-center max-w-3xl mx-auto mb-12">
+          <div class="mini-label mb-3">Why this matters</div>
+          <h2 class="text-3xl md:text-4xl font-bold text-slate-900">
+            Downtime is not just technical — it is operational and financial
+          </h2>
+          <p class="text-lg text-slate-600 mt-5 leading-relaxed">
+            A single server or storage failure can disrupt users, stop workloads, and create business risk.
+            Romanoti helps organizations build resilient infrastructure that remains available when components fail.
+          </p>
         </div>
+
+        <div class="grid md:grid-cols-3 gap-6">
+          <div class="value-card bg-slate-50 border border-slate-200 p-8">
+            <h3 class="text-xl font-bold mb-3 text-slate-900">Reduce downtime</h3>
+            <p class="text-slate-600 leading-7">
+              Design cluster-based environments that minimize outages and maintain service continuity during infrastructure failures.
+            </p>
+          </div>
+
+          <div class="value-card bg-slate-50 border border-slate-200 p-8">
+            <h3 class="text-xl font-bold mb-3 text-slate-900">Protect critical workloads</h3>
+            <p class="text-slate-600 leading-7">
+              Support SQL Server, virtualization, file services, and other production systems that require stable availability.
+            </p>
+          </div>
+
+          <div class="value-card bg-slate-50 border border-slate-200 p-8">
+            <h3 class="text-xl font-bold mb-3 text-slate-900">Improve resilience</h3>
+            <p class="text-slate-600 leading-7">
+              Build redundancy into infrastructure so operations can continue even when individual systems or paths fail.
+            </p>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <!-- CTA -->
+    <!-- =======================================================
+      WHAT WE DELIVER
+    ======================================================== -->
+    <section class="py-16 section-soft border-b border-slate-200">
+      <div class="container mx-auto px-6">
+        <div class="text-center max-w-3xl mx-auto mb-12">
+          <div class="mini-label mb-3">What we deliver</div>
+          <h2 class="text-3xl md:text-4xl font-bold text-slate-900">
+            High-availability services designed for real environments
+          </h2>
+          <p class="text-lg text-slate-600 mt-5 leading-relaxed">
+            Romanoti provides design, implementation, validation, and operational support for failover cluster and redundancy strategies.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
+          <div class="service-card bg-white border border-slate-200 p-7">
+            <h3 class="text-xl font-bold mb-3">HA architecture</h3>
+            <p class="text-slate-600 leading-7">
+              Design and deployment of failover cluster environments for servers, virtualization platforms, and business-critical workloads.
+            </p>
+          </div>
+
+          <div class="service-card bg-white border border-slate-200 p-7">
+            <h3 class="text-xl font-bold mb-3">Automatic failover</h3>
+            <p class="text-slate-600 leading-7">
+              Configuration of health monitoring, cluster behavior, and recovery paths so services fail over predictably when needed.
+            </p>
+          </div>
+
+          <div class="service-card bg-white border border-slate-200 p-7">
+            <h3 class="text-xl font-bold mb-3">Storage redundancy</h3>
+            <p class="text-slate-600 leading-7">
+              Shared storage and connectivity planning using SAN, iSCSI, and resilient data path design for clustered environments.
+            </p>
+          </div>
+
+          <div class="service-card bg-white border border-slate-200 p-7">
+            <h3 class="text-xl font-bold mb-3">Testing and validation</h3>
+            <p class="text-slate-600 leading-7">
+              Controlled failover testing, technical validation, and operational documentation to confirm readiness before production reliance.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =======================================================
+      TECHNICAL DELIVERY BLOCKS
+    ======================================================== -->
+    <section class="py-16 bg-white border-b border-slate-200">
+      <div class="container mx-auto px-6">
+        <div class="max-w-3xl mb-10">
+          <div class="mini-label mb-3">Technical scope</div>
+          <h2 class="text-3xl md:text-4xl font-bold text-slate-900">
+            Practical implementation areas
+          </h2>
+          <p class="text-lg text-slate-600 mt-4 leading-relaxed">
+            This service supports the technical design and operational preparation required for resilient clustered environments.
+          </p>
+        </div>
+
+        <div class="space-y-8">
+          <!-- Block 1 -->
+          <div class="feature-card bg-white border border-slate-200 p-8">
+            <h3 class="text-2xl font-bold mb-4">High Availability (HA) Architecture</h3>
+            <p class="mb-6 text-slate-600 leading-7">
+              Design and deployment of Windows Server Failover Clustering (WSFC) for SQL Server, file servers, and virtual machines.
+            </p>
+
+            <div class="grid md:grid-cols-3 gap-6">
+              <div class="bg-slate-50 p-6 rounded-xl border border-slate-200">
+                <h4 class="font-bold text-lg mb-3">Software</h4>
+                <p class="text-slate-600">Windows Server 2016+, Failover Cluster Manager, Hyper-V, SQL Server Always On.</p>
+              </div>
+
+              <div class="bg-slate-50 p-6 rounded-xl border border-slate-200">
+                <h4 class="font-bold text-lg mb-3">Infrastructure</h4>
+                <p class="text-slate-600">At least 2 physical or virtual servers, shared storage (SAN, iSCSI), and redundant network paths.</p>
+              </div>
+
+              <div class="bg-slate-50 p-6 rounded-xl border border-slate-200">
+                <h4 class="font-bold text-lg mb-3">Engineering</h4>
+                <p class="text-slate-600">Experienced technical specialists design, configure, and test failover scenarios.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Block 2 -->
+          <div class="feature-card bg-white border border-slate-200 p-8">
+            <h3 class="text-2xl font-bold mb-4">Automatic Failover and Recovery</h3>
+            <p class="mb-6 text-slate-600 leading-7">
+              Zero-downtime failover planning for critical services with real-time health monitoring and structured recovery behavior.
+            </p>
+
+            <div class="grid md:grid-cols-3 gap-6">
+              <div class="bg-slate-50 p-6 rounded-xl border border-slate-200">
+                <h4 class="font-bold text-lg mb-3">Software</h4>
+                <p class="text-slate-600">Cluster-aware applications, heartbeat monitoring, quorum configuration, and failover policies.</p>
+              </div>
+
+              <div class="bg-slate-50 p-6 rounded-xl border border-slate-200">
+                <h4 class="font-bold text-lg mb-3">Infrastructure</h4>
+                <p class="text-slate-600">Dedicated heartbeat network, dual NICs, power redundancy, and resilient communications between nodes.</p>
+              </div>
+
+              <div class="bg-slate-50 p-6 rounded-xl border border-slate-200">
+                <h4 class="font-bold text-lg mb-3">Engineering</h4>
+                <p class="text-slate-600">Validation of failover triggers and recovery workflows to confirm automatic service continuity.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Block 3 -->
+          <div class="feature-card bg-white border border-slate-200 p-8">
+            <h3 class="text-2xl font-bold mb-4">Shared Storage Configuration</h3>
+            <p class="mb-6 text-slate-600 leading-7">
+              Implementation of shared storage using SAN, iSCSI, or cloud-connected shared disk approaches depending on environment needs.
+            </p>
+
+            <div class="grid md:grid-cols-3 gap-6">
+              <div class="bg-slate-50 p-6 rounded-xl border border-slate-200">
+                <h4 class="font-bold text-lg mb-3">Software</h4>
+                <p class="text-slate-600">iSCSI targets, Storage Spaces Direct, storage management layers, and cluster storage integration.</p>
+              </div>
+
+              <div class="bg-slate-50 p-6 rounded-xl border border-slate-200">
+                <h4 class="font-bold text-lg mb-3">Infrastructure</h4>
+                <p class="text-slate-600">SAN/NAS storage, 10GbE networking, dedicated storage paths, and resilient connectivity planning.</p>
+              </div>
+
+              <div class="bg-slate-50 p-6 rounded-xl border border-slate-200">
+                <h4 class="font-bold text-lg mb-3">Engineering</h4>
+                <p class="text-slate-600">Configuration of LUNs, permissions, storage access, and cluster-ready presentation.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Block 4 -->
+          <div class="feature-card bg-white border border-slate-200 p-8">
+            <h3 class="text-2xl font-bold mb-4">Testing and Documentation</h3>
+            <p class="mb-6 text-slate-600 leading-7">
+              Controlled testing and operational documentation to verify behavior during failure conditions and support long-term maintainability.
+            </p>
+
+            <div class="grid md:grid-cols-3 gap-6">
+              <div class="bg-slate-50 p-6 rounded-xl border border-slate-200">
+                <h4 class="font-bold text-lg mb-3">Software</h4>
+                <p class="text-slate-600">PowerShell automation, validation scripts, monitoring tools, and documentation artifacts.</p>
+              </div>
+
+              <div class="bg-slate-50 p-6 rounded-xl border border-slate-200">
+                <h4 class="font-bold text-lg mb-3">Infrastructure</h4>
+                <p class="text-slate-600">Test environments, isolated validation paths, and representative infrastructure conditions.</p>
+              </div>
+
+              <div class="bg-slate-50 p-6 rounded-xl border border-slate-200">
+                <h4 class="font-bold text-lg mb-3">Engineering</h4>
+                <p class="text-slate-600">Structured failover testing, result capture, and operational handoff guidance.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =======================================================
+      CONNECTED ROMANOTI VALUE
+    ======================================================== -->
+    <section class="py-16 section-soft border-b border-slate-200">
+      <div class="container mx-auto px-6">
+        <div class="text-center max-w-3xl mx-auto mb-12">
+          <div class="mini-label mb-3">Connected capabilities</div>
+          <h2 class="text-3xl md:text-4xl font-bold text-slate-900">
+            Resilience works even better with visibility and operational clarity
+          </h2>
+          <p class="text-lg text-slate-600 mt-5 leading-relaxed">
+            This service can be strengthened by Romanoti platform capabilities that improve infrastructure discovery, interpretation, and operational awareness.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6">
+          <div class="service-card bg-white border border-slate-200 p-7">
+            <div class="badge mb-4">NetPilot</div>
+            <h3 class="text-xl font-bold mb-3">Infrastructure discovery</h3>
+            <p class="text-slate-600 leading-7 mb-4">
+              Identify systems, services, and technical structure before designing redundancy and continuity strategies.
+            </p>
+            <a href="/platform/netpilot.html" class="text-blue-600 font-semibold hover:underline">Explore NetPilot →</a>
+          </div>
+
+          <div class="service-card bg-white border border-slate-200 p-7">
+            <div class="badge mb-4">Ops Assistant</div>
+            <h3 class="text-xl font-bold mb-3">Operational intelligence</h3>
+            <p class="text-slate-600 leading-7 mb-4">
+              Interpret technical findings and help teams decide what to prioritize in cluster and resilience planning.
+            </p>
+            <a href="/platform/ops-assistant.html" class="text-blue-600 font-semibold hover:underline">Explore Ops Assistant →</a>
+          </div>
+
+          <div class="service-card bg-white border border-slate-200 p-7">
+            <div class="badge mb-4">Contact Romanoti</div>
+            <h3 class="text-xl font-bold mb-3">Request service guidance</h3>
+            <p class="text-slate-600 leading-7 mb-4">
+              Discuss your environment, operational risks, and continuity goals with Romanoti.
+            </p>
+            <a href="/contact.html" class="text-blue-600 font-semibold hover:underline">Start the conversation →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =======================================================
+      CTA
+    ======================================================== -->
     <section class="py-16 bg-blue-700 text-white">
-        <div class="container mx-auto text-center">
-            <h2 class="text-3xl font-bold mb-6">Need High Availability for Your Business?</h2>
-            <p class="text-xl mb-8">Schedule a free consultation to design your failover solution.</p>
-            <div class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-6">
-                <a href="https://calendly.com/info-romanoti" class="bg-white text-blue-700 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100">
-                    Schedule Consultation
-                </a>
-                <a href="tel:4386309157" class="btn-primary text-white px-8 py-3 rounded-lg font-semibold">
-                    Call Emergency Support
-                </a>
-            </div>
+      <div class="container mx-auto px-6 text-center">
+        <h2 class="text-3xl md:text-4xl font-bold mb-5">
+          Need stronger continuity for critical infrastructure?
+        </h2>
+
+        <p class="text-xl opacity-90 mb-8 max-w-3xl mx-auto">
+          Schedule a consultation with Romanoti Solutions to review redundancy, failover, and high-availability strategies for your environment.
+        </p>
+
+        <div class="flex flex-col md:flex-row justify-center gap-4">
+          <a href="/booking.html?service=Failover%20Redundancy%20Assessment" class="bg-white text-blue-700 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100">
+            Book a Consultation
+          </a>
+
+          <a href="/contact.html" class="border border-white px-8 py-3 rounded-lg font-semibold hover:bg-white/10">
+            Contact Romanoti
+          </a>
         </div>
+      </div>
     </section>
+  </main>
 
-    <!-- Footer -->
-    <footer class="bg-gray-900 text-white py-8">
-        <div class="container mx-auto px-6 text-center">
-            <p>© 2025 RomanoTI Solutions. All rights reserved.</p>
-            <p class="mt-2">Serving Canada</p>
-        </div>
-    </footer>
+  <!-- Global footer mount -->
+  <div id="app-footer"></div>
 
+  <!-- =======================================================
+    GLOBAL SITE JS
+  ======================================================== -->
+  <script defer src="/js/nav.js?v=2025-03"></script>
+  <script defer src="/js/footer.js?v=2025-03"></script>
 </body>
 </html>
