@@ -51,6 +51,40 @@
   <link rel="stylesheet" href="/css/styles.css">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
 
+  <!-- ========================================================= -->
+  <!-- CHANGE #GA4 - GOOGLE ANALYTICS TRACKING                   -->
+  <!-- --------------------------------------------------------- -->
+  <!-- Purpose:                                                  -->
+  <!-- Track user behavior on How We Work and measure movement   -->
+  <!-- toward Why Romanoti, Booking, Contact, and platform       -->
+  <!-- capabilities.                                             -->
+  <!-- Measurement ID: G-TPMHJ69C4R                              -->
+  <!-- ========================================================= -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TPMHJ69C4R"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-TPMHJ69C4R', {
+      page_path: window.location.pathname
+    });
+
+    // =========================================================
+    // CHANGE #GA4 - CENTRAL EVENT TRACKING HELPER
+    // ---------------------------------------------------------
+    // Standardized event helper for CTA click tracking across
+    // the How We Work page.
+    // =========================================================
+    function trackEvent(action, label) {
+      gtag('event', action, {
+        event_category: 'engagement',
+        event_label: label
+      });
+    }
+  </script>
+
   <script defer src="/js/nav.js?v=11"></script>
 
   <style>
@@ -110,6 +144,7 @@
             <a
               href="/booking.html"
               class="inline-flex items-center justify-center rounded-lg bg-blue-600 px-6 py-3 font-medium text-white transition hover:bg-blue-700"
+              onclick="trackEvent('click','how_hero_book_consultation')"
             >
               Book a consultation
             </a>
@@ -117,6 +152,7 @@
             <a
               href="/solutions/why-romanoti.html"
               class="inline-flex items-center justify-center rounded-lg border border-white/15 bg-white/5 px-6 py-3 font-medium text-white transition hover:bg-white/10"
+              onclick="trackEvent('click','how_hero_why_romanoti')"
             >
               Why Romanoti
             </a>
@@ -441,6 +477,7 @@
             <a
               href="/platform/netpilot.html"
               class="mt-6 inline-flex items-center justify-center rounded-lg bg-blue-600 px-5 py-3 font-medium text-white transition hover:bg-blue-700"
+              onclick="trackEvent('click','how_netpilot')"
             >
               Explore NetPilot
             </a>
@@ -455,6 +492,7 @@
             <a
               href="/platform/ops-assistant.html"
               class="mt-6 inline-flex items-center justify-center rounded-lg bg-blue-600 px-5 py-3 font-medium text-white transition hover:bg-blue-700"
+              onclick="trackEvent('click','how_ops_assistant')"
             >
               Explore Ops Assistant
             </a>
@@ -534,6 +572,7 @@
             <a
               href="/booking.html"
               class="inline-flex items-center justify-center rounded-lg bg-blue-600 px-6 py-3 font-medium text-white transition hover:bg-blue-700"
+              onclick="trackEvent('click','how_final_book_consultation')"
             >
               Book a consultation
             </a>
@@ -541,6 +580,7 @@
             <a
               href="/contact.html"
               class="inline-flex items-center justify-center rounded-lg border border-gray-600 px-6 py-3 font-medium text-white transition hover:bg-white/5"
+              onclick="trackEvent('click','how_final_contact')"
             >
               Contact Romanoti
             </a>
