@@ -20,6 +20,38 @@ content="Learn why organizations choose Romanoti Solutions for infrastructure, o
 <link rel="stylesheet" href="/css/styles.css">
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
 
+<!-- ========================================================= -->
+<!-- CHANGE #GA4 - GOOGLE ANALYTICS TRACKING                   -->
+<!-- --------------------------------------------------------- -->
+<!-- Purpose:                                                  -->
+<!-- Enable GA4 measurement on Why Romanoti and track funnel   -->
+<!-- progression toward How We Work, Booking, and Contact.     -->
+<!-- Measurement ID: G-TPMHJ69C4R                              -->
+<!-- ========================================================= -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TPMHJ69C4R"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+
+  gtag('js', new Date());
+
+  gtag('config', 'G-TPMHJ69C4R', {
+    page_path: window.location.pathname
+  });
+
+  // =========================================================
+  // CHANGE #GA4 - CENTRAL EVENT TRACKING HELPER
+  // ---------------------------------------------------------
+  // Standardized event helper for CTA click tracking.
+  // =========================================================
+  function trackEvent(action, label) {
+    gtag('event', action, {
+      event_category: 'engagement',
+      event_label: label
+    });
+  }
+</script>
+
 <script defer src="/js/nav.js?v=11"></script>
 
 </head>
@@ -54,11 +86,12 @@ content="Learn why organizations choose Romanoti Solutions for infrastructure, o
         strengthen their environments with confidence.
       </p>
       <div class="mt-8">
-  <a href="/booking.html"
-     class="inline-flex items-center bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition">
-     Book a consultation
-  </a>
-</div>
+        <a href="/booking.html"
+           class="inline-flex items-center bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition"
+           onclick="trackEvent('click','why_hero_book_consultation')">
+           Book a consultation
+        </a>
+      </div>
     </div>
   </div>
 </section>
@@ -208,7 +241,9 @@ content="Learn why organizations choose Romanoti Solutions for infrastructure, o
         <p class="text-gray-600 leading-relaxed mb-4">
           Structured support, incident handling, and continuity-focused service delivery.
         </p>
-        <a href="/services/helpdesk.html" class="text-blue-600 font-medium hover:underline">Explore service →</a>
+        <a href="/services/helpdesk.html"
+           class="text-blue-600 font-medium hover:underline"
+           onclick="trackEvent('click','why_helpdesk_service')">Explore service →</a>
       </article>
 
       <article class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
@@ -216,7 +251,9 @@ content="Learn why organizations choose Romanoti Solutions for infrastructure, o
         <p class="text-gray-600 leading-relaxed mb-4">
           Infrastructure visibility, diagnostics, and support for modern technical environments.
         </p>
-        <a href="/services/networks.html" class="text-blue-600 font-medium hover:underline">Explore service →</a>
+        <a href="/services/networks.html"
+           class="text-blue-600 font-medium hover:underline"
+           onclick="trackEvent('click','why_networks_service')">Explore service →</a>
       </article>
 
       <article class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
@@ -224,7 +261,9 @@ content="Learn why organizations choose Romanoti Solutions for infrastructure, o
         <p class="text-gray-600 leading-relaxed mb-4">
           Exposure analysis, security review, and operational guidance for risk reduction.
         </p>
-        <a href="/services/cybersecurity.html" class="text-blue-600 font-medium hover:underline">Explore service →</a>
+        <a href="/services/cybersecurity.html"
+           class="text-blue-600 font-medium hover:underline"
+           onclick="trackEvent('click','why_cybersecurity_service')">Explore service →</a>
       </article>
     </div>
   </div>
@@ -266,8 +305,9 @@ content="Learn why organizations choose Romanoti Solutions for infrastructure, o
 
     <div class="flex flex-wrap items-center justify-center gap-4">
       <a
-        href="/solutions/how-we-work.html"
+        href="/how-we-work.html"
         class="inline-flex items-center justify-center bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition"
+        onclick="trackEvent('click','why_to_how_we_work')"
       >
         Explore how we work
       </a>
@@ -275,6 +315,7 @@ content="Learn why organizations choose Romanoti Solutions for infrastructure, o
       <a
         href="/booking.html"
         class="inline-flex items-center justify-center border border-gray-300 text-gray-900 px-6 py-3 rounded-lg font-medium hover:bg-gray-50 transition"
+        onclick="trackEvent('click','why_cta_book_consultation')"
       >
         Book a consultation
       </a>
@@ -304,6 +345,7 @@ content="Learn why organizations choose Romanoti Solutions for infrastructure, o
         <a
           href="/booking.html"
           class="inline-flex items-center justify-center bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition"
+          onclick="trackEvent('click','why_final_book_consultation')"
         >
           Book a consultation
         </a>
@@ -311,6 +353,7 @@ content="Learn why organizations choose Romanoti Solutions for infrastructure, o
         <a
           href="/contact.html"
           class="inline-flex items-center justify-center border border-gray-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-white/5 transition"
+          onclick="trackEvent('click','why_final_contact')"
         >
           Contact Romanoti
         </a>
