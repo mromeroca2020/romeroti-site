@@ -30,9 +30,46 @@
   <meta name="theme-color" content="#2563eb">
 
   <!-- =======================================================
+       GLOBAL UI SUPPORT
+       CHANGE #75
+       Booking page now loads the same visual shell used by the
+       rest of the site so nav.js can render correctly.
+       This fixes the broken / unstyled header issue.
+       ======================================================= -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/css/styles.css">
+
+  <!-- =======================================================
        TYPOGRAPHY
        ======================================================= -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- ========================================================= -->
+  <!-- CHANGE #GA4 - GOOGLE ANALYTICS TRACKING                   -->
+  <!-- --------------------------------------------------------- -->
+  <!-- Purpose:                                                  -->
+  <!-- Track booking page traffic, CTA usage, and appointment    -->
+  <!-- request intent.                                           -->
+  <!-- Measurement ID: G-TPMHJ69C4R                              -->
+  <!-- ========================================================= -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TPMHJ69C4R"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-TPMHJ69C4R', {
+      page_path: window.location.pathname
+    });
+
+    function trackEvent(action, label) {
+      gtag('event', action, {
+        event_category: 'engagement',
+        event_label: label
+      });
+    }
+  </script>
 
   <style>
     :root{
@@ -356,31 +393,9 @@
   <!-- =======================================================
        GLOBAL HEADER
        CHANGE #67
-       Se usa nav.js como header oficial
+       nav.js is the official global header.
        ======================================================= -->
   <div id="app-header"></div>
-
-  <!-- =======================================================
-       FALLBACK HEADER
-       CHANGE #68
-       Solo visible mientras nav.js monta el header real
-       ======================================================= -->
-  <header id="fallback-header" class="bg-white shadow-sm sticky top-0 z-40">
-    <div class="container" style="padding-top:12px;padding-bottom:12px;display:flex;align-items:center;justify-content:space-between;gap:20px;">
-      <a href="/en/" class="flex items-center text-gray-900">
-        <img
-          src="/images/romanoti-logo-horizontal-final.png"
-          alt="Romanoti Solutions"
-          style="height:48px;width:auto;object-fit:contain;"
-        >
-      </a>
-
-      <a href="/booking.html?service=Free%20Consultation"
-         style="background:#2563eb;color:#fff;padding:10px 18px;border-radius:10px;font-weight:700;">
-        Book Now
-      </a>
-    </div>
-  </header>
 
   <!-- ============================================================
        CHANGE #69 (HIDDEN BACKUP FORM FOR NETLIFY)
@@ -505,7 +520,7 @@
               <textarea id="issue" name="issue"></textarea>
 
               <div class="form-actions">
-                <button type="submit">Request Appointment</button>
+                <button type="submit" onclick="trackEvent('click','booking_request_appointment')">Request Appointment</button>
               </div>
             </form>
 
@@ -528,8 +543,8 @@
             Explore Romanoti Platform or contact us directly if you want to understand the right entry point before requesting an appointment.
           </p>
           <div class="booking-strip__actions">
-            <a href="/platform/index.html" class="secondary-link">Explore Platform</a>
-            <a href="/contact.html" class="secondary-link">Contact Romanoti</a>
+            <a href="/platform/index.html" class="secondary-link" onclick="trackEvent('click','booking_explore_platform')">Explore Platform</a>
+            <a href="/contact.html" class="secondary-link" onclick="trackEvent('click','booking_contact_romanoti')">Contact Romanoti</a>
           </div>
         </div>
       </div>
@@ -542,33 +557,6 @@
        Se usa footer.js en vez de footer local
        ======================================================= -->
   <div id="app-footer"></div>
-
-  <!-- =======================================================
-       FALLBACK HEADER REMOVER
-       ======================================================= -->
-  <script>
-    (function () {
-      const fb = document.getElementById('fallback-header');
-      if (!fb) return;
-
-      function removeFallbackSafely() {
-        const mount = document.getElementById('app-header');
-        const injected = mount && mount.querySelector('header');
-        if (injected && fb.parentNode) {
-          fb.parentNode.removeChild(fb);
-          return true;
-        }
-        return false;
-      }
-
-      if (!removeFallbackSafely()) {
-        setTimeout(removeFallbackSafely, 150);
-        setTimeout(removeFallbackSafely, 400);
-        setTimeout(removeFallbackSafely, 1000);
-        setTimeout(removeFallbackSafely, 2000);
-      }
-    })();
-  </script>
 
   <!-- ============================================================
        CHANGE #73 (AUTO SERVICE SELECTION)
@@ -586,10 +574,10 @@
   <!-- =======================================================
        GLOBAL SCRIPTS
        CHANGE #74
-       Se conectan nav y footer globales
+       Use latest global scripts to keep header/footer aligned
+       with the rest of the site.
        ======================================================= -->
-  <script defer src="/js/nav.js?v=10"></script>
-  <script defer src="/js/footer.js?v=10"></script>
-  <script defer src="/js/fix-nav.js?v=10"></script>
+  <script defer src="/js/nav.js?v=21"></script>
+  <script defer src="/js/footer.js?v=11"></script>
 </body>
 </html>
