@@ -183,7 +183,7 @@
       platform: '/platform/index.html',
       enterprise: '/enterprise/government-business.html',
       whyRomanoti: '/solutions/why-romanoti.html',
-      howWeWork: '/solutions/how-we-work.html',
+      howWeWork: '/how-we-work.html',
       contact: '/contact.html',
       booking: '/booking.html',
 
