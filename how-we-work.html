@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <!-- =======================================================
-       FILE: /how-we-work.html
+       FILE: /solutions/how-we-work.html
        PURPOSE:
        Corporate page explaining Romanoti's delivery model
 
@@ -18,6 +18,17 @@
        2) Position the company beyond ad-hoc technical support.
        3) Connect services with the Romanoti platform model.
        4) Support assessment-based entry and monthly service.
+
+       CHANGE #88
+       -------------------------------------------------------
+       This revision strengthens the page as a true enterprise
+       funnel page by:
+       - clarifying Romanoti's delivery phases
+       - improving process language and operational framing
+       - adding a "What clients receive" section
+       - reinforcing the bridge between services, platform,
+         implementation, and continuity
+       - correcting the return link to Why Romanoti
        ======================================================= -->
 
   <meta charset="UTF-8" />
@@ -200,6 +211,16 @@
       background: rgba(255,255,255,0.14);
     }
 
+    .btn-outline-dark {
+      background: #ffffff;
+      color: var(--text-dark);
+      border-color: #cbd5e1;
+    }
+
+    .btn-outline-dark:hover {
+      background: #f8fafc;
+    }
+
     .section {
       padding: 60px 0;
       background: var(--bg-section);
@@ -241,6 +262,13 @@
       margin-top: 22px;
     }
 
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      margin-top: 22px;
+    }
+
     .grid-5 {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
@@ -261,6 +289,7 @@
       border-radius: var(--radius-lg);
       padding: 28px;
       box-shadow: var(--shadow-soft);
+      height: 100%;
     }
 
     .card h3 {
@@ -343,10 +372,15 @@
       .grid-5 {
         grid-template-columns: 1fr 1fr;
       }
+
+      .grid-4 {
+        grid-template-columns: 1fr 1fr;
+      }
     }
 
     @media (max-width: 860px) {
       .grid-3,
+      .grid-4,
       .grid-5,
       .two-col {
         grid-template-columns: 1fr;
@@ -501,9 +535,57 @@
     </section>
 
     <!-- =====================================================
-         ENGAGEMENT MODELS
+         WHAT CLIENTS RECEIVE
          ===================================================== -->
     <section class="section">
+      <div class="container-r">
+        <div class="mini-label">What clients receive</div>
+        <h2>Structured outputs, not just technical activity</h2>
+        <p class="section-intro">
+          Romanoti is designed to help organizations leave each engagement with clearer direction,
+          stronger visibility, and better operational understanding of their environment.
+        </p>
+
+        <div class="grid-4">
+          <div class="card">
+            <h3>Operational clarity</h3>
+            <p>
+              Findings are translated into understandable priorities and practical next steps
+              instead of remaining isolated technical observations.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>Documented visibility</h3>
+            <p>
+              Discovery work helps create a more structured view of systems, services,
+              dependencies, and areas of exposure.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>Implementation direction</h3>
+            <p>
+              Organizations gain clearer guidance on what to stabilize, harden,
+              remediate, or improve first.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>Continuity mindset</h3>
+            <p>
+              Romanoti helps clients think beyond immediate fixes toward resilience,
+              service continuity, and long-term operational discipline.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         ENGAGEMENT MODELS
+         ===================================================== -->
+    <section class="section alt">
       <div class="container-r">
         <div class="mini-label">Engagement models</div>
         <h2>Romanoti can engage at different levels</h2>
@@ -557,7 +639,7 @@
     <!-- =====================================================
          CONNECTED PLATFORM
          ===================================================== -->
-    <section class="section alt">
+    <section class="section">
       <div class="container-r">
         <div class="mini-label">Connected capabilities</div>
         <h2>Services and platform work together</h2>
@@ -617,7 +699,7 @@
     <!-- =====================================================
          WHO THIS IS FOR
          ===================================================== -->
-    <section class="section">
+    <section class="section alt">
       <div class="container-r">
         <div class="mini-label">Who this is for</div>
         <h2>Romanoti is built for organizations that need more than ad-hoc support</h2>
@@ -657,7 +739,7 @@
     <!-- =====================================================
          FINAL CTA
          ===================================================== -->
-    <section class="section alt">
+    <section class="section">
       <div class="container-r">
         <div class="cta-box">
           <h2>Romanoti works through structure, not improvisation.</h2>
@@ -669,7 +751,7 @@
 
           <div class="actions">
             <a href="/contact.html" class="btn btn-primary">Book a consultation</a>
-            <a href="/why-romanoti.html" class="btn btn-secondary" style="color:#1f2937;border-color:#cbd5e1;background:#fff;">Why Romanoti</a>
+            <a href="/solutions/why-romanoti.html" class="btn btn-outline-dark">Why Romanoti</a>
           </div>
         </div>
       </div>
