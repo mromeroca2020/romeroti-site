@@ -397,21 +397,6 @@
        ======================================================= -->
   <div id="app-header"></div>
 
-  <!-- ============================================================
-       CHANGE #69 (HIDDEN BACKUP FORM FOR NETLIFY)
-       Formulario oculto para asegurar detección en Netlify
-       ============================================================ -->
-  <form name="booking" netlify hidden>
-    <input type="text" name="fullname">
-    <input type="email" name="email">
-    <input type="text" name="phone">
-    <input type="text" name="company">
-    <input type="text" name="service">
-    <input type="text" name="date">
-    <input type="text" name="time">
-    <textarea name="issue"></textarea>
-  </form>
-
   <main>
     <!-- =====================================================
          HERO
@@ -477,20 +462,18 @@
             </p>
 
             <!-- ============================================================
-                 CHANGE #71 (PRIMARY NETLIFY FORM)
-                 Se mantiene Netlify Forms con action hacia thank-you
+                 CHANGE #76 - SMTP BOOKING FLOW
+                 ------------------------------------------------------------
+                 This form no longer uses Netlify Forms.
+                 It now sends data directly to:
+                 /.netlify/functions/send-booking
+
+                 Purpose:
+                 - Send internal notification email to Romanoti
+                 - Send automatic confirmation email to the client
+                 - Stop relying on Netlify form submissions for email delivery
                  ============================================================ -->
-          <form name="booking" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thank-you.html">
-
-          <!-- Netlify form name (required) -->
-          <input type="hidden" name="form-name" value="booking">
-
-          <!-- Honeypot anti-spam (hidden field) -->
-          <p style="display:none;">
-            <label>Don’t fill this out: <input name="bot-field"></label>
-          </p>
-              <input type="hidden" name="form-name" value="booking">
-
+            <form id="bookingForm">
               <label for="fullname">Full Name</label>
               <input id="fullname" name="fullname" type="text" required>
 
@@ -533,7 +516,7 @@
             </form>
 
             <p class="small-note">
-              By submitting this form, your request will be captured through Netlify Forms and routed for Romanoti review.
+              Your request will be sent directly to Romanoti and you should receive an automatic confirmation by email.
             </p>
           </div>
         </div>
@@ -577,6 +560,66 @@
       const serviceSelect = document.querySelector('select[name="service"]');
       if (serviceSelect) serviceSelect.value = service;
     }
+  </script>
+
+  <!-- ============================================================
+       CHANGE #76 - BOOKING FORM SUBMIT VIA NETLIFY FUNCTION
+       ------------------------------------------------------------
+       Sends JSON payload to /.netlify/functions/send-booking
+       instead of using Netlify Forms.
+
+       Success path:
+       - form reset
+       - redirect to /thank-you.html
+
+       Failure path:
+       - alert with backend error message
+       ============================================================ -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const form = document.getElementById("bookingForm");
+      if (!form) return;
+
+      form.addEventListener("submit", async function (e) {
+        e.preventDefault();
+
+        const formData = {
+          fullname: document.querySelector("[name='fullname']")?.value || "",
+          email: document.querySelector("[name='email']")?.value || "",
+          phone: document.querySelector("[name='phone']")?.value || "",
+          company: document.querySelector("[name='company']")?.value || "",
+          service: document.querySelector("[name='service']")?.value || "",
+          date: document.querySelector("[name='date']")?.value || "",
+          time: document.querySelector("[name='time']")?.value || "",
+          issue: document.querySelector("[name='issue']")?.value || ""
+        };
+
+        try {
+          const res = await fetch("/.netlify/functions/send-booking", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify(formData)
+          });
+
+          const result = await res.json();
+
+          if (res.ok) {
+            trackEvent('submit', 'booking_form_success');
+            alert("Request sent successfully.");
+            form.reset();
+            window.location.href = "/thank-you.html";
+          } else {
+            trackEvent('submit', 'booking_form_error');
+            alert("Error sending request: " + (result.error || "Unknown error"));
+          }
+        } catch (err) {
+          trackEvent('submit', 'booking_form_error');
+          alert("Error sending request.");
+        }
+      });
+    });
   </script>
 
   <!-- =======================================================
