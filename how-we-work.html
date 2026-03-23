@@ -3,32 +3,33 @@
 <head>
   <!-- =======================================================
        FILE: /solutions/how-we-work.html
-       PURPOSE:
-       Corporate page explaining Romanoti's delivery model
 
-       STRATEGIC POSITIONING
+       PURPOSE
        -------------------------------------------------------
-       This page is designed to explain how Romanoti works
-       with organizations in a structured, professional, and
-       enterprise-ready way.
+       Explain Romanoti's operating model:
+       how engagements begin, how discovery works, how
+       findings become decisions, and how work moves toward
+       implementation and continuity.
 
-       KEY GOALS
+       STRATEGIC ROLE
        -------------------------------------------------------
-       1) Show that Romanoti follows a disciplined process.
-       2) Position the company beyond ad-hoc technical support.
-       3) Connect services with the Romanoti platform model.
-       4) Support assessment-based entry and monthly service.
+       This page is part of the funnel:
+       Why Romanoti -> How We Work -> Booking / Contact
 
        CHANGE #88
        -------------------------------------------------------
-       This revision strengthens the page as a true enterprise
-       funnel page by:
-       - clarifying Romanoti's delivery phases
-       - improving process language and operational framing
-       - adding a "What clients receive" section
-       - reinforcing the bridge between services, platform,
-         implementation, and continuity
-       - correcting the return link to Why Romanoti
+       Full restructuring of the page to make it clearly
+       distinct from Home and service overview pages.
+
+       WHAT CHANGED
+       -------------------------------------------------------
+       - Repositioned page around Romanoti's delivery method
+       - Added a visible 5-step operating model
+       - Added client outputs / deliverables section
+       - Added engagement models section
+       - Reduced service-overview feel
+       - Kept platform references as supporting enablers,
+         not as the main message
        ======================================================= -->
 
   <meta charset="UTF-8" />
@@ -37,737 +38,520 @@
   <title>How We Work | Romanoti Solutions</title>
   <meta
     name="description"
-    content="Learn how Romanoti Solutions works with organizations through structured assessment, discovery, operational intelligence, implementation, and continuity-focused service delivery."
+    content="Learn how Romanoti Solutions works through assessment, discovery, interpretation, execution, and continuity-focused operational support."
   />
 
-  <!-- =======================================================
-       FAVICONS
-       ======================================================= -->
   <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/romanoti-icon.png">
   <link rel="icon" type="image/png" href="/images/romanoti-icon.png">
   <link rel="apple-touch-icon" href="/images/romanoti-icon.png">
   <meta name="theme-color" content="#2563eb">
 
-  <!-- =======================================================
-       GLOBAL STYLES / FONTS
-       IMPORTANT:
-       nav.js requires Tailwind classes to render correctly.
-       ======================================================= -->
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="/css/styles.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/css/styles.css">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
 
-  <!-- =======================================================
-       LOCAL PAGE STYLES
-       ======================================================= -->
+  <script defer src="/js/nav.js?v=11"></script>
+
   <style>
-    :root {
-      --primary-blue: #2f5bdb;
-      --primary-blue-dark: #2449b3;
-      --primary-blue-soft: #eaf0ff;
+    body { font-family: 'Montserrat', sans-serif; }
 
-      --text-dark: #1f2937;
-      --text-body: #5f6f8a;
-
-      --border-light: #d9e1f0;
-      --bg-page: #f5f7fb;
-      --bg-section: #ffffff;
-
-      --shadow-soft: 0 10px 25px rgba(31, 41, 55, 0.08);
-
-      --max-width: 1180px;
-      --radius-lg: 20px;
-      --radius-md: 14px;
-      --radius-sm: 10px;
+    .romanoti-grid-bg {
+      background-image:
+        linear-gradient(to right, rgba(37,99,235,0.07) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(37,99,235,0.07) 1px, transparent 1px);
+      background-size: 32px 32px;
     }
 
-    * { box-sizing: border-box; }
-
-    body {
-      margin: 0;
-      font-family: 'Montserrat', sans-serif;
-      background: var(--bg-page);
-      color: var(--text-dark);
-      line-height: 1.6;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .container-r {
-      width: min(var(--max-width), calc(100% - 32px));
-      margin: 0 auto;
-    }
-
-    .hero {
-      position: relative;
-      min-height: 72vh;
-      display: flex;
-      align-items: center;
-      overflow: hidden;
-      background: #081120;
-      color: white;
-    }
-
-    .hero__bg {
+    .romanoti-step-line {
       position: absolute;
-      inset: 0;
-      z-index: 0;
+      left: 1.1rem;
+      top: 3.2rem;
+      bottom: -2rem;
+      width: 2px;
+      background: linear-gradient(to bottom, rgba(37,99,235,0.35), rgba(37,99,235,0.08));
     }
 
-    .hero__bg img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center;
-      display: block;
-    }
-
-    .hero__overlay {
-      position: absolute;
-      inset: 0;
-      z-index: 1;
-      background:
-        linear-gradient(90deg, rgba(5,10,20,.90) 0%, rgba(5,10,20,.72) 48%, rgba(5,10,20,.36) 100%),
-        linear-gradient(180deg, rgba(5,10,20,.20) 0%, rgba(5,10,20,.48) 100%);
-    }
-
-    .hero__content {
-      position: relative;
-      z-index: 2;
-      width: min(var(--max-width), calc(100% - 32px));
-      margin: 0 auto;
-      padding: 96px 0 84px;
-      max-width: 900px;
-    }
-
-    .eyebrow {
-      display: inline-block;
-      padding: 8px 14px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.14);
-      border: 1px solid rgba(255,255,255,0.18);
-      color: #ffffff;
-      font-size: 0.84rem;
-      margin-bottom: 18px;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-    }
-
-    h1 {
-      margin: 0 0 18px;
-      font-size: clamp(2.3rem, 4vw, 4.3rem);
-      line-height: 1.06;
-      color: #ffffff;
-      font-weight: 800;
-      max-width: 860px;
-    }
-
-    .hero p {
-      margin: 0 0 28px;
-      font-size: 1.08rem;
-      color: rgba(255,255,255,.90);
-      max-width: 760px;
-    }
-
-    .actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 46px;
-      padding: 0 18px;
-      border-radius: var(--radius-sm);
-      border: 1px solid transparent;
-      font-weight: 700;
-      transition: all 0.2s ease;
-      cursor: pointer;
-    }
-
-    .btn-primary {
-      background: #ffffff;
-      color: var(--primary-blue);
-    }
-
-    .btn-primary:hover {
-      background: #f4f7ff;
-    }
-
-    .btn-secondary {
-      background: rgba(255,255,255,0.08);
-      color: #ffffff;
-      border-color: rgba(255,255,255,0.25);
-    }
-
-    .btn-secondary:hover {
-      background: rgba(255,255,255,0.14);
-    }
-
-    .btn-outline-dark {
-      background: #ffffff;
-      color: var(--text-dark);
-      border-color: #cbd5e1;
-    }
-
-    .btn-outline-dark:hover {
-      background: #f8fafc;
-    }
-
-    .section {
-      padding: 60px 0;
-      background: var(--bg-section);
-      border-top: 1px solid #edf1f7;
-    }
-
-    .section.alt {
-      background: var(--bg-page);
-    }
-
-    .mini-label {
-      font-size: .78rem;
-      font-weight: 700;
-      letter-spacing: .16em;
-      text-transform: uppercase;
-      color: #2563eb;
-      text-align: center;
-      margin-bottom: 10px;
-    }
-
-    .section h2 {
-      margin: 0 0 12px;
-      font-size: clamp(1.9rem, 2.2vw, 2.8rem);
-      text-align: center;
-      color: var(--text-dark);
-    }
-
-    .section-intro {
-      max-width: 860px;
-      margin: 0 auto 28px;
-      text-align: center;
-      color: var(--text-body);
-    }
-
-    .grid-3 {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-      margin-top: 22px;
-    }
-
-    .grid-4 {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
-      margin-top: 22px;
-    }
-
-    .grid-5 {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 18px;
-      margin-top: 28px;
-    }
-
-    .two-col {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 22px;
-      margin-top: 20px;
-    }
-
-    .card {
-      background: #ffffff;
-      border: 1px solid var(--border-light);
-      border-radius: var(--radius-lg);
-      padding: 28px;
-      box-shadow: var(--shadow-soft);
-      height: 100%;
-    }
-
-    .card h3 {
-      margin-top: 0;
-      margin-bottom: 12px;
-      font-size: 1.3rem;
-      color: var(--text-dark);
-    }
-
-    .card p {
-      margin-top: 0;
-      color: var(--text-body);
-    }
-
-    .process-card {
-      background: linear-gradient(180deg, #ffffff 0%, #f9fbff 100%);
-      border: 1px solid var(--border-light);
-      border-radius: 18px;
-      padding: 22px;
-      box-shadow: var(--shadow-soft);
-      height: 100%;
-    }
-
-    .step-number {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 38px;
-      height: 38px;
-      border-radius: 999px;
-      background: var(--primary-blue-soft);
-      color: var(--primary-blue);
-      font-weight: 800;
-      margin-bottom: 14px;
-    }
-
-    .process-card h3 {
-      margin: 0 0 10px;
-      font-size: 1.08rem;
-      color: var(--text-dark);
-    }
-
-    .process-card p {
-      margin: 0;
-      color: var(--text-body);
-      font-size: 0.96rem;
-    }
-
-    .bullets {
-      padding-left: 20px;
-      color: var(--text-body);
-      margin: 14px 0 0;
-    }
-
-    .bullets li {
-      margin-bottom: 8px;
-    }
-
-    .cta-box {
-      background: linear-gradient(135deg, #ffffff, var(--primary-blue-soft));
-      border: 1px solid var(--border-light);
-      border-radius: 24px;
-      padding: 34px;
-      box-shadow: var(--shadow-soft);
-    }
-
-    .cta-box h2 {
-      text-align: left;
-      margin-top: 0;
-      margin-bottom: 12px;
-    }
-
-    .cta-box p {
-      color: var(--text-body);
-      max-width: 860px;
-      margin: 0 0 22px;
-    }
-
-    @media (max-width: 1100px) {
-      .grid-5 {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .grid-4 {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-
-    @media (max-width: 860px) {
-      .grid-3,
-      .grid-4,
-      .grid-5,
-      .two-col {
-        grid-template-columns: 1fr;
-      }
-
-      .hero {
-        min-height: auto;
-      }
-
-      .hero__content {
-        padding: 74px 0 64px;
-      }
+    @media (max-width: 767px) {
+      .romanoti-step-line { display: none; }
     }
   </style>
 </head>
 
-<body>
-  <!-- =======================================================
-       GLOBAL HEADER
-       IMPORTANT:
-       No local header or fallback header is used here.
-       nav.js is the only source of truth for navigation.
-       ======================================================= -->
+<body class="bg-white text-gray-900 antialiased">
   <div id="app-header"></div>
 
   <main>
-    <!-- =====================================================
+
+    <!-- =======================================================
          HERO
-         ===================================================== -->
-    <section class="hero">
-      <div class="hero__bg">
-        <img src="/images/romanoti-hero-banner.png" alt="Romanoti Solutions Banner">
-      </div>
-      <div class="hero__overlay"></div>
+         ======================================================= -->
+    <section class="relative overflow-hidden bg-slate-950 text-white">
+      <div class="absolute inset-0 romanoti-grid-bg opacity-40"></div>
+      <div class="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/90 to-blue-950/70"></div>
 
-      <div class="hero__content">
-        <div class="eyebrow">How Romanoti Works</div>
-        <h1>We bring structure, clarity, and continuity to technical environments.</h1>
-        <p>
-          Romanoti Solutions works with organizations through a disciplined delivery model
-          that starts with assessment, moves through discovery and interpretation,
-          and evolves into implementation, resilience, and continuous operational support.
-        </p>
+      <div class="relative mx-auto max-w-7xl px-6 py-24 lg:px-8 lg:py-28">
+        <div class="max-w-4xl">
+          <span class="inline-flex items-center rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-semibold uppercase tracking-[0.18em] text-blue-300">
+            How We Work
+          </span>
 
-        <div class="actions">
-          <a href="/contact.html" class="btn btn-primary">Start a consultation</a>
-          <a href="/platform/index.html" class="btn btn-secondary">Explore the platform</a>
-        </div>
-      </div>
-    </section>
+          <h1 class="mt-6 text-4xl font-extrabold leading-tight md:text-5xl lg:text-6xl">
+            Structured. Visible. Operational.
+          </h1>
 
-    <!-- =====================================================
-         WHY OUR APPROACH MATTERS
-         ===================================================== -->
-    <section class="section">
-      <div class="container-r">
-        <div class="mini-label">Why our approach matters</div>
-        <h2>Technical support without structure creates risk</h2>
-        <p class="section-intro">
-          Many organizations operate with fragmented support, incomplete visibility,
-          and reactive decision-making. Romanoti is built to reduce that chaos
-          through a more disciplined and infrastructure-aware service model.
-        </p>
-
-        <div class="grid-3">
-          <div class="card">
-            <h3>Reactive operations</h3>
-            <p>
-              Teams often work in response mode, only addressing issues after they affect service quality,
-              continuity, or user experience.
-            </p>
-          </div>
-
-          <div class="card">
-            <h3>Limited visibility</h3>
-            <p>
-              Without strong discovery and service visibility, organizations struggle to understand
-              what exists, what is exposed, and what depends on what.
-            </p>
-          </div>
-
-          <div class="card">
-            <h3>Unclear priorities</h3>
-            <p>
-              Technical findings alone do not create action. Organizations need guidance,
-              interpretation, and clear next steps.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- =====================================================
-         DELIVERY MODEL
-         ===================================================== -->
-    <section class="section alt">
-      <div class="container-r">
-        <div class="mini-label">Our delivery model</div>
-        <h2>How Romanoti engages with organizations</h2>
-        <p class="section-intro">
-          Romanoti follows a structured workflow that helps organizations move from uncertainty
-          to operational clarity, and from technical review to stronger execution.
-        </p>
-
-        <div class="grid-5">
-          <div class="process-card">
-            <div class="step-number">1</div>
-            <h3>Assess</h3>
-            <p>
-              We begin by understanding the environment, objectives, current issues,
-              and the level of operational maturity.
-            </p>
-          </div>
-
-          <div class="process-card">
-            <div class="step-number">2</div>
-            <h3>Discover</h3>
-            <p>
-              Through NetPilot and technical review, we establish visibility into systems,
-              services, exposure, and infrastructure structure.
-            </p>
-          </div>
-
-          <div class="process-card">
-            <div class="step-number">3</div>
-            <h3>Interpret</h3>
-            <p>
-              Ops Assistant helps transform findings into clearer understanding,
-              operational priorities, and decision support.
-            </p>
-          </div>
-
-          <div class="process-card">
-            <div class="step-number">4</div>
-            <h3>Execute</h3>
-            <p>
-              Romanoti supports implementation, hardening, remediation,
-              continuity improvements, and service stabilization.
-            </p>
-          </div>
-
-          <div class="process-card">
-            <div class="step-number">5</div>
-            <h3>Improve</h3>
-            <p>
-              We help organizations evolve toward stronger operational discipline
-              through ongoing service, review, and continuity-focused support.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- =====================================================
-         WHAT CLIENTS RECEIVE
-         ===================================================== -->
-    <section class="section">
-      <div class="container-r">
-        <div class="mini-label">What clients receive</div>
-        <h2>Structured outputs, not just technical activity</h2>
-        <p class="section-intro">
-          Romanoti is designed to help organizations leave each engagement with clearer direction,
-          stronger visibility, and better operational understanding of their environment.
-        </p>
-
-        <div class="grid-4">
-          <div class="card">
-            <h3>Operational clarity</h3>
-            <p>
-              Findings are translated into understandable priorities and practical next steps
-              instead of remaining isolated technical observations.
-            </p>
-          </div>
-
-          <div class="card">
-            <h3>Documented visibility</h3>
-            <p>
-              Discovery work helps create a more structured view of systems, services,
-              dependencies, and areas of exposure.
-            </p>
-          </div>
-
-          <div class="card">
-            <h3>Implementation direction</h3>
-            <p>
-              Organizations gain clearer guidance on what to stabilize, harden,
-              remediate, or improve first.
-            </p>
-          </div>
-
-          <div class="card">
-            <h3>Continuity mindset</h3>
-            <p>
-              Romanoti helps clients think beyond immediate fixes toward resilience,
-              service continuity, and long-term operational discipline.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- =====================================================
-         ENGAGEMENT MODELS
-         ===================================================== -->
-    <section class="section alt">
-      <div class="container-r">
-        <div class="mini-label">Engagement models</div>
-        <h2>Romanoti can engage at different levels</h2>
-        <p class="section-intro">
-          We do not force a single delivery model. Romanoti can support organizations
-          through an initial assessment, a targeted project, or a continuity-based monthly engagement.
-        </p>
-
-        <div class="grid-3">
-          <div class="card">
-            <h3>Assessment-first engagement</h3>
-            <p>
-              Ideal for organizations that need a structured review before deciding what to implement.
-            </p>
-            <ul class="bullets">
-              <li>Environment assessment</li>
-              <li>Discovery and visibility review</li>
-              <li>Findings and recommendations</li>
-            </ul>
-          </div>
-
-          <div class="card">
-            <h3>Project-based execution</h3>
-            <p>
-              Best for organizations that already know what needs to be designed, remediated,
-              stabilized, or implemented.
-            </p>
-            <ul class="bullets">
-              <li>Implementation work</li>
-              <li>Technical remediation</li>
-              <li>Resilience and continuity projects</li>
-            </ul>
-          </div>
-
-          <div class="card">
-            <h3>Monthly operational support</h3>
-            <p>
-              Designed for organizations that need continuity, visibility, guidance,
-              and ongoing technical partnership.
-            </p>
-            <ul class="bullets">
-              <li>Continuous review</li>
-              <li>Operational intelligence</li>
-              <li>Infrastructure-aware support</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- =====================================================
-         CONNECTED PLATFORM
-         ===================================================== -->
-    <section class="section">
-      <div class="container-r">
-        <div class="mini-label">Connected capabilities</div>
-        <h2>Services and platform work together</h2>
-        <p class="section-intro">
-          Romanoti is not only a service provider. We are building a connected operating model
-          where services, discovery, interpretation, and resilience reinforce each other.
-        </p>
-
-        <div class="two-col">
-          <div class="card">
-            <h3>NetPilot</h3>
-            <p>
-              NetPilot is the discovery layer. It helps organizations understand what exists
-              in their infrastructure, what is exposed, and where technical visibility is limited.
-            </p>
-            <a href="/platform/netpilot.html" class="btn btn-primary">Explore NetPilot</a>
-          </div>
-
-          <div class="card">
-            <h3>Ops Assistant</h3>
-            <p>
-              Ops Assistant is the interpretation layer. It helps teams move from technical findings
-              toward operational meaning, prioritization, and more confident next steps.
-            </p>
-            <a href="/platform/ops-assistant.html" class="btn btn-primary">Explore Ops Assistant</a>
-          </div>
-        </div>
-
-        <div class="two-col" style="margin-top: 22px;">
-          <div class="card">
-            <h3>Infrastructure Resilience & Continuity</h3>
-            <p>
-              When discovery and interpretation reveal critical dependencies or operational risk,
-              Romanoti supports resilience strategies such as failover, redundancy,
-              and continuity planning.
-            </p>
-            <a href="/cloud-redundancy.html" class="btn btn-primary">Explore Resilience</a>
-          </div>
-
-          <div class="card">
-            <h3>Service delivery with operational discipline</h3>
-            <p>
-              The Romanoti model connects assessment, platform intelligence, and technical execution
-              into one enterprise-ready delivery approach.
-            </p>
-            <ul class="bullets">
-              <li>Discovery</li>
-              <li>Interpretation</li>
-              <li>Implementation</li>
-              <li>Continuity</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- =====================================================
-         WHO THIS IS FOR
-         ===================================================== -->
-    <section class="section alt">
-      <div class="container-r">
-        <div class="mini-label">Who this is for</div>
-        <h2>Romanoti is built for organizations that need more than ad-hoc support</h2>
-        <p class="section-intro">
-          Our approach is especially relevant for teams that need structure, continuity,
-          and more confidence in how technical services are delivered.
-        </p>
-
-        <div class="grid-3">
-          <div class="card">
-            <h3>Government and regulated environments</h3>
-            <p>
-              Teams that need stronger visibility, documented understanding,
-              and more controlled technical operations.
-            </p>
-          </div>
-
-          <div class="card">
-            <h3>Growing infrastructure teams</h3>
-            <p>
-              Organizations moving from reactive support toward a more mature
-              and service-oriented operational model.
-            </p>
-          </div>
-
-          <div class="card">
-            <h3>Enterprise environments with continuity needs</h3>
-            <p>
-              Teams that cannot afford prolonged uncertainty around availability,
-              risk, or infrastructure dependencies.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- =====================================================
-         FINAL CTA
-         ===================================================== -->
-    <section class="section">
-      <div class="container-r">
-        <div class="cta-box">
-          <h2>Romanoti works through structure, not improvisation.</h2>
-          <p>
-            We help organizations move from fragmented technical support
-            toward a more disciplined model based on assessment, visibility,
-            operational intelligence, and continuity-focused execution.
+          <p class="mt-6 max-w-3xl text-lg leading-relaxed text-slate-300 md:text-xl">
+            Romanoti works through a disciplined delivery model that helps organizations
+            move from fragmented technical support toward clearer visibility, stronger
+            execution, and continuity-focused operations.
           </p>
 
-          <div class="actions">
-            <a href="/contact.html" class="btn btn-primary">Book a consultation</a>
-            <a href="/solutions/why-romanoti.html" class="btn btn-outline-dark">Why Romanoti</a>
+          <div class="mt-8 flex flex-wrap gap-4">
+            <a
+              href="/booking.html"
+              class="inline-flex items-center justify-center rounded-lg bg-blue-600 px-6 py-3 font-medium text-white transition hover:bg-blue-700"
+            >
+              Book a consultation
+            </a>
+
+            <a
+              href="/solutions/why-romanoti.html"
+              class="inline-flex items-center justify-center rounded-lg border border-white/15 bg-white/5 px-6 py-3 font-medium text-white transition hover:bg-white/10"
+            >
+              Why Romanoti
+            </a>
           </div>
         </div>
       </div>
     </section>
+
+    <!-- =======================================================
+         WHAT THIS PAGE EXPLAINS
+         ======================================================= -->
+    <section class="bg-white py-16">
+      <div class="mx-auto max-w-7xl px-6 lg:px-8">
+        <div class="mx-auto max-w-3xl text-center">
+          <span class="inline-block text-sm font-semibold uppercase tracking-[0.18em] text-blue-600">
+            Delivery model
+          </span>
+
+          <h2 class="mt-3 text-3xl font-bold text-gray-900 md:text-4xl">
+            How Romanoti engages, evaluates, and improves environments
+          </h2>
+
+          <p class="mt-5 text-lg leading-relaxed text-gray-600">
+            This page is not a service catalog. It explains how Romanoti works:
+            how we begin, how we create visibility, how we interpret findings,
+            and how we support action with operational discipline.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- =======================================================
+         PROBLEM FRAMING
+         ======================================================= -->
+    <section class="bg-gray-50 py-16">
+      <div class="mx-auto max-w-7xl px-6 lg:px-8">
+        <div class="max-w-3xl">
+          <span class="inline-block text-sm font-semibold uppercase tracking-[0.18em] text-blue-600">
+            Why this matters
+          </span>
+
+          <h2 class="mt-3 text-3xl font-bold text-gray-900 md:text-4xl">
+            Technical support without structure creates operational risk
+          </h2>
+
+          <p class="mt-5 text-lg leading-relaxed text-gray-600">
+            Many environments are supported through disconnected tools, reactive decision-making,
+            and incomplete technical visibility. That model makes continuity harder, increases ambiguity,
+            and weakens execution.
+          </p>
+        </div>
+
+        <div class="mt-10 grid gap-6 md:grid-cols-3">
+          <article class="rounded-2xl border border-gray-100 bg-white p-7 shadow-sm">
+            <h3 class="text-xl font-semibold text-gray-900">Fragmented visibility</h3>
+            <p class="mt-3 leading-relaxed text-gray-600">
+              Teams often lack a reliable view of infrastructure, dependencies,
+              exposed services, and operational weak points.
+            </p>
+          </article>
+
+          <article class="rounded-2xl border border-gray-100 bg-white p-7 shadow-sm">
+            <h3 class="text-xl font-semibold text-gray-900">Reactive operations</h3>
+            <p class="mt-3 leading-relaxed text-gray-600">
+              Without structure, work becomes issue-driven instead of priority-driven,
+              leaving little room for continuity planning.
+            </p>
+          </article>
+
+          <article class="rounded-2xl border border-gray-100 bg-white p-7 shadow-sm">
+            <h3 class="text-xl font-semibold text-gray-900">Weak decision support</h3>
+            <p class="mt-3 leading-relaxed text-gray-600">
+              Findings alone do not create action. Organizations need interpretation,
+              prioritization, and clearer operational next steps.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- =======================================================
+         CORE METHOD
+         ======================================================= -->
+    <section class="bg-white py-16 lg:py-20">
+      <div class="mx-auto max-w-7xl px-6 lg:px-8">
+        <div class="mx-auto max-w-3xl text-center">
+          <span class="inline-block text-sm font-semibold uppercase tracking-[0.18em] text-blue-600">
+            Romanoti method
+          </span>
+
+          <h2 class="mt-3 text-3xl font-bold text-gray-900 md:text-4xl">
+            A five-step operational model
+          </h2>
+
+          <p class="mt-5 text-lg leading-relaxed text-gray-600">
+            Romanoti follows a disciplined flow that helps organizations move from uncertainty
+            to clarity, then from clarity to action and continuous improvement.
+          </p>
+        </div>
+
+        <div class="mt-14 grid gap-8 md:grid-cols-2 xl:grid-cols-5">
+
+          <article class="relative rounded-2xl border border-blue-100 bg-blue-50/60 p-6 shadow-sm">
+            <div class="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-full bg-blue-600 text-lg font-bold text-white">01</div>
+            <h3 class="text-xl font-semibold text-gray-900">Assess</h3>
+            <p class="mt-3 leading-relaxed text-gray-600">
+              We start by understanding the environment, current constraints, operational concerns,
+              and the level of technical maturity.
+            </p>
+            <ul class="mt-4 list-disc space-y-2 pl-5 text-sm text-gray-600">
+              <li>Initial context gathering</li>
+              <li>Priority and risk framing</li>
+              <li>Engagement scope alignment</li>
+            </ul>
+          </article>
+
+          <article class="relative rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
+            <div class="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-full bg-blue-600 text-lg font-bold text-white">02</div>
+            <h3 class="text-xl font-semibold text-gray-900">Discover</h3>
+            <p class="mt-3 leading-relaxed text-gray-600">
+              We create visibility into infrastructure, services, exposure,
+              dependencies, and technical structure.
+            </p>
+            <ul class="mt-4 list-disc space-y-2 pl-5 text-sm text-gray-600">
+              <li>Discovery and diagnostics</li>
+              <li>Environment mapping</li>
+              <li>Exposure and dependency visibility</li>
+            </ul>
+          </article>
+
+          <article class="relative rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
+            <div class="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-full bg-blue-600 text-lg font-bold text-white">03</div>
+            <h3 class="text-xl font-semibold text-gray-900">Interpret</h3>
+            <p class="mt-3 leading-relaxed text-gray-600">
+              We translate technical findings into operational meaning so teams can
+              understand what matters, what is urgent, and what should happen next.
+            </p>
+            <ul class="mt-4 list-disc space-y-2 pl-5 text-sm text-gray-600">
+              <li>Prioritization support</li>
+              <li>Operational intelligence</li>
+              <li>Decision-oriented interpretation</li>
+            </ul>
+          </article>
+
+          <article class="relative rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
+            <div class="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-full bg-blue-600 text-lg font-bold text-white">04</div>
+            <h3 class="text-xl font-semibold text-gray-900">Execute</h3>
+            <p class="mt-3 leading-relaxed text-gray-600">
+              Romanoti supports remediation, implementation, hardening, stabilization,
+              and resilience-oriented technical action.
+            </p>
+            <ul class="mt-4 list-disc space-y-2 pl-5 text-sm text-gray-600">
+              <li>Implementation and remediation</li>
+              <li>Stabilization actions</li>
+              <li>Security and continuity improvements</li>
+            </ul>
+          </article>
+
+          <article class="relative rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
+            <div class="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-full bg-blue-600 text-lg font-bold text-white">05</div>
+            <h3 class="text-xl font-semibold text-gray-900">Improve</h3>
+            <p class="mt-3 leading-relaxed text-gray-600">
+              We help organizations evolve toward stronger operational discipline
+              through review, continuity support, and repeated learning cycles.
+            </p>
+            <ul class="mt-4 list-disc space-y-2 pl-5 text-sm text-gray-600">
+              <li>Continuous improvement</li>
+              <li>Review and refinement</li>
+              <li>Longer-term operational maturity</li>
+            </ul>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- =======================================================
+         WHAT CLIENTS RECEIVE
+         ======================================================= -->
+    <section class="bg-gray-50 py-16">
+      <div class="mx-auto max-w-7xl px-6 lg:px-8">
+        <div class="max-w-3xl">
+          <span class="inline-block text-sm font-semibold uppercase tracking-[0.18em] text-blue-600">
+            Client outcomes
+          </span>
+
+          <h2 class="mt-3 text-3xl font-bold text-gray-900 md:text-4xl">
+            What clients receive from the Romanoti model
+          </h2>
+
+          <p class="mt-5 text-lg leading-relaxed text-gray-600">
+            Romanoti is designed to produce structured outcomes, not just technical activity.
+            The goal is to leave each engagement with greater clarity, better prioritization,
+            and stronger operational direction.
+          </p>
+        </div>
+
+        <div class="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+          <article class="rounded-2xl border border-gray-100 bg-white p-7 shadow-sm">
+            <h3 class="text-lg font-semibold text-gray-900">Clearer visibility</h3>
+            <p class="mt-3 leading-relaxed text-gray-600">
+              A better understanding of systems, services, dependencies,
+              and technical exposure.
+            </p>
+          </article>
+
+          <article class="rounded-2xl border border-gray-100 bg-white p-7 shadow-sm">
+            <h3 class="text-lg font-semibold text-gray-900">Operational priorities</h3>
+            <p class="mt-3 leading-relaxed text-gray-600">
+              Findings translated into practical next steps rather than disconnected observations.
+            </p>
+          </article>
+
+          <article class="rounded-2xl border border-gray-100 bg-white p-7 shadow-sm">
+            <h3 class="text-lg font-semibold text-gray-900">Execution direction</h3>
+            <p class="mt-3 leading-relaxed text-gray-600">
+              Clearer guidance on what to stabilize, remediate, protect, or improve first.
+            </p>
+          </article>
+
+          <article class="rounded-2xl border border-gray-100 bg-white p-7 shadow-sm">
+            <h3 class="text-lg font-semibold text-gray-900">Continuity mindset</h3>
+            <p class="mt-3 leading-relaxed text-gray-600">
+              A stronger orientation toward resilience, availability,
+              and sustainable operational support.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- =======================================================
+         ENGAGEMENT MODELS
+         ======================================================= -->
+    <section class="bg-white py-16">
+      <div class="mx-auto max-w-7xl px-6 lg:px-8">
+        <div class="mx-auto max-w-3xl text-center">
+          <span class="inline-block text-sm font-semibold uppercase tracking-[0.18em] text-blue-600">
+            Engagement models
+          </span>
+
+          <h2 class="mt-3 text-3xl font-bold text-gray-900 md:text-4xl">
+            Different ways to work with Romanoti
+          </h2>
+
+          <p class="mt-5 text-lg leading-relaxed text-gray-600">
+            Not every organization needs the same level of engagement. Romanoti can support
+            teams through assessment-led entry, focused execution, or ongoing operational support.
+          </p>
+        </div>
+
+        <div class="mt-12 grid gap-6 lg:grid-cols-3">
+          <article class="rounded-2xl border border-gray-100 bg-white p-8 shadow-sm">
+            <h3 class="text-2xl font-semibold text-gray-900">Assessment-first</h3>
+            <p class="mt-4 leading-relaxed text-gray-600">
+              Best for organizations that need a structured review before making implementation decisions.
+            </p>
+            <ul class="mt-5 list-disc space-y-2 pl-5 text-gray-600">
+              <li>Environment review</li>
+              <li>Visibility and discovery</li>
+              <li>Findings and recommendations</li>
+            </ul>
+          </article>
+
+          <article class="rounded-2xl border border-gray-100 bg-white p-8 shadow-sm">
+            <h3 class="text-2xl font-semibold text-gray-900">Project-based</h3>
+            <p class="mt-4 leading-relaxed text-gray-600">
+              Designed for organizations that already know what they want to implement,
+              harden, remediate, or stabilize.
+            </p>
+            <ul class="mt-5 list-disc space-y-2 pl-5 text-gray-600">
+              <li>Targeted delivery</li>
+              <li>Implementation support</li>
+              <li>Resilience-oriented execution</li>
+            </ul>
+          </article>
+
+          <article class="rounded-2xl border border-gray-100 bg-white p-8 shadow-sm">
+            <h3 class="text-2xl font-semibold text-gray-900">Monthly support</h3>
+            <p class="mt-4 leading-relaxed text-gray-600">
+              Built for environments that need continuity, visibility,
+              and an ongoing technical operating partner.
+            </p>
+            <ul class="mt-5 list-disc space-y-2 pl-5 text-gray-600">
+              <li>Ongoing review</li>
+              <li>Operational guidance</li>
+              <li>Continuity-focused support</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- =======================================================
+         PLATFORM SUPPORTING THE METHOD
+         ======================================================= -->
+    <section class="bg-slate-950 py-16 text-white">
+      <div class="mx-auto max-w-7xl px-6 lg:px-8">
+        <div class="max-w-3xl">
+          <span class="inline-block text-sm font-semibold uppercase tracking-[0.18em] text-blue-300">
+            Platform-supported delivery
+          </span>
+
+          <h2 class="mt-3 text-3xl font-bold md:text-4xl">
+            Services and platform capabilities reinforce each other
+          </h2>
+
+          <p class="mt-5 text-lg leading-relaxed text-slate-300">
+            Romanoti does not treat discovery, diagnostics, and operational intelligence
+            as disconnected activities. Platform capabilities support the delivery model
+            and help strengthen visibility and decision-making.
+          </p>
+        </div>
+
+        <div class="mt-10 grid gap-6 lg:grid-cols-2">
+          <article class="rounded-2xl border border-white/10 bg-white/5 p-8">
+            <h3 class="text-2xl font-semibold">NetPilot</h3>
+            <p class="mt-4 leading-relaxed text-slate-300">
+              NetPilot supports the discovery layer by helping identify devices,
+              services, and technical structure across environments.
+            </p>
+            <a
+              href="/platform/netpilot.html"
+              class="mt-6 inline-flex items-center justify-center rounded-lg bg-blue-600 px-5 py-3 font-medium text-white transition hover:bg-blue-700"
+            >
+              Explore NetPilot
+            </a>
+          </article>
+
+          <article class="rounded-2xl border border-white/10 bg-white/5 p-8">
+            <h3 class="text-2xl font-semibold">Ops Assistant</h3>
+            <p class="mt-4 leading-relaxed text-slate-300">
+              Ops Assistant supports the interpretation layer by helping turn findings
+              into clearer priorities, operational understanding, and better next steps.
+            </p>
+            <a
+              href="/platform/ops-assistant.html"
+              class="mt-6 inline-flex items-center justify-center rounded-lg bg-blue-600 px-5 py-3 font-medium text-white transition hover:bg-blue-700"
+            >
+              Explore Ops Assistant
+            </a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- =======================================================
+         WHO THIS MODEL IS FOR
+         ======================================================= -->
+    <section class="bg-white py-16">
+      <div class="mx-auto max-w-7xl px-6 lg:px-8">
+        <div class="mx-auto max-w-3xl text-center">
+          <span class="inline-block text-sm font-semibold uppercase tracking-[0.18em] text-blue-600">
+            Best fit
+          </span>
+
+          <h2 class="mt-3 text-3xl font-bold text-gray-900 md:text-4xl">
+            Built for organizations that need more than ad-hoc support
+          </h2>
+
+          <p class="mt-5 text-lg leading-relaxed text-gray-600">
+            The Romanoti method is especially relevant for environments where visibility,
+            continuity, security posture, and operational discipline matter.
+          </p>
+        </div>
+
+        <div class="mt-12 grid gap-6 md:grid-cols-3">
+          <article class="rounded-2xl border border-gray-100 bg-gray-50 p-7">
+            <h3 class="text-xl font-semibold text-gray-900">Government and regulated teams</h3>
+            <p class="mt-3 leading-relaxed text-gray-600">
+              Environments that require stronger control, clearer documentation,
+              and better operational confidence.
+            </p>
+          </article>
+
+          <article class="rounded-2xl border border-gray-100 bg-gray-50 p-7">
+            <h3 class="text-xl font-semibold text-gray-900">Growing infrastructure teams</h3>
+            <p class="mt-3 leading-relaxed text-gray-600">
+              Organizations moving beyond reactive support toward a more mature operating model.
+            </p>
+          </article>
+
+          <article class="rounded-2xl border border-gray-100 bg-gray-50 p-7">
+            <h3 class="text-xl font-semibold text-gray-900">Continuity-sensitive environments</h3>
+            <p class="mt-3 leading-relaxed text-gray-600">
+              Teams that cannot afford prolonged ambiguity around availability,
+              exposure, or technical dependencies.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- =======================================================
+         FINAL CTA
+         ======================================================= -->
+    <section class="bg-gray-50 py-16">
+      <div class="mx-auto max-w-5xl px-6 lg:px-8">
+        <div class="rounded-3xl bg-gray-900 p-8 text-white shadow-lg md:p-12">
+          <span class="inline-block text-sm font-semibold uppercase tracking-[0.18em] text-blue-300">
+            Romanoti Solutions
+          </span>
+
+          <h2 class="mt-3 text-3xl font-bold md:text-4xl">
+            Work with a model built for clarity, execution, and continuity
+          </h2>
+
+          <p class="mt-5 max-w-3xl text-lg leading-relaxed text-gray-300">
+            Romanoti helps organizations move from fragmented technical support
+            toward a more structured way of operating. Start with a conversation
+            about your environment, priorities, and next steps.
+          </p>
+
+          <div class="mt-8 flex flex-wrap gap-4">
+            <a
+              href="/booking.html"
+              class="inline-flex items-center justify-center rounded-lg bg-blue-600 px-6 py-3 font-medium text-white transition hover:bg-blue-700"
+            >
+              Book a consultation
+            </a>
+
+            <a
+              href="/contact.html"
+              class="inline-flex items-center justify-center rounded-lg border border-gray-600 px-6 py-3 font-medium text-white transition hover:bg-white/5"
+            >
+              Contact Romanoti
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
   </main>
 
-  <!-- =======================================================
-       GLOBAL FOOTER
-       ======================================================= -->
   <div id="app-footer"></div>
-
-  <!-- =======================================================
-       GLOBAL SCRIPTS
-       ======================================================= -->
-  <script defer src="/js/nav.js?v=11"></script>
-  <script defer src="/js/footer.js?v=11"></script>
-  <script defer src="/js/fix-nav.js?v=11"></script>
+  <script defer src="/js/footer.js?v=10"></script>
 </body>
 </html>
