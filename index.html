@@ -18,6 +18,39 @@
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
 
+  <!-- ========================================================= -->
+  <!-- CHANGE #GA4 - GOOGLE ANALYTICS TRACKING                   -->
+  <!-- --------------------------------------------------------- -->
+  <!-- Purpose:                                                  -->
+  <!-- Enable GA4 measurement across the Romanoti website and    -->
+  <!-- provide a base for CTA click tracking and funnel analysis -->
+  <!-- Measurement ID: G-TPMHJ69C4R                              -->
+  <!-- ========================================================= -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TPMHJ69C4R"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-TPMHJ69C4R', {
+      page_path: window.location.pathname
+    });
+
+    // =========================================================
+    // CHANGE #GA4 - CENTRAL EVENT TRACKING HELPER
+    // ---------------------------------------------------------
+    // Use this helper in CTA onclick handlers to standardize
+    // event naming across Home, Why Romanoti, and How We Work.
+    // =========================================================
+    function trackEvent(action, label) {
+      gtag('event', action, {
+        event_category: 'engagement',
+        event_label: label
+      });
+    }
+  </script>
+
   <style>
     body{font-family:'Montserrat',sans-serif;background:#f8f9fa;color:#111827;scroll-behavior:smooth}
     .btn-primary{background:#2563EB;transition:all .2s}
@@ -295,12 +328,14 @@
       <!-- ========================================================= -->
       <div class="romanoti-hero__buttons">
         <a href="/solutions/why-romanoti.html"
-           class="romanoti-btn romanoti-btn--primary">
+           class="romanoti-btn romanoti-btn--primary"
+           onclick="trackEvent('click','hero_why_romanoti')">
            Why Romanoti
         </a>
 
         <a href="/how-we-work.html"
-           class="romanoti-btn romanoti-btn--secondary">
+           class="romanoti-btn romanoti-btn--secondary"
+           onclick="trackEvent('click','hero_how_we_work')">
            How We Work
         </a>
 
@@ -311,7 +346,8 @@
         <!-- give immediate action to decision-makers landing on Home. -->
         <!-- ========================================================= -->
         <a href="/booking.html"
-           class="romanoti-btn romanoti-btn--primary">
+           class="romanoti-btn romanoti-btn--primary"
+           onclick="trackEvent('click','hero_book_consultation')">
            Book a Consultation
         </a>
       </div>
@@ -361,12 +397,14 @@
 
       <div class="flex flex-wrap justify-center gap-4">
         <a href="/solutions/why-romanoti.html"
-           class="btn-primary text-white px-6 py-3 rounded-lg font-semibold">
+           class="btn-primary text-white px-6 py-3 rounded-lg font-semibold"
+           onclick="trackEvent('click','funnel_why_romanoti')">
            Why organizations choose Romanoti
         </a>
 
         <a href="/how-we-work.html"
-           class="border px-6 py-3 rounded-lg font-semibold hover:bg-gray-100">
+           class="border px-6 py-3 rounded-lg font-semibold hover:bg-gray-100"
+           onclick="trackEvent('click','funnel_how_we_work')">
            See how we work
         </a>
       </div>
@@ -397,12 +435,14 @@
 
         <div class="flex flex-wrap gap-3 justify-center md:justify-end">
           <a href="/solutions/cybershield/easm-console.html"
-             class="bg-white border px-5 py-2 rounded-lg font-medium hover:bg-gray-50">
+             class="bg-white border px-5 py-2 rounded-lg font-medium hover:bg-gray-50"
+             onclick="trackEvent('click','cybershield_demo')">
             Watch Demo
           </a>
 
           <a href="/solutions/cybershield/"
-             class="btn-primary text-white px-5 py-2 rounded-lg font-medium">
+             class="btn-primary text-white px-5 py-2 rounded-lg font-medium"
+             onclick="trackEvent('click','cybershield_explore')">
             Explore CyberShield
           </a>
         </div>
@@ -426,17 +466,20 @@
 
         <div class="flex flex-wrap justify-center gap-4 mt-4">
           <a href="/platform/index.html"
-             class="btn-primary text-white px-6 py-3 rounded-lg font-semibold">
+             class="btn-primary text-white px-6 py-3 rounded-lg font-semibold"
+             onclick="trackEvent('click','platform_explore')">
              Explore the Platform
           </a>
 
           <a href="/platform/netpilot.html"
-             class="border px-6 py-3 rounded-lg font-semibold hover:bg-gray-50">
+             class="border px-6 py-3 rounded-lg font-semibold hover:bg-gray-50"
+             onclick="trackEvent('click','platform_netpilot')">
              See NetPilot
           </a>
 
           <a href="/platform/ops-assistant.html"
-             class="border px-6 py-3 rounded-lg font-semibold hover:bg-gray-50">
+             class="border px-6 py-3 rounded-lg font-semibold hover:bg-gray-50"
+             onclick="trackEvent('click','platform_ops_assistant')">
              See Ops Assistant
           </a>
         </div>
@@ -450,7 +493,7 @@
             Romanoti is evolving from pure services into a platform model that connects visibility,
             diagnostics, and operational intelligence.
           </p>
-          <a href="/platform/index.html" class="text-blue-600 hover:underline mt-3 inline-block">Explore Platform →</a>
+          <a href="/platform/index.html" class="text-blue-600 hover:underline mt-3 inline-block" onclick="trackEvent('click','platform_card_overview')">Explore Platform →</a>
         </div>
 
         <div class="card bg-white p-6 border border-gray-100">
@@ -460,7 +503,7 @@
             NetPilot is the discovery and diagnostics layer designed to help identify devices,
             services, and technical structure across environments.
           </p>
-          <a href="/platform/netpilot.html" class="text-blue-600 hover:underline mt-3 inline-block">Open NetPilot →</a>
+          <a href="/platform/netpilot.html" class="text-blue-600 hover:underline mt-3 inline-block" onclick="trackEvent('click','platform_card_netpilot')">Open NetPilot →</a>
         </div>
 
         <div class="card bg-white p-6 border border-gray-100">
@@ -470,7 +513,7 @@
             Ops Assistant helps interpret findings, reduce ambiguity, and support better
             operational decisions across technical environments.
           </p>
-          <a href="/platform/ops-assistant.html" class="text-blue-600 hover:underline mt-3 inline-block">Open Ops Assistant →</a>
+          <a href="/platform/ops-assistant.html" class="text-blue-600 hover:underline mt-3 inline-block" onclick="trackEvent('click','platform_card_ops_assistant')">Open Ops Assistant →</a>
         </div>
       </div>
     </div>
@@ -495,11 +538,12 @@
           <p class="text-gray-600">
             Identify exposed services, subdomains, open ports, and email authentication posture (SPF / DKIM / DMARC) before attackers do.
           </p>
-          <a href="/solutions/cybershield/easm-console.html" class="text-blue-600 hover:underline mt-3 inline-block">Try EASM →</a>
+          <a href="/solutions/cybershield/easm-console.html" class="text-blue-600 hover:underline mt-3 inline-block" onclick="trackEvent('click','easm_try')">Try EASM →</a>
 
           <!-- CHANGE #90: micro-conversion CTA -->
           <a href="/booking.html"
-             class="text-blue-600 text-sm mt-3 inline-block hover:underline">
+             class="text-blue-600 text-sm mt-3 inline-block hover:underline"
+             onclick="trackEvent('click','micro_talk_easm')">
              → Talk to Romanoti
           </a>
         </div>
@@ -511,11 +555,12 @@
             Security monitoring with log correlation, behavioral indicators (IOCs / IOAs),
             and guided response playbooks for rapid containment.
           </p>
-          <a href="/it-soc.html" class="text-blue-600 hover:underline mt-3 inline-block">See SOC →</a>
+          <a href="/it-soc.html" class="text-blue-600 hover:underline mt-3 inline-block" onclick="trackEvent('click','soc_see')">See SOC →</a>
 
           <!-- CHANGE #90: micro-conversion CTA -->
           <a href="/booking.html"
-             class="text-blue-600 text-sm mt-3 inline-block hover:underline">
+             class="text-blue-600 text-sm mt-3 inline-block hover:underline"
+             onclick="trackEvent('click','micro_talk_soc')">
              → Talk to Romanoti
           </a>
         </div>
@@ -524,11 +569,12 @@
           <div class="badge">NOC + Resilience</div>
           <h3 class="text-xl font-bold mt-2 mb-2">Availability first</h3>
           <p class="text-gray-600">Service monitoring (HTTP/TLS/DNS) and capacity; executive reports to plan for growth without surprises.</p>
-          <a href="/it-noc.html" class="text-blue-600 hover:underline mt-3 inline-block">See NOC →</a>
+          <a href="/it-noc.html" class="text-blue-600 hover:underline mt-3 inline-block" onclick="trackEvent('click','noc_see')">See NOC →</a>
 
           <!-- CHANGE #90: micro-conversion CTA -->
           <a href="/booking.html"
-             class="text-blue-600 text-sm mt-3 inline-block hover:underline">
+             class="text-blue-600 text-sm mt-3 inline-block hover:underline"
+             onclick="trackEvent('click','micro_talk_noc')">
              → Talk to Romanoti
           </a>
         </div>
@@ -555,13 +601,13 @@
             Seamless transition to modern cloud and hybrid environments.
           </p>
           <div class="mt-auto space-y-2">
-            <a href="/cloud-redundancy.html" class="text-blue-600 hover:underline text-sm block">
+            <a href="/cloud-redundancy.html" class="text-blue-600 hover:underline text-sm block" onclick="trackEvent('click','cloud_failover')">
               → Failover &amp; Redundancy
             </a>
-            <a href="/cloud-hybrid.html" class="text-blue-600 hover:underline text-sm block">
+            <a href="/cloud-hybrid.html" class="text-blue-600 hover:underline text-sm block" onclick="trackEvent('click','cloud_hybrid')">
               → Hybrid Cloud Architecture
             </a>
-            <a href="/booking.html" class="text-blue-600 hover:underline text-sm block">
+            <a href="/booking.html" class="text-blue-600 hover:underline text-sm block" onclick="trackEvent('click','micro_talk_cloud')">
               → Talk to Romanoti
             </a>
           </div>
@@ -573,13 +619,13 @@
             End-to-end modernization and support for resilient technical environments.
           </p>
           <div class="mt-auto space-y-2">
-            <a href="/it-noc.html" class="text-blue-600 hover:underline text-sm block">
+            <a href="/it-noc.html" class="text-blue-600 hover:underline text-sm block" onclick="trackEvent('click','infra_noc')">
               → NOC Services
             </a>
-            <a href="/it-soc.html" class="text-blue-600 hover:underline text-sm block">
+            <a href="/it-soc.html" class="text-blue-600 hover:underline text-sm block" onclick="trackEvent('click','infra_soc')">
               → SOC Services
             </a>
-            <a href="/booking.html" class="text-blue-600 hover:underline text-sm block">
+            <a href="/booking.html" class="text-blue-600 hover:underline text-sm block" onclick="trackEvent('click','micro_talk_infra')">
               → Talk to Romanoti
             </a>
           </div>
@@ -591,13 +637,13 @@
             Protection against exposure, ransomware, and modern security threats.
           </p>
           <div class="mt-auto flex flex-wrap gap-3">
-            <a href="/solutions/cybershield/" class="btn-primary text-white px-4 py-2 rounded-lg inline-block">
+            <a href="/solutions/cybershield/" class="btn-primary text-white px-4 py-2 rounded-lg inline-block" onclick="trackEvent('click','core_cybershield_explore')">
               Explore CyberShield
             </a>
-            <a href="/solutions/cybershield/easm-console.html" class="border px-4 py-2 rounded-lg inline-block hover:bg-gray-50">
+            <a href="/solutions/cybershield/easm-console.html" class="border px-4 py-2 rounded-lg inline-block hover:bg-gray-50" onclick="trackEvent('click','core_cybershield_demo')">
               EASM demo
             </a>
-            <a href="/booking.html" class="text-blue-600 text-sm inline-block self-center hover:underline">
+            <a href="/booking.html" class="text-blue-600 text-sm inline-block self-center hover:underline" onclick="trackEvent('click','micro_talk_cyber')">
               → Talk to Romanoti
             </a>
           </div>
@@ -609,10 +655,10 @@
             Practical support focused on continuity, visibility, and operational resilience.
           </p>
           <div class="mt-auto space-y-2">
-            <a href="/services/tools.html" class="text-blue-600 hover:underline text-sm block">
+            <a href="/services/tools.html" class="text-blue-600 hover:underline text-sm block" onclick="trackEvent('click','ops_tools')">
               → Tools &amp; Utilities
             </a>
-            <a href="/contact.html" class="text-blue-600 hover:underline text-sm block">
+            <a href="/contact.html" class="text-blue-600 hover:underline text-sm block" onclick="trackEvent('click','ops_talk_contact')">
               → Talk to Romanoti
             </a>
           </div>
@@ -638,11 +684,17 @@
       </p>
 
       <div class="flex flex-col md:flex-row justify-center gap-4">
-        <a href="/booking.html?service=Free%20Consultation" class="bg-white text-blue-700 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100">
+        <a href="/booking.html?service=Free%20Consultation"
+           class="bg-white text-blue-700 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100"
+           onclick="trackEvent('click','final_book_consultation')">
           Book a Consultation
         </a>
 
-        <a href="/contact.html" class="btn-primary text-white px-6 py-3 rounded-lg font-semibold">Contact Us</a>
+        <a href="/contact.html"
+           class="btn-primary text-white px-6 py-3 rounded-lg font-semibold"
+           onclick="trackEvent('click','final_contact')">
+          Contact Us
+        </a>
       </div>
 
       <!-- CHANGE #90: soft urgency / reassurance -->
