@@ -310,6 +310,13 @@
       box-shadow:0 10px 24px rgba(37,99,235,.22);
     }
 
+    button:disabled{
+      opacity:.7;
+      cursor:not-allowed;
+      transform:none;
+      box-shadow:none;
+    }
+
     .small-note{
       font-size:.9rem;
       color:#64748b;
@@ -511,7 +518,9 @@
               <textarea id="issue" name="issue"></textarea>
 
               <div class="form-actions">
-                <button type="submit" onclick="trackEvent('click','booking_request_appointment')">Request Appointment</button>
+                <button id="bookingSubmitButton" type="submit" onclick="trackEvent('click','booking_request_appointment')">
+                  Request Appointment
+                </button>
               </div>
             </form>
 
@@ -563,25 +572,34 @@
   </script>
 
   <!-- ============================================================
-       CHANGE #76 - BOOKING FORM SUBMIT VIA NETLIFY FUNCTION
+       CHANGE #78 - ROBUST FRONTEND SUBMIT HANDLER
        ------------------------------------------------------------
-       Sends JSON payload to /.netlify/functions/send-booking
-       instead of using Netlify Forms.
+       Improved submit flow to prevent false frontend errors.
 
-       Success path:
-       - form reset
-       - redirect to /thank-you.html
-
-       Failure path:
-       - alert with backend error message
+       What this change does:
+       - disables button while sending
+       - handles JSON responses safely
+       - handles text responses safely
+       - resets form only on true success
+       - redirects to thank-you page on success
+       - restores button on failure
        ============================================================ -->
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       const form = document.getElementById("bookingForm");
+      const submitButton = document.getElementById("bookingSubmitButton");
+
       if (!form) return;
 
       form.addEventListener("submit", async function (e) {
         e.preventDefault();
+
+        const originalButtonText = submitButton ? submitButton.textContent : "Request Appointment";
+
+        if (submitButton) {
+          submitButton.disabled = true;
+          submitButton.textContent = "Sending...";
+        }
 
         const formData = {
           fullname: document.querySelector("[name='fullname']")?.value || "",
@@ -603,20 +621,32 @@
             body: JSON.stringify(formData)
           });
 
-          const result = await res.json();
+          let result = {};
+
+          try {
+            result = await res.json();
+          } catch (jsonError) {
+            result = {};
+          }
 
           if (res.ok) {
             trackEvent('submit', 'booking_form_success');
-            alert("Request sent successfully.");
             form.reset();
             window.location.href = "/thank-you.html";
-          } else {
-            trackEvent('submit', 'booking_form_error');
-            alert("Error sending request: " + (result.error || "Unknown error"));
+            return;
           }
+
+          trackEvent('submit', 'booking_form_error');
+          alert("Error sending request: " + (result.error || "Unknown server error"));
+
         } catch (err) {
           trackEvent('submit', 'booking_form_error');
-          alert("Error sending request.");
+          alert("Network error. Please try again.");
+        } finally {
+          if (submitButton) {
+            submitButton.disabled = false;
+            submitButton.textContent = originalButtonText;
+          }
         }
       });
     });
