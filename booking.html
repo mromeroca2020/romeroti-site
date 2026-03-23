@@ -480,7 +480,15 @@
                  CHANGE #71 (PRIMARY NETLIFY FORM)
                  Se mantiene Netlify Forms con action hacia thank-you
                  ============================================================ -->
-            <form name="booking" method="POST" data-netlify="true" action="/thank-you.html">
+          <form name="booking" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thank-you.html">
+
+          <!-- Netlify form name (required) -->
+          <input type="hidden" name="form-name" value="booking">
+
+          <!-- Honeypot anti-spam (hidden field) -->
+          <p style="display:none;">
+            <label>Don’t fill this out: <input name="bot-field"></label>
+          </p>
               <input type="hidden" name="form-name" value="booking">
 
               <label for="fullname">Full Name</label>
