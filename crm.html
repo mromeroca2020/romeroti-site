@@ -1,54 +1,209 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Romanoti CRM</title>
+
+  <style>
+    /* =========================
+       Basic page styling
+       ========================= */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 30px;
+      background: #f7f9fc;
+      color: #1f2937;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    .card {
+      background: #ffffff;
+      border: 1px solid #dbe3ec;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+      max-width: 1100px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      background: #fff;
+    }
+
+    th, td {
+      border: 1px solid #dbe3ec;
+      padding: 12px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: #0f172a;
+      color: #fff;
+    }
+
+    tr:nth-child(even) {
+      background: #f8fafc;
+    }
+
+    .muted {
+      color: #6b7280;
+      margin-bottom: 10px;
+    }
+
+    .error {
+      color: #b91c1c;
+      font-weight: bold;
+    }
+
+    .ok {
+      color: #166534;
+      font-weight: bold;
+    }
+  </style>
 </head>
 <body>
 
-<h1>Romanoti CRM</h1>
+  <!-- =========================
+       Page title
+       ========================= -->
+  <h1>Romanoti CRM</h1>
 
-<table border="1" id="leadsTable">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Email</th>
-      <th>Company</th>
-      <th>Status</th>
-    </tr>
-  </thead>
-  <tbody></tbody>
-</table>
+  <div class="card">
+    <p class="muted">
+      Leads panel connected to Supabase.
+    </p>
 
-<script type="module">
-import { createClient } from "https://esm.sh/@supabase/supabase-js";
+    <!-- =========================
+         Status message area
+         Used to show loading, errors, or success
+         ========================= -->
+    <div id="statusMessage">Loading leads...</div>
 
-const supabase = createClient(
-  "https://rukftaohssovjaatzvkj.supabase.co",
-  "AQUI_TU_PUBLISHABLE_KEY_REAL"
-);
+    <!-- =========================
+         Leads table
+         Data will be inserted into tbody by JavaScript
+         ========================= -->
+    <table id="leadsTable">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Company</th>
+          <th>Phone</th>
+          <th>Status</th>
+          <th>Source</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
 
-async function loadLeads() {
-  const { data } = await supabase
-    .from("leads")
-    .select("*");
+  <!-- =========================
+       Supabase browser library
+       This is safe for frontend use ONLY with publishable key
+       Never use sb_secret here
+       ========================= -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 
-  const table = document.querySelector("#leadsTable tbody");
+  <script>
+    /* =========================
+       Supabase connection
+       IMPORTANT:
+       - Use your real project URL
+       - Use only your publishable key (sb_publishable_...)
+       ========================= */
+    const sb = window.supabase.createClient(
+      "https://rukftaohssovjaatzvkj.supabase.co",
+      "sb_publishable_UfLkSw2wUcjkH2sYAmCXBg_-Mqd65z-"
+    );
 
-  data.forEach(lead => {
-    const row = `
-      <tr>
-        <td>${lead.name}</td>
-        <td>${lead.email}</td>
-        <td>${lead.company}</td>
-        <td>${lead.pipeline_stage}</td>
-      </tr>
-    `;
-    table.innerHTML += row;
-  });
-}
+    /* =========================
+       References to HTML elements
+       ========================= */
+    const tableBody = document.querySelector("#leadsTable tbody");
+    const statusMessage = document.getElementById("statusMessage");
 
-loadLeads();
-</script>
+    /* =========================
+       Load leads from Supabase
+       ========================= */
+    async function loadLeads() {
+      try {
+        // Show loading message
+        statusMessage.textContent = "Loading leads...";
+        statusMessage.className = "";
+
+        // Query the leads table
+        const { data, error } = await sb
+          .from("leads")
+          .select("*")
+          .order("created_at", { ascending: false });
+
+        // Log raw response for debugging
+        console.log("Supabase data:", data);
+        console.log("Supabase error:", error);
+
+        // Clear current table content
+        tableBody.innerHTML = "";
+
+        // Handle Supabase error
+        if (error) {
+          statusMessage.textContent = "Error loading leads: " + error.message;
+          statusMessage.className = "error";
+          return;
+        }
+
+        // Handle empty results
+        if (!data || data.length === 0) {
+          statusMessage.textContent = "No leads found.";
+          statusMessage.className = "";
+          tableBody.innerHTML = `
+            <tr>
+              <td colspan="6">No records available yet.</td>
+            </tr>
+          `;
+          return;
+        }
+
+        // Success message
+        statusMessage.textContent = "Leads loaded successfully.";
+        statusMessage.className = "ok";
+
+        // Insert rows into the table
+        data.forEach((lead) => {
+          const row = document.createElement("tr");
+
+          row.innerHTML = `
+            <td>${lead.name ?? ""}</td>
+            <td>${lead.email ?? ""}</td>
+            <td>${lead.company ?? ""}</td>
+            <td>${lead.phone ?? ""}</td>
+            <td>${lead.pipeline_stage ?? "new"}</td>
+            <td>${lead.source ?? ""}</td>
+          `;
+
+          tableBody.appendChild(row);
+        });
+
+      } catch (err) {
+        // Catch unexpected JavaScript/runtime errors
+        console.error("Unexpected error:", err);
+        statusMessage.textContent = "Unexpected error: " + err.message;
+        statusMessage.className = "error";
+      }
+    }
+
+    /* =========================
+       Run when page loads
+       ========================= */
+    loadLeads();
+  </script>
 
 </body>
 </html>
