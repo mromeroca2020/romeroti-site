@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Romanoti CRM</title>
+</head>
+<body>
+
+<h1>Romanoti CRM</h1>
+
+<table border="1" id="leadsTable">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Company</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+</table>
+
+<script type="module">
+import { createClient } from "https://esm.sh/@supabase/supabase-js";
+
+const supabase = createClient(
+  "https://rukftaohssovjaatzvkj.supabase.co",
+  "TU_PUBLIC_ANON_KEY"
+);
+
+async function loadLeads() {
+  const { data } = await supabase
+    .from("leads")
+    .select("*");
+
+  const table = document.querySelector("#leadsTable tbody");
+
+  data.forEach(lead => {
+    const row = `
+      <tr>
+        <td>${lead.name}</td>
+        <td>${lead.email}</td>
+        <td>${lead.company}</td>
+        <td>${lead.pipeline_stage}</td>
+      </tr>
+    `;
+    table.innerHTML += row;
+  });
+}
+
+loadLeads();
+</script>
+
+</body>
+</html>
