@@ -1,13 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- =========================
+       Basic document setup
+       ========================= -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Romanoti CRM</title>
 
   <style>
     /* =========================
-       Basic page styling
+       Global page styling
+       Keeps the interface clean
+       and easy to read
        ========================= */
     body {
       font-family: Arial, sans-serif;
@@ -18,6 +23,7 @@
 
     h1 {
       margin-bottom: 20px;
+      font-size: 2rem;
     }
 
     .card {
@@ -26,17 +32,35 @@
       border-radius: 12px;
       padding: 20px;
       box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
-      max-width: 1100px;
+      max-width: 1200px;
+    }
+
+    .muted {
+      color: #6b7280;
+      margin-bottom: 10px;
+    }
+
+    .ok {
+      color: #166534;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .error {
+      color: #b91c1c;
+      font-weight: bold;
+      margin-bottom: 10px;
     }
 
     table {
       width: 100%;
       border-collapse: collapse;
       margin-top: 10px;
-      background: #fff;
+      background: #ffffff;
     }
 
-    th, td {
+    th,
+    td {
       border: 1px solid #dbe3ec;
       padding: 12px;
       text-align: left;
@@ -45,50 +69,52 @@
 
     th {
       background: #0f172a;
-      color: #fff;
+      color: #ffffff;
     }
 
     tr:nth-child(even) {
       background: #f8fafc;
     }
 
-    .muted {
+    select {
+      padding: 6px 8px;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      background: #ffffff;
+      cursor: pointer;
+    }
+
+    .small-note {
+      margin-top: 14px;
+      font-size: 0.9rem;
       color: #6b7280;
-      margin-bottom: 10px;
-    }
-
-    .error {
-      color: #b91c1c;
-      font-weight: bold;
-    }
-
-    .ok {
-      color: #166534;
-      font-weight: bold;
     }
   </style>
 </head>
 <body>
 
   <!-- =========================
-       Page title
+       Main title
        ========================= -->
   <h1>Romanoti CRM</h1>
 
+  <!-- =========================
+       Main content container
+       ========================= -->
   <div class="card">
     <p class="muted">
       Leads panel connected to Supabase.
     </p>
 
     <!-- =========================
-         Status message area
-         Used to show loading, errors, or success
+         Status / feedback message
+         Shows loading, success or error
          ========================= -->
     <div id="statusMessage">Loading leads...</div>
 
     <!-- =========================
          Leads table
-         Data will be inserted into tbody by JavaScript
+         Populated dynamically from Supabase
          ========================= -->
     <table id="leadsTable">
       <thead>
@@ -103,21 +129,25 @@
       </thead>
       <tbody></tbody>
     </table>
+
+    <p class="small-note">
+      Status can be updated directly from this panel.
+    </p>
   </div>
 
   <!-- =========================
        Supabase browser library
-       This is safe for frontend use ONLY with publishable key
-       Never use sb_secret here
+       IMPORTANT:
+       - Safe only with publishable key
+       - Never use sb_secret here
        ========================= -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 
   <script>
     /* =========================
-       Supabase connection
-       IMPORTANT:
-       - Use your real project URL
-       - Use only your publishable key (sb_publishable_...)
+       Supabase client connection
+       Uses your project URL and
+       your publishable key
        ========================= */
     const sb = window.supabase.createClient(
       "https://rukftaohssovjaatzvkj.supabase.co",
@@ -125,41 +155,67 @@
     );
 
     /* =========================
-       References to HTML elements
+       DOM references
        ========================= */
     const tableBody = document.querySelector("#leadsTable tbody");
     const statusMessage = document.getElementById("statusMessage");
 
     /* =========================
+       Update lead pipeline status
+       Triggered when user changes
+       the dropdown value
+       ========================= */
+    async function updateStatus(id, newStatus) {
+      try {
+        const { error } = await sb
+          .from("leads")
+          .update({ pipeline_stage: newStatus })
+          .eq("id", id);
+
+        if (error) {
+          console.error("Update status error:", error);
+          alert("Error updating status: " + error.message);
+          return;
+        }
+
+        console.log("Status updated successfully");
+      } catch (err) {
+        console.error("Unexpected status update error:", err);
+        alert("Unexpected error updating status");
+      }
+    }
+
+    /* =========================
        Load leads from Supabase
+       and render them in table
        ========================= */
     async function loadLeads() {
       try {
-        // Show loading message
+        // Show loading state
         statusMessage.textContent = "Loading leads...";
         statusMessage.className = "";
 
-        // Query the leads table
+        // Read all leads ordered by newest first
         const { data, error } = await sb
           .from("leads")
           .select("*")
           .order("created_at", { ascending: false });
 
-        // Log raw response for debugging
+        // Useful debugging logs
         console.log("Supabase data:", data);
         console.log("Supabase error:", error);
 
-        // Clear current table content
+        // Reset table before repopulating
         tableBody.innerHTML = "";
 
-        // Handle Supabase error
+        // Handle database error
         if (error) {
           statusMessage.textContent = "Error loading leads: " + error.message;
           statusMessage.className = "error";
           return;
         }
 
-        // Handle empty results
+        // Handle empty dataset
         if (!data || data.length === 0) {
           statusMessage.textContent = "No leads found.";
           statusMessage.className = "";
@@ -171,11 +227,11 @@
           return;
         }
 
-        // Success message
+        // Success feedback
         statusMessage.textContent = "Leads loaded successfully.";
         statusMessage.className = "ok";
 
-        // Insert rows into the table
+        // Create one row per lead
         data.forEach((lead) => {
           const row = document.createElement("tr");
 
@@ -184,7 +240,15 @@
             <td>${lead.email ?? ""}</td>
             <td>${lead.company ?? ""}</td>
             <td>${lead.phone ?? ""}</td>
-            <td>${lead.pipeline_stage ?? "new"}</td>
+            <td>
+              <select onchange="updateStatus('${lead.id}', this.value)">
+                <option value="new" ${lead.pipeline_stage === "new" ? "selected" : ""}>new</option>
+                <option value="contacted" ${lead.pipeline_stage === "contacted" ? "selected" : ""}>contacted</option>
+                <option value="meeting" ${lead.pipeline_stage === "meeting" ? "selected" : ""}>meeting</option>
+                <option value="proposal" ${lead.pipeline_stage === "proposal" ? "selected" : ""}>proposal</option>
+                <option value="closed" ${lead.pipeline_stage === "closed" ? "selected" : ""}>closed</option>
+              </select>
+            </td>
             <td>${lead.source ?? ""}</td>
           `;
 
@@ -192,7 +256,7 @@
         });
 
       } catch (err) {
-        // Catch unexpected JavaScript/runtime errors
+        // Catch unexpected runtime errors
         console.error("Unexpected error:", err);
         statusMessage.textContent = "Unexpected error: " + err.message;
         statusMessage.className = "error";
@@ -200,7 +264,14 @@
     }
 
     /* =========================
-       Run when page loads
+       Expose function globally
+       because onchange in HTML
+       needs access to it
+       ========================= */
+    window.updateStatus = updateStatus;
+
+    /* =========================
+       Initial page load
        ========================= */
     loadLeads();
   </script>
