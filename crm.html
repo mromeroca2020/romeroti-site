@@ -166,25 +166,31 @@
        Triggered when user changes
        the dropdown value
        ========================= */
-    async function updateStatus(id, newStatus) {
-      try {
-        const { error } = await sb
-          .from("leads")
-          .update({ pipeline_stage: newStatus })
-          .eq("id", id);
+async function updateStatus(id, newStatus) {
+  try {
+    const { error } = await sb
+      .from("leads")
+      .update({ pipeline_stage: newStatus })
+      .eq("id", id);
 
-        if (error) {
-          console.error("Update status error:", error);
-          alert("Error updating status: " + error.message);
-          return;
-        }
+    if (error) throw error;
 
-        console.log("Status updated successfully");
-      } catch (err) {
-        console.error("Unexpected status update error:", err);
-        alert("Unexpected error updating status");
+    // 🔥 guardar evento
+    await sb.from("lead_events").insert([
+      {
+        lead_id: id,
+        event_type: "status_change",
+        description: "Status changed to " + newStatus
       }
-    }
+    ]);
+
+    console.log("Status updated + event saved");
+
+  } catch (err) {
+    console.error(err);
+    alert("Error updating status");
+  }
+}
 
     /* =========================
        Load leads from Supabase
@@ -278,22 +284,29 @@
        needs access to it
        ========================= */
     window.updateStatus = updateStatus;
-    async function updateNotes(id, newNotes) {
+async function updateNotes(id, newNotes) {
   try {
     const { error } = await sb
       .from("leads")
       .update({ notes: newNotes })
       .eq("id", id);
 
-    if (error) {
-      alert("Error saving notes");
-      console.error(error);
-    } else {
-      console.log("Notes updated");
-    }
+    if (error) throw error;
+
+    // 🔥 guardar evento
+    await sb.from("lead_events").insert([
+      {
+        lead_id: id,
+        event_type: "notes_update",
+        description: "Notes updated"
+      }
+    ]);
+
+    console.log("Notes updated + event saved");
+
   } catch (err) {
     console.error(err);
-    alert("Unexpected error saving notes");
+    alert("Error saving notes");
   }
 }
     window.updateNotes = updateNotes;
