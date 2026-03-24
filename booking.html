@@ -376,6 +376,24 @@
       background:#f8fafc;
     }
 
+    /* ============================================================
+       CHANGE #80 - FORM FEEDBACK STYLES
+       ------------------------------------------------------------
+       Moved into the main <style> block to avoid invalid HTML
+       and ensure styles apply consistently in production.
+       ============================================================ */
+    .form-success{
+      background:#e6f9f0;
+      color:#065f46;
+      border:1px solid #34d399;
+    }
+
+    .form-error{
+      background:#fff1f2;
+      color:#7f1d1d;
+      border:1px solid #f87171;
+    }
+
     @media (max-width:980px){
       .booking-grid{
         grid-template-columns:1fr;
@@ -517,6 +535,16 @@
               <label for="issue">Describe your issue</label>
               <textarea id="issue" name="issue"></textarea>
 
+              <!-- ============================================================
+                   CHANGE #79 - FORM FEEDBACK CONTAINER
+                   ------------------------------------------------------------
+                   Inline success/error box used by the frontend submit
+                   handler instead of alerts.
+                   ============================================================ -->
+              <div id="formMessage"
+                   style="display:none; margin-bottom:14px; padding:12px 14px; border-radius:10px; font-size:.9rem;">
+              </div>
+
               <div class="form-actions">
                 <button id="bookingSubmitButton" type="submit" onclick="trackEvent('click','booking_request_appointment')">
                   Request Appointment
@@ -572,44 +600,43 @@
   </script>
 
   <!-- ============================================================
-       CHANGE #78 - ROBUST FRONTEND SUBMIT HANDLER
+       CHANGE #82 - PRODUCTION UX FORM HANDLER (FINAL)
        ------------------------------------------------------------
-       Improved submit flow to prevent false frontend errors.
-
-       What this change does:
-       - disables button while sending
-       - handles JSON responses safely
-       - handles text responses safely
-       - resets form only on true success
-       - redirects to thank-you page on success
-       - restores button on failure
+       - Uses messageBox instead of alert()
+       - Keeps backend intact
+       - Prevents false errors
+       - Adds proper UX feedback
        ============================================================ -->
   <script>
     document.addEventListener("DOMContentLoaded", function () {
+
       const form = document.getElementById("bookingForm");
       const submitButton = document.getElementById("bookingSubmitButton");
+      const messageBox = document.getElementById("formMessage");
 
-      if (!form) return;
+      if (!form || !submitButton || !messageBox) return;
 
       form.addEventListener("submit", async function (e) {
         e.preventDefault();
 
-        const originalButtonText = submitButton ? submitButton.textContent : "Request Appointment";
+        const originalText = submitButton.textContent;
 
-        if (submitButton) {
-          submitButton.disabled = true;
-          submitButton.textContent = "Sending...";
-        }
+        // Reset UI
+        messageBox.style.display = "none";
+        messageBox.className = "";
+
+        submitButton.disabled = true;
+        submitButton.textContent = "Sending...";
 
         const formData = {
-          fullname: document.querySelector("[name='fullname']")?.value || "",
-          email: document.querySelector("[name='email']")?.value || "",
-          phone: document.querySelector("[name='phone']")?.value || "",
-          company: document.querySelector("[name='company']")?.value || "",
-          service: document.querySelector("[name='service']")?.value || "",
-          date: document.querySelector("[name='date']")?.value || "",
-          time: document.querySelector("[name='time']")?.value || "",
-          issue: document.querySelector("[name='issue']")?.value || ""
+          fullname: form.fullname.value,
+          email: form.email.value,
+          phone: form.phone.value,
+          company: form.company.value,
+          service: form.service.value,
+          date: form.date.value,
+          time: form.time.value,
+          issue: form.issue.value,
         };
 
         try {
@@ -621,33 +648,42 @@
             body: JSON.stringify(formData)
           });
 
-          let result = {};
-
-          try {
-            result = await res.json();
-          } catch (jsonError) {
-            result = {};
-          }
-
           if (res.ok) {
-            trackEvent('submit', 'booking_form_success');
-            form.reset();
-            window.location.href = "/thank-you.html";
-            return;
-          }
 
-          trackEvent('submit', 'booking_form_error');
-          alert("Error sending request: " + (result.error || "Unknown server error"));
+            // SUCCESS UI
+            messageBox.className = "form-success";
+            messageBox.innerHTML = "✅ Your request has been sent successfully. We will contact you shortly.";
+            messageBox.style.display = "block";
+
+            form.reset();
+            trackEvent('submit', 'booking_form_success');
+
+            setTimeout(() => {
+              window.location.href = "/thank-you.html";
+            }, 1800);
+
+          } else {
+
+            // SERVER ERROR
+            messageBox.className = "form-error";
+            messageBox.innerHTML = "⚠️ There was a problem processing your request.";
+            messageBox.style.display = "block";
+
+            trackEvent('submit', 'booking_form_error');
+          }
 
         } catch (err) {
+
+          // NETWORK ERROR
+          messageBox.className = "form-error";
+          messageBox.innerHTML = "❌ Network error. Please try again.";
+          messageBox.style.display = "block";
+
           trackEvent('submit', 'booking_form_error');
-          alert("Network error. Please try again.");
-        } finally {
-          if (submitButton) {
-            submitButton.disabled = false;
-            submitButton.textContent = originalButtonText;
-          }
         }
+
+        submitButton.disabled = false;
+        submitButton.textContent = originalText;
       });
     });
   </script>
