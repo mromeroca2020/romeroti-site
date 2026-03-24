@@ -125,6 +125,7 @@
           <th>Phone</th>
           <th>Status</th>
           <th>Source</th>
+          <th>Notes</th>
         </tr>
       </thead>
       <tbody></tbody>
@@ -249,8 +250,16 @@
                 <option value="closed" ${lead.pipeline_stage === "closed" ? "selected" : ""}>closed</option>
               </select>
             </td>
-            <td>${lead.source ?? ""}</td>
-          `;
+           <td>${lead.source ?? ""}</td>
+
+            <td>
+              <textarea 
+                rows="2"
+                style="width:100%"
+                onchange="updateNotes('${lead.id}', this.value)"
+              >${lead.notes ?? ""}</textarea>
+            </td>
+                      `;
 
           tableBody.appendChild(row);
         });
@@ -269,6 +278,25 @@
        needs access to it
        ========================= */
     window.updateStatus = updateStatus;
+    async function updateNotes(id, newNotes) {
+  try {
+    const { error } = await sb
+      .from("leads")
+      .update({ notes: newNotes })
+      .eq("id", id);
+
+    if (error) {
+      alert("Error saving notes");
+      console.error(error);
+    } else {
+      console.log("Notes updated");
+    }
+  } catch (err) {
+    console.error(err);
+    alert("Unexpected error saving notes");
+  }
+}
+    window.updateNotes = updateNotes;
 
     /* =========================
        Initial page load
