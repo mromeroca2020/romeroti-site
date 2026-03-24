@@ -216,11 +216,11 @@ async function updateStatus(id, newStatus) {
         tableBody.innerHTML = "";
 
         // Handle database error
-        if (error) {
-          statusMessage.textContent = "Error loading leads: " + error.message;
-          statusMessage.className = "error";
-          return;
-        }
+        } catch (err) 
+      {
+        console.error("Unexpected error saving notes:", err);
+        alert("Unexpected error saving notes: " + err.message);
+      }
 
         // Handle empty dataset
         if (!data || data.length === 0) {
