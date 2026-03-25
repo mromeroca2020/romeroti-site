@@ -9,11 +9,6 @@
   <title>Romanoti CRM</title>
 
   <style>
-    /* =========================
-       Global page styling
-       Keeps the interface clean
-       and easy to read
-       ========================= */
     body {
       font-family: Arial, sans-serif;
       margin: 30px;
@@ -111,30 +106,12 @@
   </style>
 </head>
 <body>
-
-  <!-- =========================
-       Main title
-       ========================= -->
   <h1>Romanoti CRM</h1>
 
-  <!-- =========================
-       Main content container
-       ========================= -->
   <div class="card">
-    <p class="muted">
-      Leads panel connected to Supabase.
-    </p>
-
-    <!-- =========================
-         Status / feedback message
-         Shows loading, success, saving or error
-         ========================= -->
+    <p class="muted">Leads panel connected to Supabase.</p>
     <div id="statusMessage">Loading leads...</div>
 
-    <!-- =========================
-         Leads table
-         Populated dynamically from Supabase
-         ========================= -->
     <table id="leadsTable">
       <thead>
         <tr>
@@ -155,44 +132,22 @@
     </p>
   </div>
 
-  <!-- =========================
-       Supabase browser library
-       IMPORTANT:
-       - Safe only with publishable key
-       - Never use sb_secret here
-       ========================= -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <script type="module">
+    import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
-  <script>
-    /* =========================
-       Supabase client connection
-       Uses your project URL and
-       your publishable key
-       ========================= */
-    const sb = window.supabase.createClient(
+    const sb = createClient(
       "https://rukftaohssovjaatzvkj.supabase.co",
       "sb_publishable_UfLkSw2wUcjkH2sYAmCXBg_-Mqd65z-"
     );
 
-    /* =========================
-       DOM references
-       ========================= */
     const tableBody = document.querySelector("#leadsTable tbody");
     const statusMessage = document.getElementById("statusMessage");
 
-    /* =========================
-       Helper: set status message
-       ========================= */
     function setStatusMessage(message, cssClass = "") {
       statusMessage.textContent = message;
       statusMessage.className = cssClass;
     }
 
-    /* =========================
-       Helper: save lead event
-       Does not break main flow
-       if event insert fails
-       ========================= */
     async function saveLeadEvent(leadId, eventType, description) {
       try {
         const { error } = await sb.from("lead_events").insert([
@@ -211,11 +166,6 @@
       }
     }
 
-    /* =========================
-       Update lead pipeline status
-       Triggered when user changes
-       the dropdown value
-       ========================= */
     async function updateStatus(id, newStatus) {
       try {
         setStatusMessage("Saving status...", "saving");
@@ -225,9 +175,7 @@
           .update({ pipeline_stage: newStatus })
           .eq("id", id);
 
-        if (error) {
-          throw error;
-        }
+        if (error) throw error;
 
         await saveLeadEvent(
           id,
@@ -243,11 +191,6 @@
       }
     }
 
-    /* =========================
-       Update lead notes
-       Triggered when user changes
-       textarea and leaves field
-       ========================= */
     async function updateNotes(id, newNotes) {
       try {
         setStatusMessage("Saving notes...", "saving");
@@ -257,9 +200,7 @@
           .update({ notes: newNotes })
           .eq("id", id);
 
-        if (error) {
-          throw error;
-        }
+        if (error) throw error;
 
         await saveLeadEvent(
           id,
@@ -275,10 +216,6 @@
       }
     }
 
-    /* =========================
-       Load leads from Supabase
-       and render them in table
-       ========================= */
     async function loadLeads() {
       try {
         setStatusMessage("Loading leads...");
@@ -319,7 +256,7 @@
             <td>${lead.company ?? ""}</td>
             <td>${lead.phone ?? ""}</td>
             <td>
-              <select onchange="updateStatus('${lead.id}', this.value)">
+              <select data-id="${lead.id}">
                 <option value="new" ${lead.pipeline_stage === "new" ? "selected" : ""}>new</option>
                 <option value="contacted" ${lead.pipeline_stage === "contacted" ? "selected" : ""}>contacted</option>
                 <option value="meeting" ${lead.pipeline_stage === "meeting" ? "selected" : ""}>meeting</option>
@@ -329,35 +266,29 @@
             </td>
             <td>${lead.source ?? ""}</td>
             <td>
-              <textarea
-                rows="2"
-                onchange="updateNotes('${lead.id}', this.value)"
-              >${lead.notes ?? ""}</textarea>
+              <textarea data-id="${lead.id}" rows="2">${lead.notes ?? ""}</textarea>
             </td>
           `;
 
+          const select = row.querySelector("select");
+          select.addEventListener("change", (e) => {
+            updateStatus(e.target.dataset.id, e.target.value);
+          });
+
+          const textarea = row.querySelector("textarea");
+          textarea.addEventListener("change", (e) => {
+            updateNotes(e.target.dataset.id, e.target.value);
+          });
+
           tableBody.appendChild(row);
         });
-
       } catch (err) {
         console.error("Unexpected loadLeads error:", err);
         setStatusMessage("Unexpected error: " + err.message, "error");
       }
     }
 
-    /* =========================
-       Expose functions globally
-       because onchange in HTML
-       needs access to them
-       ========================= */
-    window.updateStatus = updateStatus;
-    window.updateNotes = updateNotes;
-
-    /* =========================
-       Initial page load
-       ========================= */
     loadLeads();
   </script>
-
 </body>
 </html>
