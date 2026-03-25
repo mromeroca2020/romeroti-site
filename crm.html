@@ -9,6 +9,9 @@
   <title>Romanoti CRM</title>
 
   <style>
+    /* =========================
+       Global page styling
+       ========================= */
     body {
       font-family: Arial, sans-serif;
       margin: 30px;
@@ -21,6 +24,10 @@
       font-size: 2rem;
     }
 
+    h3 {
+      margin: 0 0 12px 0;
+    }
+
     .card {
       background: #ffffff;
       border: 1px solid #dbe3ec;
@@ -28,6 +35,7 @@
       padding: 20px;
       box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
       max-width: 1200px;
+      margin-bottom: 20px;
     }
 
     .muted {
@@ -77,6 +85,14 @@
       background: #f8fafc;
     }
 
+    .clickable-row {
+      cursor: pointer;
+    }
+
+    .clickable-row:hover {
+      background: #eef4ff !important;
+    }
+
     select {
       padding: 6px 8px;
       border: 1px solid #cbd5e1;
@@ -106,12 +122,31 @@
   </style>
 </head>
 <body>
+
+  <!-- =========================
+       Main page title
+       ========================= -->
   <h1>Romanoti CRM</h1>
 
+  <!-- =========================
+       Main leads panel
+       ========================= -->
   <div class="card">
-    <p class="muted">Leads panel connected to Supabase.</p>
+    <p class="muted">
+      Leads panel connected to Supabase.
+    </p>
+
+    <!-- =========================
+         Global status message area
+         Used for loading, saving,
+         success, and error feedback
+         ========================= -->
     <div id="statusMessage">Loading leads...</div>
 
+    <!-- =========================
+         Leads table
+         One row per lead
+         ========================= -->
     <table id="leadsTable">
       <thead>
         <tr>
@@ -128,26 +163,71 @@
     </table>
 
     <p class="small-note">
-      Status and notes are updated directly from this panel.
+      Status and notes are updated directly from this panel. Click a lead row to view activity history.
     </p>
   </div>
 
+  <!-- =========================
+       Lead activity panel
+       Hidden until a lead is clicked
+       ========================= -->
+  <div class="card" id="leadDetail" style="display:none;">
+    <h3>Lead Activity</h3>
+    <div id="leadDetailHeader" class="muted"></div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>When</th>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody id="eventsTableBody"></tbody>
+    </table>
+  </div>
+
+  <!-- =========================
+       Supabase ES module import
+       This is safer and more stable
+       than relying on window globals
+       ========================= -->
   <script type="module">
     import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
+    /* =========================
+       Supabase client connection
+       IMPORTANT:
+       - Use only publishable key here
+       - Never use sb_secret on frontend
+       ========================= */
     const sb = createClient(
       "https://rukftaohssovjaatzvkj.supabase.co",
       "sb_publishable_UfLkSw2wUcjkH2sYAmCXBg_-Mqd65z-"
     );
 
+    /* =========================
+       DOM references
+       ========================= */
     const tableBody = document.querySelector("#leadsTable tbody");
     const statusMessage = document.getElementById("statusMessage");
+    const leadDetail = document.getElementById("leadDetail");
+    const leadDetailHeader = document.getElementById("leadDetailHeader");
+    const eventsTableBody = document.getElementById("eventsTableBody");
 
+    /* =========================
+       Helper to set top status text
+       ========================= */
     function setStatusMessage(message, cssClass = "") {
       statusMessage.textContent = message;
       statusMessage.className = cssClass;
     }
 
+    /* =========================
+       Save an event to lead_events
+       This should never break
+       the main UX if it fails
+       ========================= */
     async function saveLeadEvent(leadId, eventType, description) {
       try {
         const { error } = await sb.from("lead_events").insert([
@@ -166,6 +246,9 @@
       }
     }
 
+    /* =========================
+       Update pipeline stage
+       ========================= */
     async function updateStatus(id, newStatus) {
       try {
         setStatusMessage("Saving status...", "saving");
@@ -191,6 +274,9 @@
       }
     }
 
+    /* =========================
+       Update notes for a lead
+       ========================= */
     async function updateNotes(id, newNotes) {
       try {
         setStatusMessage("Saving notes...", "saving");
@@ -216,6 +302,76 @@
       }
     }
 
+    /* =========================
+       Load activity history
+       for one selected lead
+       ========================= */
+    async function loadLeadEvents(lead) {
+      try {
+        leadDetail.style.display = "block";
+        leadDetailHeader.textContent = `Activity for ${lead.name || lead.email}`;
+
+        eventsTableBody.innerHTML = `
+          <tr>
+            <td colspan="3">Loading activity...</td>
+          </tr>
+        `;
+
+        const { data, error } = await sb
+          .from("lead_events")
+          .select("*")
+          .eq("lead_id", lead.id)
+          .order("created_at", { ascending: false });
+
+        if (error) {
+          eventsTableBody.innerHTML = `
+            <tr>
+              <td colspan="3">Error loading activity: ${error.message}</td>
+            </tr>
+          `;
+          return;
+        }
+
+        if (!data || data.length === 0) {
+          eventsTableBody.innerHTML = `
+            <tr>
+              <td colspan="3">No activity yet.</td>
+            </tr>
+          `;
+          return;
+        }
+
+        eventsTableBody.innerHTML = "";
+
+        data.forEach((event) => {
+          const row = document.createElement("tr");
+
+          const when = event.created_at
+            ? new Date(event.created_at).toLocaleString()
+            : "";
+
+          row.innerHTML = `
+            <td>${when}</td>
+            <td>${event.event_type ?? ""}</td>
+            <td>${event.description ?? ""}</td>
+          `;
+
+          eventsTableBody.appendChild(row);
+        });
+      } catch (err) {
+        console.error("loadLeadEvents error:", err);
+        eventsTableBody.innerHTML = `
+          <tr>
+            <td colspan="3">Unexpected error loading activity.</td>
+          </tr>
+        `;
+      }
+    }
+
+    /* =========================
+       Load all leads and render
+       the table
+       ========================= */
     async function loadLeads() {
       try {
         setStatusMessage("Loading leads...");
@@ -249,6 +405,7 @@
 
         data.forEach((lead) => {
           const row = document.createElement("tr");
+          row.classList.add("clickable-row");
 
           row.innerHTML = `
             <td>${lead.name ?? ""}</td>
@@ -270,11 +427,30 @@
             </td>
           `;
 
+          /* =========================
+             Row click = load detail
+             We prevent row detail loading
+             when user clicks inside inputs
+             ========================= */
+          row.addEventListener("click", (event) => {
+            const tag = event.target.tagName.toLowerCase();
+            if (tag === "select" || tag === "textarea" || tag === "option") {
+              return;
+            }
+            loadLeadEvents(lead);
+          });
+
+          /* =========================
+             Status change listener
+             ========================= */
           const select = row.querySelector("select");
           select.addEventListener("change", (e) => {
             updateStatus(e.target.dataset.id, e.target.value);
           });
 
+          /* =========================
+             Notes change listener
+             ========================= */
           const textarea = row.querySelector("textarea");
           textarea.addEventListener("change", (e) => {
             updateNotes(e.target.dataset.id, e.target.value);
@@ -288,7 +464,11 @@
       }
     }
 
+    /* =========================
+       Initial page load
+       ========================= */
     loadLeads();
   </script>
+
 </body>
 </html>
