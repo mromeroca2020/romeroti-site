@@ -19,8 +19,6 @@
       --muted: #6b7280;
       --navy: #0b1730;
       --navy-2: #132347;
-      --blue-soft: #e8f0ff;
-      --green-soft: #eaf8ef;
       --yellow-soft: #fff6db;
       --red-soft: #feeeee;
       --shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
@@ -505,6 +503,13 @@
       font-size: 13px;
     }
 
+    .event-byline {
+      display: block;
+      margin-top: 4px;
+      color: #64748b;
+      font-size: 12px;
+    }
+
     @media (max-width: 1100px) {
       .layout-grid {
         grid-template-columns: 1fr;
@@ -640,6 +645,16 @@
       throw new Error("No active session");
     }
 
+    /* =========================
+       Current authenticated user
+       Used for audit trail
+       ========================= */
+    const {
+      data: { user }
+    } = await sb.auth.getUser();
+
+    const currentUserEmail = user?.email || "unknown";
+
     const tableBody = document.querySelector("#leadsTable tbody");
     const statusMessage = document.getElementById("statusMessage");
     const leadDetail = document.getElementById("leadDetail");
@@ -769,13 +784,19 @@
       `;
     }
 
+    /* =========================
+       Save event with user trace
+       Every action records who
+       performed the change
+       ========================= */
     async function saveLeadEvent(leadId, eventType, description) {
       try {
         const { error } = await sb.from("lead_events").insert([
           {
             lead_id: leadId,
             event_type: eventType,
-            description: description
+            description: description,
+            user_email: currentUserEmail
           }
         ]);
 
@@ -799,7 +820,11 @@
 
         if (error) throw error;
 
-        await saveLeadEvent(id, "status_change", "Status changed to " + newStatus);
+        await saveLeadEvent(
+          id,
+          "status_change",
+          `Status changed to ${newStatus}`
+        );
 
         setStatusMessage("Status updated successfully.", "ok");
         setFieldIndicator(id, "status", "Saved ✓", "field-ok");
@@ -825,7 +850,11 @@
 
         if (error) throw error;
 
-        await saveLeadEvent(id, "priority_change", "Priority changed to " + newPriority);
+        await saveLeadEvent(
+          id,
+          "priority_change",
+          `Priority changed to ${newPriority}`
+        );
 
         setStatusMessage("Priority updated successfully.", "ok");
         setFieldIndicator(id, "priority", "Saved ✓", "field-ok");
@@ -856,7 +885,9 @@
         await saveLeadEvent(
           id,
           "followup_change",
-          valueToSave ? "Next follow-up set to " + valueToSave : "Next follow-up cleared"
+          valueToSave
+            ? `Next follow-up set to ${valueToSave}`
+            : "Next follow-up cleared"
         );
 
         setStatusMessage("Follow-up updated successfully.", "ok");
@@ -883,7 +914,11 @@
 
         if (error) throw error;
 
-        await saveLeadEvent(id, "notes_update", "Notes updated");
+        await saveLeadEvent(
+          id,
+          "notes_update",
+          "Notes updated"
+        );
 
         setStatusMessage("Notes updated successfully.", "ok");
         setFieldIndicator(id, "notes", "Saved ✓", "field-ok");
@@ -941,7 +976,10 @@
           row.innerHTML = `
             <td>${when}</td>
             <td>${event.event_type ?? ""}</td>
-            <td>${event.description ?? ""}</td>
+            <td>
+              ${event.description ?? ""}
+              <span class="event-byline">by ${event.user_email || "system"}</span>
+            </td>
           `;
 
           eventsTableBody.appendChild(row);
@@ -1241,9 +1279,6 @@
       }
     }
 
-    /* =========================
-       Logout action
-       ========================= */
     logoutBtn.addEventListener("click", async () => {
       await sb.auth.signOut();
       window.location.href = "/crm-login.html";
