@@ -1,43 +1,241 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <!-- =========================
+       Basic document setup
+       ========================= -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Romanoti CRM Login</title>
+
+  <style>
+    :root {
+      --bg: #f3f6fb;
+      --card: #ffffff;
+      --border: #dbe3ec;
+      --text: #172033;
+      --muted: #6b7280;
+      --navy: #0b1730;
+      --navy-2: #132347;
+      --shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, var(--navy), var(--navy-2));
+      color: white;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .login-card {
+      width: 100%;
+      max-width: 420px;
+      background: var(--card);
+      color: var(--text);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 18px;
+      padding: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .brand-title {
+      font-size: 30px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: var(--navy);
+    }
+
+    .brand-subtitle {
+      color: var(--muted);
+      margin-bottom: 22px;
+      line-height: 1.4;
+    }
+
+    .field {
+      margin-bottom: 14px;
+    }
+
+    .field label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 13px;
+      font-weight: bold;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    .field input {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid #cbd5e1;
+      border-radius: 10px;
+      font-size: 14px;
+      outline: none;
+    }
+
+    .field input:focus {
+      border-color: #93c5fd;
+      box-shadow: 0 0 0 4px rgba(59,130,246,0.08);
+    }
+
+    .login-btn {
+      width: 100%;
+      padding: 12px 14px;
+      border: none;
+      border-radius: 10px;
+      background: var(--navy);
+      color: white;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.12s ease, opacity 0.12s ease;
+    }
+
+    .login-btn:hover {
+      transform: translateY(-1px);
+      opacity: 0.96;
+    }
+
+    .status {
+      margin-top: 14px;
+      min-height: 20px;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .status.ok {
+      color: #166534;
+    }
+
+    .status.error {
+      color: #b91c1c;
+    }
+
+    .status.saving {
+      color: #92400e;
+    }
+
+    .helper {
+      margin-top: 16px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+  </style>
 </head>
 <body>
+  <div class="login-card">
+    <div class="brand-title">Romanoti CRM</div>
+    <div class="brand-subtitle">
+      Internal access for Romanoti staff. Sign in with your corporate email and your CRM password.
+    </div>
 
-<h2>Romanoti CRM Login</h2>
+    <div class="field">
+      <label for="email">Email</label>
+      <input id="email" type="email" placeholder="mauricio.romero@romanoti-solutions.com" />
+    </div>
 
-<input id="email" placeholder="Email"><br><br>
-<input id="password" type="password" placeholder="Password"><br><br>
+    <div class="field">
+      <label for="password">Password</label>
+      <input id="password" type="password" placeholder="Enter your password" />
+    </div>
 
-<button onclick="login()">Login</button>
+    <button class="login-btn" id="loginBtn">Sign in</button>
 
-<p id="status"></p>
+    <div id="status" class="status"></div>
 
-<script type="module">
-import { createClient } from "https://esm.sh/@supabase/supabase-js";
+    <div class="helper">
+      This login is private and intended only for Romanoti internal users.
+    </div>
+  </div>
 
-const supabase = createClient(
-  "https://rukftaohssovjaatzvkj.supabase.co",
-  "TU_PUBLISHABLE_KEY"
-);
+  <script type="module">
+    import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
-window.login = async function () {
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
+    /* =========================
+       Supabase client connection
+       ========================= */
+    const sb = createClient(
+      "https://rukftaohssovjaatzvkj.supabase.co",
+      "sb_publishable_UfLkSw2wUcjkH2sYAmCXBg_-Mqd65z-"
+    );
 
-  const { error } = await supabase.auth.signInWithPassword({
-    email,
-    password
-  });
+    const emailInput = document.getElementById("email");
+    const passwordInput = document.getElementById("password");
+    const loginBtn = document.getElementById("loginBtn");
+    const statusEl = document.getElementById("status");
 
-  if (error) {
-    document.getElementById("status").innerText = "Login failed";
-  } else {
-    window.location.href = "/crm.html";
-  }
-};
-</script>
+    function setStatus(message, cssClass = "") {
+      statusEl.textContent = message;
+      statusEl.className = `status ${cssClass}`.trim();
+    }
 
+    /* =========================
+       If user already has session,
+       send directly to CRM
+       ========================= */
+    const {
+      data: { session }
+    } = await sb.auth.getSession();
+
+    if (session) {
+      window.location.href = "/crm.html";
+    }
+
+    /* =========================
+       Login action
+       ========================= */
+    async function login() {
+      const email = emailInput.value.trim();
+      const password = passwordInput.value;
+
+      if (!email || !password) {
+        setStatus("Please enter email and password.", "error");
+        return;
+      }
+
+      if (!email.endsWith("@romanoti-solutions.com")) {
+        setStatus("Only Romanoti corporate emails are allowed.", "error");
+        return;
+      }
+
+      try {
+        setStatus("Signing in...", "saving");
+        loginBtn.disabled = true;
+
+        const { error } = await sb.auth.signInWithPassword({
+          email,
+          password
+        });
+
+        if (error) throw error;
+
+        setStatus("Login successful. Redirecting...", "ok");
+        window.location.href = "/crm.html";
+      } catch (err) {
+        setStatus(err.message || "Login failed.", "error");
+      } finally {
+        loginBtn.disabled = false;
+      }
+    }
+
+    loginBtn.addEventListener("click", login);
+
+    passwordInput.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        login();
+      }
+    });
+  </script>
 </body>
 </html>
