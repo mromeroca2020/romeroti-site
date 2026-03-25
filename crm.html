@@ -126,6 +126,42 @@
       margin-bottom: 4px;
     }
 
+    .toolbar {
+      display: grid;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 14px;
+      box-sizing: border-box;
+    }
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .filter-btn {
+      padding: 8px 12px;
+      border: 1px solid #cbd5e1;
+      background: #ffffff;
+      border-radius: 999px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .filter-btn.active {
+      background: #0f172a;
+      color: #ffffff;
+      border-color: #0f172a;
+    }
+
     table {
       width: 100%;
       border-collapse: collapse;
@@ -218,6 +254,25 @@
     <p class="muted">Leads panel connected to Supabase.</p>
     <div id="statusMessage">Loading leads...</div>
 
+    <!-- SEARCH + FILTERS -->
+    <div class="toolbar">
+      <div class="search-box">
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Search by name, email, or company..."
+        />
+      </div>
+
+      <div class="filters">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="urgent">Urgent</button>
+        <button class="filter-btn" data-filter="high">High priority</button>
+        <button class="filter-btn" data-filter="open">Open</button>
+        <button class="filter-btn" data-filter="closed">Closed</button>
+      </div>
+    </div>
+
     <table id="leadsTable">
       <thead>
         <tr>
@@ -272,6 +327,11 @@
     const eventsTableBody = document.getElementById("eventsTableBody");
     const urgentLeadsContainer = document.getElementById("urgentLeadsContainer");
     const urgentSummary = document.getElementById("urgentSummary");
+    const searchInput = document.getElementById("searchInput");
+    const filterButtons = document.querySelectorAll(".filter-btn");
+
+    let allLeads = [];
+    let activeFilter = "all";
 
     function setStatusMessage(message, cssClass = "") {
       statusMessage.textContent = message;
@@ -531,6 +591,136 @@
       urgentLeadsContainer.appendChild(wrapper);
     }
 
+    function matchesSearch(lead, term) {
+      if (!term) return true;
+
+      const haystack = [
+        lead.name ?? "",
+        lead.email ?? "",
+        lead.company ?? ""
+      ].join(" ").toLowerCase();
+
+      return haystack.includes(term.toLowerCase());
+    }
+
+    function matchesFilter(lead, filter) {
+      const urgency = getUrgencyType(lead.next_followup);
+      const priority = lead.priority ?? "medium";
+      const status = lead.pipeline_stage ?? "new";
+
+      if (filter === "all") return true;
+      if (filter === "urgent") return urgency !== null && status !== "closed";
+      if (filter === "high") return priority === "high";
+      if (filter === "open") return status !== "closed";
+      if (filter === "closed") return status === "closed";
+
+      return true;
+    }
+
+    function renderLeadsTable(leads) {
+      const searchTerm = searchInput.value.trim();
+
+      const filteredLeads = leads.filter((lead) => {
+        return matchesSearch(lead, searchTerm) && matchesFilter(lead, activeFilter);
+      });
+
+      tableBody.innerHTML = "";
+
+      if (filteredLeads.length === 0) {
+        tableBody.innerHTML = `
+          <tr>
+            <td colspan="9">No leads match the current search/filter.</td>
+          </tr>
+        `;
+        return;
+      }
+
+      filteredLeads.forEach((lead) => {
+        const row = document.createElement("tr");
+        row.classList.add("clickable-row");
+
+        row.innerHTML = `
+          <td>${lead.name ?? ""}</td>
+          <td>${lead.email ?? ""}</td>
+          <td>${lead.company ?? ""}</td>
+          <td>${lead.phone ?? ""}</td>
+          <td>
+            <select data-id="${lead.id}">
+              <option value="new" ${lead.pipeline_stage === "new" ? "selected" : ""}>new</option>
+              <option value="contacted" ${lead.pipeline_stage === "contacted" ? "selected" : ""}>contacted</option>
+              <option value="meeting" ${lead.pipeline_stage === "meeting" ? "selected" : ""}>meeting</option>
+              <option value="proposal" ${lead.pipeline_stage === "proposal" ? "selected" : ""}>proposal</option>
+              <option value="closed" ${lead.pipeline_stage === "closed" ? "selected" : ""}>closed</option>
+            </select>
+          </td>
+          <td>
+            <select data-priority-id="${lead.id}" class="priority-${lead.priority ?? "medium"}">
+              <option value="low" ${(lead.priority ?? "medium") === "low" ? "selected" : ""}>low</option>
+              <option value="medium" ${(lead.priority ?? "medium") === "medium" ? "selected" : ""}>medium</option>
+              <option value="high" ${(lead.priority ?? "medium") === "high" ? "selected" : ""}>high</option>
+            </select>
+          </td>
+          <td>
+            <input
+              type="datetime-local"
+              data-followup-id="${lead.id}"
+              value="${toDatetimeLocalValue(lead.next_followup)}"
+            />
+          </td>
+          <td>${lead.source ?? ""}</td>
+          <td>
+            <textarea data-id="${lead.id}" rows="2">${lead.notes ?? ""}</textarea>
+          </td>
+        `;
+
+        row.addEventListener("click", (event) => {
+          const tag = event.target.tagName.toLowerCase();
+          if (tag === "select" || tag === "textarea" || tag === "input" || tag === "option") {
+            return;
+          }
+          loadLeadEvents(lead);
+        });
+
+        const statusSelect = row.querySelector("select[data-id]");
+        statusSelect.addEventListener("change", (e) => {
+          updateStatus(e.target.dataset.id, e.target.value);
+        });
+
+        const prioritySelect = row.querySelector("select[data-priority-id]");
+        prioritySelect.addEventListener("change", (e) => {
+          e.target.className = "priority-" + e.target.value;
+          updatePriority(e.target.dataset.priorityId, e.target.value);
+        });
+
+        const followupInput = row.querySelector("input[data-followup-id]");
+        followupInput.addEventListener("change", (e) => {
+          updateFollowup(e.target.dataset.followupId, e.target.value);
+        });
+
+        const textarea = row.querySelector("textarea[data-id]");
+        textarea.addEventListener("change", (e) => {
+          updateNotes(e.target.dataset.id, e.target.value);
+        });
+
+        tableBody.appendChild(row);
+      });
+    }
+
+    function bindFilters() {
+      filterButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          filterButtons.forEach((btn) => btn.classList.remove("active"));
+          button.classList.add("active");
+          activeFilter = button.dataset.filter;
+          renderLeadsTable(allLeads);
+        });
+      });
+
+      searchInput.addEventListener("input", () => {
+        renderLeadsTable(allLeads);
+      });
+    }
+
     async function loadLeads() {
       try {
         setStatusMessage("Loading leads...");
@@ -540,16 +730,17 @@
           .select("*")
           .order("created_at", { ascending: false });
 
-        tableBody.innerHTML = "";
-
         if (error) {
           setStatusMessage("Error loading leads: " + error.message, "error");
           urgentSummary.innerHTML = "";
           urgentLeadsContainer.innerHTML = `<div class="error">Error loading urgent leads.</div>`;
+          tableBody.innerHTML = "";
           return;
         }
 
-        if (!data || data.length === 0) {
+        allLeads = data || [];
+
+        if (!allLeads.length) {
           setStatusMessage("No leads found.");
           renderUrgentSummary(0, 0);
           urgentLeadsContainer.innerHTML = `<div class="urgent-empty">No urgent follow-ups right now.</div>`;
@@ -562,77 +753,8 @@
         }
 
         setStatusMessage("Leads loaded successfully.", "ok");
-        renderUrgentLeads(data);
-
-        data.forEach((lead) => {
-          const row = document.createElement("tr");
-          row.classList.add("clickable-row");
-
-          row.innerHTML = `
-            <td>${lead.name ?? ""}</td>
-            <td>${lead.email ?? ""}</td>
-            <td>${lead.company ?? ""}</td>
-            <td>${lead.phone ?? ""}</td>
-            <td>
-              <select data-id="${lead.id}">
-                <option value="new" ${lead.pipeline_stage === "new" ? "selected" : ""}>new</option>
-                <option value="contacted" ${lead.pipeline_stage === "contacted" ? "selected" : ""}>contacted</option>
-                <option value="meeting" ${lead.pipeline_stage === "meeting" ? "selected" : ""}>meeting</option>
-                <option value="proposal" ${lead.pipeline_stage === "proposal" ? "selected" : ""}>proposal</option>
-                <option value="closed" ${lead.pipeline_stage === "closed" ? "selected" : ""}>closed</option>
-              </select>
-            </td>
-            <td>
-              <select data-priority-id="${lead.id}" class="priority-${lead.priority ?? "medium"}">
-                <option value="low" ${(lead.priority ?? "medium") === "low" ? "selected" : ""}>low</option>
-                <option value="medium" ${(lead.priority ?? "medium") === "medium" ? "selected" : ""}>medium</option>
-                <option value="high" ${(lead.priority ?? "medium") === "high" ? "selected" : ""}>high</option>
-              </select>
-            </td>
-            <td>
-              <input
-                type="datetime-local"
-                data-followup-id="${lead.id}"
-                value="${toDatetimeLocalValue(lead.next_followup)}"
-              />
-            </td>
-            <td>${lead.source ?? ""}</td>
-            <td>
-              <textarea data-id="${lead.id}" rows="2">${lead.notes ?? ""}</textarea>
-            </td>
-          `;
-
-          row.addEventListener("click", (event) => {
-            const tag = event.target.tagName.toLowerCase();
-            if (tag === "select" || tag === "textarea" || tag === "input" || tag === "option") {
-              return;
-            }
-            loadLeadEvents(lead);
-          });
-
-          const statusSelect = row.querySelector("select[data-id]");
-          statusSelect.addEventListener("change", (e) => {
-            updateStatus(e.target.dataset.id, e.target.value);
-          });
-
-          const prioritySelect = row.querySelector("select[data-priority-id]");
-          prioritySelect.addEventListener("change", (e) => {
-            e.target.className = "priority-" + e.target.value;
-            updatePriority(e.target.dataset.priorityId, e.target.value);
-          });
-
-          const followupInput = row.querySelector("input[data-followup-id]");
-          followupInput.addEventListener("change", (e) => {
-            updateFollowup(e.target.dataset.followupId, e.target.value);
-          });
-
-          const textarea = row.querySelector("textarea[data-id]");
-          textarea.addEventListener("change", (e) => {
-            updateNotes(e.target.dataset.id, e.target.value);
-          });
-
-          tableBody.appendChild(row);
-        });
+        renderUrgentLeads(allLeads);
+        renderLeadsTable(allLeads);
       } catch (err) {
         console.error("Unexpected loadLeads error:", err);
         setStatusMessage("Unexpected error: " + err.message, "error");
@@ -641,6 +763,7 @@
       }
     }
 
+    bindFilters();
     loadLeads();
   </script>
 </body>
