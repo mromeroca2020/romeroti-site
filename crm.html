@@ -55,6 +55,49 @@
       margin-bottom: 10px;
     }
 
+    .urgent-title {
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin-bottom: 12px;
+    }
+
+    .urgent-empty {
+      color: #166534;
+      font-weight: bold;
+    }
+
+    .urgent-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .urgent-item {
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      padding: 14px;
+    }
+
+    .urgent-overdue {
+      background: #fef2f2;
+      border-color: #fecaca;
+    }
+
+    .urgent-today {
+      background: #fffbeb;
+      border-color: #fde68a;
+    }
+
+    .urgent-name {
+      font-weight: bold;
+      margin-bottom: 4px;
+    }
+
+    .urgent-meta {
+      color: #475569;
+      font-size: 0.95rem;
+      margin-bottom: 4px;
+    }
+
     table {
       width: 100%;
       border-collapse: collapse;
@@ -135,6 +178,13 @@
 <body>
   <h1>Romanoti CRM</h1>
 
+  <!-- FOLLOW-UPS DUE -->
+  <div class="card">
+    <div class="urgent-title">🔥 Follow-ups due</div>
+    <div id="urgentLeadsContainer">Loading urgent leads...</div>
+  </div>
+
+  <!-- MAIN CRM TABLE -->
   <div class="card">
     <p class="muted">Leads panel connected to Supabase.</p>
     <div id="statusMessage">Loading leads...</div>
@@ -161,6 +211,7 @@
     </p>
   </div>
 
+  <!-- LEAD ACTIVITY -->
   <div class="card" id="leadDetail" style="display:none;">
     <h3>Lead Activity</h3>
     <div id="leadDetailHeader" class="muted"></div>
@@ -190,6 +241,7 @@
     const leadDetail = document.getElementById("leadDetail");
     const leadDetailHeader = document.getElementById("leadDetailHeader");
     const eventsTableBody = document.getElementById("eventsTableBody");
+    const urgentLeadsContainer = document.getElementById("urgentLeadsContainer");
 
     function setStatusMessage(message, cssClass = "") {
       statusMessage.textContent = message;
@@ -227,6 +279,7 @@
 
         await saveLeadEvent(id, "status_change", "Status changed to " + newStatus);
         setStatusMessage("Status updated successfully.", "ok");
+        await loadLeads();
       } catch (err) {
         console.error("updateStatus error:", err);
         setStatusMessage("Error updating status: " + err.message, "error");
@@ -247,6 +300,7 @@
 
         await saveLeadEvent(id, "priority_change", "Priority changed to " + newPriority);
         setStatusMessage("Priority updated successfully.", "ok");
+        await loadLeads();
       } catch (err) {
         console.error("updatePriority error:", err);
         setStatusMessage("Error updating priority: " + err.message, "error");
@@ -274,6 +328,7 @@
         );
 
         setStatusMessage("Follow-up updated successfully.", "ok");
+        await loadLeads();
       } catch (err) {
         console.error("updateFollowup error:", err);
         setStatusMessage("Error updating follow-up: " + err.message, "error");
@@ -372,6 +427,63 @@
       return `${yyyy}-${mm}-${dd}T${hh}:${mi}`;
     }
 
+    function getUrgencyType(followupIso) {
+      if (!followupIso) return null;
+
+      const now = new Date();
+      const followup = new Date(followupIso);
+
+      const todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+      const todayEnd = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59);
+
+      if (followup < todayStart) return "overdue";
+      if (followup >= todayStart && followup <= todayEnd) return "today";
+      return null;
+    }
+
+    function renderUrgentLeads(leads) {
+      const urgentLeads = leads.filter((lead) => {
+        if (!lead.next_followup) return false;
+        if (lead.pipeline_stage === "closed") return false;
+        return getUrgencyType(lead.next_followup) !== null;
+      });
+
+      if (urgentLeads.length === 0) {
+        urgentLeadsContainer.innerHTML = `
+          <div class="urgent-empty">No urgent follow-ups right now.</div>
+        `;
+        return;
+      }
+
+      const wrapper = document.createElement("div");
+      wrapper.className = "urgent-list";
+
+      urgentLeads.forEach((lead) => {
+        const urgency = getUrgencyType(lead.next_followup);
+        const item = document.createElement("div");
+        item.className = `urgent-item ${urgency === "overdue" ? "urgent-overdue" : "urgent-today"}`;
+
+        const when = new Date(lead.next_followup).toLocaleString();
+
+        item.innerHTML = `
+          <div class="urgent-name">${lead.name ?? lead.email}</div>
+          <div class="urgent-meta"><strong>Status:</strong> ${lead.pipeline_stage ?? "new"} | <strong>Priority:</strong> ${lead.priority ?? "medium"}</div>
+          <div class="urgent-meta"><strong>Follow-up:</strong> ${when}</div>
+          <div class="urgent-meta"><strong>Company:</strong> ${lead.company ?? ""}</div>
+        `;
+
+        item.addEventListener("click", () => {
+          loadLeadEvents(lead);
+          window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+        });
+
+        wrapper.appendChild(item);
+      });
+
+      urgentLeadsContainer.innerHTML = "";
+      urgentLeadsContainer.appendChild(wrapper);
+    }
+
     async function loadLeads() {
       try {
         setStatusMessage("Loading leads...");
@@ -385,11 +497,13 @@
 
         if (error) {
           setStatusMessage("Error loading leads: " + error.message, "error");
+          urgentLeadsContainer.innerHTML = `<div class="error">Error loading urgent leads.</div>`;
           return;
         }
 
         if (!data || data.length === 0) {
           setStatusMessage("No leads found.");
+          urgentLeadsContainer.innerHTML = `<div class="urgent-empty">No urgent follow-ups right now.</div>`;
           tableBody.innerHTML = `
             <tr>
               <td colspan="9">No records available yet.</td>
@@ -399,6 +513,7 @@
         }
 
         setStatusMessage("Leads loaded successfully.", "ok");
+        renderUrgentLeads(data);
 
         data.forEach((lead) => {
           const row = document.createElement("tr");
@@ -472,6 +587,7 @@
       } catch (err) {
         console.error("Unexpected loadLeads error:", err);
         setStatusMessage("Unexpected error: " + err.message, "error");
+        urgentLeadsContainer.innerHTML = `<div class="error">Unexpected error loading urgent leads.</div>`;
       }
     }
 
