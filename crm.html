@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- =========================
+       Romanoti CRM
+       Protected internal page
+       for Romanoti staff
+       ========================= -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Romanoti CRM</title>
@@ -70,6 +75,13 @@
       color: rgba(255,255,255,0.75);
     }
 
+    .topbar-actions {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
     .brand-badge {
       padding: 8px 12px;
       border: 1px solid rgba(255,255,255,0.2);
@@ -78,6 +90,23 @@
       font-weight: 700;
       background: rgba(255,255,255,0.08);
       white-space: nowrap;
+    }
+
+    .logout-btn {
+      padding: 8px 12px;
+      border: 1px solid rgba(255,255,255,0.22);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.10);
+      color: white;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: opacity 0.12s ease, transform 0.12s ease;
+    }
+
+    .logout-btn:hover {
+      opacity: 0.92;
+      transform: translateY(-1px);
     }
 
     h3 {
@@ -499,7 +528,11 @@
         <div class="brand-title">Romanoti CRM</div>
         <div class="brand-subtitle">Lead operations, follow-ups, and activity tracking</div>
       </div>
-      <div class="brand-badge">Romanoti internal workspace</div>
+
+      <div class="topbar-actions">
+        <div class="brand-badge">Romanoti internal workspace</div>
+        <button id="logoutBtn" class="logout-btn">Logout</button>
+      </div>
     </div>
   </div>
 
@@ -585,10 +618,27 @@
   <script type="module">
     import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
+    /* =========================
+       Supabase client
+       ========================= */
     const sb = createClient(
       "https://rukftaohssovjaatzvkj.supabase.co",
       "sb_publishable_UfLkSw2wUcjkH2sYAmCXBg_-Mqd65z-"
     );
+
+    /* =========================
+       Protect CRM page
+       Redirect anonymous users
+       to login page
+       ========================= */
+    const {
+      data: { session }
+    } = await sb.auth.getSession();
+
+    if (!session) {
+      window.location.href = "/crm-login.html";
+      throw new Error("No active session");
+    }
 
     const tableBody = document.querySelector("#leadsTable tbody");
     const statusMessage = document.getElementById("statusMessage");
@@ -600,6 +650,7 @@
     const searchInput = document.getElementById("searchInput");
     const filterButtons = document.querySelectorAll(".filter-btn");
     const sidePanelContent = document.getElementById("sidePanelContent");
+    const logoutBtn = document.getElementById("logoutBtn");
 
     let allLeads = [];
     let activeFilter = "all";
@@ -1189,6 +1240,14 @@
         urgentLeadsContainer.innerHTML = `<div class="error">Unexpected error loading urgent leads.</div>`;
       }
     }
+
+    /* =========================
+       Logout action
+       ========================= */
+    logoutBtn.addEventListener("click", async () => {
+      await sb.auth.signOut();
+      window.location.href = "/crm-login.html";
+    });
 
     bindFilters();
     loadLeads();
