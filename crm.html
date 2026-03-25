@@ -6,34 +6,111 @@
   <title>Romanoti CRM</title>
 
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 30px;
-      background: #f7f9fc;
-      color: #1f2937;
+    :root {
+      --bg: #f3f6fb;
+      --card: #ffffff;
+      --border: #dbe3ec;
+      --text: #172033;
+      --muted: #6b7280;
+      --navy: #0b1730;
+      --navy-2: #132347;
+      --blue-soft: #e8f0ff;
+      --green-soft: #eaf8ef;
+      --yellow-soft: #fff6db;
+      --red-soft: #feeeee;
+      --shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
     }
 
-    h1 {
-      margin-bottom: 20px;
-      font-size: 2rem;
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .page {
+      padding: 22px;
+    }
+
+    .topbar {
+      background: linear-gradient(135deg, var(--navy), var(--navy-2));
+      color: white;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      box-shadow: var(--shadow);
+    }
+
+    .topbar-inner {
+      max-width: 1500px;
+      margin: 0 auto;
+      padding: 18px 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .brand-title {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+    }
+
+    .brand-subtitle {
+      font-size: 13px;
+      color: rgba(255,255,255,0.75);
+    }
+
+    .brand-badge {
+      padding: 8px 12px;
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      background: rgba(255,255,255,0.08);
+      white-space: nowrap;
     }
 
     h3 {
       margin: 0 0 12px 0;
     }
 
+    .layout-grid {
+      max-width: 1500px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 360px;
+      gap: 20px;
+      align-items: start;
+    }
+
     .card {
-      background: #ffffff;
-      border: 1px solid #dbe3ec;
-      border-radius: 12px;
-      padding: 20px;
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
-      max-width: 1400px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 18px;
+      box-shadow: var(--shadow);
       margin-bottom: 20px;
     }
 
+    .section-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: var(--navy);
+    }
+
     .muted {
-      color: #6b7280;
+      color: var(--muted);
       margin-bottom: 10px;
     }
 
@@ -55,35 +132,29 @@
       margin-bottom: 10px;
     }
 
-    .urgent-title {
-      font-size: 1.2rem;
-      font-weight: bold;
-      margin-bottom: 12px;
-    }
-
     .urgent-summary {
       display: flex;
-      gap: 12px;
+      gap: 10px;
       flex-wrap: wrap;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
 
     .urgent-chip {
       padding: 8px 12px;
       border-radius: 999px;
       font-weight: bold;
-      font-size: 0.95rem;
+      font-size: 13px;
       border: 1px solid transparent;
     }
 
     .urgent-chip.overdue {
-      background: #fef2f2;
+      background: var(--red-soft);
       border-color: #fecaca;
       color: #b91c1c;
     }
 
     .urgent-chip.today {
-      background: #fffbeb;
+      background: var(--yellow-soft);
       border-color: #fde68a;
       color: #b45309;
     }
@@ -100,30 +171,37 @@
 
     .urgent-item {
       border: 1px solid #e5e7eb;
-      border-radius: 10px;
+      border-radius: 12px;
       padding: 14px;
       cursor: pointer;
+      transition: transform 0.12s ease, box-shadow 0.12s ease;
+    }
+
+    .urgent-item:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 18px rgba(15, 23, 42, 0.08);
     }
 
     .urgent-overdue {
-      background: #fef2f2;
+      background: var(--red-soft);
       border-color: #fecaca;
     }
 
     .urgent-today {
-      background: #fffbeb;
+      background: var(--yellow-soft);
       border-color: #fde68a;
     }
 
     .urgent-name {
       font-weight: bold;
       margin-bottom: 4px;
+      color: var(--navy);
     }
 
     .urgent-meta {
       color: #475569;
-      font-size: 0.95rem;
-      margin-bottom: 4px;
+      font-size: 14px;
+      margin-bottom: 3px;
     }
 
     .toolbar {
@@ -134,11 +212,18 @@
 
     .search-box input {
       width: 100%;
-      padding: 10px 12px;
+      padding: 12px 14px;
       border: 1px solid #cbd5e1;
-      border-radius: 8px;
+      border-radius: 10px;
       font-size: 14px;
       box-sizing: border-box;
+      outline: none;
+      background: white;
+    }
+
+    .search-box input:focus {
+      border-color: #93c5fd;
+      box-shadow: 0 0 0 4px rgba(59,130,246,0.08);
     }
 
     .filters {
@@ -148,18 +233,23 @@
     }
 
     .filter-btn {
-      padding: 8px 12px;
+      padding: 9px 13px;
       border: 1px solid #cbd5e1;
       background: #ffffff;
       border-radius: 999px;
       cursor: pointer;
       font-weight: bold;
+      transition: all 0.15s ease;
+    }
+
+    .filter-btn:hover {
+      border-color: #94a3b8;
     }
 
     .filter-btn.active {
-      background: #0f172a;
+      background: var(--navy);
       color: #ffffff;
-      border-color: #0f172a;
+      border-color: var(--navy);
     }
 
     table {
@@ -167,19 +257,23 @@
       border-collapse: collapse;
       margin-top: 10px;
       background: #ffffff;
+      overflow: hidden;
+      border-radius: 12px;
     }
 
     th,
     td {
-      border: 1px solid #dbe3ec;
+      border: 1px solid var(--border);
       padding: 12px;
       text-align: left;
       vertical-align: top;
     }
 
     th {
-      background: #0f172a;
+      background: var(--navy);
       color: #ffffff;
+      font-size: 13px;
+      letter-spacing: 0.2px;
     }
 
     tr:nth-child(even) {
@@ -188,40 +282,68 @@
 
     .clickable-row {
       cursor: pointer;
+      transition: background 0.12s ease;
     }
 
     .clickable-row:hover {
-      background: #eef4ff !important;
+      background: #edf3ff !important;
+    }
+
+    .selected-row {
+      background: #e8f0ff !important;
+      outline: 2px solid #bfdbfe;
+      outline-offset: -2px;
     }
 
     select,
     input[type="datetime-local"] {
-      padding: 6px 8px;
+      padding: 7px 9px;
       border: 1px solid #cbd5e1;
-      border-radius: 6px;
+      border-radius: 8px;
       background: #ffffff;
       cursor: pointer;
       width: 100%;
       box-sizing: border-box;
+      outline: none;
+    }
+
+    select:focus,
+    input[type="datetime-local"]:focus,
+    textarea:focus {
+      border-color: #93c5fd;
+      box-shadow: 0 0 0 4px rgba(59,130,246,0.08);
     }
 
     textarea {
       width: 100%;
-      min-height: 60px;
+      min-height: 62px;
       resize: vertical;
       padding: 8px;
       border: 1px solid #cbd5e1;
-      border-radius: 6px;
+      border-radius: 8px;
       background: #ffffff;
       box-sizing: border-box;
       font-family: Arial, sans-serif;
+      outline: none;
     }
 
     .small-note {
       margin-top: 14px;
-      font-size: 0.9rem;
-      color: #6b7280;
+      font-size: 13px;
+      color: var(--muted);
     }
+
+    .field-indicator {
+      font-size: 11px;
+      margin-top: 5px;
+      display: block;
+      min-height: 14px;
+      font-weight: bold;
+    }
+
+    .field-saving { color: #92400e; }
+    .field-ok { color: #166534; }
+    .field-error { color: #b91c1c; }
 
     .priority-low {
       color: #475569;
@@ -238,16 +360,9 @@
       font-weight: bold;
     }
 
-    .layout-grid {
-      display: grid;
-      grid-template-columns: 1fr 360px;
-      gap: 20px;
-      align-items: start;
-    }
-
     .side-panel {
       position: sticky;
-      top: 20px;
+      top: 22px;
     }
 
     .detail-empty {
@@ -262,7 +377,7 @@
 
     .detail-item {
       border: 1px solid #e2e8f0;
-      border-radius: 10px;
+      border-radius: 12px;
       padding: 12px;
       background: #f8fafc;
     }
@@ -273,20 +388,23 @@
       text-transform: uppercase;
       color: #64748b;
       margin-bottom: 4px;
+      letter-spacing: 0.3px;
     }
 
     .detail-value {
-      font-size: 14px;
+      font-size: 15px;
       color: #0f172a;
       word-break: break-word;
+      line-height: 1.45;
     }
 
     .badge {
       display: inline-block;
-      padding: 5px 10px;
+      padding: 6px 10px;
       border-radius: 999px;
       font-size: 12px;
       font-weight: bold;
+      line-height: 1;
     }
 
     .badge-status {
@@ -309,6 +427,55 @@
       color: #b91c1c;
     }
 
+    .action-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .action-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      padding: 11px 14px;
+      border-radius: 10px;
+      font-weight: bold;
+      border: 1px solid transparent;
+      transition: transform 0.12s ease, box-shadow 0.12s ease, opacity 0.12s ease;
+      cursor: pointer;
+    }
+
+    .action-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 16px rgba(15, 23, 42, 0.08);
+    }
+
+    .action-email {
+      background: #dbeafe;
+      color: #1d4ed8;
+      border-color: #bfdbfe;
+    }
+
+    .action-call {
+      background: #eaf8ef;
+      color: #166534;
+      border-color: #bbf7d0;
+    }
+
+    .action-schedule {
+      background: #ede9fe;
+      color: #6d28d9;
+      border-color: #ddd6fe;
+    }
+
+    .panel-note {
+      margin-top: 12px;
+      color: #64748b;
+      font-size: 13px;
+    }
+
     @media (max-width: 1100px) {
       .layout-grid {
         grid-template-columns: 1fr;
@@ -317,87 +484,100 @@
       .side-panel {
         position: static;
       }
+
+      .topbar-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
     }
   </style>
 </head>
 <body>
-  <h1>Romanoti CRM</h1>
-
-  <div class="card">
-    <div class="urgent-title">🔥 Follow-ups due</div>
-    <div id="urgentSummary" class="urgent-summary"></div>
-    <div id="urgentLeadsContainer">Loading urgent leads...</div>
+  <div class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <div class="brand-title">Romanoti CRM</div>
+        <div class="brand-subtitle">Lead operations, follow-ups, and activity tracking</div>
+      </div>
+      <div class="brand-badge">Romanoti internal workspace</div>
+    </div>
   </div>
 
-  <div class="layout-grid">
-    <!-- MAIN -->
-    <div>
-      <div class="card">
-        <p class="muted">Leads panel connected to Supabase.</p>
-        <div id="statusMessage">Loading leads...</div>
-
-        <div class="toolbar">
-          <div class="search-box">
-            <input
-              type="text"
-              id="searchInput"
-              placeholder="Search by name, email, or company..."
-            />
-          </div>
-
-          <div class="filters">
-            <button class="filter-btn active" data-filter="all">All</button>
-            <button class="filter-btn" data-filter="urgent">Urgent</button>
-            <button class="filter-btn" data-filter="high">High priority</button>
-            <button class="filter-btn" data-filter="open">Open</button>
-            <button class="filter-btn" data-filter="closed">Closed</button>
-          </div>
+  <div class="page">
+    <div class="layout-grid">
+      <div>
+        <div class="card">
+          <div class="section-title">🔥 Follow-ups due</div>
+          <div id="urgentSummary" class="urgent-summary"></div>
+          <div id="urgentLeadsContainer">Loading urgent leads...</div>
         </div>
 
-        <table id="leadsTable">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Company</th>
-              <th>Phone</th>
-              <th>Status</th>
-              <th>Priority</th>
-              <th>Next Follow-up</th>
-              <th>Source</th>
-              <th>Notes</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
+        <div class="card">
+          <p class="muted">Leads panel connected to Supabase.</p>
+          <div id="statusMessage">Loading leads...</div>
 
-        <p class="small-note">
-          Status, priority, follow-up date and notes are updated directly from this panel. Click a lead row to view activity history and details.
-        </p>
+          <div class="toolbar">
+            <div class="search-box">
+              <input
+                type="text"
+                id="searchInput"
+                placeholder="Search by name, email, or company..."
+              />
+            </div>
+
+            <div class="filters">
+              <button class="filter-btn active" data-filter="all">All</button>
+              <button class="filter-btn" data-filter="urgent">Urgent</button>
+              <button class="filter-btn" data-filter="high">High priority</button>
+              <button class="filter-btn" data-filter="open">Open</button>
+              <button class="filter-btn" data-filter="closed">Closed</button>
+            </div>
+          </div>
+
+          <table id="leadsTable">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Company</th>
+                <th>Phone</th>
+                <th>Status</th>
+                <th>Priority</th>
+                <th>Next Follow-up</th>
+                <th>Source</th>
+                <th>Notes</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+
+          <p class="small-note">
+            Status, priority, follow-up date and notes are updated directly from this panel. Click a lead row to view activity history and details.
+          </p>
+        </div>
+
+        <div class="card" id="leadDetail" style="display:none;">
+          <h3>Lead Activity</h3>
+          <div id="leadDetailHeader" class="muted"></div>
+
+          <table>
+            <thead>
+              <tr>
+                <th>When</th>
+                <th>Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody id="eventsTableBody"></tbody>
+          </table>
+        </div>
       </div>
 
-      <div class="card" id="leadDetail" style="display:none;">
-        <h3>Lead Activity</h3>
-        <div id="leadDetailHeader" class="muted"></div>
-
-        <table>
-          <thead>
-            <tr>
-              <th>When</th>
-              <th>Type</th>
-              <th>Description</th>
-            </tr>
-          </thead>
-          <tbody id="eventsTableBody"></tbody>
-        </table>
-      </div>
-    </div>
-
-    <!-- SIDE PANEL -->
-    <div class="card side-panel">
-      <h3>Lead Detail</h3>
-      <div id="sidePanelContent" class="detail-empty">
-        Click a lead to view its detail panel.
+      <div class="card side-panel">
+        <h3>Lead Detail</h3>
+        <div id="sidePanelContent" class="detail-empty">
+          Click a lead to view its detail panel.
+        </div>
       </div>
     </div>
   </div>
@@ -430,6 +610,22 @@
       statusMessage.className = cssClass;
     }
 
+    function setFieldIndicator(id, field, message, cssClass) {
+      const el = document.getElementById(`${field}-indicator-${id}`);
+      if (!el) return;
+      el.textContent = message;
+      el.className = `field-indicator ${cssClass}`.trim();
+    }
+
+    function clearFieldIndicator(id, field) {
+      const el = document.getElementById(`${field}-indicator-${id}`);
+      if (!el) return;
+      setTimeout(() => {
+        el.textContent = "";
+        el.className = "field-indicator";
+      }, 1600);
+    }
+
     function priorityBadgeClass(priority) {
       if (priority === "high") return "badge badge-priority-high";
       if (priority === "low") return "badge badge-priority-low";
@@ -443,6 +639,12 @@
 
     function renderSidePanel(lead) {
       selectedLeadId = lead.id;
+
+      const emailHref = lead.email ? `mailto:${lead.email}` : "#";
+      const phoneHref = lead.phone ? `tel:${lead.phone}` : "#";
+      const scheduleText = encodeURIComponent(
+        `Follow-up with ${lead.name || lead.email}\nCompany: ${lead.company || ""}\nStatus: ${lead.pipeline_stage || "new"}`
+      );
 
       sidePanelContent.innerHTML = `
         <div class="detail-grid">
@@ -495,6 +697,24 @@
             <div class="detail-value">${(lead.notes ?? "").replace(/\n/g, "<br>") || "No notes yet"}</div>
           </div>
         </div>
+
+        <div class="action-grid">
+          <a class="action-btn action-email" href="${emailHref}">
+            ✉ Email lead
+          </a>
+
+          <a class="action-btn action-call" href="${phoneHref}">
+            📞 Call lead
+          </a>
+
+          <a class="action-btn action-schedule" href="mailto:${lead.email ?? ""}?subject=Follow-up%20Scheduling&body=${scheduleText}">
+            📅 Schedule follow-up
+          </a>
+        </div>
+
+        <div class="panel-note">
+          Use the panel for quick actions while keeping the table for fast editing.
+        </div>
       `;
     }
 
@@ -519,6 +739,7 @@
     async function updateStatus(id, newStatus) {
       try {
         setStatusMessage("Saving status...", "saving");
+        setFieldIndicator(id, "status", "Saving...", "field-saving");
 
         const { error } = await sb
           .from("leads")
@@ -528,11 +749,15 @@
         if (error) throw error;
 
         await saveLeadEvent(id, "status_change", "Status changed to " + newStatus);
+
         setStatusMessage("Status updated successfully.", "ok");
+        setFieldIndicator(id, "status", "Saved ✓", "field-ok");
+        clearFieldIndicator(id, "status");
         await loadLeads();
       } catch (err) {
         console.error("updateStatus error:", err);
         setStatusMessage("Error updating status: " + err.message, "error");
+        setFieldIndicator(id, "status", "Error", "field-error");
         alert("Error updating status: " + err.message);
       }
     }
@@ -540,6 +765,7 @@
     async function updatePriority(id, newPriority) {
       try {
         setStatusMessage("Saving priority...", "saving");
+        setFieldIndicator(id, "priority", "Saving...", "field-saving");
 
         const { error } = await sb
           .from("leads")
@@ -549,11 +775,15 @@
         if (error) throw error;
 
         await saveLeadEvent(id, "priority_change", "Priority changed to " + newPriority);
+
         setStatusMessage("Priority updated successfully.", "ok");
+        setFieldIndicator(id, "priority", "Saved ✓", "field-ok");
+        clearFieldIndicator(id, "priority");
         await loadLeads();
       } catch (err) {
         console.error("updatePriority error:", err);
         setStatusMessage("Error updating priority: " + err.message, "error");
+        setFieldIndicator(id, "priority", "Error", "field-error");
         alert("Error updating priority: " + err.message);
       }
     }
@@ -561,6 +791,7 @@
     async function updateFollowup(id, newFollowup) {
       try {
         setStatusMessage("Saving follow-up...", "saving");
+        setFieldIndicator(id, "followup", "Saving...", "field-saving");
 
         const valueToSave = newFollowup ? new Date(newFollowup).toISOString() : null;
 
@@ -578,10 +809,13 @@
         );
 
         setStatusMessage("Follow-up updated successfully.", "ok");
+        setFieldIndicator(id, "followup", "Saved ✓", "field-ok");
+        clearFieldIndicator(id, "followup");
         await loadLeads();
       } catch (err) {
         console.error("updateFollowup error:", err);
         setStatusMessage("Error updating follow-up: " + err.message, "error");
+        setFieldIndicator(id, "followup", "Error", "field-error");
         alert("Error updating follow-up: " + err.message);
       }
     }
@@ -589,6 +823,7 @@
     async function updateNotes(id, newNotes) {
       try {
         setStatusMessage("Saving notes...", "saving");
+        setFieldIndicator(id, "notes", "Saving...", "field-saving");
 
         const { error } = await sb
           .from("leads")
@@ -598,11 +833,15 @@
         if (error) throw error;
 
         await saveLeadEvent(id, "notes_update", "Notes updated");
+
         setStatusMessage("Notes updated successfully.", "ok");
+        setFieldIndicator(id, "notes", "Saved ✓", "field-ok");
+        clearFieldIndicator(id, "notes");
         await loadLeads();
       } catch (err) {
         console.error("updateNotes error:", err);
         setStatusMessage("Error saving notes: " + err.message, "error");
+        setFieldIndicator(id, "notes", "Error", "field-error");
         alert("Error saving notes: " + err.message);
       }
     }
@@ -801,11 +1040,16 @@
         const row = document.createElement("tr");
         row.classList.add("clickable-row");
 
+        if (lead.id === selectedLeadId) {
+          row.classList.add("selected-row");
+        }
+
         row.innerHTML = `
           <td>${lead.name ?? ""}</td>
           <td>${lead.email ?? ""}</td>
           <td>${lead.company ?? ""}</td>
           <td>${lead.phone ?? ""}</td>
+
           <td>
             <select data-id="${lead.id}">
               <option value="new" ${lead.pipeline_stage === "new" ? "selected" : ""}>new</option>
@@ -814,34 +1058,47 @@
               <option value="proposal" ${lead.pipeline_stage === "proposal" ? "selected" : ""}>proposal</option>
               <option value="closed" ${lead.pipeline_stage === "closed" ? "selected" : ""}>closed</option>
             </select>
+            <span class="field-indicator" id="status-indicator-${lead.id}"></span>
           </td>
+
           <td>
             <select data-priority-id="${lead.id}" class="priority-${lead.priority ?? "medium"}">
               <option value="low" ${(lead.priority ?? "medium") === "low" ? "selected" : ""}>low</option>
               <option value="medium" ${(lead.priority ?? "medium") === "medium" ? "selected" : ""}>medium</option>
               <option value="high" ${(lead.priority ?? "medium") === "high" ? "selected" : ""}>high</option>
             </select>
+            <span class="field-indicator" id="priority-indicator-${lead.id}"></span>
           </td>
+
           <td>
             <input
               type="datetime-local"
               data-followup-id="${lead.id}"
               value="${toDatetimeLocalValue(lead.next_followup)}"
             />
+            <span class="field-indicator" id="followup-indicator-${lead.id}"></span>
           </td>
+
           <td>${lead.source ?? ""}</td>
+
           <td>
             <textarea data-id="${lead.id}" rows="2">${lead.notes ?? ""}</textarea>
+            <span class="field-indicator" id="notes-indicator-${lead.id}"></span>
           </td>
         `;
 
         row.addEventListener("click", (event) => {
-          const tag = event.target.tagName.toLowerCase();
-          if (tag === "select" || tag === "textarea" || tag === "input" || tag === "option") {
+          if (
+            event.target.closest("select") ||
+            event.target.closest("textarea") ||
+            event.target.closest("input")
+          ) {
             return;
           }
+
           renderSidePanel(lead);
           loadLeadEvents(lead);
+          renderLeadsTable(allLeads);
         });
 
         const statusSelect = row.querySelector("select[data-id]");
