@@ -1,17 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- =========================
-       Basic document setup
-       ========================= -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Romanoti CRM</title>
 
   <style>
-    /* =========================
-       Global page styling
-       ========================= */
     body {
       font-family: Arial, sans-serif;
       margin: 30px;
@@ -34,7 +28,7 @@
       border-radius: 12px;
       padding: 20px;
       box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
-      max-width: 1200px;
+      max-width: 1400px;
       margin-bottom: 20px;
     }
 
@@ -93,13 +87,15 @@
       background: #eef4ff !important;
     }
 
-    select {
+    select,
+    input[type="datetime-local"] {
       padding: 6px 8px;
       border: 1px solid #cbd5e1;
       border-radius: 6px;
       background: #ffffff;
       cursor: pointer;
       width: 100%;
+      box-sizing: border-box;
     }
 
     textarea {
@@ -119,34 +115,30 @@
       font-size: 0.9rem;
       color: #6b7280;
     }
+
+    .priority-low {
+      color: #475569;
+      font-weight: bold;
+    }
+
+    .priority-medium {
+      color: #b45309;
+      font-weight: bold;
+    }
+
+    .priority-high {
+      color: #b91c1c;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
-
-  <!-- =========================
-       Main page title
-       ========================= -->
   <h1>Romanoti CRM</h1>
 
-  <!-- =========================
-       Main leads panel
-       ========================= -->
   <div class="card">
-    <p class="muted">
-      Leads panel connected to Supabase.
-    </p>
-
-    <!-- =========================
-         Global status message area
-         Used for loading, saving,
-         success, and error feedback
-         ========================= -->
+    <p class="muted">Leads panel connected to Supabase.</p>
     <div id="statusMessage">Loading leads...</div>
 
-    <!-- =========================
-         Leads table
-         One row per lead
-         ========================= -->
     <table id="leadsTable">
       <thead>
         <tr>
@@ -155,6 +147,8 @@
           <th>Company</th>
           <th>Phone</th>
           <th>Status</th>
+          <th>Priority</th>
+          <th>Next Follow-up</th>
           <th>Source</th>
           <th>Notes</th>
         </tr>
@@ -163,14 +157,10 @@
     </table>
 
     <p class="small-note">
-      Status and notes are updated directly from this panel. Click a lead row to view activity history.
+      Status, priority, follow-up date and notes are updated directly from this panel. Click a lead row to view activity history.
     </p>
   </div>
 
-  <!-- =========================
-       Lead activity panel
-       Hidden until a lead is clicked
-       ========================= -->
   <div class="card" id="leadDetail" style="display:none;">
     <h3>Lead Activity</h3>
     <div id="leadDetailHeader" class="muted"></div>
@@ -187,47 +177,25 @@
     </table>
   </div>
 
-  <!-- =========================
-       Supabase ES module import
-       This is safer and more stable
-       than relying on window globals
-       ========================= -->
   <script type="module">
     import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
-    /* =========================
-       Supabase client connection
-       IMPORTANT:
-       - Use only publishable key here
-       - Never use sb_secret on frontend
-       ========================= */
     const sb = createClient(
       "https://rukftaohssovjaatzvkj.supabase.co",
       "sb_publishable_UfLkSw2wUcjkH2sYAmCXBg_-Mqd65z-"
     );
 
-    /* =========================
-       DOM references
-       ========================= */
     const tableBody = document.querySelector("#leadsTable tbody");
     const statusMessage = document.getElementById("statusMessage");
     const leadDetail = document.getElementById("leadDetail");
     const leadDetailHeader = document.getElementById("leadDetailHeader");
     const eventsTableBody = document.getElementById("eventsTableBody");
 
-    /* =========================
-       Helper to set top status text
-       ========================= */
     function setStatusMessage(message, cssClass = "") {
       statusMessage.textContent = message;
       statusMessage.className = cssClass;
     }
 
-    /* =========================
-       Save an event to lead_events
-       This should never break
-       the main UX if it fails
-       ========================= */
     async function saveLeadEvent(leadId, eventType, description) {
       try {
         const { error } = await sb.from("lead_events").insert([
@@ -246,9 +214,6 @@
       }
     }
 
-    /* =========================
-       Update pipeline stage
-       ========================= */
     async function updateStatus(id, newStatus) {
       try {
         setStatusMessage("Saving status...", "saving");
@@ -260,12 +225,7 @@
 
         if (error) throw error;
 
-        await saveLeadEvent(
-          id,
-          "status_change",
-          "Status changed to " + newStatus
-        );
-
+        await saveLeadEvent(id, "status_change", "Status changed to " + newStatus);
         setStatusMessage("Status updated successfully.", "ok");
       } catch (err) {
         console.error("updateStatus error:", err);
@@ -274,9 +234,53 @@
       }
     }
 
-    /* =========================
-       Update notes for a lead
-       ========================= */
+    async function updatePriority(id, newPriority) {
+      try {
+        setStatusMessage("Saving priority...", "saving");
+
+        const { error } = await sb
+          .from("leads")
+          .update({ priority: newPriority })
+          .eq("id", id);
+
+        if (error) throw error;
+
+        await saveLeadEvent(id, "priority_change", "Priority changed to " + newPriority);
+        setStatusMessage("Priority updated successfully.", "ok");
+      } catch (err) {
+        console.error("updatePriority error:", err);
+        setStatusMessage("Error updating priority: " + err.message, "error");
+        alert("Error updating priority: " + err.message);
+      }
+    }
+
+    async function updateFollowup(id, newFollowup) {
+      try {
+        setStatusMessage("Saving follow-up...", "saving");
+
+        const valueToSave = newFollowup ? new Date(newFollowup).toISOString() : null;
+
+        const { error } = await sb
+          .from("leads")
+          .update({ next_followup: valueToSave })
+          .eq("id", id);
+
+        if (error) throw error;
+
+        await saveLeadEvent(
+          id,
+          "followup_change",
+          valueToSave ? "Next follow-up set to " + valueToSave : "Next follow-up cleared"
+        );
+
+        setStatusMessage("Follow-up updated successfully.", "ok");
+      } catch (err) {
+        console.error("updateFollowup error:", err);
+        setStatusMessage("Error updating follow-up: " + err.message, "error");
+        alert("Error updating follow-up: " + err.message);
+      }
+    }
+
     async function updateNotes(id, newNotes) {
       try {
         setStatusMessage("Saving notes...", "saving");
@@ -288,12 +292,7 @@
 
         if (error) throw error;
 
-        await saveLeadEvent(
-          id,
-          "notes_update",
-          "Notes updated"
-        );
-
+        await saveLeadEvent(id, "notes_update", "Notes updated");
         setStatusMessage("Notes updated successfully.", "ok");
       } catch (err) {
         console.error("updateNotes error:", err);
@@ -302,10 +301,6 @@
       }
     }
 
-    /* =========================
-       Load activity history
-       for one selected lead
-       ========================= */
     async function loadLeadEvents(lead) {
       try {
         leadDetail.style.display = "block";
@@ -345,10 +340,7 @@
 
         data.forEach((event) => {
           const row = document.createElement("tr");
-
-          const when = event.created_at
-            ? new Date(event.created_at).toLocaleString()
-            : "";
+          const when = event.created_at ? new Date(event.created_at).toLocaleString() : "";
 
           row.innerHTML = `
             <td>${when}</td>
@@ -368,10 +360,18 @@
       }
     }
 
-    /* =========================
-       Load all leads and render
-       the table
-       ========================= */
+    function toDatetimeLocalValue(value) {
+      if (!value) return "";
+      const date = new Date(value);
+      const pad = (n) => String(n).padStart(2, "0");
+      const yyyy = date.getFullYear();
+      const mm = pad(date.getMonth() + 1);
+      const dd = pad(date.getDate());
+      const hh = pad(date.getHours());
+      const mi = pad(date.getMinutes());
+      return `${yyyy}-${mm}-${dd}T${hh}:${mi}`;
+    }
+
     async function loadLeads() {
       try {
         setStatusMessage("Loading leads...");
@@ -380,9 +380,6 @@
           .from("leads")
           .select("*")
           .order("created_at", { ascending: false });
-
-        console.log("Supabase data:", data);
-        console.log("Supabase error:", error);
 
         tableBody.innerHTML = "";
 
@@ -395,7 +392,7 @@
           setStatusMessage("No leads found.");
           tableBody.innerHTML = `
             <tr>
-              <td colspan="7">No records available yet.</td>
+              <td colspan="9">No records available yet.</td>
             </tr>
           `;
           return;
@@ -421,37 +418,51 @@
                 <option value="closed" ${lead.pipeline_stage === "closed" ? "selected" : ""}>closed</option>
               </select>
             </td>
+            <td>
+              <select data-priority-id="${lead.id}" class="priority-${lead.priority ?? "medium"}">
+                <option value="low" ${(lead.priority ?? "medium") === "low" ? "selected" : ""}>low</option>
+                <option value="medium" ${(lead.priority ?? "medium") === "medium" ? "selected" : ""}>medium</option>
+                <option value="high" ${(lead.priority ?? "medium") === "high" ? "selected" : ""}>high</option>
+              </select>
+            </td>
+            <td>
+              <input
+                type="datetime-local"
+                data-followup-id="${lead.id}"
+                value="${toDatetimeLocalValue(lead.next_followup)}"
+              />
+            </td>
             <td>${lead.source ?? ""}</td>
             <td>
               <textarea data-id="${lead.id}" rows="2">${lead.notes ?? ""}</textarea>
             </td>
           `;
 
-          /* =========================
-             Row click = load detail
-             We prevent row detail loading
-             when user clicks inside inputs
-             ========================= */
           row.addEventListener("click", (event) => {
             const tag = event.target.tagName.toLowerCase();
-            if (tag === "select" || tag === "textarea" || tag === "option") {
+            if (tag === "select" || tag === "textarea" || tag === "input" || tag === "option") {
               return;
             }
             loadLeadEvents(lead);
           });
 
-          /* =========================
-             Status change listener
-             ========================= */
-          const select = row.querySelector("select");
-          select.addEventListener("change", (e) => {
+          const statusSelect = row.querySelector("select[data-id]");
+          statusSelect.addEventListener("change", (e) => {
             updateStatus(e.target.dataset.id, e.target.value);
           });
 
-          /* =========================
-             Notes change listener
-             ========================= */
-          const textarea = row.querySelector("textarea");
+          const prioritySelect = row.querySelector("select[data-priority-id]");
+          prioritySelect.addEventListener("change", (e) => {
+            e.target.className = "priority-" + e.target.value;
+            updatePriority(e.target.dataset.priorityId, e.target.value);
+          });
+
+          const followupInput = row.querySelector("input[data-followup-id]");
+          followupInput.addEventListener("change", (e) => {
+            updateFollowup(e.target.dataset.followupId, e.target.value);
+          });
+
+          const textarea = row.querySelector("textarea[data-id]");
           textarea.addEventListener("change", (e) => {
             updateNotes(e.target.dataset.id, e.target.value);
           });
@@ -464,11 +475,7 @@
       }
     }
 
-    /* =========================
-       Initial page load
-       ========================= */
     loadLeads();
   </script>
-
 </body>
 </html>
