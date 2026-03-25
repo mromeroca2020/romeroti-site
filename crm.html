@@ -61,6 +61,33 @@
       margin-bottom: 12px;
     }
 
+    .urgent-summary {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+
+    .urgent-chip {
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-weight: bold;
+      font-size: 0.95rem;
+      border: 1px solid transparent;
+    }
+
+    .urgent-chip.overdue {
+      background: #fef2f2;
+      border-color: #fecaca;
+      color: #b91c1c;
+    }
+
+    .urgent-chip.today {
+      background: #fffbeb;
+      border-color: #fde68a;
+      color: #b45309;
+    }
+
     .urgent-empty {
       color: #166534;
       font-weight: bold;
@@ -75,6 +102,7 @@
       border: 1px solid #e5e7eb;
       border-radius: 10px;
       padding: 14px;
+      cursor: pointer;
     }
 
     .urgent-overdue {
@@ -181,6 +209,7 @@
   <!-- FOLLOW-UPS DUE -->
   <div class="card">
     <div class="urgent-title">🔥 Follow-ups due</div>
+    <div id="urgentSummary" class="urgent-summary"></div>
     <div id="urgentLeadsContainer">Loading urgent leads...</div>
   </div>
 
@@ -242,6 +271,7 @@
     const leadDetailHeader = document.getElementById("leadDetailHeader");
     const eventsTableBody = document.getElementById("eventsTableBody");
     const urgentLeadsContainer = document.getElementById("urgentLeadsContainer");
+    const urgentSummary = document.getElementById("urgentSummary");
 
     function setStatusMessage(message, cssClass = "") {
       statusMessage.textContent = message;
@@ -441,12 +471,29 @@
       return null;
     }
 
+    function renderUrgentSummary(overdueCount, todayCount) {
+      urgentSummary.innerHTML = `
+        <div class="urgent-chip overdue">Overdue: ${overdueCount}</div>
+        <div class="urgent-chip today">Due today: ${todayCount}</div>
+      `;
+    }
+
     function renderUrgentLeads(leads) {
       const urgentLeads = leads.filter((lead) => {
         if (!lead.next_followup) return false;
         if (lead.pipeline_stage === "closed") return false;
         return getUrgencyType(lead.next_followup) !== null;
       });
+
+      const overdueCount = urgentLeads.filter(
+        (lead) => getUrgencyType(lead.next_followup) === "overdue"
+      ).length;
+
+      const todayCount = urgentLeads.filter(
+        (lead) => getUrgencyType(lead.next_followup) === "today"
+      ).length;
+
+      renderUrgentSummary(overdueCount, todayCount);
 
       if (urgentLeads.length === 0) {
         urgentLeadsContainer.innerHTML = `
@@ -497,12 +544,14 @@
 
         if (error) {
           setStatusMessage("Error loading leads: " + error.message, "error");
+          urgentSummary.innerHTML = "";
           urgentLeadsContainer.innerHTML = `<div class="error">Error loading urgent leads.</div>`;
           return;
         }
 
         if (!data || data.length === 0) {
           setStatusMessage("No leads found.");
+          renderUrgentSummary(0, 0);
           urgentLeadsContainer.innerHTML = `<div class="urgent-empty">No urgent follow-ups right now.</div>`;
           tableBody.innerHTML = `
             <tr>
@@ -587,6 +636,7 @@
       } catch (err) {
         console.error("Unexpected loadLeads error:", err);
         setStatusMessage("Unexpected error: " + err.message, "error");
+        urgentSummary.innerHTML = "";
         urgentLeadsContainer.innerHTML = `<div class="error">Unexpected error loading urgent leads.</div>`;
       }
     }
