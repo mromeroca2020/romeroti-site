@@ -52,6 +52,12 @@
       margin-bottom: 10px;
     }
 
+    .saving {
+      color: #92400e;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
     table {
       width: 100%;
       border-collapse: collapse;
@@ -82,6 +88,19 @@
       border-radius: 6px;
       background: #ffffff;
       cursor: pointer;
+      width: 100%;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 60px;
+      resize: vertical;
+      padding: 8px;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      background: #ffffff;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
     }
 
     .small-note {
@@ -108,7 +127,7 @@
 
     <!-- =========================
          Status / feedback message
-         Shows loading, success or error
+         Shows loading, success, saving or error
          ========================= -->
     <div id="statusMessage">Loading leads...</div>
 
@@ -132,7 +151,7 @@
     </table>
 
     <p class="small-note">
-      Status can be updated directly from this panel.
+      Status and notes are updated directly from this panel.
     </p>
   </div>
 
@@ -162,35 +181,99 @@
     const statusMessage = document.getElementById("statusMessage");
 
     /* =========================
+       Helper: set status message
+       ========================= */
+    function setStatusMessage(message, cssClass = "") {
+      statusMessage.textContent = message;
+      statusMessage.className = cssClass;
+    }
+
+    /* =========================
+       Helper: save lead event
+       Does not break main flow
+       if event insert fails
+       ========================= */
+    async function saveLeadEvent(leadId, eventType, description) {
+      try {
+        const { error } = await sb.from("lead_events").insert([
+          {
+            lead_id: leadId,
+            event_type: eventType,
+            description: description
+          }
+        ]);
+
+        if (error) {
+          console.error("Lead event insert error:", error);
+        }
+      } catch (err) {
+        console.error("Unexpected lead event error:", err);
+      }
+    }
+
+    /* =========================
        Update lead pipeline status
        Triggered when user changes
        the dropdown value
        ========================= */
-async function updateStatus(id, newStatus) {
-  try {
-    const { error } = await sb
-      .from("leads")
-      .update({ pipeline_stage: newStatus })
-      .eq("id", id);
+    async function updateStatus(id, newStatus) {
+      try {
+        setStatusMessage("Saving status...", "saving");
 
-    if (error) throw error;
+        const { error } = await sb
+          .from("leads")
+          .update({ pipeline_stage: newStatus })
+          .eq("id", id);
 
-    // 🔥 guardar evento
-    await sb.from("lead_events").insert([
-      {
-        lead_id: id,
-        event_type: "status_change",
-        description: "Status changed to " + newStatus
+        if (error) {
+          throw error;
+        }
+
+        await saveLeadEvent(
+          id,
+          "status_change",
+          "Status changed to " + newStatus
+        );
+
+        setStatusMessage("Status updated successfully.", "ok");
+      } catch (err) {
+        console.error("updateStatus error:", err);
+        setStatusMessage("Error updating status: " + err.message, "error");
+        alert("Error updating status: " + err.message);
       }
-    ]);
+    }
 
-    console.log("Status updated + event saved");
+    /* =========================
+       Update lead notes
+       Triggered when user changes
+       textarea and leaves field
+       ========================= */
+    async function updateNotes(id, newNotes) {
+      try {
+        setStatusMessage("Saving notes...", "saving");
 
-  } catch (err) {
-    console.error(err);
-    alert("Error updating status");
-  }
-}
+        const { error } = await sb
+          .from("leads")
+          .update({ notes: newNotes })
+          .eq("id", id);
+
+        if (error) {
+          throw error;
+        }
+
+        await saveLeadEvent(
+          id,
+          "notes_update",
+          "Notes updated"
+        );
+
+        setStatusMessage("Notes updated successfully.", "ok");
+      } catch (err) {
+        console.error("updateNotes error:", err);
+        setStatusMessage("Error saving notes: " + err.message, "error");
+        alert("Error saving notes: " + err.message);
+      }
+    }
 
     /* =========================
        Load leads from Supabase
@@ -198,47 +281,35 @@ async function updateStatus(id, newStatus) {
        ========================= */
     async function loadLeads() {
       try {
-        // Show loading state
-        statusMessage.textContent = "Loading leads...";
-        statusMessage.className = "";
+        setStatusMessage("Loading leads...");
 
-        // Read all leads ordered by newest first
         const { data, error } = await sb
           .from("leads")
           .select("*")
           .order("created_at", { ascending: false });
 
-        // Useful debugging logs
         console.log("Supabase data:", data);
         console.log("Supabase error:", error);
 
-        // Reset table before repopulating
         tableBody.innerHTML = "";
 
-        // Handle database error
-        } catch (err) 
-      {
-        console.error("Unexpected error saving notes:", err);
-        alert("Unexpected error saving notes: " + err.message);
-      }
+        if (error) {
+          setStatusMessage("Error loading leads: " + error.message, "error");
+          return;
+        }
 
-        // Handle empty dataset
         if (!data || data.length === 0) {
-          statusMessage.textContent = "No leads found.";
-          statusMessage.className = "";
+          setStatusMessage("No leads found.");
           tableBody.innerHTML = `
             <tr>
-              <td colspan="6">No records available yet.</td>
+              <td colspan="7">No records available yet.</td>
             </tr>
           `;
           return;
         }
 
-        // Success feedback
-        statusMessage.textContent = "Leads loaded successfully.";
-        statusMessage.className = "ok";
+        setStatusMessage("Leads loaded successfully.", "ok");
 
-        // Create one row per lead
         data.forEach((lead) => {
           const row = document.createElement("tr");
 
@@ -256,59 +327,30 @@ async function updateStatus(id, newStatus) {
                 <option value="closed" ${lead.pipeline_stage === "closed" ? "selected" : ""}>closed</option>
               </select>
             </td>
-           <td>${lead.source ?? ""}</td>
-
+            <td>${lead.source ?? ""}</td>
             <td>
-              <textarea 
+              <textarea
                 rows="2"
-                style="width:100%"
                 onchange="updateNotes('${lead.id}', this.value)"
               >${lead.notes ?? ""}</textarea>
             </td>
-                      `;
+          `;
 
           tableBody.appendChild(row);
         });
 
       } catch (err) {
-        // Catch unexpected runtime errors
-        console.error("Unexpected error:", err);
-        statusMessage.textContent = "Unexpected error: " + err.message;
-        statusMessage.className = "error";
+        console.error("Unexpected loadLeads error:", err);
+        setStatusMessage("Unexpected error: " + err.message, "error");
       }
     }
 
     /* =========================
-       Expose function globally
+       Expose functions globally
        because onchange in HTML
-       needs access to it
+       needs access to them
        ========================= */
     window.updateStatus = updateStatus;
-async function updateNotes(id, newNotes) {
-  try {
-    const { error } = await sb
-      .from("leads")
-      .update({ notes: newNotes })
-      .eq("id", id);
-
-    if (error) throw error;
-
-    // 🔥 guardar evento
-    await sb.from("lead_events").insert([
-      {
-        lead_id: id,
-        event_type: "notes_update",
-        description: "Notes updated"
-      }
-    ]);
-
-    console.log("Notes updated + event saved");
-
-  } catch (err) {
-    console.error(err);
-    alert("Error saving notes");
-  }
-}
     window.updateNotes = updateNotes;
 
     /* =========================
