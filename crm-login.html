@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Romanoti CRM Login</title>
+</head>
+<body>
+
+<h2>Romanoti CRM Login</h2>
+
+<input id="email" placeholder="Email"><br><br>
+<input id="password" type="password" placeholder="Password"><br><br>
+
+<button onclick="login()">Login</button>
+
+<p id="status"></p>
+
+<script type="module">
+import { createClient } from "https://esm.sh/@supabase/supabase-js";
+
+const supabase = createClient(
+  "https://rukftaohssovjaatzvkj.supabase.co",
+  "TU_PUBLISHABLE_KEY"
+);
+
+window.login = async function () {
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+
+  const { error } = await supabase.auth.signInWithPassword({
+    email,
+    password
+  });
+
+  if (error) {
+    document.getElementById("status").innerText = "Login failed";
+  } else {
+    window.location.href = "/crm.html";
+  }
+};
+</script>
+
+</body>
+</html>
