@@ -4,7 +4,7 @@
   <!-- =========================
        Romanoti CRM
        Protected internal page
-       for Romanoti staff
+       with role-based access
        ========================= -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -90,6 +90,17 @@
       white-space: nowrap;
     }
 
+    .role-badge {
+      padding: 8px 12px;
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      background: rgba(255,255,255,0.08);
+      white-space: nowrap;
+      text-transform: uppercase;
+    }
+
     .logout-btn {
       padding: 8px 12px;
       border: 1px solid rgba(255,255,255,0.22);
@@ -154,6 +165,12 @@
     }
 
     .saving {
+      color: #92400e;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .warning {
       color: #92400e;
       font-weight: bold;
       margin-bottom: 10px;
@@ -354,6 +371,12 @@
       outline: none;
     }
 
+    .readonly-control {
+      opacity: 0.65;
+      cursor: not-allowed !important;
+      background: #f8fafc !important;
+    }
+
     .small-note {
       margin-top: 14px;
       font-size: 13px;
@@ -497,6 +520,13 @@
       border-color: #ddd6fe;
     }
 
+    .action-disabled {
+      opacity: 0.45;
+      pointer-events: none;
+      box-shadow: none !important;
+      transform: none !important;
+    }
+
     .panel-note {
       margin-top: 12px;
       color: #64748b;
@@ -536,6 +566,7 @@
 
       <div class="topbar-actions">
         <div class="brand-badge">Romanoti internal workspace</div>
+        <div id="roleBadge" class="role-badge">ROLE</div>
         <button id="logoutBtn" class="logout-btn">Logout</button>
       </div>
     </div>
@@ -589,7 +620,7 @@
             <tbody></tbody>
           </table>
 
-          <p class="small-note">
+          <p id="permissionsNote" class="small-note">
             Status, priority, follow-up date and notes are updated directly from this panel. Click a lead row to view activity history and details.
           </p>
         </div>
@@ -647,13 +678,24 @@
 
     /* =========================
        Current authenticated user
-       Used for audit trail
        ========================= */
     const {
       data: { user }
     } = await sb.auth.getUser();
 
     const currentUserEmail = user?.email || "unknown";
+
+    /* =========================
+       Role resolution
+       Default role = viewer
+       ========================= */
+    const { data: roleData, error: roleError } = await sb
+      .from("user_roles")
+      .select("role")
+      .eq("id", user.id)
+      .single();
+
+    const userRole = roleData?.role || "viewer";
 
     const tableBody = document.querySelector("#leadsTable tbody");
     const statusMessage = document.getElementById("statusMessage");
@@ -666,10 +708,20 @@
     const filterButtons = document.querySelectorAll(".filter-btn");
     const sidePanelContent = document.getElementById("sidePanelContent");
     const logoutBtn = document.getElementById("logoutBtn");
+    const roleBadge = document.getElementById("roleBadge");
+    const permissionsNote = document.getElementById("permissionsNote");
 
     let allLeads = [];
     let activeFilter = "all";
     let selectedLeadId = null;
+
+    function canEdit() {
+      return userRole === "admin" || userRole === "sales";
+    }
+
+    function isAdmin() {
+      return userRole === "admin";
+    }
 
     function setStatusMessage(message, cssClass = "") {
       statusMessage.textContent = message;
@@ -703,6 +755,25 @@
       return new Date(value).toLocaleString();
     }
 
+    function applyRoleUi() {
+      roleBadge.textContent = userRole;
+
+      if (userRole === "viewer") {
+        permissionsNote.textContent =
+          "Viewer mode: you can review leads and activity history, but you cannot edit records.";
+      } else if (userRole === "sales") {
+        permissionsNote.textContent =
+          "Sales mode: you can update leads, follow-ups, priorities, and notes.";
+      } else if (userRole === "admin") {
+        permissionsNote.textContent =
+          "Admin mode: full CRM access enabled.";
+      }
+
+      if (roleError) {
+        setStatusMessage("Role not found. Viewer mode applied.", "warning");
+      }
+    }
+
     function renderSidePanel(lead) {
       selectedLeadId = lead.id;
 
@@ -711,6 +782,11 @@
       const scheduleText = encodeURIComponent(
         `Follow-up with ${lead.name || lead.email}\nCompany: ${lead.company || ""}\nStatus: ${lead.pipeline_stage || "new"}`
       );
+
+      const disabledClass = canEdit() ? "" : "action-disabled";
+      const disabledNote = canEdit()
+        ? "Use the panel for quick actions while keeping the table for fast editing."
+        : "Viewer role: quick actions are visible for context, but editing actions are disabled.";
 
       sidePanelContent.innerHTML = `
         <div class="detail-grid">
@@ -765,30 +841,25 @@
         </div>
 
         <div class="action-grid">
-          <a class="action-btn action-email" href="${emailHref}">
+          <a class="action-btn action-email ${disabledClass}" href="${canEdit() ? emailHref : "#"}">
             ✉ Email lead
           </a>
 
-          <a class="action-btn action-call" href="${phoneHref}">
+          <a class="action-btn action-call ${disabledClass}" href="${canEdit() ? phoneHref : "#"}">
             📞 Call lead
           </a>
 
-          <a class="action-btn action-schedule" href="mailto:${lead.email ?? ""}?subject=Follow-up%20Scheduling&body=${scheduleText}">
+          <a class="action-btn action-schedule ${disabledClass}" href="${canEdit() ? `mailto:${lead.email ?? ""}?subject=Follow-up%20Scheduling&body=${scheduleText}` : "#"}">
             📅 Schedule follow-up
           </a>
         </div>
 
         <div class="panel-note">
-          Use the panel for quick actions while keeping the table for fast editing.
+          ${disabledNote}
         </div>
       `;
     }
 
-    /* =========================
-       Save event with user trace
-       Every action records who
-       performed the change
-       ========================= */
     async function saveLeadEvent(leadId, eventType, description) {
       try {
         const { error } = await sb.from("lead_events").insert([
@@ -808,7 +879,17 @@
       }
     }
 
+    function blockEditIfViewer() {
+      if (!canEdit()) {
+        alert("You do not have permission to edit. Current role: viewer.");
+        return true;
+      }
+      return false;
+    }
+
     async function updateStatus(id, newStatus) {
+      if (blockEditIfViewer()) return;
+
       try {
         setStatusMessage("Saving status...", "saving");
         setFieldIndicator(id, "status", "Saving...", "field-saving");
@@ -820,11 +901,7 @@
 
         if (error) throw error;
 
-        await saveLeadEvent(
-          id,
-          "status_change",
-          `Status changed to ${newStatus}`
-        );
+        await saveLeadEvent(id, "status_change", `Status changed to ${newStatus}`);
 
         setStatusMessage("Status updated successfully.", "ok");
         setFieldIndicator(id, "status", "Saved ✓", "field-ok");
@@ -839,6 +916,8 @@
     }
 
     async function updatePriority(id, newPriority) {
+      if (blockEditIfViewer()) return;
+
       try {
         setStatusMessage("Saving priority...", "saving");
         setFieldIndicator(id, "priority", "Saving...", "field-saving");
@@ -850,11 +929,7 @@
 
         if (error) throw error;
 
-        await saveLeadEvent(
-          id,
-          "priority_change",
-          `Priority changed to ${newPriority}`
-        );
+        await saveLeadEvent(id, "priority_change", `Priority changed to ${newPriority}`);
 
         setStatusMessage("Priority updated successfully.", "ok");
         setFieldIndicator(id, "priority", "Saved ✓", "field-ok");
@@ -869,6 +944,8 @@
     }
 
     async function updateFollowup(id, newFollowup) {
+      if (blockEditIfViewer()) return;
+
       try {
         setStatusMessage("Saving follow-up...", "saving");
         setFieldIndicator(id, "followup", "Saving...", "field-saving");
@@ -885,9 +962,7 @@
         await saveLeadEvent(
           id,
           "followup_change",
-          valueToSave
-            ? `Next follow-up set to ${valueToSave}`
-            : "Next follow-up cleared"
+          valueToSave ? `Next follow-up set to ${valueToSave}` : "Next follow-up cleared"
         );
 
         setStatusMessage("Follow-up updated successfully.", "ok");
@@ -903,6 +978,8 @@
     }
 
     async function updateNotes(id, newNotes) {
+      if (blockEditIfViewer()) return;
+
       try {
         setStatusMessage("Saving notes...", "saving");
         setFieldIndicator(id, "notes", "Saving...", "field-saving");
@@ -914,11 +991,7 @@
 
         if (error) throw error;
 
-        await saveLeadEvent(
-          id,
-          "notes_update",
-          "Notes updated"
-        );
+        await saveLeadEvent(id, "notes_update", "Notes updated");
 
         setStatusMessage("Notes updated successfully.", "ok");
         setFieldIndicator(id, "notes", "Saved ✓", "field-ok");
@@ -1109,7 +1182,6 @@
 
     function renderLeadsTable(leads) {
       const searchTerm = searchInput.value.trim();
-
       const filteredLeads = leads.filter((lead) => {
         return matchesSearch(lead, searchTerm) && matchesFilter(lead, activeFilter);
       });
@@ -1124,6 +1196,9 @@
         `;
         return;
       }
+
+      const disabledAttr = canEdit() ? "" : "disabled";
+      const readonlyClass = canEdit() ? "" : "readonly-control";
 
       filteredLeads.forEach((lead) => {
         const row = document.createElement("tr");
@@ -1140,7 +1215,7 @@
           <td>${lead.phone ?? ""}</td>
 
           <td>
-            <select data-id="${lead.id}">
+            <select data-id="${lead.id}" ${disabledAttr} class="${readonlyClass}">
               <option value="new" ${lead.pipeline_stage === "new" ? "selected" : ""}>new</option>
               <option value="contacted" ${lead.pipeline_stage === "contacted" ? "selected" : ""}>contacted</option>
               <option value="meeting" ${lead.pipeline_stage === "meeting" ? "selected" : ""}>meeting</option>
@@ -1151,7 +1226,7 @@
           </td>
 
           <td>
-            <select data-priority-id="${lead.id}" class="priority-${lead.priority ?? "medium"}">
+            <select data-priority-id="${lead.id}" class="priority-${lead.priority ?? "medium"} ${readonlyClass}" ${disabledAttr}>
               <option value="low" ${(lead.priority ?? "medium") === "low" ? "selected" : ""}>low</option>
               <option value="medium" ${(lead.priority ?? "medium") === "medium" ? "selected" : ""}>medium</option>
               <option value="high" ${(lead.priority ?? "medium") === "high" ? "selected" : ""}>high</option>
@@ -1164,6 +1239,8 @@
               type="datetime-local"
               data-followup-id="${lead.id}"
               value="${toDatetimeLocalValue(lead.next_followup)}"
+              ${disabledAttr}
+              class="${readonlyClass}"
             />
             <span class="field-indicator" id="followup-indicator-${lead.id}"></span>
           </td>
@@ -1171,7 +1248,7 @@
           <td>${lead.source ?? ""}</td>
 
           <td>
-            <textarea data-id="${lead.id}" rows="2">${lead.notes ?? ""}</textarea>
+            <textarea data-id="${lead.id}" rows="2" ${disabledAttr} class="${readonlyClass}">${lead.notes ?? ""}</textarea>
             <span class="field-indicator" id="notes-indicator-${lead.id}"></span>
           </td>
         `;
@@ -1197,7 +1274,7 @@
 
         const prioritySelect = row.querySelector("select[data-priority-id]");
         prioritySelect.addEventListener("change", (e) => {
-          e.target.className = "priority-" + e.target.value;
+          e.target.className = "priority-" + e.target.value + (canEdit() ? "" : " readonly-control");
           updatePriority(e.target.dataset.priorityId, e.target.value);
         });
 
@@ -1284,6 +1361,7 @@
       window.location.href = "/crm-login.html";
     });
 
+    applyRoleUi();
     bindFilters();
     loadLeads();
   </script>
