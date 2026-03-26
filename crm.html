@@ -4,8 +4,9 @@
   <!-- =========================
        Romanoti CRM
        Protected internal page
-       with role-based access
-       and admin user management
+       with role-based access,
+       audit trail, and
+       admin user management
        ========================= -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -1373,9 +1374,10 @@
 
     /* =========================
        Admin-only user loading
-       Reads auth users through
-       public projection table
-       and combines with roles
+       Requires auth_users_public
+       view/table with:
+       - id
+       - email
        ========================= */
     async function loadUsers() {
       if (!isAdmin()) return;
@@ -1385,20 +1387,10 @@
 
         const { data: rolesData, error: rolesError } = await sb
           .from("user_roles")
-          .select("id, role")
-          .order("role", { ascending: true });
+          .select("id, role");
 
         if (rolesError) throw rolesError;
 
-        /* 
-           NOTE:
-           This assumes you have a readable table or view called auth_users_public
-           with at least:
-           - id
-           - email
-
-           If you do not have it yet, create it in Supabase before using this panel.
-        */
         const { data: authUsers, error: authError } = await sb
           .from("auth_users_public")
           .select("id, email")
@@ -1443,10 +1435,12 @@
 
     /* =========================
        Admin-only role update
-       Uses upsert so a user
-       can be assigned a role
-       even if not yet present
-       in user_roles
+       FIXED VERSION:
+       1. checks if role row exists
+       2. updates if present
+       3. inserts if missing
+       This avoids RLS friction
+       caused by upsert
        ========================= */
     async function updateUserRole(targetUserId, newRole) {
       if (!isAdmin()) {
@@ -1457,14 +1451,32 @@
       try {
         setAdminStatus("Saving role update...", "saving");
 
-        const { error } = await sb
+        const { data: existingRole, error: existingError } = await sb
           .from("user_roles")
-          .upsert(
-            [{ id: targetUserId, role: newRole }],
-            { onConflict: "id" }
-          );
+          .select("id, role")
+          .eq("id", targetUserId)
+          .maybeSingle();
 
-        if (error) throw error;
+        if (existingError) throw existingError;
+
+        let saveError = null;
+
+        if (existingRole) {
+          const { error } = await sb
+            .from("user_roles")
+            .update({ role: newRole })
+            .eq("id", targetUserId);
+
+          saveError = error;
+        } else {
+          const { error } = await sb
+            .from("user_roles")
+            .insert([{ id: targetUserId, role: newRole }]);
+
+          saveError = error;
+        }
+
+        if (saveError) throw saveError;
 
         setAdminStatus("Role updated successfully.", "ok");
         await loadUsers();
