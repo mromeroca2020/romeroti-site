@@ -7,7 +7,8 @@
        with role-based access,
        audit trail, admin user
        management, lead creation,
-       and dashboard metrics
+       dashboard metrics,
+       and Kanban phase 1
        ========================= -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -100,7 +101,8 @@
 
     .logout-btn,
     .new-lead-btn,
-    .modal-btn {
+    .modal-btn,
+    .kanban-btn {
       padding: 8px 12px;
       border-radius: 999px;
       font-size: 12px;
@@ -123,7 +125,8 @@
 
     .logout-btn:hover,
     .new-lead-btn:hover,
-    .modal-btn:hover {
+    .modal-btn:hover,
+    .kanban-btn:hover {
       opacity: 0.92;
       transform: translateY(-1px);
     }
@@ -251,6 +254,130 @@
       color: #475569;
       line-height: 1.35;
       min-height: 34px;
+    }
+
+    /* =========================
+       Kanban styles
+       ========================= */
+    .kanban-board {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .kanban-column {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 10px;
+      min-height: 220px;
+    }
+
+    .kanban-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .kanban-title {
+      font-weight: 700;
+      font-size: 13px;
+      color: var(--navy);
+      text-transform: uppercase;
+      letter-spacing: 0.2px;
+    }
+
+    .kanban-count {
+      font-size: 11px;
+      font-weight: 700;
+      color: #64748b;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 4px 8px;
+    }
+
+    .kanban-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .kanban-card {
+      background: white;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 10px;
+      cursor: pointer;
+      transition: all 0.12s ease;
+    }
+
+    .kanban-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+    }
+
+    .kanban-name {
+      font-weight: 700;
+      font-size: 13px;
+      margin-bottom: 4px;
+      color: #172033;
+    }
+
+    .kanban-meta {
+      font-size: 12px;
+      color: #64748b;
+      line-height: 1.35;
+      margin-bottom: 2px;
+    }
+
+    .kanban-priority {
+      display: inline-block;
+      margin-top: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      border-radius: 999px;
+      padding: 4px 8px;
+    }
+
+    .kanban-priority.low {
+      background: #e2e8f0;
+      color: #475569;
+    }
+
+    .kanban-priority.medium {
+      background: #fef3c7;
+      color: #b45309;
+    }
+
+    .kanban-priority.high {
+      background: #fee2e2;
+      color: #b91c1c;
+    }
+
+    .kanban-actions {
+      margin-top: 10px;
+      display: flex;
+      gap: 6px;
+    }
+
+    .kanban-btn {
+      width: 100%;
+      font-size: 11px;
+      padding: 7px 8px;
+      border: none;
+      background: var(--navy);
+      color: white;
+      border-radius: 8px;
+    }
+
+    .kanban-empty {
+      font-size: 12px;
+      color: #94a3b8;
+      padding: 8px 4px;
+      font-style: italic;
     }
 
     .urgent-summary {
@@ -761,6 +888,12 @@
       transform: none;
     }
 
+    @media (max-width: 1400px) {
+      .kanban-board {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
     @media (max-width: 1200px) {
       .stats-grid {
         grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -784,7 +917,8 @@
 
     @media (max-width: 720px) {
       .modal-grid,
-      .stats-grid {
+      .stats-grid,
+      .kanban-board {
         grid-template-columns: 1fr;
       }
 
@@ -814,10 +948,6 @@
   <div class="page">
     <div class="layout-grid">
       <div>
-        <!-- =========================
-             Dashboard metrics
-             High-value business view
-             ========================= -->
         <div class="card">
           <div class="section-title">📊 Dashboard</div>
           <div class="stats-grid">
@@ -839,7 +969,7 @@
               <div class="stat-note">Leads requiring fast attention or follow-up.</div>
             </div>
 
-            <div class="stat-card closed">
+            <div class="stat-card.closed">
               <div class="stat-label">Closed</div>
               <div id="statClosed" class="stat-value">0</div>
               <div class="stat-note">Leads already completed or closed out.</div>
@@ -849,6 +979,55 @@
               <div class="stat-label">Created Today</div>
               <div id="statToday" class="stat-value">0</div>
               <div class="stat-note">New leads added during the current day.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- =========================
+             Kanban View Phase 1
+             ========================= -->
+        <div class="card">
+          <div class="section-title">🧩 Pipeline</div>
+
+          <div id="kanbanBoard" class="kanban-board">
+            <div class="kanban-column">
+              <div class="kanban-title-row">
+                <div class="kanban-title">New</div>
+                <div id="kanban-count-new" class="kanban-count">0</div>
+              </div>
+              <div class="kanban-list" id="kanban-new"></div>
+            </div>
+
+            <div class="kanban-column">
+              <div class="kanban-title-row">
+                <div class="kanban-title">Contacted</div>
+                <div id="kanban-count-contacted" class="kanban-count">0</div>
+              </div>
+              <div class="kanban-list" id="kanban-contacted"></div>
+            </div>
+
+            <div class="kanban-column">
+              <div class="kanban-title-row">
+                <div class="kanban-title">Meeting</div>
+                <div id="kanban-count-meeting" class="kanban-count">0</div>
+              </div>
+              <div class="kanban-list" id="kanban-meeting"></div>
+            </div>
+
+            <div class="kanban-column">
+              <div class="kanban-title-row">
+                <div class="kanban-title">Proposal</div>
+                <div id="kanban-count-proposal" class="kanban-count">0</div>
+              </div>
+              <div class="kanban-list" id="kanban-proposal"></div>
+            </div>
+
+            <div class="kanban-column">
+              <div class="kanban-title-row">
+                <div class="kanban-title">Closed</div>
+                <div id="kanban-count-closed" class="kanban-count">0</div>
+              </div>
+              <div class="kanban-list" id="kanban-closed"></div>
             </div>
           </div>
         </div>
@@ -1143,10 +1322,6 @@
       );
     }
 
-    /* =========================
-       Dashboard metrics update
-       Uses current lead dataset
-       ========================= */
     function renderDashboardStats(leads) {
       const total = leads.length;
       const open = leads.filter((lead) => (lead.pipeline_stage ?? "new") !== "closed").length;
@@ -1595,6 +1770,80 @@
       return true;
     }
 
+    /* =========================
+       Kanban phase 1 render
+       Cards grouped by stage
+       Button advances one stage
+       ========================= */
+    function renderKanban(leads) {
+      const stages = ["new", "contacted", "meeting", "proposal", "closed"];
+      const nextStageMap = {
+        new: "contacted",
+        contacted: "meeting",
+        meeting: "proposal",
+        proposal: "closed"
+      };
+
+      stages.forEach((stage) => {
+        const container = document.getElementById(`kanban-${stage}`);
+        const countEl = document.getElementById(`kanban-count-${stage}`);
+        container.innerHTML = "";
+
+        const stageLeads = leads.filter((lead) => (lead.pipeline_stage ?? "new") === stage);
+        countEl.textContent = stageLeads.length;
+
+        if (!stageLeads.length) {
+          container.innerHTML = `<div class="kanban-empty">No leads in this stage.</div>`;
+          return;
+        }
+
+        stageLeads.forEach((lead) => {
+          const card = document.createElement("div");
+          card.className = "kanban-card";
+
+          const priority = lead.priority ?? "medium";
+
+          card.innerHTML = `
+            <div class="kanban-name">${lead.name ?? lead.email}</div>
+            <div class="kanban-meta">${lead.company ?? ""}</div>
+            <div class="kanban-meta">${lead.email ?? ""}</div>
+            <div class="kanban-priority ${priority}">${priority}</div>
+            <div class="kanban-actions">
+              ${
+                stage !== "closed"
+                  ? `<button class="kanban-btn">Next Stage</button>`
+                  : ""
+              }
+            </div>
+          `;
+
+          card.addEventListener("click", () => {
+            renderSidePanel(lead);
+            loadLeadEvents(lead);
+          });
+
+          const button = card.querySelector(".kanban-btn");
+          if (button) {
+            button.addEventListener("click", async (event) => {
+              event.stopPropagation();
+
+              if (!canEdit()) {
+                alert("You do not have permission to move leads.");
+                return;
+              }
+
+              const nextStage = nextStageMap[stage];
+              if (nextStage) {
+                await updateStatus(lead.id, nextStage);
+              }
+            });
+          }
+
+          container.appendChild(card);
+        });
+      });
+    }
+
     function renderLeadsTable(leads) {
       const searchTerm = searchInput.value.trim();
       const filteredLeads = leads.filter((lead) => {
@@ -1934,6 +2183,7 @@
         allLeads = data || [];
 
         renderDashboardStats(allLeads);
+        renderKanban(allLeads);
 
         if (!allLeads.length) {
           setStatusMessage("No leads found.");
