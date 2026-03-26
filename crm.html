@@ -3,12 +3,7 @@
 <head>
   <!-- =========================
        Romanoti CRM
-       Protected internal page
-       with role-based access,
-       audit trail, admin user
-       management, lead creation,
-       dashboard metrics,
-       and Kanban phase 1
+       Romanoti UI edition
        ========================= -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -16,47 +11,68 @@
 
   <style>
     :root {
-      --bg: #f3f6fb;
-      --card: #ffffff;
-      --border: #dbe3ec;
+      --bg: #eef3f9;
+      --card: rgba(255, 255, 255, 0.88);
+      --card-solid: #ffffff;
+      --border: #d7e2ee;
       --text: #172033;
       --muted: #6b7280;
-      --navy: #0b1730;
-      --navy-2: #132347;
-      --yellow-soft: #fff6db;
-      --red-soft: #feeeee;
-      --green-soft: #eaf8ef;
-      --blue-soft: #e8f0ff;
-      --purple-soft: #ede9fe;
-      --shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+      --navy: #07152d;
+      --navy-2: #10254d;
+      --navy-3: #163566;
+      --gold: #d9b56d;
+      --gold-soft: #fff5df;
+      --blue-soft: #eef5ff;
+      --purple-soft: #f2efff;
+      --green-soft: #ecf9f1;
+      --red-soft: #fff1f1;
+      --yellow-soft: #fff8e7;
+      --shadow-xs: 0 2px 8px rgba(15, 23, 42, 0.05);
+      --shadow-sm: 0 8px 20px rgba(15, 23, 42, 0.06);
+      --shadow-md: 0 16px 34px rgba(15, 23, 42, 0.08);
+      --shadow-lg: 0 24px 60px rgba(15, 23, 42, 0.14);
+      --radius: 18px;
+      --radius-sm: 12px;
     }
 
     * {
       box-sizing: border-box;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
-      font-family: Arial, sans-serif;
       margin: 0;
-      background: var(--bg);
+      font-family: "Segoe UI", Arial, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(217,181,109,0.10), transparent 30%),
+        linear-gradient(180deg, #f6f9fd 0%, #eef3f9 100%);
       color: var(--text);
     }
 
     .page {
-      padding: 22px;
+      padding: 24px;
     }
 
     .topbar {
-      background: linear-gradient(135deg, var(--navy), var(--navy-2));
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background:
+        linear-gradient(135deg, rgba(7,21,45,0.98), rgba(16,37,77,0.98)),
+        linear-gradient(90deg, var(--navy), var(--navy-2));
       color: white;
       border-bottom: 1px solid rgba(255,255,255,0.08);
-      box-shadow: var(--shadow);
+      box-shadow: 0 14px 36px rgba(7, 21, 45, 0.24);
+      backdrop-filter: blur(10px);
     }
 
     .topbar-inner {
-      max-width: 1500px;
+      max-width: 1560px;
       margin: 0 auto;
-      padding: 18px 22px;
+      padding: 20px 26px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -70,14 +86,27 @@
     }
 
     .brand-title {
-      font-size: 28px;
-      font-weight: 700;
-      letter-spacing: 0.3px;
+      font-size: 30px;
+      font-weight: 800;
+      letter-spacing: 0.2px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-title::before {
+      content: "";
+      width: 10px;
+      height: 32px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, var(--gold), #f3d79d);
+      box-shadow: 0 0 18px rgba(217,181,109,0.45);
     }
 
     .brand-subtitle {
       font-size: 13px;
-      color: rgba(255,255,255,0.75);
+      color: rgba(255,255,255,0.72);
+      letter-spacing: 0.2px;
     }
 
     .topbar-actions {
@@ -89,81 +118,97 @@
 
     .brand-badge,
     .role-badge {
-      padding: 8px 12px;
-      border: 1px solid rgba(255,255,255,0.2);
+      padding: 10px 14px;
+      border: 1px solid rgba(255,255,255,0.14);
       border-radius: 999px;
-      font-size: 12px;
-      font-weight: 700;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
       background: rgba(255,255,255,0.08);
       white-space: nowrap;
       text-transform: uppercase;
+      backdrop-filter: blur(8px);
+    }
+
+    .role-badge {
+      background: rgba(217,181,109,0.12);
+      border-color: rgba(217,181,109,0.25);
+      color: #f4deb0;
     }
 
     .logout-btn,
     .new-lead-btn,
     .modal-btn,
     .kanban-btn {
-      padding: 8px 12px;
       border-radius: 999px;
       font-size: 12px;
-      font-weight: 700;
+      font-weight: 800;
+      letter-spacing: 0.2px;
       cursor: pointer;
-      transition: opacity 0.12s ease, transform 0.12s ease;
+      transition: all 0.15s ease;
     }
 
     .logout-btn {
-      border: 1px solid rgba(255,255,255,0.22);
-      background: rgba(255,255,255,0.10);
+      padding: 10px 14px;
+      border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(255,255,255,0.08);
       color: white;
     }
 
     .new-lead-btn {
-      border: 1px solid rgba(255,255,255,0.22);
-      background: white;
+      padding: 10px 16px;
+      border: 1px solid rgba(255,255,255,0.18);
+      background: linear-gradient(180deg, #ffffff, #f5f7fb);
       color: var(--navy);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
     }
 
     .logout-btn:hover,
     .new-lead-btn:hover,
     .modal-btn:hover,
     .kanban-btn:hover {
-      opacity: 0.92;
       transform: translateY(-1px);
+      box-shadow: var(--shadow-sm);
     }
 
     .new-lead-btn:disabled {
       opacity: 0.45;
       cursor: not-allowed;
       transform: none;
-    }
-
-    h3 {
-      margin: 0 0 12px 0;
+      box-shadow: none;
     }
 
     .layout-grid {
-      max-width: 1500px;
+      max-width: 1560px;
       margin: 0 auto;
       display: grid;
       grid-template-columns: 1fr 360px;
-      gap: 20px;
+      gap: 22px;
       align-items: start;
     }
 
     .card {
       background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
+      border: 1px solid rgba(215,226,238,0.9);
+      border-radius: var(--radius);
       padding: 18px;
-      box-shadow: var(--shadow);
-      margin-bottom: 20px;
+      box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(12px);
+      margin-bottom: 22px;
     }
 
     .section-title {
-      font-size: 18px;
-      font-weight: 700;
-      margin-bottom: 10px;
+      font-size: 24px;
+      font-weight: 800;
       color: var(--navy);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-title.small {
+      font-size: 20px;
     }
 
     .muted {
@@ -171,33 +216,11 @@
       margin-bottom: 10px;
     }
 
-    .ok {
-      color: #166534;
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
+    .ok { color: #166534; font-weight: 700; margin-bottom: 10px; }
+    .error { color: #b91c1c; font-weight: 700; margin-bottom: 10px; }
+    .saving { color: #92400e; font-weight: 700; margin-bottom: 10px; }
+    .warning { color: #92400e; font-weight: 700; margin-bottom: 10px; }
 
-    .error {
-      color: #b91c1c;
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
-
-    .saving {
-      color: #92400e;
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
-
-    .warning {
-      color: #92400e;
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
-
-    /* =========================
-       Dashboard cards
-       ========================= */
     .stats-grid {
       display: grid;
       grid-template-columns: repeat(5, minmax(0, 1fr));
@@ -205,60 +228,59 @@
     }
 
     .stat-card {
+      position: relative;
       border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 16px;
+      border-radius: 16px;
+      padding: 18px;
+      overflow: hidden;
+      box-shadow: var(--shadow-xs);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
       background: white;
-      box-shadow: var(--shadow);
     }
 
-    .stat-card.total {
-      background: linear-gradient(180deg, #f8fbff, #eef5ff);
+    .stat-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
     }
 
-    .stat-card.open {
-      background: linear-gradient(180deg, #fffdf6, #fff7e0);
+    .stat-card::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0 0;
+      height: 4px;
+      background: linear-gradient(90deg, transparent, rgba(7,21,45,0.14), transparent);
     }
 
-    .stat-card.high {
-      background: linear-gradient(180deg, #fff8f8, #ffefef);
-    }
-
-    .stat-card.closed {
-      background: linear-gradient(180deg, #f7fff9, #ecfbf0);
-    }
-
-    .stat-card.today {
-      background: linear-gradient(180deg, #faf8ff, #f1edff);
-    }
+    .stat-card.total { background: linear-gradient(180deg, #f8fbff, #edf5ff); }
+    .stat-card.open { background: linear-gradient(180deg, #fffdf7, #fff7e5); }
+    .stat-card.high { background: linear-gradient(180deg, #fff9f9, #fff0f0); }
+    .stat-card.closed { background: linear-gradient(180deg, #f7fff9, #edf9f0); }
+    .stat-card.today { background: linear-gradient(180deg, #faf8ff, #f1edff); }
 
     .stat-label {
-      font-size: 12px;
-      font-weight: 700;
+      font-size: 11px;
+      font-weight: 800;
       text-transform: uppercase;
       color: #64748b;
-      letter-spacing: 0.3px;
+      letter-spacing: 0.6px;
       margin-bottom: 8px;
     }
 
     .stat-value {
-      font-size: 30px;
-      font-weight: 800;
+      font-size: 38px;
+      font-weight: 900;
       line-height: 1;
       color: var(--navy);
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
 
     .stat-note {
       font-size: 13px;
       color: #475569;
-      line-height: 1.35;
-      min-height: 34px;
+      line-height: 1.4;
+      min-height: 38px;
     }
 
-    /* =========================
-       Kanban styles
-       ========================= */
     .kanban-board {
       display: grid;
       grid-template-columns: repeat(5, minmax(0, 1fr));
@@ -266,11 +288,12 @@
     }
 
     .kanban-column {
-      background: #f8fafc;
+      background: linear-gradient(180deg, #f9fbfe, #f4f8fc);
       border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 10px;
-      min-height: 220px;
+      border-radius: 16px;
+      padding: 12px;
+      min-height: 260px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.6);
     }
 
     .kanban-title-row {
@@ -278,84 +301,80 @@
       justify-content: space-between;
       align-items: center;
       gap: 8px;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
 
     .kanban-title {
-      font-weight: 700;
-      font-size: 13px;
+      font-weight: 900;
+      font-size: 12px;
       color: var(--navy);
       text-transform: uppercase;
-      letter-spacing: 0.2px;
+      letter-spacing: 0.6px;
     }
 
     .kanban-count {
       font-size: 11px;
-      font-weight: 700;
+      font-weight: 800;
       color: #64748b;
-      background: white;
+      background: rgba(255,255,255,0.9);
       border: 1px solid var(--border);
       border-radius: 999px;
-      padding: 4px 8px;
+      padding: 5px 9px;
+      min-width: 28px;
+      text-align: center;
     }
 
     .kanban-list {
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 10px;
     }
 
     .kanban-card {
-      background: white;
-      border: 1px solid #e2e8f0;
-      border-radius: 10px;
-      padding: 10px;
+      background: rgba(255,255,255,0.95);
+      border: 1px solid #dce5ef;
+      border-radius: 14px;
+      padding: 12px;
       cursor: pointer;
-      transition: all 0.12s ease;
+      transition: all 0.15s ease;
+      box-shadow: var(--shadow-xs);
     }
 
     .kanban-card:hover {
       transform: translateY(-2px);
-      box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+      box-shadow: var(--shadow-md);
+      border-color: #c7d5e4;
     }
 
     .kanban-name {
-      font-weight: 700;
-      font-size: 13px;
-      margin-bottom: 4px;
+      font-weight: 800;
+      font-size: 14px;
+      margin-bottom: 6px;
       color: #172033;
+      line-height: 1.2;
     }
 
     .kanban-meta {
       font-size: 12px;
       color: #64748b;
-      line-height: 1.35;
+      line-height: 1.4;
       margin-bottom: 2px;
+      word-break: break-word;
     }
 
     .kanban-priority {
       display: inline-block;
-      margin-top: 6px;
+      margin-top: 8px;
       font-size: 11px;
-      font-weight: 700;
+      font-weight: 800;
       border-radius: 999px;
-      padding: 4px 8px;
+      padding: 5px 9px;
+      text-transform: lowercase;
     }
 
-    .kanban-priority.low {
-      background: #e2e8f0;
-      color: #475569;
-    }
-
-    .kanban-priority.medium {
-      background: #fef3c7;
-      color: #b45309;
-    }
-
-    .kanban-priority.high {
-      background: #fee2e2;
-      color: #b91c1c;
-    }
+    .kanban-priority.low { background: #e2e8f0; color: #475569; }
+    .kanban-priority.medium { background: #fef3c7; color: #b45309; }
+    .kanban-priority.high { background: #fee2e2; color: #b91c1c; }
 
     .kanban-actions {
       margin-top: 10px;
@@ -365,18 +384,18 @@
 
     .kanban-btn {
       width: 100%;
-      font-size: 11px;
-      padding: 7px 8px;
+      padding: 9px 10px;
       border: none;
-      background: var(--navy);
+      background: linear-gradient(135deg, var(--navy), var(--navy-2));
       color: white;
-      border-radius: 8px;
+      border-radius: 10px;
+      box-shadow: 0 10px 20px rgba(7, 21, 45, 0.14);
     }
 
     .kanban-empty {
       font-size: 12px;
       color: #94a3b8;
-      padding: 8px 4px;
+      padding: 10px 4px;
       font-style: italic;
     }
 
@@ -388,11 +407,12 @@
     }
 
     .urgent-chip {
-      padding: 8px 12px;
+      padding: 9px 13px;
       border-radius: 999px;
-      font-weight: bold;
-      font-size: 13px;
+      font-weight: 800;
+      font-size: 12px;
       border: 1px solid transparent;
+      letter-spacing: 0.2px;
     }
 
     .urgent-chip.overdue {
@@ -409,7 +429,7 @@
 
     .urgent-empty {
       color: #166534;
-      font-weight: bold;
+      font-weight: 700;
     }
 
     .urgent-list {
@@ -419,29 +439,30 @@
 
     .urgent-item {
       border: 1px solid #e5e7eb;
-      border-radius: 12px;
+      border-radius: 14px;
       padding: 14px;
       cursor: pointer;
       transition: transform 0.12s ease, box-shadow 0.12s ease;
+      background: white;
     }
 
     .urgent-item:hover {
       transform: translateY(-1px);
-      box-shadow: 0 8px 18px rgba(15, 23, 42, 0.08);
+      box-shadow: var(--shadow-sm);
     }
 
     .urgent-overdue {
-      background: var(--red-soft);
+      background: linear-gradient(180deg, #fff8f8, #fff1f1);
       border-color: #fecaca;
     }
 
     .urgent-today {
-      background: var(--yellow-soft);
+      background: linear-gradient(180deg, #fffdf5, #fff7e7);
       border-color: #fde68a;
     }
 
     .urgent-name {
-      font-weight: bold;
+      font-weight: 800;
       margin-bottom: 4px;
       color: var(--navy);
     }
@@ -462,14 +483,15 @@
     .modal-grid input,
     .modal-grid textarea {
       width: 100%;
-      padding: 12px 14px;
-      border: 1px solid #cbd5e1;
-      border-radius: 10px;
+      padding: 13px 15px;
+      border: 1px solid #cfd9e5;
+      border-radius: 12px;
       font-size: 14px;
       box-sizing: border-box;
       outline: none;
-      background: white;
-      font-family: Arial, sans-serif;
+      background: rgba(255,255,255,0.95);
+      font-family: "Segoe UI", Arial, sans-serif;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
     }
 
     .search-box input:focus,
@@ -478,8 +500,9 @@
     select:focus,
     input[type="datetime-local"]:focus,
     textarea:focus {
-      border-color: #93c5fd;
-      box-shadow: 0 0 0 4px rgba(59,130,246,0.08);
+      border-color: #9bb9dd;
+      box-shadow: 0 0 0 5px rgba(59,130,246,0.09);
+      transform: translateY(-1px);
     }
 
     .filters {
@@ -489,51 +512,68 @@
     }
 
     .filter-btn {
-      padding: 9px 13px;
-      border: 1px solid #cbd5e1;
-      background: #ffffff;
+      padding: 9px 14px;
+      border: 1px solid #d2dbe6;
+      background: rgba(255,255,255,0.95);
       border-radius: 999px;
       cursor: pointer;
-      font-weight: bold;
+      font-weight: 800;
+      font-size: 12px;
       transition: all 0.15s ease;
     }
 
     .filter-btn:hover {
       border-color: #94a3b8;
+      transform: translateY(-1px);
     }
 
     .filter-btn.active {
-      background: var(--navy);
+      background: linear-gradient(135deg, var(--navy), var(--navy-2));
       color: #ffffff;
       border-color: var(--navy);
+      box-shadow: 0 8px 20px rgba(7,21,45,0.14);
     }
 
     table {
       width: 100%;
-      border-collapse: collapse;
+      border-collapse: separate;
+      border-spacing: 0;
       margin-top: 10px;
       background: #ffffff;
       overflow: hidden;
-      border-radius: 12px;
+      border-radius: 16px;
+      box-shadow: var(--shadow-xs);
     }
 
     th,
     td {
-      border: 1px solid var(--border);
+      border-right: 1px solid #e5ebf2;
+      border-bottom: 1px solid #e5ebf2;
       padding: 12px;
       text-align: left;
       vertical-align: top;
     }
 
+    th:last-child,
+    td:last-child {
+      border-right: none;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
     th {
-      background: var(--navy);
+      background: linear-gradient(135deg, var(--navy), var(--navy-2));
       color: #ffffff;
-      font-size: 13px;
-      letter-spacing: 0.2px;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
     }
 
     tr:nth-child(even) {
-      background: #f8fafc;
+      background: #fbfcfe;
     }
 
     .clickable-row {
@@ -542,7 +582,7 @@
     }
 
     .clickable-row:hover {
-      background: #edf3ff !important;
+      background: #edf4ff !important;
     }
 
     .selected-row {
@@ -553,26 +593,27 @@
 
     select,
     input[type="datetime-local"] {
-      padding: 7px 9px;
-      border: 1px solid #cbd5e1;
-      border-radius: 8px;
+      padding: 8px 10px;
+      border: 1px solid #cfd9e5;
+      border-radius: 10px;
       background: #ffffff;
       cursor: pointer;
       width: 100%;
       box-sizing: border-box;
       outline: none;
+      font-family: "Segoe UI", Arial, sans-serif;
     }
 
     textarea {
       width: 100%;
-      min-height: 62px;
+      min-height: 68px;
       resize: vertical;
-      padding: 8px;
-      border: 1px solid #cbd5e1;
-      border-radius: 8px;
+      padding: 9px;
+      border: 1px solid #cfd9e5;
+      border-radius: 10px;
       background: #ffffff;
       box-sizing: border-box;
-      font-family: Arial, sans-serif;
+      font-family: "Segoe UI", Arial, sans-serif;
       outline: none;
     }
 
@@ -593,31 +634,21 @@
       margin-top: 5px;
       display: block;
       min-height: 14px;
-      font-weight: bold;
+      font-weight: 700;
     }
 
     .field-saving { color: #92400e; }
     .field-ok { color: #166534; }
     .field-error { color: #b91c1c; }
 
-    .priority-low {
-      color: #475569;
-      font-weight: bold;
-    }
-
-    .priority-medium {
-      color: #b45309;
-      font-weight: bold;
-    }
-
-    .priority-high {
-      color: #b91c1c;
-      font-weight: bold;
-    }
+    .priority-low { color: #475569; font-weight: 700; }
+    .priority-medium { color: #b45309; font-weight: 700; }
+    .priority-high { color: #b91c1c; font-weight: 700; }
 
     .side-panel {
       position: sticky;
-      top: 22px;
+      top: 96px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(248,251,255,0.96));
     }
 
     .detail-empty {
@@ -632,18 +663,19 @@
 
     .detail-item {
       border: 1px solid #e2e8f0;
-      border-radius: 12px;
+      border-radius: 14px;
       padding: 12px;
-      background: #f8fafc;
+      background: rgba(248,250,252,0.9);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.7);
     }
 
     .detail-label {
-      font-size: 12px;
-      font-weight: bold;
+      font-size: 11px;
+      font-weight: 800;
       text-transform: uppercase;
       color: #64748b;
-      margin-bottom: 4px;
-      letter-spacing: 0.3px;
+      margin-bottom: 5px;
+      letter-spacing: 0.5px;
     }
 
     .detail-value {
@@ -655,11 +687,12 @@
 
     .badge {
       display: inline-block;
-      padding: 6px 10px;
+      padding: 7px 10px;
       border-radius: 999px;
-      font-size: 12px;
-      font-weight: bold;
+      font-size: 11px;
+      font-weight: 800;
       line-height: 1;
+      letter-spacing: 0.2px;
     }
 
     .badge-status {
@@ -694,33 +727,34 @@
       align-items: center;
       justify-content: center;
       text-decoration: none;
-      padding: 11px 14px;
-      border-radius: 10px;
-      font-weight: bold;
+      padding: 12px 14px;
+      border-radius: 12px;
+      font-weight: 800;
       border: 1px solid transparent;
       transition: transform 0.12s ease, box-shadow 0.12s ease, opacity 0.12s ease;
       cursor: pointer;
+      font-size: 13px;
     }
 
     .action-btn:hover {
       transform: translateY(-1px);
-      box-shadow: 0 8px 16px rgba(15, 23, 42, 0.08);
+      box-shadow: var(--shadow-sm);
     }
 
     .action-email {
-      background: var(--blue-soft);
+      background: linear-gradient(180deg, #eef5ff, #e6efff);
       color: #1d4ed8;
       border-color: #bfdbfe;
     }
 
     .action-call {
-      background: var(--green-soft);
+      background: linear-gradient(180deg, #eefcf3, #e4f8ec);
       color: #166534;
       border-color: #bbf7d0;
     }
 
     .action-schedule {
-      background: var(--purple-soft);
+      background: linear-gradient(180deg, #f5f1ff, #ece7ff);
       color: #6d28d9;
       border-color: #ddd6fe;
     }
@@ -736,6 +770,7 @@
       margin-top: 12px;
       color: #64748b;
       font-size: 13px;
+      line-height: 1.4;
     }
 
     .event-byline {
@@ -772,7 +807,7 @@
     }
 
     .user-email-cell {
-      font-weight: 600;
+      font-weight: 700;
       color: #172033;
     }
 
@@ -780,18 +815,19 @@
       min-height: 20px;
       margin-top: 8px;
       font-size: 13px;
-      font-weight: bold;
+      font-weight: 700;
     }
 
     .modal-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(11, 23, 48, 0.55);
+      background: rgba(7, 21, 45, 0.50);
       display: none;
       align-items: center;
       justify-content: center;
       padding: 20px;
       z-index: 9999;
+      backdrop-filter: blur(6px);
     }
 
     .modal-overlay.show {
@@ -800,23 +836,23 @@
 
     .modal-card {
       width: 100%;
-      max-width: 720px;
-      background: white;
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      box-shadow: 0 20px 50px rgba(15, 23, 42, 0.24);
+      max-width: 760px;
+      background: rgba(255,255,255,0.97);
+      border: 1px solid rgba(215,226,238,0.9);
+      border-radius: 22px;
+      box-shadow: var(--shadow-lg);
       overflow: hidden;
     }
 
     .modal-header {
-      padding: 18px 20px;
+      padding: 20px 22px;
       background: linear-gradient(135deg, var(--navy), var(--navy-2));
       color: white;
     }
 
     .modal-title {
-      font-size: 22px;
-      font-weight: 700;
+      font-size: 26px;
+      font-weight: 900;
       margin-bottom: 4px;
     }
 
@@ -826,7 +862,7 @@
     }
 
     .modal-body {
-      padding: 20px;
+      padding: 22px;
     }
 
     .modal-grid {
@@ -841,16 +877,16 @@
 
     .modal-label {
       display: block;
-      margin-bottom: 6px;
-      font-size: 12px;
-      font-weight: 700;
+      margin-bottom: 7px;
+      font-size: 11px;
+      font-weight: 800;
       color: #64748b;
       text-transform: uppercase;
-      letter-spacing: 0.3px;
+      letter-spacing: 0.5px;
     }
 
     .modal-grid textarea {
-      min-height: 110px;
+      min-height: 120px;
       resize: vertical;
     }
 
@@ -858,7 +894,7 @@
       min-height: 20px;
       margin-top: 14px;
       font-size: 13px;
-      font-weight: bold;
+      font-weight: 700;
     }
 
     .modal-actions {
@@ -873,13 +909,15 @@
       border: 1px solid #cbd5e1;
       background: white;
       color: #172033;
-      min-width: 110px;
+      min-width: 116px;
+      padding: 11px 14px;
     }
 
     .modal-btn.primary {
-      background: var(--navy);
+      background: linear-gradient(135deg, var(--navy), var(--navy-2));
       color: white;
       border-color: var(--navy);
+      box-shadow: 0 12px 24px rgba(7,21,45,0.16);
     }
 
     .modal-btn:disabled {
@@ -925,6 +963,14 @@
       .modal-field-full {
         grid-column: auto;
       }
+
+      .page {
+        padding: 16px;
+      }
+
+      .topbar-inner {
+        padding: 18px 16px;
+      }
     }
   </style>
 </head>
@@ -969,7 +1015,7 @@
               <div class="stat-note">Leads requiring fast attention or follow-up.</div>
             </div>
 
-            <div class="stat-card.closed">
+            <div class="stat-card closed">
               <div class="stat-label">Closed</div>
               <div id="statClosed" class="stat-value">0</div>
               <div class="stat-note">Leads already completed or closed out.</div>
@@ -983,11 +1029,8 @@
           </div>
         </div>
 
-        <!-- =========================
-             Kanban View Phase 1
-             ========================= -->
         <div class="card">
-          <div class="section-title">🧩 Pipeline</div>
+          <div class="section-title small">🧩 Pipeline</div>
 
           <div id="kanbanBoard" class="kanban-board">
             <div class="kanban-column">
@@ -1033,7 +1076,7 @@
         </div>
 
         <div class="card">
-          <div class="section-title">🔥 Follow-ups due</div>
+          <div class="section-title small">🔥 Follow-ups due</div>
           <div id="urgentSummary" class="urgent-summary"></div>
           <div id="urgentLeadsContainer">Loading urgent leads...</div>
         </div>
@@ -1106,7 +1149,7 @@
         </div>
 
         <div class="card" id="leadDetail" style="display:none;">
-          <h3>Lead Activity</h3>
+          <div class="section-title small">Lead Activity</div>
           <div id="leadDetailHeader" class="muted"></div>
 
           <table>
@@ -1123,7 +1166,7 @@
       </div>
 
       <div class="card side-panel">
-        <h3>Lead Detail</h3>
+        <div class="section-title small">Lead Detail</div>
         <div id="sidePanelContent" class="detail-empty">
           Click a lead to view its detail panel.
         </div>
@@ -1770,11 +1813,6 @@
       return true;
     }
 
-    /* =========================
-       Kanban phase 1 render
-       Cards grouped by stage
-       Button advances one stage
-       ========================= */
     function renderKanban(leads) {
       const stages = ["new", "contacted", "meeting", "proposal", "closed"];
       const nextStageMap = {
