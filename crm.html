@@ -6,7 +6,8 @@
        Protected internal page
        with role-based access,
        audit trail, admin user
-       management, and lead creation
+       management, lead creation,
+       and dashboard metrics
        ========================= -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -189,6 +190,67 @@
       color: #92400e;
       font-weight: bold;
       margin-bottom: 10px;
+    }
+
+    /* =========================
+       Dashboard cards
+       ========================= */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .stat-card {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px;
+      background: white;
+      box-shadow: var(--shadow);
+    }
+
+    .stat-card.total {
+      background: linear-gradient(180deg, #f8fbff, #eef5ff);
+    }
+
+    .stat-card.open {
+      background: linear-gradient(180deg, #fffdf6, #fff7e0);
+    }
+
+    .stat-card.high {
+      background: linear-gradient(180deg, #fff8f8, #ffefef);
+    }
+
+    .stat-card.closed {
+      background: linear-gradient(180deg, #f7fff9, #ecfbf0);
+    }
+
+    .stat-card.today {
+      background: linear-gradient(180deg, #faf8ff, #f1edff);
+    }
+
+    .stat-label {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: #64748b;
+      letter-spacing: 0.3px;
+      margin-bottom: 8px;
+    }
+
+    .stat-value {
+      font-size: 30px;
+      font-weight: 800;
+      line-height: 1;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+
+    .stat-note {
+      font-size: 13px;
+      color: #475569;
+      line-height: 1.35;
+      min-height: 34px;
     }
 
     .urgent-summary {
@@ -556,8 +618,7 @@
       font-size: 12px;
     }
 
-    .admin-panel-header,
-    .lead-panel-header {
+    .admin-panel-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -595,9 +656,6 @@
       font-weight: bold;
     }
 
-    /* =========================
-       Lead creation modal
-       ========================= */
     .modal-overlay {
       position: fixed;
       inset: 0;
@@ -703,6 +761,12 @@
       transform: none;
     }
 
+    @media (max-width: 1200px) {
+      .stats-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
     @media (max-width: 1100px) {
       .layout-grid {
         grid-template-columns: 1fr;
@@ -719,7 +783,8 @@
     }
 
     @media (max-width: 720px) {
-      .modal-grid {
+      .modal-grid,
+      .stats-grid {
         grid-template-columns: 1fr;
       }
 
@@ -749,6 +814,45 @@
   <div class="page">
     <div class="layout-grid">
       <div>
+        <!-- =========================
+             Dashboard metrics
+             High-value business view
+             ========================= -->
+        <div class="card">
+          <div class="section-title">📊 Dashboard</div>
+          <div class="stats-grid">
+            <div class="stat-card total">
+              <div class="stat-label">Total Leads</div>
+              <div id="statTotal" class="stat-value">0</div>
+              <div class="stat-note">All leads currently tracked in Romanoti CRM.</div>
+            </div>
+
+            <div class="stat-card open">
+              <div class="stat-label">Open</div>
+              <div id="statOpen" class="stat-value">0</div>
+              <div class="stat-note">Leads still active in the pipeline.</div>
+            </div>
+
+            <div class="stat-card high">
+              <div class="stat-label">High Priority</div>
+              <div id="statHigh" class="stat-value">0</div>
+              <div class="stat-note">Leads requiring fast attention or follow-up.</div>
+            </div>
+
+            <div class="stat-card closed">
+              <div class="stat-label">Closed</div>
+              <div id="statClosed" class="stat-value">0</div>
+              <div class="stat-note">Leads already completed or closed out.</div>
+            </div>
+
+            <div class="stat-card today">
+              <div class="stat-label">Created Today</div>
+              <div id="statToday" class="stat-value">0</div>
+              <div class="stat-note">New leads added during the current day.</div>
+            </div>
+          </div>
+        </div>
+
         <div class="card">
           <div class="section-title">🔥 Follow-ups due</div>
           <div id="urgentSummary" class="urgent-summary"></div>
@@ -848,10 +952,6 @@
     </div>
   </div>
 
-  <!-- =========================
-       Create Lead modal
-       Only for editable roles
-       ========================= -->
   <div id="leadModal" class="modal-overlay">
     <div class="modal-card">
       <div class="modal-header">
@@ -972,6 +1072,12 @@
     const leadPriority = document.getElementById("leadPriority");
     const leadNotes = document.getElementById("leadNotes");
 
+    const statTotal = document.getElementById("statTotal");
+    const statOpen = document.getElementById("statOpen");
+    const statHigh = document.getElementById("statHigh");
+    const statClosed = document.getElementById("statClosed");
+    const statToday = document.getElementById("statToday");
+
     let allLeads = [];
     let activeFilter = "all";
     let selectedLeadId = null;
@@ -1024,6 +1130,35 @@
     function formatDateTime(value) {
       if (!value) return "Not set";
       return new Date(value).toLocaleString();
+    }
+
+    function isCreatedToday(dateValue) {
+      if (!dateValue) return false;
+      const created = new Date(dateValue);
+      const now = new Date();
+      return (
+        created.getFullYear() === now.getFullYear() &&
+        created.getMonth() === now.getMonth() &&
+        created.getDate() === now.getDate()
+      );
+    }
+
+    /* =========================
+       Dashboard metrics update
+       Uses current lead dataset
+       ========================= */
+    function renderDashboardStats(leads) {
+      const total = leads.length;
+      const open = leads.filter((lead) => (lead.pipeline_stage ?? "new") !== "closed").length;
+      const high = leads.filter((lead) => (lead.priority ?? "medium") === "high").length;
+      const closed = leads.filter((lead) => (lead.pipeline_stage ?? "new") === "closed").length;
+      const today = leads.filter((lead) => isCreatedToday(lead.created_at)).length;
+
+      statTotal.textContent = total;
+      statOpen.textContent = open;
+      statHigh.textContent = high;
+      statClosed.textContent = closed;
+      statToday.textContent = today;
     }
 
     function applyRoleUi() {
@@ -1671,9 +1806,6 @@
       }
     }
 
-    /* =========================
-       Create lead modal helpers
-       ========================= */
     function openLeadModal() {
       if (!canEdit()) {
         alert("You do not have permission to create leads.");
@@ -1701,10 +1833,6 @@
       leadNotes.value = "";
     }
 
-    /* =========================
-       Create lead directly
-       from CRM
-       ========================= */
     async function createLead() {
       if (!canEdit()) {
         alert("You do not have permission to create leads.");
@@ -1804,6 +1932,8 @@
         }
 
         allLeads = data || [];
+
+        renderDashboardStats(allLeads);
 
         if (!allLeads.length) {
           setStatusMessage("No leads found.");
