@@ -50,6 +50,16 @@
   //   /solutions/how-we-work.html
   // - nuevo enlace visible en navegación desktop
   //
+  // CHANGE #87
+  // ------------------------------------------------------------
+  // Se agrega acceso interno para empleados de Romanoti:
+  // - nuevo label i18n en EN / FR / ES
+  // - nueva ruta confirmada:
+  //   /crm-login.html
+  // - visible en navegación desktop
+  // - visible también en mobile
+  // - estilo discreto para no competir con CTA comercial
+  //
   // NOTA
   // ------------------------------------------------------------
   // Este cambio mantiene intacta la lógica actual del nav:
@@ -97,6 +107,7 @@
       howWeWork: 'Cómo trabajamos',
       contact: 'Contacto',
       book: 'Agendar',
+      staffLogin: 'Acceso Personal',
       lang: '',
 
       helpDesk: 'Help Desk / ITSM',
@@ -112,7 +123,8 @@
       fr: 'FR',
       es: 'ES',
 
-      mobileCta: 'Soluciones'
+      mobileCta: 'Soluciones',
+      mobileStaffLogin: 'Acceso CRM'
     },
     en: {
       brand: 'Romanoti Solutions',
@@ -125,6 +137,7 @@
       howWeWork: 'How We Work',
       contact: 'Contact',
       book: 'Book Now',
+      staffLogin: 'Staff Login',
       lang: '',
 
       helpDesk: 'Help Desk / ITSM',
@@ -140,7 +153,8 @@
       fr: 'FR',
       es: 'ES',
 
-      mobileCta: 'Solutions'
+      mobileCta: 'Solutions',
+      mobileStaffLogin: 'CRM Login'
     },
     fr: {
       brand: 'Romanoti Solutions',
@@ -153,6 +167,7 @@
       howWeWork: 'Notre méthode',
       contact: 'Contact',
       book: 'Prendre RDV',
+      staffLogin: 'Accès Équipe',
       lang: '',
 
       helpDesk: 'Help Desk / ITSM',
@@ -168,7 +183,8 @@
       fr: 'FR',
       es: 'ES',
 
-      mobileCta: 'Solutions'
+      mobileCta: 'Solutions',
+      mobileStaffLogin: 'Accès CRM'
     }
   };
 
@@ -186,6 +202,7 @@
       howWeWork: '/how-we-work.html',
       contact: '/contact.html',
       booking: '/booking.html',
+      crmLogin: '/crm-login.html',
 
       services: [
         { key: 'helpDesk', href: '/services/helpdesk.html' },
@@ -209,6 +226,7 @@
       howWeWork: '/solutions/how-we-work.html',
       contact: '/contact.html',
       booking: '/booking.html',
+      crmLogin: '/crm-login.html',
 
       services: [
         { key: 'helpDesk', href: '/services/helpdesk.html' },
@@ -232,6 +250,7 @@
       howWeWork: '/solutions/how-we-work.html',
       contact: '/contact.html',
       booking: '/booking.html',
+      crmLogin: '/crm-login.html',
 
       services: [
         { key: 'helpDesk', href: '/services/helpdesk.html' },
@@ -359,6 +378,13 @@
             ${I18N.book}
           </a>
 
+          <!-- STAFF LOGIN -->
+          <a href="${CURRENT.crmLogin}"
+             class="text-gray-400 hover:text-blue-600 text-sm font-medium transition"
+             title="Romanoti Internal Access">
+            ${I18N.staffLogin}
+          </a>
+
           <!-- LANGUAGE -->
           <div class="relative" id="langRoot">
             <button id="langBtn"
@@ -381,9 +407,15 @@
           </div>
         </nav>
 
-        <!-- MOBILE CTA -->
-        <div class="md:hidden">
-          <a href="${CURRENT.home}" class="bg-blue-600 text-white px-4 py-2 rounded-lg">${I18N.mobileCta}</a>
+        <!-- MOBILE ACTIONS -->
+        <div class="md:hidden flex items-center gap-3">
+          <a href="${CURRENT.crmLogin}"
+             class="text-sm text-gray-600 hover:text-blue-600 font-medium">
+            ${I18N.mobileStaffLogin}
+          </a>
+          <a href="${CURRENT.home}" class="bg-blue-600 text-white px-4 py-2 rounded-lg">
+            ${I18N.mobileCta}
+          </a>
         </div>
       </div>
     </div>
