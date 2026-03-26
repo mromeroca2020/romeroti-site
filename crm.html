@@ -5,8 +5,8 @@
        Romanoti CRM
        Protected internal page
        with role-based access,
-       audit trail, and
-       admin user management
+       audit trail, admin user
+       management, and lead creation
        ========================= -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -97,21 +97,40 @@
       text-transform: uppercase;
     }
 
-    .logout-btn {
+    .logout-btn,
+    .new-lead-btn,
+    .modal-btn {
       padding: 8px 12px;
-      border: 1px solid rgba(255,255,255,0.22);
       border-radius: 999px;
-      background: rgba(255,255,255,0.10);
-      color: white;
       font-size: 12px;
       font-weight: 700;
       cursor: pointer;
       transition: opacity 0.12s ease, transform 0.12s ease;
     }
 
-    .logout-btn:hover {
+    .logout-btn {
+      border: 1px solid rgba(255,255,255,0.22);
+      background: rgba(255,255,255,0.10);
+      color: white;
+    }
+
+    .new-lead-btn {
+      border: 1px solid rgba(255,255,255,0.22);
+      background: white;
+      color: var(--navy);
+    }
+
+    .logout-btn:hover,
+    .new-lead-btn:hover,
+    .modal-btn:hover {
       opacity: 0.92;
       transform: translateY(-1px);
+    }
+
+    .new-lead-btn:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+      transform: none;
     }
 
     h3 {
@@ -250,7 +269,9 @@
       margin-bottom: 16px;
     }
 
-    .search-box input {
+    .search-box input,
+    .modal-grid input,
+    .modal-grid textarea {
       width: 100%;
       padding: 12px 14px;
       border: 1px solid #cbd5e1;
@@ -259,9 +280,15 @@
       box-sizing: border-box;
       outline: none;
       background: white;
+      font-family: Arial, sans-serif;
     }
 
-    .search-box input:focus {
+    .search-box input:focus,
+    .modal-grid input:focus,
+    .modal-grid textarea:focus,
+    select:focus,
+    input[type="datetime-local"]:focus,
+    textarea:focus {
       border-color: #93c5fd;
       box-shadow: 0 0 0 4px rgba(59,130,246,0.08);
     }
@@ -345,13 +372,6 @@
       width: 100%;
       box-sizing: border-box;
       outline: none;
-    }
-
-    select:focus,
-    input[type="datetime-local"]:focus,
-    textarea:focus {
-      border-color: #93c5fd;
-      box-shadow: 0 0 0 4px rgba(59,130,246,0.08);
     }
 
     textarea {
@@ -536,7 +556,8 @@
       font-size: 12px;
     }
 
-    .admin-panel-header {
+    .admin-panel-header,
+    .lead-panel-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -574,6 +595,114 @@
       font-weight: bold;
     }
 
+    /* =========================
+       Lead creation modal
+       ========================= */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(11, 23, 48, 0.55);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 9999;
+    }
+
+    .modal-overlay.show {
+      display: flex;
+    }
+
+    .modal-card {
+      width: 100%;
+      max-width: 720px;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      box-shadow: 0 20px 50px rgba(15, 23, 42, 0.24);
+      overflow: hidden;
+    }
+
+    .modal-header {
+      padding: 18px 20px;
+      background: linear-gradient(135deg, var(--navy), var(--navy-2));
+      color: white;
+    }
+
+    .modal-title {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .modal-subtitle {
+      font-size: 13px;
+      color: rgba(255,255,255,0.78);
+    }
+
+    .modal-body {
+      padding: 20px;
+    }
+
+    .modal-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .modal-field-full {
+      grid-column: 1 / -1;
+    }
+
+    .modal-label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    .modal-grid textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
+
+    .modal-status {
+      min-height: 20px;
+      margin-top: 14px;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 18px;
+      flex-wrap: wrap;
+    }
+
+    .modal-btn {
+      border: 1px solid #cbd5e1;
+      background: white;
+      color: #172033;
+      min-width: 110px;
+    }
+
+    .modal-btn.primary {
+      background: var(--navy);
+      color: white;
+      border-color: var(--navy);
+    }
+
+    .modal-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
     @media (max-width: 1100px) {
       .layout-grid {
         grid-template-columns: 1fr;
@@ -588,6 +717,16 @@
         align-items: flex-start;
       }
     }
+
+    @media (max-width: 720px) {
+      .modal-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .modal-field-full {
+        grid-column: auto;
+      }
+    }
   </style>
 </head>
 <body>
@@ -599,6 +738,7 @@
       </div>
 
       <div class="topbar-actions">
+        <button id="newLeadBtn" class="new-lead-btn">+ New Lead</button>
         <div class="brand-badge">Romanoti internal workspace</div>
         <div id="roleBadge" class="role-badge">ROLE</div>
         <button id="logoutBtn" class="logout-btn">Logout</button>
@@ -659,11 +799,6 @@
           </p>
         </div>
 
-        <!-- =========================
-             Admin-only panel
-             Manage roles directly
-             from the CRM UI
-             ========================= -->
         <div id="adminPanel" class="card" style="display:none;">
           <div class="admin-panel-header">
             <h3>User Management</h3>
@@ -713,22 +848,77 @@
     </div>
   </div>
 
+  <!-- =========================
+       Create Lead modal
+       Only for editable roles
+       ========================= -->
+  <div id="leadModal" class="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-title">Create New Lead</div>
+        <div class="modal-subtitle">Add a lead directly into Romanoti CRM.</div>
+      </div>
+
+      <div class="modal-body">
+        <div class="modal-grid">
+          <div>
+            <label class="modal-label" for="leadName">Name</label>
+            <input id="leadName" type="text" placeholder="Lead full name" />
+          </div>
+
+          <div>
+            <label class="modal-label" for="leadEmail">Email</label>
+            <input id="leadEmail" type="email" placeholder="lead@email.com" />
+          </div>
+
+          <div>
+            <label class="modal-label" for="leadCompany">Company</label>
+            <input id="leadCompany" type="text" placeholder="Company name" />
+          </div>
+
+          <div>
+            <label class="modal-label" for="leadPhone">Phone</label>
+            <input id="leadPhone" type="text" placeholder="Phone number" />
+          </div>
+
+          <div>
+            <label class="modal-label" for="leadSource">Source</label>
+            <input id="leadSource" type="text" placeholder="booking_form, referral, call, etc." />
+          </div>
+
+          <div>
+            <label class="modal-label" for="leadPriority">Priority</label>
+            <select id="leadPriority">
+              <option value="medium" selected>medium</option>
+              <option value="low">low</option>
+              <option value="high">high</option>
+            </select>
+          </div>
+
+          <div class="modal-field-full">
+            <label class="modal-label" for="leadNotes">Notes</label>
+            <textarea id="leadNotes" placeholder="Initial notes about this lead..."></textarea>
+          </div>
+        </div>
+
+        <div id="leadModalStatus" class="modal-status"></div>
+
+        <div class="modal-actions">
+          <button id="cancelLeadBtn" class="modal-btn" type="button">Cancel</button>
+          <button id="saveLeadBtn" class="modal-btn primary" type="button">Save Lead</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script type="module">
     import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
-    /* =========================
-       Supabase client
-       ========================= */
     const sb = createClient(
       "https://rukftaohssovjaatzvkj.supabase.co",
       "sb_publishable_UfLkSw2wUcjkH2sYAmCXBg_-Mqd65z-"
     );
 
-    /* =========================
-       Protect CRM page
-       Redirect anonymous users
-       to login page
-       ========================= */
     const {
       data: { session }
     } = await sb.auth.getSession();
@@ -738,19 +928,12 @@
       throw new Error("No active session");
     }
 
-    /* =========================
-       Current authenticated user
-       ========================= */
     const {
       data: { user }
     } = await sb.auth.getUser();
 
     const currentUserEmail = user?.email || "unknown";
 
-    /* =========================
-       Role resolution
-       Default role = viewer
-       ========================= */
     const { data: roleData, error: roleError } = await sb
       .from("user_roles")
       .select("role")
@@ -776,6 +959,19 @@
     const adminStatus = document.getElementById("adminStatus");
     const usersTableBody = document.getElementById("usersTableBody");
 
+    const newLeadBtn = document.getElementById("newLeadBtn");
+    const leadModal = document.getElementById("leadModal");
+    const cancelLeadBtn = document.getElementById("cancelLeadBtn");
+    const saveLeadBtn = document.getElementById("saveLeadBtn");
+    const leadModalStatus = document.getElementById("leadModalStatus");
+    const leadName = document.getElementById("leadName");
+    const leadEmail = document.getElementById("leadEmail");
+    const leadCompany = document.getElementById("leadCompany");
+    const leadPhone = document.getElementById("leadPhone");
+    const leadSource = document.getElementById("leadSource");
+    const leadPriority = document.getElementById("leadPriority");
+    const leadNotes = document.getElementById("leadNotes");
+
     let allLeads = [];
     let activeFilter = "all";
     let selectedLeadId = null;
@@ -796,6 +992,11 @@
     function setAdminStatus(message, cssClass = "") {
       adminStatus.textContent = message;
       adminStatus.className = `admin-status ${cssClass}`.trim();
+    }
+
+    function setModalStatus(message, cssClass = "") {
+      leadModalStatus.textContent = message;
+      leadModalStatus.className = `modal-status ${cssClass}`.trim();
     }
 
     function setFieldIndicator(id, field, message, cssClass) {
@@ -831,12 +1032,14 @@
       if (userRole === "viewer") {
         permissionsNote.textContent =
           "Viewer mode: you can review leads and activity history, but you cannot edit records.";
+        newLeadBtn.disabled = true;
+        newLeadBtn.title = "Viewer users cannot create leads.";
       } else if (userRole === "sales") {
         permissionsNote.textContent =
-          "Sales mode: you can update leads, follow-ups, priorities, and notes.";
+          "Sales mode: you can update leads, follow-ups, priorities, notes, and create leads.";
       } else if (userRole === "support") {
         permissionsNote.textContent =
-          "Support mode: you can update operational lead fields and follow-ups.";
+          "Support mode: you can update operational lead fields, follow-ups, and create leads.";
       } else if (userRole === "admin") {
         permissionsNote.textContent =
           "Admin mode: full CRM access enabled.";
@@ -937,9 +1140,6 @@
       `;
     }
 
-    /* =========================
-       Save event with user trace
-       ========================= */
     async function saveLeadEvent(leadId, eventType, description) {
       try {
         const { error } = await sb.from("lead_events").insert([
@@ -1372,13 +1572,6 @@
       });
     }
 
-    /* =========================
-       Admin-only user loading
-       Requires auth_users_public
-       view/table with:
-       - id
-       - email
-       ========================= */
     async function loadUsers() {
       if (!isAdmin()) return;
 
@@ -1433,15 +1626,6 @@
       }
     }
 
-    /* =========================
-       Admin-only role update
-       FIXED VERSION:
-       1. checks if role row exists
-       2. updates if present
-       3. inserts if missing
-       This avoids RLS friction
-       caused by upsert
-       ========================= */
     async function updateUserRole(targetUserId, newRole) {
       if (!isAdmin()) {
         alert("Only admins can update roles.");
@@ -1484,6 +1668,106 @@
         console.error("updateUserRole error:", err);
         setAdminStatus("Error updating role: " + err.message, "error");
         alert("Error updating role: " + err.message);
+      }
+    }
+
+    /* =========================
+       Create lead modal helpers
+       ========================= */
+    function openLeadModal() {
+      if (!canEdit()) {
+        alert("You do not have permission to create leads.");
+        return;
+      }
+
+      leadModal.classList.add("show");
+      setModalStatus("");
+      leadName.focus();
+    }
+
+    function closeLeadModal() {
+      leadModal.classList.remove("show");
+      setModalStatus("");
+      resetLeadForm();
+    }
+
+    function resetLeadForm() {
+      leadName.value = "";
+      leadEmail.value = "";
+      leadCompany.value = "";
+      leadPhone.value = "";
+      leadSource.value = "";
+      leadPriority.value = "medium";
+      leadNotes.value = "";
+    }
+
+    /* =========================
+       Create lead directly
+       from CRM
+       ========================= */
+    async function createLead() {
+      if (!canEdit()) {
+        alert("You do not have permission to create leads.");
+        return;
+      }
+
+      const payload = {
+        name: leadName.value.trim(),
+        email: leadEmail.value.trim(),
+        company: leadCompany.value.trim(),
+        phone: leadPhone.value.trim(),
+        source: leadSource.value.trim(),
+        notes: leadNotes.value.trim(),
+        pipeline_stage: "new",
+        priority: leadPriority.value,
+        next_followup: null
+      };
+
+      if (!payload.name) {
+        setModalStatus("Name is required.", "error");
+        return;
+      }
+
+      if (!payload.email) {
+        setModalStatus("Email is required.", "error");
+        return;
+      }
+
+      try {
+        setModalStatus("Saving new lead...", "saving");
+        saveLeadBtn.disabled = true;
+        cancelLeadBtn.disabled = true;
+
+        const { data, error } = await sb
+          .from("leads")
+          .insert([payload])
+          .select()
+          .single();
+
+        if (error) throw error;
+
+        await saveLeadEvent(
+          data.id,
+          "lead_created",
+          `Lead created by ${currentUserEmail}`
+        );
+
+        selectedLeadId = data.id;
+
+        setModalStatus("Lead created successfully.", "ok");
+        await loadLeads();
+        renderSidePanel(data);
+        await loadLeadEvents(data);
+
+        setTimeout(() => {
+          closeLeadModal();
+        }, 500);
+      } catch (err) {
+        console.error("createLead error:", err);
+        setModalStatus("Error creating lead: " + err.message, "error");
+      } finally {
+        saveLeadBtn.disabled = false;
+        cancelLeadBtn.disabled = false;
       }
     }
 
@@ -1550,6 +1834,16 @@
         urgentLeadsContainer.innerHTML = `<div class="error">Unexpected error loading urgent leads.</div>`;
       }
     }
+
+    newLeadBtn.addEventListener("click", openLeadModal);
+    cancelLeadBtn.addEventListener("click", closeLeadModal);
+    saveLeadBtn.addEventListener("click", createLead);
+
+    leadModal.addEventListener("click", (event) => {
+      if (event.target === leadModal) {
+        closeLeadModal();
+      }
+    });
 
     logoutBtn.addEventListener("click", async () => {
       await sb.auth.signOut();
