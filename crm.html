@@ -5,6 +5,7 @@
        Romanoti CRM
        Protected internal page
        with role-based access
+       and admin user management
        ========================= -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -21,6 +22,9 @@
       --navy-2: #132347;
       --yellow-soft: #fff6db;
       --red-soft: #feeeee;
+      --green-soft: #eaf8ef;
+      --blue-soft: #e8f0ff;
+      --purple-soft: #ede9fe;
       --shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
     }
 
@@ -80,16 +84,7 @@
       flex-wrap: wrap;
     }
 
-    .brand-badge {
-      padding: 8px 12px;
-      border: 1px solid rgba(255,255,255,0.2);
-      border-radius: 999px;
-      font-size: 12px;
-      font-weight: 700;
-      background: rgba(255,255,255,0.08);
-      white-space: nowrap;
-    }
-
+    .brand-badge,
     .role-badge {
       padding: 8px 12px;
       border: 1px solid rgba(255,255,255,0.2);
@@ -503,19 +498,19 @@
     }
 
     .action-email {
-      background: #dbeafe;
+      background: var(--blue-soft);
       color: #1d4ed8;
       border-color: #bfdbfe;
     }
 
     .action-call {
-      background: #eaf8ef;
+      background: var(--green-soft);
       color: #166534;
       border-color: #bbf7d0;
     }
 
     .action-schedule {
-      background: #ede9fe;
+      background: var(--purple-soft);
       color: #6d28d9;
       border-color: #ddd6fe;
     }
@@ -538,6 +533,44 @@
       margin-top: 4px;
       color: #64748b;
       font-size: 12px;
+    }
+
+    .admin-panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 8px;
+    }
+
+    .admin-note {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 8px;
+    }
+
+    .role-select {
+      min-width: 130px;
+    }
+
+    .user-id-cell {
+      font-size: 12px;
+      color: #64748b;
+      line-height: 1.4;
+      word-break: break-all;
+    }
+
+    .user-email-cell {
+      font-weight: 600;
+      color: #172033;
+    }
+
+    .admin-status {
+      min-height: 20px;
+      margin-top: 8px;
+      font-size: 13px;
+      font-weight: bold;
     }
 
     @media (max-width: 1100px) {
@@ -625,6 +658,34 @@
           </p>
         </div>
 
+        <!-- =========================
+             Admin-only panel
+             Manage roles directly
+             from the CRM UI
+             ========================= -->
+        <div id="adminPanel" class="card" style="display:none;">
+          <div class="admin-panel-header">
+            <h3>User Management</h3>
+          </div>
+
+          <div class="admin-note">
+            Admin only. Update user roles directly from the CRM without entering Supabase manually.
+          </div>
+
+          <div id="adminStatus" class="admin-status"></div>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Email</th>
+                <th>User ID</th>
+                <th>Role</th>
+              </tr>
+            </thead>
+            <tbody id="usersTableBody"></tbody>
+          </table>
+        </div>
+
         <div class="card" id="leadDetail" style="display:none;">
           <h3>Lead Activity</h3>
           <div id="leadDetailHeader" class="muted"></div>
@@ -710,13 +771,16 @@
     const logoutBtn = document.getElementById("logoutBtn");
     const roleBadge = document.getElementById("roleBadge");
     const permissionsNote = document.getElementById("permissionsNote");
+    const adminPanel = document.getElementById("adminPanel");
+    const adminStatus = document.getElementById("adminStatus");
+    const usersTableBody = document.getElementById("usersTableBody");
 
     let allLeads = [];
     let activeFilter = "all";
     let selectedLeadId = null;
 
     function canEdit() {
-      return userRole === "admin" || userRole === "sales";
+      return userRole === "admin" || userRole === "sales" || userRole === "support";
     }
 
     function isAdmin() {
@@ -726,6 +790,11 @@
     function setStatusMessage(message, cssClass = "") {
       statusMessage.textContent = message;
       statusMessage.className = cssClass;
+    }
+
+    function setAdminStatus(message, cssClass = "") {
+      adminStatus.textContent = message;
+      adminStatus.className = `admin-status ${cssClass}`.trim();
     }
 
     function setFieldIndicator(id, field, message, cssClass) {
@@ -764,6 +833,9 @@
       } else if (userRole === "sales") {
         permissionsNote.textContent =
           "Sales mode: you can update leads, follow-ups, priorities, and notes.";
+      } else if (userRole === "support") {
+        permissionsNote.textContent =
+          "Support mode: you can update operational lead fields and follow-ups.";
       } else if (userRole === "admin") {
         permissionsNote.textContent =
           "Admin mode: full CRM access enabled.";
@@ -771,6 +843,10 @@
 
       if (roleError) {
         setStatusMessage("Role not found. Viewer mode applied.", "warning");
+      }
+
+      if (isAdmin()) {
+        adminPanel.style.display = "block";
       }
     }
 
@@ -860,6 +936,9 @@
       `;
     }
 
+    /* =========================
+       Save event with user trace
+       ========================= */
     async function saveLeadEvent(leadId, eventType, description) {
       try {
         const { error } = await sb.from("lead_events").insert([
@@ -1292,6 +1371,110 @@
       });
     }
 
+    /* =========================
+       Admin-only user loading
+       Reads auth users through
+       public projection table
+       and combines with roles
+       ========================= */
+    async function loadUsers() {
+      if (!isAdmin()) return;
+
+      try {
+        setAdminStatus("Loading users...", "saving");
+
+        const { data: rolesData, error: rolesError } = await sb
+          .from("user_roles")
+          .select("id, role")
+          .order("role", { ascending: true });
+
+        if (rolesError) throw rolesError;
+
+        /* 
+           NOTE:
+           This assumes you have a readable table or view called auth_users_public
+           with at least:
+           - id
+           - email
+
+           If you do not have it yet, create it in Supabase before using this panel.
+        */
+        const { data: authUsers, error: authError } = await sb
+          .from("auth_users_public")
+          .select("id, email")
+          .order("email", { ascending: true });
+
+        if (authError) throw authError;
+
+        const roleMap = new Map((rolesData || []).map(item => [item.id, item.role]));
+        usersTableBody.innerHTML = "";
+
+        (authUsers || []).forEach((authUser) => {
+          const currentRole = roleMap.get(authUser.id) || "viewer";
+
+          const row = document.createElement("tr");
+          row.innerHTML = `
+            <td class="user-email-cell">${authUser.email ?? ""}</td>
+            <td class="user-id-cell">${authUser.id}</td>
+            <td>
+              <select class="role-select" data-user-id="${authUser.id}">
+                <option value="admin" ${currentRole === "admin" ? "selected" : ""}>admin</option>
+                <option value="sales" ${currentRole === "sales" ? "selected" : ""}>sales</option>
+                <option value="support" ${currentRole === "support" ? "selected" : ""}>support</option>
+                <option value="viewer" ${currentRole === "viewer" ? "selected" : ""}>viewer</option>
+              </select>
+            </td>
+          `;
+
+          const roleSelect = row.querySelector(".role-select");
+          roleSelect.addEventListener("change", async (event) => {
+            await updateUserRole(authUser.id, event.target.value);
+          });
+
+          usersTableBody.appendChild(row);
+        });
+
+        setAdminStatus("User roles loaded successfully.", "ok");
+      } catch (err) {
+        console.error("loadUsers error:", err);
+        setAdminStatus("Error loading users: " + err.message, "error");
+      }
+    }
+
+    /* =========================
+       Admin-only role update
+       Uses upsert so a user
+       can be assigned a role
+       even if not yet present
+       in user_roles
+       ========================= */
+    async function updateUserRole(targetUserId, newRole) {
+      if (!isAdmin()) {
+        alert("Only admins can update roles.");
+        return;
+      }
+
+      try {
+        setAdminStatus("Saving role update...", "saving");
+
+        const { error } = await sb
+          .from("user_roles")
+          .upsert(
+            [{ id: targetUserId, role: newRole }],
+            { onConflict: "id" }
+          );
+
+        if (error) throw error;
+
+        setAdminStatus("Role updated successfully.", "ok");
+        await loadUsers();
+      } catch (err) {
+        console.error("updateUserRole error:", err);
+        setAdminStatus("Error updating role: " + err.message, "error");
+        alert("Error updating role: " + err.message);
+      }
+    }
+
     function bindFilters() {
       filterButtons.forEach((button) => {
         button.addEventListener("click", () => {
@@ -1364,6 +1547,7 @@
     applyRoleUi();
     bindFilters();
     loadLeads();
+    loadUsers();
   </script>
 </body>
 </html>
