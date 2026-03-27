@@ -981,10 +981,29 @@
 <body>
   <div class="topbar">
     <div class="topbar-inner">
-      <div class="brand">
-        <div class="brand-title">Romanoti CRM</div>
-        <div class="brand-subtitle">Lead operations, follow-ups, and activity tracking</div>
-      </div>
+      <div class="brand" style="display:flex; align-items:center; gap:12px;">
+  
+  <!-- ============================================================
+       ROMANOTI LOGO
+       CHANGE #90
+       ------------------------------------------------------------
+       - Inserta logo oficial en CRM
+       - Alineado con branding del sitio web
+       - Usa fallback automático si falla SVG
+       ============================================================ -->
+  <img 
+    src="/images/romanoti-logo-small.svg" 
+    alt="Romanoti"
+    style="height:36px; width:auto; object-fit:contain;"
+    onerror="this.onerror=null;this.src='/images/romanoti-icon.png';"
+  >
+
+  <div>
+    <div class="brand-title">Romanoti CRM</div>
+    <div class="brand-subtitle">Lead operations, follow-ups, and activity tracking</div>
+  </div>
+
+</div>
 
       <div class="topbar-actions">
         <button id="newLeadBtn" class="new-lead-btn">+ New Lead</button>
