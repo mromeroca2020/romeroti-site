@@ -7,7 +7,6 @@
 
   <style>
     :root {
-      --bg: #eef3f9;
       --navy: #07152d;
       --navy-2: #10254d;
       --gold: #d9b56d;
@@ -16,7 +15,6 @@
       --muted: #6b7280;
       --shadow-lg: 0 24px 60px rgba(15, 23, 42, 0.16);
       --shadow-md: 0 16px 34px rgba(15, 23, 42, 0.10);
-      --radius: 22px;
     }
 
     * {
@@ -30,18 +28,18 @@
       background:
         radial-gradient(circle at top left, rgba(217,181,109,0.10), transparent 28%),
         linear-gradient(135deg, #061227 0%, #0d2346 48%, #14305c 100%);
-      color: #fff;
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 28px;
+      color: #fff;
     }
 
     .login-shell {
       width: 100%;
-      max-width: 1120px;
+      max-width: 980px;
       display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
+      grid-template-columns: 0.95fr 1.05fr;
       background: rgba(255,255,255,0.08);
       border: 1px solid rgba(255,255,255,0.10);
       border-radius: 28px;
@@ -51,15 +49,18 @@
     }
 
     .login-left {
-      padding: 56px 50px;
+      padding: 52px 42px;
       background:
-        radial-gradient(circle at top left, rgba(217,181,109,0.14), transparent 24%),
+        radial-gradient(circle at top left, rgba(217,181,109,0.12), transparent 24%),
         linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
-      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
 
     .eyebrow {
       display: inline-block;
+      width: fit-content;
       padding: 8px 12px;
       border-radius: 999px;
       font-size: 11px;
@@ -73,38 +74,18 @@
     }
 
     .hero-title {
-      font-size: 50px;
-      line-height: 0.98;
+      font-size: 42px;
+      line-height: 1.02;
       font-weight: 900;
-      margin: 0 0 18px;
-      letter-spacing: -1px;
+      margin: 0 0 14px;
+      letter-spacing: -0.8px;
     }
 
     .hero-copy {
-      max-width: 520px;
+      max-width: 380px;
       color: rgba(255,255,255,0.78);
-      font-size: 16px;
+      font-size: 15px;
       line-height: 1.6;
-      margin-bottom: 28px;
-    }
-
-    .hero-list {
-      display: grid;
-      gap: 12px;
-      margin: 0;
-      padding: 0;
-      list-style: none;
-      max-width: 480px;
-    }
-
-    .hero-list li {
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 14px;
-      padding: 14px 16px;
-      color: rgba(255,255,255,0.88);
-      font-size: 14px;
-      line-height: 1.45;
     }
 
     .login-right {
@@ -262,11 +243,15 @@
       }
 
       .login-left {
-        padding: 34px 28px 28px;
+        padding: 34px 28px 24px;
       }
 
       .hero-title {
-        font-size: 38px;
+        font-size: 34px;
+      }
+
+      .hero-copy {
+        max-width: none;
       }
 
       .login-right {
@@ -279,17 +264,10 @@
   <div class="login-shell">
     <div class="login-left">
       <div class="eyebrow">Romanoti Internal Access</div>
-      <h1 class="hero-title">Secure access for Romanoti staff.</h1>
+      <h1 class="hero-title">Secure sign-in for authorized personnel.</h1>
       <div class="hero-copy">
-        Sign in with your corporate credentials to access the internal CRM, manage leads,
-        monitor pipeline activity, and coordinate follow-ups securely.
+        Access the Romanoti internal workspace using your corporate credentials.
       </div>
-
-      <ul class="hero-list">
-        <li>Role-based access for admin, sales, support, and viewer profiles.</li>
-        <li>Protected CRM workflow connected to Supabase authentication and data policies.</li>
-        <li>Unified Romanoti experience between website, login, and internal operations.</li>
-      </ul>
     </div>
 
     <div class="login-right">
@@ -326,7 +304,7 @@
         </form>
 
         <div class="footnote">
-          Authorized Romanoti personnel only. Access attempts may be reviewed for security and operational integrity.
+          Authorized Romanoti personnel only.
         </div>
       </div>
     </div>
