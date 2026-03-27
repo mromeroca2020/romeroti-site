@@ -1,25 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- =========================
-       Romanoti CRM Login
-       Private access page for
-       internal Romanoti users
-       ========================= -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Romanoti CRM Login</title>
 
   <style>
     :root {
-      --bg: #f3f6fb;
-      --card: #ffffff;
-      --border: #dbe3ec;
+      --bg: #eef3f9;
+      --navy: #07152d;
+      --navy-2: #10254d;
+      --gold: #d9b56d;
+      --border: #d7e2ee;
       --text: #172033;
       --muted: #6b7280;
-      --navy: #0b1730;
-      --navy-2: #132347;
-      --shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+      --shadow-lg: 0 24px 60px rgba(15, 23, 42, 0.16);
+      --shadow-md: 0 16px 34px rgba(15, 23, 42, 0.10);
+      --radius: 22px;
     }
 
     * {
@@ -28,96 +25,216 @@
 
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, var(--navy), var(--navy-2));
-      color: white;
+      font-family: "Segoe UI", Arial, sans-serif;
       min-height: 100vh;
+      background:
+        radial-gradient(circle at top left, rgba(217,181,109,0.10), transparent 28%),
+        linear-gradient(135deg, #061227 0%, #0d2346 48%, #14305c 100%);
+      color: #fff;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 24px;
+      padding: 28px;
+    }
+
+    .login-shell {
+      width: 100%;
+      max-width: 1120px;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      backdrop-filter: blur(12px);
+    }
+
+    .login-left {
+      padding: 56px 50px;
+      background:
+        radial-gradient(circle at top left, rgba(217,181,109,0.14), transparent 24%),
+        linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+      position: relative;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      background: rgba(217,181,109,0.14);
+      border: 1px solid rgba(217,181,109,0.22);
+      color: #f4deb0;
+      margin-bottom: 18px;
+    }
+
+    .hero-title {
+      font-size: 50px;
+      line-height: 0.98;
+      font-weight: 900;
+      margin: 0 0 18px;
+      letter-spacing: -1px;
+    }
+
+    .hero-copy {
+      max-width: 520px;
+      color: rgba(255,255,255,0.78);
+      font-size: 16px;
+      line-height: 1.6;
+      margin-bottom: 28px;
+    }
+
+    .hero-list {
+      display: grid;
+      gap: 12px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      max-width: 480px;
+    }
+
+    .hero-list li {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      padding: 14px 16px;
+      color: rgba(255,255,255,0.88);
+      font-size: 14px;
+      line-height: 1.45;
+    }
+
+    .login-right {
+      background: #ffffff;
+      color: var(--text);
+      padding: 42px 34px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .login-card {
       width: 100%;
-      max-width: 430px;
-      background: var(--card);
-      color: var(--text);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 18px;
-      padding: 28px;
-      box-shadow: var(--shadow);
+      max-width: 420px;
+    }
+
+    .brand-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .brand-mark {
+      width: 14px;
+      height: 40px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, var(--gold), #f0d390);
+      box-shadow: 0 0 18px rgba(217,181,109,0.35);
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
     }
 
     .brand-title {
       font-size: 30px;
-      font-weight: 700;
-      margin-bottom: 6px;
+      font-weight: 900;
       color: var(--navy);
+      line-height: 1;
     }
 
     .brand-subtitle {
+      font-size: 13px;
       color: var(--muted);
+    }
+
+    .intro {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.6;
       margin-bottom: 22px;
-      line-height: 1.4;
     }
 
     .field {
-      margin-bottom: 14px;
+      margin-bottom: 16px;
     }
 
-    .field label {
+    .label {
       display: block;
-      margin-bottom: 6px;
-      font-size: 13px;
-      font-weight: bold;
-      color: var(--muted);
+      margin-bottom: 7px;
+      font-size: 11px;
+      font-weight: 800;
+      color: #64748b;
       text-transform: uppercase;
-      letter-spacing: 0.3px;
+      letter-spacing: 0.5px;
     }
 
-    .field input {
+    input {
       width: 100%;
-      padding: 12px 14px;
-      border: 1px solid #cbd5e1;
-      border-radius: 10px;
-      font-size: 14px;
+      padding: 14px 15px;
+      border: 1px solid #cfd9e5;
+      border-radius: 14px;
       outline: none;
+      font-size: 14px;
+      font-family: inherit;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+      background: #fbfdff;
     }
 
-    .field input:focus {
-      border-color: #93c5fd;
-      box-shadow: 0 0 0 4px rgba(59,130,246,0.08);
-    }
-
-    .login-btn {
-      width: 100%;
-      padding: 12px 14px;
-      border: none;
-      border-radius: 10px;
-      background: var(--navy);
-      color: white;
-      font-size: 15px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: transform 0.12s ease, opacity 0.12s ease;
-    }
-
-    .login-btn:hover {
+    input:focus {
+      border-color: #9bb9dd;
+      box-shadow: 0 0 0 5px rgba(59,130,246,0.09);
       transform: translateY(-1px);
-      opacity: 0.96;
     }
 
-    .login-btn:disabled {
-      opacity: 0.7;
-      cursor: not-allowed;
+    .actions {
+      display: grid;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .btn {
+      width: 100%;
+      border: none;
+      border-radius: 14px;
+      padding: 14px 16px;
+      font-size: 14px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .btn-primary {
+      color: white;
+      background: linear-gradient(135deg, var(--navy), var(--navy-2));
+    }
+
+    .btn-secondary {
+      color: var(--navy);
+      background: #f8fbff;
+      border: 1px solid var(--border);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .status {
+      min-height: 22px;
       margin-top: 14px;
-      min-height: 20px;
-      font-size: 14px;
-      font-weight: bold;
+      font-size: 13px;
+      font-weight: 700;
     }
 
     .status.ok {
@@ -132,89 +249,128 @@
       color: #92400e;
     }
 
-    .helper {
-      margin-top: 16px;
-      color: var(--muted);
-      font-size: 13px;
+    .footnote {
+      margin-top: 18px;
+      font-size: 12px;
+      color: #64748b;
       line-height: 1.5;
+    }
+
+    @media (max-width: 900px) {
+      .login-shell {
+        grid-template-columns: 1fr;
+      }
+
+      .login-left {
+        padding: 34px 28px 28px;
+      }
+
+      .hero-title {
+        font-size: 38px;
+      }
+
+      .login-right {
+        padding: 28px 22px 30px;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="login-card">
-    <div class="brand-title">Romanoti CRM</div>
-    <div class="brand-subtitle">
-      Internal access for Romanoti staff. Sign in with your corporate email and your CRM password.
+  <div class="login-shell">
+    <div class="login-left">
+      <div class="eyebrow">Romanoti Internal Access</div>
+      <h1 class="hero-title">Secure access for Romanoti staff.</h1>
+      <div class="hero-copy">
+        Sign in with your corporate credentials to access the internal CRM, manage leads,
+        monitor pipeline activity, and coordinate follow-ups securely.
+      </div>
+
+      <ul class="hero-list">
+        <li>Role-based access for admin, sales, support, and viewer profiles.</li>
+        <li>Protected CRM workflow connected to Supabase authentication and data policies.</li>
+        <li>Unified Romanoti experience between website, login, and internal operations.</li>
+      </ul>
     </div>
 
-    <div class="field">
-      <label for="email">Email</label>
-      <input id="email" type="email" placeholder="mauricio.romero@romanoti-solutions.com" />
-    </div>
+    <div class="login-right">
+      <div class="login-card">
+        <div class="brand-row">
+          <div class="brand-mark"></div>
+          <div class="brand-text">
+            <div class="brand-title">Romanoti CRM</div>
+            <div class="brand-subtitle">Internal workspace sign-in</div>
+          </div>
+        </div>
 
-    <div class="field">
-      <label for="password">Password</label>
-      <input id="password" type="password" placeholder="Enter your password" />
-    </div>
+        <div class="intro">
+          Enter your Romanoti email and password to continue.
+        </div>
 
-    <button class="login-btn" id="loginBtn">Sign in</button>
+        <form id="loginForm">
+          <div class="field">
+            <label class="label" for="email">Email</label>
+            <input id="email" type="email" placeholder="name@romanoti-solutions.com" autocomplete="username" />
+          </div>
 
-    <div id="status" class="status"></div>
+          <div class="field">
+            <label class="label" for="password">Password</label>
+            <input id="password" type="password" placeholder="Your password" autocomplete="current-password" />
+          </div>
 
-    <div class="helper">
-      This login is private and intended only for Romanoti internal users.
+          <div id="status" class="status"></div>
+
+          <div class="actions">
+            <button id="loginBtn" type="submit" class="btn btn-primary">Sign in to CRM</button>
+            <a href="/" class="btn btn-secondary">← Back to Romanoti</a>
+          </div>
+        </form>
+
+        <div class="footnote">
+          Authorized Romanoti personnel only. Access attempts may be reviewed for security and operational integrity.
+        </div>
+      </div>
     </div>
   </div>
 
   <script type="module">
     import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
-    /* =========================
-       Supabase client
-       ========================= */
     const sb = createClient(
       "https://rukftaohssovjaatzvkj.supabase.co",
       "sb_publishable_UfLkSw2wUcjkH2sYAmCXBg_-Mqd65z-"
     );
 
-    const emailInput = document.getElementById("email");
-    const passwordInput = document.getElementById("password");
+    const form = document.getElementById("loginForm");
+    const email = document.getElementById("email");
+    const password = document.getElementById("password");
+    const status = document.getElementById("status");
     const loginBtn = document.getElementById("loginBtn");
-    const statusEl = document.getElementById("status");
 
-    function setStatus(message, cssClass = "") {
-      statusEl.textContent = message;
-      statusEl.className = `status ${cssClass}`.trim();
+    function setStatus(message, type = "") {
+      status.textContent = message;
+      status.className = `status ${type}`.trim();
     }
 
-    /* =========================
-       If session exists already,
-       redirect to CRM directly
-       ========================= */
-    const {
-      data: { session }
-    } = await sb.auth.getSession();
+    async function redirectIfSessionExists() {
+      const {
+        data: { session }
+      } = await sb.auth.getSession();
 
-    if (session) {
-      window.location.href = "/crm.html";
-    }
-
-    /* =========================
-       Login action
-       Only Romanoti corporate
-       emails are allowed
-       ========================= */
-    async function login() {
-      const email = emailInput.value.trim();
-      const password = passwordInput.value;
-
-      if (!email || !password) {
-        setStatus("Please enter email and password.", "error");
-        return;
+      if (session) {
+        window.location.href = "/crm.html";
       }
+    }
 
-      if (!email.endsWith("@romanoti-solutions.com")) {
-        setStatus("Only Romanoti corporate emails are allowed.", "error");
+    await redirectIfSessionExists();
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      const userEmail = email.value.trim();
+      const userPassword = password.value;
+
+      if (!userEmail || !userPassword) {
+        setStatus("Please enter your email and password.", "error");
         return;
       }
 
@@ -223,8 +379,8 @@
         loginBtn.disabled = true;
 
         const { error } = await sb.auth.signInWithPassword({
-          email,
-          password
+          email: userEmail,
+          password: userPassword
         });
 
         if (error) throw error;
@@ -232,16 +388,11 @@
         setStatus("Login successful. Redirecting...", "ok");
         window.location.href = "/crm.html";
       } catch (err) {
-        setStatus(err.message || "Login failed.", "error");
+        console.error("CRM login error:", err);
+        setStatus(err.message || "Unable to sign in.", "error");
       } finally {
         loginBtn.disabled = false;
       }
-    }
-
-    loginBtn.addEventListener("click", login);
-
-    passwordInput.addEventListener("keydown", (event) => {
-      if (event.key === "Enter") login();
     });
   </script>
 </body>
