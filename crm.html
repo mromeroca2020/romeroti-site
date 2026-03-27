@@ -2263,10 +2263,30 @@
       }
     });
 
-    logoutBtn.addEventListener("click", async () => {
-      await sb.auth.signOut();
-      window.location.href = "/crm-login.html";
-    });
+/* ============================================================
+   CHANGE #89
+   LOGOUT FLOW POLISH
+   ------------------------------------------------------------
+   - Cierra sesión de Supabase
+   - Redirige de forma limpia al login del CRM
+   - Evita múltiples clics durante el proceso
+   ============================================================ */
+logoutBtn.addEventListener("click", async () => {
+  try {
+    logoutBtn.disabled = true;
+    logoutBtn.textContent = "Signing out...";
+
+    const { error } = await sb.auth.signOut();
+    if (error) throw error;
+
+    window.location.replace("/crm-login.html");
+  } catch (err) {
+    console.error("Logout error:", err);
+    alert("Error signing out: " + err.message);
+    logoutBtn.disabled = false;
+    logoutBtn.textContent = "Logout";
+  }
+});
 
     applyRoleUi();
     bindFilters();
