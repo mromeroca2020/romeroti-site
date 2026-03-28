@@ -1,339 +1,149 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Servicio de Help Desk / ITSM | Romanoti Solutions</title>
+  <title>Help Desk / ITSM Services | Romanoti Solutions</title>
   <meta
     name="description"
-    content="Romanoti Solutions brinda servicios de Help Desk / ITSM con soporte estructurado, gestión de incidentes, continuidad operativa y atención técnica profesional."
+    content="Romanoti Solutions delivers structured Help Desk / ITSM services with incident management, service continuity, operational visibility, and professional technical support."
   />
 
-  <!-- Tailwind / estilos del proyecto -->
+  <link rel="icon" type="image/svg+xml" href="/images/romanoti-icon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/romanoti-icon.png">
+  <link rel="apple-touch-icon" href="/images/romanoti-icon.png">
+  <meta name="theme-color" content="#081120">
+
   <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- Si ya tienes tu hoja global, deja esta línea y elimina ajustes duplicados -->
-  <!-- <link rel="stylesheet" href="/assets/css/styles.css" /> -->
-
-  <script defer src="/assets/js/nav.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body{font-family:'Montserrat',sans-serif;background:#f8fafc;color:#0f172a}
+    .hero-dark{background:linear-gradient(135deg,#050b16 0%,#081120 55%,#0b1830 100%);color:#fff}
+    .eyebrow{display:inline-block;padding:8px 14px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:#bfdbfe;font-weight:700}
+    .btn-primary{background:linear-gradient(135deg,#2563eb,#38bdf8);color:#fff;box-shadow:0 10px 30px rgba(37,99,235,.25)}
+    .btn-primary:hover{transform:translateY(-1px);box-shadow:0 14px 36px rgba(37,99,235,.32)}
+    .btn-secondary{background:rgba(255,255,255,.06);color:#fff;border:1px solid rgba(255,255,255,.16)}
+    .btn-secondary:hover{background:rgba(255,255,255,.1)}
+    .card-soft{background:#fff;border:1px solid #e2e8f0;border-radius:20px;box-shadow:0 14px 34px -24px rgba(15,23,42,.35)}
+  </style>
+  <script defer src="/js/nav.js?v=92"></script>
+  <script defer src="/js/footer.js?v=11"></script>
 </head>
-<body class="bg-white text-gray-900 antialiased">
-
-  <!-- Header dinámico Romanoti -->
+<body class="antialiased">
   <div id="app-header"></div>
+
   <main>
-    <!-- HERO -->
-    <section class="py-16 md:py-24 bg-white">
+    <section class="hero-dark py-20 md:py-28">
       <div class="container mx-auto px-6 max-w-6xl">
         <div class="max-w-4xl">
-          <span class="inline-block text-sm font-semibold uppercase tracking-[0.18em] text-blue-600 mb-4">
-            Servicios
-          </span>
-
-          <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight mb-6">
-            Servicio de Help Desk / ITSM
-          </h1>
-
-          <p class="text-lg md:text-xl text-gray-600 max-w-3xl mb-8 leading-relaxed">
-            Romanoti Solutions brinda soporte técnico estructurado, gestión de incidentes y continuidad operativa
-            para ayudar a las organizaciones a mantener sus servicios de TI estables, visibles y bien gestionados.
+          <span class="eyebrow mb-5">Support · Service Desk · Operational Continuity</span>
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight mb-6 text-white">Help Desk / ITSM services built for operational stability.</h1>
+          <p class="text-lg md:text-xl text-blue-50/90 max-w-3xl mb-8 leading-relaxed">
+            Romanoti Solutions delivers structured support, incident handling, and service continuity practices that help organizations keep IT services stable, visible, and professionally managed.
           </p>
-
           <div class="flex flex-wrap gap-4">
-            <a
-              href="/booking.html"
-              class="inline-flex items-center justify-center bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition"
-            >
-              Agendar consulta
-            </a>
-
-            <a
-              href="/es/contact.html"
-              class="inline-flex items-center justify-center border border-gray-300 text-gray-800 px-6 py-3 rounded-lg font-medium hover:bg-gray-50 transition"
-            >
-              Hablar con Romanoti
-            </a>
+            <a href="/booking.html" class="inline-flex items-center justify-center btn-primary px-6 py-3 rounded-xl font-semibold transition">Book a consultation</a>
+            <a href="/contact.html" class="inline-flex items-center justify-center btn-secondary px-6 py-3 rounded-xl font-semibold transition">Talk to Romanoti</a>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- VALUE PROPOSITION -->
-    <section class="py-16 bg-gray-50">
+    <section class="py-16 bg-white">
       <div class="container mx-auto px-6 max-w-6xl">
-        <div class="grid md:grid-cols-2 gap-10 items-start">
+        <div class="grid lg:grid-cols-2 gap-10 items-start">
           <div>
-            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-5">
-              Soporte técnico con enfoque operativo y profesional
-            </h2>
-
+            <span class="inline-block text-sm font-semibold uppercase tracking-[0.18em] text-blue-600 mb-3">Operational support</span>
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-5">Technical support with operational discipline</h2>
             <p class="text-gray-600 leading-relaxed mb-4">
-              Nuestro servicio de Help Desk / ITSM está diseñado para ofrecer una atención organizada,
-              trazable y alineada con las necesidades reales del negocio. No se trata solo de resolver tickets,
-              sino de mantener la continuidad del servicio, reducir tiempos de interrupción y mejorar la experiencia del usuario.
+              Our Help Desk / ITSM service is designed to deliver organized, traceable support aligned with real business needs. It is not only about resolving tickets; it is about maintaining service continuity, reducing downtime, and improving the user experience.
             </p>
-
             <p class="text-gray-600 leading-relaxed">
-              Romanoti combina soporte técnico, disciplina operativa y visión de infraestructura para brindar
-              un servicio de asistencia moderno, adaptable y confiable.
+              Romanoti combines technical support, operational discipline, and infrastructure awareness to deliver a modern service model that is adaptable, visible, and dependable.
             </p>
           </div>
 
-          <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
-            <h3 class="text-xl font-semibold text-gray-900 mb-5">
-              Lo que este servicio permite
-            </h3>
-
+          <div class="card-soft p-8">
+            <h3 class="text-xl font-semibold text-gray-900 mb-5">What this service enables</h3>
             <ul class="space-y-3 text-gray-600">
-              <li>• Gestión ordenada de incidentes y solicitudes</li>
-              <li>• Soporte remoto con atención estructurada</li>
-              <li>• Escalamiento técnico cuando el caso lo requiere</li>
-              <li>• Visibilidad del estado operativo del soporte</li>
-              <li>• Mejor experiencia para usuarios y equipos internos</li>
-              <li>• Base sólida para crecimiento y mejora continua</li>
+              <li>• Structured incident and request handling</li>
+              <li>• Remote support with a controlled workflow</li>
+              <li>• Technical escalation when the case requires it</li>
+              <li>• Better visibility into operational support status</li>
+              <li>• Improved experience for users and internal teams</li>
+              <li>• A stronger foundation for growth and continuous improvement</li>
             </ul>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- CORE CAPABILITIES -->
-    <section class="py-16 bg-white">
+    <section class="py-16 bg-gray-50">
       <div class="container mx-auto px-6 max-w-6xl">
         <div class="max-w-3xl mb-12">
-          <span class="inline-block text-sm font-semibold uppercase tracking-[0.18em] text-blue-600 mb-3">
-            Capacidades
-          </span>
-
-          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            Capacidades principales del servicio
-          </h2>
-
+          <span class="inline-block text-sm font-semibold uppercase tracking-[0.18em] text-blue-600 mb-3">Core capabilities</span>
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Core service capabilities</h2>
           <p class="text-gray-600 text-lg leading-relaxed">
-            Romanoti presta soporte con una visión estructurada del ciclo de atención,
-            desde la recepción del incidente hasta su resolución, seguimiento y mejora operativa.
+            Romanoti delivers support with a structured service cycle, from intake and classification to resolution, follow-up, and operational improvement.
           </p>
         </div>
 
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <article class="p-6 rounded-2xl border border-gray-100 shadow-sm bg-white">
-            <h3 class="text-xl font-semibold text-gray-900 mb-3">
-              Gestión de incidentes
-            </h3>
-            <p class="text-gray-600 leading-relaxed">
-              Registro, clasificación, priorización y seguimiento de incidentes para asegurar respuestas oportunas, ordenadas y controladas.
-            </p>
+          <article class="card-soft p-6 bg-white">
+            <h3 class="text-xl font-semibold text-gray-900 mb-3">Incident management</h3>
+            <p class="text-gray-600 leading-relaxed">Registration, prioritization, and lifecycle tracking to ensure timely and controlled response.</p>
           </article>
-
-          <article class="p-6 rounded-2xl border border-gray-100 shadow-sm bg-white">
-            <h3 class="text-xl font-semibold text-gray-900 mb-3">
-              Gestión de solicitudes
-            </h3>
-            <p class="text-gray-600 leading-relaxed">
-              Atención de requerimientos operativos de usuarios internos o clientes, con trazabilidad y orden en el flujo de atención.
-            </p>
+          <article class="card-soft p-6 bg-white">
+            <h3 class="text-xl font-semibold text-gray-900 mb-3">Request management</h3>
+            <p class="text-gray-600 leading-relaxed">Structured handling of user and operational requests with clearer workflow control.</p>
           </article>
-
-          <article class="p-6 rounded-2xl border border-gray-100 shadow-sm bg-white">
-            <h3 class="text-xl font-semibold text-gray-900 mb-3">
-              Soporte remoto
-            </h3>
-            <p class="text-gray-600 leading-relaxed">
-              Asistencia técnica a distancia para resolver problemas comunes, orientar usuarios y reducir tiempos de espera e interrupción.
-            </p>
+          <article class="card-soft p-6 bg-white">
+            <h3 class="text-xl font-semibold text-gray-900 mb-3">Remote support</h3>
+            <p class="text-gray-600 leading-relaxed">Practical remote assistance to resolve common issues, guide users, and reduce interruption time.</p>
           </article>
-
-          <article class="p-6 rounded-2xl border border-gray-100 shadow-sm bg-white">
-            <h3 class="text-xl font-semibold text-gray-900 mb-3">
-              Escalamiento técnico
-            </h3>
-            <p class="text-gray-600 leading-relaxed">
-              Coordinación con niveles superiores o áreas especializadas cuando un caso requiere intervención avanzada o análisis adicional.
-            </p>
+          <article class="card-soft p-6 bg-white">
+            <h3 class="text-xl font-semibold text-gray-900 mb-3">Technical escalation</h3>
+            <p class="text-gray-600 leading-relaxed">Coordination with advanced technical layers when deeper intervention or analysis is required.</p>
           </article>
-
-          <article class="p-6 rounded-2xl border border-gray-100 shadow-sm bg-white">
-            <h3 class="text-xl font-semibold text-gray-900 mb-3">
-              Visibilidad operativa
-            </h3>
-            <p class="text-gray-600 leading-relaxed">
-              Seguimiento del estado de atención, identificación de patrones repetitivos y apoyo a la mejora continua del servicio.
-            </p>
+          <article class="card-soft p-6 bg-white">
+            <h3 class="text-xl font-semibold text-gray-900 mb-3">Operational visibility</h3>
+            <p class="text-gray-600 leading-relaxed">Better insight into support status, recurring issues, and improvement opportunities.</p>
           </article>
-
-          <article class="p-6 rounded-2xl border border-gray-100 shadow-sm bg-white">
-            <h3 class="text-xl font-semibold text-gray-900 mb-3">
-              Base ITSM
-            </h3>
-            <p class="text-gray-600 leading-relaxed">
-              Enfoque alineado con buenas prácticas de gestión de servicios para fortalecer estabilidad, orden y calidad de soporte.
-            </p>
+          <article class="card-soft p-6 bg-white">
+            <h3 class="text-xl font-semibold text-gray-900 mb-3">ITSM-aligned base</h3>
+            <p class="text-gray-600 leading-relaxed">A service approach aligned with disciplined service management practices, continuity, and quality.</p>
           </article>
         </div>
       </div>
     </section>
 
-    <!-- HOW WE WORK -->
-    <section class="py-16 bg-gray-50">
+    <section class="py-16 bg-white border-t border-gray-100">
       <div class="container mx-auto px-6 max-w-6xl">
         <div class="grid lg:grid-cols-2 gap-10 items-start">
           <div>
-            <span class="inline-block text-sm font-semibold uppercase tracking-[0.18em] text-blue-600 mb-3">
-              Enfoque Romanoti
-            </span>
-
-            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-5">
-              Un servicio que combina atención, control y continuidad
-            </h2>
-
+            <span class="inline-block text-sm font-semibold uppercase tracking-[0.18em] text-blue-600 mb-3">Romanoti approach</span>
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-5">A service model that combines support, control, and continuity</h2>
             <p class="text-gray-600 leading-relaxed mb-4">
-              Para Romanoti, el Help Desk no debe limitarse a responder incidencias de forma reactiva.
-              Debe actuar como una función organizada que permita dar seguimiento, resolver con criterio técnico
-              y sostener la continuidad operativa del entorno.
+              For Romanoti, the service desk should not act only as reactive support. It should function as an organized capability that helps teams follow up, resolve with technical judgment, and sustain operational continuity.
             </p>
-
             <p class="text-gray-600 leading-relaxed">
-              Por eso trabajamos con una visión que integra soporte, trazabilidad, disciplina operativa y escalamiento,
-              favoreciendo una experiencia más estable y profesional para el cliente.
+              That is why we work with an approach that integrates support, traceability, service discipline, and escalation — creating a more stable and professional support experience.
             </p>
           </div>
 
-          <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
-            <h3 class="text-xl font-semibold text-gray-900 mb-5">
-              En términos prácticos, esto se traduce en:
-            </h3>
-
-            <div class="space-y-4">
-              <div>
-                <h4 class="font-semibold text-gray-900 mb-1">Atención estructurada</h4>
-                <p class="text-gray-600">
-                  Cada caso se recibe y se gestiona con orden, prioridad y criterio operativo.
-                </p>
-              </div>
-
-              <div>
-                <h4 class="font-semibold text-gray-900 mb-1">Seguimiento visible</h4>
-                <p class="text-gray-600">
-                  El cliente puede tener mayor claridad sobre el estado del soporte y la evolución de los casos.
-                </p>
-              </div>
-
-              <div>
-                <h4 class="font-semibold text-gray-900 mb-1">Reducción de fricción</h4>
-                <p class="text-gray-600">
-                  Un flujo mejor definido reduce reprocesos, incertidumbre y pérdida de tiempo.
-                </p>
-              </div>
-
-              <div>
-                <h4 class="font-semibold text-gray-900 mb-1">Preparación para escalar</h4>
-                <p class="text-gray-600">
-                  La organización gana una base más sólida para crecer, formalizar procesos y mejorar su operación de TI.
-                </p>
-              </div>
+          <div class="card-soft p-8">
+            <h3 class="text-xl font-semibold text-gray-900 mb-5">In practical terms, this means:</h3>
+            <div class="space-y-4 text-gray-600">
+              <div><h4 class="font-semibold text-gray-900 mb-1">Structured intake</h4><p>Each case is received and handled with order, priority, and operational context.</p></div>
+              <div><h4 class="font-semibold text-gray-900 mb-1">Visible follow-up</h4><p>Clients gain more clarity on support status and case progression.</p></div>
+              <div><h4 class="font-semibold text-gray-900 mb-1">Service continuity</h4><p>The objective is not only closure, but reducing friction and sustaining the environment.</p></div>
             </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- BENEFITS -->
-    <section class="py-16 bg-white">
-      <div class="container mx-auto px-6 max-w-6xl">
-        <div class="max-w-3xl mb-12">
-          <span class="inline-block text-sm font-semibold uppercase tracking-[0.18em] text-blue-600 mb-3">
-            Beneficios
-          </span>
-
-          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            Beneficios para su organización
-          </h2>
-
-          <p class="text-gray-600 text-lg leading-relaxed">
-            Un servicio de Help Desk / ITSM bien gestionado no solo resuelve problemas:
-            mejora la continuidad, la percepción del servicio y la eficiencia operativa.
-          </p>
-        </div>
-
-        <div class="grid md:grid-cols-2 gap-6">
-          <article class="bg-gray-50 p-6 rounded-2xl border border-gray-100">
-            <h3 class="text-lg font-semibold text-gray-900 mb-2">
-              Menor tiempo de interrupción
-            </h3>
-            <p class="text-gray-600 leading-relaxed">
-              Atención más rápida y organizada para reducir el impacto de incidentes sobre usuarios y operaciones.
-            </p>
-          </article>
-
-          <article class="bg-gray-50 p-6 rounded-2xl border border-gray-100">
-            <h3 class="text-lg font-semibold text-gray-900 mb-2">
-              Mejor experiencia del usuario
-            </h3>
-            <p class="text-gray-600 leading-relaxed">
-              Comunicación clara, seguimiento visible y mayor confianza en el servicio de soporte.
-            </p>
-          </article>
-
-          <article class="bg-gray-50 p-6 rounded-2xl border border-gray-100">
-            <h3 class="text-lg font-semibold text-gray-900 mb-2">
-              Mayor control operativo
-            </h3>
-            <p class="text-gray-600 leading-relaxed">
-              Trazabilidad, priorización y mejor organización de incidentes y solicitudes dentro del entorno de TI.
-            </p>
-          </article>
-
-          <article class="bg-gray-50 p-6 rounded-2xl border border-gray-100">
-            <h3 class="text-lg font-semibold text-gray-900 mb-2">
-              Base para crecimiento
-            </h3>
-            <p class="text-gray-600 leading-relaxed">
-              Un servicio estructurado permite escalar soporte, definir procesos y fortalecer la operación general.
-            </p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- CTA FINAL -->
-    <section class="py-16 bg-white">
-      <div class="container mx-auto px-6 max-w-5xl">
-        <div class="bg-gray-900 text-white rounded-2xl p-8 md:p-12 shadow-lg">
-          <span class="inline-block text-sm font-semibold uppercase tracking-[0.18em] text-blue-400 mb-3">
-            Romanoti Solutions
-          </span>
-
-          <h2 class="text-3xl md:text-4xl font-bold mb-4">
-            Fortalezca su operación de soporte con Romanoti
-          </h2>
-
-          <p class="text-gray-300 text-lg leading-relaxed mb-8 max-w-3xl">
-            Ayudamos a las organizaciones a estructurar su servicio de Help Desk / ITSM con una visión práctica,
-            profesional y orientada a la continuidad operativa.
-          </p>
-
-          <div class="flex flex-wrap gap-4">
-            <a
-              href="/booking.html"
-              class="inline-flex items-center justify-center bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition"
-            >
-              Agendar una reunión
-            </a>
-
-            <a
-              href="/es/contact.html"
-              class="inline-flex items-center justify-center border border-gray-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-white/5 transition"
-            >
-              Contactar a Romanoti
-            </a>
           </div>
         </div>
       </div>
     </section>
   </main>
 
-<div id="app-footer"></div>
-  <script defer src="/js/nav.js?v=30"></script>
-<script defer src="/js/footer.js?v=30"></script>
+  <div id="app-footer"></div>
 </body>
 </html>
