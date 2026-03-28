@@ -43,20 +43,31 @@
       scroll-behavior:smooth;
     }
 
-    .wrap{
-      max-width:var(--max);
-      margin:0 auto;
-      padding:20px 16px 56px;
-    }
+.wrap{
+  max-width:100%;
+  margin:0;
+  padding:0 0 56px;
+}
 
-    .hero-tools{
-      background:linear-gradient(135deg,#050b16 0%,#081120 55%,#0b1830 100%);
-      color:#fff;
-      border-radius:22px;
-      padding:34px 28px;
-      box-shadow:var(--shadow);
-      margin-top:14px;
-    }
+.hero-tools-shell{
+  width:100%;
+  background:linear-gradient(135deg,#050b16 0%,#081120 55%,#0b1830 100%);
+  margin-top:14px;
+}
+
+.hero-tools-inner{
+  max-width:var(--max);
+  margin:0 auto;
+  padding:0 16px;
+}
+
+.hero-tools{
+  background:transparent;
+  color:#fff;
+  border-radius:22px;
+  padding:34px 28px;
+  box-shadow:var(--shadow);
+}
 
     .hero-grid{
       display:grid;
@@ -303,12 +314,16 @@
        ============================================================ -->
     <div class="wrap">
 
-    <!-- ============================================================
-         CHANGE #4 (NEW HERO):
-         Nuevo bloque superior para dar contexto y convertir la página
-         en una consola técnica profesional de Romanoti.
-         ============================================================ -->
-    <section class="hero-tools">
+<div class="wrap">
+
+  <!-- ============================================================
+       CHANGE #4 (NEW HERO):
+       Nuevo bloque superior para dar contexto y convertir la página
+       en una consola técnica profesional de Romanoti.
+       ============================================================ -->
+  <section class="hero-tools-shell">
+    <div class="hero-tools-inner">
+      <div class="hero-tools">
       <div class="hero-grid">
         <div>
           <div class="eyebrow">Romanoti Platform / Tools Console</div>
@@ -349,7 +364,12 @@
           </ul>
         </aside>
       </div>
-    </section>
+          </div>
+    </div>
+  </section>
+
+    <!-- ============================================================
+         CHANGE #5 (SERVER DIAGNOSTIC SECTION):
 
     <!-- ============================================================
          CHANGE #5 (SERVER DIAGNOSTIC SECTION):
