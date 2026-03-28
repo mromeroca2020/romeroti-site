@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>RomanoTI Solutions | IT Infrastructure & Cybersecurity (EN)</title>
+  <title>Romanoti Solutions | IT Infrastructure & Cybersecurity</title>
 
   <!-- Favicons -->
   <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16.png">
   <link rel="shortcut icon" href="/favicon.ico">
-  <meta name="theme-color" content="#2563eb">
+  <meta name="theme-color" content="#081120">
 
   <!-- hreflang -->
   <link rel="alternate" href="https://romanoti-solutions.netlify.app/en/" hreflang="en-CA">
@@ -20,129 +20,233 @@
 
   <!-- Tailwind + Font -->
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
 
   <style>
-    body { font-family:'Montserrat',sans-serif;background:#f8f9fa;color:#111827 }
-    .hero-bg { background:linear-gradient(135deg,#1e3a8a 0%,#2563eb 100%) }
-    .btn-primary { background:#2563EB;transition:all .2s }
-    .btn-primary:hover { background:#1D4ED8;transform:translateY(-1px);box-shadow:0 6px 18px -10px rgba(37,99,235,.7) }
-    .card { border-radius:14px;box-shadow:0 12px 32px -16px rgba(2,6,23,.2) }
-    .badge { display:inline-block;border:1px solid #cbd5e1;border-radius:999px;padding:4px 10px;font-size:12px;background:#f8fafc }
+    body{
+      font-family:'Montserrat',sans-serif;
+      background:#f8f9fa;
+      color:#111827;
+    }
+
+    .hero-dark{
+      background:linear-gradient(135deg,#050b16 0%,#081120 55%,#0b1830 100%);
+      color:#fff;
+    }
+
+    .btn-primary{
+      background:#2563EB;
+      transition:all .2s;
+    }
+
+    .btn-primary:hover{
+      background:#1D4ED8;
+      transform:translateY(-1px);
+      box-shadow:0 6px 18px -10px rgba(37,99,235,.7);
+    }
+
+    .card{
+      border-radius:16px;
+      box-shadow:0 12px 32px -16px rgba(2,6,23,.16);
+      border:1px solid #e5e7eb;
+      background:#fff;
+    }
+
+    .badge{
+      display:inline-block;
+      border:1px solid rgba(255,255,255,.18);
+      border-radius:999px;
+      padding:8px 14px;
+      font-size:12px;
+      font-weight:600;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      background:rgba(255,255,255,.06);
+      color:#93c5fd;
+    }
+
+    .section-eyebrow{
+      display:inline-block;
+      font-size:12px;
+      font-weight:700;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      color:#2563eb;
+      margin-bottom:12px;
+    }
+
+    .cta-dark{
+      background:linear-gradient(135deg,#050b16 0%,#081120 55%,#0b1830 100%);
+      color:#fff;
+      border-radius:28px;
+      box-shadow:0 20px 40px -24px rgba(2,6,23,.45);
+    }
   </style>
-  <link rel="stylesheet" href="/css/styles.css">
+
+  <script defer src="/js/nav.js?v=8"></script>
 </head>
 
-<body class="bg-gray-50">
+<body class="bg-gray-50 text-gray-900 antialiased">
   <div id="app-header"></div>
 
-  <!-- Mount for dynamic header -->
+  <main>
 
-  <!-- ================================================================= -->
-  <!-- Fallback Header EN (solo se tocó el bloque del logo)            -->
-  <!-- ================================================================= -->
+    <!-- HERO -->
+    <section class="hero-dark">
+      <div class="container mx-auto px-6 py-20 md:py-24">
+        <div class="max-w-5xl mx-auto text-center">
+          <span class="badge">Infrastructure • Cybersecurity • Continuity</span>
 
-  <!-- ================================================================= -->
-  <!-- FIN Fallback Header                                               -->
-  <!-- ================================================================= -->
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold mt-6 mb-6 leading-tight text-white">
+            Professional IT infrastructure<br class="hidden md:block">
+            and cybersecurity
+          </h1>
 
-  <!-- ===== Hero ===== -->
-  <section class="hero-bg text-white">
-    <div class="container mx-auto px-6 py-20 text-center">
-      <h1 class="text-4xl md:text-5xl font-bold mb-6">Professional IT Infrastructure & Cybersecurity</h1>
-      <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
-        Microsoft & Cisco certified expertise. 24/7 detection and response, faster incident containment, and fewer outages.
-      </p>
-      <div class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-6">
-        <a href="tel:4386309157" class="btn-primary text-white px-8 py-3 rounded-lg font-semibold">Emergency Support</a>
-        <a href="https://calendly.com/mauricioromeroca" class="bg-white text-blue-700 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100">
-          Book a Free Consultation
-        </a>
+          <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto text-blue-50 leading-relaxed">
+            Microsoft and Cisco expertise, faster detection and response,
+            quicker incident containment, and fewer operational disruptions.
+          </p>
+
+          <div class="flex flex-col md:flex-row justify-center gap-4 md:gap-6">
+            <a href="tel:4386309157" class="btn-primary text-white px-8 py-3 rounded-xl font-semibold inline-flex items-center justify-center">
+              Emergency support
+            </a>
+
+            <a href="https://calendly.com/mauricioromeroca" class="bg-white text-blue-700 px-8 py-3 rounded-xl font-semibold hover:bg-gray-100 inline-flex items-center justify-center">
+              Book a free consultation
+            </a>
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ===== CTA strip ===== -->
-  <section class="bg-blue-50 border-t border-b border-blue-100">
-    <div class="container mx-auto px-6 py-4 flex flex-col md:flex-row items-center justify-between gap-3">
-      <div class="text-blue-900 font-semibold">
-        Is your domain exposed? Run a quick EASM scan now.
-      </div>
-      <div class="flex gap-3">
-        <a href="/solutions/cybershield/easm-console.html" class="bg-white border px-5 py-2 rounded-lg font-medium hover:bg-gray-50">
-          Try EASM demo
-        </a>
-        <a href="/en/solutions/cybershield/" class="btn-primary text-white px-5 py-2 rounded-lg font-medium">
-          Explore CyberShield (MDR)
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== About ===== -->
-  <section id="about-us" class="py-14 bg-white">
-    <div class="container mx-auto px-6">
-      <div class="text-center mb-10">
-        <h2 class="text-3xl font-bold">About RomanoTI Solutions</h2>
-        <p class="text-xl text-gray-600 max-w-2xl mx-auto">15+ years delivering reliable infrastructure and security for SMBs.</p>
-      </div>
-      <div class="max-w-4xl mx-auto text-lg text-gray-700 space-y-6">
-        <p>We help small and mid-sized businesses secure data, optimize networks, and move to the cloud. Our MDR service combines SIEM correlation (Wazuh/ELK), early detections with Sigma rules and IOC/IOA, and guided playbooks to contain incidents.</p>
-        <p>No one-size-fits-all. We tailor solutions to your risk, budget, and compliance needs.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== Why choose us ===== -->
-  <section class="py-14">
-    <div class="container mx-auto px-6">
-      <div class="text-center mb-10">
-        <h2 class="text-3xl font-bold">Why choose us</h2>
-        <p class="text-xl text-gray-600 max-w-3xl mx-auto">Less attack surface, earlier detections, and guided responses.</p>
-      </div>
-
-      <div class="grid md:grid-cols-3 gap-6">
-
-        <div class="card bg-white p-6">
-          <div class="badge">EASM + Hardening</div>
-          <h3 class="text-xl font-bold mt-2 mb-2">Reduce exposure</h3>
-          <p class="text-gray-600">Discover subdomains/ports and email posture (SPF/DMARC/DKIM) to close gaps before attackers find them.</p>
-          <a href="/solutions/cybershield/easm-console.html" class="text-blue-600 hover:underline mt-3 inline-block">Try EASM →</a>
+    <!-- CTA STRIP -->
+    <section class="bg-blue-50 border-t border-b border-blue-100">
+      <div class="container mx-auto px-6 py-4 flex flex-col md:flex-row items-center justify-between gap-3">
+        <div class="text-blue-900 font-semibold text-center md:text-left">
+          Is your domain exposed? Run a quick EASM review now.
         </div>
 
-        <div class="card bg-white p-6">
-          <div class="badge">SOC / MDR 24×7</div>
-          <h3 class="text-xl font-bold mt-2 mb-2">Detect & respond</h3>
-          <p class="text-gray-600">Event correlation (Wazuh/ELK), IOCs/IOAs, and response playbooks: isolate host, block IP, reset credentials.</p>
-          <a href="/it-soc.html" class="text-blue-600 hover:underline mt-3 inline-block">See SOC →</a>
+        <div class="flex flex-wrap justify-center gap-3">
+          <a href="/en/solutions/cybershield/easm-console.html" class="bg-white border px-5 py-2 rounded-lg font-medium hover:bg-gray-50">
+            Try the EASM demo
+          </a>
+
+          <a href="/en/solutions/cybershield/" class="btn-primary text-white px-5 py-2 rounded-lg font-medium">
+            Explore CyberShield (MDR)
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about-us" class="py-16 bg-white">
+      <div class="container mx-auto px-6 max-w-6xl">
+        <div class="text-center mb-10">
+          <span class="section-eyebrow">About</span>
+          <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4">
+            About Romanoti Solutions
+          </h2>
+          <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+            More than 15 years supporting SMBs with infrastructure, cloud, and cybersecurity.
+          </p>
         </div>
 
-        <div class="card bg-white p-6">
-          <div class="badge">NOC + Resilience</div>
-          <h3 class="text-xl font-bold mt-2 mb-2">Availability first</h3>
-          <p class="text-gray-600">Monitoring for HTTP/TLS/DNS and capacity. Executive reports to plan growth with no surprises.</p>
-          <a href="/it-noc.html" class="text-blue-600 hover:underline mt-3 inline-block">See NOC →</a>
+        <div class="max-w-4xl mx-auto text-lg text-gray-700 space-y-6 leading-relaxed">
+          <p>
+            We help small and mid-sized businesses secure data, optimize networks,
+            and move toward more modern cloud environments. Our MDR approach combines
+            SIEM correlation, earlier detections, and guided playbooks to help contain incidents faster.
+          </p>
+
+          <p>
+            There is no one-size-fits-all model. We adapt solutions to your risk profile,
+            budget, and operational priorities.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHY CHOOSE US -->
+    <section class="py-16 bg-gray-50">
+      <div class="container mx-auto px-6 max-w-6xl">
+        <div class="text-center mb-10">
+          <span class="section-eyebrow">Why choose us</span>
+          <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4">
+            Why choose us
+          </h2>
+          <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+            Less exposure, earlier detection, and more guided response.
+          </p>
         </div>
 
+        <div class="grid md:grid-cols-3 gap-6">
+          <div class="card p-6">
+            <div class="inline-block border border-slate-200 rounded-full px-3 py-1 text-xs font-semibold bg-slate-50 text-slate-600">EASM + Hardening</div>
+            <h3 class="text-xl font-bold mt-4 mb-3 text-gray-900">Reduce exposure</h3>
+            <p class="text-gray-600 leading-relaxed">
+              Discover subdomains, exposed ports, and email posture issues
+              before attackers take advantage of them.
+            </p>
+            <a href="/en/solutions/cybershield/easm-console.html" class="text-blue-600 hover:underline mt-4 inline-block font-medium">
+              Try EASM →
+            </a>
+          </div>
+
+          <div class="card p-6">
+            <div class="inline-block border border-slate-200 rounded-full px-3 py-1 text-xs font-semibold bg-slate-50 text-slate-600">SOC / MDR 24×7</div>
+            <h3 class="text-xl font-bold mt-4 mb-3 text-gray-900">Detect and respond</h3>
+            <p class="text-gray-600 leading-relaxed">
+              Event correlation, indicators of compromise, and response playbooks
+              to help contain incidents with more structure.
+            </p>
+            <a href="/en/it-soc.html" class="text-blue-600 hover:underline mt-4 inline-block font-medium">
+              See SOC →
+            </a>
+          </div>
+
+          <div class="card p-6">
+            <div class="inline-block border border-slate-200 rounded-full px-3 py-1 text-xs font-semibold bg-slate-50 text-slate-600">NOC + Resilience</div>
+            <h3 class="text-xl font-bold mt-4 mb-3 text-gray-900">Availability first</h3>
+            <p class="text-gray-600 leading-relaxed">
+              Monitoring for critical services and capacity planning to support
+              continuity and growth with fewer surprises.
+            </p>
+            <a href="/en/it-noc.html" class="text-blue-600 hover:underline mt-4 inline-block font-medium">
+              See NOC →
+            </a>
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ===== CTA ===== -->
-  <section class="py-14 bg-blue-700 text-white">
-    <div class="container mx-auto px-6 text-center">
-      <h2 class="text-3xl font-bold mb-4">Ready to reduce risk and downtime?</h2>
-      <p class="text-lg opacity-90 mb-6">Book 20 minutes: posture review and next steps.</p>
-      <div class="flex flex-col md:flex-row justify-center gap-4">
-        <a href="https://calendly.com/mauricioromeroca" class="bg-white text-blue-700 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100">Book a Call</a>
-        <a href="/services/tools.html" class="btn-primary text-white px-6 py-3 rounded-lg font-semibold">Open Tools</a>
+    <!-- CTA -->
+    <section class="py-16 bg-white">
+      <div class="container mx-auto px-6 max-w-5xl">
+        <div class="cta-dark p-8 md:p-12 text-center">
+          <h2 class="text-3xl md:text-4xl font-extrabold mb-4 text-white">
+            Ready to reduce risk and downtime?
+          </h2>
+          <p class="text-lg text-slate-300 mb-8 max-w-3xl mx-auto leading-relaxed">
+            Let’s schedule a short conversation to review your posture,
+            your current exposure, and the right next technical steps.
+          </p>
+
+          <div class="flex flex-col md:flex-row justify-center gap-4">
+            <a href="https://calendly.com/mauricioromeroca" class="bg-white text-blue-700 px-6 py-3 rounded-xl font-semibold hover:bg-gray-100">
+              Book a call
+            </a>
+            <a href="/en/services/tools.html" class="btn-primary text-white px-6 py-3 rounded-xl font-semibold">
+              Open Tools
+            </a>
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Footer mount -->
+  </main>
 
-  <!-- Remove fallback when real header loads -->
   <script>
     (function(){
       const fb = document.getElementById('fallback-header');
@@ -164,52 +268,33 @@
     })();
   </script>
 
-  <!-- Nav/Footer unified -->
-  <script defer src="/js/nav.js?v=8"></script>
   <script defer src="/js/footer.js?v=8"></script>
   <script defer src="/js/fix-nav.js?v=8"></script>
 
-
-
-  <!-- ================================
-       LANG BAR: resaltar idioma activo
-       ================================ -->
   <script>
     (function () {
       var path = window.location.pathname || "/";
 
-      // Enlaces de la barra de idioma
       var enLink = document.querySelector('.langbar a[href="/en/"]');
       var frLink = document.querySelector('.langbar a[href="/fr/"]');
       var esLink = document.querySelector('.langbar a[href="/"]');
 
-      // Si no existe la barra, salimos sin hacer nada
       if (!enLink && !frLink && !esLink) return;
 
-      // Quitar negrilla a todos
       [enLink, frLink, esLink].forEach(function (a) {
         if (a) a.classList.remove("font-semibold");
       });
 
-      // Detectar idioma por la URL y aplicar negrilla
       if (path.startsWith("/en/")) {
         if (enLink) enLink.classList.add("font-semibold");
       } else if (path.startsWith("/fr/")) {
         if (frLink) frLink.classList.add("font-semibold");
       } else {
-        // Español: raíz "/" o cualquier ruta "/es/..."
         if (esLink) esLink.classList.add("font-semibold");
       }
     })();
   </script>
 
-
   <div id="app-footer"></div>
-  <script src="/js/nav.js"></script>
-  <script src="/js/footer.js"></script>
-</body>
-</html>
-
-
 </body>
 </html>
