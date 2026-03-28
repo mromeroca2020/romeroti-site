@@ -39,11 +39,6 @@ content="Learn why organizations choose Romanoti Solutions for infrastructure, o
     page_path: window.location.pathname
   });
 
-  // =========================================================
-  // CHANGE #GA4 - CENTRAL EVENT TRACKING HELPER
-  // ---------------------------------------------------------
-  // Standardized event helper for CTA click tracking.
-  // =========================================================
   function trackEvent(action, label) {
     gtag('event', action, {
       event_category: 'engagement',
@@ -63,33 +58,40 @@ content="Learn why organizations choose Romanoti Solutions for infrastructure, o
 <main>
 
 <!-- HERO -->
-<section class="relative overflow-hidden bg-[#f7f8fb] py-24 lg:py-28">
+<section class="w-full bg-gradient-to-r from-black via-slate-950 to-slate-900 py-16 md:py-20">
   <div class="mx-auto max-w-7xl px-6 lg:px-8">
     <div class="max-w-4xl">
       <span
-        class="inline-flex items-center rounded-full border border-blue-100 bg-white px-4 py-2 text-sm font-semibold uppercase text-blue-600"
+        class="inline-flex items-center rounded-full border border-slate-600 bg-white/5 px-4 py-2 text-sm font-semibold uppercase text-blue-300 mb-6"
         style="letter-spacing: 0.18em;"
       >
         Why Romanoti
       </span>
 
       <h1
-        class="mt-6 text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900"
+        class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white tracking-tight"
         style="line-height: 1.05;"
       >
         Why organizations choose Romanoti Solutions
       </h1>
 
-      <p class="mt-6 max-w-3xl text-lg md:text-xl text-gray-600 leading-relaxed">
+      <p class="mt-6 max-w-3xl text-lg md:text-xl text-slate-200 leading-relaxed">
         Romanoti Solutions combines technical discipline, infrastructure understanding,
         operational clarity, and a platform-driven vision to help organizations
         strengthen their environments with confidence.
       </p>
-      <div class="mt-8">
+
+      <div class="mt-8 flex flex-wrap gap-4">
         <a href="/booking.html"
-           class="inline-flex items-center bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition"
+           class="inline-flex items-center justify-center bg-blue-600 text-white px-6 py-3 rounded-xl font-semibold hover:bg-blue-700 transition shadow-lg"
            onclick="trackEvent('click','why_hero_book_consultation')">
            Book a consultation
+        </a>
+
+        <a href="/contact.html"
+           class="inline-flex items-center justify-center border border-slate-500 text-white px-6 py-3 rounded-xl font-semibold hover:bg-white/5 transition"
+           onclick="trackEvent('click','why_hero_contact')">
+           Contact Romanoti
         </a>
       </div>
     </div>
@@ -105,41 +107,41 @@ content="Learn why organizations choose Romanoti Solutions for infrastructure, o
         What makes Romanoti different
       </span>
 
-      <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+      <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4 tracking-tight">
         A more structured approach to technical services
       </h2>
 
-      <p class="text-gray-600 text-lg leading-relaxed">
+      <p class="text-slate-600 text-lg leading-relaxed">
         Romanoti is not built around improvised support. We aim to provide a service model
         that is structured, operationally aware, and aligned with the realities of modern infrastructure.
       </p>
     </div>
 
     <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-      <article class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
-        <h3 class="text-lg font-semibold text-gray-900 mb-3">Infrastructure understanding</h3>
-        <p class="text-gray-600 leading-relaxed">
+      <article class="bg-white p-7 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition">
+        <h3 class="text-lg font-bold text-slate-900 mb-3">Infrastructure understanding</h3>
+        <p class="text-slate-600 leading-relaxed">
           We work from visibility and technical structure, not assumptions. This allows better decisions and more effective support.
         </p>
       </article>
 
-      <article class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
-        <h3 class="text-lg font-semibold text-gray-900 mb-3">Operational discipline</h3>
-        <p class="text-gray-600 leading-relaxed">
+      <article class="bg-white p-7 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition">
+        <h3 class="text-lg font-bold text-slate-900 mb-3">Operational discipline</h3>
+        <p class="text-slate-600 leading-relaxed">
           Romanoti emphasizes order, continuity, and practical workflows that support stability instead of reactive chaos.
         </p>
       </article>
 
-      <article class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
-        <h3 class="text-lg font-semibold text-gray-900 mb-3">Platform-driven vision</h3>
-        <p class="text-gray-600 leading-relaxed">
+      <article class="bg-white p-7 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition">
+        <h3 class="text-lg font-bold text-slate-900 mb-3">Platform-driven vision</h3>
+        <p class="text-slate-600 leading-relaxed">
           We are evolving beyond services alone by connecting technical work with Romanoti Platform, NetPilot, and Ops Assistant.
         </p>
       </article>
 
-      <article class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
-        <h3 class="text-lg font-semibold text-gray-900 mb-3">Professional communication</h3>
-        <p class="text-gray-600 leading-relaxed">
+      <article class="bg-white p-7 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition">
+        <h3 class="text-lg font-bold text-slate-900 mb-3">Professional communication</h3>
+        <p class="text-slate-600 leading-relaxed">
           We believe technical service should be understandable, accountable, and aligned with the operational needs of the client.
         </p>
       </article>
@@ -157,55 +159,55 @@ content="Learn why organizations choose Romanoti Solutions for infrastructure, o
           Romanoti mindset
         </span>
 
-        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-5">
+        <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-5 tracking-tight">
           We approach technical work with structure, not improvisation
         </h2>
 
-        <p class="text-gray-600 leading-relaxed mb-4">
+        <p class="text-slate-600 leading-relaxed mb-4">
           Many organizations struggle because technical support is fragmented, reactive,
           or disconnected from real infrastructure understanding.
         </p>
 
-        <p class="text-gray-600 leading-relaxed mb-4">
+        <p class="text-slate-600 leading-relaxed mb-4">
           Romanoti works differently. We aim to understand environments, reduce ambiguity,
           and support clearer operational direction across services, infrastructure, and security.
         </p>
 
-        <p class="text-gray-600 leading-relaxed">
+        <p class="text-slate-600 leading-relaxed">
           That means better visibility, stronger continuity, and more reliable technical engagement.
         </p>
       </div>
 
-      <div class="bg-gray-50 rounded-2xl border border-gray-100 p-8">
-        <h3 class="text-xl font-semibold text-gray-900 mb-5">
+      <div class="bg-gray-50 rounded-2xl border border-slate-200 p-8 shadow-sm">
+        <h3 class="text-xl font-bold text-slate-900 mb-5">
           What clients should expect from Romanoti
         </h3>
 
         <div class="space-y-4">
           <div>
-            <h4 class="font-semibold text-gray-900 mb-1">Clearer technical conversations</h4>
-            <p class="text-gray-600">
+            <h4 class="font-semibold text-slate-900 mb-1">Clearer technical conversations</h4>
+            <p class="text-slate-600">
               We aim to translate complexity into structured understanding and practical next steps.
             </p>
           </div>
 
           <div>
-            <h4 class="font-semibold text-gray-900 mb-1">Service with operational awareness</h4>
-            <p class="text-gray-600">
+            <h4 class="font-semibold text-slate-900 mb-1">Service with operational awareness</h4>
+            <p class="text-slate-600">
               Support should not only solve isolated issues, but also strengthen continuity and stability.
             </p>
           </div>
 
           <div>
-            <h4 class="font-semibold text-gray-900 mb-1">A long-term technical direction</h4>
-            <p class="text-gray-600">
+            <h4 class="font-semibold text-slate-900 mb-1">A long-term technical direction</h4>
+            <p class="text-slate-600">
               Romanoti is building toward a stronger model that connects services with product capabilities.
             </p>
           </div>
 
           <div>
-            <h4 class="font-semibold text-gray-900 mb-1">Professional accountability</h4>
-            <p class="text-gray-600">
+            <h4 class="font-semibold text-slate-900 mb-1">Professional accountability</h4>
+            <p class="text-slate-600">
               We believe trust grows when service is organized, visible, and professionally communicated.
             </p>
           </div>
@@ -225,79 +227,63 @@ content="Learn why organizations choose Romanoti Solutions for infrastructure, o
         Connected capabilities
       </span>
 
-      <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+      <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4 tracking-tight">
         Services, infrastructure, and platform direction
       </h2>
 
-      <p class="text-gray-600 text-lg leading-relaxed">
+      <p class="text-slate-600 text-lg leading-relaxed">
         Romanoti connects core service capabilities with a broader platform strategy,
         helping organizations benefit from both practical support and long-term technical evolution.
       </p>
     </div>
 
     <div class="grid md:grid-cols-3 gap-6">
-      <article class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
-        <h3 class="text-xl font-semibold text-gray-900 mb-3">Help Desk / ITSM</h3>
-        <p class="text-gray-600 leading-relaxed mb-4">
+      <article class="bg-white p-7 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition">
+        <h3 class="text-xl font-bold text-slate-900 mb-3">Help Desk / ITSM</h3>
+        <p class="text-slate-600 leading-relaxed mb-4">
           Structured support, incident handling, and continuity-focused service delivery.
         </p>
         <a href="/services/helpdesk.html"
-           class="text-blue-600 font-medium hover:underline"
+           class="text-blue-600 font-semibold hover:underline"
            onclick="trackEvent('click','why_helpdesk_service')">Explore service →</a>
       </article>
 
-      <article class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
-        <h3 class="text-xl font-semibold text-gray-900 mb-3">Networks & Infrastructure</h3>
-        <p class="text-gray-600 leading-relaxed mb-4">
+      <article class="bg-white p-7 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition">
+        <h3 class="text-xl font-bold text-slate-900 mb-3">Networks & Infrastructure</h3>
+        <p class="text-slate-600 leading-relaxed mb-4">
           Infrastructure visibility, diagnostics, and support for modern technical environments.
         </p>
         <a href="/services/networks.html"
-           class="text-blue-600 font-medium hover:underline"
+           class="text-blue-600 font-semibold hover:underline"
            onclick="trackEvent('click','why_networks_service')">Explore service →</a>
       </article>
 
-      <article class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
-        <h3 class="text-xl font-semibold text-gray-900 mb-3">Cybersecurity</h3>
-        <p class="text-gray-600 leading-relaxed mb-4">
+      <article class="bg-white p-7 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition">
+        <h3 class="text-xl font-bold text-slate-900 mb-3">Cybersecurity</h3>
+        <p class="text-slate-600 leading-relaxed mb-4">
           Exposure analysis, security review, and operational guidance for risk reduction.
         </p>
         <a href="/services/cybersecurity.html"
-           class="text-blue-600 font-medium hover:underline"
+           class="text-blue-600 font-semibold hover:underline"
            onclick="trackEvent('click','why_cybersecurity_service')">Explore service →</a>
       </article>
     </div>
   </div>
 </section>
 
-<!-- ============================================================
-     CHANGE #87
-     ------------------------------------------------------------
-     Purpose:
-     Add an intermediate CTA that connects the trust narrative
-     of "Why Romanoti" with the process narrative of
-     "How We Work".
-
-     Reason:
-     This creates a clearer enterprise funnel:
-     Why Romanoti -> How We Work -> Booking / Contact
-
-     Scope:
-     - Adds one new section only
-     - Keeps all original sections intact
-     - Does not alter existing cards, copy, or layout blocks
-     ============================================================ -->
-<section class="py-16 bg-white border-t border-gray-100">
+<!-- INTERMEDIATE CTA -->
+<section class="py-16 bg-white border-t border-slate-200">
   <div class="container mx-auto px-6 max-w-5xl text-center">
 
     <span class="inline-block text-sm font-semibold uppercase tracking-[0.18em] text-blue-600 mb-3">
       Romanoti Method
     </span>
 
-    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+    <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4 tracking-tight">
       See how Romanoti delivers structured technical operations
     </h2>
 
-    <p class="text-gray-600 text-lg leading-relaxed mb-8 max-w-3xl mx-auto">
+    <p class="text-slate-600 text-lg leading-relaxed mb-8 max-w-3xl mx-auto">
       Understanding why Romanoti is different is only the first step.
       Explore how we structure, execute, and support technical environments
       through a disciplined operational approach.
@@ -306,7 +292,7 @@ content="Learn why organizations choose Romanoti Solutions for infrastructure, o
     <div class="flex flex-wrap items-center justify-center gap-4">
       <a
         href="/how-we-work.html"
-        class="inline-flex items-center justify-center bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition"
+        class="inline-flex items-center justify-center bg-blue-600 text-white px-6 py-3 rounded-xl font-semibold hover:bg-blue-700 transition shadow-lg"
         onclick="trackEvent('click','why_to_how_we_work')"
       >
         Explore how we work
@@ -314,7 +300,7 @@ content="Learn why organizations choose Romanoti Solutions for infrastructure, o
 
       <a
         href="/booking.html"
-        class="inline-flex items-center justify-center border border-gray-300 text-gray-900 px-6 py-3 rounded-lg font-medium hover:bg-gray-50 transition"
+        class="inline-flex items-center justify-center border border-slate-300 text-slate-900 px-6 py-3 rounded-xl font-semibold hover:bg-gray-50 transition"
         onclick="trackEvent('click','why_cta_book_consultation')"
       >
         Book a consultation
@@ -327,16 +313,16 @@ content="Learn why organizations choose Romanoti Solutions for infrastructure, o
 <!-- FINAL CTA -->
 <section class="py-16 bg-white">
   <div class="container mx-auto px-6 max-w-5xl">
-    <div class="bg-gray-900 text-white rounded-2xl p-8 md:p-12 shadow-lg">
-      <span class="inline-block text-sm font-semibold uppercase tracking-[0.18em] text-blue-400 mb-3">
+    <div class="bg-gradient-to-r from-black via-slate-950 to-slate-900 text-white rounded-[28px] p-8 md:p-12 shadow-xl">
+      <span class="inline-block text-sm font-semibold uppercase tracking-[0.18em] text-blue-300 mb-3">
         Romanoti Solutions
       </span>
 
-      <h2 class="text-3xl md:text-4xl font-bold mb-4">
+      <h2 class="text-3xl md:text-4xl font-extrabold mb-4 text-white tracking-tight">
         Start the conversation with Romanoti
       </h2>
 
-      <p class="text-gray-300 text-lg leading-relaxed mb-8 max-w-3xl">
+      <p class="text-slate-300 text-lg leading-relaxed mb-8 max-w-3xl">
         If you are looking for a more structured, professional, and infrastructure-aware technical partner,
         Romanoti is ready to help.
       </p>
@@ -344,7 +330,7 @@ content="Learn why organizations choose Romanoti Solutions for infrastructure, o
       <div class="flex flex-wrap gap-4">
         <a
           href="/booking.html"
-          class="inline-flex items-center justify-center bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition"
+          class="inline-flex items-center justify-center bg-blue-600 text-white px-6 py-3 rounded-xl font-semibold hover:bg-blue-700 transition shadow-lg"
           onclick="trackEvent('click','why_final_book_consultation')"
         >
           Book a consultation
@@ -352,7 +338,7 @@ content="Learn why organizations choose Romanoti Solutions for infrastructure, o
 
         <a
           href="/contact.html"
-          class="inline-flex items-center justify-center border border-gray-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-white/5 transition"
+          class="inline-flex items-center justify-center border border-slate-600 text-white px-6 py-3 rounded-xl font-semibold hover:bg-white/5 transition"
           onclick="trackEvent('click','why_final_contact')"
         >
           Contact Romanoti
