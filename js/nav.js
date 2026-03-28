@@ -1,14 +1,14 @@
 (function () {
   // ============================================================
   // Romanoti Solutions - Global nav.js
-  // Versión estable - cosmética + navegación consistente
+  // CHANGE #92
   // ------------------------------------------------------------
-  // OBJETIVO:
-  // - mantener la lógica estable
-  // - fijar el logo en una sola posición
-  // - mejorar espaciado del header
-  // - dar enlace principal a Services y Solutions
-  // - no tocar CRM
+  // Fixes included:
+  // - Services and Solutions have real clickable links
+  // - Dropdowns open from separate caret buttons
+  // - No invalid <a> inside <button>
+  // - Header spacing remains stable
+  // - CRM and language switch remain intact
   // ============================================================
 
   if (window.__ROMANOTI_NAV_BOOTED__) {
@@ -17,11 +17,6 @@
   }
   window.__ROMANOTI_NAV_BOOTED__ = true;
 
-  console.log('[nav] booting...');
-
-  // ============================================================
-  // 1) DETECCIÓN DE IDIOMA DESDE LA URL
-  // ============================================================
   const path = window.location.pathname || '/';
 
   let lang = 'en';
@@ -33,9 +28,6 @@
     lang = 'en';
   }
 
-  // ============================================================
-  // 2) TEXTOS POR IDIOMA
-  // ============================================================
   const I18N_MAP = {
     es: {
       brand: 'Romanoti Solutions',
@@ -49,24 +41,16 @@
       contact: 'Contacto',
       book: 'Agendar',
       staffLogin: 'Acceso Personal',
-
       helpDesk: 'Help Desk / ITSM',
       networksInfra: 'Redes e infraestructura',
       cybersecurity: 'Ciberseguridad',
       tools: 'Herramientas y diagnóstico',
-
       solutionsOverview: 'Resumen de soluciones',
       platformOverview: 'Resumen de plataforma',
       governmentBusiness: 'Government & Enterprise',
-
-      en: 'EN',
-      fr: 'FR',
-      es: 'ES',
-
       mobileCta: 'Soluciones',
       mobileStaffLogin: 'Acceso CRM'
     },
-
     en: {
       brand: 'Romanoti Solutions',
       home: 'Home',
@@ -79,24 +63,16 @@
       contact: 'Contact',
       book: 'Book Now',
       staffLogin: 'Staff Login',
-
       helpDesk: 'Help Desk / ITSM',
       networksInfra: 'Networks & Infrastructure',
       cybersecurity: 'Cybersecurity',
       tools: 'Tools & Diagnostics',
-
       solutionsOverview: 'Solutions Overview',
       platformOverview: 'Platform Overview',
       governmentBusiness: 'Government & Enterprise',
-
-      en: 'EN',
-      fr: 'FR',
-      es: 'ES',
-
       mobileCta: 'Solutions',
       mobileStaffLogin: 'CRM Login'
     },
-
     fr: {
       brand: 'Romanoti Solutions',
       home: 'Accueil',
@@ -109,20 +85,13 @@
       contact: 'Contact',
       book: 'Prendre RDV',
       staffLogin: 'Accès Équipe',
-
       helpDesk: 'Help Desk / ITSM',
       networksInfra: 'Réseaux et infrastructure',
       cybersecurity: 'Cybersécurité',
       tools: 'Outils et diagnostic',
-
       solutionsOverview: 'Aperçu des solutions',
       platformOverview: 'Aperçu de la plateforme',
       governmentBusiness: 'Government & Enterprise',
-
-      en: 'EN',
-      fr: 'FR',
-      es: 'ES',
-
       mobileCta: 'Solutions',
       mobileStaffLogin: 'Accès CRM'
     }
@@ -130,9 +99,6 @@
 
   const I18N = I18N_MAP[lang] || I18N_MAP.en;
 
-  // ============================================================
-  // 3) RUTAS REALES CONFIRMADAS
-  // ============================================================
   const ROUTES = {
     en: {
       home: '/',
@@ -145,23 +111,20 @@
       contact: '/contact.html',
       booking: '/booking.html',
       crmLogin: '/crm-login.html',
-
       services: [
         { key: 'helpDesk', href: '/services/helpdesk.html' },
         { key: 'networksInfra', href: '/services/networks.html' },
         { key: 'cybersecurity', href: '/services/cybersecurity.html' },
         { key: 'tools', href: '/services/tools.html' }
       ],
-
       solutions: [
         { key: 'solutionsOverview', href: '/solutions/index.html' },
         { key: 'platformOverview', href: '/platform/index.html' },
         { key: 'governmentBusiness', href: '/enterprise/government-business.html' }
       ]
     },
-
     fr: {
-      home: '/',
+      home: '/fr/',
       servicesIndex: '/services/index.html',
       solutionsIndex: '/solutions/index.html',
       platform: '/platform/index.html',
@@ -171,23 +134,20 @@
       contact: '/contact.html',
       booking: '/booking.html',
       crmLogin: '/crm-login.html',
-
       services: [
         { key: 'helpDesk', href: '/services/helpdesk.html' },
         { key: 'networksInfra', href: '/services/networks.html' },
         { key: 'cybersecurity', href: '/services/cybersecurity.html' },
         { key: 'tools', href: '/services/tools.html' }
       ],
-
       solutions: [
         { key: 'solutionsOverview', href: '/solutions/index.html' },
         { key: 'platformOverview', href: '/platform/index.html' },
         { key: 'governmentBusiness', href: '/enterprise/government-business.html' }
       ]
     },
-
     es: {
-      home: '/',
+      home: '/es/',
       servicesIndex: '/services/index.html',
       solutionsIndex: '/solutions/index.html',
       platform: '/platform/index.html',
@@ -197,14 +157,12 @@
       contact: '/contact.html',
       booking: '/booking.html',
       crmLogin: '/crm-login.html',
-
       services: [
         { key: 'helpDesk', href: '/services/helpdesk.html' },
         { key: 'networksInfra', href: '/services/networks.html' },
         { key: 'cybersecurity', href: '/services/cybersecurity.html' },
         { key: 'tools', href: '/services/tools.html' }
       ],
-
       solutions: [
         { key: 'solutionsOverview', href: '/solutions/index.html' },
         { key: 'platformOverview', href: '/platform/index.html' },
@@ -215,17 +173,9 @@
 
   const CURRENT = ROUTES[lang] || ROUTES.en;
 
-  // ============================================================
-  // 4) HELPERS PARA DROPDOWNS
-  // ============================================================
   function buildDropdownLinks(items) {
-    return items.map(item => {
-      if (item.divider) {
-        return '<div class="border-t my-1"></div>';
-      }
-
+    return items.map((item) => {
       const label = I18N[item.key] || item.key;
-
       return `
         <a href="${item.href}"
            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
@@ -239,15 +189,11 @@
   const servicesMenuHtml = buildDropdownLinks(CURRENT.services);
   const solutionsMenuHtml = buildDropdownLinks(CURRENT.solutions);
 
-  // ============================================================
-  // 5) HTML DEL HEADER
-  // ============================================================
   const html = `
   <header class="bg-white/95 backdrop-blur sticky top-0 z-50 border-b border-gray-100 shadow-sm" id="navHeader">
     <div class="max-w-screen-2xl mx-auto px-6 lg:px-8 xl:px-10 py-3.5">
       <div class="flex items-center justify-between gap-6 xl:gap-8">
 
-        <!-- LOGO -->
         <a href="${CURRENT.home}" class="flex items-center shrink-0 mr-4 xl:mr-6">
           <img
             src="/images/romanoti-logo-small.svg"
@@ -257,22 +203,23 @@
           >
         </a>
 
-        <!-- NAV -->
         <nav class="hidden md:flex items-center gap-4 lg:gap-5 xl:gap-6 flex-1 min-w-0 text-[13px] lg:text-[14px] xl:text-[15px]">
           <a href="${CURRENT.home}" class="text-gray-700 hover:text-blue-600 whitespace-nowrap">${I18N.home}</a>
 
-          <!-- SERVICES -->
           <div class="relative shrink-0" id="navServicesRoot">
-            <button id="navServicesBtn"
-                    class="text-gray-700 hover:text-blue-600 inline-flex items-center whitespace-nowrap"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                    aria-controls="navServicesMenu">
-              <a href="${CURRENT.servicesIndex}" class="inline-flex items-center">${I18N.services}</a>
-              <svg class="ml-1 w-4 h-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.58l3.71-3.35a.75.75 0 111.02 1.1l-4.2 3.79a.75.75 0 01-1.02 0l-4.2-3.79a.75.75 0 01.02-1.06z" clip-rule="evenodd"/>
-              </svg>
-            </button>
+            <div class="inline-flex items-center whitespace-nowrap">
+              <a href="${CURRENT.servicesIndex}" class="text-gray-700 hover:text-blue-600 whitespace-nowrap">${I18N.services}</a>
+              <button id="navServicesBtn"
+                      class="ml-1 text-gray-700 hover:text-blue-600 inline-flex items-center"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                      aria-controls="navServicesMenu"
+                      type="button">
+                <svg class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.58l3.71-3.35a.75.75 0 111.02 1.1l-4.2 3.79a.75.75 0 01-1.02 0l-4.2-3.79a.75.75 0 01.02-1.06z" clip-rule="evenodd"/>
+                </svg>
+              </button>
+            </div>
 
             <div id="navServicesMenu"
                  class="absolute left-0 mt-2 w-72 rounded-lg bg-white shadow-lg ring-1 ring-black/5 py-2 hidden z-40"
@@ -282,18 +229,20 @@
             </div>
           </div>
 
-          <!-- SOLUTIONS -->
           <div class="relative shrink-0" id="navSolutionsRoot">
-            <button id="navSolutionsBtn"
-                    class="text-gray-700 hover:text-blue-600 inline-flex items-center whitespace-nowrap"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                    aria-controls="navSolutionsMenu">
-              <a href="${CURRENT.solutionsIndex}" class="inline-flex items-center">${I18N.solutions}</a>
-              <svg class="ml-1 w-4 h-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.58l3.71-3.35a.75.75 0 111.02 1.1l-4.2 3.79a.75.75 0 01-1.02 0l-4.2-3.79a.75.75 0 01.02-1.06z" clip-rule="evenodd"/>
-              </svg>
-            </button>
+            <div class="inline-flex items-center whitespace-nowrap">
+              <a href="${CURRENT.solutionsIndex}" class="text-gray-700 hover:text-blue-600 whitespace-nowrap">${I18N.solutions}</a>
+              <button id="navSolutionsBtn"
+                      class="ml-1 text-gray-700 hover:text-blue-600 inline-flex items-center"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                      aria-controls="navSolutionsMenu"
+                      type="button">
+                <svg class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.58l3.71-3.35a.75.75 0 111.02 1.1l-4.2 3.79a.75.75 0 01-1.02 0l-4.2-3.79a.75.75 0 01.02-1.06z" clip-rule="evenodd"/>
+                </svg>
+              </button>
+            </div>
 
             <div id="navSolutionsMenu"
                  class="absolute left-0 mt-2 w-80 rounded-lg bg-white shadow-lg ring-1 ring-black/5 py-2 hidden z-40"
@@ -310,7 +259,6 @@
           <a href="${CURRENT.contact}" class="text-gray-700 hover:text-blue-600 whitespace-nowrap">${I18N.contact}</a>
         </nav>
 
-        <!-- ACTIONS -->
         <div class="hidden md:flex items-center gap-3 lg:gap-4 shrink-0 ml-3 lg:ml-4 xl:ml-6">
           <a href="${CURRENT.booking}"
              class="bg-blue-600 text-white px-4 lg:px-5 py-2.5 rounded-xl font-medium hover:bg-blue-700 transition whitespace-nowrap text-[13px] lg:text-[14px]">
@@ -328,7 +276,8 @@
                     class="text-gray-500 hover:text-blue-600 inline-flex items-center font-medium whitespace-nowrap text-[13px] lg:text-[14px]"
                     aria-haspopup="true"
                     aria-expanded="false"
-                    aria-controls="langMenu">
+                    aria-controls="langMenu"
+                    type="button">
               EN / FR / ES
               <svg class="ml-1 w-4 h-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                 <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.58l3.71-3.35a.75.75 0 111.02 1.1l-4.2 3.79a.75.75 0 01-1.02 0l-4.2-3.79a.75.75 0 01.02-1.06z" clip-rule="evenodd"/>
@@ -344,32 +293,19 @@
           </div>
         </div>
 
-        <!-- MOBILE ACTIONS -->
         <div class="md:hidden flex items-center gap-3">
-          <a href="${CURRENT.crmLogin}"
-             class="text-sm text-gray-600 hover:text-blue-600 font-medium">
-            ${I18N.mobileStaffLogin}
-          </a>
-          <a href="${CURRENT.home}" class="bg-blue-600 text-white px-4 py-2 rounded-lg">
-            ${I18N.mobileCta}
-          </a>
+          <a href="${CURRENT.crmLogin}" class="text-sm text-gray-600 hover:text-blue-600 font-medium">${I18N.mobileStaffLogin}</a>
+          <a href="${CURRENT.home}" class="bg-blue-600 text-white px-4 py-2 rounded-lg">${I18N.mobileCta}</a>
         </div>
       </div>
     </div>
   </header>`;
 
-  // ============================================================
-  // 6) MOUNT DEL HEADER
-  // ============================================================
   function mountHeader() {
     if (document.documentElement.getAttribute('data-nav-mounted') === '1') {
-      console.warn('[nav] Header already mounted, skipping mount.');
-      window.ROMANOTI_NAV_READY = true;
       return;
     }
-
     const mountPoint = document.getElementById('app-header');
-
     if (mountPoint) {
       mountPoint.innerHTML = html;
     } else {
@@ -377,109 +313,70 @@
       temp.innerHTML = html;
       document.body.insertBefore(temp.firstElementChild, document.body.firstChild);
     }
-
     document.documentElement.setAttribute('data-nav-mounted', '1');
-    window.ROMANOTI_NAV_READY = true;
   }
 
-  // ============================================================
-  // 7) NORMALIZACIÓN DE RUTA PARA CAMBIO DE IDIOMA
-  // ============================================================
   function cleanPath(pathname) {
     if (!pathname) return '/';
-
     let out = pathname.replace(/^\/(en|fr|es)(?=\/|$)/, '');
-
     if (!out) out = '/';
-
     out = out.replace(/\/{2,}/g, '/');
     out = out.replace(/\/index\.html$/i, '/');
-
     return out;
   }
 
-  // ============================================================
-  // 8) CAMBIO DE IDIOMA
-  // ============================================================
   async function goToLanguage(targetLang) {
-    try {
-      localStorage.setItem('lang', targetLang);
-    } catch (e) {}
-
+    try { localStorage.setItem('lang', targetLang); } catch (e) {}
     const currentPath = cleanPath(window.location.pathname);
-
     let prefix = '/en';
     let fallback = '/';
-
-    if (targetLang === 'fr') {
-      prefix = '/fr';
-      fallback = '/';
-    } else if (targetLang === 'es') {
-      prefix = '/es';
-      fallback = '/';
-    }
-
+    if (targetLang === 'fr') prefix = '/fr';
+    if (targetLang === 'es') prefix = '/es';
     const target = prefix + (currentPath.startsWith('/') ? currentPath : `/${currentPath}`);
-
     try {
       const res = await fetch(target, { method: 'HEAD', cache: 'no-store' });
-      if (res.ok) {
-        window.location.href = target + window.location.search + window.location.hash;
-      } else {
-        window.location.href = fallback;
-      }
+      if (res.ok) window.location.href = target + window.location.search + window.location.hash;
+      else window.location.href = fallback;
     } catch (_) {
       window.location.href = fallback;
     }
   }
 
-  // ============================================================
-  // 9) WIRING DE MENÚS
-  // ============================================================
   function wireDropdown(rootId, btnId, menuId) {
     const root = document.getElementById(rootId);
     const btn = document.getElementById(btnId);
     const menu = document.getElementById(menuId);
-
     if (!root || !btn || !menu || btn.dataset.wired) return;
 
     let closeTimer = null;
-
     const open = () => {
       clearTimeout(closeTimer);
       menu.classList.remove('hidden');
       btn.setAttribute('aria-expanded', 'true');
     };
-
     const close = () => {
       menu.classList.add('hidden');
       btn.setAttribute('aria-expanded', 'false');
     };
-
     const scheduleClose = () => {
       closeTimer = setTimeout(close, 180);
     };
 
     btn.addEventListener('mouseenter', open);
     menu.addEventListener('mouseenter', () => clearTimeout(closeTimer));
-
     btn.addEventListener('mouseleave', scheduleClose);
     menu.addEventListener('mouseleave', scheduleClose);
-
     btn.addEventListener('click', (e) => {
       e.preventDefault();
       e.stopPropagation();
       menu.classList.contains('hidden') ? open() : close();
     });
-
     document.addEventListener('click', (e) => {
       if (!root.contains(e.target)) close();
     });
-
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') close();
     });
-
     root.style.overflow = 'visible';
     btn.dataset.wired = '1';
   }
@@ -487,58 +384,35 @@
   function wireLanguageMenu() {
     const langBtn = document.getElementById('langBtn');
     const langMenu = document.getElementById('langMenu');
-
     if (!langBtn || !langMenu || langBtn.dataset.wired) return;
-
     const close = () => langMenu.classList.add('hidden');
-
     langBtn.addEventListener('click', (e) => {
       e.preventDefault();
       e.stopPropagation();
       langMenu.classList.toggle('hidden');
     });
-
     document.addEventListener('click', (e) => {
-      if (!langMenu.contains(e.target) && e.target !== langBtn) {
-        close();
-      }
+      if (!langMenu.contains(e.target) && e.target !== langBtn) close();
     });
-
     langMenu.querySelectorAll('a[data-lang]').forEach(link => {
       link.addEventListener('click', (e) => {
         e.preventDefault();
-        const targetLang = link.dataset.lang || 'en';
-        goToLanguage(targetLang);
+        goToLanguage(link.dataset.lang || 'en');
       });
     });
-
     langBtn.dataset.wired = '1';
   }
 
-  function wireMenus() {
+  function boot() {
+    mountHeader();
     wireDropdown('navServicesRoot', 'navServicesBtn', 'navServicesMenu');
     wireDropdown('navSolutionsRoot', 'navSolutionsBtn', 'navSolutionsMenu');
     wireLanguageMenu();
   }
 
-  // ============================================================
-  // 10) BOOT
-  // ============================================================
-  function boot() {
-    mountHeader();
-    wireMenus();
-    console.log('[nav] mounted & wired');
-  }
-
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
-      boot();
-      setTimeout(wireMenus, 200);
-      setTimeout(wireMenus, 800);
-    });
+    document.addEventListener('DOMContentLoaded', boot);
   } else {
     boot();
-    setTimeout(wireMenus, 200);
-    setTimeout(wireMenus, 800);
   }
 })();
