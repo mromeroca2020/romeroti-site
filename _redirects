@@ -1,37 +1,40 @@
 /assets/*    /assets/:splat    200
 
-# ============================================================
-# 🔧 FIX: Se añadió este bloque para que Netlify sirva la página
-# /services/tools.html correctamente, evitando que sea redirigida
-# por el catch-all "/* /index.html 200" (que captura todo).
-# Las rutas específicas deben ir SIEMPRE antes del catch-all.
-# ============================================================
+# Core explicit routes
+/                /index.html                             200
+/index           /index.html                             200
+/index.html      /index.html                             200
+/booking         /booking.html                           200
+/services        /services/index.html                    200
+/services/       /services/index.html                    200
+/solutions       /solutions/index.html                   200
+/solutions/      /solutions/index.html                   200
+/platform        /platform/index.html                    200
+/platform/       /platform/index.html                    200
+/enterprise      /enterprise/government-business.html    200
+/enterprise/     /enterprise/government-business.html    200
+/how-we-work     /how-we-work.html                       200
+/contact         /contact.html                           200
 
-/services/tools.html    /services/tools.html    200
-/services/tools         /services/tools.html    200
-/services/tools/*       /services/tools/:splat  200
-/booking                /booking.html           200
+# Service routes
+/services/helpdesk    /services/helpdesk.html            200
+/services/networks    /services/networks.html            200
+/services/cybersecurity /services/cybersecurity.html     200
+/services/tools       /services/tools.html               200
 
-# ============================================================
-# ⚠️ IMPORTANTE: El catch-all se deja después para que siga
-# manejando las demás rutas del sitio (SPA, páginas dinámicas, etc.)
-# ============================================================
-
-/*           /index.html       200
-
-# ============================================================
-# 🔁 Reglas originales de páginas específicas y redirecciones
-# Se mantienen sin cambios.
-# ============================================================
-
+# Existing mapped routes
 /soc/console    /solutions/cybershield/soc-console.html 200
 /soc-console    /solutions/cybershield/soc-console.html 200
 /solutions/cybershield/quick-audit     /solutions/cybershield/quick-audit.html 200!
 /solutions/cybershield/quick-audit/    /solutions/cybershield/quick-audit.html 200!
-/solutions/cybershield/quick-audit     /solutions/cybershield/quick-audit.html 200
 /en/solutions/cybershield/quick-audit  /en/solutions/cybershield/quick-audit.html 200
 /fr/solutions/cybershield/quick-audit  /fr/solutions/cybershield/quick-audit.html 200
+
+# Canonical domain redirects
 http://romanoti-solutions.com/*                https://romanoti-solutions.com/:splat  301!
 http://www.romanoti-solutions.com/*            https://romanoti-solutions.com/:splat  301!
 https://www.romanoti-solutions.com/*           https://romanoti-solutions.com/:splat  301!
 https://*.netlify.app/*                        https://romanoti-solutions.com/:splat  301!
+
+# Keep catch-all last
+/*           /index.html       200
