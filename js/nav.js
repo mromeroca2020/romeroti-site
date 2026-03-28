@@ -128,7 +128,7 @@
       servicesIndex: '/fr/services/index.html',
       solutionsIndex: '/fr/solutions/index.html',
       platform: '/fr/platform/index.html',
-      enterprise: '/fr/enterprise/government-business.html',
+      enterprise: '/fr/entreprise/government-business.html',
       whyRomanoti: '/fr/solutions/why-romanoti.html',
       howWeWork: '/fr/how-we-work.html',
       contact: '/fr/contact.html',
