@@ -2,191 +2,215 @@
 <html lang="fr">
 
 <head>
+  <!-- ========================================================= -->
+  <!-- Romanoti Solutions — Service Help Desk / ITSM             -->
+  <!-- ========================================================= -->
 
-<!-- ========================================================= -->
-<!-- Romanoti Solutions — Service Help Desk / ITSM             -->
-<!-- ========================================================= -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Service Help Desk / ITSM | Romanoti Solutions</title>
 
-<title>Service Help Desk / ITSM | Romanoti Solutions</title>
-
-<meta name="description"
-content="Romanoti fournit des services Help Desk et ITSM structurés pour assurer la stabilité opérationnelle, la gestion des incidents et le support technique dans les environnements d'entreprise.">
-
-<!-- Tailwind UI -->
-<script src="https://cdn.tailwindcss.com"></script>
-
-<!-- Romanoti dynamic navigation -->
+  <meta name="description"
+    content="Romanoti fournit des services Help Desk et ITSM structurés pour assurer la stabilité opérationnelle, la gestion des incidents et le support technique dans les environnements d'entreprise.">
 
   <link rel="stylesheet" href="/css/styles.css">
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
-</head>
 
+  <style>
+    body{
+      font-family:'Montserrat',sans-serif;
+    }
+
+    .hero-dark{
+      background:linear-gradient(135deg,#050b16 0%,#081120 55%,#0b1830 100%);
+      color:#fff;
+    }
+
+    .section-eyebrow{
+      display:inline-block;
+      font-size:12px;
+      font-weight:700;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      color:#93c5fd;
+      margin-bottom:12px;
+    }
+
+    .card-soft{
+      border:1px solid #e5e7eb;
+      border-radius:18px;
+      background:#fff;
+      box-shadow:0 12px 32px -16px rgba(2,6,23,.14);
+    }
+
+    .cta-dark{
+      background:linear-gradient(135deg,#050b16 0%,#081120 55%,#0b1830 100%);
+      color:#fff;
+      border-radius:28px;
+      box-shadow:0 20px 40px -24px rgba(2,6,23,.45);
+    }
+  </style>
+
+  <script defer src="/js/nav.js?v=8"></script>
+</head>
 
 <body class="bg-white text-gray-900 antialiased">
   <div id="app-header"></div>
 
-<!-- NAVIGATION -->
+  <main>
 
+    <!-- HERO -->
+    <section class="hero-dark py-20 md:py-24">
+      <div class="max-w-6xl mx-auto px-6">
 
-<main>
+        <span class="section-eyebrow">Services</span>
 
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 leading-tight text-white">
+          Service Help Desk / ITSM
+        </h1>
 
-<!-- ========================================================= -->
-<!-- HERO                                                      -->
-<!-- ========================================================= -->
+        <p class="text-lg md:text-xl text-slate-200 max-w-3xl mb-8 leading-relaxed">
+          Romanoti fournit un support technique structuré, la gestion des incidents
+          et la continuité opérationnelle afin de maintenir la stabilité des services IT
+          dans les organisations modernes.
+        </p>
 
-<section class="bg-blue-700 text-white py-20">
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="/fr/contact.html"
+             class="inline-flex items-center justify-center bg-white text-blue-700 px-6 py-3 rounded-xl font-semibold hover:bg-gray-100 transition">
+            Contacter Romanoti
+          </a>
 
-<div class="max-w-6xl mx-auto px-6">
+          <a href="/fr/booking.html"
+             class="inline-flex items-center justify-center border border-white text-white px-6 py-3 rounded-xl font-semibold hover:bg-white/5 transition">
+            Prendre rendez-vous
+          </a>
+        </div>
+      </div>
+    </section>
 
-<p class="text-blue-200 uppercase tracking-widest text-sm mb-3">
-SERVICES
-</p>
+    <!-- OPERATIONAL SUPPORT -->
+    <section class="py-20 bg-white">
+      <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-start">
 
-<h1 class="text-4xl md:text-5xl font-bold mb-6">
-Service Help Desk / ITSM
-</h1>
+        <div>
+          <span class="inline-block text-sm font-semibold uppercase tracking-[0.18em] text-blue-600 mb-3">
+            Support opérationnel
+          </span>
 
-<p class="text-lg text-blue-100 max-w-2xl mb-8">
-Romanoti fournit un support technique structuré, la gestion des incidents et
-la continuité opérationnelle afin de maintenir la stabilité des services IT
-dans les organisations modernes.
-</p>
+          <h2 class="text-3xl md:text-4xl font-extrabold mb-6 text-gray-900 tracking-tight">
+            Support IT opérationnel fiable
+          </h2>
 
-<div class="flex gap-4">
+          <p class="mb-4 text-gray-700 leading-relaxed">
+            Les services Help Desk de Romanoti fournissent une couche opérationnelle
+            structurée, responsable de la gestion des incidents, des demandes de service
+            et du support technique dans l’ensemble de l’organisation.
+          </p>
 
-<a href="/fr/contact.html"
-class="bg-white text-blue-700 px-6 py-3 rounded-lg font-semibold">
+          <p class="text-gray-700 leading-relaxed">
+            Nos opérations de support suivent des processus disciplinés afin de réduire
+            les interruptions de service, d’améliorer la réactivité et de maintenir
+            la stabilité des environnements informatiques.
+          </p>
+        </div>
 
-Contacter Romanoti
+        <div class="card-soft p-8 bg-gray-50">
+          <h3 class="font-bold text-xl mb-4 text-gray-900">
+            Activités de support typiques
+          </h3>
 
-</a>
+          <ul class="space-y-3 text-gray-700 leading-relaxed">
+            <li>• Assistance technique aux utilisateurs</li>
+            <li>• Identification et résolution d’incidents</li>
+            <li>• Gestion des demandes de service</li>
+            <li>• Dépannage à distance</li>
+            <li>• Suivi du cycle de vie des tickets</li>
+            <li>• Escalade vers des ingénieurs spécialisés</li>
+          </ul>
+        </div>
 
-<a href="/fr/contact.html"
-class="border border-white px-6 py-3 rounded-lg font-semibold">
+      </div>
+    </section>
 
-Prendre rendez-vous
+    <!-- BENEFITS -->
+    <section class="py-20 bg-gray-50">
+      <div class="max-w-6xl mx-auto px-6">
 
-</a>
+        <div class="text-center mb-12">
+          <span class="inline-block text-sm font-semibold uppercase tracking-[0.18em] text-blue-600 mb-3">
+            Pourquoi Romanoti
+          </span>
 
-</div>
+          <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 tracking-tight">
+            Pourquoi les organisations choisissent Romanoti
+          </h2>
+        </div>
 
-</div>
-</section>
+        <div class="grid md:grid-cols-3 gap-8">
 
+          <div class="card-soft p-7">
+            <h3 class="font-bold text-xl mb-3 text-gray-900">Discipline opérationnelle</h3>
+            <p class="text-gray-600 leading-relaxed">
+              Une gestion structurée des tickets et une réponse plus claire
+              pour soutenir la continuité des opérations.
+            </p>
+          </div>
 
-<!-- ========================================================= -->
-<!-- OPERATIONAL SUPPORT                                       -->
-<!-- ========================================================= -->
+          <div class="card-soft p-7">
+            <h3 class="font-bold text-xl mb-3 text-gray-900">Expertise technique</h3>
+            <p class="text-gray-600 leading-relaxed">
+              Les ingénieurs Romanoti apportent une expérience concrète
+              des environnements IT d’entreprise.
+            </p>
+          </div>
 
-<section class="py-20">
+          <div class="card-soft p-7">
+            <h3 class="font-bold text-xl mb-3 text-gray-900">Visibilité claire</h3>
+            <p class="text-gray-600 leading-relaxed">
+              Les organisations obtiennent une meilleure visibilité sur les incidents,
+              les tendances et les performances du support.
+            </p>
+          </div>
 
-<div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12">
+        </div>
+      </div>
+    </section>
 
-<div>
+    <!-- CTA FINAL -->
+    <section class="py-20 bg-white">
+      <div class="max-w-5xl mx-auto px-6">
+        <div class="cta-dark p-8 md:p-12 text-center">
+          <h2 class="text-3xl md:text-4xl font-extrabold mb-4 text-white">
+            Besoin d’un support IT plus structuré ?
+          </h2>
 
-<h2 class="text-3xl font-semibold mb-6">
-Support IT opérationnel fiable
-</h2>
+          <p class="text-lg text-slate-300 mb-8 max-w-3xl mx-auto leading-relaxed">
+            Romanoti peut vous aider à améliorer la gestion des incidents,
+            la continuité opérationnelle et la qualité globale du support technique.
+          </p>
 
-<p class="mb-4 text-gray-700">
-Les services Help Desk de Romanoti fournissent une couche opérationnelle
-structurée responsable de la gestion des incidents, des demandes de service
-et du support technique dans toute l'organisation.
-</p>
+          <div class="flex flex-col sm:flex-row justify-center gap-4">
+            <a href="/fr/booking.html"
+               class="inline-flex items-center justify-center bg-white text-blue-700 px-6 py-3 rounded-xl font-semibold hover:bg-gray-100 transition">
+              Prendre rendez-vous
+            </a>
 
-<p class="text-gray-700">
-Nos opérations de support suivent des processus disciplinés afin de réduire
-les interruptions de service et de maintenir la stabilité des environnements
-informatiques.
-</p>
+            <a href="/fr/contact.html"
+               class="inline-flex items-center justify-center border border-slate-600 text-white px-6 py-3 rounded-xl font-semibold hover:bg-white/5 transition">
+              Contacter Romanoti
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
 
-</div>
-
-<div class="bg-gray-50 p-8 rounded-xl border">
-
-<h3 class="font-semibold text-xl mb-4">
-Activités de support typiques
-</h3>
-
-<ul class="space-y-2 text-gray-700">
-
-<li>Assistance technique aux utilisateurs</li>
-<li>Identification et résolution d'incidents</li>
-<li>Gestion des demandes de service</li>
-<li>Dépannage à distance</li>
-<li>Suivi du cycle de vie des tickets</li>
-<li>Escalade vers des ingénieurs spécialisés</li>
-
-</ul>
-
-</div>
-
-</div>
-</section>
-
-
-<!-- ========================================================= -->
-<!-- BENEFITS                                                  -->
-<!-- ========================================================= -->
-
-<section class="py-20 bg-gray-50">
-
-<div class="max-w-6xl mx-auto px-6">
-
-<h2 class="text-3xl font-semibold mb-12 text-center">
-Pourquoi les organisations choisissent Romanoti
-</h2>
-
-
-<div class="grid md:grid-cols-3 gap-10">
-
-<div>
-<h3 class="font-semibold text-xl mb-2">Discipline opérationnelle</h3>
-<p class="text-gray-600">
-Gestion structurée des tickets et réponse rapide pour garantir
-la continuité des opérations.
-</p>
-</div>
-
-
-<div>
-<h3 class="font-semibold text-xl mb-2">Expertise technique</h3>
-<p class="text-gray-600">
-Les ingénieurs Romanoti possèdent une expérience réelle
-dans les environnements IT d'entreprise.
-</p>
-</div>
-
-
-<div>
-<h3 class="font-semibold text-xl mb-2">Visibilité claire</h3>
-<p class="text-gray-600">
-Les organisations obtiennent une visibilité sur les incidents,
-les tendances et les performances du support.
-</p>
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-</main>
-
-
-<!-- FOOTER -->
-
-
+  </main>
 
   <div id="app-footer"></div>
-  <script src="/js/nav.js"></script>
-  <script src="/js/footer.js"></script>
+  <script defer src="/js/footer.js?v=8"></script>
+  <script defer src="/js/fix-nav.js?v=8"></script>
 </body>
 </html>
