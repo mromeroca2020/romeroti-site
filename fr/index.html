@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>RomanoTI Solutions | Infrastructure TI & Cybersécurité</title>
+  <title>Romanoti Solutions | Infrastructure TI & Cybersécurité</title>
 
   <!-- Favicons -->
   <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
@@ -11,162 +11,293 @@
   <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16.png">
   <link rel="shortcut icon" href="/favicon.ico">
   <link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#2563eb">
-  <meta name="theme-color" content="#2563eb">
+  <meta name="theme-color" content="#081120">
 
   <!-- Tailwind + Montserrat -->
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
 
   <style>
-    body{font-family:'Montserrat',sans-serif;background:#f8f9fa;color:#111827;scroll-behavior:smooth}
-    .hero-bg{background:linear-gradient(135deg,#1e3a8a 0%,#2563eb 100%)}
-    .btn-primary{background:#2563EB;transition:all .2s}
-    .btn-primary:hover{background:#1D4ED8;transform:translateY(-1px);box-shadow:0 6px 18px -10px rgba(37,99,235,.7)}
-    .card{border-radius:14px;box-shadow:0 12px 32px -16px rgba(2,6,23,.2)}
-    .badge{display:inline-block;border:1px solid #cbd5e1;border-radius:999px;padding:4px 10px;font-size:12px;background:#f8fafc}
+    body{
+      font-family:'Montserrat',sans-serif;
+      background:#f8f9fa;
+      color:#111827;
+      scroll-behavior:smooth;
+    }
+
+    .hero-dark{
+      background:linear-gradient(135deg,#050b16 0%,#081120 55%,#0b1830 100%);
+      color:#fff;
+    }
+
+    .btn-primary{
+      background:#2563EB;
+      transition:all .2s;
+    }
+
+    .btn-primary:hover{
+      background:#1D4ED8;
+      transform:translateY(-1px);
+      box-shadow:0 6px 18px -10px rgba(37,99,235,.7);
+    }
+
+    .card{
+      border-radius:16px;
+      box-shadow:0 12px 32px -16px rgba(2,6,23,.16);
+      border:1px solid #e5e7eb;
+      background:#fff;
+    }
+
+    .badge{
+      display:inline-block;
+      border:1px solid rgba(255,255,255,.18);
+      border-radius:999px;
+      padding:8px 14px;
+      font-size:12px;
+      font-weight:600;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      background:rgba(255,255,255,.06);
+      color:#93c5fd;
+    }
+
+    .section-eyebrow{
+      display:inline-block;
+      font-size:12px;
+      font-weight:700;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      color:#2563eb;
+      margin-bottom:12px;
+    }
+
+    .cta-dark{
+      background:linear-gradient(135deg,#050b16 0%,#081120 55%,#0b1830 100%);
+      color:#fff;
+      border-radius:28px;
+      box-shadow:0 20px 40px -24px rgba(2,6,23,.45);
+    }
   </style>
-  <link rel="stylesheet" href="/css/styles.css">
+
+  <script defer src="/js/nav.js?v=8"></script>
 </head>
-<body class="bg-gray-50">
+
+<body class="bg-gray-50 text-gray-900 antialiased">
   <div id="app-header"></div>
 
-  <!-- Punto de montaje del header global -->
-  <!-- ===== En-tête Fallback (Français) ===== -->
-  <!-- ===== Header fallback (se oculta cuando nav.js monta el real) ===== -->
-  
+  <main>
 
-  <!-- ===== Hero ===== -->
-  <section class="hero-bg text-white">
-    <div class="container mx-auto px-6 py-20 text-center">
-      <h1 class="text-4xl md:text-5xl font-bold mb-6">Infrastructure TI & Cybersécurité professionnelles</h1>
-      <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
-        Expertise certifiée Microsoft & Cisco, détection 24/7, confinement rapide des incidents et moins d’interruptions.
-      </p>
-      <div class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-6">
-        <a href="tel:4386309157" class="btn-primary text-white px-8 py-3 rounded-lg font-semibold">Assistance d’urgence</a>
-        <a href="https://calendly.com/mauricioromeroca" class="bg-white text-blue-700 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100">
-          Réserver une consultation gratuite
-        </a>
-      </div>
-    </div>
-  </section>
+    <!-- HERO -->
+    <section class="hero-dark">
+      <div class="container mx-auto px-6 py-20 md:py-24">
+        <div class="max-w-5xl mx-auto text-center">
+          <span class="badge">Infrastructure • Cybersécurité • Continuité</span>
 
-  <!-- ===== Bandeau EASM ===== -->
-  <section class="bg-blue-50 border-t border-b border-blue-100">
-    <div class="container mx-auto px-6 py-4 flex flex-col md:flex-row items-center justify-between gap-3">
-      <div class="text-blue-900 font-semibold">
-        Votre domaine est-il exposé&nbsp;? Lancez un scan EASM rapide.
-      </div>
-      <div class="flex gap-3">
-        <a href="/fr/solutions/cybershield/easm-console.html" class="bg-white border px-5 py-2 rounded-lg font-medium hover:bg-gray-50">
-          Voir la démo EASM
-        </a>
-        <a href="/fr/solutions/cybershield/" class="btn-primary text-white px-5 py-2 rounded-lg font-medium">
-          Découvrir CyberShield (MDR)
-        </a>
-      </div>
-    </div>
-  </section>
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold mt-6 mb-6 leading-tight text-white">
+            Infrastructure TI et cybersécurité<br class="hidden md:block">
+            professionnelles
+          </h1>
 
-  <!-- ===== À propos ===== -->
-  <section id="about-us" class="py-14 bg-white">
-    <div class="container mx-auto px-6">
-      <div class="text-center mb-10">
-        <h2 class="text-3xl font-bold">À propos de RomanoTI Solutions</h2>
-        <p class="text-xl text-gray-600 max-w-2xl mx-auto">Plus de 10 ans d’excellence en infrastructure TI et cybersécurité</p>
-      </div>
-      <div class="max-w-4xl mx-auto text-lg text-gray-700 space-y-6">
-        <p>RomanoTI Solutions apporte plus de 10 ans d’expérience pratique en infrastructure TI d’entreprise, migration vers le cloud et cybersécurité. Nous aidons les PME à sécuriser leurs données, optimiser leurs réseaux et migrer vers des plateformes cloud modernes.</p>
-        <p>Chaque entreprise est unique&nbsp;: nous adaptons nos services à vos besoins.</p>
-      </div>
-    </div>
-  </section>
+          <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto text-blue-50 leading-relaxed">
+            Expertise Microsoft et Cisco, meilleure visibilité technique,
+            détection plus rapide des incidents et moins d’interruptions
+            pour vos opérations.
+          </p>
 
-  <!-- ===== Pourquoi nous choisir ===== -->
-  <section class="py-14">
-    <div class="container mx-auto px-6">
-      <div class="text-center mb-10">
-        <h2 class="text-3xl font-bold">Pourquoi nous choisir pour la cybersécurité</h2>
-        <p class="text-xl text-gray-600 max-w-3xl mx-auto">Moins de surface d’attaque, détection plus précoce et réponses guidées.</p>
-      </div>
+          <div class="flex flex-col md:flex-row justify-center gap-4 md:gap-6">
+            <a href="tel:4386309157" class="btn-primary text-white px-8 py-3 rounded-xl font-semibold inline-flex items-center justify-center">
+              Assistance d’urgence
+            </a>
 
-      <div class="grid md:grid-cols-3 gap-6">
-        <div class="card bg-white p-6">
-          <div class="badge">EASM + Hardening</div>
-          <h3 class="text-xl font-bold mt-2 mb-2">Nous réduisons l’exposition</h3>
-          <p class="text-gray-600">Découverte de sous-domaines, ports et posture email (SPF/DMARC/DKIM) pour fermer les failles avant une attaque.</p>
-          <a href="/fr/solutions/cybershield/easm-console.html" class="text-blue-600 hover:underline mt-3 inline-block">Essayer EASM →</a>
-        </div>
-        <div class="card bg-white p-6">
-          <div class="badge">SOC / MDR 24×7</div>
-          <h3 class="text-xl font-bold mt-2 mb-2">Détection & Réponse</h3>
-          <p class="text-gray-600">Corrélation d’événements (Wazuh/ELK), IOCs/IOAs et playbooks de confinement&nbsp;: isoler l’hôte, bloquer IP, réinitialiser les identifiants.</p>
-          <a href="/fr/it-soc.html" class="text-blue-600 hover:underline mt-3 inline-block">Voir le SOC →</a>
-        </div>
-        <div class="card bg-white p-6">
-          <div class="badge">NOC + Résilience</div>
-          <h3 class="text-xl font-bold mt-2 mb-2">Disponibilité d’abord</h3>
-          <p class="text-gray-600">Supervision des services (HTTP/TLS/DNS) et de capacité&nbsp;; rapports exécutifs pour planifier la croissance sans surprises.</p>
-          <a href="/fr/it-noc.html" class="text-blue-600 hover:underline mt-3 inline-block">Voir le NOC →</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== Services clés ===== -->
-  <section id="services" class="py-14">
-    <div class="container mx-auto px-6">
-      <div class="text-center mb-10">
-        <h2 class="text-3xl font-bold">Services clés</h2>
-        <p class="text-xl text-gray-600 max-w-2xl mx-auto">Solutions TI complètes adaptées à votre entreprise</p>
-      </div>
-
-      <div class="grid md:grid-cols-3 gap-6">
-        <div class="card bg-white p-6">
-          <h3 class="text-xl font-bold mb-2">Migration vers le Cloud</h3>
-          <p class="text-gray-600">Transition fluide vers Microsoft Azure.</p>
-          <div class="mt-4 space-y-2">
-            <a href="/fr/cloud-redundancy.html" class="text-blue-600 hover:underline text-sm">→ Basculement & Redondance</a><br/>
-            <a href="/fr/cloud-hybrid.html" class="text-blue-600 hover:underline text-sm">→ Architecture Cloud Hybride</a>
-          </div>
-        </div>
-
-        <div class="card bg-white p-6">
-          <h3 class="text-xl font-bold mb-2">Infrastructure TI</h3>
-          <p class="text-gray-600">Gestion de bout en bout de votre stack technologique.</p>
-          <div class="mt-4 space-y-2">
-            <a href="/fr/it-noc.html" class="text-blue-600 hover:underline text-sm">→ Services NOC</a><br/>
-            <a href="/fr/it-soc.html" class="text-blue-600 hover:underline text-sm">→ Services SOC</a>
-          </div>
-        </div>
-
-        <div class="card bg-white p-6">
-          <h3 class="text-xl font-bold mb-2">Cybersécurité</h3>
-          <p class="text-gray-600">Protection contre les rançongiciels et les fuites de données.</p>
-          <div class="mt-4 flex flex-wrap gap-3">
-            <a href="/fr/solutions/cybershield/" class="btn-primary text-white px-4 py-2 rounded-lg inline-block">Explorer CyberShield</a>
-            <a href="/fr/solutions/cybershield/easm-console.html" class="border px-4 py-2 rounded-lg inline-block hover:bg-gray-50">Démo EASM</a>
+            <a href="https://calendly.com/mauricioromeroca" class="bg-white text-blue-700 px-8 py-3 rounded-xl font-semibold hover:bg-gray-100 inline-flex items-center justify-center">
+              Réserver une consultation gratuite
+            </a>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ===== CTA final ===== -->
-  <section class="py-14 bg-blue-700 text-white">
-    <div class="container mx-auto px-6 text-center">
-      <h2 class="text-3xl font-bold mb-4">Prêt à réduire les risques et les arrêts&nbsp;?</h2>
-      <p class="text-lg opacity-90 mb-6">Planifions une évaluation de posture de 20&nbsp;minutes.</p>
-      <div class="flex flex-col md:flex-row justify-center gap-4">
-        <a href="https://calendly.com/mauricioromeroca" class="bg-white text-blue-700 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100">Réserver un appel</a>
-        <a href="/fr/services/tools.html" class="btn-primary text-white px-6 py-3 rounded-lg font-semibold">Ouvrir Tools</a>
+    <!-- BANDEAU EASM -->
+    <section class="bg-blue-50 border-t border-b border-blue-100">
+      <div class="container mx-auto px-6 py-4 flex flex-col md:flex-row items-center justify-between gap-3">
+        <div class="text-blue-900 font-semibold text-center md:text-left">
+          Votre domaine est-il exposé ? Lancez une vérification EASM rapide.
+        </div>
+
+        <div class="flex flex-wrap justify-center gap-3">
+          <a href="/fr/solutions/cybershield/easm-console.html" class="bg-white border px-5 py-2 rounded-lg font-medium hover:bg-gray-50">
+            Voir la démo EASM
+          </a>
+
+          <a href="/fr/solutions/cybershield/" class="btn-primary text-white px-5 py-2 rounded-lg font-medium">
+            Découvrir CyberShield (MDR)
+          </a>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Footer global -->
+    <!-- À PROPOS -->
+    <section id="about-us" class="py-16 bg-white">
+      <div class="container mx-auto px-6 max-w-6xl">
+        <div class="text-center mb-10">
+          <span class="section-eyebrow">À propos</span>
+          <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4">
+            À propos de Romanoti Solutions
+          </h2>
+          <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+            Plus de 10 ans d’expérience pratique en infrastructure TI, cloud et cybersécurité.
+          </p>
+        </div>
 
-  <!-- Quita el fallback sólo si el header real ya está montado -->
+        <div class="max-w-4xl mx-auto text-lg text-gray-700 space-y-6 leading-relaxed">
+          <p>
+            Romanoti Solutions apporte une expérience concrète en infrastructure TI d’entreprise,
+            en migration vers le cloud et en cybersécurité. Nous aidons les PME à mieux protéger
+            leurs données, à optimiser leurs réseaux et à évoluer vers des environnements modernes.
+          </p>
+
+          <p>
+            Chaque entreprise a sa réalité. Nous adaptons donc nos services à votre contexte,
+            à vos priorités et à vos contraintes opérationnelles.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- POURQUOI NOUS CHOISIR -->
+    <section class="py-16 bg-gray-50">
+      <div class="container mx-auto px-6 max-w-6xl">
+        <div class="text-center mb-10">
+          <span class="section-eyebrow">Pourquoi nous choisir</span>
+          <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4">
+            Pourquoi nous choisir pour la cybersécurité
+          </h2>
+          <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+            Moins de surface d’attaque, une détection plus rapide et des réponses mieux guidées.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6">
+          <div class="card p-6">
+            <div class="inline-block border border-slate-200 rounded-full px-3 py-1 text-xs font-semibold bg-slate-50 text-slate-600">EASM + Hardening</div>
+            <h3 class="text-xl font-bold mt-4 mb-3 text-gray-900">Nous réduisons l’exposition</h3>
+            <p class="text-gray-600 leading-relaxed">
+              Découverte des sous-domaines, des ports exposés et de la posture email
+              (SPF/DMARC/DKIM) afin de réduire les failles avant qu’un incident ne survienne.
+            </p>
+            <a href="/fr/solutions/cybershield/easm-console.html" class="text-blue-600 hover:underline mt-4 inline-block font-medium">
+              Essayer EASM →
+            </a>
+          </div>
+
+          <div class="card p-6">
+            <div class="inline-block border border-slate-200 rounded-full px-3 py-1 text-xs font-semibold bg-slate-50 text-slate-600">SOC / MDR 24×7</div>
+            <h3 class="text-xl font-bold mt-4 mb-3 text-gray-900">Détection et réponse</h3>
+            <p class="text-gray-600 leading-relaxed">
+              Corrélation des événements, détection d’indicateurs suspects et playbooks
+              de confinement pour isoler plus rapidement les impacts.
+            </p>
+            <a href="/fr/it-soc.html" class="text-blue-600 hover:underline mt-4 inline-block font-medium">
+              Voir le SOC →
+            </a>
+          </div>
+
+          <div class="card p-6">
+            <div class="inline-block border border-slate-200 rounded-full px-3 py-1 text-xs font-semibold bg-slate-50 text-slate-600">NOC + Résilience</div>
+            <h3 class="text-xl font-bold mt-4 mb-3 text-gray-900">Disponibilité d’abord</h3>
+            <p class="text-gray-600 leading-relaxed">
+              Supervision des services, des dépendances critiques et de la capacité afin de
+              soutenir la continuité et la croissance sans mauvaise surprise.
+            </p>
+            <a href="/fr/it-noc.html" class="text-blue-600 hover:underline mt-4 inline-block font-medium">
+              Voir le NOC →
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES CLÉS -->
+    <section id="services" class="py-16 bg-white">
+      <div class="container mx-auto px-6 max-w-6xl">
+        <div class="text-center mb-10">
+          <span class="section-eyebrow">Services clés</span>
+          <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4">
+            Services clés
+          </h2>
+          <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+            Des services TI structurés et adaptés aux besoins réels de votre entreprise.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6">
+          <div class="card p-6">
+            <h3 class="text-xl font-bold mb-3 text-gray-900">Migration vers le cloud</h3>
+            <p class="text-gray-600 leading-relaxed">
+              Une transition plus fluide vers des environnements Microsoft Azure et hybrides.
+            </p>
+            <div class="mt-4 space-y-2">
+              <a href="/fr/cloud-redundancy.html" class="text-blue-600 hover:underline text-sm font-medium">→ Basculement et redondance</a><br/>
+              <a href="/fr/cloud-hybrid.html" class="text-blue-600 hover:underline text-sm font-medium">→ Architecture cloud hybride</a>
+            </div>
+          </div>
+
+          <div class="card p-6">
+            <h3 class="text-xl font-bold mb-3 text-gray-900">Infrastructure TI</h3>
+            <p class="text-gray-600 leading-relaxed">
+              Gestion plus structurée de votre environnement technique, de la visibilité à l’exploitation.
+            </p>
+            <div class="mt-4 space-y-2">
+              <a href="/fr/it-noc.html" class="text-blue-600 hover:underline text-sm font-medium">→ Services NOC</a><br/>
+              <a href="/fr/it-soc.html" class="text-blue-600 hover:underline text-sm font-medium">→ Services SOC</a>
+            </div>
+          </div>
+
+          <div class="card p-6">
+            <h3 class="text-xl font-bold mb-3 text-gray-900">Cybersécurité</h3>
+            <p class="text-gray-600 leading-relaxed">
+              Réduction des risques, meilleure visibilité et renforcement de la posture de sécurité.
+            </p>
+            <div class="mt-4 flex flex-wrap gap-3">
+              <a href="/fr/solutions/cybershield/" class="btn-primary text-white px-4 py-2 rounded-lg inline-block font-medium">
+                Explorer CyberShield
+              </a>
+              <a href="/fr/solutions/cybershield/easm-console.html" class="border px-4 py-2 rounded-lg inline-block hover:bg-gray-50 font-medium">
+                Démo EASM
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA FINAL -->
+    <section class="py-16 bg-white">
+      <div class="container mx-auto px-6 max-w-5xl">
+        <div class="cta-dark p-8 md:p-12 text-center">
+          <h2 class="text-3xl md:text-4xl font-extrabold mb-4 text-white">
+            Prêt à réduire les risques et les interruptions ?
+          </h2>
+          <p class="text-lg text-slate-300 mb-8 max-w-3xl mx-auto leading-relaxed">
+            Planifions un échange rapide pour évaluer votre posture,
+            votre exposition et les prochaines priorités techniques.
+          </p>
+
+          <div class="flex flex-col md:flex-row justify-center gap-4">
+            <a href="https://calendly.com/mauricioromeroca" class="bg-white text-blue-700 px-6 py-3 rounded-xl font-semibold hover:bg-gray-100">
+              Réserver un appel
+            </a>
+            <a href="/fr/services/tools.html" class="btn-primary text-white px-6 py-3 rounded-xl font-semibold">
+              Ouvrir Tools
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
   <script>
     (function(){
       const fb = document.getElementById('fallback-header');
@@ -186,53 +317,33 @@
     })();
   </script>
 
- 
-
-  <!-- Cargas GLOBALES — rutas absolutas -->
-
-    <!-- Nav/Footer unified -->
-  <script defer src="/js/nav.js?v=8"></script>
   <script defer src="/js/footer.js?v=8"></script>
   <script defer src="/js/fix-nav.js?v=8"></script>
 
-  <!-- ================================
-       LANG BAR: resaltar idioma activo
-       ================================ -->
   <script>
     (function () {
       var path = window.location.pathname || "/";
 
-      // Enlaces de la barra de idioma
       var enLink = document.querySelector('.langbar a[href="/en/"]');
       var frLink = document.querySelector('.langbar a[href="/fr/"]');
       var esLink = document.querySelector('.langbar a[href="/"]');
 
-      // Si no existe la barra, salimos sin hacer nada
       if (!enLink && !frLink && !esLink) return;
 
-      // Quitar negrilla a todos
       [enLink, frLink, esLink].forEach(function (a) {
         if (a) a.classList.remove("font-semibold");
       });
 
-      // Detectar idioma por la URL y aplicar negrilla
       if (path.startsWith("/en/")) {
         if (enLink) enLink.classList.add("font-semibold");
       } else if (path.startsWith("/fr/")) {
         if (frLink) frLink.classList.add("font-semibold");
       } else {
-        // Español: raíz "/" o cualquier ruta "/es/..."
         if (esLink) esLink.classList.add("font-semibold");
       }
     })();
   </script>
 
-
-
   <div id="app-footer"></div>
-  <script src="/js/nav.js"></script>
-  <script src="/js/footer.js"></script>
 </body>
 </html>
-
-
