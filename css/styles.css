@@ -1,306 +1,580 @@
 /* =======================================================
    ROMANOTI GLOBAL DESIGN SYSTEM
-   Romanoti Solutions
+   Versión unificada - base oscura / negra
+   -------------------------------------------------------
+   OBJETIVO:
+   - unificar tipografía
+   - fijar jerarquía de títulos
+   - mantener una sola línea visual
+   - soportar header/nav estable
+   - dejar una base consistente para Home y Services
    ======================================================= */
 
 /* =======================================================
    VARIABLES
    ======================================================= */
-
 :root{
+  --primary-blue:#2563eb;
+  --primary-blue-dark:#1d4ed8;
+  --primary-blue-soft:#eaf2ff;
 
---primary-blue:#2563eb;
---primary-blue-dark:#1d4ed8;
---primary-blue-soft:#eaf2ff;
+  --bg-dark:#081120;
+  --bg-dark-2:#0b1220;
+  --bg-page:#f5f7fb;
+  --bg-card:#ffffff;
 
---bg-dark:#081120;
---bg-page:#f5f7fb;
---bg-card:#ffffff;
+  --text-dark:#0f172a;
+  --text-body:#64748b;
+  --text-light:#ffffff;
 
---text-dark:#111827;
---text-body:#5f6f8a;
---text-light:#ffffff;
+  --border-light:#d9e1f0;
+  --border-soft:#e5e7eb;
 
---border-light:#d9e1f0;
+  --shadow-soft:0 12px 32px -16px rgba(2,6,23,.18);
+  --shadow-card:0 8px 22px rgba(2,6,23,.10);
+  --shadow-nav:0 8px 24px rgba(15,23,42,.06);
 
---shadow-soft:0 12px 32px -16px rgba(2,6,23,.18);
---shadow-card:0 8px 22px rgba(2,6,23,.10);
+  --radius-xl:24px;
+  --radius-lg:18px;
+  --radius-md:14px;
+  --radius-sm:10px;
 
---radius-xl:24px;
---radius-lg:18px;
---radius-md:14px;
---radius-sm:10px;
-
---max-width:1180px;
-
+  --max-width:1200px;
 }
 
 /* =======================================================
-   BASE
+   RESET / BASE
    ======================================================= */
-
 *{
-box-sizing:border-box;
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
 }
 
 body{
-margin:0;
-font-family:'Montserrat',sans-serif;
-background:var(--bg-page);
-color:var(--text-dark);
-line-height:1.6;
+  margin:0;
+  font-family:'Montserrat',sans-serif;
+  background:var(--bg-page);
+  color:var(--text-dark);
+  line-height:1.6;
+}
+
+img{
+  max-width:100%;
+  height:auto;
+  display:block;
 }
 
 a{
-text-decoration:none;
-color:inherit;
+  text-decoration:none;
+  color:inherit;
+}
+
+button,
+input,
+select,
+textarea{
+  font:inherit;
+}
+
+/* =======================================================
+   TIPOGRAFÍA GLOBAL
+   -------------------------------------------------------
+   Una sola familia y una sola jerarquía de títulos
+   ======================================================= */
+h1,h2,h3,h4,h5,h6{
+  margin-top:0;
+  color:var(--text-dark);
+}
+
+h1{
+  font-size:clamp(2.5rem,4.8vw,4.6rem);
+  line-height:1.04;
+  font-weight:800;
+  letter-spacing:-.03em;
+  margin-bottom:20px;
+}
+
+h2{
+  font-size:clamp(2rem,3vw,3rem);
+  line-height:1.12;
+  font-weight:800;
+  letter-spacing:-.02em;
+  margin-bottom:16px;
+}
+
+h3{
+  font-size:1.3rem;
+  line-height:1.25;
+  font-weight:700;
+  margin-bottom:10px;
+}
+
+p{
+  margin-top:0;
 }
 
 /* =======================================================
    CONTAINER
    ======================================================= */
-
 .container{
-width:min(var(--max-width), calc(100% - 32px));
-margin:0 auto;
+  width:min(var(--max-width), calc(100% - 40px));
+  margin:0 auto;
 }
 
 /* =======================================================
-   SECTIONS
+   SECTION HELPERS
    ======================================================= */
-
 .section{
-padding:60px 0;
+  padding:64px 0;
 }
 
 .section-light{
-background:white;
+  background:#ffffff;
 }
 
 .section-gray{
-background:var(--bg-page);
+  background:var(--bg-page);
+}
+
+.section-dark{
+  background:var(--bg-dark);
+  color:var(--text-light);
 }
 
 .section-title{
-font-size:2.2rem;
-font-weight:800;
-margin-bottom:16px;
+  font-size:clamp(2rem,3vw,3rem);
+  font-weight:800;
+  letter-spacing:-.02em;
+  margin-bottom:16px;
 }
 
 .section-intro{
-max-width:760px;
-color:var(--text-body);
-margin-bottom:30px;
+  max-width:760px;
+  color:var(--text-body);
+  margin-bottom:32px;
+  font-size:1.05rem;
 }
 
 /* =======================================================
-   HERO
+   HERO / DARK MODEL
    ======================================================= */
-
 .hero{
-position:relative;
-min-height:60vh;
-display:flex;
-align-items:center;
-overflow:hidden;
-background:var(--bg-dark);
-color:white;
+  position:relative;
+  min-height:60vh;
+  display:flex;
+  align-items:center;
+  overflow:hidden;
+  background:var(--bg-dark);
+  color:white;
 }
 
 .hero-overlay{
-position:absolute;
-inset:0;
-background:linear-gradient(
-90deg,
-rgba(5,10,20,.90) 0%,
-rgba(5,10,20,.72) 50%,
-rgba(5,10,20,.35) 100%
-);
+  position:absolute;
+  inset:0;
+  background:linear-gradient(
+    90deg,
+    rgba(5,10,20,.90) 0%,
+    rgba(5,10,20,.72) 50%,
+    rgba(5,10,20,.35) 100%
+  );
 }
 
 .hero-content{
-position:relative;
-z-index:2;
-max-width:900px;
-padding:90px 0;
+  position:relative;
+  z-index:2;
+  max-width:900px;
+  padding:100px 0 84px;
 }
 
 .hero-title{
-font-size:clamp(2.5rem,4vw,4rem);
-font-weight:800;
-margin-bottom:20px;
+  font-size:clamp(2.5rem,4vw,4rem);
+  font-weight:800;
+  margin-bottom:20px;
+  color:#fff;
 }
 
 .hero-subtitle{
-font-size:1.15rem;
-color:rgba(255,255,255,.9);
+  font-size:1.12rem;
+  color:rgba(255,255,255,.90);
+  max-width:760px;
 }
 
 /* =======================================================
-   BUTTONS
+   HOME HERO ESPECÍFICO
    ======================================================= */
-
-.btn{
-display:inline-flex;
-align-items:center;
-justify-content:center;
-padding:12px 20px;
-border-radius:12px;
-font-weight:700;
-transition:all .2s ease;
-cursor:pointer;
-border:none;
+.romanoti-hero{
+  position:relative;
+  min-height:88vh;
+  display:flex;
+  align-items:center;
+  overflow:hidden;
+  background:#081120;
+  color:#fff;
 }
 
-.btn-primary{
-background:linear-gradient(
-135deg,
-var(--primary-blue),
-#38bdf8
-);
-color:white;
+.romanoti-hero__bg{
+  position:absolute;
+  inset:0;
+  z-index:0;
 }
 
-.btn-primary:hover{
-transform:translateY(-1px);
-box-shadow:0 10px 24px rgba(37,99,235,.25);
+.romanoti-hero__bg img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center;
+  display:block;
 }
 
-.btn-secondary{
-background:white;
-border:1px solid var(--border-light);
-color:var(--text-dark);
+.romanoti-hero__overlay{
+  position:absolute;
+  inset:0;
+  z-index:1;
+  background:
+    linear-gradient(90deg, rgba(5,10,20,.88) 0%, rgba(5,10,20,.70) 45%, rgba(5,10,20,.35) 100%),
+    linear-gradient(180deg, rgba(5,10,20,.15) 0%, rgba(5,10,20,.45) 100%);
 }
 
-.btn-secondary:hover{
-background:#f8fafc;
+.romanoti-hero__content{
+  position:relative;
+  z-index:2;
+  max-width:760px;
+  padding:120px 8% 90px;
+}
+
+.romanoti-hero__eyebrow{
+  margin:0 0 18px;
+  font-size:13px;
+  font-weight:600;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:#7dd3fc;
+}
+
+.romanoti-hero__title{
+  margin:0 0 22px;
+  font-size:clamp(2.5rem,5vw,4.8rem);
+  line-height:1.02;
+  font-weight:800;
+  letter-spacing:-.03em;
+  color:#fff;
+}
+
+.romanoti-hero__subtitle{
+  margin:0 0 32px;
+  max-width:680px;
+  font-size:clamp(1rem,1.4vw,1.18rem);
+  line-height:1.75;
+  color:rgba(255,255,255,.88);
+}
+
+.romanoti-hero__buttons{
+  display:flex;
+  flex-wrap:wrap;
+  gap:14px;
+  margin-bottom:28px;
+}
+
+.romanoti-hero-logo-wrap{
+  margin-bottom:24px;
+  display:inline-block;
+  opacity:0;
+  transform:translateY(24px) scale(0.96);
+  animation:heroLogoIntro 1.4s cubic-bezier(.22,1,.36,1) forwards;
+}
+
+.romanoti-hero-logo{
+  max-width:420px;
+  width:100%;
+  height:auto;
+  display:block;
+  transform-origin:center;
+  filter:
+    drop-shadow(0 0 12px rgba(56, 189, 248, 0.16))
+    drop-shadow(0 0 26px rgba(37, 99, 235, 0.10));
+  animation:
+    heroLogoFloatPro 6s ease-in-out infinite 1.4s,
+    heroLogoGlowPro 4.5s ease-in-out infinite 1.4s;
+}
+
+@keyframes heroLogoIntro{
+  0%{
+    opacity:0;
+    transform:translateY(24px) scale(0.96);
+  }
+  60%{
+    opacity:1;
+    transform:translateY(-4px) scale(1.01);
+  }
+  100%{
+    opacity:1;
+    transform:translateY(0) scale(1);
+  }
+}
+
+@keyframes heroLogoFloatPro{
+  0%,100%{ transform:translateY(0); }
+  25%{ transform:translateY(-4px); }
+  50%{ transform:translateY(-8px); }
+  75%{ transform:translateY(-3px); }
+}
+
+@keyframes heroLogoGlowPro{
+  0%,100%{
+    filter:
+      drop-shadow(0 0 12px rgba(56, 189, 248, 0.16))
+      drop-shadow(0 0 26px rgba(37, 99, 235, 0.10));
+  }
+  50%{
+    filter:
+      drop-shadow(0 0 22px rgba(56, 189, 248, 0.28))
+      drop-shadow(0 0 40px rgba(37, 99, 235, 0.18));
+  }
 }
 
 /* =======================================================
-   CARDS
+   BOTONES
    ======================================================= */
-
-.card{
-background:var(--bg-card);
-border:1px solid var(--border-light);
-border-radius:var(--radius-lg);
-padding:28px;
-box-shadow:var(--shadow-soft);
+.btn,
+.romanoti-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:48px;
+  padding:12px 22px;
+  border-radius:999px;
+  font-weight:700;
+  font-size:.95rem;
+  transition:all .25s ease;
+  cursor:pointer;
+  border:1px solid transparent;
 }
 
-.card h3{
-margin-top:0;
-margin-bottom:10px;
+.btn-primary,
+.romanoti-btn--primary{
+  background:linear-gradient(135deg,var(--primary-blue),#38bdf8);
+  color:white;
+  box-shadow:0 10px 30px rgba(37,99,235,.28);
 }
 
-.card p{
-color:var(--text-body);
+.btn-primary:hover,
+.romanoti-btn--primary:hover{
+  transform:translateY(-2px);
+  box-shadow:0 14px 36px rgba(37,99,235,.36);
 }
 
-/* =======================================================
-   GRID
-   ======================================================= */
-
-.grid-2{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:28px;
+.btn-secondary,
+.romanoti-btn--secondary{
+  background:rgba(255,255,255,.06);
+  color:#fff;
+  border-color:rgba(255,255,255,.2);
+  backdrop-filter:blur(6px);
 }
 
-.grid-3{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:24px;
-}
-
-.grid-4{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:22px;
+.btn-secondary:hover,
+.romanoti-btn--secondary:hover{
+  background:rgba(255,255,255,.12);
+  transform:translateY(-2px);
 }
 
 /* =======================================================
    BADGES
    ======================================================= */
-
 .badge{
-display:inline-block;
-border:1px solid var(--border-light);
-border-radius:999px;
-padding:4px 12px;
-font-size:12px;
-background:#f8fafc;
-color:#475569;
+  display:inline-block;
+  border:1px solid var(--border-light);
+  border-radius:999px;
+  padding:4px 12px;
+  font-size:12px;
+  background:#f8fafc;
+  color:#475569;
+}
+
+/* =======================================================
+   CARDS
+   ======================================================= */
+.card{
+  background:var(--bg-card);
+  border:1px solid rgba(217,225,240,.9);
+  border-radius:var(--radius-lg);
+  padding:28px;
+  box-shadow:var(--shadow-soft);
+}
+
+.card h3{
+  margin-top:0;
+  margin-bottom:10px;
+}
+
+.card p{
+  color:var(--text-body);
+}
+
+/* =======================================================
+   GRID
+   ======================================================= */
+.grid-2{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:28px;
+}
+
+.grid-3{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:24px;
+}
+
+.grid-4{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:22px;
 }
 
 /* =======================================================
    FORMS
    ======================================================= */
-
 label{
-display:block;
-margin-bottom:6px;
-font-weight:600;
-font-size:.95rem;
+  display:block;
+  margin-bottom:6px;
+  font-weight:600;
+  font-size:.95rem;
 }
 
 input,
 select,
 textarea{
-width:100%;
-padding:12px 14px;
-margin-bottom:16px;
-border-radius:12px;
-border:1px solid #d1d5db;
-background:white;
-font-family:'Montserrat',sans-serif;
-outline:none;
-transition:border-color .2s,box-shadow .2s;
+  width:100%;
+  padding:12px 14px;
+  margin-bottom:16px;
+  border-radius:12px;
+  border:1px solid #d1d5db;
+  background:white;
+  font-family:'Montserrat',sans-serif;
+  outline:none;
+  transition:border-color .2s,box-shadow .2s;
 }
 
 input:focus,
 select:focus,
 textarea:focus{
-border-color:var(--primary-blue);
-box-shadow:0 0 0 3px rgba(37,99,235,.12);
+  border-color:var(--primary-blue);
+  box-shadow:0 0 0 3px rgba(37,99,235,.12);
 }
 
 textarea{
-min-height:140px;
-resize:vertical;
+  min-height:140px;
+  resize:vertical;
+}
+
+/* =======================================================
+   TRUST STRIP
+   ======================================================= */
+.romanoti-trust{
+  background:#0b1220;
+  padding:28px 0;
+  text-align:center;
+  border-top:1px solid rgba(255,255,255,0.05);
+}
+
+.romanoti-trust__text{
+  color:#94a3b8;
+  font-size:.9rem;
+  margin-bottom:14px;
+  letter-spacing:.5px;
+}
+
+.romanoti-trust__items{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:18px;
+}
+
+.romanoti-trust__items span{
+  color:#e2e8f0;
+  font-size:.85rem;
+  padding:6px 12px;
+  border:1px solid rgba(148,163,184,0.2);
+  border-radius:999px;
+  background:rgba(255,255,255,0.02);
 }
 
 /* =======================================================
    FOOTER
    ======================================================= */
-
 .footer{
-background:white;
-border-top:1px solid var(--border-light);
-padding:28px 0;
-text-align:center;
-color:var(--text-body);
-font-size:.9rem;
+  background:white;
+  border-top:1px solid var(--border-light);
+  padding:28px 0;
+  text-align:center;
+  color:var(--text-body);
+  font-size:.9rem;
+}
+
+/* =======================================================
+   HELPERS
+   ======================================================= */
+.section-soft{
+  background:linear-gradient(180deg,#f8fafc 0%,#ffffff 100%);
 }
 
 /* =======================================================
    RESPONSIVE
    ======================================================= */
-
-@media(max-width:980px){
-
-.grid-2,
-.grid-3,
-.grid-4{
-grid-template-columns:1fr;
+@media (max-width:1100px){
+  .container{
+    width:min(var(--max-width), calc(100% - 28px));
+  }
 }
 
-.hero-content{
-padding:70px 0;
+@media (max-width:980px){
+  .grid-2,
+  .grid-3,
+  .grid-4{
+    grid-template-columns:1fr;
+  }
+
+  .hero-content{
+    padding:70px 0;
+  }
+
+  .hero-title{
+    font-size:2.4rem;
+  }
 }
 
-.hero-title{
-font-size:2.4rem;
-}
+@media (max-width:768px){
+  .romanoti-hero{
+    min-height:auto;
+  }
 
+  .romanoti-hero__content{
+    padding:96px 7% 70px;
+  }
+
+  .romanoti-hero__title{
+    font-size:2.5rem;
+  }
+
+  .romanoti-hero__subtitle{
+    font-size:1rem;
+    line-height:1.65;
+  }
+
+  .romanoti-hero__buttons{
+    flex-direction:column;
+    align-items:stretch;
+  }
+
+  .romanoti-btn{
+    width:100%;
+  }
+
+  .container{
+    width:calc(100% - 24px);
+  }
 }
