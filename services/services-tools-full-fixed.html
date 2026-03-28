@@ -1,0 +1,889 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Romanoti Tools Console | Diagnostics & Inventory</title>
+
+  <!-- ============================================================
+       CHANGE #1 (FAVICONS):
+       Unificados con el resto del sitio.
+       ============================================================ -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16.png">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#2563eb">
+  <meta name="theme-color" content="#2563eb">
+
+  <!-- Tailwind + Montserrat -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#f8f9fa;
+      --card:#ffffff;
+      --line:#e5e7eb;
+      --text:#111827;
+      --muted:#6b7280;
+      --blue:#2563eb;
+      --blue-dark:#1d4ed8;
+      --blue-soft:#eaf0ff;
+      --navy:#0f172a;
+      --shadow:0 12px 32px -16px rgba(2,6,23,.18);
+      --radius:14px;
+      --max:1180px;
+    }
+
+    body{
+      font-family:'Montserrat',sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      scroll-behavior:smooth;
+    }
+
+    .wrap{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:20px 16px 56px;
+    }
+
+    .hero-tools{
+      /* ============================================================
+         CHANGE #14 (FULL-WIDTH DARK HERO):
+         - El hero ahora se extiende de lado a lado como networks.html
+         - Se cambia el gradiente azul por el modelo oscuro / negro
+         - El contenido interno sigue alineado por el .wrap
+         ============================================================ */
+      background:linear-gradient(90deg,#020617 0%,#031634 55%,#081120 100%);
+      color:#fff;
+      border-radius:0;
+      padding:34px 28px;
+      box-shadow:var(--shadow);
+      margin-top:14px;
+      width:100vw;
+      margin-left:calc(50% - 50vw);
+      margin-right:calc(50% - 50vw);
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.2fr .8fr;
+      gap:24px;
+      align-items:center;
+    }
+
+    .eyebrow{
+      display:inline-block;
+      border:1px solid rgba(255,255,255,.22);
+      background:rgba(255,255,255,.10);
+      border-radius:999px;
+      padding:8px 12px;
+      font-size:12px;
+      margin-bottom:14px;
+    }
+
+    .hero-tools h1{
+      font-size:clamp(2rem,4vw,3.4rem);
+      line-height:1.08;
+      margin:0 0 14px;
+      font-weight:700;
+    }
+
+    .hero-tools p{
+      color:rgba(255,255,255,.92);
+      max-width:760px;
+      margin:0 0 18px;
+      font-size:1.02rem;
+    }
+
+    .hero-points{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:12px;
+      margin-top:18px;
+    }
+
+    .hero-point{
+      background:rgba(255,255,255,.10);
+      border:1px solid rgba(255,255,255,.16);
+      border-radius:14px;
+      padding:14px;
+    }
+
+    .hero-point strong{
+      display:block;
+      font-size:.95rem;
+      margin-bottom:4px;
+    }
+
+    .hero-side{
+      background:rgba(255,255,255,.10);
+      border:1px solid rgba(255,255,255,.16);
+      border-radius:18px;
+      padding:20px;
+    }
+
+    .hero-side h3{
+      margin:0 0 10px;
+      font-size:1.2rem;
+    }
+
+    .hero-side p{
+      font-size:.95rem;
+      margin-bottom:14px;
+    }
+
+    .mini-list{
+      margin:0;
+      padding-left:18px;
+      color:rgba(255,255,255,.92);
+      font-size:.92rem;
+    }
+
+    .section-block{
+      margin-top:18px;
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:20px;
+      box-shadow:var(--shadow);
+    }
+
+    .section-head{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:14px;
+      margin-bottom:12px;
+      flex-wrap:wrap;
+    }
+
+    .section-title{
+      font-size:1.55rem;
+      font-weight:700;
+      margin:0 0 6px;
+    }
+
+    .sub-title{
+      font-size:1.15rem;
+      font-weight:700;
+      margin:0 0 6px;
+    }
+
+    .muted{
+      color:var(--muted);
+    }
+
+    .row{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .grid-2{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:16px;
+    }
+
+    .btn{
+      border:1px solid #d1d5db;
+      padding:.58rem .9rem;
+      border-radius:10px;
+      background:#f9fafb;
+      cursor:pointer;
+      font-weight:600;
+      transition:all .18s ease;
+    }
+
+    .btn:hover{
+      background:#f3f4f6;
+    }
+
+    .btn-sm{
+      padding:.4rem .72rem;
+      font-size:.9rem;
+    }
+
+    .btn-primary{
+      border-color:var(--blue);
+      background:var(--blue);
+      color:#fff;
+    }
+
+    .btn-primary:hover{
+      background:var(--blue-dark);
+      filter:none;
+    }
+
+    .btn-ghost{
+      border-color:#bfdbfe;
+      background:#fff;
+      color:var(--blue);
+    }
+
+    input{
+      border:1px solid #d1d5db;
+      border-radius:10px;
+      padding:.55rem .7rem;
+      background:#fff;
+      min-height:42px;
+    }
+
+    code.inline{
+      background:#eff6ff;
+      color:#1d4ed8;
+      padding:2px 6px;
+      border-radius:6px;
+      font-size:.92em;
+    }
+
+    .tool-card{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:16px;
+      box-shadow:0 10px 24px -18px rgba(2,6,23,.22);
+    }
+
+    .badge{
+      display:inline-block;
+      border:1px solid #cbd5e1;
+      border-radius:999px;
+      padding:4px 10px;
+      font-size:12px;
+      background:#f8fafc;
+      color:#475569;
+      margin-bottom:8px;
+    }
+
+    pre{
+      background:var(--navy);
+      color:#e5e7eb;
+      padding:12px;
+      border-radius:10px;
+      overflow:auto;
+      margin-top:10px;
+      min-height:54px;
+    }
+
+    hr.sep{
+      border:none;
+      border-top:1px solid var(--line);
+      margin:16px 0;
+    }
+
+    .output-title{
+      font-size:1.2rem;
+      font-weight:700;
+      margin:24px 0 8px;
+    }
+
+    .footer-note{
+      background:#0f172a;
+      color:#fff;
+    }
+
+    @media (max-width:980px){
+      .hero-grid,
+      .grid-2{
+        grid-template-columns:1fr;
+      }
+
+      .hero-points{
+        grid-template-columns:1fr;
+      }
+    }
+  </style>
+</head>
+
+<body class="bg-gray-50">
+  <!-- ============================================================
+       CHANGE #2 (HEADER MOUNT):
+       Mountpoint del header centralizado.
+       ============================================================ -->
+  <div id="app-header"></div>
+
+  <!-- ============================================================
+       CHANGE #3 (FALLBACK HEADER):
+       Header temporal mientras carga nav.js.
+       ============================================================ -->
+  <header id="fallback-header" class="bg-white shadow-sm sticky top-0 z-40">
+    <div class="container mx-auto px-6 py-3">
+      <div class="flex items-center justify-between">
+        <a href="/" class="flex items-center font-bold text-xl text-gray-900">
+          <span class="bg-blue-600 text-white rounded-full w-10 h-10 grid place-items-center mr-3">R</span>
+          RomanoTI Solutions (Loading...)
+        </a>
+        <a href="/platform/index.html" class="bg-blue-600 text-white px-4 py-2 rounded-lg">Platform</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="wrap">
+
+    <!-- ============================================================
+         CHANGE #4 (NEW HERO):
+         Nuevo bloque superior para dar contexto y convertir la página
+         en una consola técnica profesional de Romanoti.
+         ============================================================ -->
+    <section class="hero-tools">
+      <div class="hero-grid">
+        <div>
+          <div class="eyebrow">Romanoti Platform / Tools Console</div>
+          <h1>Infrastructure diagnostics and operational checks.</h1>
+          <p>
+            Romanoti Tools Console brings together selected diagnostics, inventory
+            utilities, and external checks that support the broader Romanoti
+            Platform vision for visibility, discovery, and operational clarity.
+          </p>
+
+          <div class="hero-points">
+            <div class="hero-point">
+              <strong>Diagnostics</strong>
+              <span>Server-side validation and infrastructure checks.</span>
+            </div>
+            <div class="hero-point">
+              <strong>Inventory</strong>
+              <span>On-prem collection for LAN visibility and reporting.</span>
+            </div>
+            <div class="hero-point">
+              <strong>External checks</strong>
+              <span>TLS, email DNS, and operational exposure review.</span>
+            </div>
+          </div>
+        </div>
+
+        <aside class="hero-side">
+          <h3>What this page is for</h3>
+          <p>
+            This page demonstrates practical tools used to support infrastructure
+            visibility and technical diagnostics within the Romanoti ecosystem.
+          </p>
+          <ul class="mini-list">
+            <li>Run controlled diagnostics</li>
+            <li>Generate inventory commands for on-prem environments</li>
+            <li>Perform quick external exposure checks</li>
+            <li>Access authenticated tools for deeper technical review</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         CHANGE #5 (SERVER DIAGNOSTIC SECTION):
+         Reempaque visual del primer bloque.
+         ============================================================ -->
+    <section class="section-block">
+      <div class="section-head">
+        <div>
+          <div class="badge">Server-side Function</div>
+          <h2 class="section-title">Server Diagnostic</h2>
+          <div class="muted">
+            Runs <code class="inline">/.netlify/functions/run-tool</code> and returns structured diagnostic output.
+          </div>
+        </div>
+        <button id="btnRunDiag" class="btn btn-primary">⚡ Run Diagnostic</button>
+      </div>
+      <pre id="diagOut"></pre>
+    </section>
+
+    <!-- ============================================================
+         CHANGE #6 (ON-PREM AGENT SECTION):
+         Mejor jerarquía y contexto para inventario LAN.
+         ============================================================ -->
+    <section class="section-block">
+      <div class="section-head">
+        <div>
+          <div class="badge">LAN Inventory / Agent</div>
+          <h2 class="section-title">On-Prem Agent</h2>
+          <div class="muted">
+            Install an agent inside your network to collect basic LAN inventory
+            and send the report to the Romanoti control plane.
+          </div>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div>
+          <div><b>Org API Key</b></div>
+          <input id="orgKey" type="password" placeholder="paste your API key here" style="min-width:100%">
+          <div class="muted" style="font-size:12px;margin-top:4px">
+            Used only to generate commands and query reports. It is not stored by the page.
+          </div>
+        </div>
+        <div>
+          <div><b>Agent name (optional)</b></div>
+          <input id="agentName" placeholder="e.g. rome-office-01" style="min-width:100%">
+        </div>
+      </div>
+
+      <div class="row" style="margin-top:12px">
+        <button id="btnLinux" class="btn">Linux / macOS</button>
+        <button id="btnWindows" class="btn">Windows</button>
+        <button id="btnCopyCmd" class="btn btn-ghost">Copy command</button>
+      </div>
+
+      <pre id="agentCmd"></pre>
+
+      <div class="muted" style="font-size:12px">
+        The generated command downloads the agent, configures
+        <code class="inline">ROMANOTI_API</code> and <code class="inline">ROMANOTI_KEY</code>,
+        then executes a quick inventory scan and posts the result to
+        <code class="inline">/client/report</code>.
+      </div>
+
+      <hr class="sep">
+
+      <div class="row" style="gap:8px">
+        <button id="btnLatestReport" class="btn btn-primary btn-sm">View latest report</button>
+        <button id="btnViewIfaces" class="btn btn-sm">View interfaces</button>
+        <button id="btnExportCSV" class="btn btn-sm">Export LAN to CSV</button>
+        <button id="btnDownloadJSON" class="btn btn-sm">Download JSON</button>
+      </div>
+
+      <div class="muted" style="font-size:12px;margin-top:6px">
+        No report is displayed until a valid inventory payload is available.
+      </div>
+
+      <pre id="agentOut"></pre>
+    </section>
+
+    <!-- ============================================================
+         CHANGE #7 (EXTERNAL CHECKS):
+         Agrupación más profesional de TLS y DNS checks.
+         ============================================================ -->
+    <section class="section-block">
+      <div class="section-head">
+        <div>
+          <div class="badge">External Checks</div>
+          <h2 class="section-title">Exposure & Validation Tools</h2>
+          <div class="muted">
+            Quick validation utilities for external domains, certificates, and email posture.
+          </div>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="tool-card">
+          <h3 class="sub-title">TLS Certificate Check</h3>
+          <div class="row">
+            <input id="tlsHost" placeholder="host (e.g. example.com)" style="min-width:240px">
+            <input id="tlsPort" type="number" value="443" min="1" max="65535" style="width:100px">
+            <button id="btnTLS" class="btn btn-sm">Check TLS</button>
+          </div>
+          <div class="muted" style="font-size:12px;margin-top:8px">
+            Calls <code class="inline">/ext/tls</code> and returns issuer, subject, and expiration details.
+          </div>
+          <pre id="tlsOut"></pre>
+        </div>
+
+        <div class="tool-card">
+          <h3 class="sub-title">Email DNS Check</h3>
+          <div class="row">
+            <input id="dnsDomain" placeholder="domain (e.g. example.com)" style="min-width:260px">
+            <button id="btnEmailDNS" class="btn btn-sm">Check Email DNS</button>
+          </div>
+          <div class="muted" style="font-size:12px;margin-top:8px">
+            Calls <code class="inline">/ext/emaildns</code> and returns MX / SPF / DMARC indicators.
+          </div>
+          <pre id="dnsOut"></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         CHANGE #8 (AUTH TOOLS SECTION):
+         Login y herramientas autenticadas reagrupadas como consola.
+         ============================================================ -->
+    <section class="section-block">
+      <div class="section-head">
+        <div>
+          <div class="badge">Authenticated Operations</div>
+          <h2 class="section-title">Advanced Tools Console</h2>
+          <div class="muted">
+            Use authenticated backend calls for system information, ping, traceroute, and port scan tasks.
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- Login -->
+        <div class="tool-card" id="loginCard">
+          <h3 class="sub-title">Login</h3>
+          <div class="muted" style="margin-bottom:8px">
+            Required to use authenticated backend diagnostics.
+          </div>
+
+          <div class="row">
+            <input id="user" placeholder="username (e.g. eng1)" style="min-width:180px">
+            <input id="pass" placeholder="password" type="password" style="min-width:180px">
+          </div>
+
+          <div class="row" style="margin-top:10px">
+            <button id="btnLogin" class="btn btn-primary">Sign in</button>
+            <button id="btnLogout" class="btn">Sign out</button>
+          </div>
+
+          <div class="muted" style="margin-top:10px;font-size:12px">
+            API base:
+            <code class="inline" id="apiBaseShown"></code>.
+            You can override it with
+            <code class="inline">localStorage.setItem('romanoti_api','http://127.0.0.1:8000')</code>
+            and reload.
+          </div>
+
+          <div id="loginMsg" class="muted" style="margin-top:6px"></div>
+        </div>
+
+        <!-- Tools -->
+        <div class="tool-card hidden" id="toolsCard">
+          <div class="row" style="align-items:center;justify-content:space-between">
+            <div>
+              <h3 class="sub-title" style="margin:0">Authenticated Tools</h3>
+              <div class="muted">Signed in as: <b id="whoami"></b></div>
+            </div>
+            <button class="btn" id="btnLogoutTop">Sign out</button>
+          </div>
+
+          <div class="tool-card" style="margin-top:12px">
+            <h4 class="sub-title" style="font-size:18px">System</h4>
+            <div class="row">
+              <button class="btn btn-sm" id="btnSysInfo">/system/info</button>
+              <button class="btn btn-sm" id="btnNetInfo">/network/info</button>
+            </div>
+          </div>
+
+          <div class="tool-card" style="margin-top:12px">
+            <h4 class="sub-title" style="font-size:18px">Ping</h4>
+            <div class="row">
+              <input id="pingHost" placeholder="host (e.g. 8.8.8.8)" value="8.8.8.8" style="min-width:170px">
+              <input id="pingCount" type="number" min="1" max="10" value="4" style="width:80px">
+              <button class="btn btn-sm" id="btnPing">Run</button>
+            </div>
+            <div class="muted" style="font-size:12px">
+              If <code class="inline">/network/ping</code> is not implemented yet, the page will show “endpoint unavailable”.
+            </div>
+          </div>
+
+          <div class="tool-card" style="margin-top:12px">
+            <h4 class="sub-title" style="font-size:18px">Traceroute</h4>
+            <div class="row">
+              <input id="traceHost" placeholder="host (e.g. 8.8.8.8)" value="8.8.8.8" style="min-width:170px">
+              <button class="btn btn-sm" id="btnTrace">Run</button>
+            </div>
+            <div class="muted" style="font-size:12px">
+              If <code class="inline">/network/traceroute</code> is not implemented yet, the page will show “endpoint unavailable”.
+            </div>
+          </div>
+
+          <div class="tool-card" style="margin-top:12px">
+            <h4 class="sub-title" style="font-size:18px">Port Scan</h4>
+            <div class="row">
+              <input id="scanHost" placeholder="host (IP / hostname)" style="min-width:200px">
+              <input id="scanStart" type="number" min="1" max="65535" value="1" style="width:90px">
+              <input id="scanEnd" type="number" min="1" max="65535" value="1024" style="width:90px">
+            </div>
+            <div class="row" style="margin-top:6px">
+              <input id="scanPorts" placeholder="ports (optional: 80,443,22)" style="min-width:280px">
+              <button class="btn btn-sm" id="btnScan">Run scan</button>
+            </div>
+            <div class="muted" style="font-size:12px">
+              If “ports” is defined, start/end are ignored. Compatible with the current backend.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         CHANGE #9 (GLOBAL OUTPUT):
+         Conserva el bloque global de salida.
+         ============================================================ -->
+    <h3 class="output-title">Output</h3>
+    <pre id="out"></pre>
+  </div>
+
+  <!-- ============================================================
+       CHANGE #10 (FOOTER):
+       Footer simple y consistente.
+       ============================================================ -->
+  <footer class="footer-note py-8">
+    <div class="container mx-auto px-6 text-center">
+      <p>© 2025 RomanoTI Solutions. All rights reserved.</p>
+      <p class="mt-2">Serving Canada</p>
+    </div>
+  </footer>
+
+  <!-- ============================================================
+       CHANGE #11 (PAGE LOGIC):
+       Tu lógica original se conserva para no romper funcionalidad.
+       ============================================================ -->
+  <script>
+    // ===== Config =====
+    const CP_API  = 'https://romanoti-tools-api.onrender.com';
+    const API_BASE = localStorage.getItem('romanoti_api') || CP_API;
+    document.addEventListener('DOMContentLoaded', ()=> {
+      var el = document.getElementById('apiBaseShown');
+      if (el) el.textContent = API_BASE;
+    });
+
+    // ===== Utils =====
+    const $  = (id) => document.getElementById(id);
+    const on = (id, type, fn) => { const el = $(id); if (el) el.addEventListener(type, fn); };
+    const token = () => sessionStorage.getItem('romanoti_token');
+
+    function show(id, onState=true){ const e=$(id); if(!e) return; e.classList[onState?'remove':'add']('hidden'); }
+    function logTo(preId, obj){
+      const el = $(preId);
+      try { el.textContent = (typeof obj==='string') ? obj : JSON.stringify(obj,null,2); }
+      catch { el.textContent = String(obj); }
+    }
+    function log(obj){ logTo('out', obj); }
+
+    // ===== Netlify function =====
+    async function runTool() {
+      const o = $('diagOut'); if (o) o.textContent = 'Running…';
+      try {
+        const res  = await fetch('/.netlify/functions/run-tool?pretty=1&indent=2',{headers:{'Accept':'application/json'}});
+        const text = await res.text();
+        try {
+          const data = JSON.parse(text);
+          const toShow = (data && typeof data === 'object' && 'output' in data) ? data.output : data;
+          $('diagOut').textContent = JSON.stringify(toShow, null, 2);
+        } catch {
+          $('diagOut').textContent = text;
+        }
+      } catch (err) {
+        $('diagOut').textContent = '❌ Error: ' + String(err);
+      }
+    }
+
+    // ===== Auth =====
+    function setAuthedUI(){
+      if(token()){ show('loginCard', false); show('toolsCard', true); const u=$('user'); $('whoami').textContent = (u&&u.value)||'session'; }
+      else       { show('toolsCard', false); show('loginCard', true); $('whoami').textContent = ''; }
+    }
+
+    async function login(){
+      $('loginMsg').textContent = 'Authenticating…';
+      try{
+        const body = new URLSearchParams();
+        body.append('username', $('user').value);
+        body.append('password', $('pass').value);
+        const res = await fetch(`${API_BASE}/auth/token`, {
+          method:'POST', headers:{'Content-Type':'application/x-www-form-urlencoded'}, body
+        });
+        const text = await res.text();
+        if(!res.ok){ $('loginMsg').innerHTML = `<span style="color:#c33">Login failed: ${res.status}</span>`; return; }
+        const data = JSON.parse(text);
+        sessionStorage.setItem('romanoti_token', data.access_token);
+        setAuthedUI();
+        log({login:'ok', ...data});
+        $('loginMsg').textContent = 'OK';
+      }catch(e){ $('loginMsg').innerHTML = `<span style="color:#c33">${e}</span>`; }
+    }
+    function logout(){ sessionStorage.removeItem('romanoti_token'); setAuthedUI(); const o=$('out'); if(o) o.textContent=''; }
+
+    // ===== Generic authed call =====
+    async function call(method, path, body=null){
+      try{
+        const res  = await fetch(`${API_BASE}${path}`, {
+          method,
+          headers:{ 'Authorization': `Bearer ${token()}`, 'Content-Type':'application/json' },
+          body: body ? JSON.stringify(body) : null
+        });
+        const text = await res.text();
+        if(!res.ok){
+          if(res.status===404)  { log({error:'endpoint unavailable', path, status:res.status, body:text}); }
+          else                  { log({error:'HTTP error', path, status:res.status, body:text}); }
+          return;
+        }
+        try{ log(JSON.parse(text)); }catch{ log(text); }
+      }catch(e){ log(String(e)); }
+    }
+
+    // ===== Tools actions =====
+    async function doPing(){ await call('POST','/network/ping',{ host:$('pingHost').value, count:Number($('pingCount').value||4) }); }
+    async function doTrace(){ await call('POST','/network/traceroute',{ host:$('traceHost').value }); }
+    async function doScan(){
+      const payload = {
+        host:$('scanHost').value,
+        start:Number($('scanStart').value||1),
+        end:Number($('scanEnd').value||1024)
+      };
+      const portsStr = $('scanPorts').value.trim();
+      if(portsStr){ payload.ports = portsStr.split(',').map(p=>parseInt(p.trim(),10)).filter(Boolean); }
+      await call('POST','/network/portscan', payload);
+    }
+
+    // ===== On-Prem Agent =====
+    let lastCmd = '';
+
+    function buildLinuxCmd(){
+      const key  = $('orgKey').value.trim();
+      const name = $('agentName').value.trim();
+      const tag  = name ? ` ROMANOTI_AGENT="${name}"` : '';
+      return [
+        `curl -fsSL ${location.origin}/assets/agent/romanoti-agent.sh -o romanoti-agent.sh`,
+        `chmod +x romanoti-agent.sh`,
+        `ROMANOTI_API="${CP_API}" ROMANOTI_KEY="${key}"${tag} ./romanoti-agent.sh`
+      ].join(' && ');
+    }
+
+    function buildWindowsCmd(){
+      const key  = $('orgKey').value.trim();
+      const name = $('agentName').value.trim();
+      let cmd = `powershell -NoProfile -ExecutionPolicy Bypass -Command "`
+              + `Invoke-WebRequest -UseBasicParsing -Uri '${location.origin}/assets/agent/romanoti-agent.ps1' -OutFile 'romanoti-agent.ps1'; `
+              + `$env:ROMANOTI_API='${CP_API}'; $env:ROMANOTI_KEY='${key}'; `;
+      if(name) cmd += `$env:ROMANOTI_AGENT='${name}'; `;
+      cmd += `powershell -ExecutionPolicy Bypass -File .\\romanoti-agent.ps1"`;
+      return cmd;
+    }
+
+    async function fetchLatestReport(){
+      const key = $('orgKey').value.trim();
+      if(!key){ $('agentOut').textContent = 'Enter your Org API Key.'; return; }
+      $('agentOut').textContent = 'Querying…';
+      try{
+        const res  = await fetch(`${CP_API}/client/reports/latest`, { headers:{'x-api-key': key, 'accept':'application/json'} });
+        const text = await res.text();
+        try{ $('agentOut').textContent = JSON.stringify(JSON.parse(text), null, 2); }
+        catch{ $('agentOut').textContent = text; }
+      }catch(e){ $('agentOut').textContent = String(e); }
+    }
+
+    // ===== External checks =====
+    async function checkTLS(){
+      const host = $('tlsHost').value.trim();
+      const port = Number($('tlsPort').value||443);
+      const key  = $('orgKey').value.trim();
+      if(!key){ $('tlsOut').textContent = 'Enter your Org API Key.'; return; }
+
+      $('tlsOut').textContent = 'Querying…';
+      try{
+        const res = await fetch(`${CP_API}/ext/tls`, {
+          method:'POST',
+          headers:{'Content-Type':'application/json','x-api-key': key},
+          body: JSON.stringify({host, port})
+        });
+        const text = await res.text();
+        try{ $('tlsOut').textContent = JSON.stringify(JSON.parse(text), null, 2); }
+        catch{ $('tlsOut').textContent = text; }
+      }catch(e){ $('tlsOut').textContent = String(e); }
+    }
+
+    async function checkEmailDNS(){
+      const domain = $('dnsDomain').value.trim();
+      const key    = $('orgKey').value.trim();
+      if(!key){ $('dnsOut').textContent = 'Enter your Org API Key.'; return; }
+
+      $('dnsOut').textContent = 'Querying…';
+      try{
+        const res = await fetch(`${CP_API}/ext/emaildns`, {
+          method:'POST',
+          headers:{'Content-Type':'application/json','x-api-key': key},
+          body: JSON.stringify({domain})
+        });
+        const text = await res.text();
+        try{ $('dnsOut').textContent = JSON.stringify(JSON.parse(text), null, 2); }
+        catch{ $('dnsOut').textContent = text; }
+      }catch(e){ $('dnsOut').textContent = String(e); }
+    }
+
+    // ===== Wire events =====
+    on('btnRunDiag','click',runTool);
+
+    on('btnLogin','click',login);
+    on('btnLogout','click',logout);
+    on('btnLogoutTop','click',logout);
+
+    on('btnSysInfo','click',()=>call('GET','/system/info'));
+    on('btnNetInfo','click',()=>call('GET','/network/info'));
+
+    on('btnPing','click',doPing);
+    on('btnTrace','click',doTrace);
+    on('btnScan','click',doScan);
+
+    on('btnLinux','click',()=>{ lastCmd = buildLinuxCmd(); $('agentCmd').textContent = lastCmd; });
+    on('btnWindows','click',()=>{ lastCmd = buildWindowsCmd(); $('agentCmd').textContent = lastCmd; });
+    on('btnCopyCmd','click',()=>{ if(lastCmd) navigator.clipboard.writeText(lastCmd); });
+    on('btnLatestReport','click',fetchLatestReport);
+
+    on('btnTLS','click',checkTLS);
+    on('btnEmailDNS','click',checkEmailDNS);
+
+    document.addEventListener('DOMContentLoaded', setAuthedUI);
+  </script>
+
+  <!-- ============================================================
+       CHANGE #12 (SOLUTIONS MENU HOTFIX):
+       Se conserva tu hotfix actual.
+       ============================================================ -->
+  <script>
+    (function(){
+      function wire(btn, menu){
+        if(!btn || !menu || btn.dataset.wired) return;
+        if(!menu.classList.contains('hidden')) menu.classList.add('hidden');
+        const open=()=>{menu.classList.remove('hidden');btn.setAttribute('aria-expanded','true');};
+        const close=()=>{menu.classList.add('hidden');btn.setAttribute('aria-expanded','false');};
+        const toggle=(e)=>{e&&(e.preventDefault(),e.stopPropagation());menu.classList.contains('hidden')?open():close();};
+        btn.addEventListener('click',toggle); btn.addEventListener('mouseenter',open);
+        menu.addEventListener('mouseleave',()=>setTimeout(close,120));
+        document.addEventListener('click',(e)=>{if(!menu.contains(e.target)&&e.target!==btn) close();});
+        document.addEventListener('keydown',(e)=>{ if(e.key==='Escape') close();});
+        btn.dataset.wired='1';
+      }
+      function tryWire(){
+        const btn  = document.getElementById('navSolutionsBtn')
+                || document.querySelector('[data-nav="solutions-btn"]')
+                || document.getElementById('solutionsBtn');
+        const menu = document.getElementById('navSolutionsMenu')
+                || document.querySelector('[data-nav="solutions-menu"]')
+                || document.getElementById('solutionsMenu');
+        wire(btn, menu);
+      }
+      document.addEventListener('DOMContentLoaded', ()=>{
+        setTimeout(tryWire,0);setTimeout(tryWire,200);setTimeout(tryWire,600);setTimeout(tryWire,1200);
+      });
+      window.addEventListener('load', ()=> setTimeout(tryWire,300));
+    })();
+  </script>
+
+  <!-- ============================================================
+       CHANGE #13 (FALLBACK HEADER REMOVER):
+       Corrige el problema visual de header duplicado.
+       ============================================================ -->
+  <script>
+    (function () {
+      const fb = document.getElementById('fallback-header');
+      if (!fb) return;
+
+      function removeFallbackSafely() {
+        const mount = document.getElementById('app-header');
+        const injected = mount && mount.querySelector('header');
+        if (injected && fb.parentNode) {
+          fb.parentNode.removeChild(fb);
+          return true;
+        }
+        return false;
+      }
+
+      if (!removeFallbackSafely()) {
+        setTimeout(removeFallbackSafely, 150);
+        setTimeout(removeFallbackSafely, 400);
+        setTimeout(removeFallbackSafely, 1000);
+        setTimeout(removeFallbackSafely, 2000);
+      }
+    })();
+  </script>
+
+  <!-- Nav / Footer -->
+  <script defer src="/js/nav.js?v=7"></script>
+  <script defer src="/js/footer.js?v=7"></script>
+  <script defer src="/js/fix-nav.js?v=7"></script>
+</body>
+</html>
