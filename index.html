@@ -1,91 +1,738 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Services | Romanoti Solutions</title>
-  <meta name="description" content="Romanoti Solutions delivers structured technical services in Help Desk / ITSM, infrastructure, cybersecurity, and diagnostics.">
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Romanoti Solutions | IT Infrastructure, Cybersecurity & Operational Support</title>
 
+  <!-- ========================================================= -->
+  <!-- ROMANOTI OFFICIAL BRANDING / FAVICONS                     -->
+  <!-- ========================================================= -->
   <link rel="icon" type="image/svg+xml" href="/images/romanoti-icon.svg">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/romanoti-icon.png">
+  <link rel="icon" type="image/png" href="/images/romanoti-icon.png">
   <link rel="shortcut icon" href="/images/favicon.ico">
-  <meta name="theme-color" content="#081120">
+  <link rel="apple-touch-icon" href="/images/romanoti-icon.png">
+  <meta name="theme-color" content="#2563eb">
 
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/styles.css?v=30">
+
+  <!-- ========================================================= -->
+  <!-- CHANGE #GA4 - GOOGLE ANALYTICS TRACKING                   -->
+  <!-- --------------------------------------------------------- -->
+  <!-- Purpose:                                                  -->
+  <!-- Enable GA4 measurement across the Romanoti website and    -->
+  <!-- provide a base for CTA click tracking and funnel analysis -->
+  <!-- Measurement ID: G-TPMHJ69C4R                              -->
+  <!-- ========================================================= -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TPMHJ69C4R"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-TPMHJ69C4R', {
+      page_path: window.location.pathname
+    });
+
+    // =========================================================
+    // CHANGE #GA4 - CENTRAL EVENT TRACKING HELPER
+    // ---------------------------------------------------------
+    // Use this helper in CTA onclick handlers to standardize
+    // event naming across Home, Why Romanoti, and How We Work.
+    // =========================================================
+    function trackEvent(action, label) {
+      gtag('event', action, {
+        event_category: 'engagement',
+        event_label: label
+      });
+    }
+  </script>
+
+  <style>
+    body{font-family:'Montserrat',sans-serif;background:#f8f9fa;color:#111827;scroll-behavior:smooth}
+    .btn-primary{background:#2563EB;transition:all .2s}
+    .btn-primary:hover{background:#1D4ED8;transform:translateY(-1px);box-shadow:0 6px 18px -10px rgba(37,99,235,.7)}
+    .card{border-radius:14px;box-shadow:0 12px 32px -16px rgba(2,6,23,.2)}
+    .badge{display:inline-block;border:1px solid #cbd5e1;border-radius:999px;padding:4px 10px;font-size:12px;background:#f8fafc}
+    .romanoti-header-logo{height:52px;width:auto;object-fit:contain;display:block}
+
+    .romanoti-hero{
+      position:relative;
+      min-height:88vh;
+      display:flex;
+      align-items:center;
+      overflow:hidden;
+      background:#081120;
+      color:#fff;
+    }
+
+    .romanoti-hero__bg{
+      position:absolute;
+      inset:0;
+      z-index:0;
+    }
+
+    .romanoti-hero__bg img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      object-position:center;
+      display:block;
+    }
+
+    .romanoti-hero__overlay{
+      position:absolute;
+      inset:0;
+      z-index:1;
+      background:
+        linear-gradient(90deg, rgba(5,10,20,.88) 0%, rgba(5,10,20,.70) 45%, rgba(5,10,20,.35) 100%),
+        linear-gradient(180deg, rgba(5,10,20,.15) 0%, rgba(5,10,20,.45) 100%);
+    }
+
+    .romanoti-hero__content{
+      position:relative;
+      z-index:2;
+      max-width:760px;
+      padding:120px 8% 90px;
+    }
+
+    .romanoti-hero__eyebrow{
+      margin:0 0 18px;
+      font-size:13px;
+      font-weight:600;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      color:#7dd3fc;
+    }
+
+    .romanoti-hero__title{
+      margin:0 0 22px;
+      font-size:clamp(2.5rem,5vw,4.8rem);
+      line-height:1.02;
+      font-weight:800;
+      letter-spacing:-.03em;
+      color:#fff;
+    }
+
+    .romanoti-hero__subtitle{
+      margin:0 0 32px;
+      max-width:680px;
+      font-size:clamp(1rem,1.4vw,1.18rem);
+      line-height:1.75;
+      color:rgba(255,255,255,.88);
+    }
+
+    .romanoti-hero__buttons{
+      display:flex;
+      flex-wrap:wrap;
+      gap:14px;
+      margin-bottom:28px;
+    }
+
+    .romanoti-btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:48px;
+      padding:0 22px;
+      border-radius:999px;
+      font-weight:700;
+      font-size:.95rem;
+      text-decoration:none;
+      transition:all .25s ease;
+      border:1px solid transparent;
+    }
+
+    .romanoti-btn--primary{
+      background:linear-gradient(135deg,#2563eb 0%,#38bdf8 100%);
+      color:#fff;
+      box-shadow:0 10px 30px rgba(37,99,235,.28);
+    }
+
+    .romanoti-btn--primary:hover{
+      transform:translateY(-2px);
+      box-shadow:0 14px 36px rgba(37,99,235,.36);
+    }
+
+    .romanoti-btn--secondary{
+      background:rgba(255,255,255,.06);
+      color:#fff;
+      border-color:rgba(255,255,255,.2);
+      backdrop-filter:blur(6px);
+    }
+
+    .romanoti-btn--secondary:hover{
+      background:rgba(255,255,255,.12);
+      transform:translateY(-2px);
+    }
+
+    .section-soft{
+      background:linear-gradient(180deg,#f8fafc 0%,#ffffff 100%);
+    }
+
+    @media (max-width:768px){
+      .romanoti-header-logo{height:44px}
+      .romanoti-hero{min-height:auto}
+      .romanoti-hero__content{padding:96px 7% 70px}
+      .romanoti-hero__title{font-size:2.5rem}
+      .romanoti-hero__subtitle{font-size:1rem;line-height:1.65}
+      .romanoti-hero__buttons{flex-direction:column;align-items:stretch}
+      .romanoti-btn{width:100%}
+    }
+
+    .romanoti-hero-logo-wrap{
+      margin-bottom:24px;
+      display:inline-block;
+      opacity:0;
+      transform:translateY(24px) scale(0.96);
+      animation:heroLogoIntro 1.4s cubic-bezier(.22,1,.36,1) forwards;
+    }
+
+    .romanoti-hero-logo{
+      max-width:420px;
+      width:100%;
+      height:auto;
+      display:block;
+      transform-origin:center;
+      filter:
+        drop-shadow(0 0 12px rgba(56, 189, 248, 0.16))
+        drop-shadow(0 0 26px rgba(37, 99, 235, 0.10));
+      animation:
+        heroLogoFloatPro 6s ease-in-out infinite 1.4s,
+        heroLogoGlowPro 4.5s ease-in-out infinite 1.4s;
+    }
+
+    @keyframes heroLogoIntro{
+      0%{
+        opacity:0;
+        transform:translateY(24px) scale(0.96);
+      }
+      60%{
+        opacity:1;
+        transform:translateY(-4px) scale(1.01);
+      }
+      100%{
+        opacity:1;
+        transform:translateY(0) scale(1);
+      }
+    }
+
+    @keyframes heroLogoFloatPro{
+      0%,100%{
+        transform:translateY(0);
+      }
+      25%{
+        transform:translateY(-4px);
+      }
+      50%{
+        transform:translateY(-8px);
+      }
+      75%{
+        transform:translateY(-3px);
+      }
+    }
+
+    @keyframes heroLogoGlowPro{
+      0%,100%{
+        filter:
+          drop-shadow(0 0 12px rgba(56, 189, 248, 0.16))
+          drop-shadow(0 0 26px rgba(37, 99, 235, 0.10));
+      }
+      50%{
+        filter:
+          drop-shadow(0 0 22px rgba(56, 189, 248, 0.28))
+          drop-shadow(0 0 40px rgba(37, 99, 235, 0.18));
+      }
+    }
+
+    .romanoti-trust{
+      background:#0b1220;
+      padding:28px 0;
+      text-align:center;
+      border-top:1px solid rgba(255,255,255,0.05);
+    }
+
+    .romanoti-trust__text{
+      color:#94a3b8;
+      font-size:.9rem;
+      margin-bottom:14px;
+      letter-spacing:.5px;
+    }
+
+    .romanoti-trust__items{
+      display:flex;
+      justify-content:center;
+      flex-wrap:wrap;
+      gap:18px;
+    }
+
+    .romanoti-trust__items span{
+      color:#e2e8f0;
+      font-size:.85rem;
+      padding:6px 12px;
+      border:1px solid rgba(148,163,184,0.2);
+      border-radius:999px;
+      background:rgba(255,255,255,0.02);
+    }
+  </style>
 </head>
-<body>
+
+<body class="bg-gray-50">
+
   <div id="app-header"></div>
 
-  <section class="hero" style="min-height:72vh; background:#081120;">
-    <div class="hero-overlay"></div>
-    <div class="container hero-content">
-      <span class="badge" style="background:rgba(255,255,255,.08); color:#cbd5e1; border-color:rgba(255,255,255,.18);">Romanoti Service Portfolio</span>
-      <h1 class="hero-title mt-4">Technical services built for operational stability.</h1>
-      <p class="hero-subtitle">Romanoti delivers focused technical services that help organizations reduce downtime, improve visibility, and support secure, well-operated environments.</p>
-      <div class="mt-8 flex flex-wrap gap-4">
-        <a href="/booking.html" class="romanoti-btn romanoti-btn--primary">Book a Consultation</a>
-        <a href="/contact.html" class="romanoti-btn romanoti-btn--secondary">Talk to Romanoti</a>
+  <!-- ========================================================= -->
+  <!-- HERO                                                      -->
+  <!-- ========================================================= -->
+  <section class="romanoti-hero">
+    <div class="romanoti-hero__bg">
+      <img src="/images/romanoti-hero-banner.png" alt="Romanoti Solutions Banner">
+    </div>
+
+    <div class="romanoti-hero__overlay"></div>
+
+    <div class="romanoti-hero__content">
+      <p class="romanoti-hero__eyebrow">
+        Government &amp; Enterprise Technology Services
+      </p>
+
+      <div class="romanoti-hero-logo-wrap">
+        <img
+          src="/images/romanoti-hero-logo.png"
+          alt="Romanoti Solutions Inc"
+          class="romanoti-hero-logo"
+        >
+      </div>
+
+      <h1 class="romanoti-hero__title">
+        Secure, Optimize &amp; Operate<br>
+        Mission-Critical IT Infrastructure
+      </h1>
+
+      <p class="romanoti-hero__subtitle">
+        Romanoti helps government and enterprise organizations gain visibility, reduce risk, and operate resilient infrastructure through cybersecurity, diagnostics, and operational intelligence.
+      </p>
+
+      <!-- ========================================================= -->
+      <!-- CHANGE #89                                                -->
+      <!-- --------------------------------------------------------- -->
+      <!-- Add direct funnel entry points from Home to:              -->
+      <!-- 1) Why Romanoti                                           -->
+      <!-- 2) How We Work                                            -->
+      <!-- Purpose:                                                  -->
+      <!-- Turn Home into the strategic beginning of the funnel:     -->
+      <!-- Home -> Why Romanoti -> How We Work -> Booking            -->
+      <!-- ========================================================= -->
+      <div class="romanoti-hero__buttons">
+        <a href="/solutions/why-romanoti.html"
+           class="romanoti-btn romanoti-btn--primary"
+           onclick="trackEvent('click','hero_why_romanoti')">
+           Why Romanoti
+        </a>
+
+        <a href="/how-we-work.html"
+           class="romanoti-btn romanoti-btn--secondary"
+           onclick="trackEvent('click','hero_how_we_work')">
+           How We Work
+        </a>
+
+        <!-- ========================================================= -->
+        <!-- CHANGE #90                                                -->
+        <!-- --------------------------------------------------------- -->
+        <!-- Add direct booking CTA in hero to reduce friction and     -->
+        <!-- give immediate action to decision-makers landing on Home. -->
+        <!-- ========================================================= -->
+        <a href="/booking.html"
+           class="romanoti-btn romanoti-btn--primary"
+           onclick="trackEvent('click','hero_book_consultation')">
+           Book a Consultation
+        </a>
+      </div>
+
+      <div class="mt-4 text-sm text-blue-200 opacity-80">
+        Supporting secure environments across infrastructure, cloud, and operations
       </div>
     </div>
   </section>
 
-  <section class="section section-light">
-    <div class="container">
-      <div class="max-w-3xl mb-12">
-        <h2 class="section-title">Core service lines</h2>
-        <p class="section-intro">Each service line is designed to address a specific layer of operational maturity: support, infrastructure, security, and diagnostics. Together they form a practical service model for modern technical environments.</p>
-      </div>
+  <!-- ========================================================= -->
+  <!-- TRUST STRIP                                               -->
+  <!-- ========================================================= -->
+  <section class="romanoti-trust">
+    <div class="romanoti-trust__container">
+      <p class="romanoti-trust__text">
+        Trusted across enterprise and government IT environments
+      </p>
 
-      <div class="grid-2">
-        <a href="/services/helpdesk.html" class="card hover:shadow-xl transition-shadow">
-          <div class="badge mb-4">Service Line 01</div>
-          <h3>Help Desk / ITSM</h3>
-          <p>Structured support, incident handling, request management, and operational continuity aligned with service management practices.</p>
-          <span class="text-blue-600 font-semibold inline-block mt-4">Explore service →</span>
-        </a>
-
-        <a href="/services/networks.html" class="card hover:shadow-xl transition-shadow">
-          <div class="badge mb-4">Service Line 02</div>
-          <h3>Networks &amp; Infrastructure</h3>
-          <p>Discovery, diagnostics, and practical engineering support for environments that need stability, visibility, and cleaner technical control.</p>
-          <span class="text-blue-600 font-semibold inline-block mt-4">Explore service →</span>
-        </a>
-
-        <a href="/services/cybersecurity.html" class="card hover:shadow-xl transition-shadow">
-          <div class="badge mb-4">Service Line 03</div>
-          <h3>Cybersecurity</h3>
-          <p>Assessment, protection, and response-oriented capabilities designed to reduce exposure and improve resilience across infrastructure.</p>
-          <span class="text-blue-600 font-semibold inline-block mt-4">Explore service →</span>
-        </a>
-
-        <a href="/services/tools.html" class="card hover:shadow-xl transition-shadow">
-          <div class="badge mb-4">Service Line 04</div>
-          <h3>Tools &amp; Diagnostics</h3>
-          <p>Utility-focused capabilities that support faster troubleshooting, operational clarity, technical inventory, and better decision-making.</p>
-          <span class="text-blue-600 font-semibold inline-block mt-4">Explore service →</span>
-        </a>
+      <div class="romanoti-trust__items">
+        <span>Infrastructure</span>
+        <span>Cybersecurity</span>
+        <span>Cloud &amp; Operations</span>
+        <span>ITSM / Help Desk</span>
       </div>
     </div>
   </section>
 
-  <section class="section" style="background:#0b1220; color:#fff;">
-    <div class="container">
-      <div class="grid-2" style="align-items:center;">
-        <div>
-          <h2 class="section-title" style="color:#fff;">One operating model. Multiple technical outcomes.</h2>
-          <p style="color:rgba(255,255,255,.82); max-width:720px;">Romanoti combines disciplined execution, practical diagnostics, and business-facing clarity to support environments that cannot afford guesswork.</p>
+  <!-- ========================================================= -->
+  <!-- CHANGE #89 - STRATEGIC FUNNEL INTRO                       -->
+  <!-- --------------------------------------------------------- -->
+  <!-- Purpose:                                                  -->
+  <!-- Introduce Romanoti's narrative before the catalog-like    -->
+  <!-- service sections. This gives Home a stronger strategic    -->
+  <!-- role and directs visitors into the Why / How funnel.      -->
+  <!-- ========================================================= -->
+  <section class="py-16 bg-white border-b">
+    <div class="container mx-auto px-6 text-center max-w-4xl">
+      <h2 class="text-3xl font-bold mb-4">
+        A more structured way to operate technical environments
+      </h2>
+
+      <p class="text-lg text-gray-600 mb-8">
+        Romanoti is not only about services. It is about how environments are understood,
+        structured, secured, and improved over time through a disciplined operating model.
+      </p>
+
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="/solutions/why-romanoti.html"
+           class="btn-primary text-white px-6 py-3 rounded-lg font-semibold"
+           onclick="trackEvent('click','funnel_why_romanoti')">
+           Why organizations choose Romanoti
+        </a>
+
+        <a href="/how-we-work.html"
+           class="border px-6 py-3 rounded-lg font-semibold hover:bg-gray-100"
+           onclick="trackEvent('click','funnel_how_we_work')">
+           See how we work
+        </a>
+      </div>
+
+      <!-- ========================================================= -->
+      <!-- CHANGE #90                                                -->
+      <!-- --------------------------------------------------------- -->
+      <!-- Reduce friction with reassuring microcopy below funnel     -->
+      <!-- entry CTAs.                                               -->
+      <!-- ========================================================= -->
+      <p class="text-sm text-gray-500 mt-4">
+        No commitment. Understand your environment and next steps.
+      </p>
+    </div>
+  </section>
+
+  <!-- ========================================================= -->
+  <!-- CYBERSHIELD HIGHLIGHT                                     -->
+  <!-- ========================================================= -->
+  <section class="bg-blue-50 border-t border-b border-blue-100">
+    <div class="container mx-auto px-6 py-6">
+
+      <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+
+        <div class="text-blue-900 font-semibold text-center md:text-left">
+          Gain visibility into your exposure, resilience, and security posture.
         </div>
-        <div class="text-left md:text-right">
-          <a href="/booking.html" class="romanoti-btn romanoti-btn--primary">Book a Consultation</a>
+
+        <div class="flex flex-wrap gap-3 justify-center md:justify-end">
+          <a href="/solutions/cybershield/easm-console.html"
+             class="bg-white border px-5 py-2 rounded-lg font-medium hover:bg-gray-50"
+             onclick="trackEvent('click','cybershield_demo')">
+            Watch Demo
+          </a>
+
+          <a href="/solutions/cybershield/"
+             class="btn-primary text-white px-5 py-2 rounded-lg font-medium"
+             onclick="trackEvent('click','cybershield_explore')">
+            Explore CyberShield
+          </a>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================= -->
+  <!-- SOLUTIONS & PLATFORM                                      -->
+  <!-- ========================================================= -->
+  <section class="py-14 bg-white border-b">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-10">
+        <h2 class="text-3xl font-bold mb-3">Solutions &amp; Platform</h2>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto mb-6">
+          Romanoti combines professional service delivery with platform-oriented capabilities for
+          infrastructure discovery, diagnostics, and operational intelligence.
+        </p>
+
+        <div class="flex flex-wrap justify-center gap-4 mt-4">
+          <a href="/platform/index.html"
+             class="btn-primary text-white px-6 py-3 rounded-lg font-semibold"
+             onclick="trackEvent('click','platform_explore')">
+             Explore the Platform
+          </a>
+
+          <a href="/platform/netpilot.html"
+             class="border px-6 py-3 rounded-lg font-semibold hover:bg-gray-50"
+             onclick="trackEvent('click','platform_netpilot')">
+             See NetPilot
+          </a>
+
+          <a href="/platform/ops-assistant.html"
+             class="border px-6 py-3 rounded-lg font-semibold hover:bg-gray-50"
+             onclick="trackEvent('click','platform_ops_assistant')">
+             See Ops Assistant
+          </a>
         </div>
       </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="card bg-white p-6 border border-gray-100">
+          <div class="badge">Platform Overview</div>
+          <h3 class="text-xl font-bold mt-2 mb-2">A scalable direction</h3>
+          <p class="text-gray-600">
+            Romanoti is evolving from pure services into a platform model that connects visibility,
+            diagnostics, and operational intelligence.
+          </p>
+          <a href="/platform/index.html" class="text-blue-600 hover:underline mt-3 inline-block" onclick="trackEvent('click','platform_card_overview')">Explore Platform →</a>
+        </div>
+
+        <div class="card bg-white p-6 border border-gray-100">
+          <div class="badge">NetPilot</div>
+          <h3 class="text-xl font-bold mt-2 mb-2">Infrastructure discovery</h3>
+          <p class="text-gray-600">
+            NetPilot is the discovery and diagnostics layer designed to help identify devices,
+            services, and technical structure across environments.
+          </p>
+          <a href="/platform/netpilot.html" class="text-blue-600 hover:underline mt-3 inline-block" onclick="trackEvent('click','platform_card_netpilot')">Open NetPilot →</a>
+        </div>
+
+        <div class="card bg-white p-6 border border-gray-100">
+          <div class="badge">Ops Assistant</div>
+          <h3 class="text-xl font-bold mt-2 mb-2">Operational intelligence</h3>
+          <p class="text-gray-600">
+            Ops Assistant helps interpret findings, reduce ambiguity, and support better
+            operational decisions across technical environments.
+          </p>
+          <a href="/platform/ops-assistant.html" class="text-blue-600 hover:underline mt-3 inline-block" onclick="trackEvent('click','platform_card_ops_assistant')">Open Ops Assistant →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================= -->
+  <!-- OPERATIONAL SECURITY & THREAT VISIBILITY                  -->
+  <!-- ========================================================= -->
+  <section class="py-14">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-10">
+        <h2 class="text-3xl font-bold">Operational Security &amp; Threat Visibility</h2>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+          Romanoti combines exposure monitoring, threat detection, and operational response to help organizations reduce risk across modern infrastructure.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="card bg-white p-6">
+          <div class="badge">EASM + Hardening</div>
+          <h3 class="text-xl font-bold mt-2 mb-2">External Attack Surface Monitoring</h3>
+          <p class="text-gray-600">
+            Identify exposed services, subdomains, open ports, and email authentication posture (SPF / DKIM / DMARC) before attackers do.
+          </p>
+          <a href="/solutions/cybershield/easm-console.html" class="text-blue-600 hover:underline mt-3 inline-block" onclick="trackEvent('click','easm_try')">Try EASM →</a>
+
+          <!-- CHANGE #90: micro-conversion CTA -->
+          <a href="/booking.html"
+             class="text-blue-600 text-sm mt-3 inline-block hover:underline"
+             onclick="trackEvent('click','micro_talk_easm')">
+             → Talk to Romanoti
+          </a>
+        </div>
+
+        <div class="card bg-white p-6">
+          <div class="badge">SOC / MDR 24×7</div>
+          <h3 class="text-xl font-bold mt-2 mb-2">Threat Detection &amp; Response</h3>
+          <p class="text-gray-600">
+            Security monitoring with log correlation, behavioral indicators (IOCs / IOAs),
+            and guided response playbooks for rapid containment.
+          </p>
+          <a href="/it-soc.html" class="text-blue-600 hover:underline mt-3 inline-block" onclick="trackEvent('click','soc_see')">See SOC →</a>
+
+          <!-- CHANGE #90: micro-conversion CTA -->
+          <a href="/booking.html"
+             class="text-blue-600 text-sm mt-3 inline-block hover:underline"
+             onclick="trackEvent('click','micro_talk_soc')">
+             → Talk to Romanoti
+          </a>
+        </div>
+
+        <div class="card bg-white p-6">
+          <div class="badge">NOC + Resilience</div>
+          <h3 class="text-xl font-bold mt-2 mb-2">Availability first</h3>
+          <p class="text-gray-600">Service monitoring (HTTP/TLS/DNS) and capacity; executive reports to plan for growth without surprises.</p>
+          <a href="/it-noc.html" class="text-blue-600 hover:underline mt-3 inline-block" onclick="trackEvent('click','noc_see')">See NOC →</a>
+
+          <!-- CHANGE #90: micro-conversion CTA -->
+          <a href="/booking.html"
+             class="text-blue-600 text-sm mt-3 inline-block hover:underline"
+             onclick="trackEvent('click','micro_talk_noc')">
+             → Talk to Romanoti
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================= -->
+  <!-- CORE SERVICES                                             -->
+  <!-- ========================================================= -->
+  <section id="services" class="py-16 bg-white border-t border-b">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-10">
+        <h2 class="text-3xl font-bold">Core Services</h2>
+        <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+          Focused technical services for modern infrastructure, security, and operational continuity.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
+        <div class="card bg-white p-6 border border-gray-100 flex flex-col">
+          <h3 class="text-xl font-bold mb-3">Cloud Migration</h3>
+          <p class="text-gray-600 mb-5">
+            Seamless transition to modern cloud and hybrid environments.
+          </p>
+          <div class="mt-auto space-y-2">
+            <a href="/cloud-redundancy.html" class="text-blue-600 hover:underline text-sm block" onclick="trackEvent('click','cloud_failover')">
+              → Failover &amp; Redundancy
+            </a>
+            <a href="/cloud-hybrid.html" class="text-blue-600 hover:underline text-sm block" onclick="trackEvent('click','cloud_hybrid')">
+              → Hybrid Cloud Architecture
+            </a>
+            <a href="/booking.html" class="text-blue-600 hover:underline text-sm block" onclick="trackEvent('click','micro_talk_cloud')">
+              → Talk to Romanoti
+            </a>
+          </div>
+        </div>
+
+        <div class="card bg-white p-6 border border-gray-100 flex flex-col">
+          <h3 class="text-xl font-bold mb-3">IT Infrastructure</h3>
+          <p class="text-gray-600 mb-5">
+            End-to-end modernization and support for resilient technical environments.
+          </p>
+          <div class="mt-auto space-y-2">
+            <a href="/it-noc.html" class="text-blue-600 hover:underline text-sm block" onclick="trackEvent('click','infra_noc')">
+              → NOC Services
+            </a>
+            <a href="/it-soc.html" class="text-blue-600 hover:underline text-sm block" onclick="trackEvent('click','infra_soc')">
+              → SOC Services
+            </a>
+            <a href="/booking.html" class="text-blue-600 hover:underline text-sm block" onclick="trackEvent('click','micro_talk_infra')">
+              → Talk to Romanoti
+            </a>
+          </div>
+        </div>
+
+        <div class="card bg-white p-6 border border-gray-100 flex flex-col">
+          <h3 class="text-xl font-bold mb-3">Cybersecurity</h3>
+          <p class="text-gray-600 mb-5">
+            Protection against exposure, ransomware, and modern security threats.
+          </p>
+          <div class="mt-auto flex flex-wrap gap-3">
+            <a href="/solutions/cybershield/" class="btn-primary text-white px-4 py-2 rounded-lg inline-block" onclick="trackEvent('click','core_cybershield_explore')">
+              Explore CyberShield
+            </a>
+            <a href="/solutions/cybershield/easm-console.html" class="border px-4 py-2 rounded-lg inline-block hover:bg-gray-50" onclick="trackEvent('click','core_cybershield_demo')">
+              EASM demo
+            </a>
+            <a href="/booking.html" class="text-blue-600 text-sm inline-block self-center hover:underline" onclick="trackEvent('click','micro_talk_cyber')">
+              → Talk to Romanoti
+            </a>
+          </div>
+        </div>
+
+        <div class="card bg-white p-6 border border-gray-100 flex flex-col">
+          <h3 class="text-xl font-bold mb-3">Operational Support</h3>
+          <p class="text-gray-600 mb-5">
+            Practical support focused on continuity, visibility, and operational resilience.
+          </p>
+          <div class="mt-auto space-y-2">
+            <a href="/services/tools.html" class="text-blue-600 hover:underline text-sm block" onclick="trackEvent('click','ops_tools')">
+              → Tools &amp; Utilities
+            </a>
+            <a href="/contact.html" class="text-blue-600 hover:underline text-sm block" onclick="trackEvent('click','ops_talk_contact')">
+              → Talk to Romanoti
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================= -->
+  <!-- FINAL CTA                                                 -->
+  <!-- ========================================================= -->
+  <section class="py-14 bg-blue-700 text-white">
+    <div class="container mx-auto px-6 text-center">
+      <h2 class="text-3xl font-bold mb-4">Ready to strengthen your infrastructure and security posture?</h2>
+
+      <!-- ========================================================= -->
+      <!-- CHANGE #90                                                -->
+      <!-- --------------------------------------------------------- -->
+      <!-- Replace generic close with stronger conversion language.  -->
+      <!-- ========================================================= -->
+      <p class="text-lg opacity-90 mb-6">
+        Speak with Romanoti to understand your environment, identify risks, and define a clear path forward.
+      </p>
+
+      <div class="flex flex-col md:flex-row justify-center gap-4">
+        <a href="/booking.html?service=Free%20Consultation"
+           class="bg-white text-blue-700 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100"
+           onclick="trackEvent('click','final_book_consultation')">
+          Book a Consultation
+        </a>
+
+        <a href="/contact.html"
+           class="btn-primary text-white px-6 py-3 rounded-lg font-semibold"
+           onclick="trackEvent('click','final_contact')">
+          Contact Us
+        </a>
+      </div>
+
+      <!-- CHANGE #90: soft urgency / reassurance -->
+      <p class="text-sm opacity-70 mt-3">
+        Initial consultation available within 24–48 hours.
+      </p>
     </div>
   </section>
 
   <div id="app-footer"></div>
-  <script defer src="/js/nav.js?v=31"></script>
+  <script defer src="/js/nav.js?v=21"></script>
   <script defer src="/js/footer.js?v=11"></script>
+
+  <script>
+    (function () {
+      var path = window.location.pathname || "/";
+
+      var enLink = document.querySelector('.langbar a[href="/en/"]');
+      var frLink = document.querySelector('.langbar a[href="/fr/"]');
+      var esLink = document.querySelector('.langbar a[href="/es/"]');
+
+      if (!enLink && !frLink && !esLink) return;
+
+      [enLink, frLink, esLink].forEach(function (a) {
+        if (a) a.classList.remove("font-semibold");
+      });
+
+      if (path === "/" || path.startsWith("/en/")) {
+        if (enLink) enLink.classList.add("font-semibold");
+      } else if (path.startsWith("/fr/")) {
+        if (frLink) frLink.classList.add("font-semibold");
+      } else if (path.startsWith("/es/")) {
+        if (esLink) esLink.classList.add("font-semibold");
+      } else {
+        if (enLink) enLink.classList.add("font-semibold");
+      }
+    })();
+  </script>
+
 </body>
 </html>
