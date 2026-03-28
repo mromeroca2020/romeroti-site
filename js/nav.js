@@ -7,75 +7,14 @@
   // ------------------------------------------------------------
   // Header global estable, multilenguaje y alineado al árbol real.
   //
-  // REGLAS DE ESTA VERSIÓN
+  // CHANGE #89
   // ------------------------------------------------------------
-  // 1) Usar SOLO rutas confirmadas del proyecto actual.
-  // 2) No inventar páginas no verificadas.
-  // 3) Mantener compatibilidad con:
-  //    - GitHub
-  //    - Netlify
-  //    - Render
-  //    - frontend estático por idioma
-  //
-  // ESTRUCTURA DE IDIOMA
-  // ------------------------------------------------------------
-  // EN -> /en/
-  // FR -> /fr/
-  // ES -> /es/
-  //
-  // CHANGE #82
-  // ------------------------------------------------------------
-  // Se actualizan las rutas del menú para alinearlas con la
-  // estructura real actual del repositorio.
-  //
-  // CHANGE #84
-  // ------------------------------------------------------------
-  // Se corrige la imagen del logo del header.
-  //
-  // CHANGE #85
-  // ------------------------------------------------------------
-  // Se simplifica el selector de idioma:
-  // ANTES: 🌐 Language / Idioma / Langue
-  // AHORA: EN / FR / ES
-  //
-  // Además:
-  // - El dropdown de idioma usa etiquetas cortas.
-  // - Se corrigen rutas de Why Romanoti para fr y es.
-  //
-  // CHANGE #86
-  // ------------------------------------------------------------
-  // Se agrega "How We Work" al menú principal:
-  // - nuevo label i18n en EN / FR / ES
-  // - nueva ruta confirmada:
-  //   /solutions/how-we-work.html
-  // - nuevo enlace visible en navegación desktop
-  //
-  // CHANGE #87
-  // ------------------------------------------------------------
-  // Se agrega acceso interno para empleados de Romanoti:
-  // - nuevo label i18n en EN / FR / ES
-  // - nueva ruta confirmada:
-  //   /crm-login.html
-  // - visible en navegación desktop
-  // - visible también en mobile
-  // - estilo discreto para no competir con CTA comercial
-  //
-  // CHANGE #88
-  // ------------------------------------------------------------
-  // Corrección cosmética del header SIN tocar la lógica:
-  // - contenedor más ancho
-  // - mejor espaciado entre logo, menú y acciones
-  // - dropdowns alineados a la izquierda
-  // - CTA más equilibrado visualmente
-  //
-  // NOTA
-  // ------------------------------------------------------------
-  // Este cambio mantiene intacta la lógica actual del nav:
-  // - boot único
-  // - mount en #app-header
-  // - dropdowns Services / Solutions
-  // - selector de idioma
-  // - compatibilidad con estructura actual del proyecto
+  // Corrección cosmética del header:
+  // - evita solapamiento del texto "Contact" con el bloque derecho
+  // - mejora espaciado general
+  // - reduce ligeramente tamaño del logo
+  // - compacta spacing en menú y acciones
+  // - oculta Staff Login en pantallas intermedias para evitar montajes
   // ============================================================
 
   if (window.__ROMANOTI_NAV_BOOTED__) {
@@ -306,28 +245,27 @@
   // ============================================================
   const html = `
   <header class="bg-white/95 backdrop-blur sticky top-0 z-50 border-b border-gray-100 shadow-sm" id="navHeader">
-    <div class="max-w-screen-xl mx-auto px-8 xl:px-10 py-4">
-      <div class="flex items-center justify-between gap-8">
+    <div class="max-w-screen-2xl mx-auto px-6 lg:px-8 xl:px-10 py-3.5">
+      <div class="flex items-center justify-between gap-6 xl:gap-8">
 
-        <!-- ============================================================
-             LOGO OFICIAL
-             ============================================================ -->
-        <a href="${CURRENT.home}" class="flex items-center shrink-0 mr-6">
+        <!-- LOGO -->
+        <a href="${CURRENT.home}" class="flex items-center shrink-0 mr-4 xl:mr-6">
           <img
             src="/images/romanoti-logo-small.svg"
             alt="${I18N.brand}"
-            class="h-12 md:h-14 w-auto object-contain block"
+            class="h-10 lg:h-11 xl:h-12 w-auto object-contain block"
             onerror="this.onerror=null;this.src='/images/romanoti-icon.png';"
           >
         </a>
 
-        <nav class="hidden md:flex items-center gap-6 lg:gap-7 flex-1 min-w-0">
-          <a href="${CURRENT.home}" class="text-gray-700 hover:text-blue-600 transition-colors whitespace-nowrap">${I18N.home}</a>
+        <!-- NAV -->
+        <nav class="hidden md:flex items-center gap-4 lg:gap-5 xl:gap-6 flex-1 min-w-0 text-[13px] lg:text-[14px] xl:text-[15px]">
+          <a href="${CURRENT.home}" class="text-gray-700 hover:text-blue-600 whitespace-nowrap">${I18N.home}</a>
 
           <!-- SERVICES -->
           <div class="relative shrink-0" id="navServicesRoot">
             <button id="navServicesBtn"
-                    class="text-gray-700 hover:text-blue-600 inline-flex items-center transition-colors whitespace-nowrap"
+                    class="text-gray-700 hover:text-blue-600 inline-flex items-center whitespace-nowrap"
                     aria-haspopup="true"
                     aria-expanded="false"
                     aria-controls="navServicesMenu">
@@ -348,7 +286,7 @@
           <!-- SOLUTIONS -->
           <div class="relative shrink-0" id="navSolutionsRoot">
             <button id="navSolutionsBtn"
-                    class="text-gray-700 hover:text-blue-600 inline-flex items-center transition-colors whitespace-nowrap"
+                    class="text-gray-700 hover:text-blue-600 inline-flex items-center whitespace-nowrap"
                     aria-haspopup="true"
                     aria-expanded="false"
                     aria-controls="navSolutionsMenu">
@@ -366,39 +304,29 @@
             </div>
           </div>
 
-          <!-- PLATFORM -->
-          <a href="${CURRENT.platform}" class="text-gray-700 hover:text-blue-600 transition-colors whitespace-nowrap">${I18N.platform}</a>
-
-          <!-- ENTERPRISE -->
-          <a href="${CURRENT.enterprise}" class="text-gray-700 hover:text-blue-600 transition-colors whitespace-nowrap">${I18N.enterprise}</a>
-
-          <!-- WHY ROMANOTI -->
-          <a href="${CURRENT.whyRomanoti}" class="text-gray-700 hover:text-blue-600 transition-colors whitespace-nowrap">${I18N.whyRomanoti}</a>
-
-          <!-- HOW WE WORK -->
-          <a href="${CURRENT.howWeWork}" class="text-gray-700 hover:text-blue-600 transition-colors whitespace-nowrap">${I18N.howWeWork}</a>
-
-          <!-- CONTACT -->
-          <a href="${CURRENT.contact}" class="text-gray-700 hover:text-blue-600 transition-colors whitespace-nowrap">${I18N.contact}</a>
+          <a href="${CURRENT.platform}" class="text-gray-700 hover:text-blue-600 whitespace-nowrap">${I18N.platform}</a>
+          <a href="${CURRENT.enterprise}" class="text-gray-700 hover:text-blue-600 whitespace-nowrap">${I18N.enterprise}</a>
+          <a href="${CURRENT.whyRomanoti}" class="text-gray-700 hover:text-blue-600 whitespace-nowrap">${I18N.whyRomanoti}</a>
+          <a href="${CURRENT.howWeWork}" class="text-gray-700 hover:text-blue-600 whitespace-nowrap">${I18N.howWeWork}</a>
+          <a href="${CURRENT.contact}" class="text-gray-700 hover:text-blue-600 whitespace-nowrap">${I18N.contact}</a>
         </nav>
 
-        <div class="hidden md:flex items-center gap-4 lg:gap-5 shrink-0 ml-6">
-          <!-- BOOKING -->
-          <a href="${CURRENT.booking}" class="bg-blue-600 text-white px-5 py-3 rounded-xl font-medium hover:bg-blue-700 transition whitespace-nowrap">
+        <!-- ACTIONS -->
+        <div class="hidden md:flex items-center gap-3 lg:gap-4 shrink-0 ml-3 lg:ml-4 xl:ml-6">
+          <a href="${CURRENT.booking}"
+             class="bg-blue-600 text-white px-4 lg:px-5 py-2.5 rounded-xl font-medium hover:bg-blue-700 transition whitespace-nowrap text-[13px] lg:text-[14px]">
             ${I18N.book}
           </a>
 
-          <!-- STAFF LOGIN -->
           <a href="${CURRENT.crmLogin}"
-             class="text-gray-400 hover:text-blue-600 text-sm font-medium transition whitespace-nowrap"
+             class="hidden xl:inline-flex text-gray-400 hover:text-blue-600 text-sm font-medium whitespace-nowrap"
              title="Romanoti Internal Access">
             ${I18N.staffLogin}
           </a>
 
-          <!-- LANGUAGE -->
           <div class="relative shrink-0" id="langRoot">
             <button id="langBtn"
-                    class="text-gray-500 hover:text-blue-600 inline-flex items-center font-medium transition-colors whitespace-nowrap"
+                    class="text-gray-500 hover:text-blue-600 inline-flex items-center font-medium whitespace-nowrap text-[13px] lg:text-[14px]"
                     aria-haspopup="true"
                     aria-expanded="false"
                     aria-controls="langMenu">
