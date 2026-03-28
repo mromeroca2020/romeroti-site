@@ -60,6 +60,14 @@
   // - visible también en mobile
   // - estilo discreto para no competir con CTA comercial
   //
+  // CHANGE #88
+  // ------------------------------------------------------------
+  // Corrección cosmética del header SIN tocar la lógica:
+  // - contenedor más ancho
+  // - mejor espaciado entre logo, menú y acciones
+  // - dropdowns alineados a la izquierda
+  // - CTA más equilibrado visualmente
+  //
   // NOTA
   // ------------------------------------------------------------
   // Este cambio mantiene intacta la lógica actual del nav:
@@ -297,14 +305,14 @@
   // 5) HTML DEL HEADER
   // ============================================================
   const html = `
-  <header class="bg-white/95 backdrop-blur sticky top-0 z-50 border-b border-gray-100" id="navHeader">
-    <div class="container mx-auto px-6 py-3">
-      <div class="flex items-center justify-between">
+  <header class="bg-white/95 backdrop-blur sticky top-0 z-50 border-b border-gray-100 shadow-sm" id="navHeader">
+    <div class="max-w-screen-xl mx-auto px-8 xl:px-10 py-4">
+      <div class="flex items-center justify-between gap-8">
 
         <!-- ============================================================
              LOGO OFICIAL
              ============================================================ -->
-        <a href="${CURRENT.home}" class="flex items-center shrink-0">
+        <a href="${CURRENT.home}" class="flex items-center shrink-0 mr-6">
           <img
             src="/images/romanoti-logo-small.svg"
             alt="${I18N.brand}"
@@ -313,13 +321,13 @@
           >
         </a>
 
-        <nav class="hidden md:flex items-center space-x-8">
-          <a href="${CURRENT.home}" class="text-gray-700 hover:text-blue-600">${I18N.home}</a>
+        <nav class="hidden md:flex items-center gap-6 lg:gap-7 flex-1 min-w-0">
+          <a href="${CURRENT.home}" class="text-gray-700 hover:text-blue-600 transition-colors whitespace-nowrap">${I18N.home}</a>
 
           <!-- SERVICES -->
-          <div class="relative" id="navServicesRoot">
+          <div class="relative shrink-0" id="navServicesRoot">
             <button id="navServicesBtn"
-                    class="text-gray-700 hover:text-blue-600 inline-flex items-center"
+                    class="text-gray-700 hover:text-blue-600 inline-flex items-center transition-colors whitespace-nowrap"
                     aria-haspopup="true"
                     aria-expanded="false"
                     aria-controls="navServicesMenu">
@@ -330,7 +338,7 @@
             </button>
 
             <div id="navServicesMenu"
-                 class="absolute right-0 mt-2 w-72 rounded-lg bg-white shadow-lg ring-1 ring-black/5 py-2 hidden z-40"
+                 class="absolute left-0 mt-2 w-72 rounded-lg bg-white shadow-lg ring-1 ring-black/5 py-2 hidden z-40"
                  role="menu"
                  aria-labelledby="navServicesBtn">
               ${servicesMenuHtml}
@@ -338,9 +346,9 @@
           </div>
 
           <!-- SOLUTIONS -->
-          <div class="relative" id="navSolutionsRoot">
+          <div class="relative shrink-0" id="navSolutionsRoot">
             <button id="navSolutionsBtn"
-                    class="text-gray-700 hover:text-blue-600 inline-flex items-center"
+                    class="text-gray-700 hover:text-blue-600 inline-flex items-center transition-colors whitespace-nowrap"
                     aria-haspopup="true"
                     aria-expanded="false"
                     aria-controls="navSolutionsMenu">
@@ -351,7 +359,7 @@
             </button>
 
             <div id="navSolutionsMenu"
-                 class="absolute right-0 mt-2 w-80 rounded-lg bg-white shadow-lg ring-1 ring-black/5 py-2 hidden z-40"
+                 class="absolute left-0 mt-2 w-80 rounded-lg bg-white shadow-lg ring-1 ring-black/5 py-2 hidden z-40"
                  role="menu"
                  aria-labelledby="navSolutionsBtn">
               ${solutionsMenuHtml}
@@ -359,36 +367,38 @@
           </div>
 
           <!-- PLATFORM -->
-          <a href="${CURRENT.platform}" class="text-gray-700 hover:text-blue-600">${I18N.platform}</a>
+          <a href="${CURRENT.platform}" class="text-gray-700 hover:text-blue-600 transition-colors whitespace-nowrap">${I18N.platform}</a>
 
           <!-- ENTERPRISE -->
-          <a href="${CURRENT.enterprise}" class="text-gray-700 hover:text-blue-600">${I18N.enterprise}</a>
+          <a href="${CURRENT.enterprise}" class="text-gray-700 hover:text-blue-600 transition-colors whitespace-nowrap">${I18N.enterprise}</a>
 
           <!-- WHY ROMANOTI -->
-          <a href="${CURRENT.whyRomanoti}" class="text-gray-700 hover:text-blue-600">${I18N.whyRomanoti}</a>
+          <a href="${CURRENT.whyRomanoti}" class="text-gray-700 hover:text-blue-600 transition-colors whitespace-nowrap">${I18N.whyRomanoti}</a>
 
           <!-- HOW WE WORK -->
-          <a href="${CURRENT.howWeWork}" class="text-gray-700 hover:text-blue-600">${I18N.howWeWork}</a>
+          <a href="${CURRENT.howWeWork}" class="text-gray-700 hover:text-blue-600 transition-colors whitespace-nowrap">${I18N.howWeWork}</a>
 
           <!-- CONTACT -->
-          <a href="${CURRENT.contact}" class="text-gray-700 hover:text-blue-600">${I18N.contact}</a>
+          <a href="${CURRENT.contact}" class="text-gray-700 hover:text-blue-600 transition-colors whitespace-nowrap">${I18N.contact}</a>
+        </nav>
 
+        <div class="hidden md:flex items-center gap-4 lg:gap-5 shrink-0 ml-6">
           <!-- BOOKING -->
-          <a href="${CURRENT.booking}" class="bg-blue-600 text-white px-5 py-2 rounded-lg font-medium hover:bg-blue-700 transition">
+          <a href="${CURRENT.booking}" class="bg-blue-600 text-white px-5 py-3 rounded-xl font-medium hover:bg-blue-700 transition whitespace-nowrap">
             ${I18N.book}
           </a>
 
           <!-- STAFF LOGIN -->
           <a href="${CURRENT.crmLogin}"
-             class="text-gray-400 hover:text-blue-600 text-sm font-medium transition"
+             class="text-gray-400 hover:text-blue-600 text-sm font-medium transition whitespace-nowrap"
              title="Romanoti Internal Access">
             ${I18N.staffLogin}
           </a>
 
           <!-- LANGUAGE -->
-          <div class="relative" id="langRoot">
+          <div class="relative shrink-0" id="langRoot">
             <button id="langBtn"
-                    class="text-gray-500 hover:text-blue-600 inline-flex items-center font-medium"
+                    class="text-gray-500 hover:text-blue-600 inline-flex items-center font-medium transition-colors whitespace-nowrap"
                     aria-haspopup="true"
                     aria-expanded="false"
                     aria-controls="langMenu">
@@ -405,7 +415,7 @@
               <a href="#" data-lang="es" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">ES</a>
             </div>
           </div>
-        </nav>
+        </div>
 
         <!-- MOBILE ACTIONS -->
         <div class="md:hidden flex items-center gap-3">
