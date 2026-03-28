@@ -1,20 +1,14 @@
 (function () {
   // ============================================================
   // Romanoti Solutions - Global nav.js
-  // ============================================================
-  //
-  // OBJETIVO
+  // Versión estable - cosmética + navegación consistente
   // ------------------------------------------------------------
-  // Header global estable, multilenguaje y alineado al árbol real.
-  //
-  // CHANGE #89
-  // ------------------------------------------------------------
-  // Corrección cosmética del header:
-  // - evita solapamiento del texto "Contact" con el bloque derecho
-  // - mejora espaciado general
-  // - reduce ligeramente tamaño del logo
-  // - compacta spacing en menú y acciones
-  // - oculta Staff Login en pantallas intermedias para evitar montajes
+  // OBJETIVO:
+  // - mantener la lógica estable
+  // - fijar el logo en una sola posición
+  // - mejorar espaciado del header
+  // - dar enlace principal a Services y Solutions
+  // - no tocar CRM
   // ============================================================
 
   if (window.__ROMANOTI_NAV_BOOTED__) {
@@ -55,7 +49,6 @@
       contact: 'Contacto',
       book: 'Agendar',
       staffLogin: 'Acceso Personal',
-      lang: '',
 
       helpDesk: 'Help Desk / ITSM',
       networksInfra: 'Redes e infraestructura',
@@ -73,6 +66,7 @@
       mobileCta: 'Soluciones',
       mobileStaffLogin: 'Acceso CRM'
     },
+
     en: {
       brand: 'Romanoti Solutions',
       home: 'Home',
@@ -85,7 +79,6 @@
       contact: 'Contact',
       book: 'Book Now',
       staffLogin: 'Staff Login',
-      lang: '',
 
       helpDesk: 'Help Desk / ITSM',
       networksInfra: 'Networks & Infrastructure',
@@ -103,6 +96,7 @@
       mobileCta: 'Solutions',
       mobileStaffLogin: 'CRM Login'
     },
+
     fr: {
       brand: 'Romanoti Solutions',
       home: 'Accueil',
@@ -115,7 +109,6 @@
       contact: 'Contact',
       book: 'Prendre RDV',
       staffLogin: 'Accès Équipe',
-      lang: '',
 
       helpDesk: 'Help Desk / ITSM',
       networksInfra: 'Réseaux et infrastructure',
@@ -143,6 +136,8 @@
   const ROUTES = {
     en: {
       home: '/',
+      servicesIndex: '/services/index.html',
+      solutionsIndex: '/solutions/index.html',
       platform: '/platform/index.html',
       enterprise: '/enterprise/government-business.html',
       whyRomanoti: '/solutions/why-romanoti.html',
@@ -167,6 +162,8 @@
 
     fr: {
       home: '/',
+      servicesIndex: '/services/index.html',
+      solutionsIndex: '/solutions/index.html',
       platform: '/platform/index.html',
       enterprise: '/enterprise/government-business.html',
       whyRomanoti: '/solutions/why-romanoti.html',
@@ -191,6 +188,8 @@
 
     es: {
       home: '/',
+      servicesIndex: '/services/index.html',
+      solutionsIndex: '/solutions/index.html',
       platform: '/platform/index.html',
       enterprise: '/enterprise/government-business.html',
       whyRomanoti: '/solutions/why-romanoti.html',
@@ -269,7 +268,7 @@
                     aria-haspopup="true"
                     aria-expanded="false"
                     aria-controls="navServicesMenu">
-              ${I18N.services}
+              <a href="${CURRENT.servicesIndex}" class="inline-flex items-center">${I18N.services}</a>
               <svg class="ml-1 w-4 h-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                 <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.58l3.71-3.35a.75.75 0 111.02 1.1l-4.2 3.79a.75.75 0 01-1.02 0l-4.2-3.79a.75.75 0 01.02-1.06z" clip-rule="evenodd"/>
               </svg>
@@ -290,7 +289,7 @@
                     aria-haspopup="true"
                     aria-expanded="false"
                     aria-controls="navSolutionsMenu">
-              ${I18N.solutions}
+              <a href="${CURRENT.solutionsIndex}" class="inline-flex items-center">${I18N.solutions}</a>
               <svg class="ml-1 w-4 h-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                 <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.58l3.71-3.35a.75.75 0 111.02 1.1l-4.2 3.79a.75.75 0 01-1.02 0l-4.2-3.79a.75.75 0 01.02-1.06z" clip-rule="evenodd"/>
               </svg>
