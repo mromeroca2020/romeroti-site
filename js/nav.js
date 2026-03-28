@@ -143,7 +143,7 @@
       solutions: [
         { key: 'solutionsOverview', href: '/fr/solutions/index.html' },
         { key: 'platformOverview', href: '/fr/platform/index.html' },
-        { key: 'governmentBusiness', href: '/fr/enterprise/government-business.html' }
+        { key: 'governmentBusiness', href: '/fr/entreprise/government-business.html' }
       ]
     },
     es: {
