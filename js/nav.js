@@ -123,27 +123,27 @@
         { key: 'governmentBusiness', href: '/enterprise/government-business.html' }
       ]
     },
-    fr: {
+        fr: {
       home: '/fr/',
-      servicesIndex: '/services/index.html',
-      solutionsIndex: '/solutions/index.html',
-      platform: '/platform/index.html',
-      enterprise: '/enterprise/government-business.html',
-      whyRomanoti: '/solutions/why-romanoti.html',
-      howWeWork: '/solutions/how-we-work.html',
-      contact: '/contact.html',
-      booking: '/booking.html',
-      crmLogin: '/crm-login.html',
+      servicesIndex: '/fr/services/index.html',
+      solutionsIndex: '/fr/solutions/index.html',
+      platform: '/fr/platform/index.html',
+      enterprise: '/fr/enterprise/government-business.html',
+      whyRomanoti: '/fr/solutions/why-romanoti.html',
+      howWeWork: '/fr/how-we-work.html',
+      contact: '/fr/contact.html',
+      booking: '/fr/booking.html',
+      crmLogin: '/fr/crm-login.html',
       services: [
-        { key: 'helpDesk', href: '/services/helpdesk.html' },
-        { key: 'networksInfra', href: '/services/networks.html' },
-        { key: 'cybersecurity', href: '/services/cybersecurity.html' },
-        { key: 'tools', href: '/services/tools.html' }
+        { key: 'helpDesk', href: '/fr/services/helpdesk.html' },
+        { key: 'networksInfra', href: '/fr/services/networks.html' },
+        { key: 'cybersecurity', href: '/fr/services/cybersecurity.html' },
+        { key: 'tools', href: '/fr/services/tools.html' }
       ],
       solutions: [
-        { key: 'solutionsOverview', href: '/solutions/index.html' },
-        { key: 'platformOverview', href: '/platform/index.html' },
-        { key: 'governmentBusiness', href: '/enterprise/government-business.html' }
+        { key: 'solutionsOverview', href: '/fr/solutions/index.html' },
+        { key: 'platformOverview', href: '/fr/platform/index.html' },
+        { key: 'governmentBusiness', href: '/fr/enterprise/government-business.html' }
       ]
     },
     es: {
