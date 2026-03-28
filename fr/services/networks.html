@@ -1,51 +1,316 @@
-<h1>Networks and Infraestructure services/h1>
-  <!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="fr">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Networks and Infraestructure services | RomanoTI Solutions</title>
+  <!-- ========================================================= -->
+  <!-- Romanoti Solutions — Réseaux et Infrastructure            -->
+  <!-- ========================================================= -->
 
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/main.css"><!-- si tienes un css global -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Réseaux et Infrastructure | Romanoti Solutions</title>
+
+  <meta name="description"
+        content="Romanoti aide les organisations à améliorer la visibilité de leur infrastructure, à renforcer leurs opérations réseau et à structurer leurs environnements techniques sur site, hybrides et connectés au cloud.">
+
   <link rel="stylesheet" href="/css/styles.css">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    body{
+      font-family:'Montserrat',sans-serif;
+    }
+
+    .hero-dark{
+      background:linear-gradient(135deg,#050b16 0%,#081120 55%,#0b1830 100%);
+      color:#fff;
+    }
+
+    .section-eyebrow{
+      display:inline-block;
+      font-size:12px;
+      font-weight:700;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      color:#93c5fd;
+      margin-bottom:12px;
+    }
+
+    .card-soft{
+      border:1px solid #e5e7eb;
+      border-radius:18px;
+      background:#fff;
+      box-shadow:0 12px 32px -16px rgba(2,6,23,.14);
+    }
+
+    .cta-dark{
+      background:linear-gradient(135deg,#050b16 0%,#081120 55%,#0b1830 100%);
+      color:#fff;
+      border-radius:28px;
+      box-shadow:0 20px 40px -24px rgba(2,6,23,.45);
+    }
+  </style>
+
+  <script defer src="/js/nav.js?v=8"></script>
 </head>
-<body class="bg-gray-50">
+
+<body class="bg-white text-gray-900 antialiased">
   <div id="app-header"></div>
 
-  <!-- Header global -->
+  <main>
 
-  <!-- ===== Hero específico del servicio ===== -->
-  <section class="hero-bg text-white">
-    <div class="container mx-auto px-6 py-16">
-      <h1 class="text-3xl md:text-4xl font-bold mb-4">Networks and Infraestructure services</h1>
-      <p class="text-lg md:text-xl max-w-2xl">
-        Protection against ransomware, phishing and data breaches for small and mid-size businesses.
-      </p>
-    </div>
-  </section>
+    <!-- HERO -->
+    <section class="hero-dark py-20 md:py-24">
+      <div class="max-w-6xl mx-auto px-6">
+        <span class="section-eyebrow">Infrastructure • Réseaux • Opérations</span>
 
-  <!-- ===== Contenido principal del servicio ===== -->
-  <main class="py-12">
-    <div class="container mx-auto px-6 space-y-8">
-      <section>
-        <h2 class="text-2xl font-bold mb-3">What we do</h2>
-        <p class="text-gray-700">
-          <!-- aquí puedes pegar el texto que ya tenías en cybersecurity.html -->
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 leading-tight text-white">
+          Réseaux et infrastructure
+        </h1>
+
+        <p class="text-lg md:text-xl text-slate-200 max-w-3xl mb-8 leading-relaxed">
+          Romanoti aide les organisations à améliorer la visibilité de leur infrastructure,
+          à renforcer leurs opérations réseau et à structurer des environnements techniques
+          plus clairs, sur site, hybrides ou connectés au cloud.
         </p>
-      </section>
-    </div>
+
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="/fr/booking.html"
+             class="inline-flex items-center justify-center bg-blue-600 text-white px-6 py-3 rounded-xl font-semibold hover:bg-blue-700 transition shadow-lg">
+            Demander une revue d’infrastructure
+          </a>
+
+          <a href="/fr/platform/netpilot.html"
+             class="inline-flex items-center justify-center border border-white text-white px-6 py-3 rounded-xl font-semibold hover:bg-white/5 transition">
+            Explorer NetPilot
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHY IT MATTERS -->
+    <section class="py-20 bg-white">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="max-w-3xl mb-12">
+          <span class="inline-block text-sm font-semibold uppercase tracking-[0.18em] text-blue-600 mb-3">
+            Pourquoi c’est important
+          </span>
+
+          <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4 tracking-tight">
+            Pourquoi les réseaux et l’infrastructure comptent
+          </h2>
+
+          <p class="text-lg text-gray-600 leading-relaxed">
+            De nombreuses organisations dépendent d’une infrastructure qui doit être visible,
+            stable et compréhensible. Romanoti aide à réduire l’incertitude technique
+            en améliorant la visibilité, les diagnostics et la structure opérationnelle.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6">
+          <div class="card-soft p-7">
+            <h3 class="font-bold text-xl mb-3 text-gray-900">Visibilité limitée</h3>
+            <p class="text-gray-600 leading-relaxed">
+              Beaucoup d’équipes n’ont pas une vision complète des équipements,
+              des services, des dépendances et des relations techniques présentes
+              dans leur environnement.
+            </p>
+          </div>
+
+          <div class="card-soft p-7">
+            <h3 class="font-bold text-xl mb-3 text-gray-900">Complexité opérationnelle</h3>
+            <p class="text-gray-600 leading-relaxed">
+              Les environnements hybrides, distribués et les systèmes historiques
+              rendent l’infrastructure plus difficile à exploiter, à maintenir
+              et à diagnostiquer.
+            </p>
+          </div>
+
+          <div class="card-soft p-7">
+            <h3 class="font-bold text-xl mb-3 text-gray-900">Diagnostics trop lents</h3>
+            <p class="text-gray-600 leading-relaxed">
+              Sans visibilité structurée, les investigations techniques prennent
+              plus de temps et créent souvent plus de friction opérationnelle.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHAT ROMANOTI PROVIDES -->
+    <section class="py-20 bg-gray-50">
+      <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-start">
+
+        <div>
+          <span class="inline-block text-sm font-semibold uppercase tracking-[0.18em] text-blue-600 mb-3">
+            Ce que Romanoti apporte
+          </span>
+
+          <h2 class="text-3xl md:text-4xl font-extrabold mb-6 text-gray-900 tracking-tight">
+            Une approche plus structurée de l’infrastructure
+          </h2>
+
+          <p class="mb-4 text-gray-700 leading-relaxed">
+            Romanoti fournit des services d’infrastructure et de réseau conçus
+            pour améliorer la compréhension de l’environnement, renforcer les opérations
+            techniques et aider les organisations à prendre de meilleures décisions.
+          </p>
+
+          <p class="text-gray-700 leading-relaxed">
+            Au lieu de travailler uniquement de manière réactive, nous cherchons
+            à clarifier les dépendances, réduire l’ambiguïté technique et créer
+            une base plus stable pour les opérations quotidiennes.
+          </p>
+        </div>
+
+        <div class="card-soft p-8 bg-white">
+          <h3 class="font-bold text-xl mb-4 text-gray-900">
+            Capacités principales
+          </h3>
+
+          <ul class="space-y-3 text-gray-700 leading-relaxed">
+            <li>• Visibilité de l’infrastructure et des services</li>
+            <li>• Diagnostic technique et revue d’exposition</li>
+            <li>• Support pour réseaux sur site, hybrides et cloud</li>
+            <li>• Structure opérationnelle pour environnements complexes</li>
+            <li>• Meilleure compréhension des dépendances techniques</li>
+            <li>• Base plus claire pour la continuité et l’évolution</li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SERVICE AREAS -->
+    <section class="py-20 bg-white">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="text-center mb-12">
+          <span class="inline-block text-sm font-semibold uppercase tracking-[0.18em] text-blue-600 mb-3">
+            Domaines de service
+          </span>
+
+          <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 tracking-tight">
+            Comment Romanoti soutient les opérations réseau
+          </h2>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+
+          <div class="card-soft p-7">
+            <h3 class="font-bold text-xl mb-3 text-gray-900">Diagnostic d’infrastructure</h3>
+            <p class="text-gray-600 leading-relaxed">
+              Analyse des services, des comportements techniques et des points
+              d’incertitude qui freinent l’exploitation.
+            </p>
+          </div>
+
+          <div class="card-soft p-7">
+            <h3 class="font-bold text-xl mb-3 text-gray-900">Structure opérationnelle</h3>
+            <p class="text-gray-600 leading-relaxed">
+              Appui aux équipes techniques afin d’améliorer la cohérence,
+              la lisibilité et le fonctionnement des opérations réseau.
+            </p>
+          </div>
+
+          <div class="card-soft p-7">
+            <h3 class="font-bold text-xl mb-3 text-gray-900">Visibilité continue</h3>
+            <p class="text-gray-600 leading-relaxed">
+              Une meilleure compréhension des composants, dépendances
+              et points d’exposition pour soutenir les décisions.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- PLATFORM CONNECTION -->
+    <section class="py-20 bg-gray-50">
+      <div class="max-w-6xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-start">
+
+        <div>
+          <span class="inline-block text-sm font-semibold uppercase tracking-[0.18em] text-blue-600 mb-3">
+            Connexion avec la plateforme
+          </span>
+
+          <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 mb-5 tracking-tight">
+            Relié à Romanoti Platform et NetPilot
+          </h2>
+
+          <p class="text-gray-700 leading-relaxed mb-4">
+            Les services réseau et infrastructure de Romanoti ne sont pas pensés
+            comme un bloc isolé. Ils s’inscrivent dans une vision plus large
+            de découverte, de diagnostic et d’intelligence opérationnelle.
+          </p>
+
+          <p class="text-gray-700 leading-relaxed">
+            Cette direction permet de relier les services actuels à une plateforme
+            capable d’apporter plus de visibilité, plus de compréhension et de
+            meilleures décisions techniques.
+          </p>
+        </div>
+
+        <div class="grid gap-6">
+          <div class="card-soft p-7">
+            <h3 class="font-bold text-xl mb-3 text-gray-900">NetPilot</h3>
+            <p class="text-gray-600 leading-relaxed mb-4">
+              Un volet de découverte et de diagnostic destiné à améliorer
+              la visibilité de l’infrastructure.
+            </p>
+            <a href="/fr/platform/netpilot.html" class="text-blue-600 hover:underline font-medium">
+              Explorer NetPilot →
+            </a>
+          </div>
+
+          <div class="card-soft p-7">
+            <h3 class="font-bold text-xl mb-3 text-gray-900">Romanoti Platform</h3>
+            <p class="text-gray-600 leading-relaxed mb-4">
+              Le cadre plus large qui relie découverte, interprétation
+              et intelligence opérationnelle.
+            </p>
+            <a href="/fr/platform/index.html" class="text-blue-600 hover:underline font-medium">
+              Explorer la plateforme →
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="py-20 bg-white">
+      <div class="max-w-5xl mx-auto px-6">
+        <div class="cta-dark p-8 md:p-12 text-center">
+          <h2 class="text-3xl md:text-4xl font-extrabold mb-4 text-white">
+            Besoin de mieux comprendre votre infrastructure ?
+          </h2>
+
+          <p class="text-lg text-slate-300 mb-8 max-w-3xl mx-auto leading-relaxed">
+            Romanoti peut vous aider à améliorer la visibilité,
+            réduire l’incertitude technique et structurer des opérations
+            réseau plus fiables.
+          </p>
+
+          <div class="flex flex-col sm:flex-row justify-center gap-4">
+            <a href="/fr/booking.html"
+               class="inline-flex items-center justify-center bg-white text-blue-700 px-6 py-3 rounded-xl font-semibold hover:bg-gray-100 transition">
+              Prendre rendez-vous
+            </a>
+
+            <a href="/fr/contact.html"
+               class="inline-flex items-center justify-center border border-slate-600 text-white px-6 py-3 rounded-xl font-semibold hover:bg-white/5 transition">
+              Contacter Romanoti
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
   </main>
 
-  <!-- Footer global -->
-
-  <!-- Scripts de nav/footer -->
-  <script defer src="/js/nav.js?v=7"></script>
-  <script defer src="/js/footer.js?v=7"></script>
-
   <div id="app-footer"></div>
-  <script src="/js/nav.js"></script>
-  <script src="/js/footer.js"></script>
+  <script defer src="/js/footer.js?v=8"></script>
+  <script defer src="/js/fix-nav.js?v=8"></script>
 </body>
 </html>
