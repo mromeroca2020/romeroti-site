@@ -3,7 +3,14 @@
 <head>
   <!-- ========================================================= -->
   <!-- Romanoti Solutions — Solutions (FR)                       -->
-  <!-- ========================================================= -->
+  <!-- CHANGE LOG:
+       - navigation interne sécurisée
+       - template cohérent
+       - liens FR stabilisés
+       - NetPilot / Ops Assistant renvoyés vers /fr/platform/index.html
+         pour éviter les routes cassées tant que les sous-pages ne sont
+         pas complètement fermées.
+  ============================================================ -->
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -42,6 +49,12 @@
       border-radius:18px;
       background:#fff;
       box-shadow:0 12px 32px -16px rgba(2,6,23,.14);
+      transition:all .2s ease;
+    }
+
+    .card-soft:hover{
+      transform:translateY(-2px);
+      box-shadow:0 18px 38px -18px rgba(2,6,23,.18);
     }
 
     .cta-dark{
@@ -219,8 +232,8 @@
             <p class="text-gray-600 leading-relaxed mb-4">
               Découverte et diagnostics destinés à améliorer la compréhension de l’infrastructure.
             </p>
-            <a href="/fr/platform/netpilot.html" class="text-blue-600 hover:underline font-medium">
-              Explorer NetPilot →
+            <a href="/fr/platform/index.html" class="text-blue-600 hover:underline font-medium">
+              Explorer la plateforme →
             </a>
           </div>
 
@@ -230,8 +243,8 @@
               Une intelligence opérationnelle qui aide à interpréter les constats
               et à guider les prochaines étapes.
             </p>
-            <a href="/fr/platform/ops-assistant.html" class="text-blue-600 hover:underline font-medium">
-              Explorer Ops Assistant →
+            <a href="/fr/platform/index.html" class="text-blue-600 hover:underline font-medium">
+              Explorer la plateforme →
             </a>
           </div>
 
