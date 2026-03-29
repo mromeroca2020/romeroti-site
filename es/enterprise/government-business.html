@@ -2,198 +2,370 @@
 <html lang="es">
 <head>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Gobierno & Empresas | Romanoti Solutions</title>
+  <title>Gobierno & Empresas | Romanoti Solutions</title>
 
-<meta
-  name="description"
-  content="Romanoti Solutions apoya entornos gubernamentales y empresariales mediante servicios TI estructurados, visibilidad de infraestructura, ciberseguridad y capacidades técnicas orientadas a plataforma."
->
+  <meta
+    name="description"
+    content="Romanoti Solutions apoya entornos gubernamentales y empresariales mediante servicios TI estructurados, visibilidad de infraestructura, soporte orientado a ciberseguridad y capacidades técnicas impulsadas por plataforma."
+  >
 
-<!-- FAVICON (Romanoti estándar) -->
-<link rel="icon" href="/images/favicon.ico">
-<link rel="icon" type="image/png" sizes="32x32" href="/images/romanoti-icon.png">
-<link rel="apple-touch-icon" href="/images/romanoti-icon.png">
-<meta name="theme-color" content="#081120">
+  <!-- Favicon Romanoti -->
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/romanoti-icon.png">
+  <link rel="icon" type="image/png" href="/images/romanoti-icon.png">
+  <link rel="apple-touch-icon" href="/images/romanoti-icon.png">
+  <meta name="theme-color" content="#081120">
 
-<!-- ESTILOS -->
-<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/styles.css?v=30">
+  <!-- Estilos -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css?v=42">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
 
+  <style>
+    body{
+      font-family:'Montserrat',sans-serif;
+    }
+
+    /* Ajuste Romanoti quirúrgico:
+       mantenemos la estructura, pero alineamos el hero y las cards
+       al lenguaje visual del sitio */
+    .romanoti-hero{
+      background: linear-gradient(135deg,#050b16 0%,#081120 55%,#0b1830 100%);
+    }
+
+    .romanoti-glass{
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.18);
+      box-shadow: 0 20px 50px rgba(0,0,0,.12);
+      backdrop-filter: blur(4px);
+    }
+
+    .romanoti-card{
+      border-radius: 1rem;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 10px 25px rgba(15,23,42,.06);
+    }
+
+    .romanoti-card:hover{
+      box-shadow: 0 16px 36px rgba(15,23,42,.10);
+    }
+  </style>
+
+  <script defer src="/js/nav.js?v=42"></script>
 </head>
 
 <body class="bg-white text-gray-900 antialiased">
+  <div id="app-header"></div>
 
-<!-- HEADER DINÁMICO -->
-<div id="app-header"></div>
+  <main>
 
-<main>
+    <!-- HERO -->
+    <section class="w-full romanoti-hero py-16 md:py-20">
+      <div class="container mx-auto px-6 max-w-6xl">
+        <div class="max-w-4xl">
 
-<!-- ========================================================= -->
-<!-- HERO                                                      -->
-<!-- ========================================================= -->
+          <span class="inline-flex items-center rounded-full border border-slate-600 bg-white/5 px-4 py-2 text-sm font-semibold uppercase tracking-[0.18em] text-blue-300 mb-6">
+            Gobierno & Empresas
+          </span>
 
-<section class="w-full bg-gradient-to-r from-black via-slate-950 to-slate-900 py-16 md:py-20">
-  <div class="container mx-auto px-6 max-w-6xl">
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight tracking-tight mb-6">
+            Preparación técnica para entornos empresariales y gubernamentales
+          </h1>
 
-    <span class="inline-flex items-center rounded-full border border-slate-600 bg-white/5 px-4 py-2 text-sm font-semibold uppercase tracking-[0.18em] text-blue-300 mb-6">
-      Gobierno & Empresas
-    </span>
+          <p class="text-lg md:text-xl text-slate-200 max-w-3xl leading-relaxed mb-8">
+            Romanoti Solutions apoya organizaciones que requieren servicios técnicos estructurados,
+            disciplina operativa, visibilidad de infraestructura y ejecución profesional
+            en entornos TI modernos.
+          </p>
 
-    <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight tracking-tight mb-6">
-      Preparación técnica para entornos empresariales y gubernamentales
-    </h1>
+          <div class="flex flex-wrap gap-4">
+            <a
+              href="/es/booking.html"
+              class="inline-flex items-center justify-center bg-blue-600 text-white px-6 py-3 rounded-xl font-semibold hover:bg-blue-700 transition shadow-lg"
+            >
+              Agendar consulta
+            </a>
 
-    <p class="text-lg md:text-xl text-slate-200 max-w-3xl leading-relaxed mb-8">
-      Romanoti Solutions apoya organizaciones que requieren servicios técnicos estructurados,
-      disciplina operativa, visibilidad de infraestructura y ejecución profesional
-      en entornos TI modernos.
-    </p>
+            <a
+              href="/es/contact.html"
+              class="inline-flex items-center justify-center border border-slate-500 text-white px-6 py-3 rounded-xl font-semibold hover:bg-white/5 transition"
+            >
+              Contactar Romanoti
+            </a>
+          </div>
 
-    <div class="flex flex-wrap gap-4">
-      <a href="/es/booking.html"
-         class="inline-flex items-center justify-center bg-blue-600 text-white px-6 py-3 rounded-xl font-semibold hover:bg-blue-700 transition shadow-lg">
-        Agendar consulta
-      </a>
-
-      <a href="/es/contact.html"
-         class="inline-flex items-center justify-center border border-slate-500 text-white px-6 py-3 rounded-xl font-semibold hover:bg-white/5 transition">
-        Contactar Romanoti
-      </a>
-    </div>
-
-  </div>
-</section>
-
-<!-- ========================================================= -->
-<!-- POSICIONAMIENTO                                           -->
-<!-- ========================================================= -->
-
-<section class="py-16 bg-gray-50">
-  <div class="container mx-auto px-6 max-w-6xl grid md:grid-cols-2 gap-10">
-
-    <div>
-      <span class="text-sm font-semibold uppercase tracking-[0.18em] text-blue-600 mb-3 inline-block">
-        Posicionamiento
-      </span>
-
-      <h2 class="text-3xl md:text-4xl font-extrabold mb-5">
-        Un enfoque estructurado para organizaciones que necesitan control y claridad
-      </h2>
-
-      <p class="text-gray-600 mb-4">
-        Los entornos empresariales y gubernamentales requieren más que soporte técnico:
-        necesitan claridad, continuidad, trazabilidad y un modelo operativo disciplinado.
-      </p>
-
-      <p class="text-gray-600">
-        Romanoti responde a esta necesidad con servicios estructurados, diagnóstico de infraestructura
-        y una evolución hacia un modelo de plataforma.
-      </p>
-    </div>
-
-    <div class="bg-white p-8 rounded-xl border">
-      <h3 class="font-bold text-xl mb-4">Qué aporta Romanoti</h3>
-      <ul class="space-y-2 text-gray-600">
-        <li>• Servicios estructurados</li>
-        <li>• Visibilidad de infraestructura</li>
-        <li>• Soporte a entornos híbridos</li>
-        <li>• Claridad operativa</li>
-        <li>• Enfoque en ciberseguridad</li>
-        <li>• Evolución hacia plataforma</li>
-      </ul>
-    </div>
-
-  </div>
-</section>
-
-<!-- ========================================================= -->
-<!-- CAPACIDADES                                               -->
-<!-- ========================================================= -->
-
-<section class="py-16">
-  <div class="container mx-auto px-6 max-w-6xl">
-
-    <h2 class="text-3xl font-bold mb-10">Capacidades clave</h2>
-
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-
-      <div class="card">
-        <h3>Help Desk / ITSM</h3>
-        <p>Soporte estructurado y continuidad operativa.</p>
+        </div>
       </div>
+    </section>
 
-      <div class="card">
-        <h3>Redes e Infraestructura</h3>
-        <p>Diagnóstico y visibilidad técnica.</p>
+    <!-- POSITIONING -->
+    <section class="py-16 bg-gray-50">
+      <div class="container mx-auto px-6 max-w-6xl">
+        <div class="grid md:grid-cols-2 gap-10 items-start">
+
+          <div>
+            <span class="inline-block text-sm font-semibold uppercase tracking-[0.18em] text-blue-600 mb-3">
+              Posicionamiento
+            </span>
+
+            <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-5 tracking-tight">
+              Un enfoque estructurado para organizaciones que necesitan control y claridad
+            </h2>
+
+            <p class="text-slate-600 leading-relaxed mb-4">
+              Los entornos empresariales y gubernamentales suelen requerir más que soporte técnico básico.
+              Requieren claridad, continuidad, trazabilidad y un modelo de servicio
+              alineado con realidades operativas complejas.
+            </p>
+
+            <p class="text-slate-600 leading-relaxed">
+              Romanoti está diseñado para responder a esa necesidad mediante servicios disciplinados,
+              pensamiento técnico orientado a infraestructura y un modelo de plataforma en evolución
+              que conecta descubrimiento, diagnóstico e inteligencia operativa.
+            </p>
+          </div>
+
+          <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-8 romanoti-card">
+            <h3 class="text-xl font-bold text-slate-900 mb-5">
+              Qué aporta Romanoti a estos entornos
+            </h3>
+
+            <ul class="space-y-3 text-slate-600">
+              <li>• Servicios estructurados</li>
+              <li>• Visibilidad y diagnóstico de infraestructura</li>
+              <li>• Soporte para entornos híbridos y modernos</li>
+              <li>• Claridad operativa para equipos técnicos</li>
+              <li>• Enfoque de servicio orientado a ciberseguridad</li>
+              <li>• Dirección técnica impulsada por plataforma</li>
+            </ul>
+          </div>
+
+        </div>
       </div>
+    </section>
 
-      <div class="card">
-        <h3>Ciberseguridad</h3>
-        <p>Análisis de exposición y resiliencia.</p>
+    <!-- CAPABILITIES -->
+    <section class="py-16 bg-white">
+      <div class="container mx-auto px-6 max-w-6xl">
+
+        <div class="max-w-3xl mb-12">
+          <span class="inline-block text-sm font-semibold uppercase tracking-[0.18em] text-blue-600 mb-3">
+            Capacidades clave
+          </span>
+
+          <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4 tracking-tight">
+            Servicios alineados con madurez operativa
+          </h2>
+
+          <p class="text-slate-600 text-lg leading-relaxed">
+            Romanoti ofrece capacidades relevantes para organizaciones que necesitan soporte confiable,
+            mejor entendimiento de la infraestructura y decisiones técnicas más sólidas.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <article class="p-7 rounded-2xl border border-slate-200 shadow-sm bg-white hover:shadow-md transition romanoti-card">
+            <h3 class="text-xl font-bold text-slate-900 mb-3">Help Desk / ITSM</h3>
+            <p class="text-slate-600 leading-relaxed">
+              Soporte estructurado, gestión de incidentes y continuidad de servicio alineados con necesidades operativas.
+            </p>
+          </article>
+
+          <article class="p-7 rounded-2xl border border-slate-200 shadow-sm bg-white hover:shadow-md transition romanoti-card">
+            <h3 class="text-xl font-bold text-slate-900 mb-3">Redes e Infraestructura</h3>
+            <p class="text-slate-600 leading-relaxed">
+              Visibilidad, diagnóstico y soporte operativo para entornos distribuidos, híbridos y en evolución.
+            </p>
+          </article>
+
+          <article class="p-7 rounded-2xl border border-slate-200 shadow-sm bg-white hover:shadow-md transition romanoti-card">
+            <h3 class="text-xl font-bold text-slate-900 mb-3">Soporte de Ciberseguridad</h3>
+            <p class="text-slate-600 leading-relaxed">
+              Análisis de exposición, revisión orientada a seguridad y guía práctica para fortalecer la resiliencia técnica.
+            </p>
+          </article>
+
+          <article class="p-7 rounded-2xl border border-slate-200 shadow-sm bg-white hover:shadow-md transition romanoti-card">
+            <h3 class="text-xl font-bold text-slate-900 mb-3">Visibilidad de Infraestructura</h3>
+            <p class="text-slate-600 leading-relaxed">
+              Soporte para entender qué existe en el entorno, cómo se comporta y dónde puede existir exposición.
+            </p>
+          </article>
+
+          <article class="p-7 rounded-2xl border border-slate-200 shadow-sm bg-white hover:shadow-md transition romanoti-card">
+            <h3 class="text-xl font-bold text-slate-900 mb-3">Inteligencia Operativa</h3>
+            <p class="text-slate-600 leading-relaxed">
+              Interpretación estructurada de hallazgos para ayudar a los equipos técnicos a navegar complejidad con más claridad.
+            </p>
+          </article>
+
+          <article class="p-7 rounded-2xl border border-slate-200 shadow-sm bg-white hover:shadow-md transition romanoti-card">
+            <h3 class="text-xl font-bold text-slate-900 mb-3">Dirección Técnica</h3>
+            <p class="text-slate-600 leading-relaxed">
+              Un modelo de servicio y plataforma diseñado para apoyar madurez, claridad y mejora operativa a largo plazo.
+            </p>
+          </article>
+        </div>
       </div>
+    </section>
 
-      <div class="card">
-        <h3>Visibilidad</h3>
-        <p>Comprensión del entorno técnico.</p>
+    <!-- WHY IT FITS -->
+    <section class="py-16 bg-gray-50">
+      <div class="container mx-auto px-6 max-w-6xl">
+        <div class="grid lg:grid-cols-2 gap-10 items-start">
+
+          <div>
+            <span class="inline-block text-sm font-semibold uppercase tracking-[0.18em] text-blue-600 mb-3">
+              Por qué encaja
+            </span>
+
+            <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-5 tracking-tight">
+              Diseñado para entornos donde el trabajo técnico debe ser claro, disciplinado y confiable
+            </h2>
+
+            <p class="text-slate-600 leading-relaxed mb-4">
+              Romanoti es especialmente relevante donde las organizaciones necesitan servicio con estructura,
+              comprensión de infraestructura y un modelo operativo más profesional.
+            </p>
+
+            <p class="text-slate-600 leading-relaxed">
+              Esto incluye organizaciones con procesos regulados, necesidad de trazabilidad interna,
+              complejidad operativa o entornos donde la ambigüedad técnica genera riesgo.
+            </p>
+          </div>
+
+          <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-8 romanoti-card">
+            <h3 class="text-xl font-bold text-slate-900 mb-5">
+              Valor práctico para contextos empresariales y orientados a gobierno
+            </h3>
+
+            <div class="space-y-4">
+              <div>
+                <h4 class="font-semibold text-slate-900 mb-1">Servicios más estructurados</h4>
+                <p class="text-slate-600">
+                  Mejor alineación entre soporte, revisión técnica y continuidad operativa.
+                </p>
+              </div>
+
+              <div>
+                <h4 class="font-semibold text-slate-900 mb-1">Infraestructura más clara</h4>
+                <p class="text-slate-600">
+                  Más confianza sobre dispositivos, servicios, visibilidad y relaciones técnicas.
+                </p>
+              </div>
+
+              <div>
+                <h4 class="font-semibold text-slate-900 mb-1">Mejor apoyo a decisiones operativas</h4>
+                <p class="text-slate-600">
+                  Los hallazgos técnicos ganan valor cuando se interpretan con estructura.
+                </p>
+              </div>
+
+              <div>
+                <h4 class="font-semibold text-slate-900 mb-1">Dirección técnica a largo plazo</h4>
+                <p class="text-slate-600">
+                  Romanoti combina capacidad de servicio con una evolución más amplia hacia plataforma.
+                </p>
+              </div>
+            </div>
+          </div>
+
+        </div>
       </div>
+    </section>
 
-      <div class="card">
-        <h3>Inteligencia Operativa</h3>
-        <p>Interpretación estructurada de resultados.</p>
+    <!-- PLATFORM CONNECTION -->
+    <section class="py-16 bg-white">
+      <div class="container mx-auto px-6 max-w-6xl">
+
+        <div class="max-w-3xl mb-12">
+          <span class="inline-block text-sm font-semibold uppercase tracking-[0.18em] text-blue-600 mb-3">
+            Conexión con la plataforma
+          </span>
+
+          <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4 tracking-tight">
+            Capacidades de servicio conectadas con Romanoti Platform
+          </h2>
+
+          <p class="text-slate-600 text-lg leading-relaxed">
+            Romanoti no se limita a servicios aislados. Está evolucionando hacia un modelo de plataforma
+            que fortalece descubrimiento, diagnóstico e inteligencia operativa.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6">
+          <article class="bg-slate-50 p-7 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition romanoti-card">
+            <h3 class="text-xl font-bold text-slate-900 mb-3">Romanoti Platform</h3>
+            <p class="text-slate-600 leading-relaxed mb-4">
+              El modelo operativo más amplio que conecta descubrimiento de infraestructura e inteligencia operativa.
+            </p>
+            <a href="/es/platform/index.html" class="text-blue-600 font-semibold hover:underline">Explorar plataforma →</a>
+          </article>
+
+          <article class="bg-slate-50 p-7 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition romanoti-card">
+            <h3 class="text-xl font-bold text-slate-900 mb-3">NetPilot</h3>
+            <p class="text-slate-600 leading-relaxed mb-4">
+              Descubrimiento y diagnóstico diseñados para mejorar la visibilidad de infraestructura.
+            </p>
+            <a href="/es/platform/netpilot.html" class="text-blue-600 font-semibold hover:underline">Explorar NetPilot →</a>
+          </article>
+
+          <article class="bg-slate-50 p-7 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition romanoti-card">
+            <h3 class="text-xl font-bold text-slate-900 mb-3">Ops Assistant</h3>
+            <p class="text-slate-600 leading-relaxed mb-4">
+              Inteligencia operativa para ayudar a interpretar hallazgos y apoyar el pensamiento de próximos pasos.
+            </p>
+            <a href="/es/platform/ops-assistant.html" class="text-blue-600 font-semibold hover:underline">Explorar Ops Assistant →</a>
+          </article>
+        </div>
       </div>
+    </section>
 
-      <div class="card">
-        <h3>Dirección Técnica</h3>
-        <p>Evolución hacia madurez tecnológica.</p>
+    <!-- CTA -->
+    <section class="py-16 bg-white">
+      <div class="container mx-auto px-6 max-w-5xl">
+        <div class="bg-gradient-to-r from-black via-slate-950 to-slate-900 text-white rounded-[28px] p-8 md:p-12 shadow-xl">
+          <span class="inline-block text-sm font-semibold uppercase tracking-[0.18em] text-blue-300 mb-3">
+            Romanoti Solutions
+          </span>
+
+          <h2 class="text-3xl md:text-4xl font-extrabold mb-4 text-white tracking-tight">
+            Inicia una conversación empresarial o gubernamental con Romanoti
+          </h2>
+
+          <p class="text-slate-300 text-lg leading-relaxed mb-8 max-w-3xl">
+            Si tu organización necesita servicios técnicos estructurados, mejor comprensión de infraestructura
+            y un modelo operativo más disciplinado, Romanoti está listo para ayudarte.
+          </p>
+
+          <div class="flex flex-wrap gap-4">
+            <a
+              href="/es/booking.html"
+              class="inline-flex items-center justify-center bg-blue-600 text-white px-6 py-3 rounded-xl font-semibold hover:bg-blue-700 transition shadow-lg"
+            >
+              Agendar consulta
+            </a>
+
+            <a
+              href="/es/contact.html"
+              class="inline-flex items-center justify-center border border-slate-600 text-white px-6 py-3 rounded-xl font-semibold hover:bg-white/5 transition"
+            >
+              Contactar Romanoti
+            </a>
+          </div>
+        </div>
       </div>
+    </section>
 
-    </div>
+  </main>
 
-  </div>
-</section>
+  <div id="app-footer"></div>
 
-<!-- ========================================================= -->
-<!-- CONEXIÓN PLATAFORMA                                       -->
-<!-- ========================================================= -->
-
-<section class="py-16 bg-gray-50">
-  <div class="container mx-auto px-6 max-w-6xl">
-
-    <h2 class="text-3xl font-bold mb-10">Conectado a la plataforma Romanoti</h2>
-
-    <div class="grid md:grid-cols-3 gap-6">
-
-      <a href="/es/platform/index.html" class="card">
-        <h3>Plataforma Romanoti</h3>
-        <p>Modelo operativo completo.</p>
-      </a>
-
-      <a href="/es/platform/netpilot.html" class="card">
-        <h3>NetPilot</h3>
-        <p>Descubrimiento y diagnóstico.</p>
-      </a>
-
-      <a href="/es/platform/ops-assistant.html" class="card">
-        <h3>Ops Assistant</h3>
-        <p>Interpretación operativa.</p>
-      </a>
-
-    </div>
-
-  </div>
-</section>
-
-</main>
-
-<!-- FOOTER -->
-<div id="app-footer"></div>
-
-<script defer src="/js/nav.js?v=31"></script>
-<script defer src="/js/footer.js?v=11"></script>
-
+  <script defer src="/js/nav.js?v=42"></script>
+  <script defer src="/js/footer.js?v=42"></script>
+  <script defer src="/js/fix-nav.js?v=42"></script>
 </body>
 </html>
