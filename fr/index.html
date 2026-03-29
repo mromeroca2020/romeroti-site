@@ -13,30 +13,94 @@
   <!-- Tailwind + Fonts -->
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="/css/styles.css">
 
-  <script defer src="/js/nav.js?v=40"></script>
+  <!-- 🔥 FIX HERO + COMPONENTES -->
+  <style>
+    body{
+      font-family:'Montserrat',sans-serif;
+      background:#f8f9fa;
+      color:#111827;
+      scroll-behavior:smooth;
+    }
+
+    .hero-dark{
+      background:linear-gradient(135deg,#050b16 0%,#081120 55%,#0b1830 100%);
+      color:#fff;
+    }
+
+    .btn-primary{
+      background:#2563EB;
+      transition:all .2s;
+    }
+
+    .btn-primary:hover{
+      background:#1D4ED8;
+      transform:translateY(-1px);
+      box-shadow:0 6px 18px -10px rgba(37,99,235,.7);
+    }
+
+    .card{
+      border-radius:16px;
+      box-shadow:0 12px 32px -16px rgba(2,6,23,.16);
+      border:1px solid #e5e7eb;
+      background:#fff;
+    }
+
+    .badge{
+      display:inline-block;
+      border:1px solid rgba(255,255,255,.18);
+      border-radius:999px;
+      padding:8px 14px;
+      font-size:12px;
+      font-weight:600;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      background:rgba(255,255,255,.06);
+      color:#93c5fd;
+    }
+
+    .section-eyebrow{
+      display:inline-block;
+      font-size:12px;
+      font-weight:700;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      color:#2563eb;
+      margin-bottom:12px;
+    }
+
+    .cta-dark{
+      background:linear-gradient(135deg,#050b16 0%,#081120 55%,#0b1830 100%);
+      color:#fff;
+      border-radius:28px;
+      box-shadow:0 20px 40px -24px rgba(2,6,23,.45);
+    }
+  </style>
+
+  <script defer src="/js/nav.js?v=41"></script>
 </head>
 
-<body class="bg-gray-50 text-gray-900 antialiased">
+<body>
   <div id="app-header"></div>
 
   <main>
 
     <!-- HERO -->
     <section class="hero-dark">
-      <div class="container mx-auto px-6 py-20 md:py-24 text-center">
+      <div class="container mx-auto px-6 py-24 text-center">
 
         <span class="badge">
           Infrastructure • Cybersécurité • Continuité
         </span>
 
-        <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold mt-6 mb-6 text-white">
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold mt-6 mb-6">
           Infrastructure IT<br class="hidden md:block">
           et cybersécurité professionnelles
         </h1>
 
-        <p class="text-xl md:text-2xl text-blue-50 max-w-3xl mx-auto">
+        <p class="text-xl text-blue-100 max-w-3xl mx-auto">
           Expertise Microsoft et Cisco, détection plus rapide,
           meilleure réponse aux incidents et moins d’interruptions opérationnelles.
         </p>
@@ -176,7 +240,7 @@
     <section class="py-16 bg-white">
       <div class="container mx-auto px-6 max-w-5xl text-center">
 
-        <div class="cta-dark p-8 md:p-12">
+        <div class="cta-dark p-10">
 
           <h2 class="text-3xl md:text-4xl font-extrabold text-white">
             Prêt à réduire les risques ?
@@ -205,6 +269,6 @@
 
   <div id="app-footer"></div>
 
-  <script defer src="/js/footer.js?v=10"></script>
+  <script defer src="/js/footer.js?v=11"></script>
 </body>
 </html>
