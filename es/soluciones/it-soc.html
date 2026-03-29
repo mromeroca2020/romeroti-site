@@ -3,103 +3,232 @@
 <head>
   <!-- =========================================================
     Fichier: /fr/it-soc.html
-    Base: copie 1:1 de /it-soc.html
-    Modifs:
-      - Traduction FR du contenu visible (titres, paragraphes, labels).
-      - Conservés: structure, IDs, scripts, endpoints, favicons et nav/footer centralisés.
+    Romanoti template + contenu FR + outils SOC préservés
   ========================================================== -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <!-- CHANGE: Titre FR -->
-  <title>Services SOC | RomanoTI Solutions</title>
 
-  <!-- Tailwind CSS -->
+  <title>Services SOC | Romanoti Solutions</title>
+  <meta name="description" content="Services SOC Romanoti : détection des menaces, analyse des journaux, posture e-mail, vérification TLS et réponse aux incidents.">
+
+  <!-- Tailwind -->
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
 
-  <!-- Favicons (mêmes que le root) -->
+  <!-- Favicons -->
   <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png?v=4">
   <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png?v=4">
   <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16.png?v=4">
   <link rel="shortcut icon" href="/favicon.ico?v=4">
   <link rel="mask-icon" href="/img/safari-pinned-tab.svg?v=4" color="#2563eb">
-  <meta name="theme-color" content="#2563eb">
+  <meta name="theme-color" content="#081120">
+
+  <link rel="stylesheet" href="/css/styles.css?v=42">
 
   <style>
-    body{font-family:'Montserrat',sans-serif;background:#f8f9fa;color:#333;scroll-behavior:smooth}
-    .hero-bg{background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%)}
-    .btn-primary{background:#2563EB;transition:all .3s}
-    .btn-primary:hover{background:#1D4ED8;transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.15)}
-    .feature-card{transition:all .3s;border-radius:.5rem;box-shadow:0 1px 3px rgba(0,0,0,.1)}
-    .feature-card:hover{transform:translateY(-6px);box-shadow:0 12px 30px -8px rgba(37,99,235,.15)}
-    pre.tools-out{background:#0e1116;color:#eaeef3;padding:10px;border-radius:8px;max-height:40vh;overflow:auto}
-    .badge{display:inline-flex;align-items:center;padding:.2rem .5rem;border-radius:.5rem;font-size:.75rem;font-weight:600}
-    .badge-ok{background:#ecfdf5;color:#065f46;border:1px solid #a7f3d0}
-    .badge-warn{background:#fffbeb;color:#92400e;border:1px solid #fcd34d}
-    .badge-err{background:#fef2f2;color:#991b1b;border:1px solid #fecaca}
+    body{
+      font-family:'Montserrat',sans-serif;
+      background:#f8f9fa;
+      color:#111827;
+      scroll-behavior:smooth;
+    }
+
+    .hero-romanoti{
+      background:linear-gradient(135deg,#050b16 0%,#081120 55%,#0b1830 100%);
+      color:#fff;
+    }
+
+    .glass-panel{
+      background:rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.18);
+      box-shadow:0 20px 50px rgba(0,0,0,.12);
+      backdrop-filter:blur(4px);
+    }
+
+    .btn-primary{
+      background:#2563EB;
+      transition:all .25s ease;
+    }
+
+    .btn-primary:hover{
+      background:#1D4ED8;
+      transform:translateY(-1px);
+      box-shadow:0 8px 20px rgba(37,99,235,.25);
+    }
+
+    .btn-secondary-dark{
+      background:rgba(255,255,255,.08);
+      color:#fff;
+      border:1px solid rgba(255,255,255,.25);
+      transition:all .25s ease;
+    }
+
+    .btn-secondary-dark:hover{
+      background:rgba(255,255,255,.14);
+      transform:translateY(-1px);
+    }
+
+    .feature-card{
+      transition:all .25s ease;
+      border-radius:1rem;
+      box-shadow:0 10px 30px -12px rgba(2,6,23,.10);
+      border:1px solid #e5e7eb;
+      background:#fff;
+    }
+
+    .feature-card:hover{
+      transform:translateY(-3px);
+      box-shadow:0 18px 36px -16px rgba(37,99,235,.12);
+    }
+
+    pre.tools-out{
+      background:#0e1116;
+      color:#eaeef3;
+      padding:10px;
+      border-radius:8px;
+      max-height:40vh;
+      overflow:auto;
+      min-height:64px;
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      padding:.2rem .5rem;
+      border-radius:.5rem;
+      font-size:.75rem;
+      font-weight:600;
+    }
+
+    .badge-ok{
+      background:#ecfdf5;
+      color:#065f46;
+      border:1px solid #a7f3d0;
+    }
+
+    .badge-warn{
+      background:#fffbeb;
+      color:#92400e;
+      border:1px solid #fcd34d;
+    }
+
+    .badge-err{
+      background:#fef2f2;
+      color:#991b1b;
+      border:1px solid #fecaca;
+    }
+
+    .section-eyebrow{
+      display:inline-block;
+      font-size:12px;
+      font-weight:700;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      color:#2563eb;
+      margin-bottom:12px;
+    }
   </style>
-  <link rel="stylesheet" href="/css/styles.css">
 </head>
+
 <body class="bg-gray-50">
   <div id="app-header"></div>
 
-  <!-- Header centralisé -->
-
   <!-- ===== Hero SOC ===== -->
-  <section class="hero-bg text-white py-28">
-    <div class="container mx-auto px-6 text-center">
-      <!-- CHANGE: H1 FR -->
-      <h1 class="text-4xl md:text-5xl font-bold mb-6">Services SOC</h1>
-      <!-- CHANGE: Subclaim FR -->
-      <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
-        Détection des menaces, analytique des journaux et réponse aux incidents — 24/7
-      </p>
+  <section class="hero-romanoti py-20 md:py-24">
+    <div class="container mx-auto px-6 max-w-6xl">
+      <div class="grid lg:grid-cols-2 gap-10 items-center">
+        <div>
+          <span class="inline-flex items-center rounded-full border border-slate-600 bg-white/5 px-4 py-2 text-sm font-semibold uppercase tracking-[0.18em] text-blue-300 mb-6">
+            SOC • Détection • Réponse
+          </span>
+
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 leading-tight tracking-tight text-white">
+            Services SOC
+          </h1>
+
+          <p class="text-lg md:text-xl text-slate-200 max-w-3xl leading-relaxed mb-8">
+            Détection des menaces, analytique des journaux et réponse aux incidents —
+            avec une approche structurée, orientée vers la visibilité, le triage et l’action.
+          </p>
+
+          <div class="flex flex-wrap gap-4">
+            <a href="/fr/booking.html"
+               class="inline-flex items-center justify-center btn-primary text-white px-6 py-3 rounded-xl font-semibold shadow-lg">
+              Prendre rendez-vous
+            </a>
+
+            <a href="/fr/contact.html"
+               class="inline-flex items-center justify-center btn-secondary-dark px-6 py-3 rounded-xl font-semibold">
+              Contacter Romanoti
+            </a>
+          </div>
+        </div>
+
+        <div class="glass-panel rounded-2xl p-8">
+          <h3 class="text-2xl font-bold text-white mb-4">Ce que Romanoti apporte en SOC</h3>
+          <p class="text-slate-200 mb-6">
+            Une couche de visibilité, d’analyse et de réponse conçue pour aider les organisations
+            à mieux comprendre leurs signaux de sécurité et agir plus rapidement.
+          </p>
+
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div class="rounded-xl border border-white/15 bg-white/5 p-4">
+              <h4 class="font-bold text-white mb-1">Détection</h4>
+              <p class="text-slate-300 text-sm">Règles, alertes et corrélation d’événements.</p>
+            </div>
+            <div class="rounded-xl border border-white/15 bg-white/5 p-4">
+              <h4 class="font-bold text-white mb-1">Triage</h4>
+              <p class="text-slate-300 text-sm">Classification et priorisation des alertes.</p>
+            </div>
+            <div class="rounded-xl border border-white/15 bg-white/5 p-4">
+              <h4 class="font-bold text-white mb-1">Posture</h4>
+              <p class="text-slate-300 text-sm">Validation e-mail et visibilité externe.</p>
+            </div>
+            <div class="rounded-xl border border-white/15 bg-white/5 p-4">
+              <h4 class="font-bold text-white mb-1">Réponse</h4>
+              <p class="text-slate-300 text-sm">Playbooks et actions guidées.</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- ===== Marketing SOC ===== -->
   <section class="py-16 bg-white">
-    <div class="container mx-auto px-6">
+    <div class="container mx-auto px-6 max-w-6xl">
       <div class="text-center mb-12">
-        <!-- CHANGE: Titre section FR -->
-        <h2 class="text-3xl font-bold">Ce que nous livrons</h2>
-        <!-- CHANGE: Paragraphe FR -->
-        <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+        <span class="section-eyebrow">Capacités SOC</span>
+        <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900">Ce que nous livrons</h2>
+        <p class="text-xl text-gray-600 max-w-2xl mx-auto mt-3">
           Supervision de sécurité centralisée, triage d’alertes et réponse rapide aux incidents.
         </p>
       </div>
 
-      <div class="feature-card p-8 rounded-lg shadow-sm bg-white mb-8">
-        <!-- CHANGE -->
-        <h3 class="text-xl font-bold mb-4">Surveillance de sécurité & Détection des menaces</h3>
-        <!-- CHANGE -->
-        <p class="mb-6">Corrélation SIEM (Wazuh/ELK), règles Sigma, détection IOC/IOA et alertes en temps réel.</p>
+      <div class="feature-card p-8 mb-8">
+        <h3 class="text-xl font-bold mb-4">Surveillance de sécurité & détection des menaces</h3>
+        <p class="mb-6 text-gray-700">Corrélation SIEM (Wazuh/ELK), règles Sigma, détection IOC/IOA et alertes en temps réel.</p>
         <div class="grid md:grid-cols-3 gap-6">
           <div class="bg-green-50 p-6 rounded-lg">
-            <!-- CHANGE -->
             <h4 class="font-bold text-lg mb-3">Plateforme</h4>
             <p>Wazuh, ELK/Opensearch, Zeek, Suricata (selon périmètre)</p>
           </div>
           <div class="bg-green-50 p-6 rounded-lg">
-            <!-- CHANGE -->
             <h4 class="font-bold text-lg mb-3">Couverture</h4>
             <p>Endpoints, serveurs, pare-feu, O365/Azure AD, SaaS</p>
           </div>
           <div class="bg-green-50 p-6 rounded-lg">
-            <!-- CHANGE -->
             <h4 class="font-bold text-lg mb-3">Triage</h4>
             <p>Classification L1/L2 avec playbooks reproductibles</p>
           </div>
         </div>
       </div>
 
-      <div class="feature-card p-8 rounded-lg shadow-sm bg-white mb-8">
-        <!-- CHANGE -->
+      <div class="feature-card p-8 mb-8">
         <h3 class="text-xl font-bold mb-4">Posture de sécurité e-mail</h3>
-        <!-- CHANGE -->
-        <p class="mb-6">Validation de MX, SPF, DKIM et DMARC pour réduire l’usurpation et le spoofing.</p>
+        <p class="mb-6 text-gray-700">Validation de MX, SPF, DKIM et DMARC pour réduire l’usurpation et le spoofing.</p>
         <div class="grid md:grid-cols-3 gap-6">
           <div class="bg-green-50 p-6 rounded-lg">
             <h4 class="font-bold text-lg mb-3">MX</h4>
@@ -116,11 +245,9 @@
         </div>
       </div>
 
-      <div class="feature-card p-8 rounded-lg shadow-sm bg-white">
-        <!-- CHANGE -->
+      <div class="feature-card p-8">
         <h3 class="text-xl font-bold mb-4">Réponse aux incidents</h3>
-        <!-- CHANGE -->
-        <p class="mb-6">Playbooks pour phishing, rançongiciel, C2 et exfiltration. Preuves et post-mortem.</p>
+        <p class="mb-6 text-gray-700">Playbooks pour phishing, rançongiciel, C2 et exfiltration. Preuves et post-mortem.</p>
         <div class="grid md:grid-cols-3 gap-6">
           <div class="bg-green-50 p-6 rounded-lg">
             <h4 class="font-bold text-lg mb-3">Contre-mesures</h4>
@@ -140,29 +267,24 @@
   </section>
 
   <!-- ===== SOC Quick Tools ===== -->
-  <section id="soc-tools" class="py-16 bg-white">
+  <section id="soc-tools" class="py-16 bg-gray-50">
     <div class="container mx-auto px-6 max-w-6xl">
       <div class="text-center mb-10">
-        <!-- CHANGE -->
+        <span class="section-eyebrow">Outils rapides</span>
         <h2 class="text-3xl font-bold">Outils SOC rapides</h2>
-        <!-- CHANGE -->
         <p class="text-xl text-gray-600">Vérifiez la posture e-mail et le chiffrement TLS en quelques secondes</p>
       </div>
 
       <!-- Réglages: API Key -->
       <div class="bg-white rounded-lg shadow-sm border p-6 mb-10">
-        <!-- CHANGE -->
         <h3 class="text-xl font-semibold mb-2">Paramètres</h3>
-        <!-- CHANGE -->
         <p class="text-gray-600 mb-4">Votre <b>Org API Key</b> (stockée dans votre navigateur, pas sur le serveur).</p>
         <div class="flex flex-col md:flex-row gap-4 items-start md:items-end">
           <div class="flex-1">
-            <!-- CHANGE: label -->
             <label for="orgKey" class="block text-sm font-medium text-gray-700">Org API Key</label>
             <input id="orgKey" type="password" class="mt-1 w-full border rounded-lg px-3 py-2"
                    placeholder="collez votre API key (ex: MySecret123$)">
           </div>
-          <!-- CHANGE: texto botón -->
           <button id="btnSaveKey" class="btn-primary text-white px-5 py-2 rounded-lg font-medium">
             Enregistrer
           </button>
@@ -173,12 +295,11 @@
       <!-- Outils -->
       <div class="grid md:grid-cols-3 gap-8">
         <!-- Email Security Posture -->
-        <div class="feature-card p-6 bg-white rounded-lg shadow-sm border">
+        <div class="feature-card p-6">
           <h3 class="text-lg font-bold mb-3">Posture de sécurité e-mail</h3>
           <p class="text-gray-600 mb-4">Consultez MX / SPF / DMARC pour un domaine.</p>
           <label class="block text-sm font-medium text-gray-700">Domaine</label>
           <input id="espDomain" class="w-full border rounded-lg px-3 py-2 mb-3" placeholder="example.com" value="example.com">
-          <!-- CHANGE: texto botón -->
           <button id="btnEspCheck" class="btn-primary text-white px-4 py-2 rounded-lg font-medium">Exécuter</button>
           <div id="espBadges" class="mt-3 space-x-2"></div>
           <pre id="espOut" class="tools-out mt-3"></pre>
@@ -186,7 +307,7 @@
         </div>
 
         <!-- DKIM Lookup -->
-        <div class="feature-card p-6 bg-white rounded-lg shadow-sm border">
+        <div class="feature-card p-6">
           <h3 class="text-lg font-bold mb-3">Recherche DKIM</h3>
           <p class="text-gray-600 mb-4">Interrogez l’enregistrement TXT d’un sélecteur DKIM.</p>
           <label class="block text-sm font-medium text-gray-700">Domaine</label>
@@ -199,7 +320,7 @@
         </div>
 
         <!-- TLS Cert Expiry -->
-        <div class="feature-card p-6 bg-white rounded-lg shadow-sm border">
+        <div class="feature-card p-6">
           <h3 class="text-lg font-bold mb-3">Expiration du certificat TLS</h3>
           <p class="text-gray-600 mb-4">Vérifiez l’expiration et l’émetteur du certificat.</p>
           <label class="block text-sm font-medium text-gray-700">Hôte</label>
@@ -220,9 +341,8 @@
   <section class="py-16 bg-white">
     <div class="container mx-auto px-6 max-w-6xl">
       <div class="text-center mb-10">
-        <!-- CHANGE -->
-        <h2 class="text-3cxl md:text-3xl font-bold">Boîte à outils SOC (Live)</h2>
-        <!-- CHANGE -->
+        <span class="section-eyebrow">SOC Live</span>
+        <h2 class="text-3xl md:text-3xl font-bold">Boîte à outils SOC (Live)</h2>
         <p class="text-xl text-gray-600">
           Démos d’alertes et de réponse : <code>/soc/alerts</code>, <code>/soc/alerts/recent</code>, <code>/soc/playbooks/run</code>
         </p>
@@ -230,7 +350,7 @@
 
       <div class="grid md:grid-cols-2 gap-8">
         <!-- Envoyer une alerte -->
-        <div class="feature-card p-6 bg-white rounded-lg shadow-sm border">
+        <div class="feature-card p-6">
           <h3 class="text-lg font-bold mb-3">Envoyer une alerte (démo)</h3>
           <div class="grid grid-cols-2 gap-3 mb-3">
             <div>
@@ -259,7 +379,7 @@
         </div>
 
         <!-- Alertes récentes -->
-        <div class="feature-card p-6 bg-white rounded-lg shadow-sm border">
+        <div class="feature-card p-6">
           <h3 class="text-lg font-bold mb-3">Alertes récentes</h3>
           <div class="flex items-center gap-3 mb-3">
             <label class="text-sm text-gray-700">Limite</label>
@@ -270,7 +390,7 @@
         </div>
 
         <!-- Playbooks -->
-        <div class="feature-card p-6 bg-white rounded-lg shadow-sm border md:col-span-2">
+        <div class="feature-card p-6 md:col-span-2">
           <h3 class="text-lg font-bold mb-3">Exécuter un playbook (simulation)</h3>
           <div class="grid md:grid-cols-3 gap-3">
             <div>
@@ -295,9 +415,7 @@
     </div>
   </section>
 
-  <!-- Footer centralisé -->
-
-  <!-- JS (inchangé) : Quick Tools + Live Toolbox -->
+  <!-- JS (préservé) -->
   <script>
   const API_BASE = 'https://romanoti-tools-api.onrender.com';
   const $ = (id) => document.getElementById(id);
@@ -364,8 +482,7 @@
     if(raw){ try{details=JSON.parse(raw);}catch(e){ pretty('outAlert',{error:'JSON invalide dans les détails',e:String(e)}); return; } }
     if(!title){ pretty('outAlert',{error:'Titre manquant'}); return; }
     pretty('outAlert','Envoi…');
-    const resp=socPost('/soc/alerts',{source,severity,title,details});
-    resp.then(r=>pretty('outAlert', r));
+    socPost('/soc/alerts',{source,severity,title,details}).then(r=>pretty('outAlert', r));
   }
 
   async function fetchAlerts(){
@@ -386,20 +503,16 @@
   document.addEventListener('DOMContentLoaded', () => {
     loadKey();
     $('btnSaveKey').addEventListener('click', saveKey);
-
-    // Outils rapides
     $('btnEspCheck').addEventListener('click', runEmailPosture);
     $('btnDkimCheck').addEventListener('click', runDkimLookup);
     $('btnTlsCheck').addEventListener('click', runTlsCheck);
-
-    // Live Toolbox
     $('btnSendAlert').addEventListener('click', sendAlert);
     $('btnFetchAlerts').addEventListener('click', fetchAlerts);
     $('btnRunPB').addEventListener('click', runPlaybook);
   });
   </script>
 
-  <!-- Fallback du menu “Solutions” (inchangé) -->
+  <!-- Fallback menu Solutions -->
   <script>
     (function(){
       function wire(btn, menu){
@@ -421,13 +534,10 @@
     })();
   </script>
 
-  <!-- Nav/Footer centralisés -->
-  <script defer src="/js/nav.js?v=6"></script>
-  <script defer src="/js/footer.js?v=6"></script>
-  <script defer src="/js/fix-nav.js?v=6"></script>
-
   <div id="app-footer"></div>
-  <script src="/js/nav.js"></script>
-  <script src="/js/footer.js"></script>
+
+  <script defer src="/js/nav.js?v=42"></script>
+  <script defer src="/js/footer.js?v=42"></script>
+  <script defer src="/js/fix-nav.js?v=42"></script>
 </body>
 </html>
