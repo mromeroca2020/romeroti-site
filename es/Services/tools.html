@@ -14,14 +14,14 @@
   <meta name="description"
         content="Herramientas Romanoti para diagnóstico de red, inventario LAN, verificación TLS y análisis DNS en entornos empresariales.">
 
-  <!-- FAVICON CORRECTO -->
+  <!-- Favicon Romanoti -->
   <link rel="icon" type="image/svg+xml" href="/images/romanoti-icon.svg">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/romanoti-icon.png">
   <link rel="shortcut icon" href="/images/favicon.ico">
   <meta name="theme-color" content="#081120">
 
   <!-- CSS -->
-  <link rel="stylesheet" href="/css/styles.css?v=40">
+  <link rel="stylesheet" href="/css/styles.css?v=41">
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
 
@@ -35,6 +35,16 @@
     .hero-dark{
       background:linear-gradient(135deg,#050b16 0%,#081120 55%,#0b1830 100%);
       color:#fff;
+    }
+
+    .hero-dark h1{
+      color:#ffffff !important;
+      opacity:1 !important;
+      text-shadow:none !important;
+    }
+
+    .hero-dark p{
+      color:#cbd5e1 !important;
     }
 
     .card{
@@ -51,10 +61,33 @@
       padding:12px;
       border-radius:10px;
       overflow:auto;
+      min-height:44px;
     }
+
+    .btn{
+      border:1px solid #d1d5db;
+      padding:.5rem .8rem;
+      border-radius:10px;
+      background:#f9fafb;
+      cursor:pointer;
+    }
+
+    .btn:hover{background:#f3f4f6}
+
+    .btn-primary{
+      border-color:#2563EB;
+      background:#2563EB;
+      color:#fff;
+    }
+
+    .btn-primary:hover{
+      filter:brightness(1.05);
+    }
+
+    .rt-hidden{display:none}
   </style>
 
-  <script defer src="/js/nav.js?v=40"></script>
+  <script defer src="/js/nav.js?v=41"></script>
 
 </head>
 
@@ -64,122 +97,408 @@
 
 <main>
 
-<!-- HERO -->
-<section class="hero-dark py-20">
-  <div class="max-w-6xl mx-auto px-6">
+  <!-- HERO -->
+  <section class="hero-dark py-20">
+    <div class="max-w-6xl mx-auto px-6">
 
-    <span class="text-blue-300 uppercase tracking-widest text-sm">
-      Herramientas Romanoti
-    </span>
+      <span class="text-blue-300 uppercase tracking-widest text-sm font-semibold">
+        Herramientas Romanoti
+      </span>
 
-    <h1 class="text-4xl md:text-5xl font-extrabold mt-4 mb-6 max-w-3xl">
-      Diagnóstico, visibilidad y control operativo
-    </h1>
+      <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold mt-4 mb-6 max-w-3xl leading-tight text-white">
+        Diagnóstico, visibilidad y control operativo
+      </h1>
 
-    <p class="text-lg text-slate-300 max-w-2xl">
-      Herramientas prácticas para analizar infraestructura, validar seguridad
-      y obtener visibilidad técnica en tiempo real.
-    </p>
+      <p class="text-lg md:text-xl text-slate-300 max-w-2xl leading-relaxed">
+        Herramientas prácticas para analizar infraestructura, validar seguridad
+        y obtener visibilidad técnica en tiempo real.
+      </p>
 
-  </div>
-</section>
-
-<!-- CONTENIDO -->
-<section class="py-16">
-<div class="max-w-6xl mx-auto px-6 space-y-10">
-
-<!-- DIAGNOSTICO -->
-<div class="card">
-  <div class="flex justify-between items-center">
-    <div>
-      <h2 class="text-xl font-bold">Diagnóstico del servidor</h2>
-      <p class="text-gray-500 text-sm">Ejecuta función Netlify y muestra resultados JSON</p>
     </div>
-    <button id="btnRunDiag" class="bg-blue-600 text-white px-4 py-2 rounded-lg">
-      Ejecutar
-    </button>
-  </div>
-  <pre id="diagOut"></pre>
-</div>
+  </section>
 
-<!-- AGENTE -->
-<div class="card">
-  <h2 class="text-xl font-bold mb-4">Agente local (inventario LAN)</h2>
+  <!-- CONTENIDO -->
+  <section class="py-16">
+    <div class="max-w-6xl mx-auto px-6 space-y-10">
 
-  <div class="grid md:grid-cols-2 gap-4">
-    <input id="orgKey" type="password" placeholder="Clave API">
-    <input id="agentName" placeholder="Nombre del agente">
-  </div>
+      <!-- DIAGNÓSTICO -->
+      <div class="card">
+        <div class="flex flex-col md:flex-row md:justify-between md:items-center gap-4">
+          <div>
+            <h2 class="text-xl font-bold">Diagnóstico del servidor</h2>
+            <p class="text-gray-500 text-sm">Ejecuta función Netlify y muestra resultados JSON</p>
+          </div>
+          <button id="btnRunDiag" class="btn btn-primary">Ejecutar</button>
+        </div>
+        <pre id="diagOut"></pre>
+      </div>
 
-  <div class="flex gap-3 mt-4">
-    <button id="btnLinux" class="border px-3 py-2 rounded">Linux</button>
-    <button id="btnWindows" class="border px-3 py-2 rounded">Windows</button>
-    <button id="btnCopyCmd" class="border px-3 py-2 rounded">Copiar</button>
-  </div>
+      <!-- AGENTE -->
+      <div class="card">
+        <h2 class="text-xl font-bold mb-4">Agente local (inventario LAN)</h2>
 
-  <pre id="agentCmd"></pre>
+        <div class="grid md:grid-cols-2 gap-4">
+          <input id="orgKey" type="password" placeholder="Clave API"
+                 class="border border-gray-300 rounded-lg px-3 py-2">
+          <input id="agentName" placeholder="Nombre del agente"
+                 class="border border-gray-300 rounded-lg px-3 py-2">
+        </div>
 
-  <div class="flex gap-2 mt-4">
-    <button id="btnLatestReport" class="bg-blue-600 text-white px-3 py-2 rounded">
-      Último reporte
-    </button>
-  </div>
+        <div class="flex gap-3 mt-4 flex-wrap">
+          <button id="btnLinux" class="btn">Linux</button>
+          <button id="btnWindows" class="btn">Windows</button>
+          <button id="btnCopyCmd" class="btn">Copiar</button>
+        </div>
 
-  <pre id="agentOut"></pre>
-</div>
+        <pre id="agentCmd"></pre>
 
-<!-- EXTERNOS -->
-<div class="card">
-  <h2 class="text-xl font-bold mb-4">Verificaciones externas</h2>
+        <div class="flex gap-2 mt-4 flex-wrap">
+          <button id="btnLatestReport" class="btn btn-primary">Último reporte</button>
+          <button id="btnViewIfaces" class="btn">Ver interfaces</button>
+          <button id="btnExportCSV" class="btn">Exportar CSV</button>
+          <button id="btnDownloadJSON" class="btn">Descargar JSON</button>
+        </div>
 
-  <div class="space-y-4">
+        <pre id="agentOut"></pre>
+      </div>
 
-    <div>
-      <input id="tlsHost" placeholder="dominio">
-      <button id="btnTLS" class="border px-3 py-2 rounded">TLS</button>
-      <pre id="tlsOut"></pre>
+      <!-- VERIFICACIONES EXTERNAS -->
+      <div class="card">
+        <h2 class="text-xl font-bold mb-4">Verificaciones externas</h2>
+
+        <div class="space-y-6">
+
+          <div class="card" style="margin-top:0">
+            <div class="section-title font-bold text-lg mb-2">Verificación TLS</div>
+            <div class="flex gap-3 flex-wrap">
+              <input id="tlsHost" placeholder="dominio"
+                     class="border border-gray-300 rounded-lg px-3 py-2 min-w-[220px]">
+              <input id="tlsPort" type="number" value="443" min="1" max="65535"
+                     class="border border-gray-300 rounded-lg px-3 py-2 w-28">
+              <button id="btnTLS" class="btn">TLS</button>
+            </div>
+            <pre id="tlsOut"></pre>
+          </div>
+
+          <div class="card" style="margin-top:0">
+            <div class="section-title font-bold text-lg mb-2">Verificación DNS de correo</div>
+            <div class="flex gap-3 flex-wrap">
+              <input id="dnsDomain" placeholder="dominio"
+                     class="border border-gray-300 rounded-lg px-3 py-2 min-w-[240px]">
+              <button id="btnEmailDNS" class="btn">DNS</button>
+            </div>
+            <pre id="dnsOut"></pre>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- LOGIN -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="card" id="loginCard">
+          <h2 class="text-xl font-bold mb-4">Autenticación</h2>
+
+          <div class="flex gap-3 flex-wrap">
+            <input id="user" placeholder="usuario"
+                   class="border border-gray-300 rounded-lg px-3 py-2 min-w-[180px]">
+            <input id="pass" type="password" placeholder="contraseña"
+                   class="border border-gray-300 rounded-lg px-3 py-2 min-w-[180px]">
+          </div>
+
+          <div class="flex gap-3 mt-3 flex-wrap">
+            <button id="btnLogin" class="btn btn-primary">Iniciar sesión</button>
+            <button id="btnLogout" class="btn">Cerrar sesión</button>
+          </div>
+
+          <div class="text-sm mt-2 text-gray-500">API: <code id="apiBaseShown"></code></div>
+          <div id="loginMsg" class="text-sm mt-2 text-gray-500"></div>
+        </div>
+
+        <div class="card rt-hidden" id="toolsCard">
+          <div class="flex items-center justify-between gap-4 flex-wrap">
+            <div>
+              <div class="text-xl font-bold">Herramientas</div>
+              <div class="text-gray-500">Autenticado como: <b id="whoami"></b></div>
+            </div>
+            <button class="btn" id="btnLogoutTop">Cerrar sesión</button>
+          </div>
+
+          <div class="card mt-4" style="padding:16px">
+            <div class="font-bold mb-2">Sistema</div>
+            <div class="flex gap-2 flex-wrap">
+              <button class="btn" id="btnSysInfo">/system/info</button>
+              <button class="btn" id="btnNetInfo">/network/info</button>
+            </div>
+          </div>
+
+          <div class="card mt-4" style="padding:16px">
+            <div class="font-bold mb-2">Ping</div>
+            <div class="flex gap-2 flex-wrap">
+              <input id="pingHost" value="8.8.8.8" placeholder="host"
+                     class="border border-gray-300 rounded-lg px-3 py-2 min-w-[170px]">
+              <input id="pingCount" type="number" min="1" max="10" value="4"
+                     class="border border-gray-300 rounded-lg px-3 py-2 w-24">
+              <button class="btn" id="btnPing">Enviar</button>
+            </div>
+          </div>
+
+          <div class="card mt-4" style="padding:16px">
+            <div class="font-bold mb-2">Traceroute</div>
+            <div class="flex gap-2 flex-wrap">
+              <input id="traceHost" value="8.8.8.8" placeholder="host"
+                     class="border border-gray-300 rounded-lg px-3 py-2 min-w-[170px]">
+              <button class="btn" id="btnTrace">Enviar</button>
+            </div>
+          </div>
+
+          <div class="card mt-4" style="padding:16px">
+            <div class="font-bold mb-2">Escaneo de puertos</div>
+            <div class="flex gap-2 flex-wrap">
+              <input id="scanHost" placeholder="host"
+                     class="border border-gray-300 rounded-lg px-3 py-2 min-w-[200px]">
+              <input id="scanStart" type="number" min="1" max="65535" value="1"
+                     class="border border-gray-300 rounded-lg px-3 py-2 w-24">
+              <input id="scanEnd" type="number" min="1" max="65535" value="1024"
+                     class="border border-gray-300 rounded-lg px-3 py-2 w-24">
+            </div>
+            <div class="flex gap-2 flex-wrap mt-2">
+              <input id="scanPorts" placeholder="puertos opcionales: 80,443,22"
+                     class="border border-gray-300 rounded-lg px-3 py-2 min-w-[280px]">
+              <button class="btn" id="btnScan">Escanear</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="text-xl font-bold">Salida</h3>
+      <pre id="out"></pre>
+
     </div>
-
-    <div>
-      <input id="dnsDomain" placeholder="dominio">
-      <button id="btnEmailDNS" class="border px-3 py-2 rounded">DNS</button>
-      <pre id="dnsOut"></pre>
-    </div>
-
-  </div>
-</div>
-
-<!-- LOGIN -->
-<div class="card">
-  <h2 class="text-xl font-bold mb-4">Autenticación</h2>
-
-  <div class="flex gap-3">
-    <input id="user" placeholder="usuario">
-    <input id="pass" type="password" placeholder="contraseña">
-  </div>
-
-  <div class="flex gap-3 mt-3">
-    <button id="btnLogin" class="bg-blue-600 text-white px-3 py-2 rounded">
-      Iniciar sesión
-    </button>
-    <button id="btnLogout" class="border px-3 py-2 rounded">
-      Cerrar sesión
-    </button>
-  </div>
-
-  <div id="loginMsg" class="text-sm mt-2 text-gray-500"></div>
-</div>
-
-</div>
-</section>
+  </section>
 
 </main>
 
 <div id="app-footer"></div>
 
-<!-- SCRIPTS LIMPIOS -->
-<script defer src="/js/footer.js?v=40"></script>
-<script defer src="/js/fix-nav.js?v=40"></script>
+<script>
+  const CP_API  = 'https://romanoti-tools-api.onrender.com';
+  const API_BASE = localStorage.getItem('romanoti_api') || CP_API;
+
+  document.addEventListener('DOMContentLoaded', ()=> {
+    const el = document.getElementById('apiBaseShown');
+    if (el) el.textContent = API_BASE;
+  });
+
+  const $  = (id) => document.getElementById(id);
+  const on = (id, type, fn) => { const el = $(id); if (el) el.addEventListener(type, fn); };
+  const token = () => sessionStorage.getItem('romanoti_token');
+
+  function show(id, onState=true){
+    const e = $(id);
+    if (!e) return;
+    e.classList[onState ? 'remove' : 'add']('rt-hidden');
+  }
+
+  function logTo(preId, obj){
+    const el = $(preId);
+    try { el.textContent = (typeof obj==='string') ? obj : JSON.stringify(obj,null,2); }
+    catch { el.textContent = String(obj); }
+  }
+  function log(obj){ logTo('out', obj); }
+
+  async function runTool() {
+    const o = $('diagOut'); if (o) o.textContent = 'Ejecutando…';
+    try {
+      const res  = await fetch('/.netlify/functions/run-tool?pretty=1&indent=2',{headers:{'Accept':'application/json'}});
+      const text = await res.text();
+      try {
+        const data = JSON.parse(text);
+        const toShow = (data && typeof data === 'object' && 'output' in data) ? data.output : data;
+        $('diagOut').textContent = JSON.stringify(toShow, null, 2);
+      } catch {
+        $('diagOut').textContent = text;
+      }
+    } catch (err) {
+      $('diagOut').textContent = '❌ Error: ' + String(err);
+    }
+  }
+
+  function setAuthedUI(){
+    if(token()){
+      show('loginCard', false);
+      show('toolsCard', true);
+      const u = $('user');
+      $('whoami').textContent = (u && u.value) || 'session';
+    } else {
+      show('toolsCard', false);
+      show('loginCard', true);
+      $('whoami').textContent = '';
+    }
+  }
+
+  async function login(){
+    $('loginMsg').textContent = 'Autenticando…';
+    try{
+      const body = new URLSearchParams();
+      body.append('username', $('user').value);
+      body.append('password', $('pass').value);
+      const res = await fetch(`${API_BASE}/auth/token`, {
+        method:'POST',
+        headers:{'Content-Type':'application/x-www-form-urlencoded'},
+        body
+      });
+      const text = await res.text();
+      if(!res.ok){
+        $('loginMsg').innerHTML = `<span style="color:#c33">Error de inicio de sesión: ${res.status}</span>`;
+        return;
+      }
+      const data = JSON.parse(text);
+      sessionStorage.setItem('romanoti_token', data.access_token);
+      setAuthedUI();
+      log({login:'ok', ...data});
+      $('loginMsg').textContent = 'OK';
+    }catch(e){
+      $('loginMsg').innerHTML = `<span style="color:#c33">${e}</span>`;
+    }
+  }
+
+  function logout(){
+    sessionStorage.removeItem('romanoti_token');
+    setAuthedUI();
+    const o = $('out');
+    if(o) o.textContent = '';
+  }
+
+  async function call(method, path, body=null){
+    try{
+      const res = await fetch(`${API_BASE}${path}`, {
+        method,
+        headers:{
+          'Authorization': `Bearer ${token()}`,
+          'Content-Type':'application/json'
+        },
+        body: body ? JSON.stringify(body) : null
+      });
+      const text = await res.text();
+      if(!res.ok){
+        if(res.status===404) log({error:'endpoint no disponible', path, status:res.status, body:text});
+        else log({error:'error HTTP', path, status:res.status, body:text});
+        return;
+      }
+      try{ log(JSON.parse(text)); }catch{ log(text); }
+    }catch(e){ log(String(e)); }
+  }
+
+  async function doPing(){ await call('POST','/network/ping',{ host:$('pingHost').value, count:Number($('pingCount').value||4) }); }
+  async function doTrace(){ await call('POST','/network/traceroute',{ host:$('traceHost').value }); }
+
+  async function doScan(){
+    const payload = {
+      host:$('scanHost').value,
+      start:Number($('scanStart').value||1),
+      end:Number($('scanEnd').value||1024)
+    };
+    const portsStr = $('scanPorts').value.trim();
+    if(portsStr){
+      payload.ports = portsStr.split(',').map(p=>parseInt(p.trim(),10)).filter(Boolean);
+    }
+    await call('POST','/network/portscan', payload);
+  }
+
+  let lastCmd = '';
+
+  function buildLinuxCmd(){
+    const key  = $('orgKey').value.trim();
+    const name = $('agentName').value.trim();
+    const tag  = name ? ` ROMANOTI_AGENT="${name}"` : '';
+    return [
+      `curl -fsSL ${location.origin}/assets/agent/romanoti-agent.sh -o romanoti-agent.sh`,
+      `chmod +x romanoti-agent.sh`,
+      `ROMANOTI_API="${CP_API}" ROMANOTI_KEY="${key}"${tag} ./romanoti-agent.sh`
+    ].join(' && ');
+  }
+
+  function buildWindowsCmd(){
+    const key  = $('orgKey').value.trim();
+    const name = $('agentName').value.trim();
+    let cmd = `powershell -NoProfile -ExecutionPolicy Bypass -Command "`
+            + `Invoke-WebRequest -UseBasicParsing -Uri '${location.origin}/assets/agent/romanoti-agent.ps1' -OutFile 'romanoti-agent.ps1'; `
+            + `$env:ROMANOTI_API='${CP_API}'; $env:ROMANOTI_KEY='${key}'; `;
+    if(name) cmd += `$env:ROMANOTI_AGENT='${name}'; `;
+    cmd += `powershell -ExecutionPolicy Bypass -File .\\romanoti-agent.ps1"`;
+    return cmd;
+  }
+
+  async function fetchLatestReport(){
+    const key = $('orgKey').value.trim();
+    if(!key){ $('agentOut').textContent = 'Ingresa tu clave API de la organización.'; return; }
+    $('agentOut').textContent = 'Consultando…';
+    try{
+      const res  = await fetch(`${CP_API}/client/reports/latest`, { headers:{'x-api-key': key, 'accept':'application/json'} });
+      const text = await res.text();
+      try{ $('agentOut').textContent = JSON.stringify(JSON.parse(text), null, 2); }
+      catch{ $('agentOut').textContent = text; }
+    }catch(e){ $('agentOut').textContent = String(e); }
+  }
+
+  async function checkTLS(){
+    const host = $('tlsHost').value.trim();
+    const port = Number($('tlsPort').value||443);
+    const key  = $('orgKey').value.trim();
+    if(!key){ $('tlsOut').textContent = 'Ingresa tu clave API de la organización.'; return; }
+
+    $('tlsOut').textContent = 'Consultando…';
+    try{
+      const res = await fetch(`${CP_API}/ext/tls`, {
+        method:'POST',
+        headers:{'Content-Type':'application/json','x-api-key': key},
+        body: JSON.stringify({host, port})
+      });
+      const text = await res.text();
+      try{ $('tlsOut').textContent = JSON.stringify(JSON.parse(text), null, 2); }
+      catch{ $('tlsOut').textContent = text; }
+    }catch(e){ $('tlsOut').textContent = String(e); }
+  }
+
+  async function checkEmailDNS(){
+    const domain = $('dnsDomain').value.trim();
+    const key    = $('orgKey').value.trim();
+    if(!key){ $('dnsOut').textContent = 'Ingresa tu clave API de la organización.'; return; }
+
+    $('dnsOut').textContent = 'Consultando…';
+    try{
+      const res = await fetch(`${CP_API}/ext/emaildns`, {
+        method:'POST',
+        headers:{'Content-Type':'application/json','x-api-key': key},
+        body: JSON.stringify({domain})
+      });
+      const text = await res.text();
+      try{ $('dnsOut').textContent = JSON.stringify(JSON.parse(text), null, 2); }
+      catch{ $('dnsOut').textContent = text; }
+    }catch(e){ $('dnsOut').textContent = String(e); }
+  }
+
+  on('btnRunDiag','click',runTool);
+  on('btnLogin','click',login);
+  on('btnLogout','click',logout);
+  on('btnLogoutTop','click',logout);
+  on('btnSysInfo','click',()=>call('GET','/system/info'));
+  on('btnNetInfo','click',()=>call('GET','/network/info'));
+  on('btnPing','click',doPing);
+  on('btnTrace','click',doTrace);
+  on('btnScan','click',doScan);
+  on('btnLinux','click',()=>{ lastCmd = buildLinuxCmd(); $('agentCmd').textContent = lastCmd; });
+  on('btnWindows','click',()=>{ lastCmd = buildWindowsCmd(); $('agentCmd').textContent = lastCmd; });
+  on('btnCopyCmd','click',()=>{ if(lastCmd) navigator.clipboard.writeText(lastCmd); });
+  on('btnLatestReport','click',fetchLatestReport);
+  on('btnTLS','click',checkTLS);
+  on('btnEmailDNS','click',checkEmailDNS);
+
+  document.addEventListener('DOMContentLoaded', setAuthedUI);
+</script>
+
+<script defer src="/js/footer.js?v=41"></script>
+<script defer src="/js/fix-nav.js?v=41"></script>
 
 </body>
 </html>
