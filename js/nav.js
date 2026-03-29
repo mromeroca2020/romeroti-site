@@ -102,7 +102,7 @@
   const ROUTES = {
     en: {
       home: '/',
-      servicesIndex: '/services/index.html',
+      servicesIndex: '/en/services/index.html',
       solutionsIndex: '/solutions/index.html',
       platform: '/platform/index.html',
       enterprise: '/enterprise/government-business.html',
@@ -148,7 +148,7 @@
     },
     es: {
       home: '/es/',
-      servicesIndex: '/services/index.html',
+      servicesIndex: '/es/services/index.html',
       solutionsIndex: '/solutions/index.html',
       platform: '/platform/index.html',
       enterprise: '/enterprise/government-business.html',
