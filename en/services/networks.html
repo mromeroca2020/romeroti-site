@@ -1,52 +1,147 @@
-<h1>Networks and Infraestructure services/h1>
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Networks and Infraestructure services | RomanoTI Solutions</title>
+  <!-- ========================================================= -->
+  <!-- Romanoti Solutions — Networks & Infrastructure Services   -->
+  <!-- ========================================================= -->
+  <!-- Fixes applied:
+       1) Removed broken stray line before DOCTYPE:
+          <h1>Networks and Infraestructure services/h1>
+       2) Corrected spelling:
+          Infraestructure -> Infrastructure
+       3) Removed duplicate nav/footer script includes
+       4) Kept centralized header/footer placeholders
+       5) Added Romanoti favicon references
+  -->
 
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Networks and Infrastructure Services | Romanoti Solutions</title>
+  <meta
+    name="description"
+    content="Romanoti Solutions provides networks and infrastructure services focused on visibility, operational clarity, diagnostics, and resilient technical environments."
+  />
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/svg+xml" href="/images/romanoti-icon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/romanoti-icon.png">
+  <link rel="shortcut icon" href="/images/favicon.ico">
+  <meta name="theme-color" content="#081120">
+
+  <!-- Tailwind CSS -->
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/main.css"><!-- si tienes un css global -->
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Global Styles -->
+  <link rel="stylesheet" href="/css/main.css">
   <link rel="stylesheet" href="/css/styles.css">
+
+  <style>
+    /* Minimal local fallback styling to avoid a plain broken look
+       if hero-bg is not defined in a global stylesheet. */
+    body {
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .hero-bg {
+      background: linear-gradient(135deg, #050b16 0%, #081120 55%, #0b1830 100%);
+    }
+  </style>
 </head>
-<body class="bg-gray-50">
+
+<body class="bg-gray-50 text-gray-900 antialiased">
+  <!-- Centralized Header -->
   <div id="app-header"></div>
 
-  <!-- Header global -->
-
-  <!-- ===== Hero específico del servicio ===== -->
+  <!-- ========================================================= -->
+  <!-- Service Hero                                              -->
+  <!-- ========================================================= -->
   <section class="hero-bg text-white">
-    <div class="container mx-auto px-6 py-16">
-      <h1 class="text-3xl md:text-4xl font-bold mb-4">Networks and Infraestructure services</h1>
-      <p class="text-lg md:text-xl max-w-2xl">
-        Protection against ransomware, phishing and data breaches for small and mid-size businesses.
+    <div class="container mx-auto px-6 py-16 md:py-20">
+      <span class="inline-flex items-center rounded-full border border-slate-600 bg-white/5 px-4 py-2 text-sm font-semibold uppercase tracking-[0.18em] text-blue-300 mb-6">
+        Services
+      </span>
+
+      <h1 class="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-4 leading-tight">
+        Networks and Infrastructure Services
+      </h1>
+
+      <p class="text-lg md:text-xl max-w-3xl text-slate-200 leading-relaxed">
+        Romanoti helps organizations improve infrastructure visibility, support operational stability,
+        and build cleaner technical control across modern network environments.
       </p>
     </div>
   </section>
 
-  <!-- ===== Contenido principal del servicio ===== -->
-  <main class="py-12">
-    <div class="container mx-auto px-6 space-y-8">
-      <section>
-        <h2 class="text-2xl font-bold mb-3">What we do</h2>
-        <p class="text-gray-700">
-          <!-- aquí puedes pegar el texto que ya tenías en cybersecurity.html -->
+  <!-- ========================================================= -->
+  <!-- Main Content                                              -->
+  <!-- ========================================================= -->
+  <main class="py-12 md:py-16">
+    <div class="container mx-auto px-6 space-y-10">
+
+      <section class="bg-white rounded-2xl border border-slate-200 shadow-sm p-8">
+        <h2 class="text-2xl font-bold mb-4">What we do</h2>
+        <p class="text-gray-700 leading-relaxed mb-4">
+          Romanoti provides practical infrastructure support for organizations that need better visibility,
+          stronger diagnostics, and more structured operational control across networked environments.
+        </p>
+        <p class="text-gray-700 leading-relaxed">
+          This service line supports teams that need clarity around devices, services, connectivity,
+          and the technical conditions that affect stability, performance, and day-to-day operations.
         </p>
       </section>
+
+      <section class="grid md:grid-cols-3 gap-6">
+        <article class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
+          <h3 class="text-xl font-bold mb-3">Infrastructure Visibility</h3>
+          <p class="text-gray-600 leading-relaxed">
+            Better understanding of devices, services, dependencies, and technical exposure across the environment.
+          </p>
+        </article>
+
+        <article class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
+          <h3 class="text-xl font-bold mb-3">Operational Diagnostics</h3>
+          <p class="text-gray-600 leading-relaxed">
+            Practical technical reviews that help teams investigate conditions, reduce ambiguity, and move faster.
+          </p>
+        </article>
+
+        <article class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
+          <h3 class="text-xl font-bold mb-3">Structured Support</h3>
+          <p class="text-gray-600 leading-relaxed">
+            Support aligned with operational stability, technical clarity, and long-term infrastructure improvement.
+          </p>
+        </article>
+      </section>
+
+      <section class="bg-slate-900 text-white rounded-3xl p-8 md:p-10 shadow-lg">
+        <h2 class="text-2xl md:text-3xl font-extrabold mb-4">Need infrastructure clarity?</h2>
+        <p class="text-slate-300 max-w-2xl mb-6 leading-relaxed">
+          Romanoti can help your organization understand infrastructure conditions, improve technical visibility,
+          and move toward a more stable operational model.
+        </p>
+
+        <div class="flex flex-wrap gap-4">
+          <a href="/booking.html" class="inline-flex items-center justify-center bg-blue-600 text-white px-6 py-3 rounded-xl font-semibold hover:bg-blue-700 transition">
+            Book a Consultation
+          </a>
+          <a href="/contact.html" class="inline-flex items-center justify-center border border-slate-500 text-white px-6 py-3 rounded-xl font-semibold hover:bg-white/5 transition">
+            Contact Romanoti
+          </a>
+        </div>
+      </section>
+
     </div>
   </main>
 
-  <!-- Footer global -->
+  <!-- Centralized Footer -->
+  <div id="app-footer"></div>
 
-  <!-- Scripts de nav/footer -->
+  <!-- Centralized Navigation/Footer Scripts -->
   <script defer src="/js/nav.js?v=7"></script>
   <script defer src="/js/footer.js?v=7"></script>
-
-  <div id="app-footer"></div>
-  <script src="/js/nav.js"></script>
-  <script src="/js/footer.js"></script>
 </body>
 </html>
-
