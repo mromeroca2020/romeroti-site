@@ -1,412 +1,413 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<title>Romanoti Ops Assistant | Romanoti Solutions</title>
+  <title>Romanoti Ops Assistant | Romanoti Solutions</title>
 
-<meta
-name="description"
-content="Romanoti Ops Assistant es el componente de inteligencia operativa de la plataforma Romanoti."
-/>
+  <meta
+    name="description"
+    content="Romanoti Ops Assistant es el componente de inteligencia operativa de la plataforma Romanoti."
+  />
 
-<link rel="stylesheet" href="../css/styles.css" />
+  <!-- Favicon Romanoti -->
+  <link rel="icon" type="image/svg+xml" href="/images/romanoti-icon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/romanoti-icon.png">
+  <link rel="shortcut icon" href="/images/favicon.ico">
+  <meta name="theme-color" content="#081120">
 
-<style>
-
-:root{
---primary-blue:#2f5bdb;
---primary-blue-dark:#2449b3;
---primary-blue-soft:#eaf0ff;
-
---romanoti-gold:#d6b46b;
-
---text-dark:#1f2937;
---text-body:#5f6f8a;
---text-light:#ffffff;
-
---border-light:#d9e1f0;
---bg-page:#f5f7fb;
---bg-section:#ffffff;
-
---shadow-soft:0 10px 25px rgba(31,41,55,.08);
-
---max-width:1180px;
---radius-lg:20px;
---radius-md:14px;
---radius-sm:10px;
-}
-
-*{box-sizing:border-box}
-
-body{
-margin:0;
-font-family:Arial,Helvetica,sans-serif;
-background:var(--bg-page);
-color:var(--text-dark);
-line-height:1.6;
-}
-
-a{text-decoration:none;color:inherit}
-
-.container{
-width:min(var(--max-width),calc(100% - 32px));
-margin:auto;
-}
-
-.topbar{
-background:#fff;
-border-bottom:1px solid var(--border-light);
-position:sticky;
-top:0;
-z-index:100;
-}
-
-.topbar-inner{
-display:flex;
-align-items:center;
-justify-content:space-between;
-min-height:72px;
-}
-
-.brand{
-display:flex;
-align-items:center;
-gap:12px;
-font-weight:700;
-}
-
-.brand-badge{
-width:36px;
-height:36px;
-border-radius:50%;
-background:var(--primary-blue);
-color:#fff;
-display:flex;
-align-items:center;
-justify-content:center;
-}
-
-.nav{
-display:flex;
-gap:18px;
-}
-
-.nav a{
-color:var(--text-body);
-font-size:.95rem;
-}
-
-.nav a:hover{
-color:var(--primary-blue);
-}
-
-.hero{
-background:linear-gradient(135deg,var(--primary-blue-dark),var(--primary-blue));
-color:#fff;
-padding:76px 0 84px;
-}
-
-.hero-grid{
-display:grid;
-grid-template-columns:1.15fr .85fr;
-gap:28px;
-align-items:center;
-}
-
-h1{
-font-size:clamp(2.2rem,4vw,4rem);
-margin-bottom:18px;
-}
-
-.hero p{
-font-size:1.08rem;
-max-width:720px;
-}
-
-.actions{
-display:flex;
-gap:14px;
-margin-top:24px;
-}
-
-.btn{
-display:inline-flex;
-align-items:center;
-justify-content:center;
-min-height:46px;
-padding:0 18px;
-border-radius:var(--radius-sm);
-font-weight:700;
-}
-
-.btn-primary{
-background:#fff;
-color:var(--primary-blue);
-}
-
-.btn-secondary{
-background:rgba(255,255,255,.08);
-border:1px solid rgba(255,255,255,.25);
-color:#fff;
-}
-
-.hero-card{
-background:rgba(255,255,255,.10);
-border:1px solid rgba(255,255,255,.18);
-border-radius:var(--radius-lg);
-padding:24px;
-}
-
-.section{
-padding:56px 0;
-background:#fff;
-border-top:1px solid #edf1f7;
-}
-
-.section h2{
-text-align:center;
-font-size:2rem;
-margin-bottom:10px;
-}
-
-.section-intro{
-text-align:center;
-max-width:760px;
-margin:auto;
-margin-bottom:30px;
-color:var(--text-body);
-}
-
-.two-col{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:22px;
-}
-
-.card{
-background:#fff;
-border:1px solid var(--border-light);
-border-radius:var(--radius-lg);
-padding:28px;
-box-shadow:var(--shadow-soft);
-}
-
-.bullets{
-padding-left:20px;
-color:var(--text-body);
-}
-
-.feature-grid{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:18px;
-margin-top:22px;
-}
-
-.feature-item{
-background:#fff;
-border:1px solid var(--border-light);
-border-radius:var(--radius-md);
-padding:22px;
-box-shadow:var(--shadow-soft);
-}
-
-.feature-item h3{
-color:var(--primary-blue);
-margin-bottom:10px;
-}
-
-.cta{
-padding:60px 0 80px;
-background:var(--bg-page);
-}
-
-.cta-box{
-background:linear-gradient(135deg,#fff,var(--primary-blue-soft));
-border-radius:24px;
-padding:34px;
-border:1px solid var(--border-light);
-}
-
-.footer{
-background:#fff;
-border-top:1px solid var(--border-light);
-padding:26px 0 38px;
-text-align:center;
-color:var(--text-body);
-}
-
-@media(max-width:980px){
-
-.hero-grid,
-.two-col,
-.feature-grid{
-grid-template-columns:1fr;
-}
-
-}
-
-</style>
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/styles.css?v=42" />
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --primary-blue:#2563eb;
+      --primary-blue-dark:#1d4ed8;
+      --primary-blue-soft:#eaf0ff;
+      --romanoti-gold:#d6b46b;
+      --text-dark:#111827;
+      --text-body:#5f6f8a;
+      --text-light:#ffffff;
+      --border-light:#d9e1f0;
+      --bg-page:#f5f7fb;
+      --bg-section:#ffffff;
+      --shadow-soft:0 12px 32px -16px rgba(2,6,23,.14);
+      --max-width:1180px;
+      --radius-lg:20px;
+      --radius-md:14px;
+      --radius-sm:10px;
+    }
+
+    *{box-sizing:border-box}
+
+    body{
+      margin:0;
+      font-family:'Montserrat',sans-serif;
+      background:var(--bg-page);
+      color:var(--text-dark);
+      line-height:1.6;
+    }
+
+    a{text-decoration:none;color:inherit}
+
+    .container{
+      width:min(var(--max-width),calc(100% - 32px));
+      margin:auto;
+    }
+
+    .hero{
+      background:linear-gradient(135deg,#050b16 0%,#081120 55%,#0b1830 100%);
+      color:#fff;
+      padding:82px 0 88px;
+      border-bottom:1px solid rgba(255,255,255,.05);
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.15fr .85fr;
+      gap:28px;
+      align-items:center;
+    }
+
+    .eyebrow{
+      display:inline-block;
+      padding:8px 14px;
+      border-radius:999px;
+      background:rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.18);
+      color:#dbeafe;
+      font-size:.84rem;
+      margin-bottom:18px;
+      font-weight:600;
+    }
+
+    h1{
+      font-size:clamp(2.4rem,4vw,4.1rem);
+      margin:0 0 18px;
+      line-height:1.04;
+      color:#ffffff;
+      font-weight:800;
+      letter-spacing:-.03em;
+      max-width:820px;
+    }
+
+    .hero p{
+      font-size:1.08rem;
+      max-width:720px;
+      color:rgba(255,255,255,.90);
+      margin:0 0 28px;
+    }
+
+    .actions{
+      display:flex;
+      gap:14px;
+      margin-top:24px;
+      flex-wrap:wrap;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:46px;
+      padding:0 18px;
+      border-radius:var(--radius-sm);
+      font-weight:700;
+      border:1px solid transparent;
+      transition:all .2s ease;
+      cursor:pointer;
+    }
+
+    .btn-primary{
+      background:#fff;
+      color:var(--primary-blue);
+    }
+
+    .btn-primary:hover{
+      background:#f4f7ff;
+      transform:translateY(-1px);
+    }
+
+    .btn-secondary{
+      background:rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.25);
+      color:#fff;
+    }
+
+    .btn-secondary:hover{
+      background:rgba(255,255,255,.14);
+      transform:translateY(-1px);
+    }
+
+    .hero-card{
+      background:rgba(255,255,255,.10);
+      border:1px solid rgba(255,255,255,.18);
+      border-radius:var(--radius-lg);
+      padding:24px;
+      box-shadow:0 20px 50px rgba(0,0,0,.12);
+      backdrop-filter:blur(4px);
+    }
+
+    .hero-card h3{
+      margin-top:0;
+      margin-bottom:10px;
+      font-size:1.3rem;
+      color:#fff;
+      font-weight:700;
+    }
+
+    .hero-card p{
+      color:rgba(255,255,255,.88);
+      margin-bottom:0;
+    }
+
+    .section{
+      padding:64px 0;
+      background:#fff;
+      border-top:1px solid #edf1f7;
+    }
+
+    .section h2{
+      text-align:center;
+      font-size:clamp(2rem,2.4vw,3rem);
+      margin:0 0 12px;
+      color:var(--text-dark);
+      font-weight:800;
+      letter-spacing:-.02em;
+    }
+
+    .section-intro{
+      text-align:center;
+      max-width:760px;
+      margin:auto;
+      margin-bottom:30px;
+      color:var(--text-body);
+    }
+
+    .two-col{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:22px;
+    }
+
+    .card{
+      background:#fff;
+      border:1px solid var(--border-light);
+      border-radius:var(--radius-lg);
+      padding:28px;
+      box-shadow:var(--shadow-soft);
+      transition:all .2s ease;
+    }
+
+    .card:hover{
+      transform:translateY(-2px);
+      box-shadow:0 18px 38px -18px rgba(2,6,23,.18);
+    }
+
+    .card h3{
+      margin-top:0;
+      margin-bottom:12px;
+      font-size:1.35rem;
+      color:var(--text-dark);
+      font-weight:700;
+    }
+
+    .card p{
+      color:var(--text-body);
+      margin-top:0;
+    }
+
+    .bullets{
+      padding-left:20px;
+      color:var(--text-body);
+      margin:0;
+    }
+
+    .bullets li{
+      margin-bottom:8px;
+    }
+
+    .cta{
+      padding:64px 0 84px;
+      background:var(--bg-page);
+    }
+
+    .cta-box{
+      background:linear-gradient(135deg,#ffffff,var(--primary-blue-soft));
+      border-radius:24px;
+      padding:34px;
+      border:1px solid var(--border-light);
+      box-shadow:var(--shadow-soft);
+    }
+
+    .cta-box h2{
+      margin-top:0;
+      margin-bottom:12px;
+      text-align:left;
+      font-weight:800;
+      letter-spacing:-.02em;
+    }
+
+    .cta-box p{
+      color:var(--text-body);
+      max-width:860px;
+      margin:0 0 22px;
+    }
+
+    @media(max-width:980px){
+      .hero-grid,
+      .two-col{
+        grid-template-columns:1fr;
+      }
+
+      .hero{
+        padding:56px 0 64px;
+      }
+    }
+  </style>
+
+  <script defer src="/js/nav.js?v=42"></script>
 </head>
 
 <body>
   <div id="app-header"></div>
 
+  <main>
 
+    <section class="hero">
+      <div class="container hero-grid">
 
-<main>
+        <div>
+          <div class="eyebrow">Romanoti Platform / Ops Assistant</div>
 
-<section class="hero">
-<div class="container hero-grid">
+          <h1>Interpreta tu infraestructura con inteligencia operativa.</h1>
 
-<div>
+          <p>
+            Romanoti Ops Assistant es la capa de inteligencia operativa de la plataforma Romanoti.
+            Está diseñado para ayudar a los equipos a comprender resultados técnicos,
+            reducir la ambigüedad y tomar decisiones con mayor claridad.
+          </p>
 
-<h1>Interpreta tu infraestructura con inteligencia operativa</h1>
+          <div class="actions">
+            <a class="btn btn-primary" href="/es/contact.html">Solicitar información</a>
+            <a class="btn btn-secondary" href="/es/platform/netpilot.html">Ver NetPilot</a>
+          </div>
+        </div>
 
-<p>
-Romanoti Ops Assistant es la capa de inteligencia operativa de la plataforma Romanoti.
-Está diseñado para ayudar a los equipos a comprender resultados técnicos,
-reducir la ambigüedad y tomar decisiones con mayor claridad.
-</p>
+        <aside class="hero-card">
+          <h3>Para qué sirve Ops Assistant</h3>
 
-<div class="actions">
-<a class="btn btn-primary" href="../contact.html">Solicitar información</a>
-<a class="btn btn-secondary" href="netpilot.html">Ver NetPilot</a>
-</div>
+          <p>
+            Ops Assistant transforma resultados técnicos en interpretación guiada,
+            permitiendo a los equipos entender qué revisar y dónde enfocar esfuerzos.
+          </p>
+        </aside>
 
-</div>
+      </div>
+    </section>
 
-<aside class="hero-card">
+    <section class="section">
+      <div class="container">
 
-<h3>Para qué sirve Ops Assistant</h3>
+        <h2>Por qué importa Ops Assistant</h2>
 
-<p>
-Ops Assistant transforma resultados técnicos en interpretación guiada,
-permitiendo a los equipos entender qué revisar y dónde enfocar esfuerzos.
-</p>
+        <p class="section-intro">
+          La visibilidad por sí sola no es suficiente.
+          Los equipos también necesitan interpretar resultados y comprender
+          qué acciones tomar a continuación.
+        </p>
 
-</aside>
+        <div class="two-col">
 
-</div>
-</section>
+          <div class="card">
+            <h3>El problema</h3>
+            <ul class="bullets">
+              <li>Demasiada información técnica</li>
+              <li>Prioridades poco claras</li>
+              <li>Interpretación lenta de resultados</li>
+              <li>Ambigüedad operativa</li>
+            </ul>
+          </div>
 
-<section class="section">
+          <div class="card">
+            <h3>El enfoque de Ops Assistant</h3>
+            <ul class="bullets">
+              <li>Interpretación operativa</li>
+              <li>Contexto técnico guiado</li>
+              <li>Soporte para investigación técnica</li>
+              <li>Recomendaciones de siguientes pasos</li>
+            </ul>
+          </div>
 
-<div class="container">
+        </div>
 
-<h2>Por qué importa Ops Assistant</h2>
+      </div>
+    </section>
 
-<p class="section-intro">
-La visibilidad por sí sola no es suficiente.  
-Los equipos también necesitan interpretar resultados y comprender
-qué acciones tomar a continuación.
-</p>
+    <section class="section">
+      <div class="container">
 
-<div class="two-col">
+        <h2>Ops Assistant dentro de la plataforma Romanoti</h2>
 
-<div class="card">
+        <p class="section-intro">
+          Ops Assistant conecta los resultados técnicos con decisiones operativas.
+          Trabaja junto a NetPilot para convertir visibilidad en acción.
+        </p>
 
-<h3>El problema</h3>
+        <div class="two-col">
 
-<ul class="bullets">
-<li>Demasiada información técnica</li>
-<li>Prioridades poco claras</li>
-<li>Interpretación lenta de resultados</li>
-<li>Ambigüedad operativa</li>
-</ul>
+          <div class="card">
+            <h3>Rol de Ops Assistant</h3>
 
-</div>
+            <p>
+              Ayuda a responder la pregunta:
+              <strong>¿Qué significan estos resultados y qué debemos revisar ahora?</strong>
+            </p>
+          </div>
 
-<div class="card">
+          <div class="card">
+            <h3>Conectado con NetPilot</h3>
 
-<h3>El enfoque de Ops Assistant</h3>
+            <p>
+              NetPilot descubre infraestructura.
+              Ops Assistant interpreta los resultados.
+            </p>
 
-<ul class="bullets">
-<li>Interpretación operativa</li>
-<li>Contexto técnico guiado</li>
-<li>Soporte para investigación técnica</li>
-<li>Recomendaciones de siguientes pasos</li>
-</ul>
+            <a class="btn btn-secondary" href="/es/platform/netpilot.html">Abrir NetPilot</a>
+          </div>
 
-</div>
+        </div>
 
-</div>
+      </div>
+    </section>
 
-</div>
-</section>
+    <section class="cta">
+      <div class="container">
 
-<section class="section">
+        <div class="cta-box">
+          <h2>Ops Assistant es la capa de inteligencia de Romanoti.</h2>
 
-<div class="container">
+          <p>
+            Forma parte de la evolución de Romanoti hacia un modelo de plataforma,
+            manteniendo la continuidad del sitio actual.
+          </p>
 
-<h2>Ops Assistant dentro de la plataforma Romanoti</h2>
+          <div class="actions">
+            <a class="btn btn-secondary" href="/es/contact.html">Contactar a Romanoti</a>
+            <a class="btn btn-primary" href="/es/platform/index.html">Volver a Platform</a>
+          </div>
+        </div>
 
-<p class="section-intro">
-Ops Assistant conecta los resultados técnicos con decisiones operativas.
-Trabaja junto a NetPilot para convertir visibilidad en acción.
-</p>
+      </div>
+    </section>
 
-<div class="two-col">
-
-<div class="card">
-
-<h3>Rol de Ops Assistant</h3>
-
-<p>
-Ayuda a responder la pregunta:
-<strong>¿Qué significan estos resultados y qué debemos revisar ahora?</strong>
-</p>
-
-</div>
-
-<div class="card">
-
-<h3>Conectado con NetPilot</h3>
-
-<p>
-NetPilot descubre infraestructura.  
-Ops Assistant interpreta los resultados.
-</p>
-
-<a class="btn btn-secondary" href="netpilot.html">Abrir NetPilot</a>
-
-</div>
-
-</div>
-
-</div>
-</section>
-
-<section class="cta">
-
-<div class="container">
-
-<div class="cta-box">
-
-<h2>Ops Assistant es la capa de inteligencia de Romanoti.</h2>
-
-<p>
-Forma parte de la evolución de Romanoti hacia un modelo de plataforma,
-manteniendo la continuidad del sitio actual.
-</p>
-
-</div>
-
-</div>
-
-</section>
-
-</main>
-
-
-
+  </main>
 
   <div id="app-footer"></div>
-  <script src="/js/nav.js"></script>
-  <script src="/js/footer.js"></script>
+  <script defer src="/js/footer.js?v=42"></script>
+  <script defer src="/js/fix-nav.js?v=42"></script>
 </body>
 </html>
