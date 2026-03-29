@@ -4,15 +4,6 @@
   <!-- ========================================================= -->
   <!-- Romanoti Solutions — Networks & Infrastructure Services   -->
   <!-- ========================================================= -->
-  <!-- Fixes applied:
-       1) Removed broken stray line before DOCTYPE:
-          <h1>Networks and Infraestructure services/h1>
-       2) Corrected spelling:
-          Infraestructure -> Infrastructure
-       3) Removed duplicate nav/footer script includes
-       4) Kept centralized header/footer placeholders
-       5) Added Romanoti favicon references
-  -->
 
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -37,17 +28,27 @@
 
   <!-- Global Styles -->
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/styles.css?v=43">
 
   <style>
-    /* Minimal local fallback styling to avoid a plain broken look
-       if hero-bg is not defined in a global stylesheet. */
     body {
       font-family: 'Montserrat', sans-serif;
     }
 
-    .hero-bg {
+    .romanoti-hero {
       background: linear-gradient(135deg, #050b16 0%, #081120 55%, #0b1830 100%);
+    }
+
+    .romanoti-card {
+      border: 1px solid #e2e8f0;
+      border-radius: 1rem;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.06);
+      transition: all 0.2s ease;
+    }
+
+    .romanoti-card:hover {
+      box-shadow: 0 16px 36px rgba(15, 23, 42, 0.10);
+      transform: translateY(-2px);
     }
   </style>
 </head>
@@ -59,20 +60,22 @@
   <!-- ========================================================= -->
   <!-- Service Hero                                              -->
   <!-- ========================================================= -->
-  <section class="hero-bg text-white">
-    <div class="container mx-auto px-6 py-16 md:py-20">
-      <span class="inline-flex items-center rounded-full border border-slate-600 bg-white/5 px-4 py-2 text-sm font-semibold uppercase tracking-[0.18em] text-blue-300 mb-6">
-        Services
-      </span>
+  <section class="romanoti-hero text-white py-20 md:py-24">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="max-w-4xl">
+        <span class="inline-flex items-center rounded-full border border-slate-600 bg-white/5 px-4 py-2 text-sm font-semibold uppercase tracking-[0.18em] text-blue-300 mb-6">
+          Services
+        </span>
 
-      <h1 class="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-4 leading-tight">
-        Networks and Infrastructure Services
-      </h1>
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 leading-tight tracking-tight text-white">
+          Networks and Infrastructure Services
+        </h1>
 
-      <p class="text-lg md:text-xl max-w-3xl text-slate-200 leading-relaxed">
-        Romanoti helps organizations improve infrastructure visibility, support operational stability,
-        and build cleaner technical control across modern network environments.
-      </p>
+        <p class="text-lg md:text-xl max-w-3xl text-slate-200 leading-relaxed">
+          Romanoti helps organizations improve infrastructure visibility, support operational stability,
+          and build cleaner technical control across modern network environments.
+        </p>
+      </div>
     </div>
   </section>
 
@@ -80,9 +83,9 @@
   <!-- Main Content                                              -->
   <!-- ========================================================= -->
   <main class="py-12 md:py-16">
-    <div class="container mx-auto px-6 space-y-10">
+    <div class="max-w-6xl mx-auto px-6 space-y-10">
 
-      <section class="bg-white rounded-2xl border border-slate-200 shadow-sm p-8">
+      <section class="bg-white rounded-2xl border border-slate-200 shadow-sm p-8 romanoti-card">
         <h2 class="text-2xl font-bold mb-4">What we do</h2>
         <p class="text-gray-700 leading-relaxed mb-4">
           Romanoti provides practical infrastructure support for organizations that need better visibility,
@@ -95,21 +98,21 @@
       </section>
 
       <section class="grid md:grid-cols-3 gap-6">
-        <article class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
+        <article class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 romanoti-card">
           <h3 class="text-xl font-bold mb-3">Infrastructure Visibility</h3>
           <p class="text-gray-600 leading-relaxed">
             Better understanding of devices, services, dependencies, and technical exposure across the environment.
           </p>
         </article>
 
-        <article class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
+        <article class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 romanoti-card">
           <h3 class="text-xl font-bold mb-3">Operational Diagnostics</h3>
           <p class="text-gray-600 leading-relaxed">
             Practical technical reviews that help teams investigate conditions, reduce ambiguity, and move faster.
           </p>
         </article>
 
-        <article class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
+        <article class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 romanoti-card">
           <h3 class="text-xl font-bold mb-3">Structured Support</h3>
           <p class="text-gray-600 leading-relaxed">
             Support aligned with operational stability, technical clarity, and long-term infrastructure improvement.
