@@ -11,7 +11,7 @@
   <title>Networks and Infrastructure Services | Romanoti Solutions</title>
   <meta
     name="description"
-    content="Romanoti Solutions provides networks and infrastructure services focused on visibility, operational clarity, diagnostics, and resilient technical environments."
+    content="Romanoti Solutions provides networks and infrastructure services focused on visibility, diagnostics, operational stability, and cleaner technical control."
   />
 
   <!-- Favicons -->
@@ -24,12 +24,12 @@
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="stylesheet" href="/css/styles.css?v=44">
+  <link rel="stylesheet" href="/css/styles.css?v=45">
 
   <style>
     body{
       font-family:'Montserrat',sans-serif;
-      background:#f8fafc;
+      background:#f7f9fc;
       color:#0f172a;
     }
 
@@ -37,24 +37,32 @@
       background:linear-gradient(135deg,#050b16 0%,#081120 55%,#0b1830 100%);
     }
 
-    .glass-card{
+    .romanoti-glass{
       background:rgba(255,255,255,.08);
       border:1px solid rgba(255,255,255,.16);
-      box-shadow:0 18px 45px rgba(0,0,0,.14);
+      box-shadow:0 18px 45px rgba(0,0,0,.16);
       backdrop-filter:blur(6px);
     }
 
     .romanoti-card{
+      background:#fff;
       border:1px solid #e2e8f0;
       border-radius:1rem;
-      background:#fff;
-      box-shadow:0 10px 25px rgba(15,23,42,.06);
+      box-shadow:0 10px 24px rgba(15,23,42,.06);
       transition:all .2s ease;
     }
 
     .romanoti-card:hover{
       transform:translateY(-2px);
-      box-shadow:0 18px 35px rgba(15,23,42,.10);
+      box-shadow:0 18px 38px rgba(15,23,42,.10);
+    }
+
+    .section-soft{
+      background:linear-gradient(180deg,#f8fbff 0%, #eef4fb 100%);
+    }
+
+    .section-dark{
+      background:linear-gradient(135deg,#0a1222 0%, #0f1b33 100%);
     }
   </style>
 </head>
@@ -63,21 +71,21 @@
   <div id="app-header"></div>
 
   <!-- HERO -->
-  <section class="romanoti-hero text-white py-20 md:py-24">
+  <section class="romanoti-hero text-white py-16 md:py-20">
     <div class="max-w-6xl mx-auto px-6">
-      <div class="grid lg:grid-cols-2 gap-10 items-center">
-        <div>
+      <div class="grid lg:grid-cols-12 gap-8 items-center">
+        <div class="lg:col-span-7">
           <span class="inline-flex items-center rounded-full border border-slate-600 bg-white/5 px-4 py-2 text-sm font-semibold uppercase tracking-[0.18em] text-blue-300 mb-6">
             Services
           </span>
 
-          <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 leading-tight tracking-tight text-white">
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 leading-[1.02] tracking-tight text-white">
             Networks and Infrastructure Services
           </h1>
 
           <p class="text-lg md:text-xl max-w-3xl text-slate-200 leading-relaxed mb-8">
-            Romanoti helps organizations improve infrastructure visibility, support operational stability,
-            and build cleaner technical control across modern network environments.
+            Romanoti helps organizations improve infrastructure visibility, strengthen diagnostics,
+            and support more stable, better-controlled technical environments.
           </p>
 
           <div class="flex flex-wrap gap-4">
@@ -93,105 +101,137 @@
           </div>
         </div>
 
-        <div class="glass-card rounded-2xl p-8">
-          <h3 class="text-2xl font-bold text-white mb-4">What this service supports</h3>
-          <p class="text-slate-200 mb-6">
-            A structured service model for organizations that need better infrastructure clarity,
-            stronger diagnostics, and more reliable technical operations.
-          </p>
+        <div class="lg:col-span-5">
+          <div class="romanoti-glass rounded-2xl p-6 md:p-7">
+            <h3 class="text-2xl font-bold text-white mb-4">Where this service creates value</h3>
+            <p class="text-slate-200 mb-5 leading-relaxed">
+              A practical service line for organizations that need visibility, stronger technical reviews,
+              and more confidence in daily infrastructure operations.
+            </p>
 
-          <div class="grid sm:grid-cols-2 gap-4">
-            <div class="rounded-xl border border-white/15 bg-white/5 p-4">
-              <h4 class="font-bold text-white mb-1">Visibility</h4>
-              <p class="text-slate-300 text-sm">Devices, services, dependencies, and technical exposure.</p>
-            </div>
-            <div class="rounded-xl border border-white/15 bg-white/5 p-4">
-              <h4 class="font-bold text-white mb-1">Diagnostics</h4>
-              <p class="text-slate-300 text-sm">Technical reviews that reduce ambiguity and speed up action.</p>
-            </div>
-            <div class="rounded-xl border border-white/15 bg-white/5 p-4">
-              <h4 class="font-bold text-white mb-1">Stability</h4>
-              <p class="text-slate-300 text-sm">Support aligned with operational continuity and cleaner control.</p>
-            </div>
-            <div class="rounded-xl border border-white/15 bg-white/5 p-4">
-              <h4 class="font-bold text-white mb-1">Direction</h4>
-              <p class="text-slate-300 text-sm">A stronger base for long-term infrastructure improvement.</p>
+            <div class="grid grid-cols-2 gap-4">
+              <div class="rounded-xl border border-white/15 bg-white/5 p-4">
+                <h4 class="font-bold text-white mb-1">Visibility</h4>
+                <p class="text-slate-300 text-sm">Devices, services, dependencies, and exposure.</p>
+              </div>
+              <div class="rounded-xl border border-white/15 bg-white/5 p-4">
+                <h4 class="font-bold text-white mb-1">Diagnostics</h4>
+                <p class="text-slate-300 text-sm">Faster investigation and less ambiguity.</p>
+              </div>
+              <div class="rounded-xl border border-white/15 bg-white/5 p-4">
+                <h4 class="font-bold text-white mb-1">Stability</h4>
+                <p class="text-slate-300 text-sm">Support aligned with operational continuity.</p>
+              </div>
+              <div class="rounded-xl border border-white/15 bg-white/5 p-4">
+                <h4 class="font-bold text-white mb-1">Control</h4>
+                <p class="text-slate-300 text-sm">Cleaner technical structure over time.</p>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
 
-  <!-- INTRO -->
-  <section class="py-16 bg-white">
-    <div class="max-w-6xl mx-auto px-6">
-      <div class="max-w-3xl mb-12">
-        <span class="inline-block text-sm font-semibold uppercase tracking-[0.18em] text-blue-600 mb-3">
-          Core service line
-        </span>
-        <h2 class="text-3xl md:text-4xl font-extrabold mb-4 tracking-tight text-slate-900">
-          What we do
-        </h2>
-        <p class="text-lg text-slate-600 leading-relaxed">
-          Romanoti provides practical infrastructure support for organizations that need better visibility,
-          stronger diagnostics, and a more structured technical operating model across networked environments.
-        </p>
-      </div>
-
-      <div class="grid md:grid-cols-3 gap-6">
-        <article class="romanoti-card p-7">
-          <h3 class="text-xl font-bold mb-3 text-slate-900">Infrastructure Visibility</h3>
-          <p class="text-slate-600 leading-relaxed">
-            Better understanding of devices, services, dependencies, and technical exposure across the environment.
-          </p>
-        </article>
-
-        <article class="romanoti-card p-7">
-          <h3 class="text-xl font-bold mb-3 text-slate-900">Operational Diagnostics</h3>
-          <p class="text-slate-600 leading-relaxed">
-            Practical technical reviews that help teams investigate conditions, reduce ambiguity, and move faster.
-          </p>
-        </article>
-
-        <article class="romanoti-card p-7">
-          <h3 class="text-xl font-bold mb-3 text-slate-900">Structured Support</h3>
-          <p class="text-slate-600 leading-relaxed">
-            Support aligned with operational stability, technical clarity, and long-term infrastructure improvement.
-          </p>
-        </article>
+      <!-- Bottom strip inside hero -->
+      <div class="mt-10 grid md:grid-cols-3 gap-4">
+        <div class="rounded-xl border border-white/10 bg-white/5 px-5 py-4">
+          <div class="text-sm uppercase tracking-[0.18em] text-blue-300 font-semibold mb-1">Infrastructure</div>
+          <div class="text-slate-200">Clearer understanding of technical environments.</div>
+        </div>
+        <div class="rounded-xl border border-white/10 bg-white/5 px-5 py-4">
+          <div class="text-sm uppercase tracking-[0.18em] text-blue-300 font-semibold mb-1">Operations</div>
+          <div class="text-slate-200">Better support for day-to-day technical execution.</div>
+        </div>
+        <div class="rounded-xl border border-white/10 bg-white/5 px-5 py-4">
+          <div class="text-sm uppercase tracking-[0.18em] text-blue-300 font-semibold mb-1">Direction</div>
+          <div class="text-slate-200">A stronger base for long-term infrastructure improvement.</div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- WHY IT MATTERS -->
-  <section class="py-16 bg-slate-50">
+  <!-- INTRO / VALUE -->
+  <section class="section-soft py-16 md:py-20">
     <div class="max-w-6xl mx-auto px-6">
-      <div class="grid lg:grid-cols-2 gap-10 items-start">
-        <div>
+      <div class="grid lg:grid-cols-12 gap-8 items-start">
+        <div class="lg:col-span-5">
           <span class="inline-block text-sm font-semibold uppercase tracking-[0.18em] text-blue-600 mb-3">
-            Why it matters
+            Core service line
           </span>
           <h2 class="text-3xl md:text-4xl font-extrabold mb-5 tracking-tight text-slate-900">
-            Infrastructure problems often begin with lack of clarity
+            What we do
           </h2>
-          <p class="text-slate-600 leading-relaxed mb-4">
-            Many organizations operate environments that have grown over time without full technical visibility.
-            Devices, services, routes, dependencies, and exposure points can become difficult to understand.
+          <p class="text-lg text-slate-600 leading-relaxed mb-4">
+            Romanoti provides practical infrastructure support for organizations that need better visibility,
+            stronger diagnostics, and a more structured operating model across networked environments.
           </p>
           <p class="text-slate-600 leading-relaxed">
-            Romanoti helps bring structure back into that reality through clearer diagnostics and better operational understanding.
+            This service supports teams that need clarity around systems, connectivity,
+            service presence, and the technical conditions that affect stability and performance.
           </p>
         </div>
 
+        <div class="lg:col-span-7 grid md:grid-cols-3 gap-6">
+          <article class="romanoti-card p-6">
+            <h3 class="text-xl font-bold mb-3 text-slate-900">Infrastructure Visibility</h3>
+            <p class="text-slate-600 leading-relaxed">
+              Better understanding of devices, services, dependencies, and technical exposure.
+            </p>
+          </article>
+
+          <article class="romanoti-card p-6">
+            <h3 class="text-xl font-bold mb-3 text-slate-900">Operational Diagnostics</h3>
+            <p class="text-slate-600 leading-relaxed">
+              Technical reviews that help teams investigate faster and move with more confidence.
+            </p>
+          </article>
+
+          <article class="romanoti-card p-6">
+            <h3 class="text-xl font-bold mb-3 text-slate-900">Structured Support</h3>
+            <p class="text-slate-600 leading-relaxed">
+              Cleaner support aligned with continuity, clarity, and long-term improvement.
+            </p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHALLENGES -->
+  <section class="py-16 md:py-20 bg-white">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="text-center max-w-3xl mx-auto mb-12">
+        <span class="inline-block text-sm font-semibold uppercase tracking-[0.18em] text-blue-600 mb-3">
+          Why it matters
+        </span>
+        <h2 class="text-3xl md:text-4xl font-extrabold mb-4 tracking-tight text-slate-900">
+          Infrastructure issues often begin with lack of clarity
+        </h2>
+        <p class="text-lg text-slate-600 leading-relaxed">
+          Many environments become harder to operate over time because services, dependencies,
+          and technical relationships are not fully visible or clearly understood.
+        </p>
+      </div>
+
+      <div class="grid lg:grid-cols-2 gap-8">
         <div class="romanoti-card p-8">
-          <h3 class="text-2xl font-bold mb-5 text-slate-900">Typical infrastructure challenges</h3>
+          <h3 class="text-2xl font-bold mb-5 text-slate-900">Typical conditions we see</h3>
           <ul class="space-y-3 text-slate-600">
-            <li>• Incomplete visibility into devices and services</li>
-            <li>• Fragmented understanding of dependencies</li>
-            <li>• Slow technical investigation cycles</li>
-            <li>• Ambiguity around operational exposure</li>
-            <li>• Difficulty connecting findings to action</li>
+            <li>• Incomplete visibility into infrastructure components</li>
+            <li>• Fragmented understanding of services and dependencies</li>
+            <li>• Slower investigation cycles during technical issues</li>
+            <li>• Ambiguity around operational exposure and service conditions</li>
+            <li>• Difficulty connecting findings to practical next steps</li>
+          </ul>
+        </div>
+
+        <div class="romanoti-card p-8">
+          <h3 class="text-2xl font-bold mb-5 text-slate-900">How Romanoti responds</h3>
+          <ul class="space-y-3 text-slate-600">
+            <li>• Clearer understanding of what exists in the environment</li>
+            <li>• Better support for reviewing technical behaviors</li>
+            <li>• More structured diagnostics and analysis</li>
+            <li>• Stronger operational confidence for technical teams</li>
+            <li>• A cleaner path toward infrastructure maturity</li>
           </ul>
         </div>
       </div>
@@ -199,62 +239,66 @@
   </section>
 
   <!-- SERVICE AREAS -->
-  <section class="py-16 bg-white">
+  <section class="section-dark text-white py-16 md:py-20">
     <div class="max-w-6xl mx-auto px-6">
-      <div class="text-center max-w-3xl mx-auto mb-12">
-        <span class="inline-block text-sm font-semibold uppercase tracking-[0.18em] text-blue-600 mb-3">
+      <div class="max-w-3xl mb-12">
+        <span class="inline-block text-sm font-semibold uppercase tracking-[0.18em] text-blue-300 mb-3">
           Service areas
         </span>
-        <h2 class="text-3xl md:text-4xl font-extrabold mb-4 tracking-tight text-slate-900">
+        <h2 class="text-3xl md:text-4xl font-extrabold mb-4 tracking-tight text-white">
           How Romanoti supports networks and infrastructure
         </h2>
-        <p class="text-lg text-slate-600 leading-relaxed">
-          A service line designed to improve visibility, support investigation, and strengthen operational stability.
+        <p class="text-lg text-slate-300 leading-relaxed">
+          A practical service line designed to improve visibility, reduce ambiguity,
+          and strengthen technical operations.
         </p>
       </div>
 
       <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <article class="romanoti-card p-6">
-          <h3 class="text-lg font-bold mb-3 text-slate-900">Infrastructure Reviews</h3>
-          <p class="text-slate-600 text-sm leading-relaxed">
+        <div class="rounded-2xl border border-white/10 bg-white/5 p-6">
+          <h3 class="text-lg font-bold mb-3 text-white">Infrastructure Reviews</h3>
+          <p class="text-slate-300 text-sm leading-relaxed">
             Structured review of technical conditions affecting reliability and understanding.
           </p>
-        </article>
+        </div>
 
-        <article class="romanoti-card p-6">
-          <h3 class="text-lg font-bold mb-3 text-slate-900">Network Diagnostics</h3>
-          <p class="text-slate-600 text-sm leading-relaxed">
+        <div class="rounded-2xl border border-white/10 bg-white/5 p-6">
+          <h3 class="text-lg font-bold mb-3 text-white">Network Diagnostics</h3>
+          <p class="text-slate-300 text-sm leading-relaxed">
             Support for investigating behaviors, service presence, and technical ambiguity.
           </p>
-        </article>
+        </div>
 
-        <article class="romanoti-card p-6">
-          <h3 class="text-lg font-bold mb-3 text-slate-900">Operational Clarity</h3>
-          <p class="text-slate-600 text-sm leading-relaxed">
-            Better understanding of what exists, what matters, and what requires attention.
+        <div class="rounded-2xl border border-white/10 bg-white/5 p-6">
+          <h3 class="text-lg font-bold mb-3 text-white">Operational Clarity</h3>
+          <p class="text-slate-300 text-sm leading-relaxed">
+            Better understanding of what exists, what matters, and what requires action.
           </p>
-        </article>
+        </div>
 
-        <article class="romanoti-card p-6">
-          <h3 class="text-lg font-bold mb-3 text-slate-900">Long-Term Direction</h3>
-          <p class="text-slate-600 text-sm leading-relaxed">
+        <div class="rounded-2xl border border-white/10 bg-white/5 p-6">
+          <h3 class="text-lg font-bold mb-3 text-white">Long-Term Direction</h3>
+          <p class="text-slate-300 text-sm leading-relaxed">
             A stronger base for cleaner technical control and infrastructure improvement.
           </p>
-        </article>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- CTA -->
-  <section class="py-16 bg-white">
+  <section class="py-16 md:py-20 bg-white">
     <div class="max-w-5xl mx-auto px-6">
       <div class="bg-slate-900 text-white rounded-3xl p-8 md:p-10 shadow-xl">
-        <h2 class="text-2xl md:text-3xl font-extrabold mb-4 text-white">
+        <span class="inline-block text-sm font-semibold uppercase tracking-[0.18em] text-blue-300 mb-3">
+          Romanoti Solutions
+        </span>
+        <h2 class="text-3xl md:text-4xl font-extrabold mb-4 text-white tracking-tight">
           Need infrastructure clarity?
         </h2>
-        <p class="text-slate-300 max-w-2xl mb-6 leading-relaxed">
-          Romanoti can help your organization understand infrastructure conditions, improve technical visibility,
-          and move toward a more stable operational model.
+        <p class="text-slate-300 max-w-2xl mb-6 leading-relaxed text-lg">
+          Romanoti can help your organization understand infrastructure conditions,
+          improve technical visibility, and move toward a more stable operating model.
         </p>
 
         <div class="flex flex-wrap gap-4">
