@@ -1,22 +1,17 @@
 <!DOCTYPE html>
 <!--
   =========================================================
-  Archivo: /fr/solutions/cybershield/index.html
-  Propósito: Landing de CyberShield (MDR) en francés
-  Notas:
-    - Mantiene la misma estructura del original (EN/ES).
-    - Solo se cambian textos y el atributo lang para i18n.
-    - El header/footer se inyectan con /js/nav.js y /js/footer.js.
-    - Hotfix universal del menú: /js/fix-nav.js (no se toca).
+  Archivo sugerido: /es/solutions/cybershield/index.html
+  Propósito: Landing de CyberShield (MDR) en español
   =========================================================
 -->
-<html lang="fr"> <!-- CHANGE: lang='fr' para SEO/i18n correctos -->
+<html lang="es">
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>CyberShield | Sécurité gérée RomanoTI</title> <!-- CHANGE: título en francés -->
+  <title>CyberShield | Seguridad gestionada Romanoti</title>
 
-  <!-- ===== Favicons RomanoTI (unificados) ===== -->
+  <!-- Favicons -->
   <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png?v=4">
   <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png?v=4">
   <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16.png?v=4">
@@ -24,11 +19,11 @@
   <link rel="mask-icon" href="/img/safari-pinned-tab.svg?v=4" color="#2563eb">
   <meta name="theme-color" content="#2563eb">
 
-  <!-- ===== CSS + Fuentes ===== -->
+  <!-- CSS + Fuentes -->
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
 
-  <!-- ===== Estilos locales ===== -->
   <style>
     body{font-family:'Montserrat',sans-serif}
     .hero-bg{background:linear-gradient(135deg,#1e3a8a 0%,#2563eb 100%)}
@@ -37,150 +32,141 @@
     .card{border:1px solid #e5e7eb;border-radius:16px;box-shadow:0 10px 30px -12px rgba(0,0,0,.12)}
     .badge{display:inline-block;border:1px solid #cbd5e1;border-radius:999px;padding:4px 10px;font-size:12px;background:#f8fafc}
     .logo-badge{background:#2563EB}
-    /* Compatibilidad para el dropdown (legacy / hotfix) */
     .dropdown{display:none}
     .dropdown.show{display:block}
   </style>
-  <link rel="stylesheet" href="/css/styles.css">
+
+  <script defer src="/js/nav.js?v=2025-01"></script>
 </head>
+
 <body class="bg-gray-50 text-gray-900">
   <div id="app-header"></div>
 
-  <!-- Header centralizado (nav.js lo inyecta) -->
-
-  <!-- =================== Hero =================== -->
+  <!-- HERO -->
   <section class="hero-bg text-white">
     <div class="container mx-auto px-6 py-20 text-center">
 
-      <!-- CHANGE: badge traducido -->
-      <span class="badge border-white text-white">Détection & réponse gérées (MDR)</span>
+      <span class="badge border-white text-white">Detección y respuesta gestionadas (MDR)</span>
 
       <h1 class="text-4xl md:text-5xl font-bold mt-4">CyberShield</h1>
 
-      <!-- CHANGE: subtítulo con francés natural B2B -->
       <p class="text-xl md:text-2xl mt-4 max-w-3xl mx-auto">
-        Détection et réponse 24×7 contre les rançongiciels, les intrusions et les interruptions — pour les réseaux on-prem et cloud.
+        Detección y respuesta 24×7 contra ransomware, intrusiones e interrupciones
+        para redes on-prem y entornos en la nube.
       </p>
 
-      <!-- Botones (textos en FR). Los href NO se tocan -->
       <div class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-6 mt-6">
-        <a href="https://calendly.com/mauricioromeroca"
-           class="btn-primary text-white px-6 py-3 rounded-lg font-semibold inline-flex items-center justify-center">Réserver une démo</a>
-        <a href="/it-soc.html"
-           class="bg-white text-blue-700 px-6 py-3 rounded-lg font-semibold inline-flex items-center justify-center hover:bg-gray-100">Voir les détails SOC</a>
-        <a href="/solutions/cybershield/soc-console.html"
-           class="bg-white text-blue-700 px-6 py-3 rounded-lg font-semibold inline-flex items-center justify-center hover:bg-gray-100">Ouvrir la console SOC</a>
+        <a href="/es/booking.html"
+           class="btn-primary text-white px-6 py-3 rounded-lg font-semibold inline-flex items-center justify-center">
+          Reservar una demo
+        </a>
+
+        <a href="/es/it-soc.html"
+           class="bg-white text-blue-700 px-6 py-3 rounded-lg font-semibold inline-flex items-center justify-center hover:bg-gray-100">
+          Ver detalles del SOC
+        </a>
+
+        <a href="/es/solutions/cybershield/soc-console.html"
+           class="bg-white text-blue-700 px-6 py-3 rounded-lg font-semibold inline-flex items-center justify-center hover:bg-gray-100">
+          Abrir consola SOC
+        </a>
       </div>
     </div>
   </section>
 
-  <!-- =================== Ce qui est inclus =================== -->
+  <!-- QUÉ INCLUYE -->
   <section class="py-14 bg-white">
     <div class="container mx-auto px-6">
-      <h2 class="text-3xl font-bold text-center">Ce qui est inclus</h2>
+      <h2 class="text-3xl font-bold text-center">Qué incluye</h2>
 
-      <!-- CHANGE: microcopy explicando la cobertura (FR) -->
       <p class="text-gray-600 text-center max-w-2xl mx-auto mt-2">
-        Nous combinons NOC (disponibilité) + SOC (sécurité) + protection e-mail pour couvrir les risques réels.
+        Combinamos NOC (disponibilidad) + SOC (seguridad) + protección de correo
+        para cubrir riesgos reales en operación.
       </p>
 
       <div class="grid md:grid-cols-3 gap-6 mt-10">
         <!-- NOC -->
         <div class="card p-6 bg-white">
           <h3 class="text-xl font-bold mb-2">NOC 24×7</h3>
-          <!-- CHANGE: bullets en FR -->
           <ul class="text-gray-700 list-disc ml-5 space-y-1">
-            <li>Uptime / HTTP / TLS / DNS / Ports</li>
-            <li>Alertes par e-mail / Teams / Slack</li>
-            <li>Rapport mensuel de performance</li>
+            <li>Disponibilidad / HTTP / TLS / DNS / Puertos</li>
+            <li>Alertas por correo / Teams / Slack</li>
+            <li>Reporte mensual de desempeño</li>
           </ul>
         </div>
 
         <!-- SOC -->
         <div class="card p-6 bg-white">
           <h3 class="text-xl font-bold mb-2">SOC (MDR)</h3>
-          <!-- CHANGE: bullets en FR con términos de SOC -->
           <ul class="text-gray-700 list-disc ml-5 space-y-1">
-            <li>EDR + corrélation d’événements</li>
-            <li>Cas d’usage : rançongiciel / C2 / mouvement latéral</li>
-            <li>Playbooks et réponse guidée</li>
+            <li>EDR + correlación de eventos</li>
+            <li>Casos de uso: ransomware / C2 / movimiento lateral</li>
+            <li>Playbooks y respuesta guiada</li>
           </ul>
         </div>
 
-        <!-- Email -->
+        <!-- EMAIL -->
         <div class="card p-6 bg-white">
-          <h3 class="text-xl font-bold mb-2">Sécurité e-mail</h3>
-          <!-- CHANGE: bullets en FR para postura de correo -->
+          <h3 class="text-xl font-bold mb-2">Seguridad de correo</h3>
           <ul class="text-gray-700 list-disc ml-5 space-y-1">
-            <li>Contrôles de posture SPF / DMARC / DKIM</li>
-            <li>Authentification avancée</li>
-            <li>Sensibilisation (optionnel)</li>
+            <li>Controles de postura SPF / DMARC / DKIM</li>
+            <li>Autenticación avanzada</li>
+            <li>Concientización (opcional)</li>
           </ul>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- =================== Plans (opcional; traducido 1:1) =================== -->
-  <!--
-    CHANGE: Si en tu versión EN/ES muestras “Planes”, aquí está la versión FR.
-    Si no quieres mostrarla, puedes comentar o eliminar esta sección.
-  -->
+  <!-- PLANES -->
   <section class="py-14">
     <div class="container mx-auto px-6">
-      <h2 class="text-3xl font-bold text-center">Forfaits</h2>
+      <h2 class="text-3xl font-bold text-center">Planes</h2>
+
       <div class="grid md:grid-cols-3 gap-6 mt-10">
         <!-- Starter -->
         <div class="card bg-white p-6">
           <div class="badge">Starter</div>
-          <h3 class="text-xl font-bold mt-2 mb-2">Petites équipes</h3>
+          <h3 class="text-xl font-bold mt-2 mb-2">Equipos pequeños</h3>
           <ul class="text-gray-700 list-disc ml-5 space-y-1">
             <li>NOC Essentials</li>
-            <li>E-mail sécurisé (1 domaine)</li>
-            <li>Support aux heures ouvrables</li>
+            <li>Correo seguro (1 dominio)</li>
+            <li>Soporte en horario laboral</li>
           </ul>
         </div>
 
         <!-- Growth -->
         <div class="card bg-white p-6 border-blue-600">
-          <div class="badge bg-blue-50 border-blue-200">Recommandé</div> <!-- CHANGE: “Recommended” → FR -->
+          <div class="badge bg-blue-50 border-blue-200">Recomendado</div>
           <h3 class="text-xl font-bold mt-2 mb-2">Growth</h3>
           <ul class="text-gray-700 list-disc ml-5 space-y-1">
             <li>NOC + SOC (MDR)</li>
-            <li>E-mail sécurisé (2 domaines)</li>
-            <li>Support étendu</li>
+            <li>Correo seguro (2 dominios)</li>
+            <li>Soporte extendido</li>
           </ul>
         </div>
 
         <!-- Enterprise -->
         <div class="card bg-white p-6">
           <div class="badge">Enterprise</div>
-          <h3 class="text-xl font-bold mt-2 mb-2">Opérations 24×7</h3>
+          <h3 class="text-xl font-bold mt-2 mb-2">Operaciones 24×7</h3>
           <ul class="text-gray-700 list-disc ml-5 space-y-1">
-            <li>NOC + SOC avancés</li>
-            <li>Intégrations SIEM / ITSM</li>
-            <li>SLA critiques</li>
+            <li>NOC + SOC avanzados</li>
+            <li>Integraciones SIEM / ITSM</li>
+            <li>SLA críticos</li>
           </ul>
         </div>
       </div>
 
       <div class="text-center mt-10">
-        <a href="https://calendly.com/mauricioromeroca"
-           class="btn-primary text-white px-8 py-3 rounded-lg font-semibold">Obtenir un devis / Démo</a>
+        <a href="/es/booking.html"
+           class="btn-primary text-white px-8 py-3 rounded-lg font-semibold">
+          Solicitar cotización / demo
+        </a>
       </div>
     </div>
   </section>
 
-  <!-- =================== Footer =================== -->
-  
-
-  <!-- =================== Scripts =================== -->
-
-  <!--
-    Fallback de dropdown (legacy). Lo mantenemos tal cual, pero en FR NO es necesario tocarlo,
-    ya que nav.js y fix-nav.js gestionan el menú.
-    Se conserva para compatibilidad, sin modificar eventos ni selectores.
-  -->
   <script>
     (function(){
       const btn  = document.getElementById('solutionsBtn');
@@ -196,19 +182,13 @@
       document.addEventListener('click',(e)=>{ if(!menu.contains(e.target) && e.target!==btn) close(); });
       document.addEventListener('keydown',(e)=>{ if(e.key==='Escape') close(); });
 
-      // Hover como refuerzo UX
       btn.addEventListener('mouseenter', open);
       btn.parentNode.addEventListener('mouseleave', ()=>setTimeout(close,120));
     })();
   </script>
 
-  <!-- Hotfix universal de navegación (no tocar rutas ni versiones) -->
-  <script defer src="/js/nav.js?v=2025-01"></script>
+  <div id="app-footer"></div>
   <script defer src="/js/footer.js?v=2025-01"></script>
   <script defer src="/js/fix-nav.js?v=2025-01"></script>
-
-  <div id="app-footer"></div>
-  <script src="/js/nav.js"></script>
-  <script src="/js/footer.js"></script>
 </body>
 </html>
