@@ -1,194 +1,377 @@
 <!DOCTYPE html>
-<!--
-  =========================================================
-  Archivo sugerido: /es/solutions/cybershield/index.html
-  Propósito: Landing de CyberShield (MDR) en español
-  =========================================================
--->
-<html lang="es">
+<html lang="fr">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>CyberShield | Seguridad gestionada Romanoti</title>
+  <!-- ========================================================= -->
+  <!-- Romanoti Solutions — Solutions (FR)                       -->
+  <!-- ROUTE: /fr/solutions/index.html                           -->
+  <!-- ========================================================= -->
 
-  <!-- Favicons -->
-  <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png?v=4">
-  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png?v=4">
-  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16.png?v=4">
-  <link rel="shortcut icon" href="/favicon.ico?v=4" type="image/x-icon">
-  <link rel="mask-icon" href="/img/safari-pinned-tab.svg?v=4" color="#2563eb">
-  <meta name="theme-color" content="#2563eb">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- CSS + Fuentes -->
+  <title>Solutions | Romanoti Solutions</title>
+
+  <meta name="description"
+        content="Romanoti Solutions aide les organisations à répondre à de vrais défis opérationnels grâce à des services techniques structurés, une meilleure visibilité de l’infrastructure et une direction orientée plateforme.">
+
+  <link rel="stylesheet" href="/css/styles.css">
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/styles.css">
 
   <style>
-    body{font-family:'Montserrat',sans-serif}
-    .hero-bg{background:linear-gradient(135deg,#1e3a8a 0%,#2563eb 100%)}
-    .btn-primary{background:#2563EB;transition:all .2s}
-    .btn-primary:hover{background:#1D4ED8;transform:translateY(-1px);box-shadow:0 6px 18px -10px rgba(37,99,235,.7)}
-    .card{border:1px solid #e5e7eb;border-radius:16px;box-shadow:0 10px 30px -12px rgba(0,0,0,.12)}
-    .badge{display:inline-block;border:1px solid #cbd5e1;border-radius:999px;padding:4px 10px;font-size:12px;background:#f8fafc}
-    .logo-badge{background:#2563EB}
-    .dropdown{display:none}
-    .dropdown.show{display:block}
+    body{
+      font-family:'Montserrat',sans-serif;
+    }
+
+    .hero-dark{
+      background:linear-gradient(135deg,#050b16 0%,#081120 55%,#0b1830 100%);
+      color:#fff;
+    }
+
+    .section-eyebrow{
+      display:inline-block;
+      font-size:12px;
+      font-weight:700;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      color:#93c5fd;
+      margin-bottom:12px;
+    }
+
+    .card-soft{
+      border:1px solid #e5e7eb;
+      border-radius:18px;
+      background:#fff;
+      box-shadow:0 12px 32px -16px rgba(2,6,23,.14);
+      transition:all .2s ease;
+    }
+
+    .card-soft:hover{
+      transform:translateY(-2px);
+      box-shadow:0 18px 38px -18px rgba(2,6,23,.18);
+    }
+
+    .pill-dark{
+      display:inline-flex;
+      align-items:center;
+      border:1px solid rgba(255,255,255,.14);
+      border-radius:999px;
+      padding:10px 18px;
+      background:rgba(255,255,255,.03);
+      color:#e5e7eb;
+      font-weight:600;
+      font-size:14px;
+    }
+
+    .cta-dark{
+      background:linear-gradient(135deg,#050b16 0%,#081120 55%,#0b1830 100%);
+      color:#fff;
+      border-radius:28px;
+      box-shadow:0 20px 40px -24px rgba(2,6,23,.45);
+    }
   </style>
 
-  <script defer src="/js/nav.js?v=2025-01"></script>
+  <script defer src="/js/nav.js?v=8"></script>
 </head>
 
-<body class="bg-gray-50 text-gray-900">
+<body class="bg-white text-gray-900 antialiased">
   <div id="app-header"></div>
 
-  <!-- HERO -->
-  <section class="hero-bg text-white">
-    <div class="container mx-auto px-6 py-20 text-center">
+  <main>
 
-      <span class="badge border-white text-white">Detección y respuesta gestionadas (MDR)</span>
+    <!-- HERO -->
+    <section class="hero-dark py-20 md:py-24">
+      <div class="max-w-6xl mx-auto px-6">
 
-      <h1 class="text-4xl md:text-5xl font-bold mt-4">CyberShield</h1>
+        <span class="section-eyebrow">Solutions</span>
 
-      <p class="text-xl md:text-2xl mt-4 max-w-3xl mx-auto">
-        Detección y respuesta 24×7 contra ransomware, intrusiones e interrupciones
-        para redes on-prem y entornos en la nube.
-      </p>
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 leading-tight text-white max-w-5xl">
+          Des solutions techniques pour de vrais défis opérationnels
+        </h1>
 
-      <div class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-6 mt-6">
-        <a href="/es/booking.html"
-           class="btn-primary text-white px-6 py-3 rounded-lg font-semibold inline-flex items-center justify-center">
-          Reservar una demo
-        </a>
+        <p class="text-lg md:text-xl text-slate-200 max-w-3xl mb-8 leading-relaxed">
+          Romanoti Solutions aide les organisations à faire face à la complexité de l’infrastructure,
+          au manque de visibilité, à l’instabilité des services et à l’exposition sécurité
+          grâce à des services techniques structurés et une logique orientée plateforme.
+        </p>
 
-        <a href="/es/it-soc.html"
-           class="bg-white text-blue-700 px-6 py-3 rounded-lg font-semibold inline-flex items-center justify-center hover:bg-gray-100">
-          Ver detalles del SOC
-        </a>
+        <div class="flex flex-col sm:flex-row gap-4 mb-10">
+          <a href="/fr/booking.html"
+             class="inline-flex items-center justify-center bg-blue-600 text-white px-6 py-3 rounded-xl font-semibold hover:bg-blue-700 transition shadow-lg">
+            Prendre rendez-vous
+          </a>
 
-        <a href="/es/solutions/cybershield/soc-console.html"
-           class="bg-white text-blue-700 px-6 py-3 rounded-lg font-semibold inline-flex items-center justify-center hover:bg-gray-100">
-          Abrir consola SOC
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- QUÉ INCLUYE -->
-  <section class="py-14 bg-white">
-    <div class="container mx-auto px-6">
-      <h2 class="text-3xl font-bold text-center">Qué incluye</h2>
-
-      <p class="text-gray-600 text-center max-w-2xl mx-auto mt-2">
-        Combinamos NOC (disponibilidad) + SOC (seguridad) + protección de correo
-        para cubrir riesgos reales en operación.
-      </p>
-
-      <div class="grid md:grid-cols-3 gap-6 mt-10">
-        <!-- NOC -->
-        <div class="card p-6 bg-white">
-          <h3 class="text-xl font-bold mb-2">NOC 24×7</h3>
-          <ul class="text-gray-700 list-disc ml-5 space-y-1">
-            <li>Disponibilidad / HTTP / TLS / DNS / Puertos</li>
-            <li>Alertas por correo / Teams / Slack</li>
-            <li>Reporte mensual de desempeño</li>
-          </ul>
+          <a href="/fr/contact.html"
+             class="inline-flex items-center justify-center border border-white text-white px-6 py-3 rounded-xl font-semibold hover:bg-white/5 transition">
+            Contacter Romanoti
+          </a>
         </div>
 
-        <!-- SOC -->
-        <div class="card p-6 bg-white">
-          <h3 class="text-xl font-bold mb-2">SOC (MDR)</h3>
-          <ul class="text-gray-700 list-disc ml-5 space-y-1">
-            <li>EDR + correlación de eventos</li>
-            <li>Casos de uso: ransomware / C2 / movimiento lateral</li>
-            <li>Playbooks y respuesta guiada</li>
-          </ul>
-        </div>
+        <p class="text-slate-300 text-lg mb-6">
+          Romanoti soutient des environnements sécurisés dans l’infrastructure,
+          le cloud et les opérations.
+        </p>
 
-        <!-- EMAIL -->
-        <div class="card p-6 bg-white">
-          <h3 class="text-xl font-bold mb-2">Seguridad de correo</h3>
-          <ul class="text-gray-700 list-disc ml-5 space-y-1">
-            <li>Controles de postura SPF / DMARC / DKIM</li>
-            <li>Autenticación avanzada</li>
-            <li>Concientización (opcional)</li>
-          </ul>
+        <div class="flex flex-wrap gap-3">
+          <span class="pill-dark">Infrastructure</span>
+          <span class="pill-dark">Cybersécurité</span>
+          <span class="pill-dark">Cloud & opérations</span>
+          <span class="pill-dark">ITSM / Help Desk</span>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- PLANES -->
-  <section class="py-14">
-    <div class="container mx-auto px-6">
-      <h2 class="text-3xl font-bold text-center">Planes</h2>
+    <!-- POSITIONNEMENT -->
+    <section class="py-20 bg-white">
+      <div class="max-w-5xl mx-auto px-6 text-center">
+        <h2 class="text-3xl md:text-5xl font-extrabold text-gray-900 mb-6 leading-tight">
+          Une manière plus structurée d’exploiter les environnements techniques
+        </h2>
 
-      <div class="grid md:grid-cols-3 gap-6 mt-10">
-        <!-- Starter -->
-        <div class="card bg-white p-6">
-          <div class="badge">Starter</div>
-          <h3 class="text-xl font-bold mt-2 mb-2">Equipos pequeños</h3>
-          <ul class="text-gray-700 list-disc ml-5 space-y-1">
-            <li>NOC Essentials</li>
-            <li>Correo seguro (1 dominio)</li>
-            <li>Soporte en horario laboral</li>
-          </ul>
+        <p class="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed mb-8">
+          Romanoti ne se limite pas à fournir des services. Il s’agit aussi de comprendre,
+          structurer, sécuriser et améliorer les environnements au fil du temps
+          grâce à un modèle opérationnel plus discipliné.
+        </p>
+
+        <div class="flex flex-col sm:flex-row justify-center gap-4 mb-4">
+          <a href="/fr/solutions/why-romanoti.html"
+             class="inline-flex items-center justify-center bg-blue-600 text-white px-6 py-3 rounded-xl font-semibold hover:bg-blue-700 transition shadow-lg">
+            Pourquoi les organisations choisissent Romanoti
+          </a>
+
+          <a href="/fr/how-we-work.html"
+             class="inline-flex items-center justify-center border border-slate-300 text-slate-900 px-6 py-3 rounded-xl font-semibold hover:bg-gray-50 transition">
+            Voir notre méthode
+          </a>
         </div>
 
-        <!-- Growth -->
-        <div class="card bg-white p-6 border-blue-600">
-          <div class="badge bg-blue-50 border-blue-200">Recomendado</div>
-          <h3 class="text-xl font-bold mt-2 mb-2">Growth</h3>
-          <ul class="text-gray-700 list-disc ml-5 space-y-1">
-            <li>NOC + SOC (MDR)</li>
-            <li>Correo seguro (2 dominios)</li>
-            <li>Soporte extendido</li>
-          </ul>
+        <p class="text-gray-500">
+          Sans engagement. Comprenez votre environnement et les prochaines étapes.
+        </p>
+      </div>
+    </section>
+
+    <!-- STRIP CYBER -->
+    <section class="bg-blue-50 border-t border-b border-blue-100">
+      <div class="max-w-7xl mx-auto px-6 py-6 flex flex-col lg:flex-row items-center justify-between gap-4">
+        <div class="text-blue-900 font-semibold text-center lg:text-left text-lg">
+          Gagnez en visibilité sur votre exposition, votre résilience et votre posture de sécurité.
         </div>
 
-        <!-- Enterprise -->
-        <div class="card bg-white p-6">
-          <div class="badge">Enterprise</div>
-          <h3 class="text-xl font-bold mt-2 mb-2">Operaciones 24×7</h3>
-          <ul class="text-gray-700 list-disc ml-5 space-y-1">
-            <li>NOC + SOC avanzados</li>
-            <li>Integraciones SIEM / ITSM</li>
-            <li>SLA críticos</li>
-          </ul>
+        <div class="flex flex-wrap justify-center gap-3">
+          <a href="/fr/solutions/cybershield/easm-console.html"
+             class="bg-white border px-5 py-3 rounded-xl font-medium hover:bg-gray-50">
+            Voir la démo
+          </a>
+
+          <a href="/fr/solutions/cybershield/"
+             class="bg-blue-600 text-white px-5 py-3 rounded-xl font-medium hover:bg-blue-700 transition">
+            Explorer CyberShield
+          </a>
         </div>
       </div>
+    </section>
 
-      <div class="text-center mt-10">
-        <a href="/es/booking.html"
-           class="btn-primary text-white px-8 py-3 rounded-lg font-semibold">
-          Solicitar cotización / demo
-        </a>
+    <!-- CAS D’USAGE -->
+    <section class="py-20 bg-gray-50">
+      <div class="max-w-6xl mx-auto px-6">
+
+        <div class="max-w-3xl mb-12">
+          <span class="inline-block text-sm font-semibold uppercase tracking-[0.18em] text-blue-600 mb-3">
+            Cas d’usage
+          </span>
+
+          <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4 tracking-tight">
+            Là où Romanoti crée de la valeur
+          </h2>
+
+          <p class="text-lg text-gray-600 leading-relaxed">
+            Romanoti est conçu pour soutenir les organisations qui ont besoin
+            de plus de clarté, de structure et de contrôle opérationnel
+            dans leurs environnements techniques.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+          <div class="card-soft p-7">
+            <h3 class="font-bold text-xl mb-3 text-gray-900">Visibilité de l’infrastructure</h3>
+            <p class="text-gray-600 leading-relaxed">
+              Pour les organisations qui doivent mieux comprendre leurs équipements,
+              leurs services et leur exposition technique.
+            </p>
+          </div>
+
+          <div class="card-soft p-7">
+            <h3 class="font-bold text-xl mb-3 text-gray-900">Continuité opérationnelle</h3>
+            <p class="text-gray-600 leading-relaxed">
+              Pour les équipes qui ont besoin d’un support structuré,
+              d’une meilleure gestion des incidents et d’opérations plus cohérentes.
+            </p>
+          </div>
+
+          <div class="card-soft p-7">
+            <h3 class="font-bold text-xl mb-3 text-gray-900">Amélioration de la posture de sécurité</h3>
+            <p class="text-gray-600 leading-relaxed">
+              Pour les organisations qui recherchent une meilleure compréhension
+              de leur exposition, du risque et des enjeux sécurité liés à l’infrastructure.
+            </p>
+          </div>
+
+          <div class="card-soft p-7">
+            <h3 class="font-bold text-xl mb-3 text-gray-900">Support d’environnements hybrides</h3>
+            <p class="text-gray-600 leading-relaxed">
+              Pour les entreprises opérant sur site, de manière distribuée
+              ou au travers d’environnements connectés au cloud.
+            </p>
+          </div>
+
+          <div class="card-soft p-7">
+            <h3 class="font-bold text-xl mb-3 text-gray-900">Aide à la décision technique</h3>
+            <p class="text-gray-600 leading-relaxed">
+              Pour les responsables et les équipes qui ont besoin de plus de clarté
+              avant de prendre des décisions opérationnelles ou d’infrastructure.
+            </p>
+          </div>
+
+          <div class="card-soft p-7">
+            <h3 class="font-bold text-xl mb-3 text-gray-900">Évolution orientée plateforme</h3>
+            <p class="text-gray-600 leading-relaxed">
+              Pour les organisations qui veulent un support utile aujourd’hui
+              et un modèle technique plus intelligent demain.
+            </p>
+          </div>
+
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <script>
-    (function(){
-      const btn  = document.getElementById('solutionsBtn');
-      const menu = document.getElementById('solutionsMenu');
-      if(!btn || !menu) return;
+    <!-- CAPACITÉS CONNECTÉES -->
+    <section class="py-20 bg-white">
+      <div class="max-w-6xl mx-auto px-6">
 
-      function open(){ menu.classList.add('show'); menu.classList.remove('hidden'); menu.style.display='block'; btn.setAttribute('aria-expanded','true'); }
-      function close(){ menu.classList.remove('show'); menu.classList.add('hidden'); menu.style.display=''; btn.setAttribute('aria-expanded','false'); }
-      function isOpen(){ return menu.classList.contains('show') || !menu.classList.contains('hidden') || menu.style.display==='block'; }
-      function toggle(){ isOpen()? close() : open(); }
+        <div class="max-w-3xl mb-12">
+          <span class="inline-block text-sm font-semibold uppercase tracking-[0.18em] text-blue-600 mb-3">
+            Capacités connectées
+          </span>
 
-      btn.addEventListener('click',(e)=>{ e.preventDefault(); e.stopPropagation(); toggle(); });
-      document.addEventListener('click',(e)=>{ if(!menu.contains(e.target) && e.target!==btn) close(); });
-      document.addEventListener('keydown',(e)=>{ if(e.key==='Escape') close(); });
+          <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4 tracking-tight">
+            Services et plateforme, ensemble
+          </h2>
 
-      btn.addEventListener('mouseenter', open);
-      btn.parentNode.addEventListener('mouseleave', ()=>setTimeout(close,120));
-    })();
-  </script>
+          <p class="text-lg text-gray-600 leading-relaxed">
+            Romanoti relie l’exécution des services à une vision plateforme
+            qui connecte découverte, diagnostic et intelligence opérationnelle.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+          <div class="card-soft p-7">
+            <h3 class="font-bold text-xl mb-3 text-gray-900">Help Desk / ITSM</h3>
+            <p class="text-gray-600 leading-relaxed mb-4">
+              Support structuré et continuité de service pour les environnements opérationnels.
+            </p>
+            <a href="/fr/services/helpdesk.html" class="text-blue-600 hover:underline font-medium">
+              Explorer le service →
+            </a>
+          </div>
+
+          <div class="card-soft p-7">
+            <h3 class="font-bold text-xl mb-3 text-gray-900">Réseaux et infrastructure</h3>
+            <p class="text-gray-600 leading-relaxed mb-4">
+              Visibilité, diagnostics et support pour les environnements techniques modernes.
+            </p>
+            <a href="/fr/services/networks.html" class="text-blue-600 hover:underline font-medium">
+              Explorer le service →
+            </a>
+          </div>
+
+          <div class="card-soft p-7">
+            <h3 class="font-bold text-xl mb-3 text-gray-900">Cybersécurité</h3>
+            <p class="text-gray-600 leading-relaxed mb-4">
+              Analyse de l’exposition, revue sécurité et guidance opérationnelle.
+            </p>
+            <a href="/fr/services/cybersecurity.html" class="text-blue-600 hover:underline font-medium">
+              Explorer le service →
+            </a>
+          </div>
+
+          <div class="card-soft p-7">
+            <h3 class="font-bold text-xl mb-3 text-gray-900">NetPilot</h3>
+            <p class="text-gray-600 leading-relaxed mb-4">
+              Découverte et diagnostics destinés à améliorer la compréhension de l’infrastructure.
+            </p>
+            <a href="/fr/platform/index.html" class="text-blue-600 hover:underline font-medium">
+              Explorer la plateforme →
+            </a>
+          </div>
+
+          <div class="card-soft p-7">
+            <h3 class="font-bold text-xl mb-3 text-gray-900">Ops Assistant</h3>
+            <p class="text-gray-600 leading-relaxed mb-4">
+              Une intelligence opérationnelle qui aide à interpréter les constats
+              et à guider les prochaines étapes.
+            </p>
+            <a href="/fr/platform/index.html" class="text-blue-600 hover:underline font-medium">
+              Explorer la plateforme →
+            </a>
+          </div>
+
+          <div class="card-soft p-7">
+            <h3 class="font-bold text-xl mb-3 text-gray-900">Romanoti Platform</h3>
+            <p class="text-gray-600 leading-relaxed mb-4">
+              Le modèle global qui relie découverte, interprétation et clarté technique.
+            </p>
+            <a href="/fr/platform/index.html" class="text-blue-600 hover:underline font-medium">
+              Explorer la plateforme →
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA FINAL -->
+    <section class="py-20 bg-white">
+      <div class="max-w-5xl mx-auto px-6">
+        <div class="cta-dark p-8 md:p-12">
+          <div class="max-w-3xl">
+            <span class="inline-block text-sm font-semibold uppercase tracking-[0.18em] text-blue-300 mb-3">
+              Romanoti Solutions
+            </span>
+
+            <h2 class="text-3xl md:text-4xl font-extrabold mb-4 text-white tracking-tight">
+              Trouvons la bonne solution pour votre environnement
+            </h2>
+
+            <p class="text-lg text-slate-300 leading-relaxed mb-8">
+              Que vous ayez besoin de visibilité sur l’infrastructure,
+              de continuité de service ou d’un meilleur support à la décision technique,
+              Romanoti peut vous aider à avancer avec plus de clarté.
+            </p>
+
+            <div class="flex flex-col sm:flex-row gap-4">
+              <a href="/fr/booking.html"
+                 class="inline-flex items-center justify-center bg-blue-600 text-white px-6 py-3 rounded-xl font-semibold hover:bg-blue-700 transition shadow-lg">
+                Prendre rendez-vous
+              </a>
+
+              <a href="/fr/contact.html"
+                 class="inline-flex items-center justify-center border border-slate-600 text-white px-6 py-3 rounded-xl font-semibold hover:bg-white/5 transition">
+                Contacter Romanoti
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
 
   <div id="app-footer"></div>
-  <script defer src="/js/footer.js?v=2025-01"></script>
-  <script defer src="/js/fix-nav.js?v=2025-01"></script>
+  <script defer src="/js/footer.js?v=8"></script>
+  <script defer src="/js/fix-nav.js?v=8"></script>
 </body>
 </html>
