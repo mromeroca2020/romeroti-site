@@ -20,130 +20,259 @@
   <link rel="shortcut icon" href="/images/favicon.ico">
   <meta name="theme-color" content="#081120">
 
-  <!-- Tailwind CSS -->
+  <!-- CSS -->
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-
-  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
-
-  <!-- Global Styles -->
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="stylesheet" href="/css/styles.css?v=43">
+  <link rel="stylesheet" href="/css/styles.css?v=44">
 
   <style>
-    body {
-      font-family: 'Montserrat', sans-serif;
+    body{
+      font-family:'Montserrat',sans-serif;
+      background:#f8fafc;
+      color:#0f172a;
     }
 
-    .romanoti-hero {
-      background: linear-gradient(135deg, #050b16 0%, #081120 55%, #0b1830 100%);
+    .romanoti-hero{
+      background:linear-gradient(135deg,#050b16 0%,#081120 55%,#0b1830 100%);
     }
 
-    .romanoti-card {
-      border: 1px solid #e2e8f0;
-      border-radius: 1rem;
-      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.06);
-      transition: all 0.2s ease;
+    .glass-card{
+      background:rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.16);
+      box-shadow:0 18px 45px rgba(0,0,0,.14);
+      backdrop-filter:blur(6px);
     }
 
-    .romanoti-card:hover {
-      box-shadow: 0 16px 36px rgba(15, 23, 42, 0.10);
-      transform: translateY(-2px);
+    .romanoti-card{
+      border:1px solid #e2e8f0;
+      border-radius:1rem;
+      background:#fff;
+      box-shadow:0 10px 25px rgba(15,23,42,.06);
+      transition:all .2s ease;
+    }
+
+    .romanoti-card:hover{
+      transform:translateY(-2px);
+      box-shadow:0 18px 35px rgba(15,23,42,.10);
     }
   </style>
 </head>
 
-<body class="bg-gray-50 text-gray-900 antialiased">
-  <!-- Centralized Header -->
+<body class="bg-slate-50 text-slate-900 antialiased">
   <div id="app-header"></div>
 
-  <!-- ========================================================= -->
-  <!-- Service Hero                                              -->
-  <!-- ========================================================= -->
+  <!-- HERO -->
   <section class="romanoti-hero text-white py-20 md:py-24">
     <div class="max-w-6xl mx-auto px-6">
-      <div class="max-w-4xl">
-        <span class="inline-flex items-center rounded-full border border-slate-600 bg-white/5 px-4 py-2 text-sm font-semibold uppercase tracking-[0.18em] text-blue-300 mb-6">
-          Services
-        </span>
+      <div class="grid lg:grid-cols-2 gap-10 items-center">
+        <div>
+          <span class="inline-flex items-center rounded-full border border-slate-600 bg-white/5 px-4 py-2 text-sm font-semibold uppercase tracking-[0.18em] text-blue-300 mb-6">
+            Services
+          </span>
 
-        <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 leading-tight tracking-tight text-white">
-          Networks and Infrastructure Services
-        </h1>
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 leading-tight tracking-tight text-white">
+            Networks and Infrastructure Services
+          </h1>
 
-        <p class="text-lg md:text-xl max-w-3xl text-slate-200 leading-relaxed">
-          Romanoti helps organizations improve infrastructure visibility, support operational stability,
-          and build cleaner technical control across modern network environments.
-        </p>
+          <p class="text-lg md:text-xl max-w-3xl text-slate-200 leading-relaxed mb-8">
+            Romanoti helps organizations improve infrastructure visibility, support operational stability,
+            and build cleaner technical control across modern network environments.
+          </p>
+
+          <div class="flex flex-wrap gap-4">
+            <a href="/booking.html"
+               class="inline-flex items-center justify-center bg-blue-600 text-white px-6 py-3 rounded-xl font-semibold hover:bg-blue-700 transition shadow-lg">
+              Book a Consultation
+            </a>
+
+            <a href="/contact.html"
+               class="inline-flex items-center justify-center border border-slate-500 text-white px-6 py-3 rounded-xl font-semibold hover:bg-white/5 transition">
+              Contact Romanoti
+            </a>
+          </div>
+        </div>
+
+        <div class="glass-card rounded-2xl p-8">
+          <h3 class="text-2xl font-bold text-white mb-4">What this service supports</h3>
+          <p class="text-slate-200 mb-6">
+            A structured service model for organizations that need better infrastructure clarity,
+            stronger diagnostics, and more reliable technical operations.
+          </p>
+
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div class="rounded-xl border border-white/15 bg-white/5 p-4">
+              <h4 class="font-bold text-white mb-1">Visibility</h4>
+              <p class="text-slate-300 text-sm">Devices, services, dependencies, and technical exposure.</p>
+            </div>
+            <div class="rounded-xl border border-white/15 bg-white/5 p-4">
+              <h4 class="font-bold text-white mb-1">Diagnostics</h4>
+              <p class="text-slate-300 text-sm">Technical reviews that reduce ambiguity and speed up action.</p>
+            </div>
+            <div class="rounded-xl border border-white/15 bg-white/5 p-4">
+              <h4 class="font-bold text-white mb-1">Stability</h4>
+              <p class="text-slate-300 text-sm">Support aligned with operational continuity and cleaner control.</p>
+            </div>
+            <div class="rounded-xl border border-white/15 bg-white/5 p-4">
+              <h4 class="font-bold text-white mb-1">Direction</h4>
+              <p class="text-slate-300 text-sm">A stronger base for long-term infrastructure improvement.</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ========================================================= -->
-  <!-- Main Content                                              -->
-  <!-- ========================================================= -->
-  <main class="py-12 md:py-16">
-    <div class="max-w-6xl mx-auto px-6 space-y-10">
-
-      <section class="bg-white rounded-2xl border border-slate-200 shadow-sm p-8 romanoti-card">
-        <h2 class="text-2xl font-bold mb-4">What we do</h2>
-        <p class="text-gray-700 leading-relaxed mb-4">
+  <!-- INTRO -->
+  <section class="py-16 bg-white">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="max-w-3xl mb-12">
+        <span class="inline-block text-sm font-semibold uppercase tracking-[0.18em] text-blue-600 mb-3">
+          Core service line
+        </span>
+        <h2 class="text-3xl md:text-4xl font-extrabold mb-4 tracking-tight text-slate-900">
+          What we do
+        </h2>
+        <p class="text-lg text-slate-600 leading-relaxed">
           Romanoti provides practical infrastructure support for organizations that need better visibility,
-          stronger diagnostics, and more structured operational control across networked environments.
+          stronger diagnostics, and a more structured technical operating model across networked environments.
         </p>
-        <p class="text-gray-700 leading-relaxed">
-          This service line supports teams that need clarity around devices, services, connectivity,
-          and the technical conditions that affect stability, performance, and day-to-day operations.
-        </p>
-      </section>
+      </div>
 
-      <section class="grid md:grid-cols-3 gap-6">
-        <article class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 romanoti-card">
-          <h3 class="text-xl font-bold mb-3">Infrastructure Visibility</h3>
-          <p class="text-gray-600 leading-relaxed">
+      <div class="grid md:grid-cols-3 gap-6">
+        <article class="romanoti-card p-7">
+          <h3 class="text-xl font-bold mb-3 text-slate-900">Infrastructure Visibility</h3>
+          <p class="text-slate-600 leading-relaxed">
             Better understanding of devices, services, dependencies, and technical exposure across the environment.
           </p>
         </article>
 
-        <article class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 romanoti-card">
-          <h3 class="text-xl font-bold mb-3">Operational Diagnostics</h3>
-          <p class="text-gray-600 leading-relaxed">
+        <article class="romanoti-card p-7">
+          <h3 class="text-xl font-bold mb-3 text-slate-900">Operational Diagnostics</h3>
+          <p class="text-slate-600 leading-relaxed">
             Practical technical reviews that help teams investigate conditions, reduce ambiguity, and move faster.
           </p>
         </article>
 
-        <article class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 romanoti-card">
-          <h3 class="text-xl font-bold mb-3">Structured Support</h3>
-          <p class="text-gray-600 leading-relaxed">
+        <article class="romanoti-card p-7">
+          <h3 class="text-xl font-bold mb-3 text-slate-900">Structured Support</h3>
+          <p class="text-slate-600 leading-relaxed">
             Support aligned with operational stability, technical clarity, and long-term infrastructure improvement.
           </p>
         </article>
-      </section>
+      </div>
+    </div>
+  </section>
 
-      <section class="bg-slate-900 text-white rounded-3xl p-8 md:p-10 shadow-lg">
-        <h2 class="text-2xl md:text-3xl font-extrabold mb-4">Need infrastructure clarity?</h2>
+  <!-- WHY IT MATTERS -->
+  <section class="py-16 bg-slate-50">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid lg:grid-cols-2 gap-10 items-start">
+        <div>
+          <span class="inline-block text-sm font-semibold uppercase tracking-[0.18em] text-blue-600 mb-3">
+            Why it matters
+          </span>
+          <h2 class="text-3xl md:text-4xl font-extrabold mb-5 tracking-tight text-slate-900">
+            Infrastructure problems often begin with lack of clarity
+          </h2>
+          <p class="text-slate-600 leading-relaxed mb-4">
+            Many organizations operate environments that have grown over time without full technical visibility.
+            Devices, services, routes, dependencies, and exposure points can become difficult to understand.
+          </p>
+          <p class="text-slate-600 leading-relaxed">
+            Romanoti helps bring structure back into that reality through clearer diagnostics and better operational understanding.
+          </p>
+        </div>
+
+        <div class="romanoti-card p-8">
+          <h3 class="text-2xl font-bold mb-5 text-slate-900">Typical infrastructure challenges</h3>
+          <ul class="space-y-3 text-slate-600">
+            <li>• Incomplete visibility into devices and services</li>
+            <li>• Fragmented understanding of dependencies</li>
+            <li>• Slow technical investigation cycles</li>
+            <li>• Ambiguity around operational exposure</li>
+            <li>• Difficulty connecting findings to action</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICE AREAS -->
+  <section class="py-16 bg-white">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="text-center max-w-3xl mx-auto mb-12">
+        <span class="inline-block text-sm font-semibold uppercase tracking-[0.18em] text-blue-600 mb-3">
+          Service areas
+        </span>
+        <h2 class="text-3xl md:text-4xl font-extrabold mb-4 tracking-tight text-slate-900">
+          How Romanoti supports networks and infrastructure
+        </h2>
+        <p class="text-lg text-slate-600 leading-relaxed">
+          A service line designed to improve visibility, support investigation, and strengthen operational stability.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <article class="romanoti-card p-6">
+          <h3 class="text-lg font-bold mb-3 text-slate-900">Infrastructure Reviews</h3>
+          <p class="text-slate-600 text-sm leading-relaxed">
+            Structured review of technical conditions affecting reliability and understanding.
+          </p>
+        </article>
+
+        <article class="romanoti-card p-6">
+          <h3 class="text-lg font-bold mb-3 text-slate-900">Network Diagnostics</h3>
+          <p class="text-slate-600 text-sm leading-relaxed">
+            Support for investigating behaviors, service presence, and technical ambiguity.
+          </p>
+        </article>
+
+        <article class="romanoti-card p-6">
+          <h3 class="text-lg font-bold mb-3 text-slate-900">Operational Clarity</h3>
+          <p class="text-slate-600 text-sm leading-relaxed">
+            Better understanding of what exists, what matters, and what requires attention.
+          </p>
+        </article>
+
+        <article class="romanoti-card p-6">
+          <h3 class="text-lg font-bold mb-3 text-slate-900">Long-Term Direction</h3>
+          <p class="text-slate-600 text-sm leading-relaxed">
+            A stronger base for cleaner technical control and infrastructure improvement.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-16 bg-white">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="bg-slate-900 text-white rounded-3xl p-8 md:p-10 shadow-xl">
+        <h2 class="text-2xl md:text-3xl font-extrabold mb-4 text-white">
+          Need infrastructure clarity?
+        </h2>
         <p class="text-slate-300 max-w-2xl mb-6 leading-relaxed">
           Romanoti can help your organization understand infrastructure conditions, improve technical visibility,
           and move toward a more stable operational model.
         </p>
 
         <div class="flex flex-wrap gap-4">
-          <a href="/booking.html" class="inline-flex items-center justify-center bg-blue-600 text-white px-6 py-3 rounded-xl font-semibold hover:bg-blue-700 transition">
+          <a href="/booking.html"
+             class="inline-flex items-center justify-center bg-blue-600 text-white px-6 py-3 rounded-xl font-semibold hover:bg-blue-700 transition">
             Book a Consultation
           </a>
-          <a href="/contact.html" class="inline-flex items-center justify-center border border-slate-500 text-white px-6 py-3 rounded-xl font-semibold hover:bg-white/5 transition">
+          <a href="/contact.html"
+             class="inline-flex items-center justify-center border border-slate-500 text-white px-6 py-3 rounded-xl font-semibold hover:bg-white/5 transition">
             Contact Romanoti
           </a>
         </div>
-      </section>
-
+      </div>
     </div>
-  </main>
+  </section>
 
-  <!-- Centralized Footer -->
   <div id="app-footer"></div>
 
-  <!-- Centralized Navigation/Footer Scripts -->
   <script defer src="/js/nav.js?v=7"></script>
   <script defer src="/js/footer.js?v=7"></script>
 </body>
