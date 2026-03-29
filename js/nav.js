@@ -149,7 +149,7 @@
     es: {
       home: '/es/',
       servicesIndex: '/es/services/index.html',
-      solutionsIndex: '/solutions/index.html',
+      solutionsIndex: '/es/soluciones/index.html',
       platform: '/platform/index.html',
       enterprise: '/enterprise/government-business.html',
       whyRomanoti: '/solutions/why-romanoti.html',
@@ -164,7 +164,7 @@
         { key: 'tools', href: '/services/tools.html' }
       ],
       solutions: [
-        { key: 'solutionsOverview', href: '/solutions/index.html' },
+        { key: 'solutionsOverview', href: '/es/soluciones/index.html' },
         { key: 'platformOverview', href: '/platform/index.html' },
         { key: 'governmentBusiness', href: '/enterprise/government-business.html' }
       ]
