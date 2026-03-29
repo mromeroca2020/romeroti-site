@@ -158,15 +158,15 @@
       booking: '/booking.html',
       crmLogin: '/crm-login.html',
       services: [
-        { key: 'helpDesk', href: '/services/helpdesk.html' },
-        { key: 'networksInfra', href: '/services/networks.html' },
-        { key: 'cybersecurity', href: '/services/cybersecurity.html' },
+        { key: 'helpDesk', href: '/es/services/helpdesk.html' },
+        { key: 'networksInfra', href: '/es/services/networks.html' },
+        { key: 'cybersecurity', href: '/es/services/cybersecurity.html' },
         { key: 'tools', href: '/services/tools.html' }
       ],
       solutions: [
         { key: 'solutionsOverview', href: '/es/soluciones/index.html' },
-        { key: 'platformOverview', href: '/platform/index.html' },
-        { key: 'governmentBusiness', href: '/enterprise/government-business.html' }
+        { key: 'platformOverview', href: '/es/platform/index.html' },
+        { key: 'governmentBusiness', href: '/es/enterprise/government-business.html' }
       ]
     }
   };
