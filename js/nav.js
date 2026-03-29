@@ -35,7 +35,7 @@
       services: 'Servicios',
       solutions: 'Soluciones',
       platform: 'Plataforma',
-      enterprise: 'Empresa', # corregido por David
+      enterprise: 'Empresa',
       whyRomanoti: 'Por qué Romanoti',
       howWeWork: 'Cómo trabajamos',
       contact: 'Contacto',
