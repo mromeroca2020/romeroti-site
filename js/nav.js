@@ -152,7 +152,7 @@
       solutionsIndex: '/es/soluciones/index.html',
       platform: '/es/platform/index.html',
       enterprise: '/es/enterprise/government-business.html',
-      whyRomanoti: '/es/solutions/why-romanoti.html',
+      whyRomanoti: '/es/soluciones/why-romanoti.html',
       howWeWork: '/es/solutions/how-we-work.html',
       contact: '/es/contact.html',
       booking: '/es/booking.html',
