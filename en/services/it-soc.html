@@ -2,432 +2,777 @@
 <html lang="en">
 <head>
   <!-- =========================================================
-    Archivo: /it-soc.html
-    Propósito: Página de servicios SOC + Quick Tools + Live Toolbox.
-    Cambios clave:
-      - Favicons RomanoTI con cache-buster (?v=4).
-      - Header y Footer centralizados (nav.js / footer.js) + FALLBACK.
-      - Dropdown “Solutions” funcionando siempre.
-      - Lógica SOC intacta (Quick Tools + Live Toolbox).
-  ========================================================== -->
+       FILE: /en/services/it-soc.html
+
+       PURPOSE
+       ---------------------------------------------------------
+       Romanoti SOC service page with:
+       - enterprise-aligned service positioning
+       - centralized header/footer
+       - SOC Quick Tools
+       - SOC Live Toolbox
+
+       CHANGE SUMMARY
+       ---------------------------------------------------------
+       - Migrated legacy RomanoTI page to Romanoti template
+       - Corrected mixed-language content to full English
+       - Preserved SOC tool functionality
+       - Removed duplicate nav/footer script loading
+       - Updated branding, favicon strategy, and layout consistency
+       - Kept page ready for later exposure in EN navigation
+       ========================================================= -->
+
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>SOC Services | RomanoTI Solutions</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- Tailwind CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <title>SOC Services | Romanoti Solutions</title>
+  <meta
+    name="description"
+    content="Romanoti SOC Services provide security monitoring, threat detection, incident response, and practical security tooling to strengthen operational resilience."
+  />
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
-
-  <!-- =============== Favicons RomanoTI (cache-buster v=4) =============== -->
-  <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png?v=4">
-  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png?v=4">
-  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16.png?v=4">
-  <link rel="shortcut icon" href="/favicon.ico?v=4">
-  <link rel="mask-icon" href="/img/safari-pinned-tab.svg?v=4" color="#2563eb">
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/romanoti-icon.png">
+  <link rel="icon" type="image/png" href="/images/romanoti-icon.png">
+  <link rel="apple-touch-icon" href="/images/romanoti-icon.png">
   <meta name="theme-color" content="#2563eb">
 
-  <!-- Estilos rápidos -->
-  <style>
-    body{font-family:'Montserrat',sans-serif;background:#f8f9fa;color:#333;scroll-behavior:smooth}
-    .hero-bg{background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%)} /* SOC = Blue */
-    .btn-primary{background:#2563EB;transition:all .3s}
-    .btn-primary:hover{background:#1D4ED8;transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.15)}
-    .feature-card{transition:all .3s;border-radius:.5rem;box-shadow:0 1px 3px rgba(0,0,0,.1)}
-    .feature-card:hover{transform:translateY(-6px);box-shadow:0 12px 30px -8px rgba(37,99,235,.15)}
-    pre.tools-out{background:#0e1116;color:#eaeef3;padding:10px;border-radius:8px;max-height:40vh;overflow:auto}
-    .badge{display:inline-flex;align-items:center;padding:.2rem .5rem;border-radius:.5rem;font-size:.75rem;font-weight:600}
-    .badge-ok{background:#ecfdf5;color:#065f46;border:1px solid #a7f3d0}
-    .badge-warn{background:#fffbeb;color:#92400e;border:1px solid #fcd34d}
-    .badge-err{background:#fef2f2;color:#991b1b;border:1px solid #fecaca}
-  </style>
+  <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="/css/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    body { font-family: 'Montserrat', sans-serif; }
+
+    .romanoti-grid-bg {
+      background-image:
+        linear-gradient(to right, rgba(37,99,235,0.07) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(37,99,235,0.07) 1px, transparent 1px);
+      background-size: 32px 32px;
+    }
+
+    .romanoti-card {
+      transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+    }
+
+    .romanoti-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 18px 40px -18px rgba(37, 99, 235, 0.22);
+    }
+
+    .btn-primary {
+      background: #2563EB;
+      transition: all .25s ease;
+    }
+
+    .btn-primary:hover {
+      background: #1D4ED8;
+      transform: translateY(-1px);
+      box-shadow: 0 10px 24px rgba(37, 99, 235, .22);
+    }
+
+    pre.tools-out {
+      background: #0f172a;
+      color: #e2e8f0;
+      padding: 1rem;
+      border-radius: 0.9rem;
+      max-height: 22rem;
+      overflow: auto;
+      font-size: 0.875rem;
+      line-height: 1.5;
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: .25rem .55rem;
+      border-radius: .6rem;
+      font-size: .75rem;
+      font-weight: 700;
+      margin-right: .4rem;
+      margin-bottom: .4rem;
+    }
+
+    .badge-ok   { background:#ecfdf5; color:#065f46; border:1px solid #a7f3d0; }
+    .badge-warn { background:#fffbeb; color:#92400e; border:1px solid #fcd34d; }
+    .badge-err  { background:#fef2f2; color:#991b1b; border:1px solid #fecaca; }
+  </style>
 </head>
-<body class="bg-gray-50">
+
+<body class="bg-white text-gray-900 antialiased">
   <div id="app-header"></div>
 
-  <!-- Mountpoint del header centralizado -->
+  <main>
 
- 
+    <!-- =======================================================
+         HERO
+         ======================================================= -->
+    <section class="relative overflow-hidden bg-slate-950 text-white">
+      <div class="absolute inset-0 romanoti-grid-bg opacity-40"></div>
+      <div class="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/95 to-blue-950/60"></div>
 
-  <!-- ===== Hero SOC ===== -->
-  <section class="hero-bg text-white py-28">
-    <div class="container mx-auto px-6 text-center">
-      <h1 class="text-4xl md:text-5xl font-bold mb-6">SOC Services</h1>
-      <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
-        Threat detection, log analytics, and incident response — 24/7
-      </p>
-    </div>
-  </section>
+      <div class="relative mx-auto max-w-7xl px-6 py-24 lg:px-8 lg:py-28">
+        <div class="max-w-4xl">
+          <span class="inline-flex items-center rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-semibold uppercase tracking-[0.18em] text-blue-300">
+            SOC Services
+          </span>
 
-  <!-- ===== Marketing SOC ===== -->
-  <section class="py-16 bg-white">
-    <div class="container mx-auto px-6">
-      <div class="text-center mb-12">
-        <h2 class="text-3xl font-bold">What We Deliver</h2>
-        <p class="text-xl text-gray-600 max-w-2xl mx-auto">
-          Centralized security monitoring, alert triage, and swift incident response.
-        </p>
-      </div>
+          <h1 class="mt-6 max-w-4xl text-4xl font-extrabold leading-tight text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.45)] md:text-5xl lg:text-6xl">
+            Security visibility, threat response, and practical operational defense.
+          </h1>
 
-      <div class="feature-card p-8 rounded-lg shadow-sm bg-white mb-8">
-        <h3 class="text-xl font-bold mb-4">Security Monitoring & Threat Detection</h3>
-        <p class="mb-6">SIEM correlación de eventos (Wazuh/ELK), reglas Sigma, detección de IOC/IOA y alertas en tiempo real.</p>
-        <div class="grid md:grid-cols-3 gap-6">
-          <div class="bg-green-50 p-6 rounded-lg">
-            <h4 class="font-bold text-lg mb-3">Plataforma</h4>
-            <p>Wazuh, ELK/Opensearch, Zeek, Suricata (según alcance)</p>
-          </div>
-          <div class="bg-green-50 p-6 rounded-lg">
-            <h4 class="font-bold text-lg mb-3">Cobertura</h4>
-            <p>Endpoints, servers, firewalls, O365/Azure AD, SaaS</p>
-          </div>
-          <div class="bg-green-50 p-6 rounded-lg">
-            <h4 class="font-bold text-lg mb-3">Triage</h4>
-            <p>Clasificación L1/L2 con playbooks repetibles</p>
-          </div>
-        </div>
-      </div>
+          <p class="mt-6 max-w-3xl text-lg leading-relaxed text-slate-300 md:text-xl">
+            Romanoti SOC Services help organizations strengthen monitoring, investigation,
+            and incident handling with a structured approach to detection, analysis,
+            escalation, and security resilience.
+          </p>
 
-      <div class="feature-card p-8 rounded-lg shadow-sm bg-white mb-8">
-        <h3 class="text-xl font-bold mb-4">Email Security Posture</h3>
-        <p class="mb-6">Validación de MX, SPF, DKIM y DMARC para reducir suplantación y spoofing.</p>
-        <div class="grid md:grid-cols-3 gap-6">
-          <div class="bg-green-50 p-6 rounded-lg">
-            <h4 class="font-bold text-lg mb-3">MX</h4>
-            <p>Ruteo adecuado, null-MX si el dominio no recibe correo</p>
-          </div>
-          <div class="bg-green-50 p-6 rounded-lg">
-            <h4 class="font-bold text-lg mb-3">SPF</h4>
-            <p>Reglas y mecanismos permitidos, longitud y sintaxis</p>
-          </div>
-          <div class="bg-green-50 p-6 rounded-lg">
-            <h4 class="font-bold text-lg mb-3">DMARC</h4>
-            <p>Política p/quarantine/reject y reporting</p>
+          <div class="mt-8 flex flex-wrap gap-4">
+            <a
+              href="/en/booking.html"
+              class="inline-flex items-center justify-center rounded-lg bg-blue-600 px-6 py-3 font-medium text-white transition hover:bg-blue-700"
+            >
+              Schedule a consultation
+            </a>
+
+            <a
+              href="/en/contact.html"
+              class="inline-flex items-center justify-center rounded-lg border border-white/15 bg-white/5 px-6 py-3 font-medium text-white transition hover:bg-white/10"
+            >
+              Contact Romanoti
+            </a>
           </div>
         </div>
       </div>
+    </section>
 
-      <div class="feature-card p-8 rounded-lg shadow-sm bg-white">
-        <h3 class="text-xl font-bold mb-4">Incident Response</h3>
-        <p class="mb-6">Playbooks para phishing, ransomware, C2 y exfiltración. Evidencias y post-mortem.</p>
-        <div class="grid md:grid-cols-3 gap-6">
-          <div class="bg-green-50 p-6 rounded-lg">
-            <h4 class="font-bold text-lg mb-3">Contención</h4>
-            <p>Aislar host, bloquear IOC, revocar tokens</p>
-          </div>
-          <div class="bg-green-50 p-6 rounded-lg">
-            <h4 class="font-bold text-lg mb-3">Erradicación</h4>
-            <p>Limpiar persistencia, restaurar integridad</p>
-          </div>
-          <div class="bg-green-50 p-6 rounded-lg">
-            <h4 class="font-bold text-lg mb-3">Lecciones</h4>
-            <p>Reporte ejecutivo y mejoras de control</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+    <!-- =======================================================
+         INTRO
+         ======================================================= -->
+    <section class="bg-white py-16">
+      <div class="mx-auto max-w-7xl px-6 lg:px-8">
+        <div class="mx-auto max-w-3xl text-center">
+          <span class="inline-block text-sm font-semibold uppercase tracking-[0.18em] text-blue-600">
+            Operational focus
+          </span>
 
-  <!-- ===== SOC Quick Tools ===== -->
-  <section id="soc-tools" class="py-16 bg-white">
-    <div class="container mx-auto px-6 max-w-6xl">
-      <div class="text-center mb-10">
-        <h2 class="text-3xl font-bold">SOC Quick Tools</h2>
-        <p class="text-xl text-gray-600">Chequear postura de correo y cifrado TLS en segundos</p>
-      </div>
+          <h2 class="mt-3 text-3xl font-bold text-gray-900 md:text-4xl">
+            A SOC model designed for detection, prioritization, and response
+          </h2>
 
-      <!-- Settings: API Key -->
-      <div class="bg-white rounded-lg shadow-sm border p-6 mb-10">
-        <h3 class="text-xl font-semibold mb-2">Settings</h3>
-        <p class="text-gray-600 mb-4">Tu <b>Org API Key</b> (se almacena en tu navegador, no en el servidor).</p>
-        <div class="flex flex-col md:flex-row gap-4 items-start md:items-end">
-          <div class="flex-1">
-            <label for="orgKey" class="block text-sm font-medium text-gray-700">Org API Key</label>
-            <input id="orgKey" type="password" class="mt-1 w-full border rounded-lg px-3 py-2"
-                   placeholder="pega tu API key (ej: MySecret123$)">
-          </div>
-          <button id="btnSaveKey" class="btn-primary text-white px-5 py-2 rounded-lg font-medium">
-            Guardar
-          </button>
-        </div>
-        <p id="keyMsg" class="text-sm text-gray-500 mt-2"></p>
-      </div>
-
-      <!-- Herramientas -->
-      <div class="grid md:grid-cols-3 gap-8">
-        <!-- Email Security Posture -->
-        <div class="feature-card p-6 bg-white rounded-lg shadow-sm border">
-          <h3 class="text-lg font-bold mb-3">Email Security Posture</h3>
-          <p class="text-gray-600 mb-4">Consulta MX / SPF / DMARC para un dominio.</p>
-          <label class="block text-sm font-medium text-gray-700">Domain</label>
-          <input id="espDomain" class="w-full border rounded-lg px-3 py-2 mb-3" placeholder="example.com" value="example.com">
-          <button id="btnEspCheck" class="btn-primary text-white px-4 py-2 rounded-lg font-medium">Run</button>
-          <div id="espBadges" class="mt-3 space-x-2"></div>
-          <pre id="espOut" class="tools-out mt-3"></pre>
-          <p class="text-xs text-gray-500 mt-2">Tip: Null MX (0 .) indica que el dominio <b>no</b> acepta correo (RFC 7505).</p>
-        </div>
-
-        <!-- DKIM Lookup -->
-        <div class="feature-card p-6 bg-white rounded-lg shadow-sm border">
-          <h3 class="text-lg font-bold mb-3">DKIM Lookup</h3>
-          <p class="text-gray-600 mb-4">Consulta el registro TXT de un selector DKIM.</p>
-          <label class="block text-sm font-medium text-gray-700">Domain</label>
-          <input id="dkimDomain" class="w-full border rounded-lg px-3 py-2 mb-3" placeholder="example.com" value="example.com">
-          <label class="block text-sm font-medium text-gray-700">Selector</label>
-          <input id="dkimSelector" class="w-full border rounded-lg px-3 py-2 mb-3" placeholder="selector1" value="selector1">
-          <button id="btnDkimCheck" class="btn-primary text-white px-4 py-2 rounded-lg font-medium">Run</button>
-          <pre id="dkimOut" class="tools-out mt-3"></pre>
-          <p class="text-xs text-gray-500 mt-2">Consulta TXT en <code>selector._domainkey.domain</code>.</p>
-        </div>
-
-        <!-- TLS Cert Expiry -->
-        <div class="feature-card p-6 bg-white rounded-lg shadow-sm border">
-          <h3 class="text-lg font-bold mb-3">TLS Cert Expiry</h3>
-          <p class="text-gray-600 mb-4">Verifica expiración y emisor del certificado.</p>
-          <label class="block text-sm font-medium text-gray-700">Host</label>
-          <input id="tlsHost" class="w-full border rounded-lg px-3 py-2 mb-3" placeholder="example.com" value="example.com">
-          <label class="block text-sm font-medium text-gray-700">Port</label>
-          <input id="tlsPort" type="number" min="1" max="65535" value="443" class="w-full border rounded-lg px-3 py-2 mb-3">
-          <button id="btnTlsCheck" class="btn-primary text-white px-4 py-2 rounded-lg font-medium">Run</button>
-          <pre id="tlsOut" class="tools-out mt-3"></pre>
-          <p class="text-xs text-gray-500 mt-2">
-            Nota: este chequeo espera TLS directo (HTTPS:443 o SMTPS:465). <b>STARTTLS</b> (SMTP:25/587) no aplica.
+          <p class="mt-5 text-lg leading-relaxed text-gray-600">
+            Romanoti combines monitoring discipline, security analysis, and operational follow-through
+            to help teams move from scattered alerts toward more structured security operations.
           </p>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ===== SOC Live Toolbox (NUEVO) ===== -->
-  <section class="py-16 bg-white">
-    <div class="container mx-auto px-6 max-w-6xl">
-      <div class="text-center mb-10">
-        <h2 class="text-3cxl md:text-3xl font-bold">SOC Live Toolbox</h2>
-        <p class="text-xl text-gray-600">
-          Demos de alertas y respuesta: <code>/soc/alerts</code>, <code>/soc/alerts/recent</code>, <code>/soc/playbooks/run</code>
-        </p>
+    <!-- =======================================================
+         SERVICE BLOCKS
+         ======================================================= -->
+    <section class="bg-gray-50 py-16">
+      <div class="mx-auto max-w-7xl px-6 lg:px-8">
+        <div class="grid gap-8">
+
+          <article class="romanoti-card rounded-3xl border border-gray-100 bg-white p-8 shadow-sm">
+            <h3 class="text-2xl font-bold text-gray-900">Security Monitoring and Threat Detection</h3>
+            <p class="mt-4 max-w-4xl leading-relaxed text-gray-600">
+              SIEM event correlation, Sigma-based detection logic, IOC and IOA visibility,
+              and real-time alerting to identify suspicious behavior across critical environments.
+            </p>
+
+            <div class="mt-8 grid gap-6 md:grid-cols-3">
+              <div class="rounded-2xl bg-blue-50 p-6">
+                <h4 class="text-lg font-bold text-gray-900">Platform</h4>
+                <p class="mt-3 text-gray-700">
+                  Wazuh, ELK or OpenSearch, Zeek, and Suricata depending on scope and maturity.
+                </p>
+              </div>
+
+              <div class="rounded-2xl bg-blue-50 p-6">
+                <h4 class="text-lg font-bold text-gray-900">Coverage</h4>
+                <p class="mt-3 text-gray-700">
+                  Endpoints, servers, firewalls, Microsoft 365, Azure AD, and selected SaaS environments.
+                </p>
+              </div>
+
+              <div class="rounded-2xl bg-blue-50 p-6">
+                <h4 class="text-lg font-bold text-gray-900">Triage</h4>
+                <p class="mt-3 text-gray-700">
+                  Repeatable L1 and L2 triage processes supported by playbooks and operational judgment.
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <article class="romanoti-card rounded-3xl border border-gray-100 bg-white p-8 shadow-sm">
+            <h3 class="text-2xl font-bold text-gray-900">Email Security Posture</h3>
+            <p class="mt-4 max-w-4xl leading-relaxed text-gray-600">
+              Validation of MX, SPF, DKIM, and DMARC records to reduce spoofing risk,
+              improve domain trust, and strengthen email-related defensive posture.
+            </p>
+
+            <div class="mt-8 grid gap-6 md:grid-cols-3">
+              <div class="rounded-2xl bg-blue-50 p-6">
+                <h4 class="text-lg font-bold text-gray-900">MX</h4>
+                <p class="mt-3 text-gray-700">
+                  Proper mail routing and null-MX validation when a domain is not meant to receive email.
+                </p>
+              </div>
+
+              <div class="rounded-2xl bg-blue-50 p-6">
+                <h4 class="text-lg font-bold text-gray-900">SPF</h4>
+                <p class="mt-3 text-gray-700">
+                  Authorized sending mechanisms, syntax review, and basic policy hygiene checks.
+                </p>
+              </div>
+
+              <div class="rounded-2xl bg-blue-50 p-6">
+                <h4 class="text-lg font-bold text-gray-900">DMARC</h4>
+                <p class="mt-3 text-gray-700">
+                  Policy validation for none, quarantine, or reject, including reporting alignment.
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <article class="romanoti-card rounded-3xl border border-gray-100 bg-white p-8 shadow-sm">
+            <h3 class="text-2xl font-bold text-gray-900">Incident Response</h3>
+            <p class="mt-4 max-w-4xl leading-relaxed text-gray-600">
+              Playbook-driven response support for phishing, ransomware, command-and-control,
+              suspicious access, and data exposure scenarios, with documentation and post-incident follow-up.
+            </p>
+
+            <div class="mt-8 grid gap-6 md:grid-cols-3">
+              <div class="rounded-2xl bg-blue-50 p-6">
+                <h4 class="text-lg font-bold text-gray-900">Containment</h4>
+                <p class="mt-3 text-gray-700">
+                  Isolate affected hosts, block IOCs, revoke sessions or tokens, and reduce blast radius quickly.
+                </p>
+              </div>
+
+              <div class="rounded-2xl bg-blue-50 p-6">
+                <h4 class="text-lg font-bold text-gray-900">Eradication</h4>
+                <p class="mt-3 text-gray-700">
+                  Remove persistence, restore trust, and support the technical cleanup process.
+                </p>
+              </div>
+
+              <div class="rounded-2xl bg-blue-50 p-6">
+                <h4 class="text-lg font-bold text-gray-900">Lessons Learned</h4>
+                <p class="mt-3 text-gray-700">
+                  Executive-level summary, incident evidence, and recommended control improvements.
+                </p>
+              </div>
+            </div>
+          </article>
+
+        </div>
       </div>
+    </section>
 
-      <div class="grid md:grid-cols-2 gap-8">
-        <!-- Enviar alerta -->
-        <div class="feature-card p-6 bg-white rounded-lg shadow-sm border">
-          <h3 class="text-lg font-bold mb-3">Enviar alerta (demo)</h3>
-          <div class="grid grid-cols-2 gap-3 mb-3">
-            <div>
-              <label class="block text-sm font-medium text-gray-700">Source</label>
-              <select id="alSource" class="w-full border rounded-lg px-3 py-2">
-                <option>edr</option>
-                <option>wazuh</option>
-                <option>firewall</option>
-                <option>ids</option>
-              </select>
-            </div>
-            <div>
-              <label class="block text-sm font-medium text-gray-700">Severity</label>
-              <select id="alSeverity" class="w-full border rounded-lg px-3 py-2">
-                <option>low</option>
-                <option>medium</option>
-                <option>high</option>
-                <option>critical</option>
-              </select>
-            </div>
-          </div>
-          <input id="alTitle" class="w-full border rounded-lg px-3 py-2 mb-3" placeholder="Título (ej: Suspicious PowerShell)">
-          <textarea id="alDetails" rows="5" class="w-full border rounded-lg px-3 py-2 mb-3" placeholder='Detalles JSON (ej: {"host":"pc-01","user":"alice"})'></textarea>
-          <button id="btnSendAlert" class="btn-primary text-white px-4 py-2 rounded-lg">Enviar alerta</button>
-          <pre id="outAlert" class="tools-out mt-3"></pre>
+    <!-- =======================================================
+         SOC QUICK TOOLS
+         ======================================================= -->
+    <section id="soc-tools" class="bg-white py-16">
+      <div class="mx-auto max-w-7xl px-6 lg:px-8">
+        <div class="mx-auto max-w-3xl text-center">
+          <span class="inline-block text-sm font-semibold uppercase tracking-[0.18em] text-blue-600">
+            SOC Quick Tools
+          </span>
+
+          <h2 class="mt-3 text-3xl font-bold text-gray-900 md:text-4xl">
+            Fast checks for email security and TLS posture
+          </h2>
+
+          <p class="mt-5 text-lg leading-relaxed text-gray-600">
+            Use these tools to validate domain email posture, DKIM selectors, and certificate visibility
+            through the Romanoti backend.
+          </p>
         </div>
 
-        <!-- Alertas recientes -->
-        <div class="feature-card p-6 bg-white rounded-lg shadow-sm border">
-          <h3 class="text-lg font-bold mb-3">Alertas recientes</h3>
-          <div class="flex items-center gap-3 mb-3">
-            <label class="text-sm text-gray-700">Límite</label>
-            <input id="alLimit" type="number" value="10" min="1" max="200" class="w-24 border rounded-lg px-3 py-2">
-            <button id="btnFetchAlerts" class="btn-primary text-white px-4 py-2 rounded-lg">Actualizar</button>
+        <div class="mt-10 rounded-3xl border border-gray-100 bg-gray-50 p-6 shadow-sm md:p-8">
+          <h3 class="text-xl font-semibold text-gray-900">Settings</h3>
+          <p class="mt-2 text-gray-600">
+            Your <strong>Org API Key</strong> is stored locally in your browser and sent only when running checks.
+          </p>
+
+          <div class="mt-6 flex flex-col gap-4 md:flex-row md:items-end">
+            <div class="flex-1">
+              <label for="orgKey" class="block text-sm font-medium text-gray-700">Org API Key</label>
+              <input
+                id="orgKey"
+                type="password"
+                class="mt-1 w-full rounded-xl border border-gray-300 px-4 py-3 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200"
+                placeholder="Paste your API key"
+              >
+            </div>
+
+            <button id="btnSaveKey" class="btn-primary rounded-xl px-5 py-3 font-medium text-white">
+              Save key
+            </button>
           </div>
-          <pre id="outAlerts" class="tools-out"></pre>
+
+          <p id="keyMsg" class="mt-3 text-sm text-gray-500"></p>
         </div>
 
-        <!-- Playbooks -->
-        <div class="feature-card p-6 bg-white rounded-lg shadow-sm border md:col-span-2">
-          <h3 class="text-lg font-bold mb-3">Ejecutar playbook (simulado)</h3>
-          <div class="grid md:grid-cols-3 gap-3">
-            <div>
-              <label class="block text-sm font-medium text-gray-700">Playbook</label>
-              <select id="pbId" class="w-full border rounded-lg px-3 py-2">
-                <option value="isolate-host">isolate-host</option>
-                <option value="reset-user">reset-user</option>
-                <option value="block-ip">block-ip</option>
-              </select>
-            </div>
-            <div>
-              <label class="block text-sm font-medium text-gray-700">Target</label>
-              <input id="pbTarget" class="w-full border rounded-lg px-3 py-2" placeholder="host/usuario/IP">
-            </div>
-            <div class="flex items-end">
-              <button id="btnRunPB" class="btn-primary text-white px-4 py-2 rounded-lg w-full">Ejecutar</button>
-            </div>
-          </div>
-          <pre id="outPB" class="tools-out mt-3"></pre>
+        <div class="mt-10 grid gap-8 lg:grid-cols-3">
+          <article class="romanoti-card rounded-3xl border border-gray-100 bg-white p-6 shadow-sm">
+            <h3 class="text-xl font-bold text-gray-900">Email Security Posture</h3>
+            <p class="mt-3 text-gray-600">
+              Check MX, SPF, and DMARC records for a domain.
+            </p>
+
+            <label class="mt-5 block text-sm font-medium text-gray-700">Domain</label>
+            <input id="espDomain" class="mt-1 w-full rounded-xl border border-gray-300 px-4 py-3" placeholder="example.com" value="example.com">
+
+            <button id="btnEspCheck" class="btn-primary mt-4 rounded-xl px-4 py-3 font-medium text-white">Run</button>
+
+            <div id="espBadges" class="mt-4"></div>
+            <pre id="espOut" class="tools-out mt-4"></pre>
+            <p class="mt-3 text-xs text-gray-500">
+              Tip: Null MX (<code>0 .</code>) indicates the domain is not configured to receive email.
+            </p>
+          </article>
+
+          <article class="romanoti-card rounded-3xl border border-gray-100 bg-white p-6 shadow-sm">
+            <h3 class="text-xl font-bold text-gray-900">DKIM Lookup</h3>
+            <p class="mt-3 text-gray-600">
+              Query the TXT record of a DKIM selector.
+            </p>
+
+            <label class="mt-5 block text-sm font-medium text-gray-700">Domain</label>
+            <input id="dkimDomain" class="mt-1 w-full rounded-xl border border-gray-300 px-4 py-3" placeholder="example.com" value="example.com">
+
+            <label class="mt-4 block text-sm font-medium text-gray-700">Selector</label>
+            <input id="dkimSelector" class="mt-1 w-full rounded-xl border border-gray-300 px-4 py-3" placeholder="selector1" value="selector1">
+
+            <button id="btnDkimCheck" class="btn-primary mt-4 rounded-xl px-4 py-3 font-medium text-white">Run</button>
+
+            <pre id="dkimOut" class="tools-out mt-4"></pre>
+            <p class="mt-3 text-xs text-gray-500">
+              Query target: <code>selector._domainkey.domain</code>
+            </p>
+          </article>
+
+          <article class="romanoti-card rounded-3xl border border-gray-100 bg-white p-6 shadow-sm">
+            <h3 class="text-xl font-bold text-gray-900">TLS Certificate Check</h3>
+            <p class="mt-3 text-gray-600">
+              Verify certificate visibility, issuer, and expiry.
+            </p>
+
+            <label class="mt-5 block text-sm font-medium text-gray-700">Host</label>
+            <input id="tlsHost" class="mt-1 w-full rounded-xl border border-gray-300 px-4 py-3" placeholder="example.com" value="example.com">
+
+            <label class="mt-4 block text-sm font-medium text-gray-700">Port</label>
+            <input id="tlsPort" type="number" min="1" max="65535" value="443" class="mt-1 w-full rounded-xl border border-gray-300 px-4 py-3">
+
+            <button id="btnTlsCheck" class="btn-primary mt-4 rounded-xl px-4 py-3 font-medium text-white">Run</button>
+
+            <pre id="tlsOut" class="tools-out mt-4"></pre>
+            <p class="mt-3 text-xs text-gray-500">
+              Designed for direct TLS services such as HTTPS on 443 or SMTPS on 465. STARTTLS flows are not covered here.
+            </p>
+          </article>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Footer centralizado -->
+    <!-- =======================================================
+         SOC LIVE TOOLBOX
+         ======================================================= -->
+    <section class="bg-gray-50 py-16">
+      <div class="mx-auto max-w-7xl px-6 lg:px-8">
+        <div class="mx-auto max-w-3xl text-center">
+          <span class="inline-block text-sm font-semibold uppercase tracking-[0.18em] text-blue-600">
+            SOC Live Toolbox
+          </span>
 
-  <!-- ====== JS SOC (Quick Tools + Live Toolbox) ====== -->
-  <script>
-  /**
-   * SOC Quick Tools + Live Toolbox (frontend)
-   */
-  const API_BASE = 'https://romanoti-tools-api.onrender.com';
-  const $ = (id) => document.getElementById(id);
-  function pretty(preId, data){ const el=$(preId); try{ el.textContent=(typeof data==='string')?data:JSON.stringify(data,null,2);}catch{ el.textContent=String(data);} }
-  function msg(id, text){ $(id).textContent = text || ''; }
-  function badge(text, type='ok'){ const s=document.createElement('span'); s.className=`badge ${type==='ok'?'badge-ok':type==='warn'?'badge-warn':'badge-err'}`; s.textContent=text; return s; }
+          <h2 class="mt-3 text-3xl font-bold text-gray-900 md:text-4xl">
+            Demo alerts, recent activity, and simulated playbook execution
+          </h2>
 
-  function loadKey(){ $('orgKey').value = localStorage.getItem('romanoti_org_key') || ''; }
-  function saveKey(){ const k=$('orgKey').value.trim(); localStorage.setItem('romanoti_org_key', k); msg('keyMsg', k?'✅ API Key guardada localmente.':'API Key vacía.'); }
-  function getKeyOrWarn(){ const k=$('orgKey').value.trim() || localStorage.getItem('romanoti_org_key') || ''; if(!k) alert('Ingresa tu Org API Key primero.'); return k; }
+          <p class="mt-5 text-lg leading-relaxed text-gray-600">
+            Practical demos for <code>/soc/alerts</code>, <code>/soc/alerts/recent</code>, and <code>/soc/playbooks/run</code>.
+          </p>
+        </div>
 
-  async function runEmailPosture(){
-    const key=getKeyOrWarn(); if(!key) return;
-    const domain=$('espDomain').value.trim();
-    $('espOut').textContent='Running…'; $('espBadges').innerHTML='';
-    try{
-      const res=await fetch(`${API_BASE}/ext/emaildns`,{method:'POST',headers:{'x-api-key':key,'content-type':'application/json','accept':'application/json'},body:JSON.stringify({domain})});
-      const data=await res.json();
+        <div class="mt-10 grid gap-8 lg:grid-cols-2">
+          <article class="romanoti-card rounded-3xl border border-gray-100 bg-white p-6 shadow-sm">
+            <h3 class="text-xl font-bold text-gray-900">Send Demo Alert</h3>
 
-      const mx=data.mx||[];
-      if(mx.length===1 && (typeof mx[0]==='string') && mx[0].trim()==='0 .'){ $('espBadges').appendChild(badge('Null MX (no recibe correo)','warn')); }
-      else if(mx.length>0){ $('espBadges').appendChild(badge('MX OK','ok')); } else { $('espBadges').appendChild(badge('MX faltante','err')); }
+            <div class="mt-5 grid grid-cols-1 gap-4 md:grid-cols-2">
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Source</label>
+                <select id="alSource" class="mt-1 w-full rounded-xl border border-gray-300 px-4 py-3">
+                  <option>edr</option>
+                  <option>wazuh</option>
+                  <option>firewall</option>
+                  <option>ids</option>
+                </select>
+              </div>
 
-      const spf=(data.spf||[]).find(s=>s.toLowerCase().startsWith('v=spf1'));
-      if(spf) $('espBadges').appendChild(badge('SPF OK','ok')); else $('espBadges').appendChild(badge('SPF faltante','err'));
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Severity</label>
+                <select id="alSeverity" class="mt-1 w-full rounded-xl border border-gray-300 px-4 py-3">
+                  <option>low</option>
+                  <option>medium</option>
+                  <option>high</option>
+                  <option>critical</option>
+                </select>
+              </div>
+            </div>
 
-      const dmarc=(data.dmarc||[]).find(s=>s.toLowerCase().startsWith('v=dmarc1'));
-      if(dmarc){ const pol=(dmarc.toLowerCase().match(/p=(none|quarantine|reject)/)||[,'none'])[1]; $('espBadges').appendChild(badge(`DMARC p=${pol}`, pol==='reject'?'ok':pol==='quarantine'?'warn':'err')); }
-      else { $('espBadges').appendChild(badge('DMARC faltante','err')); }
+            <input id="alTitle" class="mt-4 w-full rounded-xl border border-gray-300 px-4 py-3" placeholder="Title (e.g. Suspicious PowerShell)">
+            <textarea id="alDetails" rows="5" class="mt-4 w-full rounded-xl border border-gray-300 px-4 py-3" placeholder='Details JSON (e.g. {"host":"pc-01","user":"alice"})'></textarea>
 
-      pretty('espOut', data);
-    }catch(e){ pretty('espOut',{error:String(e)}); }
-  }
+            <button id="btnSendAlert" class="btn-primary mt-4 rounded-xl px-4 py-3 font-medium text-white">
+              Send alert
+            </button>
 
-  async function runDkimLookup(){
-    const key=getKeyOrWarn(); if(!key) return;
-    const domain=$('dkimDomain').value.trim(); const selector=$('dkimSelector').value.trim();
-    if(!domain || !selector){ pretty('dkimOut',{error:'Ingresa dominio y selector'}); return; }
-    const qname=`${selector}._domainkey.${domain}`; $('dkimOut').textContent=`Consultando TXT en ${qname} …`;
-    try{
-      const res=await fetch(`${API_BASE}/noc/dns-lookup`,{method:'POST',headers:{'x-api-key':key,'content-type':'application/json','accept':'application/json'},body:JSON.stringify({domain:qname,type:'TXT'})});
-      const data=await res.json(); pretty('dkimOut', data);
-    }catch(e){ pretty('dkimOut',{error:String(e)}); }
-  }
+            <pre id="outAlert" class="tools-out mt-4"></pre>
+          </article>
 
-  async function runTlsCheck(){
-    const key=getKeyOrWarn(); if(!key) return;
-    const host=$('tlsHost').value.trim(); const port=parseInt($('tlsPort').value||'443',10);
-    $('tlsOut').textContent='Running…';
-    try{
-      const res=await fetch(`${API_BASE}/ext/tls`,{method:'POST',headers:{'x-api-key':key,'content-type':'application/json','accept':'application/json'},body:JSON.stringify({host,port})});
-      const data=await res.json(); pretty('tlsOut', data);
-    }catch(e){ pretty('tlsOut',{error:String(e)}); }
-  }
+          <article class="romanoti-card rounded-3xl border border-gray-100 bg-white p-6 shadow-sm">
+            <h3 class="text-xl font-bold text-gray-900">Recent Alerts</h3>
 
-  async function socPost(path, body){ const key=getKeyOrWarn(); if(!key) return {ok:false,status:0,error:'API key missing'}; try{ const res=await fetch(API_BASE+path,{method:'POST',headers:{'x-api-key':key,'content-type':'application/json','accept':'application/json'},body:JSON.stringify(body||{})}); const text=await res.text(); try{return{ok:res.ok,status:res.status,data:JSON.parse(text)}}catch{return{ok:res.ok,status:res.status,data:text}} }catch(e){return{ok:false,status:0,error:String(e)}}}
-  async function socGet(path){ const key=getKeyOrWarn(); if(!key) return {ok:false,status:0,error:'API key missing'}; try{ const res=await fetch(API_BASE+path,{headers:{'x-api-key':key,'accept':'application/json'}}); const text=await res.text(); try{return{ok:res.ok,status:res.status,data:JSON.parse(text)}}catch{return{ok:res.ok,status:res.status,data:text}} }catch(e){return{ok:false,status:0,error:String(e)}}}
+            <div class="mt-5 flex flex-wrap items-center gap-3">
+              <label class="text-sm text-gray-700">Limit</label>
+              <input id="alLimit" type="number" value="10" min="1" max="200" class="w-24 rounded-xl border border-gray-300 px-4 py-3">
+              <button id="btnFetchAlerts" class="btn-primary rounded-xl px-4 py-3 font-medium text-white">Refresh</button>
+            </div>
 
-  async function sendAlert(){
-    const source=$('alSource').value.trim().toLowerCase();
-    const severity=$('alSeverity').value.trim().toLowerCase();
-    const title=$('alTitle').value.trim();
-    let details={}; const raw=$('alDetails').value.trim();
-    if(raw){ try{details=JSON.parse(raw);}catch(e){ pretty('outAlert',{error:'JSON inválido en detalles',e:String(e)}); return; } }
-    if(!title){ pretty('outAlert',{error:'Falta título'}); return; }
-    pretty('outAlert','Enviando…');
-    const resp=await socPost('/soc/alerts',{source,severity,title,details});
-    pretty('outAlert', resp);
-  }
+            <pre id="outAlerts" class="tools-out mt-4"></pre>
+          </article>
 
-  async function fetchAlerts(){
-    const limit=Math.max(1, Math.min(200, parseInt(($('alLimit').value||'10'),10)));
-    pretty('outAlerts','Cargando…');
-    const resp=await socGet('/soc/alerts/recent?limit='+encodeURIComponent(limit));
-    pretty('outAlerts', resp);
-  }
+          <article class="romanoti-card rounded-3xl border border-gray-100 bg-white p-6 shadow-sm lg:col-span-2">
+            <h3 class="text-xl font-bold text-gray-900">Run Simulated Playbook</h3>
 
-  async function runPlaybook(){
-    const playbook_id=$('pbId').value;
-    const target=$('pbTarget').value.trim();
-    pretty('outPB','Ejecutando…');
-    const resp=await socPost('/soc/playbooks/run',{playbook_id,target});
-    pretty('outPB', resp);
-  }
+            <div class="mt-5 grid gap-4 md:grid-cols-3">
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Playbook</label>
+                <select id="pbId" class="mt-1 w-full rounded-xl border border-gray-300 px-4 py-3">
+                  <option value="isolate-host">isolate-host</option>
+                  <option value="reset-user">reset-user</option>
+                  <option value="block-ip">block-ip</option>
+                </select>
+              </div>
 
-  document.addEventListener('DOMContentLoaded', () => {
-    loadKey();
-    $('btnSaveKey').addEventListener('click', saveKey);
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Target</label>
+                <input id="pbTarget" class="mt-1 w-full rounded-xl border border-gray-300 px-4 py-3" placeholder="host / user / IP">
+              </div>
 
-    // Quick Tools
-    $('btnEspCheck').addEventListener('click', runEmailPosture);
-    $('btnDkimCheck').addEventListener('click', runDkimLookup);
-    $('btnTlsCheck').addEventListener('click', runTlsCheck);
+              <div class="flex items-end">
+                <button id="btnRunPB" class="btn-primary w-full rounded-xl px-4 py-3 font-medium text-white">Run playbook</button>
+              </div>
+            </div>
 
-    // Live Toolbox
-    $('btnSendAlert').addEventListener('click', sendAlert);
-    $('btnFetchAlerts').addEventListener('click', fetchAlerts);
-    $('btnRunPB').addEventListener('click', runPlaybook);
-  });
-  </script>
+            <pre id="outPB" class="tools-out mt-4"></pre>
+          </article>
+        </div>
+      </div>
+    </section>
 
-  <!-- ===== Fallback robusto del dropdown “Solutions” (si nav.js no cablea) ===== -->
-  <script>
-    (function(){
-      function wire(btn, menu){
-        if(!btn || !menu || btn.dataset.wired) return;
-        const open  = ()=>{ menu.classList.remove('hidden'); btn.setAttribute('aria-expanded','true'); };
-        const close = ()=>{ menu.classList.add('hidden');  btn.setAttribute('aria-expanded','false'); };
-        const toggle= ()=> (menu.classList.contains('hidden') ? open() : close());
-        btn.addEventListener('click', (e)=>{ e.preventDefault(); e.stopPropagation(); toggle(); });
-        document.addEventListener('click', (e)=>{ if(!menu.contains(e.target) && e.target!==btn) close(); });
-        document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') close(); });
-        btn.dataset.wired='1';
-      }
-      function tryWire(){
-        const btn  = document.getElementById('navSolutionsBtn') || document.getElementById('solutionsBtn') || document.getElementById('fb-solutions-btn');
-        const menu = document.getElementById('navSolutionsMenu')|| document.getElementById('solutionsMenu')|| document.getElementById('fb-solutions-menu');
-        wire(btn, menu);
-      }
-      document.addEventListener('DOMContentLoaded', ()=>{ tryWire(); setTimeout(tryWire, 250); setTimeout(tryWire, 800); });
-    })();
-  </script>
+    <!-- =======================================================
+         CTA
+         ======================================================= -->
+    <section class="bg-slate-950 py-16 text-white">
+      <div class="mx-auto max-w-5xl px-6 lg:px-8">
+        <div class="rounded-3xl border border-white/10 bg-white/5 p-8 shadow-lg md:p-12">
+          <span class="inline-block text-sm font-semibold uppercase tracking-[0.18em] text-blue-300">
+            Romanoti Solutions
+          </span>
 
-  <!-- Carga del header/footer centralizados -->
-<!-- siempre justo antes de 
+          <h2 class="mt-3 text-3xl font-bold md:text-4xl">
+            Strengthen security operations with clearer monitoring and better response discipline
+          </h2>
+
+          <p class="mt-5 max-w-3xl text-lg leading-relaxed text-slate-300">
+            Whether you need better visibility, stronger alert handling, or a more practical incident response model,
+            Romanoti can help you bring more structure to security operations.
+          </p>
+
+          <div class="mt-8 flex flex-wrap gap-4">
+            <a
+              href="/en/booking.html"
+              class="inline-flex items-center justify-center rounded-lg bg-blue-600 px-6 py-3 font-medium text-white transition hover:bg-blue-700"
+            >
+              Schedule consultation
+            </a>
+
+            <a
+              href="/en/contact.html"
+              class="inline-flex items-center justify-center rounded-lg border border-white/15 bg-white/5 px-6 py-3 font-medium text-white transition hover:bg-white/10"
+            >
+              Contact Romanoti
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
   <div id="app-footer"></div>
-  <script src="/js/nav.js"></script>
-  <script src="/js/footer.js"></script>
-</body> y solo una vez por página -->
-<!-- Nav/Footer (con versión para romper caché) -->
-<script defer src="/js/nav.js?v=6"></script>
-<script defer src="/js/footer.js?v=6"></script>
-<script defer src="/js/fix-nav.js?v=6"></script>
-  <!-- Quita el fallback cuando nav.js ya inyectó el header -->
+
+  <!-- =======================================================
+       SOC QUICK TOOLS + LIVE TOOLBOX
+       ======================================================= -->
   <script>
-    (function(){
-      function swapIfReady(){
-        const mount = document.getElementById('app-header');
-        const fb = document.getElementById('fallback-header');
-        if(mount && mount.childElementCount > 0 && fb){ fb.parentNode.removeChild(fb); }
+    const API_BASE = 'https://romanoti-tools-api.onrender.com';
+    const $ = (id) => document.getElementById(id);
+
+    function pretty(preId, data) {
+      const el = $(preId);
+      if (!el) return;
+      try { el.textContent = (typeof data === 'string') ? data : JSON.stringify(data, null, 2); }
+      catch { el.textContent = String(data); }
+    }
+
+    function msg(id, text) {
+      const el = $(id);
+      if (el) el.textContent = text || '';
+    }
+
+    function badge(text, type = 'ok') {
+      const s = document.createElement('span');
+      s.className = `badge ${type === 'ok' ? 'badge-ok' : type === 'warn' ? 'badge-warn' : 'badge-err'}`;
+      s.textContent = text;
+      return s;
+    }
+
+    function loadKey() {
+      const el = $('orgKey');
+      if (!el) return;
+      el.value = localStorage.getItem('romanoti_org_key') || '';
+    }
+
+    function saveKey() {
+      const el = $('orgKey');
+      if (!el) return;
+      const key = el.value.trim();
+      localStorage.setItem('romanoti_org_key', key);
+      msg('keyMsg', key ? 'API key saved locally in this browser.' : 'API key is empty.');
+    }
+
+    function getKeyOrWarn() {
+      const el = $('orgKey');
+      const key = (el?.value.trim()) || localStorage.getItem('romanoti_org_key') || '';
+      if (!key) alert('Enter your Org API Key first.');
+      return key;
+    }
+
+    async function runEmailPosture() {
+      const key = getKeyOrWarn();
+      if (!key) return;
+
+      const domain = $('espDomain')?.value.trim();
+      $('espOut').textContent = 'Running…';
+      $('espBadges').innerHTML = '';
+
+      try {
+        const res = await fetch(`${API_BASE}/ext/emaildns`, {
+          method: 'POST',
+          headers: {
+            'x-api-key': key,
+            'content-type': 'application/json',
+            'accept': 'application/json'
+          },
+          body: JSON.stringify({ domain })
+        });
+
+        const data = await res.json();
+        const mx = data.mx || [];
+
+        if (mx.length === 1 && typeof mx[0] === 'string' && mx[0].trim() === '0 .') {
+          $('espBadges').appendChild(badge('Null MX (no inbound mail)', 'warn'));
+        } else if (mx.length > 0) {
+          $('espBadges').appendChild(badge('MX OK', 'ok'));
+        } else {
+          $('espBadges').appendChild(badge('Missing MX', 'err'));
+        }
+
+        const spf = (data.spf || []).find(s => s.toLowerCase().startsWith('v=spf1'));
+        $('espBadges').appendChild(badge(spf ? 'SPF OK' : 'Missing SPF', spf ? 'ok' : 'err'));
+
+        const dmarc = (data.dmarc || []).find(s => s.toLowerCase().startsWith('v=dmarc1'));
+        if (dmarc) {
+          const pol = (dmarc.toLowerCase().match(/p=(none|quarantine|reject)/) || [, 'none'])[1];
+          $('espBadges').appendChild(
+            badge(`DMARC p=${pol}`, pol === 'reject' ? 'ok' : pol === 'quarantine' ? 'warn' : 'err')
+          );
+        } else {
+          $('espBadges').appendChild(badge('Missing DMARC', 'err'));
+        }
+
+        pretty('espOut', data);
+      } catch (e) {
+        pretty('espOut', { error: String(e) });
       }
-      document.addEventListener('DOMContentLoaded', swapIfReady);
-      window.addEventListener('load', ()=>setTimeout(swapIfReady, 60));
-      setTimeout(swapIfReady, 800);
-    })();
+    }
+
+    async function runDkimLookup() {
+      const key = getKeyOrWarn();
+      if (!key) return;
+
+      const domain = $('dkimDomain')?.value.trim();
+      const selector = $('dkimSelector')?.value.trim();
+
+      if (!domain || !selector) {
+        pretty('dkimOut', { error: 'Enter both domain and selector.' });
+        return;
+      }
+
+      const qname = `${selector}._domainkey.${domain}`;
+      $('dkimOut').textContent = `Querying TXT at ${qname} …`;
+
+      try {
+        const res = await fetch(`${API_BASE}/noc/dns-lookup`, {
+          method: 'POST',
+          headers: {
+            'x-api-key': key,
+            'content-type': 'application/json',
+            'accept': 'application/json'
+          },
+          body: JSON.stringify({ domain: qname, type: 'TXT' })
+        });
+
+        const data = await res.json();
+        pretty('dkimOut', data);
+      } catch (e) {
+        pretty('dkimOut', { error: String(e) });
+      }
+    }
+
+    async function runTlsCheck() {
+      const key = getKeyOrWarn();
+      if (!key) return;
+
+      const host = $('tlsHost')?.value.trim();
+      const port = parseInt($('tlsPort')?.value || '443', 10);
+      $('tlsOut').textContent = 'Running…';
+
+      try {
+        const res = await fetch(`${API_BASE}/ext/tls`, {
+          method: 'POST',
+          headers: {
+            'x-api-key': key,
+            'content-type': 'application/json',
+            'accept': 'application/json'
+          },
+          body: JSON.stringify({ host, port })
+        });
+
+        const data = await res.json();
+        pretty('tlsOut', data);
+      } catch (e) {
+        pretty('tlsOut', { error: String(e) });
+      }
+    }
+
+    async function socPost(path, body) {
+      const key = getKeyOrWarn();
+      if (!key) return { ok: false, status: 0, error: 'API key missing' };
+
+      try {
+        const res = await fetch(API_BASE + path, {
+          method: 'POST',
+          headers: {
+            'x-api-key': key,
+            'content-type': 'application/json',
+            'accept': 'application/json'
+          },
+          body: JSON.stringify(body || {})
+        });
+
+        const text = await res.text();
+        try { return { ok: res.ok, status: res.status, data: JSON.parse(text) }; }
+        catch { return { ok: res.ok, status: res.status, data: text }; }
+      } catch (e) {
+        return { ok: false, status: 0, error: String(e) };
+      }
+    }
+
+    async function socGet(path) {
+      const key = getKeyOrWarn();
+      if (!key) return { ok: false, status: 0, error: 'API key missing' };
+
+      try {
+        const res = await fetch(API_BASE + path, {
+          headers: {
+            'x-api-key': key,
+            'accept': 'application/json'
+          }
+        });
+
+        const text = await res.text();
+        try { return { ok: res.ok, status: res.status, data: JSON.parse(text) }; }
+        catch { return { ok: res.ok, status: res.status, data: text }; }
+      } catch (e) {
+        return { ok: false, status: 0, error: String(e) };
+      }
+    }
+
+    async function sendAlert() {
+      const source = $('alSource')?.value.trim().toLowerCase();
+      const severity = $('alSeverity')?.value.trim().toLowerCase();
+      const title = $('alTitle')?.value.trim();
+
+      let details = {};
+      const raw = $('alDetails')?.value.trim();
+
+      if (raw) {
+        try { details = JSON.parse(raw); }
+        catch (e) {
+          pretty('outAlert', { error: 'Invalid JSON in details.', detail: String(e) });
+          return;
+        }
+      }
+
+      if (!title) {
+        pretty('outAlert', { error: 'Missing title.' });
+        return;
+      }
+
+      pretty('outAlert', 'Sending…');
+      const resp = await socPost('/soc/alerts', { source, severity, title, details });
+      pretty('outAlert', resp);
+    }
+
+    async function fetchAlerts() {
+      const limit = Math.max(1, Math.min(200, parseInt(($('alLimit')?.value || '10'), 10)));
+      pretty('outAlerts', 'Loading…');
+      const resp = await socGet('/soc/alerts/recent?limit=' + encodeURIComponent(limit));
+      pretty('outAlerts', resp);
+    }
+
+    async function runPlaybook() {
+      const playbook_id = $('pbId')?.value;
+      const target = $('pbTarget')?.value.trim();
+      pretty('outPB', 'Running…');
+      const resp = await socPost('/soc/playbooks/run', { playbook_id, target });
+      pretty('outPB', resp);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      loadKey();
+
+      $('btnSaveKey')?.addEventListener('click', saveKey);
+      $('btnEspCheck')?.addEventListener('click', runEmailPosture);
+      $('btnDkimCheck')?.addEventListener('click', runDkimLookup);
+      $('btnTlsCheck')?.addEventListener('click', runTlsCheck);
+      $('btnSendAlert')?.addEventListener('click', sendAlert);
+      $('btnFetchAlerts')?.addEventListener('click', fetchAlerts);
+      $('btnRunPB')?.addEventListener('click', runPlaybook);
+    });
   </script>
+
+  <script defer src="/js/nav.js?v=11"></script>
+  <script defer src="/js/footer.js?v=10"></script>
 </body>
 </html>
