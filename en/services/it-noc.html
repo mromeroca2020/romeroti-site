@@ -1,333 +1,540 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- =======================================================
+       FILE: /en/services/it-noc.html
+
+       PURPOSE
+       -------------------------------------------------------
+       Present Romanoti's NOC service in the current Romanoti
+       web standard while preserving the live toolbox and the
+       existing dynamic navigation/footer architecture.
+
+       CHANGE SUMMARY
+       -------------------------------------------------------
+       - Rebuilt legacy layout into Romanoti template
+       - Updated branding from RomanoTI to Romanoti
+       - Unified favicon set with current site assets
+       - Preserved dynamic header and footer
+       - Preserved live toolbox functionality
+       - Removed duplicate nav/footer script loading
+       - Replaced outdated Tailwind 2 CDN with current usage
+       - Improved CTA structure and page readability
+       ======================================================= -->
+
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>NOC Services | RomanoTI Solutions</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- Tailwind CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <title>NOC Services | Romanoti Solutions</title>
+  <meta
+    name="description"
+    content="Romanoti NOC Services provide continuous monitoring, alerting, incident escalation, performance reporting, log analysis, and operational support to strengthen availability and continuity."
+  />
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
-
-  <!-- FAVICONS unified -->
-  <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16.png">
-  <link rel="shortcut icon" href="/favicon.ico">
-  <link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#2563eb">
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/romanoti-icon.png">
+  <link rel="icon" type="image/png" href="/images/romanoti-icon.png">
+  <link rel="apple-touch-icon" href="/images/romanoti-icon.png">
   <meta name="theme-color" content="#2563eb">
 
-  <style>
-    body{font-family:'Montserrat',sans-serif;background:#f8f9fa;color:#333;scroll-behavior:smooth}
-    .hero-bg{background:linear-gradient(135deg,#1e3a8a 0%,#2563eb 100%)}
-    .btn-primary{background:#2563EB;transition:all .3s}
-    .btn-primary:hover{background:#1D4ED8;transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.15)}
-    .feature-card{transition:all .3s;border-radius:.5rem;box-shadow:0 1px 3px rgba(0,0,0,.1)}
-    .feature-card:hover{transform:translateY(-6px);box-shadow:0 12px 30px -8px rgba(37,99,235,.15)}
-  </style>
+  <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="/css/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    body { font-family: 'Montserrat', sans-serif; }
+
+    .romanoti-grid-bg {
+      background-image:
+        linear-gradient(to right, rgba(37,99,235,0.07) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(37,99,235,0.07) 1px, transparent 1px);
+      background-size: 32px 32px;
+    }
+
+    .romanoti-card {
+      transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+    }
+
+    .romanoti-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 18px 40px -20px rgba(15, 23, 42, 0.35);
+      border-color: rgba(37,99,235,0.25);
+    }
+  </style>
+
+  <script defer src="/js/nav.js?v=11"></script>
 </head>
-<body class="bg-gray-50">
+<body class="bg-white text-gray-900 antialiased">
   <div id="app-header"></div>
 
-  <!-- Centralized header mountpoint -->
+  <main>
 
-  <!-- ===== Hero NOC ===== -->
-  <section class="hero-bg text-white py-28">
-    <div class="container mx-auto px-6 text-center">
-      <h1 class="text-4xl md:text-5xl font-bold mb-6">NOC Services</h1>
-      <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
-        24/7 monitoring, alerting, and response for your network and systems
-      </p>
-    </div>
-  </section>
+    <!-- =======================================================
+         HERO
+         ======================================================= -->
+    <section class="relative overflow-hidden bg-slate-950 text-white">
+      <div class="absolute inset-0 romanoti-grid-bg opacity-40"></div>
+      <div class="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/95 to-blue-950/60"></div>
 
-  <!-- ===== Marketing section ===== -->
-  <section class="py-16 bg-white">
-    <div class="container mx-auto px-6">
-      <div class="text-center mb-12">
-        <h2 class="text-3xl font-bold">What We Deliver</h2>
-        <p class="text-xl text-gray-600 max-w-2xl mx-auto">
-          Comprehensive network and system monitoring to keep your IT environment running smoothly.
-        </p>
-      </div>
+      <div class="relative mx-auto max-w-7xl px-6 py-24 lg:px-8 lg:py-28">
+        <div class="max-w-4xl">
+          <span class="inline-flex items-center rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-semibold uppercase tracking-[0.18em] text-blue-300">
+            NOC Services
+          </span>
 
-      <!-- 24/7 Monitoring -->
-      <div class="feature-card p-8 rounded-lg shadow-sm bg-white mb-8">
-        <h3 class="text-xl font-bold mb-4">24/7 Network and Server Monitoring</h3>
-        <p class="mb-6">Continuous monitoring of network devices, servers, and critical services to detect issues before they impact your business.</p>
-        <div class="grid md:grid-cols-3 gap-6">
-          <div class="bg-blue-50 p-6 rounded-lg">
-            <h4 class="font-bold text-lg mb-3">Software</h4>
-            <p>Zabbix, PRTG, Nagios. SNMP/WMI-based monitoring with real-time dashboards.</p>
-          </div>
-          <div class="bg-blue-50 p-6 rounded-lg">
-            <h4 class="font-bold text-lg mb-3">Hardware</h4>
-            <p>Firewalls, switches, servers with SNMP/WMI enabled. Optional monitoring gateway.</p>
-          </div>
-          <div class="bg-blue-50 p-6 rounded-lg">
-            <h4 class="font-bold text-lg mb-3">Human Intervention</h4>
-            <p>Certified engineers (MCP, CCNA) validate alerts and initiate response.</p>
+          <h1 class="mt-6 max-w-4xl text-4xl font-extrabold leading-tight text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.45)] md:text-5xl lg:text-6xl">
+            Continuous visibility for networks, servers, and critical services.
+          </h1>
+
+          <p class="mt-6 max-w-3xl text-lg leading-relaxed text-slate-300 md:text-xl">
+            Romanoti NOC Services help organizations strengthen uptime, reduce operational blind spots,
+            and respond faster to incidents through structured monitoring, alerting, reporting, and escalation support.
+          </p>
+
+          <div class="mt-8 flex flex-wrap gap-4">
+            <a
+              href="/en/booking.html"
+              class="inline-flex items-center justify-center rounded-lg bg-blue-600 px-6 py-3 font-medium text-white transition hover:bg-blue-700"
+            >
+              Schedule a consultation
+            </a>
+
+            <a
+              href="/en/contact.html"
+              class="inline-flex items-center justify-center rounded-lg border border-white/15 bg-white/5 px-6 py-3 font-medium text-white transition hover:bg-white/10"
+            >
+              Talk to Romanoti
+            </a>
           </div>
         </div>
       </div>
+    </section>
 
-      <!-- Real-time Alerting -->
-      <div class="feature-card p-8 rounded-lg shadow-sm bg-white mb-8">
-        <h3 class="text-xl font-bold mb-4">Real-time Alerting and Incident Escalation</h3>
-        <p class="mb-6">Immediate notifications and escalation procedures to ensure rapid response to critical events.</p>
-        <div class="grid md:grid-cols-3 gap-6">
-          <div class="bg-blue-50 p-6 rounded-lg">
-            <h4 class="font-bold text-lg mb-3">Software</h4>
-            <p>Email, SMS (Twilio), Teams/Slack integrations. Smart thresholds to reduce noise.</p>
-          </div>
-          <div class="bg-blue-50 p-6 rounded-lg">
-            <h4 class="font-bold text-lg mb-3">Hardware</h4>
-            <p>Mobile devices for on-call engineers. Redundant comms channels.</p>
-          </div>
-          <div class="bg-blue-50 p-6 rounded-lg">
-            <h4 class="font-bold text-lg mb-3">Human Intervention</h4>
-            <p>L1/L2/L3 escalation path. First response in under 15 minutes for critical alerts.</p>
-          </div>
+    <!-- =======================================================
+         INTRO
+         ======================================================= -->
+    <section class="bg-white py-16">
+      <div class="mx-auto max-w-7xl px-6 lg:px-8">
+        <div class="mx-auto max-w-3xl text-center">
+          <span class="inline-block text-sm font-semibold uppercase tracking-[0.18em] text-blue-600">
+            Operational coverage
+          </span>
+
+          <h2 class="mt-3 text-3xl font-bold text-gray-900 md:text-4xl">
+            Designed for teams that need faster detection, cleaner escalation, and steadier operations
+          </h2>
+
+          <p class="mt-5 text-lg leading-relaxed text-gray-600">
+            Romanoti's NOC model focuses on operational continuity. It combines monitoring, event handling,
+            reporting, and human review to help organizations detect issues earlier and respond with more discipline.
+          </p>
         </div>
       </div>
+    </section>
 
-      <!-- Performance Reporting -->
-      <div class="feature-card p-8 rounded-lg shadow-sm bg-white mb-8">
-        <h3 class="text-xl font-bold mb-4">Performance Reporting and Capacity Planning</h3>
-        <p class="mb-6">Monthly reports and trend analysis to help you plan for future growth and avoid performance bottlenecks.</p>
-        <div class="grid md:grid-cols-3 gap-6">
-          <div class="bg-blue-50 p-6 rounded-lg">
-            <h4 class="font-bold text-lg mb-3">Software</h4>
-            <p>Power BI, Zabbix reporting, PRTG history. Custom dashboards and forecasts.</p>
-          </div>
-          <div class="bg-blue-50 p-6 rounded-lg">
-            <h4 class="font-bold text-lg mb-3">Hardware</h4>
-            <p>Storage for logs and metrics (local or cloud). Retention: 12+ months.</p>
-          </div>
-          <div class="bg-blue-50 p-6 rounded-lg">
-            <h4 class="font-bold text-lg mb-3">Human Intervention</h4>
-            <p>Engineers analyze trends and recommend upgrades before limits are reached.</p>
-          </div>
+    <!-- =======================================================
+         SERVICE GRID
+         ======================================================= -->
+    <section class="bg-gray-50 py-16 lg:py-20">
+      <div class="mx-auto max-w-7xl px-6 lg:px-8">
+        <div class="max-w-3xl">
+          <span class="inline-block text-sm font-semibold uppercase tracking-[0.18em] text-blue-600">
+            What we deliver
+          </span>
+
+          <h2 class="mt-3 text-3xl font-bold text-gray-900 md:text-4xl">
+            Core NOC capabilities delivered through a Romanoti operating model
+          </h2>
+
+          <p class="mt-5 text-lg leading-relaxed text-gray-600">
+            The service is structured around the activities that matter most for availability, operational confidence,
+            and incident readiness.
+          </p>
         </div>
-      </div>
 
-      <!-- Log Management -->
-      <div class="feature-card p-8 rounded-lg shadow-sm bg-white mb-8">
-        <h3 class="text-xl font-bold mb-4">Log Management and Analysis</h3>
-        <p class="mb-6">Centralized log collection and analysis for troubleshooting, compliance, and security auditing.</p>
-        <div class="grid md:grid-cols-3 gap-6">
-          <div class="bg-blue-50 p-6 rounded-lg">
-            <h4 class="font-bold text-lg mb-3">Software</h4>
-            <p>ELK Stack, Graylog, Wazuh. Syslog and agent-based log aggregation.</p>
-          </div>
-          <div class="bg-blue-50 p-6 rounded-lg">
-            <h4 class="font-bold text-lg mb-3">Hardware</h4>
-            <p>Lightweight SIEM server (2 vCPU, 8 GB RAM, 100 GB SSD) or cloud-based.</p>
-          </div>
-          <div class="bg-blue-50 p-6 rounded-lg">
-            <h4 class="font-bold text-lg mb-3">Human Intervention</h4>
-            <p>Analysts review logs for anomalies, compliance, and security threats.</p>
-          </div>
-        </div>
-      </div>
+        <div class="mt-12 space-y-8">
 
-      <!-- Incident Response -->
-      <div class="feature-card p-8 rounded-lg shadow-sm bg-white">
-        <h3 class="text-xl font-bold mb-4">Incident Response and Resolution Tracking</h3>
-        <p class="mb-6">Full lifecycle tracking of incidents from detection to resolution, with detailed documentation and reporting.</p>
-        <div class="grid md:grid-cols-3 gap-6">
-          <div class="bg-blue-50 p-6 rounded-lg">
-            <h4 class="font-bold text-lg mb-3">Software</h4>
-            <p>Zammad, Jira Service Desk. Ticketing with SLA tracking and audit trail.</p>
-          </div>
-          <div class="bg-blue-50 p-6 rounded-lg">
-            <h4 class="font-bold text-lg mb-3">Hardware</h4>
-            <p>Secure database with daily backups. Cloud or on-prem.</p>
-          </div>
-          <div class="bg-blue-50 p-6 rounded-lg">
-            <h4 class="font-bold text-lg mb-3">Human Intervention</h4>
-            <p>ITIL-based process: Detection → Escalation → Resolution → Feedback.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== NOC Live Toolbox ===== -->
-  <section class="py-12 bg-white">
-    <div class="container mx-auto px-6 max-w-4xl">
-      <h2 class="text-2xl font-bold mb-2">NOC Live Toolbox</h2>
-      <p class="text-gray-600 mb-6">Run real-time checks through the RomanoTI backend.</p>
-
-      <!-- Org API Key -->
-      <div class="mb-6">
-        <label class="block text-sm font-medium text-gray-700 mb-1">Org API Key</label>
-        <input id="nocKey" type="password" placeholder="Paste your API key"
-               class="w-full rounded-lg border-gray-300 focus:ring-blue-500 focus:border-blue-500"/>
-        <p class="text-xs text-gray-500 mt-1">Only sent as <code>x-api-key</code> header; never stored server-side.</p>
-      </div>
-
-      <div class="grid md:grid-cols-2 gap-6">
-        <!-- HTTP Check -->
-        <div class="p-5 border rounded-xl shadow-sm">
-          <h3 class="font-semibold mb-3">HTTP Check</h3>
-          <div class="space-y-3">
-            <input id="httpUrl" type="url" placeholder="https://example.com"
-                   class="w-full rounded-lg border-gray-300 focus:ring-blue-500 focus:border-blue-500"/>
-            <div class="flex gap-3">
-              <label class="inline-flex items-center gap-2">
-                <input id="httpTls" type="checkbox" class="rounded border-gray-300" checked/>
-                <span class="text-sm text-gray-700">Verify TLS</span>
-              </label>
-              <div class="flex items-center gap-2">
-                <span class="text-sm text-gray-700">Timeout</span>
-                <input id="httpTimeout" type="number" value="8" min="1" max="30"
-                       class="w-20 rounded-lg border-gray-300 focus:ring-blue-500 focus:border-blue-500"/>
-                <span class="text-sm text-gray-700">s</span>
+          <article class="romanoti-card rounded-2xl border border-gray-100 bg-white p-8 shadow-sm">
+            <h3 class="text-2xl font-semibold text-gray-900">24/7 Network and Server Monitoring</h3>
+            <p class="mt-4 leading-relaxed text-gray-600">
+              Continuous monitoring of network devices, servers, and critical services to detect issues before they impact business operations.
+            </p>
+            <div class="mt-8 grid gap-6 md:grid-cols-3">
+              <div class="rounded-2xl bg-blue-50 p-6">
+                <h4 class="text-lg font-semibold text-gray-900">Software</h4>
+                <p class="mt-3 text-gray-600">Zabbix, PRTG, and Nagios with SNMP/WMI-based monitoring and live dashboards.</p>
+              </div>
+              <div class="rounded-2xl bg-blue-50 p-6">
+                <h4 class="text-lg font-semibold text-gray-900">Hardware</h4>
+                <p class="mt-3 text-gray-600">Firewalls, switches, and servers with SNMP/WMI enabled, plus optional monitoring gateway support.</p>
+              </div>
+              <div class="rounded-2xl bg-blue-50 p-6">
+                <h4 class="text-lg font-semibold text-gray-900">Human intervention</h4>
+                <p class="mt-3 text-gray-600">Certified engineers validate alerts and initiate response for meaningful operational action.</p>
               </div>
             </div>
-            <button id="btnHttp" class="btn-primary text-white px-4 py-2 rounded-lg">Run</button>
-            <pre id="outHttp" class="bg-gray-900 text-gray-100 p-3 rounded-lg text-sm overflow-auto max-h-60"></pre>
-          </div>
-        </div>
+          </article>
 
-        <!-- DNS Lookup -->
-        <div class="p-5 border rounded-xl shadow-sm">
-          <h3 class="font-semibold mb-3">DNS Lookup</h3>
-          <div class="space-y-3">
-            <input id="dnsDomain" type="text" placeholder="example.com"
-                   class="w-full rounded-lg border-gray-300 focus:ring-blue-500 focus:border-blue-500"/>
-            <select id="dnsType" class="w-full rounded-lg border-gray-300 focus:ring-blue-500 focus:border-blue-500">
-              <option>A</option>
-              <option>AAAA</option>
-              <option>MX</option>
-              <option>TXT</option>
-              <option>NS</option>
-            </select>
-            <button id="btnDns" class="btn-primary text-white px-4 py-2 rounded-lg">Query</button>
-            <pre id="outDns" class="bg-gray-900 text-gray-100 p-3 rounded-lg text-sm overflow-auto max-h-60"></pre>
-          </div>
-        </div>
-
-        <!-- Ping -->
-        <div class="p-5 border rounded-xl shadow-sm md:col-span-2">
-          <h3 class="font-semibold mb-3">Ping</h3>
-          <div class="grid md:grid-cols-3 gap-3">
-            <input id="pingHost" type="text" placeholder="8.8.8.8"
-                   class="rounded-lg border-gray-300 focus:ring-blue-500 focus:border-blue-500"/>
-            <div class="flex items-center gap-2">
-              <span class="text-sm text-gray-700">Count</span>
-              <input id="pingCount" type="number" value="4" min="1" max="10"
-                     class="w-24 rounded-lg border-gray-300 focus:ring-blue-500 focus:border-blue-500"/>
+          <article class="romanoti-card rounded-2xl border border-gray-100 bg-white p-8 shadow-sm">
+            <h3 class="text-2xl font-semibold text-gray-900">Real-time Alerting and Incident Escalation</h3>
+            <p class="mt-4 leading-relaxed text-gray-600">
+              Immediate notifications and escalation procedures designed to speed up response when critical events occur.
+            </p>
+            <div class="mt-8 grid gap-6 md:grid-cols-3">
+              <div class="rounded-2xl bg-blue-50 p-6">
+                <h4 class="text-lg font-semibold text-gray-900">Software</h4>
+                <p class="mt-3 text-gray-600">Email, SMS, Teams, and Slack integrations with threshold tuning to reduce alert fatigue.</p>
+              </div>
+              <div class="rounded-2xl bg-blue-50 p-6">
+                <h4 class="text-lg font-semibold text-gray-900">Hardware</h4>
+                <p class="mt-3 text-gray-600">Mobile devices for on-call engineers and redundant communication paths for critical alerts.</p>
+              </div>
+              <div class="rounded-2xl bg-blue-50 p-6">
+                <h4 class="text-lg font-semibold text-gray-900">Human intervention</h4>
+                <p class="mt-3 text-gray-600">Structured L1/L2/L3 escalation paths with response handling for high-priority events.</p>
+              </div>
             </div>
-            <button id="btnPing" class="btn-primary text-white px-4 py-2 rounded-lg">Send</button>
-          </div>
-          <pre id="outPing" class="bg-gray-900 text-gray-100 p-3 rounded-lg text-sm overflow-auto max-h-60 mt-3"></pre>
+          </article>
+
+          <article class="romanoti-card rounded-2xl border border-gray-100 bg-white p-8 shadow-sm">
+            <h3 class="text-2xl font-semibold text-gray-900">Performance Reporting and Capacity Planning</h3>
+            <p class="mt-4 leading-relaxed text-gray-600">
+              Reporting and trend analysis that help teams plan growth, identify bottlenecks, and improve resource decisions.
+            </p>
+            <div class="mt-8 grid gap-6 md:grid-cols-3">
+              <div class="rounded-2xl bg-blue-50 p-6">
+                <h4 class="text-lg font-semibold text-gray-900">Software</h4>
+                <p class="mt-3 text-gray-600">Power BI, Zabbix reporting, and PRTG history with dashboards, trends, and forecasting views.</p>
+              </div>
+              <div class="rounded-2xl bg-blue-50 p-6">
+                <h4 class="text-lg font-semibold text-gray-900">Hardware</h4>
+                <p class="mt-3 text-gray-600">Storage for logs and metrics, whether cloud-based or local, with long-term retention support.</p>
+              </div>
+              <div class="rounded-2xl bg-blue-50 p-6">
+                <h4 class="text-lg font-semibold text-gray-900">Human intervention</h4>
+                <p class="mt-3 text-gray-600">Engineers interpret usage patterns and recommend upgrades before operational limits are reached.</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="romanoti-card rounded-2xl border border-gray-100 bg-white p-8 shadow-sm">
+            <h3 class="text-2xl font-semibold text-gray-900">Log Management and Analysis</h3>
+            <p class="mt-4 leading-relaxed text-gray-600">
+              Centralized log collection and analysis to improve troubleshooting, compliance support, and visibility into abnormal events.
+            </p>
+            <div class="mt-8 grid gap-6 md:grid-cols-3">
+              <div class="rounded-2xl bg-blue-50 p-6">
+                <h4 class="text-lg font-semibold text-gray-900">Software</h4>
+                <p class="mt-3 text-gray-600">ELK Stack, Graylog, and Wazuh with syslog and agent-based aggregation approaches.</p>
+              </div>
+              <div class="rounded-2xl bg-blue-50 p-6">
+                <h4 class="text-lg font-semibold text-gray-900">Hardware</h4>
+                <p class="mt-3 text-gray-600">A lightweight SIEM server or cloud-based deployment sized for log retention and analysis workloads.</p>
+              </div>
+              <div class="rounded-2xl bg-blue-50 p-6">
+                <h4 class="text-lg font-semibold text-gray-900">Human intervention</h4>
+                <p class="mt-3 text-gray-600">Analysts review anomalies, operational patterns, and security-relevant log events.</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="romanoti-card rounded-2xl border border-gray-100 bg-white p-8 shadow-sm">
+            <h3 class="text-2xl font-semibold text-gray-900">Incident Response and Resolution Tracking</h3>
+            <p class="mt-4 leading-relaxed text-gray-600">
+              Full lifecycle tracking from detection to resolution, with status visibility, documentation, and audit-friendly records.
+            </p>
+            <div class="mt-8 grid gap-6 md:grid-cols-3">
+              <div class="rounded-2xl bg-blue-50 p-6">
+                <h4 class="text-lg font-semibold text-gray-900">Software</h4>
+                <p class="mt-3 text-gray-600">Zammad and Jira Service Management workflows with SLA tracking and ticket history.</p>
+              </div>
+              <div class="rounded-2xl bg-blue-50 p-6">
+                <h4 class="text-lg font-semibold text-gray-900">Hardware</h4>
+                <p class="mt-3 text-gray-600">Secure databases with backup strategies for cloud or on-premises operational records.</p>
+              </div>
+              <div class="rounded-2xl bg-blue-50 p-6">
+                <h4 class="text-lg font-semibold text-gray-900">Human intervention</h4>
+                <p class="mt-3 text-gray-600">Process-guided handling across detection, escalation, resolution, and feedback loops.</p>
+              </div>
+            </div>
+          </article>
+
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ===== CTA ===== -->
-  <section class="py-16 bg-blue-700 text-white">
-    <div class="container mx-auto text-center">
-      <h2 class="text-3xl font-bold mb-6">Ready to Secure Your Network?</h2>
-      <p class="text-xl mb-8">Schedule a free consultation to discuss your NOC needs.</p>
-      <div class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-6">
-        <a href="https://calendly.com/mauricioromeroca" class="bg-white text-blue-700 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100">
-          Schedule Consultation
-        </a>
-        <a href="tel:4386309157" class="btn-primary text-white px-8 py-3 rounded-lg font-semibold">
-          Call Emergency Support
-        </a>
+    <!-- =======================================================
+         TOOLBOX
+         ======================================================= -->
+    <section class="bg-white py-16">
+      <div class="mx-auto max-w-5xl px-6 lg:px-8">
+        <div class="max-w-3xl">
+          <span class="inline-block text-sm font-semibold uppercase tracking-[0.18em] text-blue-600">
+            Live toolbox
+          </span>
+
+          <h2 class="mt-3 text-3xl font-bold text-gray-900 md:text-4xl">
+            Run real-time NOC checks through the Romanoti backend
+          </h2>
+
+          <p class="mt-5 text-lg leading-relaxed text-gray-600">
+            This live section keeps the existing utility workflow intact while presenting it in the current site standard.
+          </p>
+        </div>
+
+        <div class="mt-10 rounded-3xl border border-gray-100 bg-gray-50 p-8 shadow-sm">
+          <div class="mb-8">
+            <label for="nocKey" class="block text-sm font-semibold text-gray-800">Org API Key</label>
+            <input
+              id="nocKey"
+              type="password"
+              placeholder="Paste your API key"
+              class="mt-2 w-full rounded-xl border border-gray-300 bg-white px-4 py-3 text-gray-900 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200"
+            />
+            <p class="mt-2 text-sm text-gray-500">Sent only as an <code>x-api-key</code> header and not stored server-side.</p>
+          </div>
+
+          <div class="grid gap-6 md:grid-cols-2">
+            <article class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+              <h3 class="text-xl font-semibold text-gray-900">HTTP Check</h3>
+              <div class="mt-4 space-y-4">
+                <input
+                  id="httpUrl"
+                  type="url"
+                  placeholder="https://example.com"
+                  class="w-full rounded-xl border border-gray-300 px-4 py-3 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200"
+                />
+                <div class="flex flex-wrap items-center gap-4">
+                  <label class="inline-flex items-center gap-2 text-sm text-gray-700">
+                    <input id="httpTls" type="checkbox" class="rounded border-gray-300" checked />
+                    Verify TLS
+                  </label>
+                  <div class="flex items-center gap-2 text-sm text-gray-700">
+                    <span>Timeout</span>
+                    <input
+                      id="httpTimeout"
+                      type="number"
+                      value="8"
+                      min="1"
+                      max="30"
+                      class="w-20 rounded-lg border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none"
+                    />
+                    <span>s</span>
+                  </div>
+                </div>
+                <button id="btnHttp" class="inline-flex items-center justify-center rounded-lg bg-blue-600 px-4 py-2 font-medium text-white transition hover:bg-blue-700">Run</button>
+                <pre id="outHttp" class="max-h-60 overflow-auto rounded-2xl bg-gray-900 p-4 text-sm text-gray-100"></pre>
+              </div>
+            </article>
+
+            <article class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+              <h3 class="text-xl font-semibold text-gray-900">DNS Lookup</h3>
+              <div class="mt-4 space-y-4">
+                <input
+                  id="dnsDomain"
+                  type="text"
+                  placeholder="example.com"
+                  class="w-full rounded-xl border border-gray-300 px-4 py-3 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200"
+                />
+                <select id="dnsType" class="w-full rounded-xl border border-gray-300 px-4 py-3 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200">
+                  <option>A</option>
+                  <option>AAAA</option>
+                  <option>MX</option>
+                  <option>TXT</option>
+                  <option>NS</option>
+                </select>
+                <button id="btnDns" class="inline-flex items-center justify-center rounded-lg bg-blue-600 px-4 py-2 font-medium text-white transition hover:bg-blue-700">Query</button>
+                <pre id="outDns" class="max-h-60 overflow-auto rounded-2xl bg-gray-900 p-4 text-sm text-gray-100"></pre>
+              </div>
+            </article>
+
+            <article class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm md:col-span-2">
+              <h3 class="text-xl font-semibold text-gray-900">Ping</h3>
+              <div class="mt-4 grid gap-4 md:grid-cols-[1fr_auto_auto] md:items-center">
+                <input
+                  id="pingHost"
+                  type="text"
+                  placeholder="8.8.8.8"
+                  class="w-full rounded-xl border border-gray-300 px-4 py-3 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200"
+                />
+                <div class="flex items-center gap-2 text-sm text-gray-700">
+                  <span>Count</span>
+                  <input
+                    id="pingCount"
+                    type="number"
+                    value="4"
+                    min="1"
+                    max="10"
+                    class="w-24 rounded-lg border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none"
+                  />
+                </div>
+                <button id="btnPing" class="inline-flex items-center justify-center rounded-lg bg-blue-600 px-4 py-2 font-medium text-white transition hover:bg-blue-700">Send</button>
+              </div>
+              <pre id="outPing" class="mt-4 max-h-60 overflow-auto rounded-2xl bg-gray-900 p-4 text-sm text-gray-100"></pre>
+            </article>
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Centralized footer -->
+    <!-- =======================================================
+         FIT SECTION
+         ======================================================= -->
+    <section class="bg-slate-950 py-16 text-white">
+      <div class="mx-auto max-w-7xl px-6 lg:px-8">
+        <div class="mx-auto max-w-3xl text-center">
+          <span class="inline-block text-sm font-semibold uppercase tracking-[0.18em] text-blue-300">
+            Best fit
+          </span>
 
-  <!-- ===== NOC toolbox JS ===== -->
-  <script>
-  (function(){
-    const CP_API = 'https://romanoti-tools-api.onrender.com';
-    const $   = (id) => document.getElementById(id);
-    const val = (id) => (($(id)?.value) || '').trim();
-    const keyHdr = () => ({ 'x-api-key': val('nocKey') });
+          <h2 class="mt-3 text-3xl font-bold md:text-4xl">
+            Best suited for environments where uptime and response discipline matter
+          </h2>
 
-    const KEY_STORAGE = 'noc_org_key';
-    const saved = localStorage.getItem(KEY_STORAGE);
-    if (saved && $('nocKey')) $('nocKey').value = saved;
-    $('nocKey')?.addEventListener('input', () => {
-      const k = val('nocKey');
-      if (k) localStorage.setItem(KEY_STORAGE, k);
-      else   localStorage.removeItem(KEY_STORAGE);
-    });
+          <p class="mt-5 text-lg leading-relaxed text-slate-300">
+            NOC support is especially valuable for organizations that cannot afford prolonged blind spots across infrastructure,
+            availability, or incident response workflows.
+          </p>
+        </div>
 
-    function showJSON(preId, payload){
-      const el = $(preId);
-      if (!el) return;
-      try { el.textContent = (typeof payload === 'string') ? payload : JSON.stringify(payload, null, 2); }
-      catch { el.textContent = String(payload); }
-    }
+        <div class="mt-12 grid gap-6 md:grid-cols-3">
+          <article class="rounded-2xl border border-white/10 bg-white/5 p-7">
+            <h3 class="text-xl font-semibold">Distributed operations</h3>
+            <p class="mt-3 leading-relaxed text-slate-300">Teams that need centralized visibility across sites, services, and infrastructure dependencies.</p>
+          </article>
+          <article class="rounded-2xl border border-white/10 bg-white/5 p-7">
+            <h3 class="text-xl font-semibold">Availability-sensitive services</h3>
+            <p class="mt-3 leading-relaxed text-slate-300">Environments where downtime, missed alerts, or unclear ownership create business risk.</p>
+          </article>
+          <article class="rounded-2xl border border-white/10 bg-white/5 p-7">
+            <h3 class="text-xl font-semibold">Growing IT teams</h3>
+            <p class="mt-3 leading-relaxed text-slate-300">Organizations moving from reactive support toward a more mature operating model.</p>
+          </article>
+        </div>
+      </div>
+    </section>
 
-    async function postJson(path, body, extraHeaders = {}){
-      const headers = {
-        'content-type': 'application/json',
-        'accept'      : 'application/json',
-        ...keyHdr(),
-        ...extraHeaders
-      };
-      let res, text;
-      try{
-        res  = await fetch(`${CP_API}${path}`, { method: 'POST', headers, body: JSON.stringify(body) });
-        text = await res.text();
-      }catch(err){
-        return { ok:false, status:0, error:String(err) };
-      }
-      try { return { ok: res.ok, status: res.status, data: JSON.parse(text) }; }
-      catch{ return { ok: res.ok, status: res.status, data: text }; }
-    }
+    <!-- =======================================================
+         FINAL CTA
+         ======================================================= -->
+    <section class="bg-gray-50 py-16">
+      <div class="mx-auto max-w-5xl px-6 lg:px-8">
+        <div class="rounded-3xl bg-gray-900 p-8 text-white shadow-lg md:p-12">
+          <span class="inline-block text-sm font-semibold uppercase tracking-[0.18em] text-blue-300">
+            Romanoti Solutions
+          </span>
 
-    $('btnHttp')?.addEventListener('click', async () => {
-      const url      = val('httpUrl');
-      const timeoutS = Number(val('httpTimeout') || '8');
-      const verify   = $('httpTls')?.checked ?? true;
-      if (!url) { showJSON('outHttp', { error: 'Enter a URL' }); return; }
-      showJSON('outHttp', 'Running…');
-      const resp = await postJson('/noc/http-check', { url, timeout_s: timeoutS, verify_tls: verify });
-      showJSON('outHttp', resp);
-    });
+          <h2 class="mt-3 text-3xl font-bold md:text-4xl">
+            Build a steadier monitoring and response model
+          </h2>
 
-    $('btnDns')?.addEventListener('click', async () => {
-      const domain = val('dnsDomain');
-      const type   = (val('dnsType') || 'A').toUpperCase();
-      if (!domain) { showJSON('outDns', { error: 'Enter a domain' }); return; }
-      showJSON('outDns', 'Running…');
-      const resp = await postJson('/noc/dns-lookup', { domain, type });
-      showJSON('outDns', resp);
-    });
+          <p class="mt-5 max-w-3xl text-lg leading-relaxed text-gray-300">
+            Romanoti helps teams move from fragmented monitoring toward clearer visibility,
+            stronger escalation practices, and better operational continuity.
+          </p>
 
-    $('btnPing')?.addEventListener('click', async () => {
-      const host  = val('pingHost');
-      const count = Number(val('pingCount') || '4');
-      if (!host) { showJSON('outPing', { error: 'Enter a host' }); return; }
-      showJSON('outPing', 'Sending…');
-      const resp = await postJson('/network/ping', { host, count });
-      showJSON('outPing', resp);
-    });
-  })();
-  </script>
+          <div class="mt-8 flex flex-wrap gap-4">
+            <a
+              href="/en/booking.html"
+              class="inline-flex items-center justify-center rounded-lg bg-blue-600 px-6 py-3 font-medium text-white transition hover:bg-blue-700"
+            >
+              Schedule consultation
+            </a>
 
-  <!-- Nav/Footer (with cache-busting version) -->
-  <script defer src="/js/nav.js?v=6"></script>
-  <script defer src="/js/footer.js?v=6"></script>
-  <script defer src="/js/fix-nav.js?v=6"></script>
+            <a
+              href="tel:4386309157"
+              class="inline-flex items-center justify-center rounded-lg border border-gray-600 px-6 py-3 font-medium text-white transition hover:bg-white/5"
+            >
+              Call emergency support
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
 
   <div id="app-footer"></div>
-  <script src="/js/nav.js"></script>
-  <script src="/js/footer.js"></script>
+
+  <script>
+    (function(){
+      const CP_API = 'https://romanoti-tools-api.onrender.com';
+      const $ = (id) => document.getElementById(id);
+      const val = (id) => (($(id)?.value) || '').trim();
+      const keyHdr = () => ({ 'x-api-key': val('nocKey') });
+
+      const KEY_STORAGE = 'noc_org_key';
+      const saved = localStorage.getItem(KEY_STORAGE);
+      if (saved && $('nocKey')) $('nocKey').value = saved;
+      $('nocKey')?.addEventListener('input', () => {
+        const k = val('nocKey');
+        if (k) localStorage.setItem(KEY_STORAGE, k);
+        else localStorage.removeItem(KEY_STORAGE);
+      });
+
+      function showJSON(preId, payload){
+        const el = $(preId);
+        if (!el) return;
+        try {
+          el.textContent = (typeof payload === 'string') ? payload : JSON.stringify(payload, null, 2);
+        } catch {
+          el.textContent = String(payload);
+        }
+      }
+
+      async function postJson(path, body, extraHeaders = {}) {
+        const headers = {
+          'content-type': 'application/json',
+          'accept': 'application/json',
+          ...keyHdr(),
+          ...extraHeaders
+        };
+
+        let res, text;
+        try {
+          res = await fetch(`${CP_API}${path}`, { method: 'POST', headers, body: JSON.stringify(body) });
+          text = await res.text();
+        } catch (err) {
+          return { ok: false, status: 0, error: String(err) };
+        }
+
+        try {
+          return { ok: res.ok, status: res.status, data: JSON.parse(text) };
+        } catch {
+          return { ok: res.ok, status: res.status, data: text };
+        }
+      }
+
+      $('btnHttp')?.addEventListener('click', async () => {
+        const url = val('httpUrl');
+        const timeoutS = Number(val('httpTimeout') || '8');
+        const verify = $('httpTls')?.checked ?? true;
+        if (!url) { showJSON('outHttp', { error: 'Enter a URL' }); return; }
+        showJSON('outHttp', 'Running…');
+        const resp = await postJson('/noc/http-check', { url, timeout_s: timeoutS, verify_tls: verify });
+        showJSON('outHttp', resp);
+      });
+
+      $('btnDns')?.addEventListener('click', async () => {
+        const domain = val('dnsDomain');
+        const type = (val('dnsType') || 'A').toUpperCase();
+        if (!domain) { showJSON('outDns', { error: 'Enter a domain' }); return; }
+        showJSON('outDns', 'Running…');
+        const resp = await postJson('/noc/dns-lookup', { domain, type });
+        showJSON('outDns', resp);
+      });
+
+      $('btnPing')?.addEventListener('click', async () => {
+        const host = val('pingHost');
+        const count = Number(val('pingCount') || '4');
+        if (!host) { showJSON('outPing', { error: 'Enter a host' }); return; }
+        showJSON('outPing', 'Sending…');
+        const resp = await postJson('/network/ping', { host, count });
+        showJSON('outPing', resp);
+      });
+    })();
+  </script>
+
+  <script defer src="/js/footer.js?v=10"></script>
 </body>
 </html>
