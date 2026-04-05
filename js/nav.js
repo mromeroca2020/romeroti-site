@@ -72,6 +72,7 @@
       solutionsOverview: 'Solutions Overview',
       platformOverview: 'Platform Overview',
       governmentBusiness: 'Government & Enterprise',
+      easmConsole: 'EASM Console',
       mobileCta: 'Solutions',
       mobileStaffLogin: 'CRM Login'
     },
@@ -124,7 +125,8 @@
       solutions: [
         { key: 'solutionsOverview', href: '/solutions/index.html' },
         { key: 'platformOverview', href: '/platform/index.html' },
-        { key: 'governmentBusiness', href: '/enterprise/government-business.html' }
+        { key: 'governmentBusiness', href: '/enterprise/government-business.html' },
+        { key: 'easmConsole', href: '/solutions/cybershield/easm-console.html' }
       ]
     },
         fr: {
