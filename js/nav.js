@@ -66,6 +66,8 @@
       helpDesk: 'Help Desk / ITSM',
       networksInfra: 'Networks & Infrastructure',
       cybersecurity: 'Cybersecurity',
+      itNoc: 'IT NOC',
+      itSoc: 'IT SOC',
       tools: 'Tools & Diagnostics',
       solutionsOverview: 'Solutions Overview',
       platformOverview: 'Platform Overview',
@@ -115,6 +117,8 @@
         { key: 'helpDesk', href: '/services/helpdesk.html' },
         { key: 'networksInfra', href: '/en/services/networks.html' },
         { key: 'cybersecurity', href: '/en/services/cybersecurity.html' },
+        { key: 'itNoc', href: '/en/services/it-noc.html' },
+        { key: 'itSoc', href: '/en/services/it-soc.html' },
         { key: 'tools', href: '/services/tools.html' }
       ],
       solutions: [
