@@ -13,6 +13,12 @@
   // CHANGE #CYBERSHIELD-NAV
   // ------------------------------------------------------------
   // Added CyberShield to EN navigation under Solutions.
+  //
+  // CHANGE #HOW-WE-WORK-H1-VISIBILITY
+  // ------------------------------------------------------------
+  // Safe, isolated visual fix for the hero H1 in /how-we-work.
+  // This does NOT alter routes, nav structure, dropdown behavior,
+  // language behavior, or page mounting logic.
   // ============================================================
 
   if (window.__ROMANOTI_NAV_BOOTED__) {
@@ -415,11 +421,48 @@
     langBtn.dataset.wired = '1';
   }
 
+  // ============================================================
+  // Safe patch: improve hero title visibility only on How We Work
+  // ------------------------------------------------------------
+  // Scope:
+  // - /how-we-work.html
+  // - /fr/how-we-work.html
+  // - /es/how-we-work.html
+  //
+  // Behavior:
+  // - Forces H1 to render above dark overlays
+  // - Increases contrast without altering layout
+  // - Leaves all other pages untouched
+  // ============================================================
+  function fixHeroTitleVisibility() {
+    const pathname = window.location.pathname || '';
+    if (!pathname.includes('how-we-work')) return;
+
+    const h1 = document.querySelector('h1');
+    if (!h1) return;
+
+    h1.style.color = '#ffffff';
+    h1.style.opacity = '1';
+    h1.style.textShadow = '0 4px 18px rgba(0,0,0,0.35)';
+    h1.style.position = 'relative';
+    h1.style.zIndex = '2';
+
+    const parent = h1.parentElement;
+    if (parent) {
+      const currentPosition = window.getComputedStyle(parent).position;
+      if (currentPosition === 'static') {
+        parent.style.position = 'relative';
+      }
+      parent.style.zIndex = '2';
+    }
+  }
+
   function boot() {
     mountHeader();
     wireDropdown('navServicesRoot', 'navServicesBtn', 'navServicesMenu');
     wireDropdown('navSolutionsRoot', 'navSolutionsBtn', 'navSolutionsMenu');
     wireLanguageMenu();
+    fixHeroTitleVisibility();
   }
 
   if (document.readyState === 'loading') {
