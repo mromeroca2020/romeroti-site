@@ -2,187 +2,371 @@
 <html lang="en">
 <head>
   <!-- =========================================================
-    Archivo: /solutions/cybershield/index.html
-    Propósito: Landing de CyberShield (MDR)
-    Puntos clave:
-      - Favicons RomanoTI (con cache-buster)
-      - Navbar unificada + dropdown Solutions
-      - Estilo y secciones documentadas
-      - Hotfix universal del menú (/js/fix-nav.js)
+    File: /solutions/cybershield/index.html
+    Purpose: CyberShield solution landing page
+    Changes applied:
+      - Romanoti branding corrected
+      - EN enterprise copy rewritten
+      - CRM-oriented CTA flow implemented
+      - Dynamic header/footer preserved
+      - Routes normalized
+      - CyberShield positioned as solution layer
+      - EASM Console integrated as related capability
   ========================================================== -->
+
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>CyberShield | RomanoTI Managed Security</title>
+  <title>CyberShield | Romanoti Solutions</title>
 
-  <!-- ===== Favicons RomanoTI (unificados) ===== -->
-  <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png?v=4">
-  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png?v=4">
-  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16.png?v=4">
-  <link rel="shortcut icon" href="/favicon.ico?v=4" type="image/x-icon">
-  <link rel="mask-icon" href="/img/safari-pinned-tab.svg?v=4" color="#2563eb">
-  <meta name="theme-color" content="#2563eb">
+  <meta
+    name="description"
+    content="CyberShield helps organizations improve external exposure visibility, strengthen security posture, and support structured response decisions across modern environments."
+  />
 
-  <!-- ===== CSS + Fuentes ===== -->
+  <!-- ===== Favicons ===== -->
+  <link rel="icon" type="image/svg+xml" href="/images/romanoti-icon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/romanoti-icon.png">
+  <link rel="shortcut icon" href="/images/favicon.ico">
+  <meta name="theme-color" content="#081120">
+
+  <!-- ===== CSS + Fonts ===== -->
+  <link rel="stylesheet" href="/css/styles.css?v=40">
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
 
-  <!-- ===== Estilos locales ===== -->
   <style>
-    body{font-family:'Montserrat',sans-serif}
-    .hero-bg{background:linear-gradient(135deg,#1e3a8a 0%,#2563eb 100%)}
-    .btn-primary{background:#2563EB;transition:all .2s}
-    .btn-primary:hover{background:#1D4ED8;transform:translateY(-1px);box-shadow:0 6px 18px -10px rgba(37,99,235,.7)}
-    .card{border:1px solid #e5e7eb;border-radius:16px;box-shadow:0 10px 30px -12px rgba(0,0,0,.12)}
-    .badge{display:inline-block;border:1px solid #cbd5e1;border-radius:999px;padding:4px 10px;font-size:12px;background:#f8fafc}
-    .logo-badge{background:#2563EB}
-    /* Compatibilidad para el dropdown (legacy / hotfix) */
-    .dropdown{display:none}
-    .dropdown.show{display:block}
+    body{
+      font-family:'Montserrat',sans-serif;
+      background:#f8f9fa;
+      color:#111827;
+    }
+
+    .hero-dark{
+      background:linear-gradient(135deg,#050b16 0%,#081120 55%,#0b1830 100%);
+      color:#fff;
+    }
+
+    .section-eyebrow{
+      display:inline-block;
+      font-size:12px;
+      font-weight:700;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      color:#93c5fd;
+      margin-bottom:12px;
+    }
+
+    .card-soft{
+      border:1px solid #e5e7eb;
+      border-radius:18px;
+      background:#fff;
+      box-shadow:0 12px 32px -16px rgba(2,6,23,.14);
+      transition:all .2s ease;
+    }
+
+    .card-soft:hover{
+      transform:translateY(-2px);
+      box-shadow:0 18px 38px -18px rgba(2,6,23,.18);
+    }
+
+    .cta-dark{
+      background:linear-gradient(135deg,#050b16 0%,#081120 55%,#0b1830 100%);
+      color:#fff;
+      border-radius:28px;
+      box-shadow:0 20px 40px -24px rgba(2,6,23,.45);
+    }
   </style>
+
+  <script defer src="/js/nav.js?v=40"></script>
 </head>
-<body class="bg-gray-50 text-gray-900">
 
- <div id="app-header"></div>
+<body class="bg-white text-gray-900 antialiased">
+  <div id="app-header"></div>
 
-  <!-- =================== Hero =================== -->
-  <section class="hero-bg text-white">
-    <div class="container mx-auto px-6 py-20 text-center">
-      <span class="badge border-white text-white">Managed Detection & Response</span>
-      <h1 class="text-4xl md:text-5xl font-bold mt-4">CyberShield</h1>
-      <p class="text-xl md:text-2xl mt-4 max-w-3xl mx-auto">
-        Detección y respuesta 24×7 contra ransomware, intrusiones y caídas — para redes on-prem y cloud.
-      </p>
+  <main>
 
-      <div class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-6 mt-6">
-        <a href="https://calendly.com/mauricioromeroca"
-           class="btn-primary text-white px-6 py-3 rounded-lg font-semibold inline-flex items-center justify-center">Agendar demo</a>
-        <a href="/it-soc.html"
-           class="bg-white text-blue-700 px-6 py-3 rounded-lg font-semibold inline-flex items-center justify-center hover:bg-gray-100">Ver detalles SOC</a>
-        <a href="/solutions/cybershield/soc-console.html"
-           class="bg-white text-blue-700 px-6 py-3 rounded-lg font-semibold inline-flex items-center justify-center hover:bg-gray-100">Abrir consola SOC</a>
-      </div>
-    </div>
-  </section>
+    <!-- HERO -->
+    <section class="hero-dark py-20 md:py-24">
+      <div class="max-w-6xl mx-auto px-6">
+        <span class="section-eyebrow">Security • Visibility • Structured Response</span>
 
-  <!-- =================== Qué incluye =================== -->
-  <section class="py-14 bg-white">
-    <div class="container mx-auto px-6">
-      <h2 class="text-3xl font-bold text-center">Qué incluye</h2>
-      <p class="text-gray-600 text-center max-w-2xl mx-auto mt-2">
-        Combinamos NOC (disponibilidad) + SOC (seguridad) + protección de correo para cubrir riesgos reales.
-      </p>
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 leading-tight text-white max-w-4xl">
+          CyberShield
+        </h1>
 
-      <div class="grid md:grid-cols-3 gap-6 mt-10">
-        <!-- NOC -->
-        <div class="card p-6 bg-white">
-          <h3 class="text-xl font-bold mb-2">NOC 24×7</h3>
-          <ul class="text-gray-700 list-disc ml-5 space-y-1">
-            <li>Uptime / HTTP / TLS / DNS / Puertos</li>
-            <li>Alertas email/Teams/Slack</li>
-            <li>Reporte mensual de performance</li>
-          </ul>
-        </div>
-        <!-- SOC -->
-        <div class="card p-6 bg-white">
-          <h3 class="text-xl font-bold mb-2">SOC (MDR)</h3>
-          <ul class="text-gray-700 list-disc ml-5 space-y-1">
-            <li>EDR + correlación de eventos</li>
-            <li>Use cases: ransomware / C2 / lateral movement</li>
-            <li>Playbooks y respuesta guiada</li>
-          </ul>
-        </div>
-        <!-- Email -->
-        <div class="card p-6 bg-white">
-          <h3 class="text-xl font-bold mb-2">Email Security</h3>
-          <ul class="text-gray-700 list-disc ml-5 space-y-1">
-            <li>SPF/DMARC/DKIM posture checks</li>
-            <li>Autenticación avanzada</li>
-            <li>Awareness (opcional)</li>
-          </ul>
+        <p class="text-lg md:text-xl text-slate-200 max-w-3xl mb-8 leading-relaxed">
+          CyberShield helps organizations improve external exposure visibility,
+          strengthen security posture, and support better response decisions
+          across modern infrastructure environments.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="/contact.html?service=cybershield&amp;intent=assessment"
+             class="inline-flex items-center justify-center bg-blue-600 text-white px-6 py-3 rounded-xl font-semibold hover:bg-blue-700 transition shadow-lg">
+            Request CyberShield assessment
+          </a>
+
+          <a href="/contact.html?service=cybershield&amp;intent=general"
+             class="inline-flex items-center justify-center border border-white text-white px-6 py-3 rounded-xl font-semibold hover:bg-white/5 transition">
+            Contact Romanoti
+          </a>
+
+          <a href="/solutions/cybershield/easm-console.html"
+             class="inline-flex items-center justify-center border border-blue-300 text-blue-100 px-6 py-3 rounded-xl font-semibold hover:bg-white/5 transition">
+            Explore EASM Console
+          </a>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- =================== Planes =================== -->
-  <section class="py-14">
-    <div class="container mx-auto px-6">
-      <h2 class="text-3xl font-bold text-center">Planes</h2>
-      <div class="grid md:grid-cols-3 gap-6 mt-10">
-        <!-- Starter -->
-        <div class="card bg-white p-6">
-          <div class="badge">Starter</div>
-          <h3 class="text-xl font-bold mt-2 mb-2">Pequeños equipos</h3>
-          <ul class="text-gray-700 list-disc ml-5 space-y-1">
-            <li>NOC Essentials</li>
-            <li>Correo seguro (1 dominio)</li>
-            <li>Soporte horario laboral</li>
-          </ul>
+    <!-- WHY CYBERSHIELD -->
+    <section class="py-20 bg-white">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="max-w-3xl mb-12">
+          <span class="inline-block text-sm font-semibold uppercase tracking-[0.18em] text-blue-600 mb-3">
+            Why CyberShield matters
+          </span>
+
+          <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4 tracking-tight">
+            A clearer view of exposure leads to better security decisions
+          </h2>
+
+          <p class="text-lg text-gray-600 leading-relaxed">
+            Many organizations do not need more noise. They need better clarity.
+            CyberShield is designed to help teams understand where exposure exists,
+            how risk connects to infrastructure, and what actions make the most sense next.
+          </p>
         </div>
-        <!-- Growth -->
-        <div class="card bg-white p-6 border-blue-600">
-          <div class="badge bg-blue-50 border-blue-200">Recommended</div>
-          <h3 class="text-xl font-bold mt-2 mb-2">Growth</h3>
-          <ul class="text-gray-700 list-disc ml-5 space-y-1">
-            <li>NOC + SOC (MDR)</li>
-            <li>Correo seguro (2 dominios)</li>
-            <li>Soporte extendido</li>
-          </ul>
-        </div>
-        <!-- Enterprise -->
-        <div class="card bg-white p-6">
-          <div class="badge">Enterprise</div>
-          <h3 class="text-xl font-bold mt-2 mb-2">Operación 24×7</h3>
-          <ul class="text-gray-700 list-disc ml-5 space-y-1">
-            <li>NOC + SOC avanzados</li>
-            <li>Integraciones SIEM/ITSM</li>
-            <li>SLA críticos</li>
-          </ul>
+
+        <div class="grid md:grid-cols-3 gap-6">
+          <div class="card-soft p-7">
+            <h3 class="font-bold text-xl mb-3 text-gray-900">External exposure visibility</h3>
+            <p class="text-gray-600 leading-relaxed">
+              Better awareness of domains, services, email posture, subdomains,
+              and other signals that affect security posture from the outside.
+            </p>
+          </div>
+
+          <div class="card-soft p-7">
+            <h3 class="font-bold text-xl mb-3 text-gray-900">Structured interpretation</h3>
+            <p class="text-gray-600 leading-relaxed">
+              Findings become more useful when they are connected to operational reality,
+              technical dependencies, and concrete priorities.
+            </p>
+          </div>
+
+          <div class="card-soft p-7">
+            <h3 class="font-bold text-xl mb-3 text-gray-900">Response support</h3>
+            <p class="text-gray-600 leading-relaxed">
+              CyberShield is meant to support better follow-up decisions,
+              clearer reporting, and more structured action planning over time.
+            </p>
+          </div>
         </div>
       </div>
+    </section>
 
-      <div class="text-center mt-10">
-        <a href="https://calendly.com/info-romanoti" class="btn-primary text-white px-8 py-3 rounded-lg font-semibold">Cotizar / Demo</a>
+    <!-- WHAT CYBERSHIELD INCLUDES -->
+    <section class="py-20 bg-gray-50">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="max-w-3xl mb-12">
+          <span class="inline-block text-sm font-semibold uppercase tracking-[0.18em] text-blue-600 mb-3">
+            What CyberShield includes
+          </span>
+
+          <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4 tracking-tight">
+            A practical security-oriented solution layer
+          </h2>
+
+          <p class="text-lg text-gray-600 leading-relaxed">
+            CyberShield is not positioned as noise-heavy tooling. It is a structured
+            layer designed to improve visibility, support analysis, and help organizations
+            move toward stronger security discipline.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="card-soft p-7">
+            <h3 class="font-bold text-xl mb-3 text-gray-900">Exposure review</h3>
+            <p class="text-gray-600 leading-relaxed">
+              Review technical signals that may indicate external exposure,
+              weak posture, or operational blind spots.
+            </p>
+          </div>
+
+          <div class="card-soft p-7">
+            <h3 class="font-bold text-xl mb-3 text-gray-900">Posture awareness</h3>
+            <p class="text-gray-600 leading-relaxed">
+              Support a clearer understanding of the organization’s current
+              security posture across modern infrastructure environments.
+            </p>
+          </div>
+
+          <div class="card-soft p-7">
+            <h3 class="font-bold text-xl mb-3 text-gray-900">Guided next steps</h3>
+            <p class="text-gray-600 leading-relaxed">
+              Help connect findings to actions, priorities, and conversations
+              that improve resilience over time.
+            </p>
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- =================== Footer =================== -->
-  <footer class="bg-gray-900 text-white py-8">
-    <div class="container mx-auto px-6 text-center">
-      <p>© 2025 RomanoTI Solutions. All rights reserved.</p>
-      <p class="mt-2">Serving Canada</p>
-    </div>
-  </footer>
+    <!-- CONNECTED CAPABILITIES -->
+    <section class="py-20 bg-white">
+      <div class="max-w-6xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-start">
 
-  <!-- =================== Scripts =================== -->
+        <div>
+          <span class="inline-block text-sm font-semibold uppercase tracking-[0.18em] text-blue-600 mb-3">
+            Connected capabilities
+          </span>
 
-  <!-- Fallback de dropdown (robusto; no interfiere con /js/fix-nav.js) -->
-  <script>
-    (function(){
-      const btn  = document.getElementById('solutionsBtn');
-      const menu = document.getElementById('solutionsMenu');
-      if(!btn || !menu) return;
+          <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 mb-5 tracking-tight">
+            Connected to cybersecurity services and evolving platform capabilities
+          </h2>
 
-      function open(){ menu.classList.add('show'); menu.classList.remove('hidden'); menu.style.display='block'; btn.setAttribute('aria-expanded','true'); }
-      function close(){ menu.classList.remove('show'); menu.classList.add('hidden'); menu.style.display=''; btn.setAttribute('aria-expanded','false'); }
-      function isOpen(){ return menu.classList.contains('show') || !menu.classList.contains('hidden') || menu.style.display==='block'; }
-      function toggle(){ isOpen()? close() : open(); }
+          <p class="text-gray-700 leading-relaxed mb-4">
+            CyberShield is designed to sit between technical visibility and better decision-making.
+            It complements Romanoti cybersecurity services while also connecting to more structured
+            platform-oriented capabilities.
+          </p>
 
-      btn.addEventListener('click',(e)=>{ e.preventDefault(); e.stopPropagation(); toggle(); });
-      document.addEventListener('click',(e)=>{ if(!menu.contains(e.target) && e.target!==btn) close(); });
-      document.addEventListener('keydown',(e)=>{ if(e.key==='Escape') close(); });
+          <p class="text-gray-700 leading-relaxed">
+            This makes CyberShield useful both as a guided assessment layer
+            and as a bridge toward more mature visibility and analysis workflows.
+          </p>
+        </div>
 
-      // Hover como refuerzo UX
-      btn.addEventListener('mouseenter', open);
-      btn.parentNode.addEventListener('mouseleave', ()=>setTimeout(close,120));
-    })();
-  </script>
+        <div class="grid gap-6">
+          <div class="card-soft p-7">
+            <h3 class="font-bold text-xl mb-3 text-gray-900">EASM Console</h3>
+            <p class="text-gray-600 leading-relaxed mb-4">
+              Explore a more focused view of external exposure signals,
+              including DNS, email posture, subdomains, TLS, and ports.
+            </p>
+            <a href="/solutions/cybershield/easm-console.html" class="text-blue-600 hover:underline font-medium">
+              Explore EASM Console →
+            </a>
+          </div>
 
-  <!-- Hotfix universal para el menú “Solutions” -->
-  <!-- siempre justo antes de </body> y solo una vez por página -->
-<script defer src="/js/nav.js?v=2025-01"></script>
-<script defer src="/js/footer.js?v=2025-01"></script>
-<script defer src="/js/fix-nav.js?v=2025-01"></script>
+          <div class="card-soft p-7">
+            <h3 class="font-bold text-xl mb-3 text-gray-900">Cybersecurity Services</h3>
+            <p class="text-gray-600 leading-relaxed mb-4">
+              Romanoti cybersecurity services provide the broader service layer
+              for visibility, risk interpretation, and structured support.
+            </p>
+            <a href="/en/services/cybersecurity.html" class="text-blue-600 hover:underline font-medium">
+              Explore Cybersecurity →
+            </a>
+          </div>
+
+          <div class="card-soft p-7">
+            <h3 class="font-bold text-xl mb-3 text-gray-900">Romanoti Platform</h3>
+            <p class="text-gray-600 leading-relaxed mb-4">
+              The broader framework that connects discovery,
+              interpretation, and operational intelligence.
+            </p>
+            <a href="/platform/index.html" class="text-blue-600 hover:underline font-medium">
+              Explore the platform →
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ENGAGEMENT OPTIONS -->
+    <section class="py-20 bg-gray-50">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="text-center mb-12">
+          <span class="inline-block text-sm font-semibold uppercase tracking-[0.18em] text-blue-600 mb-3">
+            Engagement options
+          </span>
+
+          <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 tracking-tight">
+            Multiple paths into the CRM, depending on visitor intent
+          </h2>
+
+          <p class="text-lg text-gray-600 leading-relaxed max-w-3xl mx-auto mt-4">
+            Not every visitor is ready for the same next step. CyberShield offers
+            more than one path so sales and technical follow-up can start with clearer context.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="card-soft p-7">
+            <h3 class="font-bold text-xl mb-3 text-gray-900">Request assessment</h3>
+            <p class="text-gray-600 leading-relaxed mb-5">
+              For organizations ready to describe their environment,
+              concerns, and exposure context.
+            </p>
+            <a href="/contact.html?service=cybershield&amp;intent=assessment"
+               class="inline-flex items-center justify-center bg-blue-600 text-white px-5 py-3 rounded-xl font-semibold hover:bg-blue-700 transition">
+              Start assessment
+            </a>
+          </div>
+
+          <div class="card-soft p-7">
+            <h3 class="font-bold text-xl mb-3 text-gray-900">General inquiry</h3>
+            <p class="text-gray-600 leading-relaxed mb-5">
+              For visitors who want to ask questions before deciding
+              which kind of review or solution path fits best.
+            </p>
+            <a href="/contact.html?service=cybershield&amp;intent=general"
+               class="inline-flex items-center justify-center border border-slate-300 bg-white text-slate-900 px-5 py-3 rounded-xl font-semibold hover:bg-slate-50 transition">
+              Contact Romanoti
+            </a>
+          </div>
+
+          <div class="card-soft p-7">
+            <h3 class="font-bold text-xl mb-3 text-gray-900">Explore capability</h3>
+            <p class="text-gray-600 leading-relaxed mb-5">
+              For technical visitors who want to see a concrete capability
+              before submitting a formal request.
+            </p>
+            <a href="/solutions/cybershield/easm-console.html"
+               class="inline-flex items-center justify-center border border-slate-300 bg-white text-slate-900 px-5 py-3 rounded-xl font-semibold hover:bg-slate-50 transition">
+              View EASM Console
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="py-20 bg-white">
+      <div class="max-w-5xl mx-auto px-6">
+        <div class="cta-dark p-8 md:p-12 text-center">
+          <h2 class="text-3xl md:text-4xl font-extrabold mb-4 text-white">
+            Need a more structured view of your exposure and security posture?
+          </h2>
+
+          <p class="text-lg text-slate-300 mb-8 max-w-3xl mx-auto leading-relaxed">
+            CyberShield helps organizations move from fragmented security signals
+            to clearer interpretation, better prioritization, and more confident next steps.
+          </p>
+
+          <div class="flex flex-col sm:flex-row justify-center gap-4">
+            <a href="/contact.html?service=cybershield&amp;intent=assessment"
+               class="inline-flex items-center justify-center bg-white text-blue-700 px-6 py-3 rounded-xl font-semibold hover:bg-gray-100 transition">
+              Request assessment
+            </a>
+
+            <a href="/contact.html?service=cybershield&amp;intent=general"
+               class="inline-flex items-center justify-center border border-slate-600 text-white px-6 py-3 rounded-xl font-semibold hover:bg-white/5 transition">
+              Contact Romanoti
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div id="app-footer"></div>
+
+  <script defer src="/js/footer.js?v=40"></script>
+  <script defer src="/js/fix-nav.js?v=40"></script>
 </body>
 </html>
