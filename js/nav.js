@@ -9,6 +9,10 @@
   // - No invalid <a> inside <button>
   // - Header spacing remains stable
   // - CRM and language switch remain intact
+  //
+  // CHANGE #CYBERSHIELD-NAV
+  // ------------------------------------------------------------
+  // Added CyberShield to EN navigation under Solutions.
   // ============================================================
 
   if (window.__ROMANOTI_NAV_BOOTED__) {
@@ -72,6 +76,7 @@
       solutionsOverview: 'Solutions Overview',
       platformOverview: 'Platform Overview',
       governmentBusiness: 'Government & Enterprise',
+      cyberShield: 'CyberShield',
       easmConsole: 'EASM Console',
       mobileCta: 'Solutions',
       mobileStaffLogin: 'CRM Login'
@@ -126,6 +131,7 @@
         { key: 'solutionsOverview', href: '/solutions/index.html' },
         { key: 'platformOverview', href: '/platform/index.html' },
         { key: 'governmentBusiness', href: '/enterprise/government-business.html' },
+        { key: 'cyberShield', href: '/solutions/cybershield/index.html' },
         { key: 'easmConsole', href: '/solutions/cybershield/easm-console.html' }
       ]
     },
