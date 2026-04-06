@@ -9,8 +9,6 @@
 
   <!-- =======================================================
        SEO
-       CHANGE #35
-       Se corrige branding RomanoTI -> Romanoti
        ======================================================= -->
   <title>Contact Romanoti | Romanoti Solutions</title>
   <meta
@@ -20,9 +18,6 @@
 
   <!-- =======================================================
        FAVICONS
-       CHANGE #36
-       Se alinean con la estructura nueva del proyecto
-       usando /images en lugar de /img
        ======================================================= -->
   <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/romanoti-icon.png">
@@ -38,9 +33,6 @@
 
   <!-- =======================================================
        PAGE STYLES
-       CHANGE #37
-       Se agregan estilos del hero corporativo y se mantiene
-       la UI del formulario
        ======================================================= -->
   <style>
     body {
@@ -100,13 +92,6 @@
       resize: vertical;
     }
 
-    /* =======================================================
-       CONTACT HERO
-       CHANGE #38
-       Hero oscuro estilo Romanoti conservando la misma
-       estructura general del archivo para no alterar
-       innecesariamente la página
-       ======================================================= */
     .romanoti-contact-hero {
       position: relative;
       min-height: 52vh;
@@ -206,18 +191,8 @@
 
 <body class="bg-gray-50">
 
-  <!-- =======================================================
-       HEADER MOUNTPOINT
-       Header centralizado vía nav.js
-       ======================================================= -->
   <div id="app-header"></div>
 
-  <!-- =======================================================
-       FALLBACK HEADER
-       CHANGE #39
-       Se actualiza branding del fallback para no romper
-       la consistencia visual antes de que monte nav.js
-       ======================================================= -->
   <header id="fallback-header" class="bg-white shadow-sm sticky top-0 z-40">
     <div class="container mx-auto px-6 py-3">
       <div class="flex items-center justify-between gap-4">
@@ -238,13 +213,7 @@
   </header>
 
   <main>
-    <!-- =====================================================
-         CONTACT HERO
-         CHANGE #40
-         Se conserva la misma ubicación del hero pero se
-         actualiza a estilo oscuro Romanoti para mantener
-         consistencia con las páginas recientes del sitio
-         ===================================================== -->
+    <!-- CONTACT HERO -->
     <section class="romanoti-contact-hero">
       <div class="romanoti-contact-hero__bg" aria-hidden="true">
         <img src="/images/romanoti-hero-banner.png" alt="">
@@ -253,38 +222,33 @@
       <div class="romanoti-contact-hero__overlay"></div>
 
       <div class="romanoti-contact-hero__content">
-        <div class="romanoti-contact-hero__eyebrow">Contact • Technical Inquiry • Demo Request</div>
+        <div id="contact-eyebrow" class="romanoti-contact-hero__eyebrow">Contact • Technical Inquiry • Demo Request</div>
 
-        <h1 class="romanoti-contact-hero__title">
+        <h1 id="contact-hero-title" class="romanoti-contact-hero__title">
           Contact Romanoti
         </h1>
 
-        <p class="romanoti-contact-hero__subtitle">
+        <p id="contact-hero-subtitle" class="romanoti-contact-hero__subtitle">
           Tell us what you need — infrastructure services, cybersecurity,
           Romanoti Platform, NetPilot, Ops Assistant, or a focused technical demo.
         </p>
       </div>
     </section>
 
-    <!-- =====================================================
-         CONTACT SECTION
-         ===================================================== -->
+    <!-- CONTACT SECTION -->
     <section class="py-14 bg-white">
       <div class="container mx-auto px-6">
         <div class="grid md:grid-cols-2 gap-8 items-start">
 
-          <!-- ===============================================
-               LEFT COLUMN
-               Context and value
-               =============================================== -->
+          <!-- LEFT COLUMN -->
           <div class="card bg-white border border-gray-100 p-8">
-            <div class="badge mb-4">Romanoti Solutions</div>
+            <div id="contact-left-badge" class="badge mb-4">Romanoti Solutions</div>
 
-            <h2 class="text-3xl font-bold mb-4">
+            <h2 id="contact-left-title" class="text-3xl font-bold mb-4">
               Let’s start the conversation
             </h2>
 
-            <p class="text-gray-600 mb-6">
+            <p id="contact-left-intro" class="text-gray-600 mb-6">
               Use this form to reach Romanoti Solutions for technical services,
               platform discussions, product questions, or demo requests.
             </p>
@@ -292,7 +256,7 @@
             <div class="space-y-5 text-gray-700">
               <div>
                 <h3 class="font-semibold text-lg mb-1">What you can contact us about</h3>
-                <ul class="list-disc list-inside text-gray-600 space-y-1">
+                <ul id="contact-topic-list" class="list-disc list-inside text-gray-600 space-y-1">
                   <li>Romanoti Platform</li>
                   <li>NetPilot and Ops Assistant</li>
                   <li>Cybersecurity and attack surface review</li>
@@ -304,7 +268,7 @@
 
               <div>
                 <h3 class="font-semibold text-lg mb-1">Best use of this form</h3>
-                <p class="text-gray-600">
+                <p id="contact-best-use" class="text-gray-600">
                   Share enough context so we can understand your environment,
                   your area of interest, and the type of support or conversation you need.
                 </p>
@@ -312,7 +276,7 @@
 
               <div>
                 <h3 class="font-semibold text-lg mb-1">Response intent</h3>
-                <p class="text-gray-600">
+                <p id="contact-response-intent" class="text-gray-600">
                   This page is designed for serious inquiries related to infrastructure,
                   security, visibility, diagnostics, and platform-oriented technical work.
                 </p>
@@ -320,26 +284,23 @@
             </div>
           </div>
 
-          <!-- ===============================================
-               RIGHT COLUMN
-               Contact form
-               =============================================== -->
+          <!-- RIGHT COLUMN -->
           <div class="card bg-white border border-gray-100 p-8">
-            <div class="badge mb-4">Request / Inquiry Form</div>
+            <div id="contact-form-badge" class="badge mb-4">Request / Inquiry Form</div>
 
-            <h2 class="text-2xl font-bold mb-6">
+            <h2 id="contact-form-title" class="text-2xl font-bold mb-6">
               Send your message
             </h2>
 
-            <!-- =================================================
-                 FORM
-                 FormSubmit integration preserved
-                 ================================================= -->
-            <form action="https://formsubmit.co/info@romanoti-solutions.com" method="POST" class="space-y-5">
-              <input type="hidden" name="_subject" value="New Romanoti website inquiry">
+            <form action="https://formsubmit.co/info@romanoti-solutions.com" method="POST" class="space-y-5" id="romanoti-contact-form">
+              <input type="hidden" name="_subject" id="form-subject" value="New Romanoti website inquiry">
               <input type="hidden" name="_captcha" value="false">
               <input type="hidden" name="_template" value="table">
               <input type="hidden" name="_next" value="https://romanoti-solutions.com/contact.html?sent=1">
+
+              <!-- Added for CRM context -->
+              <input type="hidden" name="service_context" id="service_context" value="">
+              <input type="hidden" name="request_intent" id="request_intent" value="">
 
               <div>
                 <label for="name" class="block text-sm font-semibold mb-2">Full Name</label>
@@ -412,7 +373,7 @@
               </div>
             </form>
 
-            <p class="text-sm text-gray-500 mt-5">
+            <p class="text-sm text-gray-500 mt-5" id="contact-form-note">
               By submitting this form, your message will be sent to the Romanoti contact inbox for review.
             </p>
           </div>
@@ -420,9 +381,7 @@
       </div>
     </section>
 
-    <!-- =====================================================
-         OPTIONAL CTA
-         ===================================================== -->
+    <!-- OPTIONAL CTA -->
     <section class="py-14 bg-gray-50 border-t">
       <div class="container mx-auto px-6 text-center">
         <h2 class="text-3xl font-bold mb-4">
@@ -440,14 +399,8 @@
     </section>
   </main>
 
-  <!-- =======================================================
-       FOOTER MOUNT
-       ======================================================= -->
   <div id="app-footer"></div>
 
-  <!-- =======================================================
-       FALLBACK HEADER REMOVER
-       ======================================================= -->
   <script>
     (function () {
       const fb = document.getElementById('fallback-header');
@@ -473,10 +426,83 @@
   </script>
 
   <!-- =======================================================
-       NAV / FOOTER SCRIPTS
-       CHANGE #41
-       Se incrementa versión para evitar caché viejo
+       CONTEXTUAL CRM GUIDANCE
        ======================================================= -->
+  <script>
+    (function () {
+      const params = new URLSearchParams(window.location.search);
+      const service = (params.get('service') || '').toLowerCase();
+      const intent = (params.get('intent') || '').toLowerCase();
+
+      const subjectInput = document.getElementById('form-subject');
+      const serviceContext = document.getElementById('service_context');
+      const requestIntent = document.getElementById('request_intent');
+      const interestSelect = document.getElementById('interest');
+      const messageField = document.getElementById('message');
+
+      const heroEyebrow = document.getElementById('contact-eyebrow');
+      const heroTitle = document.getElementById('contact-hero-title');
+      const heroSubtitle = document.getElementById('contact-hero-subtitle');
+      const leftBadge = document.getElementById('contact-left-badge');
+      const leftTitle = document.getElementById('contact-left-title');
+      const leftIntro = document.getElementById('contact-left-intro');
+      const bestUse = document.getElementById('contact-best-use');
+      const responseIntentText = document.getElementById('contact-response-intent');
+      const formBadge = document.getElementById('contact-form-badge');
+      const formTitle = document.getElementById('contact-form-title');
+      const formNote = document.getElementById('contact-form-note');
+
+      function setInterestValue(targetText) {
+        if (!interestSelect) return;
+        const options = Array.from(interestSelect.options);
+        const match = options.find(opt => opt.textContent.trim().toLowerCase() === targetText.toLowerCase());
+        if (match) {
+          interestSelect.value = match.value;
+        }
+      }
+
+      serviceContext.value = service || '';
+      requestIntent.value = intent || '';
+
+      if (service === 'cybersecurity') {
+        heroEyebrow.textContent = 'Cybersecurity • Security Review • Guided Request';
+        heroTitle.textContent = intent === 'review' ? 'Request Cybersecurity Review' : 'Contact Romanoti About Cybersecurity';
+        heroSubtitle.textContent = intent === 'review'
+          ? 'Tell us about your infrastructure, exposure concerns, or security priorities. We will route your request with cybersecurity context.'
+          : 'Use this form to contact Romanoti regarding cybersecurity services, exposure concerns, and operational resilience.';
+
+        leftBadge.textContent = 'Cybersecurity Request';
+        leftTitle.textContent = intent === 'review' ? 'Start your cybersecurity review request' : 'Start a cybersecurity conversation';
+        leftIntro.textContent = intent === 'review'
+          ? 'Use this form to request a cybersecurity review and give our team the context needed to assess your exposure and priorities.'
+          : 'Use this form to contact Romanoti about cybersecurity services, security posture, exposure concerns, or related technical questions.';
+
+        bestUse.textContent = intent === 'review'
+          ? 'Share your main concern, affected domain or environment, and what kind of security review or guidance you are looking for.'
+          : 'Share enough context so we can understand your current environment, your concern, and what kind of cybersecurity support you need.';
+
+        responseIntentText.textContent = 'This request will be routed with cybersecurity context to help sales and technical review start with more clarity.';
+        formBadge.textContent = intent === 'review' ? 'Cybersecurity Review Form' : 'Cybersecurity Inquiry Form';
+        formTitle.textContent = intent === 'review' ? 'Submit your cybersecurity request' : 'Send your cybersecurity message';
+        formNote.textContent = 'Your request will be sent to the Romanoti contact inbox with cybersecurity context for review.';
+
+        setInterestValue('Cybersecurity');
+
+        if (messageField && !messageField.value.trim()) {
+          messageField.placeholder = intent === 'review'
+            ? 'Describe your environment, known exposure, current concern, and what kind of cybersecurity review you are looking for.'
+            : 'Describe your environment, your concern, and how Romanoti may help from a cybersecurity perspective.';
+        }
+
+        if (subjectInput) {
+          subjectInput.value = intent === 'review'
+            ? 'New Romanoti cybersecurity review request'
+            : 'New Romanoti cybersecurity inquiry';
+        }
+      }
+    })();
+  </script>
+
   <script defer src="/js/nav.js?v=10"></script>
   <script defer src="/js/footer.js?v=10"></script>
   <script defer src="/js/fix-nav.js?v=10"></script>
