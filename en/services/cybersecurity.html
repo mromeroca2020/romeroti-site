@@ -1,52 +1,327 @@
-<h1>Cybersecurity</h1>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Cybersecurity Services | RomanoTI Solutions</title>
+  <!-- ========================================================= -->
+  <!-- Romanoti Solutions — Cybersecurity                        -->
+  <!-- EN version rebuilt from approved ES structure             -->
+  <!-- ========================================================= -->
 
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Cybersecurity | Romanoti Solutions</title>
+
+  <meta name="description"
+        content="Romanoti helps organizations better understand their security posture, identify exposure, and strengthen operational resilience across modern IT environments.">
+
+  <link rel="icon" type="image/svg+xml" href="/images/romanoti-icon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/romanoti-icon.png">
+  <link rel="shortcut icon" href="/images/favicon.ico">
+  <meta name="theme-color" content="#081120">
+
+  <link rel="stylesheet" href="/css/styles.css?v=40">
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/main.css"><!-- si tienes un css global -->
-  <link rel="stylesheet" href="/css/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    body{
+      font-family:'Montserrat',sans-serif;
+      background:#f8f9fa;
+      color:#111827;
+    }
+
+    .hero-dark{
+      background:linear-gradient(135deg,#050b16 0%,#081120 55%,#0b1830 100%);
+      color:#fff;
+    }
+
+    .section-eyebrow{
+      display:inline-block;
+      font-size:12px;
+      font-weight:700;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      color:#93c5fd;
+      margin-bottom:12px;
+    }
+
+    .card-soft{
+      border:1px solid #e5e7eb;
+      border-radius:18px;
+      background:#fff;
+      box-shadow:0 12px 32px -16px rgba(2,6,23,.14);
+      transition:all .2s ease;
+    }
+
+    .card-soft:hover{
+      transform:translateY(-2px);
+      box-shadow:0 18px 38px -18px rgba(2,6,23,.18);
+    }
+
+    .cta-dark{
+      background:linear-gradient(135deg,#050b16 0%,#081120 55%,#0b1830 100%);
+      color:#fff;
+      border-radius:28px;
+      box-shadow:0 20px 40px -24px rgba(2,6,23,.45);
+    }
+  </style>
+
+  <script defer src="/js/nav.js?v=40"></script>
 </head>
-<body class="bg-gray-50">
+
+<body class="bg-white text-gray-900 antialiased">
   <div id="app-header"></div>
 
-  <!-- Header global -->
+  <main>
 
-  <!-- ===== Hero específico del servicio ===== -->
-  <section class="hero-bg text-white">
-    <div class="container mx-auto px-6 py-16">
-      <h1 class="text-3xl md:text-4xl font-bold mb-4">Cybersecurity Services</h1>
-      <p class="text-lg md:text-xl max-w-2xl">
-        Protection against ransomware, phishing and data breaches for small and mid-size businesses.
-      </p>
-    </div>
-  </section>
+    <!-- HERO -->
+    <section class="hero-dark py-20 md:py-24">
+      <div class="max-w-6xl mx-auto px-6">
+        <span class="section-eyebrow">Security • Exposure • Operational Resilience</span>
 
-  <!-- ===== Contenido principal del servicio ===== -->
-  <main class="py-12">
-    <div class="container mx-auto px-6 space-y-8">
-      <section>
-        <h2 class="text-2xl font-bold mb-3">What we do</h2>
-        <p class="text-gray-700">
-          <!-- aquí puedes pegar el texto que ya tenías en cybersecurity.html -->
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 leading-tight text-white max-w-4xl">
+          Cybersecurity
+        </h1>
+
+        <p class="text-lg md:text-xl text-slate-200 max-w-3xl mb-8 leading-relaxed">
+          Romanoti helps organizations better understand their security posture,
+          identify exposure, and strengthen operational resilience
+          across modern IT environments.
         </p>
-      </section>
-    </div>
+
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="/en/booking.html?service=Cybersecurity%20Review"
+             class="inline-flex items-center justify-center bg-blue-600 text-white px-6 py-3 rounded-xl font-semibold hover:bg-blue-700 transition shadow-lg">
+            Request security review
+          </a>
+
+          <a href="/en/contact.html"
+             class="inline-flex items-center justify-center border border-white text-white px-6 py-3 rounded-xl font-semibold hover:bg-white/5 transition">
+            Contact Romanoti
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHY SECURITY VISIBILITY MATTERS -->
+    <section class="py-20 bg-white">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="max-w-3xl mb-12">
+          <span class="inline-block text-sm font-semibold uppercase tracking-[0.18em] text-blue-600 mb-3">
+            Why security visibility matters
+          </span>
+
+          <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4 tracking-tight">
+            Reduce uncertainty across modern environments
+          </h2>
+
+          <p class="text-lg text-gray-600 leading-relaxed">
+            Many organizations operate infrastructure without complete visibility
+            into their exposure, services, and attack surface. Romanoti helps
+            reduce that uncertainty through structured technical review.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6">
+          <div class="card-soft p-7">
+            <h3 class="font-bold text-xl mb-3 text-gray-900">Poorly understood exposure</h3>
+            <p class="text-gray-600 leading-relaxed">
+              Domains, exposed services, ports, and email configurations
+              can create areas of risk that remain unclear to internal teams.
+            </p>
+          </div>
+
+          <div class="card-soft p-7">
+            <h3 class="font-bold text-xl mb-3 text-gray-900">Fragmented security</h3>
+            <p class="text-gray-600 leading-relaxed">
+              When security, infrastructure, and operations move separately,
+              response becomes slower and risk becomes harder to interpret.
+            </p>
+          </div>
+
+          <div class="card-soft p-7">
+            <h3 class="font-bold text-xl mb-3 text-gray-900">Insufficient resilience</h3>
+            <p class="text-gray-600 leading-relaxed">
+              Without a clear structure, incidents take longer to understand,
+              contain, and document properly.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHAT ROMANOTI BRINGS -->
+    <section class="py-20 bg-gray-50">
+      <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-start">
+
+        <div>
+          <span class="inline-block text-sm font-semibold uppercase tracking-[0.18em] text-blue-600 mb-3">
+            What Romanoti brings
+          </span>
+
+          <h2 class="text-3xl md:text-4xl font-extrabold mb-6 text-gray-900 tracking-tight">
+            A more structured approach to cybersecurity
+          </h2>
+
+          <p class="mb-4 text-gray-700 leading-relaxed">
+            Romanoti provides cybersecurity services designed to improve
+            exposure awareness, strengthen operational clarity, and support
+            more coherent technical decisions.
+          </p>
+
+          <p class="text-gray-700 leading-relaxed">
+            Rather than limiting the work to a purely defensive reaction,
+            we aim to clarify exposed surfaces, structure analysis, and support
+            operational continuity in the face of risk.
+          </p>
+        </div>
+
+        <div class="card-soft p-8 bg-white">
+          <h3 class="font-bold text-xl mb-4 text-gray-900">
+            Core capabilities
+          </h3>
+
+          <ul class="space-y-3 text-gray-700 leading-relaxed">
+            <li>• Exposure and attack surface review</li>
+            <li>• Better visibility into services, domains, and critical dependencies</li>
+            <li>• Clearer interpretation of technical risk</li>
+            <li>• Support for operational resilience</li>
+            <li>• Greater awareness of security impact across infrastructure</li>
+            <li>• A more structured foundation for technical decision-making</li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SERVICE AREAS -->
+    <section class="py-20 bg-white">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="text-center mb-12">
+          <span class="inline-block text-sm font-semibold uppercase tracking-[0.18em] text-blue-600 mb-3">
+            Service areas
+          </span>
+
+          <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 tracking-tight">
+            How Romanoti supports cybersecurity
+          </h2>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+
+          <div class="card-soft p-7">
+            <h3 class="font-bold text-xl mb-3 text-gray-900">Exposure review</h3>
+            <p class="text-gray-600 leading-relaxed">
+              Analysis of domains, exposed services, and technical signals
+              that directly influence security posture.
+            </p>
+          </div>
+
+          <div class="card-soft p-7">
+            <h3 class="font-bold text-xl mb-3 text-gray-900">Operational risk interpretation</h3>
+            <p class="text-gray-600 leading-relaxed">
+              An approach that helps connect security findings
+              to operational realities and concrete priorities.
+            </p>
+          </div>
+
+          <div class="card-soft p-7">
+            <h3 class="font-bold text-xl mb-3 text-gray-900">Technical clarity</h3>
+            <p class="text-gray-600 leading-relaxed">
+              Better understanding of dependencies, impacts,
+              and next steps to reduce ambiguity.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- PLATFORM CONNECTION -->
+    <section class="py-20 bg-gray-50">
+      <div class="max-w-6xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-start">
+
+        <div>
+          <span class="inline-block text-sm font-semibold uppercase tracking-[0.18em] text-blue-600 mb-3">
+            Platform connection
+          </span>
+
+          <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 mb-5 tracking-tight">
+            Connected to Romanoti Platform and security capabilities
+          </h2>
+
+          <p class="text-gray-700 leading-relaxed mb-4">
+            Cybersecurity at Romanoti is not designed as an isolated silo.
+            It is part of a broader vision of visibility, diagnostics,
+            and operational intelligence.
+          </p>
+
+          <p class="text-gray-700 leading-relaxed">
+            This direction helps connect current services with a platform
+            capable of bringing more structure, better understanding,
+            and stronger technical decisions over time.
+          </p>
+        </div>
+
+        <div class="grid gap-6">
+          <div class="card-soft p-7">
+            <h3 class="font-bold text-xl mb-3 text-gray-900">CyberShield</h3>
+            <p class="text-gray-600 leading-relaxed mb-4">
+              A security-oriented line focused on visibility, exposure,
+              and better-structured response capabilities.
+            </p>
+            <a href="/solutions/cybershield/" class="text-blue-600 hover:underline font-medium">
+              Explore CyberShield →
+            </a>
+          </div>
+
+          <div class="card-soft p-7">
+            <h3 class="font-bold text-xl mb-3 text-gray-900">Romanoti Platform</h3>
+            <p class="text-gray-600 leading-relaxed mb-4">
+              The broader framework that connects discovery,
+              interpretation, and operational intelligence.
+            </p>
+            <a href="/en/platform/index.html" class="text-blue-600 hover:underline font-medium">
+              Explore the platform →
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="py-20 bg-white">
+      <div class="max-w-5xl mx-auto px-6">
+        <div class="cta-dark p-8 md:p-12 text-center">
+          <h2 class="text-3xl md:text-4xl font-extrabold mb-4 text-white">
+            Need a clearer view of your security posture?
+          </h2>
+
+          <p class="text-lg text-slate-300 mb-8 max-w-3xl mx-auto leading-relaxed">
+            Romanoti can help you better understand your exposure,
+            structure the analysis, and strengthen operational resilience.
+          </p>
+
+          <div class="flex flex-col sm:flex-row justify-center gap-4">
+            <a href="/en/booking.html?service=Cybersecurity%20Review"
+               class="inline-flex items-center justify-center bg-white text-blue-700 px-6 py-3 rounded-xl font-semibold hover:bg-gray-100 transition">
+              Schedule consultation
+            </a>
+
+            <a href="/en/contact.html"
+               class="inline-flex items-center justify-center border border-slate-600 text-white px-6 py-3 rounded-xl font-semibold hover:bg-white/5 transition">
+              Contact Romanoti
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
   </main>
 
-  <!-- Footer global -->
-
-  <!-- Scripts de nav/footer -->
-  <script defer src="/js/nav.js?v=7"></script>
-  <script defer src="/js/footer.js?v=7"></script>
-
   <div id="app-footer"></div>
-  <script src="/js/nav.js"></script>
-  <script src="/js/footer.js"></script>
+  <script defer src="/js/footer.js?v=40"></script>
+  <script defer src="/js/fix-nav.js?v=40"></script>
 </body>
 </html>
-
