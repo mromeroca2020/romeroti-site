@@ -20,6 +20,14 @@
        - Removed duplicate nav/footer script loading
        - Replaced outdated Tailwind 2 CDN with current usage
        - Improved CTA structure and page readability
+
+       CHANGE #FIT-SECTION-TEXT-VISIBILITY
+       -------------------------------------------------------
+       - Added explicit text-white classes to the main H2 and
+         the three H3 cards inside the "Best fit" section.
+       - Reason: prevent dark global heading styles from
+         overriding inherited white text on dark background.
+       - Scope limited only to that section.
        ======================================================= -->
 
   <meta charset="UTF-8" />
@@ -387,7 +395,7 @@
             Best fit
           </span>
 
-          <h2 class="mt-3 text-3xl font-bold md:text-4xl">
+          <h2 class="mt-3 text-3xl font-bold text-white md:text-4xl">
             Best suited for environments where uptime and response discipline matter
           </h2>
 
@@ -399,15 +407,15 @@
 
         <div class="mt-12 grid gap-6 md:grid-cols-3">
           <article class="rounded-2xl border border-white/10 bg-white/5 p-7">
-            <h3 class="text-xl font-semibold">Distributed operations</h3>
+            <h3 class="text-xl font-semibold text-white">Distributed operations</h3>
             <p class="mt-3 leading-relaxed text-slate-300">Teams that need centralized visibility across sites, services, and infrastructure dependencies.</p>
           </article>
           <article class="rounded-2xl border border-white/10 bg-white/5 p-7">
-            <h3 class="text-xl font-semibold">Availability-sensitive services</h3>
+            <h3 class="text-xl font-semibold text-white">Availability-sensitive services</h3>
             <p class="mt-3 leading-relaxed text-slate-300">Environments where downtime, missed alerts, or unclear ownership create business risk.</p>
           </article>
           <article class="rounded-2xl border border-white/10 bg-white/5 p-7">
-            <h3 class="text-xl font-semibold">Growing IT teams</h3>
+            <h3 class="text-xl font-semibold text-white">Growing IT teams</h3>
             <p class="mt-3 leading-relaxed text-slate-300">Organizations moving from reactive support toward a more mature operating model.</p>
           </article>
         </div>
