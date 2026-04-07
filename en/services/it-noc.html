@@ -28,6 +28,13 @@
        - Reason: prevent dark global heading styles from
          overriding inherited white text on dark background.
        - Scope limited only to that section.
+
+       CHANGE #FINAL-CTA-TEXT-VISIBILITY
+       -------------------------------------------------------
+       - Added explicit text-white to the FINAL CTA H2 only.
+       - Reason: prevent global heading color overrides on the
+         dark card background.
+       - Scope limited to one heading line only.
        ======================================================= -->
 
   <meta charset="UTF-8" />
@@ -432,7 +439,7 @@
             Romanoti Solutions
           </span>
 
-          <h2 class="mt-3 text-3xl font-bold md:text-4xl">
+          <h2 class="mt-3 text-3xl font-bold text-white md:text-4xl">
             Build a steadier monitoring and response model
           </h2>
 
