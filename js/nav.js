@@ -148,7 +148,7 @@
       platform: '/fr/platform/index.html',
       enterprise: '/fr/entreprise/government-business.html',
       whyRomanoti: '/fr/solutions/why-romanoti.html',
-      howWeWork: '/fr/how-we-work.html',
+      howWeWork: '/fr/solutions/how-we-work.html',
       contact: '/fr/contact.html',
       booking: '/fr/booking.html',
       crmLogin: '/fr/crm-login.html',
