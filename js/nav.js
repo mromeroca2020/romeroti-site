@@ -172,8 +172,8 @@
       enterprise: '/es/enterprise/government-business.html',
       whyRomanoti: '/es/soluciones/why-romanoti.html',
       howWeWork: '/es/how-we-work.html',
-      contact: '/es/contact.html',
-      booking: '/es/booking.html',
+      contact: '/contact.html',
+      booking: '/booking.html',
       crmLogin: '/crm-login.html',
       services: [
         { key: 'helpDesk', href: '/es/services/helpdesk.html' },
