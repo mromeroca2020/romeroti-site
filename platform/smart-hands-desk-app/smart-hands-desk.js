@@ -1,5 +1,5 @@
 ﻿(function () {
-  const API_BASE = "http://127.0.0.1:8775";
+  const API_BASE = window.RomanotiSmartHandsConfig?.apiBase || "http://127.0.0.1:8775";
 
   let allTickets = [];
   let currentFilter = "dashboard";
@@ -415,5 +415,6 @@
     init();
   }
 })();
+
 
 
