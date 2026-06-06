@@ -1,0 +1,639 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- =======================================================
+       FILE: /platform/ops-assistant-app/index.html
+       PURPOSE:
+       Protected pilot shell for Romanoti Ops Assistant.
+
+       FLOW:
+       Ops Assistant Login -> Ops Assistant App
+       Ops Assistant App -> Logout -> Ops Assistant Login
+       ======================================================= -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Romanoti Ops Assistant | Operations Hub</title>
+
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #07101a;
+      --panel: #111a25;
+      --panel-2: #182638;
+      --border: rgba(255,255,255,.12);
+      --text: #f8fafc;
+      --muted: #b6c2d4;
+      --soft: #8fa0b6;
+      --green: #f59e0b;
+      --blue: #38a2ff;
+      --radius: 22px;
+      --sidebar: 300px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: 'Montserrat', sans-serif;
+      background:
+        radial-gradient(circle at top right, rgba(245,158,11,.08), transparent 30%),
+        linear-gradient(135deg, #050b12 0%, #07101a 48%, #09131f 100%);
+      color: var(--text);
+    }
+
+    .app-shell {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: var(--sidebar) 1fr;
+    }
+
+    .sidebar {
+      border-right: 1px solid var(--border);
+      background: rgba(5,11,18,.72);
+      padding: 28px 20px;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow: auto;
+    }
+
+    .brand {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      padding-bottom: 26px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 28px;
+    }
+
+    .brand-mark {
+      width: 62px;
+      height: 62px;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, rgba(56,162,255,.22), rgba(245,158,11,.20));
+      border: 1px solid rgba(245,158,11,.42);
+      color: var(--green);
+      font-weight: 900;
+    }
+
+    .brand h1 {
+      font-size: 1.35rem;
+      margin: 0 0 2px;
+      line-height: 1.1;
+    }
+
+    .brand p {
+      margin: 0;
+      color: var(--muted);
+      font-size: .92rem;
+    }
+
+    .side-label {
+      color: var(--soft);
+      text-transform: uppercase;
+      letter-spacing: .13em;
+      font-weight: 900;
+      font-size: .78rem;
+      margin: 24px 0 12px;
+    }
+
+    .nav-button {
+      width: 100%;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.03);
+      color: var(--text);
+      min-height: 54px;
+      border-radius: 16px;
+      padding: 0 16px;
+      text-align: left;
+      font: inherit;
+      font-weight: 800;
+      cursor: pointer;
+      margin-bottom: 10px;
+    }
+
+    .nav-button.active {
+      background: rgba(245,158,11,.14);
+      border-color: rgba(245,158,11,.44);
+    }
+
+    .context-card {
+      margin-top: 28px;
+      padding: 18px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.05);
+      border: 1px solid var(--border);
+    }
+
+    .context-card strong {
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .context-card span {
+      color: var(--muted);
+      font-size: .92rem;
+      line-height: 1.45;
+    }
+
+    .main {
+      padding: 40px 44px 64px;
+      overflow: hidden;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 36px;
+    }
+
+    .kicker {
+      color: var(--soft);
+      text-transform: uppercase;
+      letter-spacing: .28em;
+      font-weight: 900;
+      margin-bottom: 12px;
+    }
+
+    .page-title {
+      font-size: clamp(3rem, 5vw, 5.2rem);
+      line-height: .94;
+      margin: 0 0 18px;
+      letter-spacing: -0.04em;
+    }
+
+    .page-subtitle {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.18rem;
+      line-height: 1.65;
+      max-width: 820px;
+    }
+
+    .user-actions {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .user-pill {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 12px 18px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid var(--border);
+    }
+
+    .avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 999px;
+      display: grid;
+      place-items: center;
+      background: rgba(245,158,11,.18);
+      color: var(--green);
+      font-weight: 900;
+    }
+
+    .user-name {
+      font-weight: 900;
+      line-height: 1.1;
+    }
+
+    .user-role {
+      color: var(--muted);
+      font-size: .88rem;
+      margin-top: 2px;
+    }
+
+    .logout-button {
+      min-height: 54px;
+      padding: 0 24px;
+      border: 0;
+      border-radius: 999px;
+      background: var(--green);
+      color: #04111d;
+      font: inherit;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .hero-panel {
+      background: linear-gradient(135deg, rgba(42,61,83,.94), rgba(22,34,50,.96));
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 28px;
+      padding: 36px;
+      display: grid;
+      grid-template-columns: 1.35fr .65fr;
+      gap: 34px;
+      align-items: center;
+      box-shadow: 0 24px 70px rgba(0,0,0,.24);
+      margin-bottom: 28px;
+    }
+
+    .panel-kicker {
+      color: var(--soft);
+      text-transform: uppercase;
+      letter-spacing: .24em;
+      font-weight: 900;
+      margin-bottom: 14px;
+    }
+
+    .hero-panel h2 {
+      font-size: clamp(2.1rem, 3.4vw, 3.7rem);
+      line-height: .98;
+      margin: 0 0 18px;
+      letter-spacing: -0.04em;
+    }
+
+    .hero-panel p {
+      margin: 0 0 24px;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .action-pill {
+      min-height: 48px;
+      padding: 0 18px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.08);
+      color: var(--text);
+      font: inherit;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .action-pill.primary {
+      background: var(--green);
+      color: #06111d;
+      border-color: transparent;
+    }
+
+    .status-box {
+      background: rgba(5,11,18,.68);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 24px;
+    }
+
+    .status-box h3 {
+      margin: 0 0 18px;
+      font-size: 1.15rem;
+    }
+
+    .status-item {
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 12px 16px;
+      color: var(--muted);
+      margin-bottom: 12px;
+      background: rgba(255,255,255,.04);
+    }
+
+    .grid-cards {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-bottom: 28px;
+    }
+
+    .metric-card, .content-card {
+      background: rgba(255,255,255,.055);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 24px;
+    }
+
+    .metric-label {
+      color: var(--soft);
+      text-transform: uppercase;
+      letter-spacing: .16em;
+      font-weight: 900;
+      font-size: .8rem;
+      margin-bottom: 10px;
+    }
+
+    .metric-value {
+      font-size: 2.4rem;
+      font-weight: 900;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .metric-note {
+      color: var(--muted);
+      line-height: 1.5;
+      font-size: .92rem;
+    }
+
+    .module-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .content-card h3 {
+      margin: 0 0 10px;
+      font-size: 1.25rem;
+    }
+
+    .content-card p {
+      margin: 0 0 16px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .tag {
+      display: inline-flex;
+      min-height: 32px;
+      padding: 0 12px;
+      align-items: center;
+      border-radius: 999px;
+      background: rgba(245,158,11,.13);
+      color: var(--green);
+      font-size: .8rem;
+      font-weight: 900;
+    }
+
+    @media (max-width: 1100px) {
+      .app-shell {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        position: static;
+        height: auto;
+      }
+
+      .hero-panel {
+        grid-template-columns: 1fr;
+      }
+
+      .grid-cards,
+      .module-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .main {
+        padding: 28px 20px 48px;
+      }
+
+      .topbar {
+        flex-direction: column;
+      }
+
+      .grid-cards,
+      .module-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark">OA</div>
+        <div>
+          <h1>Romanoti Ops Assistant</h1>
+          <p>Operational Intelligence Platform</p>
+        </div>
+      </div>
+
+      <div class="side-label">Workspace</div>
+      <button class="nav-button active" data-view="hub">Operations Hub</button>
+      <button class="nav-button" data-view="reports">Report Builder</button>
+      <button class="nav-button" data-view="runbooks">SOP / Runbooks</button>
+      <button class="nav-button" data-view="recommendations">Recommendations</button>
+      <button class="nav-button" data-view="handoff">Handoff Notes</button>
+      <button class="nav-button" data-view="cases">Cases</button>
+      <button class="nav-button" data-view="settings">Settings</button>
+
+      <div class="side-label">Pilot Context</div>
+      <div class="context-card">
+        <strong>Ops Pilot v0.1</strong>
+        <span>Protected pilot shell for operational interpretation, report preparation, SOP direction, and handoff workflows.</span>
+      </div>
+
+      <div class="context-card">
+        <strong>Platform Role</strong>
+        <span>NetPilot discovers. RIV organizes. Network Assistant troubleshoots. Ops Assistant interprets and documents.</span>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div>
+          <div class="kicker">Romanoti Operational Intelligence</div>
+          <h1 class="page-title">Operations Hub</h1>
+          <p class="page-subtitle">
+            A clean control center for operational interpretation, recommendations,
+            SOP/runbook direction, report preparation, and handoff notes.
+          </p>
+        </div>
+
+        <div class="user-actions">
+          <div class="user-pill">
+            <div class="avatar" id="userInitials">MR</div>
+            <div>
+              <div class="user-name" id="userName">Mauricio Romero</div>
+              <div class="user-role" id="userRole">Romanoti Admin</div>
+            </div>
+          </div>
+          <button class="logout-button" id="logoutButton">Logout</button>
+        </div>
+      </header>
+
+      <section class="hero-panel" id="view-hub">
+        <div>
+          <div class="panel-kicker">Pilot workspace</div>
+          <h2>Start with context. Produce a clean operational output.</h2>
+          <p>
+            Ops Assistant is organized as a modular assistant workspace. Select Reports,
+            SOP / Runbooks, Recommendations, Handoff Notes, or Cases as focused pages
+            without overwhelming the operator.
+          </p>
+
+          <div class="pill-row">
+            <button class="action-pill primary" data-view="reports">Open Report Builder</button>
+            <button class="action-pill" data-view="runbooks">Open SOP / Runbooks</button>
+            <button class="action-pill" data-view="handoff">Open Handoff Notes</button>
+          </div>
+        </div>
+
+        <div class="status-box">
+          <h3>Workspace Status</h3>
+          <div class="status-item">Product mode: Pilot</div>
+          <div class="status-item">Draft reports: 3</div>
+          <div class="status-item">Runbook templates: 5</div>
+          <div class="status-item">Open recommendations: 4</div>
+          <div class="status-item" id="lastRun">Last opened: --</div>
+        </div>
+      </section>
+
+      <section class="grid-cards">
+        <div class="metric-card">
+          <div class="metric-label">Draft reports</div>
+          <div class="metric-value">3</div>
+          <div class="metric-note">Operational summaries ready for review.</div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-label">Runbooks</div>
+          <div class="metric-value">5</div>
+          <div class="metric-note">Reusable SOP directions planned.</div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-label">Recommendations</div>
+          <div class="metric-value">4</div>
+          <div class="metric-note">Next-action items in pilot workspace.</div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-label">Product mode</div>
+          <div class="metric-value">Pilot</div>
+          <div class="metric-note">Structured for future commercial demonstrations.</div>
+        </div>
+      </section>
+
+      <section class="module-grid">
+        <article class="content-card" id="view-reports">
+          <span class="tag">Reports</span>
+          <h3>Report Builder</h3>
+          <p>
+            Prepare structured operational summaries with issue context, actions performed,
+            evidence references, risk notes, recommended next steps, and closure status.
+          </p>
+        </article>
+
+        <article class="content-card" id="view-runbooks">
+          <span class="tag">SOP / Runbooks</span>
+          <h3>Guided procedures</h3>
+          <p>
+            Organize repeatable operational procedures, checklists, escalation triggers,
+            closure criteria, and task execution notes.
+          </p>
+        </article>
+
+        <article class="content-card" id="view-recommendations">
+          <span class="tag">Recommendations</span>
+          <h3>Next-action guidance</h3>
+          <p>
+            Convert findings and technical signals into recommended follow-up actions,
+            review priorities, escalation notes, and operational impact summaries.
+          </p>
+        </article>
+
+        <article class="content-card" id="view-handoff">
+          <span class="tag">Handoff</span>
+          <h3>Shift and task closure</h3>
+          <p>
+            Prepare handoff notes for pending validations, open risks, completed actions,
+            responsible parties, and next scheduled checks.
+          </p>
+        </article>
+
+        <article class="content-card" id="view-cases">
+          <span class="tag">Cases</span>
+          <h3>Saved operational cases</h3>
+          <p>
+            Future versions will save case records, findings, report drafts, recommendation history,
+            and evidence references.
+          </p>
+        </article>
+
+        <article class="content-card" id="view-settings">
+          <span class="tag">Settings</span>
+          <h3>Assistant preferences</h3>
+          <p>
+            Future settings will manage report templates, SOP categories, company context,
+            integration preferences, and platform handoff behavior.
+          </p>
+        </article>
+      </section>
+    </main>
+  </div>
+
+  <script src="../ops-assistant-auth.js"></script>
+  <script>
+    (function () {
+      const loginPage = "../ops-assistant-login.html";
+
+      if (!window.RomanotiOpsAssistantAuth || !window.RomanotiOpsAssistantAuth.isAuthenticated()) {
+        window.location.href = loginPage;
+        return;
+      }
+
+      const user = window.RomanotiOpsAssistantAuth.getUser() || {
+        name: "Romanoti User",
+        role: "Ops Assistant User",
+        initials: "RU"
+      };
+
+      document.getElementById("userName").textContent = user.name;
+      document.getElementById("userRole").textContent = user.role;
+      document.getElementById("userInitials").textContent = user.initials;
+
+      document.getElementById("lastRun").textContent =
+        "Last opened: " + new Date().toLocaleString();
+
+      document.getElementById("logoutButton").addEventListener("click", function () {
+        window.RomanotiOpsAssistantAuth.logout();
+        window.location.href = loginPage;
+      });
+
+      function setActive(view) {
+        document.querySelectorAll(".nav-button").forEach((button) => {
+          button.classList.toggle("active", button.dataset.view === view);
+        });
+
+        const target = document.getElementById("view-" + view);
+        if (target) {
+          target.scrollIntoView({ behavior: "smooth", block: "center" });
+        }
+      }
+
+      document.querySelectorAll("[data-view]").forEach((button) => {
+        button.addEventListener("click", function () {
+          setActive(button.dataset.view);
+        });
+      });
+    })();
+  </script>
+  <script src="./ops-functional.js"></script>
+  <script src="./ops-cleanup.js"></script>
+  <script src="./ops-reports-ui.js"></script>
+  <script src="./ops-nav.js"></script>
+  <script src="./ops-active-nav.js"></script>
+  <script src="./ops-inventory-ui.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+

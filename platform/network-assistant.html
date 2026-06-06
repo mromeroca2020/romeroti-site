@@ -2,27 +2,26 @@
 <html lang="en">
 <head>
   <!-- =======================================================
-       FILE: /platform/ops-assistant.html
+       FILE: /platform/network-assistant.html
        PURPOSE:
-       Romanoti Ops Assistant concept / roadmap page.
+       Romanoti Network Assistant concept / roadmap page.
 
        POSITIONING:
-       Ops Assistant is the operational intelligence and documentation
-       layer of Romanoti Platform. It is not NetPilot, RIV, or Network
-       Assistant:
-       - NetPilot discovers and detects.
-       - Network Assistant troubleshoots and guides commands.
-       - RIV organizes infrastructure, Smart Hands, and lifecycle workflows.
-       - Ops Assistant interprets findings, recommends next actions,
-         supports SOP/runbook logic, and prepares operational reports.
+       Network Assistant is the troubleshooting and command-guidance
+       layer of Romanoti Platform. It is not NetPilot, RIV, or Ops
+       Assistant. It has its own role:
+       - NetPilot discovers.
+       - Network Assistant troubleshoots.
+       - RIV organizes and guides infrastructure execution.
+       - Ops Assistant interprets, documents, and recommends.
        ======================================================= -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Romanoti Ops Assistant | RomanoTI-Solutions Inc.</title>
+  <title>Romanoti Network Assistant | RomanoTI-Solutions Inc.</title>
   <meta
     name="description"
-    content="Romanoti Ops Assistant is the operational intelligence layer of Romanoti Platform, helping teams interpret findings, prepare recommendations, document actions, and generate operational reports."
+    content="Romanoti Network Assistant is the troubleshooting and command guidance layer of Romanoti Platform, focused on structured network issue resolution, vendor command templates, technical reports, and escalation support."
   />
 
   <!-- =======================================================
@@ -43,10 +42,9 @@
 
   <style>
     /* =======================================================
-       PAGE-SPECIFIC: PLATFORM HERO + OPS ASSISTANT
+       PAGE-SPECIFIC: PLATFORM HERO + NETWORK ASSISTANT
        This page intentionally reuses the same visual language
-       as platform/index.html and network-assistant.html so it
-       feels native to Romanoti Platform.
+       as platform/index.html so it feels native to Romanoti.
        ======================================================= */
 
     .platform-hero{
@@ -307,46 +305,44 @@
 
       <div class="platform-hero__grid">
         <div>
-          <div class="eyebrow">Romanoti Platform / Ops Assistant</div>
-          <h1>Turn technical findings into operational decisions.</h1>
+          <div class="eyebrow">Romanoti Platform / Network Assistant</div>
+          <h1>Guided troubleshooting and command assistance for network operations.</h1>
           <p>
-            Romanoti Ops Assistant is the operational intelligence layer of Romanoti Platform.
-            It helps teams interpret findings, prepare recommendations, document actions,
-            and move from technical visibility to organized operational execution.
+            Romanoti Network Assistant is the troubleshooting and command-guidance
+            direction of Romanoti Platform. It helps technical teams move from symptoms
+            to structured checks, vendor commands, escalation notes, and technical reports.
           </p>
 
           <div class="actions">
             <a class="btn btn-primary" href="/platform/index.html">Back to Platform</a>
             <a class="btn btn-secondary" href="/platform/netpilot-login.html">Launch NetPilot</a>
-            <a class="btn btn-secondary" href="/platform/network-assistant.html">Explore Network Assistant</a>
           </div>
         </div>
 
         <aside class="hero-card">
-          <div class="mini-label">Operational intelligence layer</div>
-          <h3>Ops Assistant is built for interpretation, documentation, and next-action clarity.</h3>
+          <div class="mini-label">Roadmap module</div>
+          <h3>Network troubleshooting should be guided, repeatable, and documented.</h3>
           <p>
-            It does not replace RIV Smart Hands or Network Assistant troubleshooting.
-            It helps explain what findings mean, what should happen next, and how the work
-            should be documented.
+            Network Assistant will focus on the “what should we check next?” layer:
+            commands, expected results, evidence, escalation, and resolution summaries.
           </p>
 
           <div class="stats">
             <div class="stat">
-              <strong>Interpret</strong>
-              <div>Transform findings into operational meaning</div>
+              <strong>Diagnose</strong>
+              <div>Interface, VLAN, DNS, routing, CRC, optic issues</div>
             </div>
             <div class="stat">
-              <strong>Recommend</strong>
-              <div>Prepare next steps and review priorities</div>
+              <strong>Guide</strong>
+              <div>Step-by-step checks and vendor command templates</div>
             </div>
             <div class="stat">
               <strong>Document</strong>
-              <div>Generate notes, reports, and handoff summaries</div>
+              <div>Technical notes, evidence, and report summaries</div>
             </div>
             <div class="stat">
-              <strong>Standardize</strong>
-              <div>Support SOPs, runbooks, and repeatable workflows</div>
+              <strong>Escalate</strong>
+              <div>Clear next actions for engineers and field teams</div>
             </div>
           </div>
         </aside>
@@ -354,15 +350,15 @@
     </section>
 
     <!-- =====================================================
-         POSITIONING
+         WHERE IT FITS
          ===================================================== -->
     <section class="section section-light">
       <div class="container">
-        <h2 class="section-title" style="text-align:center;">Where Ops Assistant fits</h2>
+        <h2 class="section-title" style="text-align:center;">Where Network Assistant fits</h2>
         <p class="section-intro" style="text-align:center; margin-left:auto; margin-right:auto;">
-          Ops Assistant should stay clearly separated from NetPilot, Network Assistant, and RIV.
-          Its value is not raw discovery or command troubleshooting. Its value is interpretation,
-          operational reasoning, documentation, and next-step discipline.
+          Network Assistant is not a duplicate of NetPilot, RIV, or Ops Assistant.
+          It has its own role inside Romanoti Platform: network troubleshooting,
+          validation commands, configuration guidance, and structured technical resolution.
         </p>
 
         <div class="grid-4">
@@ -370,8 +366,8 @@
             <div class="badge">NetPilot</div>
             <h3>Discover</h3>
             <p>
-              NetPilot focuses on device discovery, visibility, service detection,
-              and technical context gathering.
+              NetPilot focuses on network discovery, service visibility, candidate
+              identification, and device awareness.
             </p>
           </div>
 
@@ -379,17 +375,17 @@
             <div class="badge">Network Assistant</div>
             <h3>Troubleshoot</h3>
             <p>
-              Network Assistant guides command checks, vendor templates, interface issues,
-              VLANs, DNS, routing, CRC, and optics.
+              Network Assistant guides symptoms, checks, commands, expected results,
+              and troubleshooting paths.
             </p>
           </div>
 
           <div class="card">
             <div class="badge">RIV</div>
-            <h3>Execute</h3>
+            <h3>Organize</h3>
             <p>
-              RIV manages infrastructure context, Smart Hands workflows, connectivity,
-              lifecycle, decommissioning, and evidence.
+              RIV manages infrastructure context, rack information, connectivity paths,
+              Smart Hands workflows, and lifecycle operations.
             </p>
           </div>
 
@@ -397,8 +393,8 @@
             <div class="badge">Ops Assistant</div>
             <h3>Interpret</h3>
             <p>
-              Ops Assistant transforms findings and actions into recommendations,
-              reports, runbooks, notes, and operational summaries.
+              Ops Assistant supports operational interpretation, documentation,
+              recommendations, and report generation.
             </p>
           </div>
         </div>
@@ -406,74 +402,134 @@
     </section>
 
     <!-- =====================================================
-         CORE SCOPE
+         INITIAL TROUBLESHOOTING SCOPE
          ===================================================== -->
     <section class="section section-gray">
       <div class="container">
-        <h2 class="section-title" style="text-align:center;">Ops Assistant scope</h2>
+        <h2 class="section-title" style="text-align:center;">Initial troubleshooting scope</h2>
         <p class="section-intro" style="text-align:center; margin-left:auto; margin-right:auto;">
-          The first version should focus on a practical operational layer:
-          summaries, recommendations, SOP-style guidance, report drafts, and handoff notes.
+          The first version should stay focused and useful: common network problems,
+          vendor command templates, expected observations, and report-ready conclusions.
         </p>
 
         <div class="grid-4">
           <div class="card">
-            <div class="badge">Reports</div>
-            <h3>Operational summaries</h3>
+            <div class="badge">Layer 1 / 2</div>
+            <h3>Interface down</h3>
             <p>
-              Convert findings, checks, and field actions into a clear operational summary
-              that can be reviewed by technical leads or clients.
+              Guide physical validation, port status, administrative state, cable path,
+              optic checks, and peer-side confirmation.
+            </p>
+            <ul class="bullets">
+              <li>Port status checks</li>
+              <li>Admin / operational state</li>
+              <li>Remote side validation</li>
+              <li>Evidence capture</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <div class="badge">Physical / Optic</div>
+            <h3>CRC errors and fiber issues</h3>
+            <p>
+              Help teams review error counters, optics, light levels, cable quality,
+              dirty fiber, and replacement recommendations.
+            </p>
+            <ul class="bullets">
+              <li>CRC / input error checks</li>
+              <li>Optic health review</li>
+              <li>Fiber / transceiver notes</li>
+              <li>Recommended next actions</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <div class="badge">Layer 2</div>
+            <h3>VLAN mismatch</h3>
+            <p>
+              Guide access/trunk validation, allowed VLANs, native VLAN, spanning-tree,
+              and endpoint-side observations.
+            </p>
+            <ul class="bullets">
+              <li>Access / trunk checks</li>
+              <li>Allowed VLAN review</li>
+              <li>Native VLAN notes</li>
+              <li>Port configuration summary</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <div class="badge">Services</div>
+            <h3>DNS issues</h3>
+            <p>
+              Support structured DNS checks: name resolution, resolver reachability,
+              split DNS, stale records, and service impact notes.
+            </p>
+            <ul class="bullets">
+              <li>Resolver validation</li>
+              <li>Lookup testing</li>
+              <li>Record mismatch notes</li>
+              <li>Impact summary</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <div class="badge">Layer 3</div>
+            <h3>Basic routing</h3>
+            <p>
+              Assist with route lookup, gateway checks, next-hop validation, subnet
+              mismatch, and reachability testing.
+            </p>
+            <ul class="bullets">
+              <li>Route table review</li>
+              <li>Gateway validation</li>
+              <li>Ping / traceroute checks</li>
+              <li>Escalation notes</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <div class="badge">Vendor Templates</div>
+            <h3>Command guidance</h3>
+            <p>
+              Prepare vendor-specific command templates for Cisco, Fortinet, Juniper,
+              Arista, Dell, and Aruba / HPE environments.
+            </p>
+            <ul class="bullets">
+              <li>Show commands</li>
+              <li>Validation commands</li>
+              <li>Expected output notes</li>
+              <li>Report snippets</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <div class="badge">Future</div>
+            <h3>BGP basics</h3>
+            <p>
+              Later versions can add BGP neighbor checks, route advertisement notes,
+              policy review, and escalation package generation.
+            </p>
+            <ul class="bullets">
+              <li>Neighbor state</li>
+              <li>Route advertisement review</li>
+              <li>Policy / prefix notes</li>
+              <li>Senior escalation prep</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <div class="badge">Output</div>
+            <h3>Technical reports</h3>
+            <p>
+              Convert guided checks into a structured summary for handoff, escalation,
+              client review, or internal documentation.
             </p>
             <ul class="bullets">
               <li>Issue summary</li>
-              <li>Actions performed</li>
-              <li>Evidence references</li>
-              <li>Recommended next steps</li>
-            </ul>
-          </div>
-
-          <div class="card">
-            <div class="badge">SOP / Runbooks</div>
-            <h3>Guided procedures</h3>
-            <p>
-              Support repeatable operational procedures for common tasks, reviews,
-              escalations, and field execution support.
-            </p>
-            <ul class="bullets">
-              <li>Step-by-step runbooks</li>
-              <li>Checklists</li>
-              <li>Escalation triggers</li>
-              <li>Closure criteria</li>
-            </ul>
-          </div>
-
-          <div class="card">
-            <div class="badge">Decision Support</div>
-            <h3>Next-action logic</h3>
-            <p>
-              Help teams decide what should be reviewed, escalated, documented,
-              or scheduled as a follow-up action.
-            </p>
-            <ul class="bullets">
-              <li>Priority interpretation</li>
-              <li>Risk notes</li>
-              <li>Follow-up recommendations</li>
-              <li>Operational impact summary</li>
-            </ul>
-          </div>
-
-          <div class="card">
-            <div class="badge">Handoff</div>
-            <h3>Shift and task closure</h3>
-            <p>
-              Prepare handoff notes, task completion summaries, and operational closure
-              documentation for future review.
-            </p>
-            <ul class="bullets">
-              <li>End-of-task notes</li>
-              <li>End-of-shift summary</li>
-              <li>Open items</li>
-              <li>Pending validations</li>
+              <li>Evidence notes</li>
+              <li>Commands used</li>
+              <li>Recommended action</li>
             </ul>
           </div>
         </div>
@@ -485,38 +541,38 @@
          ===================================================== -->
     <section class="section section-light">
       <div class="container">
-        <h2 class="section-title" style="text-align:center;">Proposed Ops Assistant workflow</h2>
+        <h2 class="section-title" style="text-align:center;">Proposed Network Assistant workflow</h2>
         <p class="section-intro" style="text-align:center; margin-left:auto; margin-right:auto;">
-          Ops Assistant should help turn technical activity into consistent operational understanding:
-          collect context, interpret meaning, and produce a useful output.
+          The product experience should remain simple: select the issue, select the vendor,
+          follow guided checks, then produce a technical summary.
         </p>
 
         <div class="diagram-row">
           <div class="diagram-box">
-            <h3>Collect context</h3>
+            <h3>Select issue</h3>
             <p>
-              Use findings from NetPilot, RIV, Network Assistant, tickets, notes,
-              and operator observations.
+              Choose interface down, CRC errors, VLAN mismatch, DNS, routing,
+              fiber / optic issue, or another guided scenario.
             </p>
           </div>
 
           <div class="diagram-arrow">→</div>
 
           <div class="diagram-box">
-            <h3>Interpret action</h3>
+            <h3>Run guided checks</h3>
             <p>
-              Identify what the situation means, what should be reviewed next,
-              and what requires escalation or documentation.
+              Follow structured validation steps with vendor-specific command templates
+              and expected observations.
             </p>
           </div>
 
           <div class="diagram-arrow">→</div>
 
           <div class="diagram-box">
-            <h3>Generate output</h3>
+            <h3>Prepare report</h3>
             <p>
-              Produce report summaries, SOP guidance, handoff notes,
-              and operational recommendations.
+              Generate a clear technical summary with symptoms, checks performed,
+              results, recommendations, and escalation notes.
             </p>
           </div>
         </div>
@@ -524,41 +580,41 @@
     </section>
 
     <!-- =====================================================
-         INTEGRATION DIRECTION
+         VENDOR DIRECTION
          ===================================================== -->
     <section class="section section-gray">
       <div class="container">
-        <h2 class="section-title" style="text-align:center;">Integration direction</h2>
+        <h2 class="section-title" style="text-align:center;">Vendor command template direction</h2>
         <p class="section-intro" style="text-align:center; margin-left:auto; margin-right:auto;">
-          Ops Assistant becomes more valuable as Romanoti Platform matures. It can consume
-          outputs from technical modules and turn them into understandable operational artifacts.
+          Network Assistant will grow around reusable troubleshooting patterns and
+          vendor-specific command guidance for common enterprise network platforms.
         </p>
 
         <div class="grid-3">
           <div class="card">
-            <div class="badge">From NetPilot</div>
-            <h3>Discovery findings</h3>
+            <div class="badge">Cisco</div>
+            <h3>Switching and routing checks</h3>
             <p>
-              NetPilot can provide discovery notes, visible devices, alerts,
-              and technical context that Ops Assistant can summarize.
+              Interface state, VLAN, trunk, counters, routing, neighbor status,
+              and basic reachability commands.
             </p>
           </div>
 
           <div class="card">
-            <div class="badge">From RIV</div>
-            <h3>Infrastructure context</h3>
+            <div class="badge">Fortinet</div>
+            <h3>Firewall validation</h3>
             <p>
-              RIV can provide rack, connectivity, Smart Hands, decommission,
-              and evidence context for final reports.
+              Interface status, routing, policy review, DNS reachability,
+              and connectivity troubleshooting direction.
             </p>
           </div>
 
           <div class="card">
-            <div class="badge">From Network Assistant</div>
-            <h3>Troubleshooting outputs</h3>
+            <div class="badge">Juniper / Arista / Dell / Aruba</div>
+            <h3>Multi-vendor templates</h3>
             <p>
-              Network Assistant can provide commands used, checks performed,
-              findings, and recommended escalation notes.
+              Expand troubleshooting patterns across modern network platforms while
+              keeping the operator workflow consistent.
             </p>
           </div>
         </div>
@@ -572,44 +628,45 @@
       <div class="container">
         <h2 class="section-title" style="text-align:center;">Future app direction</h2>
         <p class="section-intro" style="text-align:center; margin-left:auto; margin-right:auto;">
-          Ops Assistant can later become a protected Romanoti Platform app with saved cases,
-          report generation, SOP templates, runbook execution, and task handoff workflows.
+          Network Assistant can later become a protected Romanoti Platform app with
+          login access, guided troubleshooting sessions, command libraries, saved cases,
+          and report exports.
         </p>
 
         <div class="grid-4">
           <div class="card">
             <div class="badge">Phase 1</div>
-            <h3>Concept alignment</h3>
+            <h3>Concept page</h3>
             <p>
-              Position Ops Assistant clearly as the operational interpretation and reporting
-              layer of the Romanoti ecosystem.
+              Present the product direction clearly inside Romanoti Platform and define
+              the initial troubleshooting scope.
             </p>
           </div>
 
           <div class="card">
             <div class="badge">Phase 2</div>
-            <h3>Report builder</h3>
+            <h3>Guided issue selector</h3>
             <p>
-              Create structured report templates for findings, actions, evidence,
-              risks, next steps, and closure notes.
+              Build the first app experience around issue selection, vendor selection,
+              guided checks, and recommended actions.
             </p>
           </div>
 
           <div class="card">
             <div class="badge">Phase 3</div>
-            <h3>SOP and runbooks</h3>
+            <h3>Command library</h3>
             <p>
-              Add guided procedures, repeatable checklists, escalation criteria,
-              and operational task templates.
+              Add reusable command templates, expected results, evidence notes,
+              and escalation-friendly summaries.
             </p>
           </div>
 
           <div class="card">
             <div class="badge">Phase 4</div>
-            <h3>Platform integration</h3>
+            <h3>Reports and integration</h3>
             <p>
-              Connect outputs from RIV, NetPilot, and Network Assistant into
-              case summaries and operational documentation.
+              Connect outputs to Ops Assistant reports, RIV context, and NetPilot
+              discovery results where useful.
             </p>
           </div>
         </div>
@@ -622,17 +679,16 @@
     <section class="section section-gray">
       <div class="container">
         <div class="cta-box">
-          <h2>Ops Assistant strengthens the operational intelligence side of Romanoti Platform.</h2>
+          <h2>Network Assistant strengthens the troubleshooting side of Romanoti Platform.</h2>
           <p>
-            The goal is to help technical work become easier to understand, document,
-            escalate, and hand off. Ops Assistant gives Romanoti a practical path from
-            infrastructure visibility to operational clarity.
+            The goal is not to replace engineers. The goal is to make troubleshooting more
+            structured, repeatable, documented, and easier to hand off across technical teams.
           </p>
 
           <div class="actions">
             <a class="btn btn-primary" href="/platform/index.html">Back to Romanoti Platform</a>
             <a class="btn btn-secondary" href="/platform/netpilot-login.html">Launch NetPilot</a>
-            <a class="btn btn-secondary" href="/platform/network-assistant.html">Explore Network Assistant</a>
+            <a class="btn btn-secondary" href="/platform/ops-assistant.html">Explore Ops Assistant</a>
           </div>
         </div>
       </div>

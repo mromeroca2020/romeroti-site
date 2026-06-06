@@ -1,0 +1,130 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script src="../smart-hands-desk-auth.js"></script>
+  <script>
+    if (window.RomanotiSmartHandsAuth) {
+      window.RomanotiSmartHandsAuth.requireAuth("../smart-hands-desk-login.html");
+    }
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Romanoti Smart Hands Desk</title>
+  <link rel="stylesheet" href="./smart-hands-desk.css" />
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="app-icon">SH</div>
+      <div>
+        <h1>Romanoti Smart Hands Desk</h1>
+        <p>Smart Hands Execution Platform</p>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <p class="section-label">Workspace</p>
+    <button class="nav-button active" data-view="dashboard">Operations Queue</button>
+    <button class="nav-button" data-view="assigned">Assigned to Me</button>
+    <button class="nav-button" data-view="unassigned">Unassigned</button>
+    <button class="nav-button" data-view="ready">Ready for Execution</button>
+    <button class="nav-button" data-view="onhold">On Hold</button>
+    <button class="nav-button" data-view="closed">Closed</button>
+
+    <div class="pilot-card">
+      <strong>Smart Hands Desk v0.1</strong>
+      <p>Real SQLite-backed ticket execution workspace for Romanoti Platform.</p>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div>
+        <p class="kicker">ROMANOTI SMART HANDS DESK</p>
+        <h2>Operations Queue</h2>
+        <p class="subtitle">
+          Lightweight ticket execution for Smart Hands work, evidence, notes, approvals and closure.
+        </p>
+      </div>
+
+      <div class="user-pill">
+        <div class="avatar">MR</div>
+        <div>
+          <strong>Mauricio Romero</strong>
+          <span>Romanoti Admin</span>
+        </div>
+      </div>
+    </header>
+
+    <section class="hero-card">
+      <div>
+        <p class="panel-kicker">REAL PRODUCT WORKSPACE</p>
+        <h3>Manage Smart Hands tickets with clarity.</h3>
+        <p>
+          Smart Hands Desk organizes field execution tickets, statuses, work notes,
+          affected CIs, approvals, task SLAs, attached knowledge and future handoff
+          with Ops Assistant, RIV and Inventory Assistant.
+        </p>
+        <div class="actions">
+          <button class="primary-btn" id="refreshTicketsButton">Refresh Tickets</button>
+          <button class="ghost-btn">Create Ticket</button>
+        </div>
+      </div>
+
+      <div class="status-card">
+        <h4>Workspace Status</h4>
+        <div id="statusCounts"></div>
+      </div>
+    </section>
+
+    <section class="content-grid">
+      <section class="panel tickets-panel">
+        <div class="panel-header">
+          <div>
+            <p class="panel-kicker">Ticket Queue</p>
+            <h3>Active Smart Hands Tickets</h3>
+          </div>
+          <span id="ticketCountBadge" class="badge">0 tickets</span>
+        </div>
+
+        <div id="ticketsTable" class="tickets-table">
+          Loading tickets...
+        </div>
+      </section>
+
+      <section class="panel detail-panel">
+        <div class="panel-header">
+          <div>
+            <p class="panel-kicker">Ticket Detail</p>
+            <h3 id="detailTitle">Select a ticket</h3>
+          </div>
+          <span id="detailStatus" class="badge muted">Waiting</span>
+        </div>
+
+        <div id="ticketDetail" class="ticket-detail-empty">
+          Select a Smart Hands ticket from the queue to review details.
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <script src="./smart-hands-config.js"></script>
+  <script src="./smart-hands-desk.js"></script>
+  <script src="./smart-hands-create-ticket.js"></script>
+  <script src="./smart-hands-work-notes.js"></script>
+  <script src="./smart-hands-status.js"></script>
+  <script src="./smart-hands-close-ticket.js"></script>
+  <script src="./smart-hands-evidence.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

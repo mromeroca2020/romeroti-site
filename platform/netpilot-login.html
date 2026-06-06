@@ -1,0 +1,238 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NetPilot Login | Romanoti Platform</title>
+
+  <style>
+    :root {
+      --bg: #0b1015;
+      --panel: #151d27;
+      --text: #f4f7fb;
+      --muted: #aab7c6;
+      --line: #2b3948;
+      --green: #7ddc9b;
+      --danger: #ff7d7d;
+      --radius: 22px;
+      --shadow: 0 24px 60px rgba(0, 0, 0, 0.32);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      background:
+        radial-gradient(circle at top left, rgba(125, 220, 155, 0.16), transparent 32rem),
+        linear-gradient(180deg, var(--bg), #070a0e 75%);
+      color: var(--text);
+      font-family: Inter, Segoe UI, system-ui, sans-serif;
+      padding: 24px;
+    }
+
+    .login-card {
+      width: min(520px, 100%);
+      padding: 34px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: linear-gradient(145deg, rgba(28,38,50,0.96), rgba(15,23,32,0.96));
+      box-shadow: var(--shadow);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 30px;
+    }
+
+    .brand-mark {
+      width: 46px;
+      height: 46px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: rgba(125, 220, 155, 0.12);
+      border: 1px solid rgba(125, 220, 155, 0.38);
+      color: var(--green);
+      font-weight: 900;
+    }
+
+    .brand strong,
+    .brand span {
+      display: block;
+    }
+
+    .brand span {
+      color: var(--muted);
+      font-size: 0.86rem;
+      margin-top: 3px;
+    }
+
+    .eyebrow {
+      margin: 0 0 10px;
+      color: var(--green);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      font-weight: 900;
+    }
+
+    h1 {
+      margin: 0 0 14px;
+      font-size: clamp(2.2rem, 5vw, 3.4rem);
+      line-height: 1;
+      letter-spacing: -0.05em;
+    }
+
+    p {
+      color: var(--muted);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    form {
+      display: grid;
+      gap: 16px;
+      margin-top: 26px;
+    }
+
+    label {
+      display: grid;
+      gap: 8px;
+      font-weight: 800;
+    }
+
+    input {
+      width: 100%;
+      border: 1px solid var(--line);
+      background: #070a0e;
+      color: var(--text);
+      border-radius: 14px;
+      padding: 14px 15px;
+      font: inherit;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: var(--green);
+      box-shadow: 0 0 0 4px rgba(125, 220, 155, 0.12);
+    }
+
+    .error {
+      display: none;
+      padding: 12px 14px;
+      border: 1px solid rgba(255,125,125,0.38);
+      background: rgba(255,125,125,0.09);
+      color: var(--danger);
+      border-radius: 14px;
+      font-weight: 800;
+    }
+
+    .error.visible { display: block; }
+
+    button {
+      border: 0;
+      border-radius: 14px;
+      padding: 14px 16px;
+      background: var(--green);
+      color: #07140d;
+      font: inherit;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .footer-actions {
+      margin-top: 22px;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    a:hover { color: var(--green); }
+  </style>
+</head>
+
+<body>
+  <main class="login-card">
+    <div class="brand">
+      <div class="brand-mark">NP</div>
+      <div>
+        <strong>Romanoti NetPilot</strong>
+        <span>Romanoti Platform Access</span>
+      </div>
+    </div>
+
+    <p class="eyebrow">Secure App Access</p>
+    <h1>Sign in to NetPilot</h1>
+    <p>
+      Access the NetPilot web app inside Romanoti Platform for network discovery,
+      device visibility, alert center, guided detection, and future RIV handoff.
+    </p>
+
+    <form id="loginForm">
+      <label>
+        Username
+        <input id="username" type="text" autocomplete="username" required />
+      </label>
+
+      <label>
+        Password
+        <input id="password" type="password" autocomplete="current-password" required />
+      </label>
+
+      <div id="loginError" class="error">
+        Invalid username or password.
+      </div>
+
+      <button type="submit">Enter NetPilot</button>
+    </form>
+
+    <div class="footer-actions">
+      <a href="./index.html">Back to Platform</a>
+      <a href="./netpilot.html">About NetPilot</a>
+    </div>
+  </main>
+
+  <script>
+    const SESSION_KEY = "romanoti_netpilot_session_v1";
+
+    const allowedUsers = [
+      { username: "netpilot", password: "Romanoti2026!" },
+      { username: "mauricio", password: "NetPilot2026!" }
+    ];
+
+    const form = document.getElementById("loginForm");
+    const error = document.getElementById("loginError");
+
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      const username = document.getElementById("username").value.trim();
+      const password = document.getElementById("password").value.trim();
+
+      const valid = allowedUsers.some(function (user) {
+        return user.username === username && user.password === password;
+      });
+
+      if (valid) {
+        localStorage.setItem(SESSION_KEY, "active");
+        window.location.href = "./netpilot-app/index.html";
+      } else {
+        error.classList.add("visible");
+      }
+    });
+  </script>
+</body>
+</html>
