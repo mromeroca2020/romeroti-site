@@ -44,6 +44,39 @@
       .replaceAll(">", "&gt;");
   }
 
+
+  function formatDateTime(value) {
+    if (!value) return "";
+
+    const raw = String(value);
+
+    const match = raw.match(/^(\d{4})-(\d{2})-(\d{2})[T\s](\d{2}):(\d{2})/);
+
+    if (match) {
+      const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+      const year = match[1];
+      const month = months[Number(match[2]) - 1] || match[2];
+      const day = match[3];
+      const hour = match[4];
+      const minute = match[5];
+
+      return `${month} ${day}, ${year} · ${hour}:${minute}`;
+    }
+
+    const parsed = new Date(raw);
+
+    if (Number.isNaN(parsed.getTime())) {
+      return raw;
+    }
+
+    return parsed.toLocaleString(undefined, {
+      year: "numeric",
+      month: "short",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit"
+    });
+  }
   function pretty(value) {
     return String(value || "")
       .replaceAll("_", " ")
@@ -275,7 +308,7 @@
 
         ${renderCollection("Work Notes", detail.work_notes, "No work notes yet.", (item) => `
           <div class="note">
-            <strong>${escapeHtml(item.created_by)}</strong> · ${escapeHtml(item.created_at)}
+            <strong>${escapeHtml(item.created_by)}</strong> · ${escapeHtml(formatDateTime(item.created_at))}
             <br>${escapeHtml(item.note_text)}
           </div>
         `)}
@@ -312,7 +345,7 @@
 
         ${renderCollection("Ticket History", detail.history, "No history yet.", (item) => `
           <div class="note">
-            <strong>${escapeHtml(item.event_type)}</strong> · ${escapeHtml(item.created_at)}
+            <strong>${escapeHtml(item.event_type)}</strong> · ${escapeHtml(formatDateTime(item.created_at))}
             <br>${escapeHtml(item.event_text)}
           </div>
         `)}
@@ -382,4 +415,5 @@
     init();
   }
 })();
+
 
