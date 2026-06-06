@@ -1,6 +1,12 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
+  <script src="../smart-hands-desk-auth.js"></script>
+  <script>
+    if (window.RomanotiSmartHandsAuth) {
+      window.RomanotiSmartHandsAuth.requireAuth("../smart-hands-desk-login.html");
+    }
+  </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Romanoti Smart Hands Desk</title>
@@ -112,6 +118,7 @@
   <script src="./smart-hands-evidence.js"></script>
 </body>
 </html>
+
 
 
 
