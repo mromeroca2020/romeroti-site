@@ -477,3 +477,169 @@ tr.ticket-row:hover td {
   border-color: rgba(56,189,248,.38) !important;
 }
 
+
+/* =======================================================
+   Romanoti Smart Hands Desk
+   Create Ticket Modal
+   ======================================================= */
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(2, 6, 12, .78);
+  backdrop-filter: blur(10px);
+  z-index: 999;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+.modal-backdrop.hidden {
+  display: none;
+}
+
+.modal-card {
+  width: min(980px, 96vw);
+  max-height: 92vh;
+  overflow: auto;
+  background: linear-gradient(135deg, rgba(23,34,52,.98), rgba(15,23,42,.99));
+  border: 1px solid rgba(148,163,184,.24);
+  border-radius: 30px;
+  box-shadow: 0 40px 120px rgba(0,0,0,.55);
+  padding: 28px;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  align-items: flex-start;
+  margin-bottom: 22px;
+}
+
+.modal-header h3 {
+  margin: 5px 0 8px;
+  font-size: 2.25rem;
+  letter-spacing: -.055em;
+}
+
+.modal-header p {
+  color: var(--muted);
+  margin: 0;
+}
+
+.modal-close {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,.08);
+  color: white;
+  font-size: 1.8rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.modal-close:hover {
+  background: rgba(239,68,68,.18);
+  border-color: rgba(239,68,68,.45);
+}
+
+.ticket-form {
+  display: block;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.form-field {
+  display: grid;
+  gap: 8px;
+}
+
+.form-field.full {
+  grid-column: 1 / -1;
+}
+
+.form-field span {
+  color: #9fb7d9;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  font-size: .72rem;
+  font-weight: 900;
+}
+
+.form-field input,
+.form-field textarea,
+.form-field select {
+  width: 100%;
+  border: 1px solid rgba(148,163,184,.25);
+  background: rgba(3,10,18,.72);
+  color: white;
+  border-radius: 16px;
+  padding: 14px 15px;
+  outline: none;
+}
+
+.form-field textarea {
+  resize: vertical;
+}
+
+.form-field input:focus,
+.form-field textarea:focus,
+.form-field select:focus {
+  border-color: rgba(56,189,248,.65);
+  box-shadow: 0 0 0 3px rgba(56,189,248,.12);
+}
+
+.form-message {
+  margin-top: 16px;
+  border: 1px solid rgba(56,189,248,.28);
+  background: rgba(56,189,248,.12);
+  color: #bae6fd;
+  border-radius: 16px;
+  padding: 13px 15px;
+  font-weight: 800;
+}
+
+.form-message.hidden {
+  display: none;
+}
+
+.form-message.success {
+  border-color: rgba(34,197,94,.35);
+  background: rgba(34,197,94,.12);
+  color: #bbf7d0;
+}
+
+.form-message.error {
+  border-color: rgba(239,68,68,.35);
+  background: rgba(239,68,68,.12);
+  color: #fecaca;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.primary-btn:disabled {
+  opacity: .65;
+  cursor: not-allowed;
+}
+
+@media (max-width: 760px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .modal-actions {
+    flex-direction: column;
+  }
+}
+

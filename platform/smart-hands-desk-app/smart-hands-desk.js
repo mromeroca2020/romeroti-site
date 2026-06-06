@@ -365,7 +365,7 @@
 
     document.querySelectorAll(".ghost-btn").forEach((button) => {
       button.addEventListener("click", function () {
-        alert("Create Ticket will be connected to the Smart Hands Desk backend in the next product step.");
+        if (window.openSmartHandsCreateTicketModal) { window.openSmartHandsCreateTicketModal(); } else { alert("Create Ticket form is not loaded. Please refresh the page and try again."); }
       });
     });
   }
@@ -382,3 +382,4 @@
     init();
   }
 })();
+
