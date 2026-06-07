@@ -277,6 +277,146 @@
       border-radius:999px;
       background:rgba(255,255,255,0.02);
     }
+  
+    /* =========================================================
+       HOME HERO LAYOUT FIX
+       Purpose:
+       - Balance the home hero on desktop
+       - Prevent the main headline from being cut
+       - Avoid the "stacked left" visual issue
+       - Preserve existing HTML and navigation
+       ========================================================= */
+    .romanoti-hero {
+      min-height: calc(100vh - 76px);
+      align-items: center;
+    }
+
+    .romanoti-hero__content {
+      width: min(1180px, calc(100% - 48px));
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 86px 0 72px;
+      display: grid;
+      grid-template-columns: minmax(320px, 0.95fr) minmax(360px, 1.05fr);
+      gap: clamp(34px, 5vw, 86px);
+      align-items: center;
+    }
+
+    .romanoti-hero__content > :not(.romanoti-hero-logo-wrap) {
+      grid-column: 1;
+    }
+
+    .romanoti-hero-logo-wrap {
+      grid-column: 2;
+      grid-row: 1 / span 6;
+      justify-self: center;
+      align-self: center;
+      margin: 0;
+      width: 100%;
+      max-width: 520px;
+    }
+
+    .romanoti-hero-logo {
+      max-width: 100%;
+      border-radius: 4px;
+    }
+
+    .romanoti-hero__title {
+      max-width: 760px;
+      font-size: clamp(2.75rem, 4.2vw, 4.35rem);
+      line-height: 1.04;
+      letter-spacing: -0.045em;
+      text-wrap: balance;
+    }
+
+    .romanoti-hero__subtitle {
+      max-width: 660px;
+    }
+
+    .romanoti-hero__overlay {
+      background:
+        radial-gradient(circle at 68% 34%, rgba(56, 189, 248, 0.16), transparent 32%),
+        linear-gradient(90deg, rgba(5,10,20,.92) 0%, rgba(5,10,20,.74) 43%, rgba(5,10,20,.55) 100%),
+        linear-gradient(180deg, rgba(5,10,20,.10) 0%, rgba(5,10,20,.50) 100%);
+    }
+
+    @media (max-width: 980px) {
+      .romanoti-hero__content {
+        grid-template-columns: 1fr;
+        width: min(760px, calc(100% - 40px));
+        padding: 82px 0 64px;
+        gap: 26px;
+      }
+
+      .romanoti-hero__content > :not(.romanoti-hero-logo-wrap) {
+        grid-column: 1;
+      }
+
+      .romanoti-hero-logo-wrap {
+        grid-column: 1;
+        grid-row: auto;
+        justify-self: start;
+        max-width: 420px;
+      }
+
+      .romanoti-hero__title {
+        font-size: clamp(2.45rem, 9vw, 3.6rem);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .romanoti-hero__content {
+        width: min(100% - 30px, 560px);
+        padding: 72px 0 54px;
+      }
+
+      .romanoti-hero-logo-wrap {
+        max-width: 330px;
+      }
+
+      .romanoti-hero__title {
+        font-size: 2.42rem;
+        line-height: 1.06;
+      }
+    }
+
+  
+    /* =========================================================
+       HOME HERO LOGO POSITION REFINEMENT
+       Purpose:
+       - Move the Romanoti square hero image slightly upward
+       - Improve desktop balance between headline and visual
+       ========================================================= */
+    @media (min-width: 981px) {
+      .romanoti-hero-logo-wrap {
+        align-self: start;
+        margin-top: clamp(34px, 6vh, 72px);
+      }
+    }
+  
+    /* =========================================================
+       HOME HERO SPACING REFINEMENT
+       Purpose:
+       - Bring CTA buttons closer to the hero message
+       - Keep the two-column desktop balance
+       - Avoid excessive empty vertical space
+       ========================================================= */
+    @media (min-width: 981px) {
+      .romanoti-hero__content {
+        row-gap: clamp(18px, 2.4vh, 34px);
+        column-gap: clamp(34px, 5vw, 86px);
+      }
+
+      .romanoti-hero__buttons {
+        margin-top: 4px;
+        margin-bottom: 10px;
+      }
+
+      .romanoti-hero__content > .mt-4 {
+        margin-top: 0;
+      }
+    }
+
   </style>
 </head>
 
