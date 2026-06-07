@@ -1,0 +1,303 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Backup & Recovery Assistant Access | Romanoti Platform</title>
+
+  <link rel="icon" type="image/png" href="../images/romanoti-icon.png" />
+  <script src="./backup-recovery-auth.js"></script>
+
+  <style>
+    :root {
+      --bg: #07111f;
+      --panel: rgba(15, 23, 42, .92);
+      --line: rgba(148, 163, 184, .24);
+      --text: #e5f0ff;
+      --muted: #9fb1c9;
+      --blue: #38bdf8;
+      --green: #22c55e;
+      --red: #ef4444;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Montserrat, Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 15% 15%, rgba(56,189,248,.22), transparent 34%),
+        radial-gradient(circle at 85% 20%, rgba(34,197,94,.12), transparent 30%),
+        linear-gradient(135deg, #020617, #07111f 50%, #0f172a);
+      display: grid;
+      place-items: center;
+      padding: 28px;
+    }
+
+    .login-shell {
+      width: min(1120px, 96vw);
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .intro-card,
+    .login-card {
+      background: linear-gradient(135deg, rgba(15,23,42,.95), rgba(30,41,59,.88));
+      border: 1px solid var(--line);
+      border-radius: 32px;
+      box-shadow: 0 30px 100px rgba(0,0,0,.42);
+      padding: 34px;
+    }
+
+    .eyebrow {
+      color: var(--blue);
+      text-transform: uppercase;
+      letter-spacing: .16em;
+      font-size: .76rem;
+      font-weight: 900;
+      margin-bottom: 14px;
+    }
+
+    h1 {
+      font-size: clamp(2.25rem, 4vw, 4.15rem);
+      line-height: .95;
+      letter-spacing: -.06em;
+      margin: 0 0 18px;
+    }
+
+    h2 {
+      margin: 0 0 10px;
+      font-size: 2rem;
+      letter-spacing: -.04em;
+    }
+
+    p {
+      color: var(--muted);
+      line-height: 1.7;
+      margin: 0 0 18px;
+    }
+
+    .status-card {
+      margin-top: 22px;
+      border: 1px solid rgba(56,189,248,.22);
+      background: rgba(56,189,248,.08);
+      border-radius: 22px;
+      padding: 18px;
+    }
+
+    .status-card strong {
+      color: #bae6fd;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 24px;
+    }
+
+    .pill {
+      border: 1px solid rgba(56,189,248,.24);
+      color: #bae6fd;
+      background: rgba(56,189,248,.09);
+      border-radius: 999px;
+      padding: 9px 12px;
+      font-size: .82rem;
+      font-weight: 800;
+    }
+
+    label {
+      display: grid;
+      gap: 8px;
+      margin-bottom: 15px;
+    }
+
+    label span {
+      color: #9fb7d9;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      font-size: .72rem;
+      font-weight: 900;
+    }
+
+    input {
+      width: 100%;
+      border: 1px solid rgba(148,163,184,.25);
+      background: rgba(3,10,18,.72);
+      color: white;
+      border-radius: 16px;
+      padding: 14px 15px;
+      outline: none;
+      font-size: 1rem;
+    }
+
+    input:focus {
+      border-color: rgba(56,189,248,.65);
+      box-shadow: 0 0 0 3px rgba(56,189,248,.12);
+    }
+
+    .btn {
+      width: 100%;
+      border: 0;
+      border-radius: 16px;
+      padding: 14px 18px;
+      background: linear-gradient(135deg, #38bdf8, #2563eb);
+      color: white;
+      font-weight: 900;
+      cursor: pointer;
+      font-size: 1rem;
+      margin-top: 6px;
+    }
+
+    .secondary-link {
+      display: inline-block;
+      margin-top: 16px;
+      color: #bae6fd;
+      text-decoration: none;
+      font-weight: 800;
+    }
+
+    .message {
+      display: none;
+      margin-top: 14px;
+      border-radius: 14px;
+      padding: 12px 14px;
+      font-weight: 800;
+    }
+
+    .message.error {
+      display: block;
+      color: #fecaca;
+      background: rgba(239,68,68,.12);
+      border: 1px solid rgba(239,68,68,.35);
+    }
+
+    .message.success {
+      display: block;
+      color: #bbf7d0;
+      background: rgba(34,197,94,.12);
+      border: 1px solid rgba(34,197,94,.35);
+    }
+
+    .hint {
+      margin-top: 18px;
+      font-size: .82rem;
+      color: #7f93ad;
+    }
+
+    @media (max-width: 860px) {
+      .login-shell {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="login-shell">
+    <section class="intro-card">
+      <div class="eyebrow">Romanoti Platform Pilot Access</div>
+      <h1>Backup & Recovery Assistant</h1>
+
+      <p>
+        Operational access point for Romanoti Smart Hands Desk, connected to the
+        cloud API running on Render.
+      </p>
+
+      <p>
+        This module supports ticket execution, status control, work notes,
+        evidence records, and contextual closure notes for Smart Hands operations.
+      </p>
+
+      <div class="status-card">
+        <p>
+          <strong>Cloud API:</strong><br />
+          https://romanoti-smart-hands-desk-api.onrender.com
+        </p>
+      </div>
+
+      <div class="pill-row">
+        <span class="pill">Backup Validation</span>
+        <span class="pill">Restore Support</span>
+        <span class="pill">Evidence</span>
+        <span class="pill">Traceability</span>
+        <span class="pill">Continuity</span>
+      </div>
+    </section>
+
+    <section class="login-card">
+      <div class="eyebrow">Authorized Pilot Access</div>
+      <h2>Sign in</h2>
+
+      <p>
+        Enter Backup & Recovery Assistant pilot credentials to open the frontend pilot application.
+      </p>
+
+      <form id="backupRecoveryLoginForm">
+        <label>
+          <span>Username</span>
+          <input name="username" autocomplete="username" required placeholder="romanoti" />
+        </label>
+
+        <label>
+          <span>Password</span>
+          <input name="password" type="password" autocomplete="current-password" required placeholder="Password" />
+        </label>
+
+        <button class="btn" type="submit">Launch Backup & Recovery Assistant</button>
+
+        <div id="loginMessage" class="message"></div>
+      </form>
+
+      <a class="secondary-link" href="./index.html">← Back to Romanoti Platform</a>
+
+      <p class="hint">
+        Pilot access gate for presentation and controlled validation. Production authentication
+        should later move to backend users, roles, and secured API sessions.
+      </p>
+    </section>
+  </main>
+
+  <script>
+    const form = document.getElementById("backupRecoveryLoginForm");
+    const message = document.getElementById("loginMessage");
+
+    if (window.RomanotiBackupRecoveryAuth && window.RomanotiBackupRecoveryAuth.isAuthenticated()) {
+      message.className = "message success";
+      message.textContent = "Session already active. Opening Backup & Recovery Assistant...";
+      setTimeout(function () {
+        window.location.href = "./backup-recovery-app/index.html";
+      }, 500);
+    }
+
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      const data = new FormData(form);
+      const username = data.get("username");
+      const password = data.get("password");
+
+      if (!window.RomanotiBackupRecoveryAuth.login(username, password)) {
+        message.className = "message error";
+        message.textContent = "Invalid Backup & Recovery Assistant credentials.";
+        return;
+      }
+
+      message.className = "message success";
+      message.textContent = "Access granted. Opening Backup & Recovery Assistant...";
+
+      setTimeout(function () {
+        window.location.href = "./backup-recovery-app/index.html";
+      }, 550);
+    });
+  </script>
+</body>
+</html>
+

@@ -1,0 +1,123 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Romanoti Backup & Recovery Assistant</title>
+
+  <link rel="stylesheet" href="./backup-recovery.css" />
+</head>
+
+<body>
+  <main class="bra-shell">
+    <header class="bra-header">
+      <div>
+        <p class="bra-kicker">Romanoti Platform</p>
+        <h1>Backup & Recovery Assistant</h1>
+        <p class="bra-subtitle">
+          Operational support for backup validation, restore assistance,
+          evidence tracking, continuity, and information protection.
+        </p>
+      </div>
+
+      <div class="bra-status-card">
+        <span class="bra-status-dot"></span>
+        <div>
+          <strong>Frontend pilot</strong>
+          <small>No backend connected yet</small>
+        </div>
+        <button type="button" class="bra-logout-button" id="logoutBtn">Logout</button>
+      </div>
+    </header>
+
+    <section class="bra-positioning">
+      <h2>Specialized operational backup support</h2>
+      <p>
+        This module is not an antivirus and it is not a general server administration tool.
+        It is designed to help technical teams document, validate, trace, and support
+        backup and restore operations with clear evidence and continuity-focused workflows.
+      </p>
+    </section>
+
+    <section class="bra-grid" aria-label="Backup and recovery capabilities">
+      <article class="bra-card">
+        <span class="bra-card-icon">01</span>
+        <h3>Backup Validation</h3>
+        <p>
+          Track backup status, last successful jobs, failed jobs, scope,
+          frequency, and validation notes.
+        </p>
+      </article>
+
+      <article class="bra-card">
+        <span class="bra-card-icon">02</span>
+        <h3>Restore Support</h3>
+        <p>
+          Guide restore requests with requester, target system, recovery point,
+          priority, and approval context.
+        </p>
+      </article>
+
+      <article class="bra-card">
+        <span class="bra-card-icon">03</span>
+        <h3>Evidence & Traceability</h3>
+        <p>
+          Collect operational evidence, screenshots, notes, validation logs,
+          and closure details for audit-ready reporting.
+        </p>
+      </article>
+
+      <article class="bra-card">
+        <span class="bra-card-icon">04</span>
+        <h3>Continuity Readiness</h3>
+        <p>
+          Support continuity reviews by identifying backup gaps, recovery risks,
+          pending validations, and next actions.
+        </p>
+      </article>
+    </section>
+
+    <section class="bra-actions">
+      <button type="button" class="bra-button primary" id="startAssessmentBtn">
+        Start backup assessment
+      </button>
+
+      <button type="button" class="bra-button secondary" id="createRestoreBtn">
+        Create restore request
+      </button>
+    </section>
+
+    <section class="bra-workflow-panel" id="workflowPanel" hidden>
+      <div class="bra-workflow-header">
+        <div>
+          <p class="bra-kicker">Selected workflow</p>
+          <h2 id="workflowTitle">Workflow title</h2>
+        </div>
+
+        <span class="bra-pill" id="workflowStatus">Draft</span>
+      </div>
+
+      <div class="bra-workflow-grid" id="workflowSteps"></div>
+    </section>
+
+    <section class="bra-console" id="braConsole">
+      <div class="bra-console-header">
+        <strong>Assistant console</strong>
+        <span>Ready</span>
+      </div>
+
+      <p>
+        Backup & Recovery Assistant frontend loaded successfully.
+        The next step will be visual styling, then workflow actions, then backend/API.
+      </p>
+    </section>
+  </main>
+
+  <script src="../backup-recovery-auth.js"></script>
+  <script src="./backup-recovery-config.js"></script>
+  <script src="./backup-recovery.js"></script>
+</body>
+</html>
+
+

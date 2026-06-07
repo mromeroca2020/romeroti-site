@@ -1,0 +1,347 @@
+﻿:root {
+  --bra-bg: #08111f;
+  --bra-bg-soft: #0d1b2f;
+  --bra-card: rgba(255, 255, 255, 0.075);
+  --bra-card-border: rgba(255, 255, 255, 0.12);
+  --bra-text: #f4f7fb;
+  --bra-muted: #9fb0c8;
+  --bra-accent: #38bdf8;
+  --bra-accent-strong: #0ea5e9;
+  --bra-success: #22c55e;
+  --bra-warning: #f59e0b;
+  --bra-shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: Inter, Segoe UI, Roboto, Arial, sans-serif;
+  color: var(--bra-text);
+  background:
+    radial-gradient(circle at top left, rgba(56, 189, 248, 0.18), transparent 34%),
+    radial-gradient(circle at bottom right, rgba(34, 197, 94, 0.12), transparent 32%),
+    linear-gradient(135deg, #050914 0%, var(--bra-bg) 48%, #061525 100%);
+}
+
+.bra-shell {
+  width: min(1180px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 48px 0;
+}
+
+.bra-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 32px;
+  padding: 34px;
+  border: 1px solid var(--bra-card-border);
+  border-radius: 28px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.11), rgba(255,255,255,0.045));
+  box-shadow: var(--bra-shadow);
+  backdrop-filter: blur(16px);
+}
+
+.bra-kicker {
+  margin: 0 0 12px;
+  color: var(--bra-accent);
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(2.1rem, 4vw, 4.2rem);
+  line-height: 1;
+  letter-spacing: -0.06em;
+}
+
+.bra-subtitle {
+  max-width: 760px;
+  margin: 18px 0 0;
+  color: var(--bra-muted);
+  font-size: 1.08rem;
+  line-height: 1.7;
+}
+
+.bra-status-card {
+  min-width: 245px;
+  display: flex;
+  gap: 13px;
+  align-items: center;
+  padding: 16px 18px;
+  border: 1px solid rgba(56, 189, 248, 0.24);
+  border-radius: 18px;
+  background: rgba(14, 165, 233, 0.11);
+}
+
+.bra-status-dot {
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: var(--bra-success);
+  box-shadow: 0 0 22px rgba(34, 197, 94, 0.9);
+}
+
+.bra-status-card strong,
+.bra-status-card small {
+  display: block;
+}
+
+.bra-status-card small {
+  color: var(--bra-muted);
+  margin-top: 4px;
+}
+
+.bra-positioning {
+  margin-top: 24px;
+  padding: 26px 30px;
+  border-left: 4px solid var(--bra-accent);
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.055);
+  border-top: 1px solid var(--bra-card-border);
+  border-right: 1px solid var(--bra-card-border);
+  border-bottom: 1px solid var(--bra-card-border);
+}
+
+.bra-positioning h2 {
+  margin: 0 0 10px;
+  font-size: 1.35rem;
+}
+
+.bra-positioning p {
+  margin: 0;
+  color: var(--bra-muted);
+  line-height: 1.7;
+}
+
+.bra-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  margin-top: 24px;
+}
+
+.bra-card {
+  min-height: 230px;
+  padding: 24px;
+  border: 1px solid var(--bra-card-border);
+  border-radius: 24px;
+  background: var(--bra-card);
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.22);
+  transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+}
+
+.bra-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(56, 189, 248, 0.38);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.bra-card-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 16px;
+  color: #e0f2fe;
+  background: rgba(56, 189, 248, 0.16);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  font-weight: 800;
+}
+
+.bra-card h3 {
+  margin: 22px 0 12px;
+  font-size: 1.08rem;
+}
+
+.bra-card p {
+  margin: 0;
+  color: var(--bra-muted);
+  line-height: 1.62;
+  font-size: 0.95rem;
+}
+
+.bra-actions {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 26px;
+}
+
+.bra-button {
+  border: 0;
+  border-radius: 999px;
+  padding: 14px 20px;
+  cursor: pointer;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+.bra-button.primary {
+  color: #031525;
+  background: linear-gradient(135deg, var(--bra-accent), var(--bra-success));
+}
+
+.bra-button.secondary {
+  color: var(--bra-text);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--bra-card-border);
+}
+
+.bra-console {
+  margin-top: 24px;
+  padding: 22px 24px;
+  border-radius: 22px;
+  border: 1px solid rgba(245, 158, 11, 0.24);
+  background: rgba(245, 158, 11, 0.08);
+}
+
+.bra-console-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 12px;
+}
+
+.bra-console-header span {
+  color: var(--bra-warning);
+  font-weight: 800;
+}
+
+.bra-console p {
+  margin: 0;
+  color: var(--bra-muted);
+  line-height: 1.65;
+}
+
+@media (max-width: 980px) {
+  .bra-header {
+    flex-direction: column;
+  }
+
+  .bra-status-card {
+    width: 100%;
+  }
+
+  .bra-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .bra-shell {
+    width: min(100% - 24px, 1180px);
+    padding: 24px 0;
+  }
+
+  .bra-header,
+  .bra-positioning {
+    padding: 24px;
+  }
+
+  .bra-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .bra-actions {
+    flex-direction: column;
+  }
+
+  .bra-button {
+    width: 100%;
+  }
+}
+
+.bra-workflow-panel {
+  margin-top: 24px;
+  padding: 26px;
+  border-radius: 24px;
+  border: 1px solid rgba(56, 189, 248, 0.22);
+  background: rgba(56, 189, 248, 0.065);
+}
+
+.bra-workflow-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 18px;
+  margin-bottom: 20px;
+}
+
+.bra-workflow-header h2 {
+  margin: 0;
+  font-size: 1.45rem;
+}
+
+.bra-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 90px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  color: #e0f2fe;
+  background: rgba(56, 189, 248, 0.14);
+  border: 1px solid rgba(56, 189, 248, 0.28);
+  font-weight: 800;
+  font-size: 0.8rem;
+}
+
+.bra-workflow-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+.bra-step {
+  padding: 18px;
+  border-radius: 18px;
+  border: 1px solid var(--bra-card-border);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.bra-step strong {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.bra-step p {
+  margin: 0;
+  color: var(--bra-muted);
+  line-height: 1.55;
+  font-size: 0.92rem;
+}
+
+@media (max-width: 900px) {
+  .bra-workflow-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .bra-workflow-header {
+    flex-direction: column;
+  }
+}
+
+.bra-logout-button {
+  margin-left: auto;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--bra-text);
+  border-radius: 999px;
+  padding: 9px 13px;
+  cursor: pointer;
+  font-weight: 800;
+}
+
+.bra-logout-button:hover {
+  background: rgba(239, 68, 68, 0.18);
+  border-color: rgba(239, 68, 68, 0.35);
+}
