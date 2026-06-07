@@ -345,3 +345,119 @@ h1 {
   background: rgba(239, 68, 68, 0.18);
   border-color: rgba(239, 68, 68, 0.35);
 }
+
+.bra-form-panel {
+  margin-top: 24px;
+  padding: 26px;
+  border-radius: 24px;
+  border: 1px solid rgba(34, 197, 94, 0.24);
+  background: rgba(34, 197, 94, 0.055);
+}
+
+.bra-form-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 18px;
+  margin-bottom: 20px;
+}
+
+.bra-form-header h2 {
+  margin: 0;
+  font-size: 1.45rem;
+}
+
+.bra-form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.bra-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.bra-field.full {
+  grid-column: 1 / -1;
+}
+
+.bra-field label {
+  color: var(--bra-text);
+  font-weight: 800;
+  font-size: 0.9rem;
+}
+
+.bra-field input,
+.bra-field select,
+.bra-field textarea {
+  width: 100%;
+  border-radius: 14px;
+  border: 1px solid var(--bra-card-border);
+  background: rgba(3, 15, 30, 0.72);
+  color: var(--bra-text);
+  padding: 12px 13px;
+  font: inherit;
+  outline: none;
+}
+
+.bra-field textarea {
+  min-height: 110px;
+  resize: vertical;
+}
+
+.bra-field input:focus,
+.bra-field select:focus,
+.bra-field textarea:focus {
+  border-color: rgba(56, 189, 248, 0.58);
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.12);
+}
+
+.bra-form-actions {
+  grid-column: 1 / -1;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 6px;
+}
+
+.bra-summary {
+  margin-top: 22px;
+  padding: 20px;
+  border-radius: 20px;
+  border: 1px solid rgba(56, 189, 248, 0.22);
+  background: rgba(56, 189, 248, 0.07);
+}
+
+.bra-summary dl {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 10px 16px;
+  margin: 0;
+}
+
+.bra-summary dt {
+  color: var(--bra-accent);
+  font-weight: 900;
+}
+
+.bra-summary dd {
+  margin: 0;
+  color: var(--bra-muted);
+  line-height: 1.55;
+}
+
+@media (max-width: 760px) {
+  .bra-form {
+    grid-template-columns: 1fr;
+  }
+
+  .bra-form-header {
+    flex-direction: column;
+  }
+
+  .bra-summary dl {
+    grid-template-columns: 1fr;
+  }
+}

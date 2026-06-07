@@ -16,75 +16,81 @@
         <p class="bra-kicker">Romanoti Platform</p>
         <h1>Backup & Recovery Assistant</h1>
         <p class="bra-subtitle">
-          Operational support for backup validation, restore assistance,
-          evidence tracking, continuity, and information protection.
+          Proprietary Romanoti workspace for execution orders, routine backup validation,
+          restore test evidence, operational traceability, and business-owner confidence.
         </p>
       </div>
 
       <div class="bra-status-card">
         <span class="bra-status-dot"></span>
         <div>
-          <strong>Frontend pilot</strong>
-          <small>No backend connected yet</small>
+          <strong>Execution-order workspace</strong>
+          <small>Backend/API pending</small>
         </div>
         <button type="button" class="bra-logout-button" id="logoutBtn">Logout</button>
       </div>
     </header>
 
     <section class="bra-positioning">
-      <h2>Specialized operational backup support</h2>
+      <h2>Romanoti Backup Reality & Continuity Validation</h2>
       <p>
-        This module is not an antivirus and it is not a general server administration tool.
-        It is designed to help technical teams document, validate, trace, and support
-        backup and restore operations with clear evidence and continuity-focused workflows.
+        Romanoti does not perform backups and does not replace backup platforms,
+        vendors, MSPs, or internal IT teams. It acts as a proprietary validation layer
+        that helps operators create execution orders, review routine backup evidence,
+        validate restore readiness, identify gaps, and give business owners a clear
+        view of whether their backup and recovery processes are trustworthy.
       </p>
     </section>
 
     <section class="bra-grid" aria-label="Backup and recovery capabilities">
       <article class="bra-card">
         <span class="bra-card-icon">01</span>
-        <h3>Backup Validation</h3>
+        <h3>Validation Orders</h3>
         <p>
-          Track backup status, last successful jobs, failed jobs, scope,
-          frequency, and validation notes.
+          Create guided operational orders to verify backup scope, recent job results,
+          restore point availability, evidence, and validation notes.
         </p>
       </article>
 
       <article class="bra-card">
         <span class="bra-card-icon">02</span>
-        <h3>Restore Support</h3>
+        <h3>Restore Test Orders</h3>
         <p>
-          Guide restore requests with requester, target system, recovery point,
-          priority, and approval context.
+          Guide restore validation activities with requester context, target system,
+          recovery point, test result, evidence, and closure notes.
         </p>
       </article>
 
       <article class="bra-card">
         <span class="bra-card-icon">03</span>
-        <h3>Evidence & Traceability</h3>
+        <h3>Routine Evidence Review</h3>
         <p>
-          Collect operational evidence, screenshots, notes, validation logs,
-          and closure details for audit-ready reporting.
+          Review screenshots, job references, timestamps, logs, provider reports,
+          operator notes, risks, and pending validation items.
         </p>
       </article>
 
       <article class="bra-card">
         <span class="bra-card-icon">04</span>
-        <h3>Continuity Readiness</h3>
+        <h3>Owner Continuity Report</h3>
         <p>
-          Support continuity reviews by identifying backup gaps, recovery risks,
-          pending validations, and next actions.
+          Translate technical backup and restore evidence into a clear business-facing
+          summary of reliability, gaps, pending actions, and continuity readiness.
         </p>
       </article>
     </section>
 
     <section class="bra-actions">
       <button type="button" class="bra-button primary" id="startAssessmentBtn">
-        Start backup assessment
+        Create Validation Order
       </button>
 
       <button type="button" class="bra-button secondary" id="createRestoreBtn">
-        Create restore request
+        Create Restore Test Order
+      </button>
+
+      <button type="button" class="bra-button secondary" id="createRoutineBtn">
+        Create Routine Evidence Review
       </button>
     </section>
 
@@ -99,6 +105,26 @@
       </div>
 
       <div class="bra-workflow-grid" id="workflowSteps"></div>
+    </section>
+
+    <section class="bra-form-panel" id="formPanel" hidden>
+      <div class="bra-form-header">
+        <div>
+          <p class="bra-kicker">Execution order draft</p>
+          <h2 id="formTitle">Operational order</h2>
+        </div>
+        <span class="bra-pill" id="formMode">Draft</span>
+      </div>
+
+      <form class="bra-form" id="operationalForm"></form>
+
+      <section class="bra-summary" id="draftSummary" hidden>
+        <div class="bra-console-header">
+          <strong>Generated owner-ready summary</strong>
+          <span>Draft</span>
+        </div>
+        <div id="summaryContent"></div>
+      </section>
     </section>
 
     <section class="bra-console" id="braConsole">
@@ -119,5 +145,10 @@
   <script src="./backup-recovery.js"></script>
 </body>
 </html>
+
+
+
+
+
 
 
