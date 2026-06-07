@@ -409,6 +409,24 @@
     btn.dataset.wired = '1';
   }
 
+  // TEMP_HIDE_ES_FR_LANG_OPTIONS
+  // ES/FR language options are temporarily hidden while translations are updated.
+  // Do not delete ES/FR pages.
+  function hideOutdatedLanguageOptions() {
+    const langBtn = document.getElementById('langBtn');
+    const langMenu = document.getElementById('langMenu');
+
+    if (langBtn) {
+      const svg = langBtn.querySelector('svg');
+      langBtn.innerHTML = 'EN' + (svg ? svg.outerHTML : '');
+    }
+
+    if (langMenu) {
+      langMenu.querySelectorAll('a[data-lang="fr"], a[data-lang="es"]').forEach(function (link) {
+        link.remove();
+      });
+    }
+  }
   function wireLanguageMenu() {
     const langBtn = document.getElementById('langBtn');
     const langMenu = document.getElementById('langMenu');
@@ -445,6 +463,7 @@
     wireDropdown('navServicesRoot', 'navServicesBtn', 'navServicesMenu');
     wireDropdown('navSolutionsRoot', 'navSolutionsBtn', 'navSolutionsMenu');
     wireLanguageMenu();
+    hideOutdatedLanguageOptions();
   }
 
   if (document.readyState === 'loading') {
